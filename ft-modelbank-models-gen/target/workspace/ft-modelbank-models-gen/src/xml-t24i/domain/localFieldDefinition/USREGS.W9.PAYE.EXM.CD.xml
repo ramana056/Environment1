@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<localref:LocalRef xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:localref="http://www.odcgroup.com/t24/application/localref/model/LocalRef"
+    xmlns:translationDsl="http://www.odcgroup.com/translation/TranslationDsl" localRefID="USREGS.W9.PAYE.EXM.CD" maximumChars="3" minimumChars="0"
+    mandatory="false" charType="A" defaultPossible="false" virtualTable="W9.PAYE.EXM.CDE"
+    description="W9 Payee Exemption Code">
+  <shortName xsi:type="translationDsl:LocalTranslations">
+    <translations locale="en" text="W9.PAYE.EXM.CDE"/>
+  </shortName>
+  <vettingTable vettingTable="1">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="1-An organization exempt from tax"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="10">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="10-A common trust fund Operated"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="11">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="11-A financial institution"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="12">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="12-A middleman investment"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="13">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="13-A trust exempt from tax"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="2">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="2-The US States or any of its"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="3">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="3-A state, the District of Columbia"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="4">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="4-A foreign gov or any of its"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="5">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="5-A corporation"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="6">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="6-A dealer in securities or commod"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="7">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="7-A futures commission merchant"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="8">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="8-A real estate investment trust"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="9">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="9-An entity registered at all times"/>
+    </remarks>
+  </vettingTable>
+</localref:LocalRef>

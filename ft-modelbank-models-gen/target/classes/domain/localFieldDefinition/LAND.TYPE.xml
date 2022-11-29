@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<localref:LocalRef xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:localref="http://www.odcgroup.com/t24/application/localref/model/LocalRef"
+    xmlns:translationDsl="http://www.odcgroup.com/translation/TranslationDsl" localRefID="LAND.TYPE" maximumChars="40" minimumChars="0" mandatory="false"
+    charType="A" defaultPossible="false" virtualTable="LAND.TYPE" description="Land Type">
+  <shortName xsi:type="translationDsl:LocalTranslations">
+    <translations locale="en" text="LAND.TYPE"/>
+  </shortName>
+  <vettingTable vettingTable="CONSURBLAND">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Consolidated Urban Land"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="DEVORDERLAND">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Development ordered land"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="DEVSECTORLAND">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Development sectorized land"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="RESTOFDEVLAND">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Rest of development land"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="UNCONSURBLAND">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Unconsolidated Urban Land"/>
+    </remarks>
+  </vettingTable>
+</localref:LocalRef>

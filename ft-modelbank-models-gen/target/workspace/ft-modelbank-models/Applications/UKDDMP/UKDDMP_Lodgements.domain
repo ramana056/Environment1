@@ -1,0 +1,434 @@
+# UTF-8
+/* DDI Lodgements */
+Domain UKDDMP_Lodgements
+    @t24:i (module=UKDDMP)
+    @java:Package (value=com.temenos.t24.datamodel.ukddmp.ukddmp_lodgements)
+namespace "http://www.temenos.com/t24/UKDDMP_Lodgements"
+metamodelVersion 1.30.6
+Classes {
+    UKDDMP_ADDACS_IN_OUT_FILE
+        @i18n:Description (en="")
+        @t24:i (t24Name=UKDDMP.ADDACS.IN.OUT.FILE, level=F, type=U, allowedFunctions="A C D E I L P Q R S", localRefApplicationSysNo=41.0, localRefAllowed=true)
+    {
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=60.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=61.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=57.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        CORRELATION_ID : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=10, sysNumber=5.0, core=true, t24Name=CORRELATION.ID, mandatory=false)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=58.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=54.0, core=true, t24Name=CURR.NO, mandatory=false)
+        DATA_ADVICE_DD : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=6, sysNumber=22.0, core=true, t24Name=DATA.ADVICE.DD, mandatory=false)
+        DATA_ADVICE_FQY : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=1, sysNumber=23.0, core=true, t24Name=DATA.ADVICE.FQY, mandatory=false)
+        DATA_ADVICE_PAYER : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=18, sysNumber=19.0, core=true, t24Name=DATA.ADVICE.PAYER, mandatory=false)
+        DATA_ADVICE_PAY_ACC : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=8, sysNumber=20.0, core=true, t24Name=DATA.ADVICE.PAY.ACC, mandatory=false)
+        DATA_ADVICE_PAY_SORT : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=6, sysNumber=21.0, core=true, t24Name=DATA.ADVICE.PAY.SORT, mandatory=false)
+        DATA_ADVICE_REF : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=18, sysNumber=18.0, core=true, t24Name=DATA.ADVICE.REF, mandatory=false)
+        DATA_ADV_LAST_DATE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=6, sysNumber=32.0, core=true, t24Name=DATA.ADV.LAST.DATE, mandatory=false)
+        DATA_ADV_NEWDATE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=6, sysNumber=29.0, core=true, t24Name=DATA.ADV.NEWDATE, mandatory=false)
+        DATA_ADV_PAYER_ACCNO : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=8, sysNumber=27.0, core=true, t24Name=DATA.ADV.PAYER.ACCNO, mandatory=false)
+        DATA_ADV_PAYER_SORTCDE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=6, sysNumber=28.0, core=true, t24Name=DATA.ADV.PAYER.SORTCDE, mandatory=false)
+        DATA_ADV_PAY_FQY : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=1, sysNumber=30.0, core=true, t24Name=DATA.ADV.PAY.FQY, mandatory=false)
+        DATA_ADV_PAY_NAME : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=18, sysNumber=26.0, core=true, t24Name=DATA.ADV.PAY.NAME, mandatory=false)
+        DATA_ADV_PYMT : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=24.0, core=true, t24Name=DATA.ADV.PYMT, typeModifiers="-USD", mandatory=false)
+        DATA_ADV_REASON : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=1, sysNumber=25.0, core=true, t24Name=DATA.ADV.REASON, mandatory=false)
+        DATA_EFF_DATE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=6, sysNumber=17.0, core=true, t24Name=DATA.EFF.DATE, mandatory=false)
+        DATA_NEW_PAYMENT : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=31.0, core=true, t24Name=DATA.NEW.PAYMENT, typeModifiers="-USD", mandatory=false)
+        DATA_RECORD_TYPE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=1, sysNumber=16.0, core=true, t24Name=DATA.RECORD.TYPE, mandatory=false)
+        DATA_SUN : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=6, sysNumber=15.0, core=true, t24Name=DATA.SUN, mandatory=false)
+        DATE_TIME -> byValue UKDDMP_Lodgements:UKDDMP_ADDACS_IN_OUT_FILE__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=59.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        FILE_DIRECTION : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=10, sysNumber=1.0, core=true, t24Name=FILE.DIRECTION, mandatory=false)
+        FILE_STATUS : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=2.0, core=true, t24Name=FILE.STATUS, mandatory=false)
+        FILE_TYPE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=30, sysNumber=4.0, core=true, t24Name=FILE.TYPE, mandatory=false)
+        HDR_BANK_CODE_PAYING_BANK : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=4, sysNumber=10.0, core=true, t24Name=HDR.BANK.CODE.PAYING.BANK, mandatory=false)
+        HDR_BANK_CODE_SUBMITTER : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=4, sysNumber=8.0, core=true, t24Name=HDR.BANK.CODE.SUBMITTER, mandatory=false)
+        HDR_CENTER_NO : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=2, sysNumber=9.0, core=true, t24Name=HDR.CENTER.NO, mandatory=false)
+        HDR_FILE_NUMBER : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=13.0, core=true, t24Name=HDR.FILE.NUMBER, mandatory=false)
+        HDR_LABEL_NAME : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=6.0, core=true, t24Name=HDR.LABEL.NAME, mandatory=false)
+        HDR_PROC_DAY : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=6, sysNumber=11.0, core=true, t24Name=HDR.PROC.DAY, mandatory=false)
+        HDR_SERIAL_NO : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=6, sysNumber=7.0, core=true, t24Name=HDR.SERIAL.NO, mandatory=false)
+        HDR_TEST_INDICATOR : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=4, sysNumber=14.0, core=true, t24Name=HDR.TEST.INDICATOR, mandatory=false)
+        HDR_WORK_CODE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=9, sysNumber=12.0, core=true, t24Name=HDR.WORK.CODE, mandatory=false)
+        ID -> UKDDMP_Lodgements:UKDDMP_ADDACS_IN_OUT_FILE PK required
+            @i18n:Label (en="Transaction Ref")
+            @i18n:Tooltip (en="Transaction Reference")
+            @t24:i (align=L, inputBehaviour=I, maxLength=30, sysNumber=0.0, core=true, businessType=A, t24Name="@ID", mandatory=true)
+        INPUTTER -> byValue UKDDMP_Lodgements:UKDDMP_ADDACS_IN_OUT_FILE__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        OVERRIDE -> byValue UKDDMP_Lodgements:UKDDMP_ADDACS_IN_OUT_FILE__OVERRIDE *
+            @t24:i (t24Name=OVERRIDE)
+        REASON_FOR_FAILURE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=20, sysNumber=3.0, core=true, t24Name=REASON.FOR.FAILURE, mandatory=false)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=53.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        REJ_ADVICE_NOTE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=4, sysNumber=39.0, core=true, t24Name=REJ.ADVICE.NOTE, mandatory=false)
+        REJ_ORIG_ACC_NUMBER : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=8, sysNumber=38.0, core=true, t24Name=REJ.ORIG.ACC.NUMBER, mandatory=false)
+        REJ_ORIG_NAME : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=18, sysNumber=35.0, core=true, t24Name=REJ.ORIG.NAME, mandatory=false)
+        REJ_ORIG_SORT_CODE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=6, sysNumber=37.0, core=true, t24Name=REJ.ORIG.SORT.CODE, mandatory=false)
+        REJ_PAYER_ACC_TYPE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=1, sysNumber=40.0, core=true, t24Name=REJ.PAYER.ACC.TYPE, mandatory=false)
+        REJ_PROC_DATE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=6, sysNumber=34.0, core=true, t24Name=REJ.PROC.DATE, mandatory=false)
+        REJ_TXN_CODE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=2, sysNumber=36.0, core=true, t24Name=REJ.TXN.CODE, mandatory=false)
+        RESERVED_1 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=42.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_10 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=51.0, core=true, t24Name=RESERVED.10, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=43.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=44.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=45.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        RESERVED_5 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=46.0, core=true, t24Name=RESERVED.5, mandatory=false)
+        RESERVED_6 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=47.0, core=true, t24Name=RESERVED.6, mandatory=false)
+        RESERVED_7 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=48.0, core=true, t24Name=RESERVED.7, mandatory=false)
+        RESERVED_8 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=49.0, core=true, t24Name=RESERVED.8, mandatory=false)
+        RESERVED_9 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=50.0, core=true, t24Name=RESERVED.9, mandatory=false)
+        UTL_LABEL_NAME : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=33.0, core=true, t24Name=UTL.LABEL.NAME, mandatory=false)
+    }
+    UKDDMP_ADDACS_IN_OUT_FILE__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=56.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    UKDDMP_ADDACS_IN_OUT_FILE__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=55.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    UKDDMP_ADDACS_IN_OUT_FILE__OVERRIDE
+    {
+        OVERRIDE : T24BusinessTypes:N
+            @i18n:Label (en=Override)
+            @i18n:Tooltip (en="Overrides generated by this transaction")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=52.0, core=true, t24Name=OVERRIDE, mandatory=false)
+    }
+    UKDDMP_AUDDIS_FILE
+        @i18n:Description (en="")
+        @t24:i (t24Name=UKDDMP.AUDDIS.FILE, level=F, type=U, allowedFunctions="A C D E I L P Q R S", localRefApplicationSysNo=86.0, localRefAllowed=true)
+    {
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=105.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=106.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=102.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        BACS_OUTPUT_REF_NO : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=8, sysNumber=66.0, core=true, t24Name=BACS.OUTPUT.REF.NO, mandatory=false)
+        CALC_AMOUNT : T24BusinessTypes:AMT
+            @i18n:Label (en="Calc Amt")
+            @i18n:Tooltip (en="Indicates the calculated amount")
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=60.0, core=true, t24Name=CALC.AMOUNT, typeModifiers="-USD", mandatory=false)
+        CLEAR_SYS_REF : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=18, sysNumber=62.0, core=true, t24Name=CLEAR.SYS.REF, mandatory=false)
+        CORRELATION_ID : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=26, sysNumber=4.0, core=true, t24Name=CORRELATION.ID, mandatory=false)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=103.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=99.0, core=true, t24Name=CURR.NO, mandatory=false)
+        DATE_TIME -> byValue UKDDMP_Lodgements:UKDDMP_AUDDIS_FILE__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DDO_DIRECTORY_CREATED : UKDDMP_Lodgements:UKDDMP_AUDDIS_FILE__DDO_DIRECTORY_CREATED
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=85.0, core=true, t24Name=DDO.DIRECTORY.CREATED, mandatory=false)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=104.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        EOF1_BLOCK_COUNT : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=6, sysNumber=71.0, core=true, t24Name=EOF1.BLOCK.COUNT, mandatory=false)
+        EOF1_HDR1 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=70.0, core=true, t24Name=EOF1.HDR1, mandatory=false)
+        EOF1_HDR1_ADDL : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=20, sysNumber=72.0, core=true, t24Name=EOF1.HDR1.ADDL, mandatory=false)
+        EOF1_LABEL_IDENTIFIER : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=68.0, core=true, t24Name=EOF1.LABEL.IDENTIFIER, mandatory=false)
+        EOF1_LABEL_NUMBER : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=1, sysNumber=69.0, core=true, t24Name=EOF1.LABEL.NUMBER, mandatory=false)
+        EOF2_HDR2_ADDL -> byValue UKDDMP_Lodgements:UKDDMP_AUDDIS_FILE__EOF2_HDR2_ADDL *
+            @t24:i (t24Name=EOF2.HDR2.ADDL)
+        EOF2_LABEL_IDENTIFIER : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=73.0, core=true, t24Name=EOF2.LABEL.IDENTIFIER, mandatory=false)
+        EOF2_LABEL_NUMBER : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=1, sysNumber=74.0, core=true, t24Name=EOF2.LABEL.NUMBER, mandatory=false)
+        ERROR_CODE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=2, sysNumber=64.0, core=true, t24Name=ERROR.CODE, mandatory=false)
+        FAILURE_REASON : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=26, sysNumber=3.0, core=true, t24Name=FAILURE.REASON, mandatory=false)
+        FILE_DIRECTION : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=26, sysNumber=1.0, core=true, t24Name=FILE.DIRECTION, mandatory=false)
+        FILE_STATUS : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=2.0, core=true, t24Name=FILE.STATUS, mandatory=false)
+        HDR1_ACCESSIBILITY : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=1, sysNumber=28.0, core=true, t24Name=HDR1.ACCESSIBILITY, mandatory=false)
+        HDR1_BLOCK_COUNT : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=6, sysNumber=29.0, core=true, t24Name=HDR1.BLOCK.COUNT, mandatory=false)
+        HDR1_CREATION_DATE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=6, sysNumber=26.0, core=true, t24Name=HDR1.CREATION.DATE, mandatory=false)
+        HDR1_EXPIRATION_DATE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=6, sysNumber=27.0, core=true, t24Name=HDR1.EXPIRATION.DATE, mandatory=false)
+        HDR1_FILE_SEC_NO : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=4, sysNumber=22.0, core=true, t24Name=HDR1.FILE.SEC.NO, mandatory=false)
+        HDR1_FILE_SEQ_NO : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=4, sysNumber=23.0, core=true, t24Name=HDR1.FILE.SEQ.NO, mandatory=false)
+        HDR1_GENERATION_NO : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=4, sysNumber=24.0, core=true, t24Name=HDR1.GENERATION.NO, mandatory=false)
+        HDR1_GEN_VER_NO : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=2, sysNumber=25.0, core=true, t24Name=HDR1.GEN.VER.NO, mandatory=false)
+        HDR1_LABEL_IDENTIFIER : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=13.0, core=true, t24Name=HDR1.LABEL.IDENTIFIER, mandatory=false)
+        HDR1_LABEL_NO : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=1, sysNumber=14.0, core=true, t24Name=HDR1.LABEL.NO, mandatory=false)
+        HDR1_RESERVED : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=7, sysNumber=31.0, core=true, t24Name=HDR1.RESERVED, mandatory=false)
+        HDR1_SET_IDENTI : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=6, sysNumber=21.0, core=true, t24Name=HDR1.SET.IDENTI, mandatory=false)
+        HDR1_SUN1 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=6, sysNumber=16.0, core=true, t24Name=HDR1.SUN1, mandatory=false)
+        HDR1_SUN2 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=6, sysNumber=20.0, core=true, t24Name=HDR1.SUN2, mandatory=false)
+        HDR1_SYSTEM_CODE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=13, sysNumber=30.0, core=true, t24Name=HDR1.SYSTEM.CODE, mandatory=false)
+        HDR1_VOL_SERIAL_NO1 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=1, sysNumber=15.0, core=true, t24Name=HDR1.VOL.SERIAL.NO1, mandatory=false)
+        HDR1_VOL_SERIAL_NO2 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=1, sysNumber=17.0, core=true, t24Name=HDR1.VOL.SERIAL.NO2, mandatory=false)
+        HDR1_VOL_SERIAL_NO3 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=18.0, core=true, t24Name=HDR1.VOL.SERIAL.NO3, mandatory=false)
+        HDR1_VOL_SERIAL_NO4 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=6, sysNumber=19.0, core=true, t24Name=HDR1.VOL.SERIAL.NO4, mandatory=false)
+        HDR2_BLOCK_LENG : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=5, sysNumber=35.0, core=true, t24Name=HDR2.BLOCK.LENG, mandatory=false)
+        HDR2_BUFFER : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=2, sysNumber=38.0, core=true, t24Name=HDR2.BUFFER, mandatory=false)
+        HDR2_BUFFER_OFFSET : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=2, sysNumber=40.0, core=true, t24Name=HDR2.BUFFER.OFFSET, mandatory=false)
+        HDR2_LABEL_IDENTIFIER : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=32.0, core=true, t24Name=HDR2.LABEL.IDENTIFIER, mandatory=false)
+        HDR2_LABEL_NO : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=1, sysNumber=33.0, core=true, t24Name=HDR2.LABEL.NO, mandatory=false)
+        HDR2_RECORD_FORMAT : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=1, sysNumber=34.0, core=true, t24Name=HDR2.RECORD.FORMAT, mandatory=false)
+        HDR2_RECORD_LENG : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=5, sysNumber=36.0, core=true, t24Name=HDR2.RECORD.LENG, mandatory=false)
+        HDR2_RESERVED : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=39.0, core=true, t24Name=HDR2.RESERVED, mandatory=false)
+        HDR2_RESERVED1 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=1, sysNumber=37.0, core=true, t24Name=HDR2.RESERVED1, mandatory=false)
+        HDR2_RESERVED2 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=28, sysNumber=41.0, core=true, t24Name=HDR2.RESERVED2, mandatory=false)
+        ID -> UKDDMP_Lodgements:UKDDMP_AUDDIS_FILE PK required
+            @i18n:Label (en="Transaction Ref")
+            @i18n:Tooltip (en="Transaction Reference")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=0.0, core=true, businessType=A, t24Name="@ID", mandatory=true)
+        INPUTTER -> byValue UKDDMP_Lodgements:UKDDMP_AUDDIS_FILE__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        INWARD_ACC : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=8, sysNumber=54.0, core=true, t24Name=INWARD.ACC, mandatory=false)
+        ORIG_ACC_NO : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=8, sysNumber=58.0, core=true, t24Name=ORIG.ACC.NO, mandatory=false)
+        ORIG_AUDDIS_STATUS : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=1, sysNumber=67.0, core=true, t24Name=ORIG.AUDDIS.STATUS, mandatory=false)
+        ORIG_IDENTIFY_NO : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=6, sysNumber=65.0, core=true, t24Name=ORIG.IDENTIFY.NO, mandatory=false)
+        ORIG_NAME : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=18, sysNumber=61.0, core=true, t24Name=ORIG.NAME, mandatory=false)
+        ORIG_SORT_CODE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=6, sysNumber=57.0, core=true, t24Name=ORIG.SORT.CODE, mandatory=false)
+        OVERRIDE -> byValue UKDDMP_Lodgements:UKDDMP_AUDDIS_FILE__OVERRIDE *
+            @t24:i (t24Name=OVERRIDE)
+        PAYER_ACC_NAME : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=18, sysNumber=63.0, core=true, t24Name=PAYER.ACC.NAME, mandatory=false)
+        PAYER_ACC_TYPE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=1, sysNumber=55.0, core=true, t24Name=PAYER.ACC.TYPE, mandatory=false)
+        PAYER_SORT_CODE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=6, sysNumber=53.0, core=true, t24Name=PAYER.SORT.CODE, mandatory=false)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=98.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        RESERVED_1 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=87.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_10 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=96.0, core=true, t24Name=RESERVED.10, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=88.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=89.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=90.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        RESERVED_5 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=91.0, core=true, t24Name=RESERVED.5, mandatory=false)
+        RESERVED_6 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=92.0, core=true, t24Name=RESERVED.6, mandatory=false)
+        RESERVED_7 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=93.0, core=true, t24Name=RESERVED.7, mandatory=false)
+        RESERVED_8 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=94.0, core=true, t24Name=RESERVED.8, mandatory=false)
+        RESERVED_9 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=95.0, core=true, t24Name=RESERVED.9, mandatory=false)
+        STAND_ALONE_AMT : T24BusinessTypes:AMT
+            @i18n:Label (en=Amount)
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=59.0, core=true, t24Name=STAND.ALONE.AMT, typeModifiers="-USD", mandatory=false)
+        TRANSACTION_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Transaction Code")
+            @i18n:Tooltip (en="Indicates the Transaction Type")
+            @t24:i (align=L, inputBehaviour=I, maxLength=2, sysNumber=56.0, core=true, t24Name=TRANSACTION.CODE, mandatory=false)
+        UHL1_AUDIT : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=7, sysNumber=50.0, core=true, t24Name=UHL1.AUDIT, mandatory=false)
+        UHL1_COUNTRY_CODE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=6, sysNumber=47.0, core=true, t24Name=UHL1.COUNTRY.CODE, mandatory=false)
+        UHL1_CURRENCY_CODE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=2, sysNumber=46.0, core=true, t24Name=UHL1.CURRENCY.CODE, mandatory=false)
+        UHL1_FILE_NO : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=49.0, core=true, t24Name=UHL1.FILE.NO, mandatory=false)
+        UHL1_LABEL_IDENTIFIER : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=42.0, core=true, t24Name=UHL1.LABEL.IDENTIFIER, mandatory=false)
+        UHL1_LABEL_NO : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=1, sysNumber=43.0, core=true, t24Name=UHL1.LABEL.NO, mandatory=false)
+        UHL1_PROC_DATE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=6, sysNumber=44.0, core=true, t24Name=UHL1.PROC.DATE, mandatory=false)
+        UHL1_RESERVED1 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=15, sysNumber=51.0, core=true, t24Name=UHL1.RESERVED1, mandatory=false)
+        UHL1_RESERVED2 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=26, sysNumber=52.0, core=true, t24Name=UHL1.RESERVED2, mandatory=false)
+        UHL1_UNIQUE_NO : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=10, sysNumber=45.0, core=true, t24Name=UHL1.UNIQUE.NO, mandatory=false)
+        UHL1_WORK_CODE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=9, sysNumber=48.0, core=true, t24Name=UHL1.WORK.CODE, mandatory=false)
+        UTL1_ADDL : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=21, sysNumber=83.0, core=true, t24Name=UTL1.ADDL, mandatory=false)
+        UTL1_CREDIT_VALUE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=13, sysNumber=79.0, core=true, t24Name=UTL1.CREDIT.VALUE, mandatory=false)
+        UTL1_CR_ITEM : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=7, sysNumber=81.0, core=true, t24Name=UTL1.CR.ITEM, mandatory=false)
+        UTL1_DDI_ITEM_COUNT : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=10, sysNumber=82.0, core=true, t24Name=UTL1.DDI.ITEM.COUNT, mandatory=false)
+        UTL1_DEBIT_VALUE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=13, sysNumber=78.0, core=true, t24Name=UTL1.DEBIT.VALUE, mandatory=false)
+        UTL1_DR_ITEM : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=7, sysNumber=80.0, core=true, t24Name=UTL1.DR.ITEM, mandatory=false)
+        UTL1_LABEL_IDENTIFIER : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=76.0, core=true, t24Name=UTL1.LABEL.IDENTIFIER, mandatory=false)
+        UTL1_LABEL_NUMBER : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=1, sysNumber=77.0, core=true, t24Name=UTL1.LABEL.NUMBER, mandatory=false)
+        UTL1_RESERVED : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=29, sysNumber=84.0, core=true, t24Name=UTL1.RESERVED, mandatory=false)
+        VOL1_ACCESSIBILITY : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=1, sysNumber=8.0, core=true, t24Name=VOL1.ACCESSIBILITY, mandatory=false)
+        VOL1_LABEL_IDENTIFIER : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=5.0, core=true, t24Name=VOL1.LABEL.IDENTIFIER, mandatory=false)
+        VOL1_LABEL_NO : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=1, sysNumber=6.0, core=true, t24Name=VOL1.LABEL.NO, mandatory=false)
+        VOL1_LABEL_STD : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=1, sysNumber=12.0, core=true, t24Name=VOL1.LABEL.STD, mandatory=false)
+        VOL1_OWNER_IDENTI : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=14, sysNumber=10.0, core=true, t24Name=VOL1.OWNER.IDENTI, mandatory=false)
+        VOL1_RESERVED : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=26, sysNumber=9.0, core=true, t24Name=VOL1.RESERVED, mandatory=false)
+        VOL1_SERIAL_NO : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=6, sysNumber=7.0, core=true, t24Name=VOL1.SERIAL.NO, mandatory=false)
+        VOL2_RESERVED : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=28, sysNumber=11.0, core=true, t24Name=VOL2.RESERVED, mandatory=false)
+    }
+    UKDDMP_AUDDIS_FILE__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=101.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    UKDDMP_AUDDIS_FILE__EOF2_HDR2_ADDL
+    {
+        EOF2_HDR2_ADDL : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=75.0, core=true, t24Name=EOF2.HDR2.ADDL, mandatory=false)
+    }
+    UKDDMP_AUDDIS_FILE__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=100.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    UKDDMP_AUDDIS_FILE__OVERRIDE
+    {
+        OVERRIDE : T24BusinessTypes:N
+            @i18n:Label (en=Override)
+            @i18n:Tooltip (en="Overrides generated by this transaction")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=97.0, core=true, t24Name=OVERRIDE, mandatory=false)
+    }
+}
+Enumerations {
+    UKDDMP_AUDDIS_FILE__DDO_DIRECTORY_CREATED : mml:string
+        False=False
+        True=True
+}

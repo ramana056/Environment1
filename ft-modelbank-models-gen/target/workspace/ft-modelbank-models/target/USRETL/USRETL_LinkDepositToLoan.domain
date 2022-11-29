@@ -1,0 +1,193 @@
+# UTF-8
+/* 900852 - Link Deposit to Loan */
+Domain USRETL_LinkDepositToLoan
+    @t24:i (module=USRETL)
+    @java:Package (value=com.temenos.t24.datamodel.usretl.usretl_linkdeposittoloan)
+namespace "http://www.temenos.com/t24/USRETL_LinkDepositToLoan"
+metamodelVersion 1.30.6
+Classes {
+    NOFILE_INT_PROOF_REPORT
+        @i18n:Description (en="")
+        @t24:i (t24Name=NOFILE.INT.PROOF.REPORT, level=I, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        ARRANGEMENT_ID : T24BusinessTypes:ARR
+            @i18n:Label (en="Arrangement Id")
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, core=false, t24Name=ARRANGEMENT.ID, mandatory=true)
+        END_DATE : T24BusinessTypes:D
+            @i18n:Label (en="End Date")
+            @i18n:Tooltip (en="End Date")
+            @t24:i (align=R, inputBehaviour=N, maxLength=11, core=false, t24Name=END.DATE, mandatory=false)
+        FINAL_ARRAY : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=100, core=false, t24Name=FINAL.ARRAY, genOperation=USRETL.NOF.INT.PROOF.REPORT, mandatory=false)
+        START_DATE : T24BusinessTypes:D
+            @i18n:Label (en="Start Date")
+            @i18n:Tooltip (en="Start Date")
+            @t24:i (align=R, inputBehaviour=N, maxLength=11, core=false, t24Name=START.DATE, mandatory=false)
+    }
+    USRETL_DEPOSIT_LINKED_LOANS
+        @i18n:Description (en="")
+        @t24:i (t24Name=USRETL.DEPOSIT.LINKED.LOANS, level=F, type=L, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        CHANGE_PROPERTY : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=23.0, core=true, t24Name=CHANGE.PROPERTY, mandatory=false)
+        LINKED_ARR_ID -> byValue USRETL_LinkDepositToLoan:USRETL_DEPOSIT_LINKED_LOANS__LINKED_ARR_ID *
+            @t24:i (t24Name=LINKED.ARR.ID)
+        LIQUIDATION_ACCOUNT -> AC_AccountOpening:ACCOUNT
+            @t24:i (align=L, inputBehaviour=I, maxLength=36, sysNumber=22.0, core=true, businessType=ANT, t24Name=LIQUIDATION.ACCOUNT, mandatory=false)
+        LIQUIDATION_METHOD : USRETL_LinkDepositToLoan:USRETL_DEPOSIT_LINKED_LOANS__LIQUIDATION_METHOD
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=21.0, core=true, t24Name=LIQUIDATION.METHOD, mandatory=false)
+        LOAN_BAL_TYPE -> AC_SoftAccounting:AC_BALANCE_TYPE
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=3.0, core=true, businessType=A, t24Name=LOAN.BAL.TYPE, mandatory=false)
+        LOAN_CUSTOMER_NO -> ST_Customer:CUSTOMER
+            @t24:i (align=R, inputBehaviour=I, maxLength=10, sysNumber=1.0, core=true, businessType=CUS, t24Name=LOAN.CUSTOMER.NO, mandatory=false)
+        LOAN_ID -> USRETL_LinkDepositToLoan:USRETL_DEPOSIT_LINKED_LOANS PK required
+            @i18n:Label (en="Loan Id")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=0.0, core=true, businessType=ARR, t24Name=LOAN.ID, mandatory=true)
+        LOAN_MATURITY_DATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=4.0, core=true, t24Name=LOAN.MATURITY.DATE, mandatory=false)
+        LOAN_PROPERTY -> AA_ProductFramework:AA_PROPERTY
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=2.0, core=true, businessType=A, t24Name=LOAN.PROPERTY, mandatory=false)
+        RESERVED1 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=26.0, core=true, t24Name=RESERVED1, mandatory=false)
+        RESERVED2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=25.0, core=true, t24Name=RESERVED2, mandatory=false)
+        RESERVED3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=24.0, core=true, t24Name=RESERVED3, mandatory=false)
+        RESERVED5 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=20.0, core=true, t24Name=RESERVED5, mandatory=false)
+        RESERVED6 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=19.0, core=true, t24Name=RESERVED6, mandatory=false)
+        RESERVED7 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=18.0, core=true, t24Name=RESERVED7, mandatory=false)
+        RESERVED8 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=6.0, core=true, t24Name=RESERVED8, mandatory=false)
+        RESERVED9 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=5.0, core=true, t24Name=RESERVED9, mandatory=false)
+    }
+    USRETL_DEPOSIT_LINKED_LOANS_WORK
+        @i18n:Description (en="")
+        @t24:i (t24Name=USRETL.DEPOSIT.LINKED.LOANS.WORK, level=F, type=L, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        CHANGE_PROPERTY : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=23.0, core=true, t24Name=CHANGE.PROPERTY, mandatory=false)
+        LINKED_ARR_ID -> byValue USRETL_LinkDepositToLoan:USRETL_DEPOSIT_LINKED_LOANS_WORK__LINKED_ARR_ID *
+            @t24:i (t24Name=LINKED.ARR.ID)
+        LIQUIDATION_ACCOUNT -> AC_AccountOpening:ACCOUNT
+            @t24:i (align=L, inputBehaviour=I, maxLength=36, sysNumber=22.0, core=true, businessType=ANT, t24Name=LIQUIDATION.ACCOUNT, mandatory=false)
+        LIQUIDATION_METHOD : USRETL_LinkDepositToLoan:USRETL_DEPOSIT_LINKED_LOANS_WORK__LIQUIDATION_METHOD
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=21.0, core=true, t24Name=LIQUIDATION.METHOD, mandatory=false)
+        LOAN_BAL_TYPE -> AC_SoftAccounting:AC_BALANCE_TYPE
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=3.0, core=true, businessType=A, t24Name=LOAN.BAL.TYPE, mandatory=false)
+        LOAN_CUSTOMER_NO -> ST_Customer:CUSTOMER
+            @t24:i (align=R, inputBehaviour=I, maxLength=10, sysNumber=1.0, core=true, businessType=CUS, t24Name=LOAN.CUSTOMER.NO, mandatory=false)
+        LOAN_ID -> USRETL_LinkDepositToLoan:USRETL_DEPOSIT_LINKED_LOANS_WORK PK required
+            @i18n:Label (en="Loan Id")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=0.0, core=true, businessType=ARR, t24Name=LOAN.ID, mandatory=true)
+        LOAN_MATURITY_DATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=4.0, core=true, t24Name=LOAN.MATURITY.DATE, mandatory=false)
+        LOAN_PROPERTY -> AA_ProductFramework:AA_PROPERTY
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=2.0, core=true, businessType=A, t24Name=LOAN.PROPERTY, mandatory=false)
+        RESERVED1 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=26.0, core=true, t24Name=RESERVED1, mandatory=false)
+        RESERVED2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=25.0, core=true, t24Name=RESERVED2, mandatory=false)
+        RESERVED3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=24.0, core=true, t24Name=RESERVED3, mandatory=false)
+        RESERVED5 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=20.0, core=true, t24Name=RESERVED5, mandatory=false)
+        RESERVED6 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=19.0, core=true, t24Name=RESERVED6, mandatory=false)
+        RESERVED7 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=18.0, core=true, t24Name=RESERVED7, mandatory=false)
+        RESERVED8 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=6.0, core=true, t24Name=RESERVED8, mandatory=false)
+        RESERVED9 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=5.0, core=true, t24Name=RESERVED9, mandatory=false)
+    }
+    USRETL_DEPOSIT_LINKED_LOANS_WORK__LINKED_ARR_ID
+    {
+        LINKED_ARR_ID -> AA_Framework:AA_ARRANGEMENT
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=7.0, core=true, businessType=A, t24Name=LINKED.ARR.ID, mandatory=false)
+        LINKED_BAL_TYPE -> AC_SoftAccounting:AC_BALANCE_TYPE
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=11.0, core=true, businessType=A, t24Name=LINKED.BAL.TYPE, mandatory=false)
+        LINKED_PROPERTY -> AA_ProductFramework:AA_PROPERTY
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=10.0, core=true, businessType=A, t24Name=LINKED.PROPERTY, mandatory=false)
+        LINK_EFFECTIVE_DATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=8.0, core=true, t24Name=LINK.EFFECTIVE.DATE, mandatory=false)
+        LIQUIDATION_DATE -> byValue USRETL_LinkDepositToLoan:USRETL_DEPOSIT_LINKED_LOANS_WORK__LINKED_ARR_ID__LIQUIDATION_DATE *
+            @t24:i (t24Name=LIQUIDATION.DATE)
+        PRIORITY : T24BusinessTypes:N
+            @i18n:Label (en=Priority)
+            @t24:i (align=R, inputBehaviour=I, maxLength=2, sysNumber=12.0, core=true, t24Name=PRIORITY, mandatory=false)
+        PRODUCT_LINE -> AA_ProductFramework:AA_PRODUCT_LINE
+            @i18n:Label (en="Product Line")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=9.0, core=true, businessType=A, t24Name=PRODUCT.LINE, mandatory=false)
+        SPREAD : T24BusinessTypes:R
+            @t24:i (align=R, inputBehaviour=I, maxLength=12, sysNumber=15.0, core=true, t24Name=SPREAD, mandatory=false)
+        SPREAD_OPERAND : USRETL_LinkDepositToLoan:USRETL_DEPOSIT_LINKED_LOANS_WORK__LINKED_ARR_ID__SPREAD_OPERAND
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=14.0, core=true, t24Name=SPREAD.OPERAND, mandatory=false)
+        SPREAD_TYPE : USRETL_LinkDepositToLoan:USRETL_DEPOSIT_LINKED_LOANS_WORK__LINKED_ARR_ID__SPREAD_TYPE
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=13.0, core=true, t24Name=SPREAD.TYPE, mandatory=false)
+    }
+    USRETL_DEPOSIT_LINKED_LOANS_WORK__LINKED_ARR_ID__LIQUIDATION_DATE
+    {
+        LIQUIDATION_AMOUNT : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=19, sysNumber=17.0, core=true, t24Name=LIQUIDATION.AMOUNT, mandatory=false)
+        LIQUIDATION_DATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=16.0, core=true, t24Name=LIQUIDATION.DATE, mandatory=false)
+    }
+    USRETL_DEPOSIT_LINKED_LOANS__LINKED_ARR_ID
+    {
+        LINKED_ARR_ID -> AA_Framework:AA_ARRANGEMENT
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=7.0, core=true, businessType=A, t24Name=LINKED.ARR.ID, mandatory=false)
+        LINKED_BAL_TYPE -> AC_SoftAccounting:AC_BALANCE_TYPE
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=11.0, core=true, businessType=A, t24Name=LINKED.BAL.TYPE, mandatory=false)
+        LINKED_PROPERTY -> AA_ProductFramework:AA_PROPERTY
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=10.0, core=true, businessType=A, t24Name=LINKED.PROPERTY, mandatory=false)
+        LINK_EFFECTIVE_DATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=8.0, core=true, t24Name=LINK.EFFECTIVE.DATE, mandatory=false)
+        LIQUIDATION_DATE -> byValue USRETL_LinkDepositToLoan:USRETL_DEPOSIT_LINKED_LOANS__LINKED_ARR_ID__LIQUIDATION_DATE *
+            @t24:i (t24Name=LIQUIDATION.DATE)
+        PRIORITY : T24BusinessTypes:N
+            @i18n:Label (en=Priority)
+            @t24:i (align=R, inputBehaviour=I, maxLength=2, sysNumber=12.0, core=true, t24Name=PRIORITY, mandatory=false)
+        PRODUCT_LINE -> AA_ProductFramework:AA_PRODUCT_LINE
+            @i18n:Label (en="Product Line")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=9.0, core=true, businessType=A, t24Name=PRODUCT.LINE, mandatory=false)
+        SPREAD : T24BusinessTypes:R
+            @t24:i (align=R, inputBehaviour=I, maxLength=12, sysNumber=15.0, core=true, t24Name=SPREAD, mandatory=false)
+        SPREAD_OPERAND : USRETL_LinkDepositToLoan:USRETL_DEPOSIT_LINKED_LOANS__LINKED_ARR_ID__SPREAD_OPERAND
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=14.0, core=true, t24Name=SPREAD.OPERAND, mandatory=false)
+        SPREAD_TYPE : USRETL_LinkDepositToLoan:USRETL_DEPOSIT_LINKED_LOANS__LINKED_ARR_ID__SPREAD_TYPE
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=13.0, core=true, t24Name=SPREAD.TYPE, mandatory=false)
+    }
+    USRETL_DEPOSIT_LINKED_LOANS__LINKED_ARR_ID__LIQUIDATION_DATE
+    {
+        LIQUIDATION_AMOUNT : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=19, sysNumber=17.0, core=true, t24Name=LIQUIDATION.AMOUNT, mandatory=false)
+        LIQUIDATION_DATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=16.0, core=true, t24Name=LIQUIDATION.DATE, mandatory=false)
+    }
+}
+Enumerations {
+    USRETL_DEPOSIT_LINKED_LOANS_WORK__LINKED_ARR_ID__SPREAD_OPERAND : mml:string
+        ADD=ADD
+        MULTIPLY=MULTIPLY
+        SUB=SUB
+    USRETL_DEPOSIT_LINKED_LOANS_WORK__LINKED_ARR_ID__SPREAD_TYPE : mml:string
+        FIXED=FIXED
+        VARIABLE=VARIABLE
+    USRETL_DEPOSIT_LINKED_LOANS_WORK__LIQUIDATION_METHOD : mml:string
+        AUTO=AUTO
+        NULL=NULL
+    USRETL_DEPOSIT_LINKED_LOANS__LINKED_ARR_ID__SPREAD_OPERAND : mml:string
+        ADD=ADD
+        MULTIPLY=MULTIPLY
+        SUB=SUB
+    USRETL_DEPOSIT_LINKED_LOANS__LINKED_ARR_ID__SPREAD_TYPE : mml:string
+        FIXED=FIXED
+        VARIABLE=VARIABLE
+    USRETL_DEPOSIT_LINKED_LOANS__LIQUIDATION_METHOD : mml:string
+        AUTO=AUTO
+        NULL=NULL
+}

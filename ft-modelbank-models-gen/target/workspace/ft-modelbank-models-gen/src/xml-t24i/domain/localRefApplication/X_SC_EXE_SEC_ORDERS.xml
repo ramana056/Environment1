@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<localReferenceApplication:LocalReferenceApplication xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:localReferenceApplication="http://www.odcgroup.com/t24/application/localRefApplication/model/LocalReferenceApplication"
+    xmlns:translationDsl="http://www.odcgroup.com/translation/TranslationDsl" forApplication="name://SC_SctOrderExecution:SC_EXE_SEC_ORDERS#">
+  <localField groupName="No" localRefID="TAP.REF.ID">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="TAP.REF.ID"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+  <localField groupName="No" localRefID="TRD.VENUE.TXNID">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="TRD.VENUE.TXNID"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+</localReferenceApplication:LocalReferenceApplication>

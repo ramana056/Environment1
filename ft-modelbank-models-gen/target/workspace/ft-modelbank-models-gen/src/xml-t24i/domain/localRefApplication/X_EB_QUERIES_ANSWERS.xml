@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<localReferenceApplication:LocalReferenceApplication xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:localReferenceApplication="http://www.odcgroup.com/t24/application/localRefApplication/model/LocalReferenceApplication"
+    xmlns:translationDsl="http://www.odcgroup.com/translation/TranslationDsl" forApplication="name://DE_Messaging:EB_QUERIES_ANSWERS#">
+  <localField groupName="No" localRefID="HDR.BUSS.ID">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="HDR.BUSS.ID"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+  <localField groupName="No" localRefID="HDR.SOURCE">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="HDR.SOURCE"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+  <localField groupName="No" localRefID="HDR.PRCS.ID">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="HDR.PRCS.ID"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+  <localField groupName="No" localRefID="HDR.BRCH.CD">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="HDR.BRCH.CD"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+  <localField groupName="No" localRefID="HDR.CUST.ID">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="HDR.CUST.ID"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+  <localField groupName="No" localRefID="HDR.USER.ID">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="HDR.USER.ID"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+  <localField groupName="No" localRefID="HDR.SER.NDE">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="HDR.SER.NDE"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+</localReferenceApplication:LocalReferenceApplication>

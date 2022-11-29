@@ -1,0 +1,413 @@
+# UTF-8
+/* PP Argentina Debit Order */
+Domain PPADEB_DebitOrder
+    @t24:i (module=PPADEB)
+    @java:Package (value=com.temenos.t24.datamodel.ppadeb.ppadeb_debitorder)
+namespace "http://www.temenos.com/t24/PPADEB_DebitOrder"
+metamodelVersion 1.30.6
+Classes {
+    /* PPADEB.DEBIT.ORDER table */
+    PPADEB_DEBIT_ORDER
+        @i18n:Description (en="")
+        @t24:i (t24Name=PPADEB.DEBIT.ORDER, level=F, type=H, allowedFunctions="A C D E H I L P Q R S", localRefApplicationSysNo=60.0, localRefAllowed=true)
+    {
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=69.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=70.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=66.0, core=true, t24Name=AUTHORISER, mandatory=false)
+/* Field for denoting that the transaction has been auto-accepted. Valid only for incoming debit order requests.
+This field will be set to Yes by the system if the auto-acceptance conditions defined in field 'Auto Acceptance API' of debit order product table are satisfied.
+No input field for the user. */
+        AUTO_ACCEPT : PPADEB_DebitOrder:PPADEB_DEBIT_ORDER__AUTO_ACCEPT
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=38.0, core=true, t24Name=AUTO.ACCEPT, mandatory=false)
+        /* Field to store the business date provided by clearing */
+        BUSINESS_DATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=35.0, core=true, t24Name=BUSINESS.DATE, mandatory=false)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=67.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        /* Date of debit order creation in UTC format */
+        CREATION_DATE : T24BusinessTypes:A
+            @i18n:Label (en="Creation Date")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=30.0, core=true, t24Name=CREATION.DATE, mandatory=false)
+        /* Alias of the credit account number */
+        CREDIT_ACCOUNT_ALIAS : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=8.0, core=true, t24Name=CREDIT.ACCOUNT.ALIAS, mandatory=false)
+        /* Currency of the credit account number */
+        CREDIT_ACCOUNT_CURRENCY -> ST_CurrencyConfig:CURRENCY
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=6.0, core=true, businessType=CCY, t24Name=CREDIT.ACCOUNT.CURRENCY, mandatory=false)
+        /* Alternate ID of the credit account number. The alternate key will be a valid record in ALT.ACCT.PARAMETER */
+        CREDIT_ACCOUNT_NUMBER : T24BusinessTypes:A required
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=3.0, core=true, t24Name=CREDIT.ACCOUNT.NUMBER, mandatory=true)
+        /* Account type of the credit account number */
+        CREDIT_ACCOUNT_TYPE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=9.0, core=true, t24Name=CREDIT.ACCOUNT.TYPE, mandatory=false)
+        /* Bank code of the credit account number */
+        CREDIT_PARTY_BANK_CODE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=4.0, core=true, t24Name=CREDIT.PARTY.BANK.CODE, mandatory=false)
+        /* Branch code of the credit account number */
+        CREDIT_PARTY_BRANCH_CODE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=5.0, core=true, t24Name=CREDIT.PARTY.BRANCH.CODE, mandatory=false)
+        /* Credit party Name. */
+        CREDIT_PARTY_NAME : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=10.0, core=true, t24Name=CREDIT.PARTY.NAME, mandatory=false)
+        /* Credit party reference such as legal document number, CUIT etc.. */
+        CREDIT_PARTY_REFERENCE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=2.0, core=true, t24Name=CREDIT.PARTY.REFERENCE, mandatory=false)
+        /* Terminal code of the credit account. Stored for information purposes */
+        CREDIT_PARTY_TERMINAL_CODE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=7.0, core=true, t24Name=CREDIT.PARTY.TERMINAL.CODE, mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=63.0, core=true, t24Name=CURR.NO, mandatory=false)
+        DATE_TIME -> byValue PPADEB_DebitOrder:PPADEB_DEBIT_ORDER__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        /* Alias of the debit account number */
+        DEBIT_ACCOUNT_ALIAS : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=15.0, core=true, t24Name=DEBIT.ACCOUNT.ALIAS, mandatory=false)
+        /* Currency of the debit account number */
+        DEBIT_ACCOUNT_CURRENCY -> ST_CurrencyConfig:CURRENCY
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=16.0, core=true, businessType=CCY, t24Name=DEBIT.ACCOUNT.CURRENCY, mandatory=false)
+        /* Alternate ID of the Debit account number. The alternate key will be a valid record in ALT.ACCT.PARAMETER */
+        DEBIT_ACCOUNT_NUMBER : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=12.0, core=true, t24Name=DEBIT.ACCOUNT.NUMBER, mandatory=false)
+        /* Account type of the debit account number */
+        DEBIT_ACCOUNT_TYPE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=17.0, core=true, t24Name=DEBIT.ACCOUNT.TYPE, mandatory=false)
+        /* Should be a valid Debit order product. Mandatory field. */
+        DEBIT_ORDER_PRODUCT -> PPADEB_DebitOrder:PPADEB_DEBIT_ORDER_PRODUCT required
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=1.0, core=true, businessType=A, t24Name=DEBIT.ORDER.PRODUCT, mandatory=true)
+        /* Bank code of the debit account number */
+        DEBIT_PARTY_BANK_CODE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=13.0, core=true, t24Name=DEBIT.PARTY.BANK.CODE, mandatory=false)
+        /* Branch code of the debit account number */
+        DEBIT_PARTY_BRANCH_CODE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=14.0, core=true, t24Name=DEBIT.PARTY.BRANCH.CODE, mandatory=false)
+        /* Debit Party Name */
+        DEBIT_PARTY_NAME : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=18.0, core=true, t24Name=DEBIT.PARTY.NAME, mandatory=false)
+        /* Debit party reference such as legal document number, CUIT etc.. */
+        DEBIT_PARTY_REFERENCE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=11.0, core=true, t24Name=DEBIT.PARTY.REFERENCE, mandatory=false)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=68.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+/* Field to indicate the device type used by the requestor to initiate a debit order request.
+Information field provided by channels. */
+        DEVICE_TYPE : PPADEB_DebitOrder:PPADEB_DEBIT_ORDER__DEVICE_TYPE
+            @t24:i (align=R, inputBehaviour=I, maxLength=3, sysNumber=46.0, core=true, t24Name=DEVICE.TYPE, mandatory=false)
+/* Direction of the debit order.
+Inward - Incoming debit order request to the debtor
+Outward - Outward debit order request initiated by the requestor (credit party). */
+        DIRECTION : PPADEB_DebitOrder:PPADEB_DEBIT_ORDER__DIRECTION required
+            @i18n:Label (en=Direction)
+            @i18n:Tooltip (en="In or Out")
+            @t24:i (align=L, inputBehaviour=I, maxLength=1, sysNumber=34.0, core=true, t24Name=DIRECTION, mandatory=true)
+        /* Field to denote the enrollment status of the customer. This field is updated with the value sent from the clearing house and stored for information purpose only. */
+        ENROLLMENT_STATUS : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=42.0, core=true, t24Name=ENROLLMENT.STATUS, mandatory=false)
+        /* Field to store the expiry date and time received from clearing house based on the validity period mentioned by the requestor in field Request Validity */
+        EXPIRY_DATE_TIME : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=31.0, core=true, t24Name=EXPIRY.DATE.TIME, mandatory=false)
+        /* System generated ID of the debit order */
+        ID -> PPADEB_DebitOrder:PPADEB_DEBIT_ORDER PK required
+            @i18n:Label (en="Transaction Ref")
+            @i18n:Tooltip (en="Transaction Reference")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=0.0, core=true, businessType=A, t24Name=ID, mandatory=true)
+        /* Field to store the IMEI code of the device */
+        IMEI_CODE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=49.0, core=true, t24Name=IMEI.CODE, mandatory=false)
+        INPUTTER -> byValue PPADEB_DebitOrder:PPADEB_DEBIT_ORDER__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        /* Field to store the IP address of the customer initiating the debit order */
+        IP_ADDRESS : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=45.0, core=true, t24Name=IP.ADDRESS, mandatory=false)
+        /* Field to update the Latitude */
+        LATITUDE : T24BusinessTypes:A required
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=39.0, core=true, t24Name=LATITUDE, mandatory=true)
+        /* Field to update the Longitude */
+        LONGITUDE : T24BusinessTypes:A required
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=40.0, core=true, t24Name=LONGITUDE, mandatory=true)
+        /* Description field to provide other information */
+        NARRATIVE : T24BusinessTypes:A required
+            @i18n:Label (en=Narrative)
+            @i18n:Tooltip (en="Any narrative to be input for user information")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=19.0, core=true, t24Name=NARRATIVE, mandatory=true)
+/* Field to indicate the operation system used by the requestor to initiate a debit order request.
+Information field provided by channels. */
+        OPERATING_SYSTEM : PPADEB_DebitOrder:PPADEB_DEBIT_ORDER__OPERATING_SYSTEM
+            @t24:i (align=R, inputBehaviour=I, maxLength=35, sysNumber=47.0, core=true, t24Name=OPERATING.SYSTEM, mandatory=false)
+/* Field for user to perform necessary operations
+Accept - Debtor to accept the incoming debit order request
+Reject - Debtor to reject the incoming debit order request
+Cancel - Requestor to cancel the debit order initiated. Cancellation can only be triggered if there is no underlying payment in TPH. */
+        OPERATION : PPADEB_DebitOrder:PPADEB_DEBIT_ORDER__OPERATION
+            @i18n:Label (en=Operation)
+            @t24:i (align=L, inputBehaviour=I, maxLength=10, sysNumber=36.0, core=true, t24Name=OPERATION, mandatory=false)
+        /* Field to denote if the transaction is performed by the same person. This field is updated with the value sent from the clearing house and stored for information purpose only. */
+        OPERATION_BY_SAME_PERSON : PPADEB_DebitOrder:PPADEB_DEBIT_ORDER__OPERATION_BY_SAME_PERSON
+            @t24:i (align=R, inputBehaviour=I, maxLength=1, sysNumber=41.0, core=true, t24Name=OPERATION.BY.SAME.PERSON, mandatory=false)
+        OVERRIDE -> byValue PPADEB_DebitOrder:PPADEB_DEBIT_ORDER__OVERRIDE *
+            @t24:i (t24Name=OVERRIDE)
+        /* Field to denote the preauthorization details of the transaction. This field is updated with the value sent from the clearing house and stored for information purpose only. */
+        PREAUTHORIZATION : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=43.0, core=true, t24Name=PREAUTHORIZATION, mandatory=false)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=62.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        /* Field for mentioning the reason for rejection. Mandatory field when field 'Operation' = 'Reject' */
+        REJECTION_REASON : PPADEB_DebitOrder:PPADEB_DEBIT_ORDER__REJECTION_REASON
+            @t24:i (align=R, inputBehaviour=I, maxLength=35, sysNumber=37.0, core=true, t24Name=REJECTION.REASON, mandatory=false)
+        /* Amount requested by the credit party (requestor) */
+        REQUEST_AMOUNT : T24BusinessTypes:AMT required
+            @t24:i (align=R, inputBehaviour=I, maxLength=19, sysNumber=22.0, core=true, t24Name=REQUEST.AMOUNT, typeModifiers="21", mandatory=true)
+        /* Currency of the transaction */
+        REQUEST_CURRENCY -> ST_CurrencyConfig:CURRENCY required
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=21.0, core=true, businessType=CCY, t24Name=REQUEST.CURRENCY, mandatory=true)
+        /* Field to capture the purpose of the transaction */
+        REQUEST_PURPOSE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=20.0, core=true, t24Name=REQUEST.PURPOSE, mandatory=false)
+        /* Validity period of the transaction. This value will be entered by the requestor (credit party) while initiation a debit order request. */
+        REQUEST_VALIDITY : T24BusinessTypes:N required
+            @t24:i (align=R, inputBehaviour=I, maxLength=5, sysNumber=23.0, core=true, t24Name=REQUEST.VALIDITY, mandatory=true)
+        RESERVED_1 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=59.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_10 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=50.0, core=true, t24Name=RESERVED.10, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=58.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=57.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=56.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        RESERVED_5 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=55.0, core=true, t24Name=RESERVED.5, mandatory=false)
+        RESERVED_6 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=54.0, core=true, t24Name=RESERVED.6, mandatory=false)
+        RESERVED_7 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=53.0, core=true, t24Name=RESERVED.7, mandatory=false)
+        RESERVED_8 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=52.0, core=true, t24Name=RESERVED.8, mandatory=false)
+        RESERVED_9 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=51.0, core=true, t24Name=RESERVED.9, mandatory=false)
+        /* Response code from clearing house or the error code that has to be sent to clearing house is updated in this field. If a record is committed with a value in this field, an IF event will be emitted */
+        RESPONSE_CODE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=27.0, core=true, t24Name=RESPONSE.CODE, mandatory=false)
+        /* Response description from clearing house */
+        RESPONSE_DESCRIPTION : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=128, sysNumber=28.0, core=true, t24Name=RESPONSE.DESCRIPTION, mandatory=false)
+        /* Free text field for storing requestor information */
+        SELLER_DESCRIPTION : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=44.0, core=true, t24Name=SELLER.DESCRIPTION, mandatory=false)
+        /* Field to store the SIM code */
+        SIM_CODE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=48.0, core=true, t24Name=SIM.CODE, mandatory=false)
+        /* Status of the Debit order transaction */
+        STATUS : PPADEB_DebitOrder:PPADEB_DEBIT_ORDER__STATUS
+            @i18n:Label (en=Status)
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=24.0, core=true, t24Name=STATUS, mandatory=false)
+        /* The date of the respective status update is available in this field. */
+        STATUS_DATE : T24BusinessTypes:D
+            @i18n:Label (en="Status Date")
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=26.0, core=true, t24Name=STATUS.DATE, mandatory=false)
+        /* Description of the status. */
+        STATUS_DESCRIPTION : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=25.0, core=true, t24Name=STATUS.DESCRIPTION, mandatory=false)
+        /* Description field to capture the rules on suspicious activity received from clearing. */
+        SUSPICIOUS_ACTIVITY_RULES : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=33.0, core=true, t24Name=SUSPICIOUS.ACTIVITY.RULES, mandatory=false)
+        /* Field to store the scoring suspicious activity received from clearing. */
+        SUSPICIOUS_ACTIVITY_SCORE : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=3, sysNumber=32.0, core=true, t24Name=SUSPICIOUS.ACTIVITY.SCORE, mandatory=false)
+        /* End to end reference of the transaction */
+        TRANSACTION_REFERENCE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=29.0, core=true, t24Name=TRANSACTION.REFERENCE, mandatory=false)
+    }
+    PPADEB_DEBIT_ORDER_PRODUCT
+        @i18n:Description (en="")
+        @t24:i (t24Name=PPADEB.DEBIT.ORDER.PRODUCT, nonStop=true, level=I, type=H, allowedFunctions="A C D E I L P Q S", localRefApplicationSysNo=19.0, localRefAllowed=true)
+    {
+        ALLOWED_CURRENCY -> byValue PPADEB_DebitOrder:PPADEB_DEBIT_ORDER_PRODUCT__ALLOWED_CURRENCY *
+            @t24:i (t24Name=ALLOWED.CURRENCY)
+        ALLOW_FX : PPADEB_DebitOrder:PPADEB_DEBIT_ORDER_PRODUCT__ALLOW_FX
+            @t24:i (align=L, inputBehaviour=I, maxLength=1, sysNumber=2.0, core=true, t24Name=ALLOW.FX, mandatory=false)
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=28.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=29.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=25.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        AUTO_ACCEPTANCE_API : T24BusinessTypes:HOOK
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=8.0, core=true, t24Name=AUTO.ACCEPTANCE.API, typeModifiers=DEBIT.PRODUCT.AUTO.ACCEPTANCE.HOOK, mandatory=false)
+        CLEARING_TIME_ZONE : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=7.0, core=true, t24Name=CLEARING.TIME.ZONE, mandatory=false)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=26.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=22.0, core=true, t24Name=CURR.NO, mandatory=false)
+        DATE_TIME -> byValue PPADEB_DebitOrder:PPADEB_DEBIT_ORDER_PRODUCT__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=27.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        DESCRIPTION -> byValue PPADEB_DebitOrder:PPADEB_DEBIT_ORDER_PRODUCT__DESCRIPTION *
+            @t24:i (t24Name=DESCRIPTION)
+        INPUTTER -> byValue PPADEB_DebitOrder:PPADEB_DEBIT_ORDER_PRODUCT__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        MAXIMUM_EXPIRY : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=5, sysNumber=5.0, core=true, t24Name=MAXIMUM.EXPIRY, mandatory=false)
+        MINIMUM_EXPIRY : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=5, sysNumber=4.0, core=true, t24Name=MINIMUM.EXPIRY, mandatory=false)
+        OVERRIDE -> byValue PPADEB_DebitOrder:PPADEB_DEBIT_ORDER_PRODUCT__OVERRIDE *
+            @t24:i (t24Name=OVERRIDE)
+        RECORD_ID -> PPADEB_DebitOrder:PPADEB_DEBIT_ORDER_PRODUCT PK required
+            @i18n:Label (en="Product ID")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=0.0, core=true, businessType=A, t24Name=RECORD.ID, mandatory=true)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=21.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        RESERVED_1 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=9.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_10 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=18.0, core=true, t24Name=RESERVED.10, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=10.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=11.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=12.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        RESERVED_5 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=13.0, core=true, t24Name=RESERVED.5, mandatory=false)
+        RESERVED_6 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=14.0, core=true, t24Name=RESERVED.6, mandatory=false)
+        RESERVED_7 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=15.0, core=true, t24Name=RESERVED.7, mandatory=false)
+        RESERVED_8 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=16.0, core=true, t24Name=RESERVED.8, mandatory=false)
+        RESERVED_9 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=17.0, core=true, t24Name=RESERVED.9, mandatory=false)
+        VALIDATION_API -> byValue PPADEB_DebitOrder:PPADEB_DEBIT_ORDER_PRODUCT__VALIDATION_API *
+            @t24:i (t24Name=VALIDATION.API)
+    }
+    PPADEB_DEBIT_ORDER_PRODUCT__ALLOWED_CURRENCY
+    {
+        ALLOWED_CURRENCY -> ST_CurrencyConfig:CURRENCY
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=3.0, core=true, businessType=A, t24Name=ALLOWED.CURRENCY, mandatory=false)
+    }
+    PPADEB_DEBIT_ORDER_PRODUCT__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=24.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    PPADEB_DEBIT_ORDER_PRODUCT__DESCRIPTION
+    {
+        DESCRIPTION : T24BusinessTypes:A required
+            @i18n:Label (en=Description)
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, multiLanguage=true, sysNumber=1.0, core=true, t24Name=DESCRIPTION, mandatory=true)
+    }
+    PPADEB_DEBIT_ORDER_PRODUCT__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=23.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    PPADEB_DEBIT_ORDER_PRODUCT__OVERRIDE
+    {
+        OVERRIDE : T24BusinessTypes:N
+            @i18n:Label (en=Override)
+            @i18n:Tooltip (en="Overrides generated by this transaction")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=20.0, core=true, t24Name=OVERRIDE, mandatory=false)
+    }
+    PPADEB_DEBIT_ORDER_PRODUCT__VALIDATION_API
+    {
+        VALIDATION_API : T24BusinessTypes:HOOK
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=6.0, core=true, t24Name=VALIDATION.API, typeModifiers=DEBIT.PRODUCT.VALIDATE.API.HOOK, mandatory=false)
+    }
+    PPADEB_DEBIT_ORDER__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=65.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    PPADEB_DEBIT_ORDER__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=64.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    PPADEB_DEBIT_ORDER__OVERRIDE
+    {
+        OVERRIDE : T24BusinessTypes:N
+            @i18n:Label (en=Override)
+            @i18n:Tooltip (en="Overrides generated by this transaction")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=61.0, core=true, t24Name=OVERRIDE, mandatory=false)
+    }
+}
+Enumerations {
+    PPADEB_DEBIT_ORDER_PRODUCT__ALLOW_FX : mml:string
+        N=N
+        NULL=NULL
+        Y=Y
+    PPADEB_DEBIT_ORDER__AUTO_ACCEPT : mml:string
+        NULL=NULL
+        Yes=Yes
+    PPADEB_DEBIT_ORDER__DEVICE_TYPE : mml:string
+        01=01
+        02=02
+        03=03
+        04=04
+        NULL=NULL
+    PPADEB_DEBIT_ORDER__DIRECTION : mml:string
+        I=I
+        O=O
+    PPADEB_DEBIT_ORDER__OPERATING_SYSTEM : mml:string
+        01=01
+        02=02
+        03=03
+        04=04
+        05=05
+        06=06
+        NULL=NULL
+    PPADEB_DEBIT_ORDER__OPERATION : mml:string
+        Accept=Accept
+        Cancel=Cancel
+        NULL=NULL
+        Reject=Reject
+    PPADEB_DEBIT_ORDER__OPERATION_BY_SAME_PERSON : mml:string
+        0=0
+        1=1
+    PPADEB_DEBIT_ORDER__REJECTION_REASON : mml:string
+        10=10
+        11=11
+    PPADEB_DEBIT_ORDER__STATUS : mml:string
+        CREDITED=CREDITED
+        CREDITINGERROR=CREDITINGERROR
+        DATAERROR=DATAERROR
+        DELETED=DELETED
+        EXPIRED=EXPIRED
+        INITIATED=INITIATED
+        INPROGRESS=INPROGRESS
+        REJECTIONFROMCUSTOMER=REJECTIONFROMCUSTOMER
+        REJECTPENDINGCONFIRMATION=REJECTPENDINGCONFIRMATION
+}

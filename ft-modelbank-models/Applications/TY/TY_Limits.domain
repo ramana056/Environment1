@@ -1,0 +1,677 @@
+# UTF-8
+/* New comp to showcase dealer limits */
+Domain TY_Limits
+    @t24:i (module=TY)
+    @java:Package (value=com.temenos.t24.datamodel.ty.ty_limits)
+namespace "http://www.temenos.com/t24/TY_Limits"
+metamodelVersion 1.30.6
+Classes {
+    NOFILE_TY_GET_LIMIT_BREACH
+        @i18n:Description (en="")
+        @t24:i (t24Name=NOFILE.TY.GET.LIMIT.BREACH, level=I, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        REPORT_NAME : T24BusinessTypes:N
+            @i18n:Label (en="Report Name")
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, core=false, t24Name=REPORT.NAME, mandatory=false)
+        TY_LIMIT_REPORT : T24BusinessTypes:N
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, core=false, t24Name=TY.LIMIT.REPORT, genOperation=E.TY.GET.LIMIT.BREACH, mandatory=true)
+    }
+/* TY.DEALER.TXN.LIMIT helps the user to setup and monitor deal amounts at transaction level for a dealer desk where in user can key in the limit amounts and based on which exceptions will be raised at the transaction level to let the user know about the transaction limit breach if there are any for the different currencies defined.
+
+This table lets the user to monitor the limit amounts for various transactions using various limit products defined in LIMIT.REFERENCE table. However for SPOT and FORWARD transaction, the system lets the user to define the Limit product as deal type SP and FW respectively and limit amounts can be monitored based on this definition. If SP/FW and its corresponding limit references are also defined, SP/FW definition takes the priority and monitoring will be carried out based on SP/FW definition.
+
+Dealer Desk is the ID of the table where in each dealer can setup the limit for the transaction amounts. */
+    TY_DEALER_TXN_LIMIT
+        @i18n:Description (en="")
+        @t24:i (t24Name=TY.DEALER.TXN.LIMIT, level=F, type=H, allowedFunctions="A C D E H I L P Q R S", localRefApplicationSysNo=19.0, localRefAllowed=true)
+    {
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=27.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=28.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=24.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=25.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=21.0, core=true, t24Name=CURR.NO, mandatory=false)
+        DATE_TIME -> byValue TY_Limits:TY_DEALER_TXN_LIMIT__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=26.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        DESCRIPTION -> byValue TY_Limits:TY_DEALER_TXN_LIMIT__DESCRIPTION *
+            @t24:i (t24Name=DESCRIPTION)
+        INPUTTER -> byValue TY_Limits:TY_DEALER_TXN_LIMIT__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        LIMIT_PRODUCT -> byValue TY_Limits:TY_DEALER_TXN_LIMIT__LIMIT_PRODUCT *
+            @t24:i (t24Name=LIMIT.PRODUCT)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=20.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        RESERVED_1 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=18.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_10 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=9.0, core=true, t24Name=RESERVED.10, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=17.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=16.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=15.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        RESERVED_5 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=14.0, core=true, t24Name=RESERVED.5, mandatory=false)
+        RESERVED_6 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=13.0, core=true, t24Name=RESERVED.6, mandatory=false)
+        RESERVED_7 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=12.0, core=true, t24Name=RESERVED.7, mandatory=false)
+        RESERVED_8 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=11.0, core=true, t24Name=RESERVED.8, mandatory=false)
+        RESERVED_9 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=10.0, core=true, t24Name=RESERVED.9, mandatory=false)
+/* An user defined field to define the amounts if transactions are to be monitored in any particular currency can be defined over here.
+
+Validations:
+Input in the field will require inputs in TXN.LIMIT.CCY. */
+        TXN_LIMIT_AMT : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=19, sysNumber=8.0, core=true, t24Name=TXN.LIMIT.AMT, mandatory=false)
+/* An user defined field to define the currency if transactions are monitored in any particular currency can be defined over here.
+
+Validations:
+Valid currency.
+Input in the field will require inputs in TXN.LIMIT.AMT. */
+        TXN_LIMIT_CCY -> ST_CurrencyConfig:CURRENCY
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=7.0, core=true, businessType=CCY, t24Name=TXN.LIMIT.CCY, mandatory=false)
+        /* Dealer Desk is the ID of the table where in each dealer can setup the limit for the transaction amounts. */
+        TY_ID -> TY_Limits:TY_DEALER_TXN_LIMIT PK required
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=0.0, core=true, businessType=A, t24Name=TY.ID, mandatory=true)
+    }
+    TY_DEALER_TXN_LIMIT__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=23.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    TY_DEALER_TXN_LIMIT__DESCRIPTION
+    {
+/* Description of the current record.
+
+Validation:
+
+Standard T24 Alphanumeric field.
+Mandatory field - Language specific. */
+        DESCRIPTION : T24BusinessTypes:A required
+            @i18n:Label (en=Description)
+            @i18n:Tooltip (en=Description)
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, multiLanguage=true, sysNumber=1.0, core=true, t24Name=DESCRIPTION, mandatory=true)
+    }
+    TY_DEALER_TXN_LIMIT__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=22.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    TY_DEALER_TXN_LIMIT__LIMIT_PRODUCT
+    {
+        DEAL_CCY -> byValue TY_Limits:TY_DEALER_TXN_LIMIT__LIMIT_PRODUCT__DEAL_CCY *
+            @t24:i (t24Name=DEAL.CCY)
+/* An user defined field to define the limit product to be monitored.
+
+Validations:
+Multi-value field.
+No Duplicates are allowed.
+Input in the field will require inputs in LIMIT.DEAL.CCY and LIMIT.AMOUNT
+Valid values are IDs of LIMIT.REFERENCE/ SP or FW */
+        LIMIT_PRODUCT : T24BusinessTypes:A
+            @i18n:Label (en="Limit Product")
+            @i18n:Tooltip (en="Identifies the Limit Product")
+            @t24:i (align=L, inputBehaviour=I, maxLength=4, sysNumber=2.0, core=true, t24Name=LIMIT.PRODUCT, mandatory=false)
+    }
+    TY_DEALER_TXN_LIMIT__LIMIT_PRODUCT__DEAL_CCY
+    {
+/* An user defined field to define the transaction/deal currency to be monitored for a dealer.
+
+Validations:
+Sub Value field.
+Should be a valid CURRENCY.
+No Duplications within a limit product.
+Input in the field will require inputs in LIMIT.PRODUCT and LIMIT.AMOUNT */
+        DEAL_CCY -> ST_CurrencyConfig:CURRENCY
+            @i18n:Label (en="Deal Ccy")
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=3.0, core=true, businessType=CCY, t24Name=DEAL.CCY, mandatory=false)
+/* An user defined field to define to limit amount for the particular LIMIT.PRODUCT>LIMIT.DEAL.CCY.
+
+Validations:
+Sub Value field.
+Input in the field will require inputs in LIMIT.PRODUCT and LIMIT.DEAL.CCY. */
+        LIMIT_AMOUNT : T24BusinessTypes:AMT
+            @i18n:Label (en="Limit Amount")
+            @i18n:Tooltip (en="It shows the limit amount")
+            @t24:i (align=R, inputBehaviour=I, maxLength=19, sysNumber=4.0, core=true, t24Name=LIMIT.AMOUNT, mandatory=false)
+/* Specifies how much limit amount has been left for the particular LIMIT.PRODUCT>LIMIT.DEAL.CCY.
+
+
+Validations:
+Sub Value field.
+NOINPUT field. Updated by system.
+LIMIT.AVAIL = LIMIT.AMOUNT -  ABS(LIMIT.UTILIZED) */
+        LIMIT_AVAIL : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=N, maxLength=3, sysNumber=6.0, core=true, t24Name=LIMIT.AVAIL, mandatory=false)
+/* Specifies how much limit amount has been utilized by the transactions for the current dealer.
+
+Validations:
+Sub Value field.
+NOINPUT field. Updated by system.
+LIMIT.AVAIL = LIMIT.AMOUNT -  TRANSACTION.AMOUNT (Transactions like FX,ND,etc.) */
+        LIMIT_UTILIZED : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=N, maxLength=19, sysNumber=5.0, core=true, t24Name=LIMIT.UTILIZED, mandatory=false)
+    }
+    /* This is a concat table to update the individual transaction amounts that are supposed to update TY.INTRADAY.LIM.CCY table. The ID of this table would be of the format "CCY"."XXX" where CCY is the currency record of TY.INTRADAY.LIM.CCY table and XXX is a unique number allocated based on the current session. This is an intermediate file that contain the transaction amounts and the underlying data would be flushed to update TY.INTRADAY.LIM.CCY table when FX and NDF deals are input. */
+    TY_INTRADAY_CONCAT
+        @i18n:Description (en="")
+        @t24:i (t24Name=TY.INTRADAY.CONCAT, level=F, type=L, allowedFunctions="L P S", localRefApplicationSysNo=13.0, localRefAllowed=true)
+    {
+        CURRENCY : T24BusinessTypes:A
+            @i18n:Label (en=Ccy)
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=3.0, core=true, t24Name=CURRENCY, mandatory=false)
+        DEALER : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=2, sysNumber=4.0, core=true, t24Name=DEALER, mandatory=false)
+        /* This field contains the long amount of the current incoming transaction. This amount would be moved to the LONG.UTIL.AMT field of TY.INTRADAY.LIM.CCY table. */
+        LONG_UTIL_AMT : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=19, sysNumber=1.0, core=true, t24Name=LONG.UTIL.AMT, mandatory=false)
+        RESERVED_1 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=12.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=11.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=10.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=9.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        RESERVED_5 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=8.0, core=true, t24Name=RESERVED.5, mandatory=false)
+        RESERVED_6 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=7.0, core=true, t24Name=RESERVED.6, mandatory=false)
+        RESERVED_7 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=6.0, core=true, t24Name=RESERVED.7, mandatory=false)
+        RESERVED_8 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=5.0, core=true, t24Name=RESERVED.8, mandatory=false)
+        /* This field contains the short amount of the current incoming transaction. This amount would be moved to the SHORT.UTIL.AMT field of TY.INTRADAY.LIM.CCY table. */
+        SHORT_UTIL_AMT : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=19, sysNumber=2.0, core=true, t24Name=SHORT.UTIL.AMT, mandatory=false)
+        /* The ID of this table would be of the format "CCY"."XXX" where CCY is the currency record of TY.INTRADAY.LIM.CCY table and XXX is a unique number allocated based on the current session. */
+        TY_INTRADAY_CONCAT_ID -> TY_Limits:TY_INTRADAY_CONCAT PK required
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=0.0, core=true, businessType=A, t24Name=TY.INTRADAY.CONCAT.ID, mandatory=true)
+    }
+/* This is the table that contains the intraday amounts consumed by a particular currency.
+
+Records of 3 kinds are possible in this table.
+1.) Currency record at the company level.
+2.) Currency record at the dealer level.
+3.) Common currency at the company level.
+
+This table is autocreated when a TY.POSITION.LIMITS record is authorized. The limit amounts defined in this table are validated during runtime and appropriate overrides are raised during deal input. */
+    TY_INTRADAY_LIM_CCY
+        @i18n:Description (en="")
+        @t24:i (t24Name=TY.INTRADAY.LIM.CCY, level=F, type=L, allowedFunctions="L P S", localRefApplicationSysNo=16.0, localRefAllowed=true)
+    {
+        /* This field contains the intraday limit for the currency. This limit amount is defaulted from the intraday amount defined in TY.POSITION.LIMITS. */
+        INTRADAY_LIMIT : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=19, sysNumber=1.0, core=true, t24Name=INTRADAY.LIMIT, mandatory=false)
+        OVN_OUTSTANDING : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=19, sysNumber=2.0, core=true, t24Name=OVN.OUTSTANDING, mandatory=false)
+        RESERVED_1 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=15.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_10 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=6.0, core=true, t24Name=RESERVED.10, mandatory=false)
+        RESERVED_11 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=5.0, core=true, t24Name=RESERVED.11, mandatory=false)
+        RESERVED_12 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=4.0, core=true, t24Name=RESERVED.12, mandatory=false)
+        RESERVED_13 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=3.0, core=true, t24Name=RESERVED.13, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=14.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=13.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=12.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        RESERVED_5 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=11.0, core=true, t24Name=RESERVED.5, mandatory=false)
+        RESERVED_6 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=10.0, core=true, t24Name=RESERVED.6, mandatory=false)
+        RESERVED_7 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=9.0, core=true, t24Name=RESERVED.7, mandatory=false)
+        RESERVED_8 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=8.0, core=true, t24Name=RESERVED.8, mandatory=false)
+        RESERVED_9 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=7.0, core=true, t24Name=RESERVED.9, mandatory=false)
+/* The ID could take the below 3 values.
+
+1. CCY where CCY is a valid currency.
+2. CCY.DD where CCY is a valid currency and DD is a valid dealer desk
+3. C.CCY where C is to indicate that it is a common currency and CCY is a valid currency */
+        TY_INTRADAY_LIM_CCY_ID -> TY_Limits:TY_INTRADAY_LIM_CCY PK required
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=0.0, core=true, businessType=A, t24Name=TY.INTRADAY.LIM.CCY.ID, mandatory=true)
+    }
+/* This is the table that contains the details of individual limit breaches recorded at instances a breach was raised. Breaches could arise at 3 instances.
+
+1. When intraday or overnight breaches are encountered - During deal input(intraday) and COB(overnight)
+2. When TY.DEALER.TXN.LIMIT is breached. - During deal input
+3. When stop loss limit is breached. - By a stop loss service */
+    TY_LIMIT_REPORT
+        @i18n:Description (en="")
+        @t24:i (t24Name=TY.LIMIT.REPORT, level=F, type=L, allowedFunctions="L P S", localRefApplicationSysNo=23.0, localRefAllowed=true)
+    {
+        /* This field contains the currency in which a breach is raised. */
+        CURRENCY -> ST_CurrencyConfig:CURRENCY
+            @i18n:Label (en=Ccy)
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=1.0, core=true, businessType=CCY, t24Name=CURRENCY, mandatory=false)
+        /* This field contains the dealer desk that input a transaction that has led to a limit breach. */
+        DEALER_DESK : T24BusinessTypes:A
+            @i18n:Label (en="Dealer Desk")
+            @i18n:Tooltip (en="Specifies the Dealer Desk handling the transaction")
+            @t24:i (align=L, inputBehaviour=I, maxLength=19, sysNumber=6.0, core=true, t24Name=DEALER.DESK, mandatory=false)
+        /* This field contains any additional notes entered by the dealer at the time of transaction input when a breach was encountered. */
+        DEALER_NOTES : T24BusinessTypes:A
+            @i18n:Label (en="Dealer Instr")
+            @t24:i (align=L, inputBehaviour=I, maxLength=19, sysNumber=7.0, core=true, t24Name=DEALER.NOTES, mandatory=false)
+        /* This field contains the transaction amount when a breach was raised. */
+        DEAL_AMT : T24BusinessTypes:AMT
+            @i18n:Label (en="Deal Amount")
+            @t24:i (align=R, inputBehaviour=I, maxLength=19, sysNumber=11.0, core=true, t24Name=DEAL.AMT, mandatory=false)
+        /* This field contains the date on which the transaction was input and a breach was raised. */
+        DEAL_DATE : T24BusinessTypes:D
+            @i18n:Label (en="Deal Date")
+            @i18n:Tooltip (en="Indicates the Deal date")
+            @t24:i (align=R, inputBehaviour=I, maxLength=8, sysNumber=10.0, core=true, t24Name=DEAL.DATE, mandatory=false)
+        /* This field contain the transaction reference during the input of which a breach was encountered. */
+        DEAL_REF : T24BusinessTypes:A
+            @i18n:Label (en="Transaction Ref")
+            @t24:i (align=L, inputBehaviour=I, maxLength=19, sysNumber=9.0, core=true, t24Name=DEAL.REF, mandatory=false)
+        /* This field contains the amount by which the current transaction is breached. */
+        EXCEEDED_BY : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=19, sysNumber=5.0, core=true, t24Name=EXCEEDED.BY, mandatory=false)
+        /* This field contains the time at which the limit breach was encountered. */
+        LIMIT_BREACH_TIME : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=19, sysNumber=8.0, core=true, t24Name=LIMIT.BREACH.TIME, mandatory=false)
+        /* This field contains the limit amount that is breached by an incoming transaction. */
+        LIMIT_EXPOSURE : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=19, sysNumber=2.0, core=true, t24Name=LIMIT.EXPOSURE, mandatory=false)
+        /* This field contains the limit utilization amount after a breach is encountered. */
+        LIMIT_UTIL_AFTER : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=19, sysNumber=4.0, core=true, t24Name=LIMIT.UTIL.AFTER, mandatory=false)
+        /* This field contains the limit utilization amount before a breach was encountered. */
+        LIMIT_UTIL_BEFORE : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=19, sysNumber=3.0, core=true, t24Name=LIMIT.UTIL.BEFORE, mandatory=false)
+        /* This field contains the product reference of the transaction that raised a limit breach. Could take values as either SP, FW or any valid limit references. */
+        PRODUCT : T24BusinessTypes:A
+            @i18n:Label (en=Product)
+            @t24:i (align=L, inputBehaviour=I, maxLength=19, sysNumber=12.0, core=true, t24Name=PRODUCT, mandatory=false)
+        RESERVED_1 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=22.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_10 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=13.0, core=true, t24Name=RESERVED.10, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=21.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=20.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=19.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        RESERVED_5 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=18.0, core=true, t24Name=RESERVED.5, mandatory=false)
+        RESERVED_6 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=17.0, core=true, t24Name=RESERVED.6, mandatory=false)
+        RESERVED_7 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=16.0, core=true, t24Name=RESERVED.7, mandatory=false)
+        RESERVED_8 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=15.0, core=true, t24Name=RESERVED.8, mandatory=false)
+        RESERVED_9 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=14.0, core=true, t24Name=RESERVED.9, mandatory=false)
+        TY_LIMIT_REPORT -> TY_Limits:TY_LIMIT_REPORT PK required
+            @t24:i (align=L, inputBehaviour=I, maxLength=100, sysNumber=0.0, core=true, businessType=A, t24Name=TY.LIMIT.REPORT, mandatory=true)
+    }
+    /* This table is the primary configuration table for dealer limits. The currencies for which the limit amounts are to be monitored are defined here. For each currency, the intraday and overnight amounts are defined. The limit monitoring will happen based on the amounts defined here. The stop loss limit could also be monitored for any currency. The limit definition could either be at the company level or at individual dealer level. The ID format for company level record should be of the format "COMPANYCODE"."CCY.POSITION" where COMPANYCODE should be the current company and "CCY.POSITION" should be a hardcoded text. The ID format for dealer level record should be of the format "COMPANYCODE"."CCY.POSITION"."DEALER" where COMPANYCODE should be the current company, "CCY.POSITION" is a hardcoded text and DEALER represents a valid dealer desk. */
+    TY_POSITION_LIMITS
+        @i18n:Description (en="")
+        @t24:i (t24Name=TY.POSITION.LIMITS, level=F, type=H, allowedFunctions="A C D E H I L P Q R S", localRefApplicationSysNo=38.0, localRefAllowed=true)
+    {
+/* An user defined field that contains the intraday limit amount for the aggregate(common) currency.
+This amount is automatically assigned to the respective TY.INTRADAY.LIM.CCY record when TY.POSITIONS.LIMITS is authorized.
+The intraday position during a deal capture would be validated against the amount defined here and in case of a breach, overrides are raised in respective applications.
+This field is mandatory when a currency is defined in AGG.LIM.CCY field.
+
+Validation:
+
+Should be a valid amount.
+Mandatory when AGG.LIM.CCY is defined. */
+        AGG_INTRA_LIM_AMT : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=19, sysNumber=15.0, core=true, t24Name=AGG.INTRA.LIM.AMT, mandatory=false)
+/* An user defined field that contains the common currency in which the limits are to be monitored. The transaction amounts of all transactions would be converted into this common currency and be validated against the defined limit amount.
+
+Validations:
+
+Should be defined only at company level and cannot be defined at dealer level.
+Should be a valid currency. */
+        AGG_LIM_CCY -> ST_CurrencyConfig:CURRENCY
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=14.0, core=true, businessType=CCY, t24Name=AGG.LIM.CCY, mandatory=false)
+/* An user defined field that contains the overnight limit amount for the aggregate(common) currency.
+The overnight position for the limit currency would be validated against the amount defined here and in case of a breach, the exceptions are raised in a report during cob.
+This field is mandatory when a currency is defined in AGG.LIM.CCY field.
+
+Validation:
+
+Should be a valid amount.
+Mandatory when AGG.LIM.CCY is defined.
+Should be less than intraday amount defined in AGG.INTRA.LIM.AMT field. */
+        AGG_OVN_LIM_AMT : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=19, sysNumber=16.0, core=true, t24Name=AGG.OVN.LIM.AMT, mandatory=false)
+/* System defaulted field that contains the overnight limit utilized amount for the aggregate currency.
+This field is updated during COB from the utilization amounts picked from currency POSITION. */
+        AGG_OVN_LIM_UTIL : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=17.0, core=true, t24Name=AGG.OVN.LIM.UTIL, mandatory=false)
+        AGG_OVN_TIME_BAND -> byValue TY_Limits:TY_POSITION_LIMITS__AGG_OVN_TIME_BAND *
+            @t24:i (t24Name=AGG.OVN.TIME.BAND)
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=47.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=48.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=44.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=45.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=41.0, core=true, t24Name=CURR.NO, mandatory=false)
+        DATE_TIME -> byValue TY_Limits:TY_POSITION_LIMITS__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=46.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        DESCRIPTION -> byValue TY_Limits:TY_POSITION_LIMITS__DESCRIPTION *
+            @t24:i (t24Name=DESCRIPTION)
+/* An user defined field to indicate if the intraday positions at close of day are to be retained for the next day or to be cleared.
+Allowed values are "YES" or NULL. */
+        INCL_OVN_TO_INTRA : TY_Limits:TY_POSITION_LIMITS__INCL_OVN_TO_INTRA
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=28.0, core=true, t24Name=INCL.OVN.TO.INTRA, mandatory=false)
+        INPUTTER -> byValue TY_Limits:TY_POSITION_LIMITS__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        LIMIT_CCY -> byValue TY_Limits:TY_POSITION_LIMITS__LIMIT_CCY *
+            @t24:i (t24Name=LIMIT.CCY)
+        OVERRIDE -> byValue TY_Limits:TY_POSITION_LIMITS__OVERRIDE *
+            @t24:i (t24Name=OVERRIDE)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=40.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        RESERVED_1 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=37.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_11 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=25.0, core=true, t24Name=RESERVED.11, mandatory=false)
+        RESERVED_12 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=24.0, core=true, t24Name=RESERVED.12, mandatory=false)
+        RESERVED_13 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=23.0, core=true, t24Name=RESERVED.13, mandatory=false)
+        RESERVED_14 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=22.0, core=true, t24Name=RESERVED.14, mandatory=false)
+        RESERVED_15 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=21.0, core=true, t24Name=RESERVED.15, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=36.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=35.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=34.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        RESERVED_5 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=33.0, core=true, t24Name=RESERVED.5, mandatory=false)
+        RESERVED_6 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=32.0, core=true, t24Name=RESERVED.6, mandatory=false)
+        RESERVED_7 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=31.0, core=true, t24Name=RESERVED.7, mandatory=false)
+        RESERVED_8 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=30.0, core=true, t24Name=RESERVED.8, mandatory=false)
+        RESERVED_9 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=29.0, core=true, t24Name=RESERVED.9, mandatory=false)
+/* An user defined field that contains the stop loss amount for the stop loss currency.
+This is the limit amount for stop loss and any breaches are reported during cob through a report.
+
+Validations:
+
+Mandatory when STOP.LOSS.CCY is defined.
+Must be defined only at dealer level. */
+        STOP_LOSS_AMT : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=19, sysNumber=27.0, core=true, t24Name=STOP.LOSS.AMT, mandatory=false)
+/* An user defined field that contains the currency in which the stop loss limits are to be monitored.
+
+Validations:
+Must be defined only at dealer level. */
+        STOP_LOSS_CCY -> ST_CurrencyConfig:CURRENCY
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=26.0, core=true, businessType=CCY, t24Name=STOP.LOSS.CCY, mandatory=false)
+        /* The ID format for company level record should be of the format "COMPANYCODE"."CCY.POSITION" where COMPANYCODE should be the current company and "CCY.POSITION" should be a hardcoded text. The ID format for dealer level record should be of the format "COMPANYCODE"."CCY.POSITION"."DEALER" where COMPANYCODE should be the current company, "CCY.POSITION" is a hardcoded text and DEALER represents a valid dealer desk. */
+        TY_POSITION_LIMITS_ID -> TY_Limits:TY_POSITION_LIMITS PK required
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=0.0, core=true, businessType=A, t24Name=TY.POSITION.LIMITS.ID, mandatory=true)
+    }
+    TY_POSITION_LIMITS__AGG_OVN_TIME_BAND
+    {
+/* An user defined field that contains the overnight limit amount of the aggregate currency for the specific time band.
+This field is associated with AGG.OVN.TIME.BAND where for each time band, a limit amount is expected.
+The time band limit amount should be less than the overall aggregate overnight limit amount(AGG.OVN.LIM.AMT).
+
+Validations:
+
+Mandatory for the associated time band defined in AGG.OVN.TIME.BAND. */
+        AGG_OVN_TB_LIM_AMT : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=19, sysNumber=19.0, core=true, t24Name=AGG.OVN.TB.LIM.AMT, mandatory=false)
+/* System defaulted field that contains the limit utilized amount for the specific overnight aggregate currency time band.
+This field is updated during COB from the utilization amounts picked from currency POSITION. */
+        AGG_OVN_TB_UTIL : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=20.0, core=true, t24Name=AGG.OVN.TB.UTIL, mandatory=false)
+/* An user defined field that contains the overnight time band for the aggregate currency and the range is defined in days.
+Can contain any valid time band in the range between 0 to 998.
+For the remaining time band range, a value of REST is to be defined. REST is assumed to be for the time band of 999 days or more.
+REST is a mandatory time band range.
+The time bands should be defined in chronological order.
+
+Validations:
+
+Must be in the range between 0 to 998.
+REST time band is mandatory.
+Time bands should be in chronological order. */
+        AGG_OVN_TIME_BAND : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=4, sysNumber=18.0, core=true, t24Name=AGG.OVN.TIME.BAND, mandatory=false)
+    }
+    TY_POSITION_LIMITS__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=43.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    TY_POSITION_LIMITS__DESCRIPTION
+    {
+/* It gives the description of the TY.POSITION.LIMITS record
+
+Validation Rules:
+1. Standard t24 Alphanumeric field
+2. Mandatory field - Language Specific. */
+        DESCRIPTION : T24BusinessTypes:A required
+            @i18n:Label (en=Description)
+            @i18n:Tooltip (en=Description)
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, multiLanguage=true, sysNumber=1.0, core=true, t24Name=DESCRIPTION, mandatory=true)
+    }
+    TY_POSITION_LIMITS__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=42.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    TY_POSITION_LIMITS__LIMIT_CCY
+    {
+/* An user defined field that contains the intraday limit amount for the limit currency.
+This amount is automatically assigned to the respective TY.INTRADAY.LIM.CCY record when TY.POSITIONS.LIMITS record is authorized.
+The intraday position during a deal capture would be validated against the amount defined here and in case of a breach, overrides are raised in respective applications.
+This field is mandatory when a currency is defined in LIMIT.CCY field.
+
+Validation:
+
+Should be a valid amount.
+Mandatory when LIMIT.CCY is defined. */
+        INTRADAY_LIM_AMT : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=19, sysNumber=3.0, core=true, t24Name=INTRADAY.LIM.AMT, mandatory=false)
+/* An user defined field that contains the currency for which intraday and overnight limits are to be monitored.
+Multiple currencies could be defined and for each currency intraday and overnight limit amounts could be monitored.
+Only currencies defined at company level could be re-defined at dealer level. Example : GBP currency could be defined in US0010001.CCY.POSITION.D1 only when US0010001.CCY.POSITION contains GBP as a currency.
+
+Validation:
+
+Should be a valid currency.
+A currency defined at dealer level should already have been defined at company level. */
+        LIMIT_CCY -> ST_CurrencyConfig:CURRENCY
+            @i18n:Label (en="Limit Ccy")
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=2.0, core=true, businessType=CCY, t24Name=LIMIT.CCY, mandatory=false)
+/* An user defined field that contains the overnight limit amount for the limit currency.
+The overnight position for the limit currency would be validated against the amount defined here and in case of a breach, the exceptions are raised in a report during cob.
+This field is mandatory when a currency is defined in LIMIT.CCY field.
+
+Validation:
+
+Should be a valid amount.
+Mandatory when LIMIT.CCY is defined.
+Should be less than intraday amount defined in INTRADAY.LIM.AMT field. */
+        OVN_LIMIT_AMT : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=19, sysNumber=4.0, core=true, t24Name=OVN.LIMIT.AMT, mandatory=false)
+/* System defaulted field that contains the overnight limit utilized amount for a particular currency.
+This field is updated during COB from the utilization amounts picked from currency POSITION. */
+        OVN_LIMIT_UTIL : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=5.0, core=true, t24Name=OVN.LIMIT.UTIL, mandatory=false)
+        OVN_TIME_BAND -> byValue TY_Limits:TY_POSITION_LIMITS__LIMIT_CCY__OVN_TIME_BAND *
+            @t24:i (t24Name=OVN.TIME.BAND)
+        RESERVED_16 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=13.0, core=true, t24Name=RESERVED.16, mandatory=false)
+        RESERVED_17 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=12.0, core=true, t24Name=RESERVED.17, mandatory=false)
+        RESERVED_18 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=11.0, core=true, t24Name=RESERVED.18, mandatory=false)
+        RESERVED_19 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=10.0, core=true, t24Name=RESERVED.19, mandatory=false)
+        RESERVED_20 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=9.0, core=true, t24Name=RESERVED.20, mandatory=false)
+    }
+    TY_POSITION_LIMITS__LIMIT_CCY__OVN_TIME_BAND
+    {
+/* An user defined field that contains the overnight limit amount for the specific time band.
+This field is associated with OVN.TIME.BAND where for each time band, a limit amount is expected.
+The time band limit amount should be less than the overall overnight limit amount(OVN.LIMIT.AMT).
+
+Validations:
+
+Mandatory for the associated time band defined in OVN.TIME.BAND. */
+        OVN_TB_LIMIT_AMT : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=19, sysNumber=7.0, core=true, t24Name=OVN.TB.LIMIT.AMT, mandatory=false)
+/* System defaulted field that contains the limit utilized amount for the specific overnight time band.
+This field is updated during COB from the utilization amounts picked from currency POSITION. */
+        OVN_TB_LIMIT_UTIL : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=8.0, core=true, t24Name=OVN.TB.LIMIT.UTIL, mandatory=false)
+/* An user defined field that contains the overnight time band for which the range is defined in days.
+Can contain any valid time band in the range between 0 to 998.
+For the remaining time band range, a value of REST is to be defined. REST is assumed to be for the time band of 999 days or more.
+REST is a mandatory time band range.
+The time bands should be defined in chronological order.
+
+Validations:
+
+Must be in the range between 0 to 998.
+REST time band is mandatory.
+Time bands should be in chronological order. */
+        OVN_TIME_BAND : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=4, sysNumber=6.0, core=true, t24Name=OVN.TIME.BAND, mandatory=false)
+    }
+    TY_POSITION_LIMITS__OVERRIDE
+    {
+        /* Contains override messages that are raised by the system. */
+        OVERRIDE : T24BusinessTypes:N
+            @i18n:Label (en=Override)
+            @i18n:Tooltip (en="Overrides generated by this transaction")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=39.0, core=true, t24Name=OVERRIDE, mandatory=false)
+    }
+    /* This field contains the individual transaction level details that updated the limits in TY.DEALER.TXN.LIMITS. This table is recalibrated during COB to re-calculate the days left to maturity for a transaction. When a deal is matured, the amount in this table is used to reverse the limit consumed in TY.DEALER.TXN.LIMITS. */
+    TY_PRODUCT_TXNS
+        @i18n:Description (en="")
+        @t24:i (t24Name=TY.PRODUCT.TXNS, level=F, type=L, allowedFunctions="L P S", localRefApplicationSysNo=17.0, localRefAllowed=true)
+    {
+        /* This field contains the number of days left to maturity for the transaction. This is recalibrated everyday during cob using today's date and the MAT.DATE field. When the value is less than zero, it means that the deal has matured and the amount that was consumed by this deal already in TY.DEALER.TXN.LIMITS is to be reversed. */
+        DAYS_LEFT : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=4, sysNumber=6.0, core=true, t24Name=DAYS.LEFT, mandatory=false)
+        DEAL_CCY -> byValue TY_Limits:TY_PRODUCT_TXNS__DEAL_CCY *
+            @t24:i (t24Name=DEAL.CCY)
+        /* This field contains the maturity date of the transaction that updated the limits in TY.DEALER.TXN.LIMITS */
+        MAT_DATE : T24BusinessTypes:A
+            @i18n:Label (en="Maturity Date")
+            @i18n:Tooltip (en="Indicates maturity date ")
+            @t24:i (align=L, inputBehaviour=I, maxLength=8, sysNumber=4.0, core=true, t24Name=MAT.DATE, mandatory=false)
+        RESERVED_1 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=16.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_10 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=7.0, core=true, t24Name=RESERVED.10, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=15.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=14.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=13.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        RESERVED_5 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=12.0, core=true, t24Name=RESERVED.5, mandatory=false)
+        RESERVED_6 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=11.0, core=true, t24Name=RESERVED.6, mandatory=false)
+        RESERVED_7 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=10.0, core=true, t24Name=RESERVED.7, mandatory=false)
+        RESERVED_8 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=9.0, core=true, t24Name=RESERVED.8, mandatory=false)
+        RESERVED_9 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=8.0, core=true, t24Name=RESERVED.9, mandatory=false)
+        /* This field contains the value to indicate if the transaction matures during start of day or end of day. A value of "Y" indicates that the deal matures during start of day. A value of "N" indicates that the deal matures during end of day. */
+        START_OF_DAY_MAT : TY_Limits:TY_PRODUCT_TXNS__START_OF_DAY_MAT
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=5.0, core=true, t24Name=START.OF.DAY.MAT, mandatory=false)
+/* Valid ID is TransactionID.LimitProduct.DealerDesk.
+Example: FX0935700001.SP.01 */
+        TY_PRODUCT_TXNS_ID -> TY_Limits:TY_PRODUCT_TXNS PK required
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=0.0, core=true, businessType=A, t24Name=TY.PRODUCT.TXNS.ID, mandatory=true)
+    }
+    TY_PRODUCT_TXNS__DEAL_CCY
+    {
+        /* This field contains the transaction amount that updated the limits in TY.DEALER.TXN.LIMITS */
+        DEAL_AMOUNT : T24BusinessTypes:AMT
+            @i18n:Label (en="Deal Amount")
+            @t24:i (align=R, inputBehaviour=I, maxLength=19, sysNumber=2.0, core=true, t24Name=DEAL.AMOUNT, mandatory=false)
+        /* This field contains the currency of the transaction that updated the limits in TY.DEALER.TXN.LIMITS */
+        DEAL_CCY -> ST_CurrencyConfig:CURRENCY
+            @i18n:Label (en="Deal Ccy")
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=1.0, core=true, businessType=CCY, t24Name=DEAL.CCY, mandatory=false)
+        /* This field contains the local equivalent of the transaction amount that updated the limits in TY.DEALER.TXN.LIMITS */
+        DEAL_LCY_AMT : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=19, sysNumber=3.0, core=true, t24Name=DEAL.LCY.AMT, mandatory=false)
+    }
+}
+Enumerations {
+    TY_POSITION_LIMITS__INCL_OVN_TO_INTRA : mml:string
+        YES=YES
+    TY_PRODUCT_TXNS__START_OF_DAY_MAT : mml:string
+        NULL=NULL
+        YES=YES
+}

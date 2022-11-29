@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<localref:LocalRef xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:localref="http://www.odcgroup.com/t24/application/localref/model/LocalRef"
+    xmlns:translationDsl="http://www.odcgroup.com/translation/TranslationDsl" localRefID="USREGS.FATCA.STATUS.CD" maximumChars="3" minimumChars="0"
+    mandatory="false" charType="N" defaultPossible="false" virtualTable="FATCA.STATUS.CODE"
+    description="FATCA Status Code (Chapter 4)">
+  <shortName xsi:type="translationDsl:LocalTranslations">
+    <translations locale="en" text="FATCA.STATUS.CD"/>
+  </shortName>
+  <vettingTable vettingTable="01">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="01 - U.S. Withholding Agent-FI"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="02">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="02 - U.S. Withholding Agent-Other"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="03">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="03 - Territory FI-not treated as US"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="04">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="04 - Territory FI-treated as U.S"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="05">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="05 - Participating FFI-Other"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="06">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="06 - Participating FFI-Reporting"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="07">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="07 - Registered FFI-Reporting Model"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="08">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="08 - Registered FFI-Sponsored"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="09">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="09 - Registered FFI-Other"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="10">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="10 - Certified FFI-Other"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="11">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="11 - Certified FFI with Low Value"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="12">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="12 - Certified FFI-Nonregistering"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="13">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="13 - Certified FFI-Sponsored Entity"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="14">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="14 - Certified FFI-Investment Adv"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="15">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="15 - Nonparticipating FFI"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="16">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="16 - Owner-Documented FFI"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="19">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="19 - Passive NFFE identifying Subst"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="20">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="20 - Passive NFFE with no Subst US"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="21">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="21 - Publicly Traded NFFE"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="22">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="22 - Active NFFE 23 Individual"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="24">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="24 - Section 501(c) Entities"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="25">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="25 - Excepted Territory NFFE"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="26">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="26 - Excepted NFFE-Other"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="27">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="27 - Exempt Beneficial Owner"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="28">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="28 - Entity Wholly Owned"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="29">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="29 - Unknown Recipient"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="30">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="30 - Recalcitrant Account Holder"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="31">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="31 - Nonreporting IGA FFI"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="32">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="32 - Direct reporting NFFE"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="33">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="33 - U.S. reportable account"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="34">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="34 - Nonconsenting U.S. account"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="35">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="35 - Sponsored direct reporting"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="36">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="36 - Excepted Inter-affiliate FFI"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="37">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="37 - Undocumented Preexisting"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="38">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="38 - U.S. Branch-ECI presumption"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="39">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="39 - Account Holder of Excluded Fin"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="40">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="40 - Passive NFFE reported by FFI"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="41">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="41 - NFFE subject to 1472 withhold"/>
+    </remarks>
+  </vettingTable>
+</localref:LocalRef>

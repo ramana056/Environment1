@@ -1,0 +1,89 @@
+# UTF-8
+/* Accounting Integrity check */
+Domain AC_IntegrityCheck
+    @t24:i (module=AC)
+    @java:Package (value=com.temenos.t24.datamodel.ac.ac_integritycheck)
+namespace "http://www.temenos.com/t24/AC_IntegrityCheck"
+metamodelVersion 1.30.6
+Classes {
+    AC_INTEGRITY_ACCOUNTING
+        @i18n:Description (en="")
+        @t24:i (t24Name=AC.INTEGRITY.ACCOUNTING, level=I, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        AC_INTEGRITY_ACCOUNTING_ID -> AC_IntegrityCheck:AC_INTEGRITY_ACCOUNTING PK required
+            @t24:i (align=L, inputBehaviour=I, maxLength=60, sysNumber=0.0, core=true, businessType=ANY, t24Name=AC.INTEGRITY.ACCOUNTING.ID, mandatory=true)
+        RECORD_INFO -> byValue AC_IntegrityCheck:AC_INTEGRITY_ACCOUNTING__RECORD_INFO *
+            @t24:i (t24Name=RECORD.INFO)
+    }
+    AC_INTEGRITY_ACCOUNTING__RECORD_INFO
+    {
+        RECORD_INFO : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=1000, sysNumber=1.0, core=true, t24Name=RECORD.INFO, mandatory=false)
+    }
+    AC_INTEGRITY_CAL_DATA
+        @i18n:Description (en="")
+        @t24:i (t24Name=AC.INTEGRITY.CAL.DATA, level=I, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        AC_CAL_DATA_ID -> AC_IntegrityCheck:AC_INTEGRITY_CAL_DATA PK required
+            @t24:i (align=L, inputBehaviour=I, maxLength=60, sysNumber=0.0, core=true, businessType=ANY, t24Name=AC.CAL.DATA.ID, mandatory=true)
+        RECORD_INFO -> byValue AC_IntegrityCheck:AC_INTEGRITY_CAL_DATA__RECORD_INFO *
+            @t24:i (t24Name=RECORD.INFO)
+    }
+    AC_INTEGRITY_CAL_DATA__RECORD_INFO
+    {
+        RECORD_INFO : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=1000, sysNumber=1.0, core=true, t24Name=RECORD.INFO, mandatory=false)
+    }
+    AC_INTEGRITY_CAL_SUMMARY
+        @i18n:Description (en="")
+        @t24:i (t24Name=AC.INTEGRITY.CAL.SUMMARY, level=I, type=L, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        AC_CAL_SUMMARY_ID -> AC_IntegrityCheck:AC_INTEGRITY_CAL_SUMMARY PK required
+            @t24:i (align=L, inputBehaviour=I, maxLength=150, sysNumber=0.0, core=true, businessType=ANY, t24Name=AC.CAL.SUMMARY.ID, mandatory=true)
+        CAL_CON_UPD_WORK_TOT : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=15, sysNumber=7.0, core=true, t24Name=CAL.CON.UPD.WORK.TOT, mandatory=false)
+        CON_ASST_LIAB_TOT : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=15, sysNumber=6.0, core=true, t24Name=CON.ASST.LIAB.TOT, mandatory=false)
+        CON_ENT_TODAY_TOT : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=15, sysNumber=5.0, core=true, t24Name=CON.ENT.TODAY.TOT, mandatory=false)
+        CON_UPD_WORK_TOT : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=15, sysNumber=4.0, core=true, t24Name=CON.UPD.WORK.TOT, mandatory=false)
+        DATE : T24BusinessTypes:D
+            @i18n:Label (en=Date)
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=1.0, core=true, t24Name=DATE, mandatory=false)
+        EOD_CON_UPD_WORK_TOT : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=15, sysNumber=8.0, core=true, t24Name=EOD.CON.UPD.WORK.TOT, mandatory=false)
+        EOD_SPEC_ENTRY_TOT : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=15, sysNumber=9.0, core=true, t24Name=EOD.SPEC.ENTRY.TOT, mandatory=false)
+        SPEC_ENTRY_TOT : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=15, sysNumber=3.0, core=true, t24Name=SPEC.ENTRY.TOT, mandatory=false)
+        STMT_ENTRY_TOT : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=15, sysNumber=2.0, core=true, t24Name=STMT.ENTRY.TOT, mandatory=false)
+    }
+    AC_INTEGRITY_ERROR
+        @i18n:Description (en="")
+        @t24:i (t24Name=AC.INTEGRITY.ERROR, level=I, type=L, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        AC_INTEGRITY_ERROR_ID -> AC_IntegrityCheck:AC_INTEGRITY_ERROR PK required
+            @t24:i (align=L, inputBehaviour=I, maxLength=100, sysNumber=0.0, core=true, businessType=ANY, t24Name=AC.INTEGRITY.ERROR.ID, mandatory=true)
+        CHECK_NAME : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=1.0, core=true, t24Name=CHECK.NAME, mandatory=false)
+        DATE : T24BusinessTypes:D
+            @i18n:Label (en=Date)
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=2.0, core=true, t24Name=DATE, mandatory=false)
+        ERROR_MESSAGE : T24BusinessTypes:ANY
+            @i18n:Label (en="Error Message")
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=3.0, core=true, t24Name=ERROR.MESSAGE, mandatory=false)
+        INTEG_DATA_ID : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=60, sysNumber=4.0, core=true, t24Name=INTEG.DATA.ID, mandatory=false)
+        RECORD_INFO -> byValue AC_IntegrityCheck:AC_INTEGRITY_ERROR__RECORD_INFO *
+            @t24:i (t24Name=RECORD.INFO)
+        RECORD_TAG : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=100, sysNumber=5.0, core=true, t24Name=RECORD.TAG, mandatory=false)
+    }
+    AC_INTEGRITY_ERROR__RECORD_INFO
+    {
+        RECORD_INFO : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=1000, sysNumber=6.0, core=true, t24Name=RECORD.INFO, mandatory=false)
+    }
+}

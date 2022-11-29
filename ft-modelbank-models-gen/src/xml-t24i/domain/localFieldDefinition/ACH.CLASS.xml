@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<localref:LocalRef xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:localref="http://www.odcgroup.com/t24/application/localref/model/LocalRef"
+    xmlns:translationDsl="http://www.odcgroup.com/translation/TranslationDsl" localRefID="ACH.CLASS" maximumChars="3" minimumChars="0" mandatory="false"
+    charType="A" defaultPossible="false" virtualTable="ACH.CLASS.CODE" description="ACH.CLASS">
+  <shortName xsi:type="translationDsl:LocalTranslations">
+    <translations locale="en" text="ACH.CLASS"/>
+  </shortName>
+  <vettingTable vettingTable="ACK">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="ACK-ACH Payment Acknowledgement"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="ADV">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="ADV-Automated Accounting Advise"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="ARC">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="ARC-Accounts Receivable Entry"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="ATX">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="ATX-Financial EDI Acknowledgement"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="BOC">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="BOC-Back Office Conversion"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="CBR">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Corporate Cross-Corder Payment"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="CCD">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="CCD-Cash Concentration or Disb"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="CIE">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="CIE-Customer Initiated Entry"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="COR">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="COR-Auto Notification Change/Refuse"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="CTX">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="CTX-Corporate Trade Exchange"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="DNE">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="DNE-Death Notification Entry"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="ENR">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="ENR-Automated Enrollment Entry"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="IAT">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="IAT-IAT Payment"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="MTE">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="MTE-Machine Transfer Entry"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="NOC">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="NOC-Auto Notification Change/Refuse"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="PBR">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Consumer Cross-Border Payment"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="POP">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="POP-Point of Purchase Entry"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="POS">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="POS-Point of Sale Entry"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="PPD">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="PPD-Prearranged Payment and Deposit"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="RCK">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="RCK-Re-presented Check Entry"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="SHR">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="SHR-Shared Network Transaction"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="TEL">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="TEL-Telephone initiated Entry"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="TRC">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="TRC-Truncated Entry"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="TRX">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="TRX-Entries Exchange"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="WEB">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="WEB-Internet-Initiated Entry"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="XCK">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="XCK-Destroyed Check Entry"/>
+    </remarks>
+  </vettingTable>
+</localref:LocalRef>

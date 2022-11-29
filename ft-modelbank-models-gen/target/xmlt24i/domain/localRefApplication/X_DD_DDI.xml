@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<localReferenceApplication:LocalReferenceApplication xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:localReferenceApplication="http://www.odcgroup.com/t24/application/localRefApplication/model/LocalReferenceApplication"
+    xmlns:translationDsl="http://www.odcgroup.com/translation/TranslationDsl" forApplication="name://DD_Contract:DD_DDI#">
+  <localField groupName="No" localRefID="SEPA.MANDATE.ID">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="SEPA.MANDATE.ID"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+  <localField groupName="No" localRefID="FORWARDED.ACCOUNT">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="FORWARD.ACCOUNT"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+  <localField groupName="No" localRefID="ILBNKB.BANK.CODE">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="BANK.CODE"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+  <localField groupName="No" localRefID="ILBNKB.BRANCH.CODE">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="BRANCH.CODE"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+  <localField groupName="No" localRefID="ACHFRM.SVC.CLASS.CODE">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="SVC.CLASS.CODE"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+  <localField groupName="No" localRefID="ACHFRM.SEC.CODE">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="SEC.CODE"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+  <localField groupName="ACHFRM_IAT_PAYINFO_ONE" localRefID="ACHFRM.IAT.PAYINFO.ONE">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="IAT.PAYINFO.ONE"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+</localReferenceApplication:LocalReferenceApplication>

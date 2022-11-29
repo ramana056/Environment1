@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<localref:LocalRef xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:localref="http://www.odcgroup.com/t24/application/localref/model/LocalRef"
+    xmlns:translationDsl="http://www.odcgroup.com/translation/TranslationDsl" localRefID="USREGS.SUFFIX" maximumChars="5" minimumChars="0" mandatory="false"
+    charType="ANY" defaultPossible="false" virtualTable="USREGS.CUS.SUFFIX" description="Customer Suffix">
+  <shortName xsi:type="translationDsl:LocalTranslations">
+    <translations locale="en" text="SUFFIX"/>
+  </shortName>
+  <vettingTable vettingTable="B.V.M.">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Blessed Virgin Mary"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="C.S.C.">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Congregation of Holy Cross"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="C.S.J.">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Sisters of St. Joseph"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="CFRE">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Certified Fund Raising Executive"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="CLU">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Chartered Life Underwriter"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="CPA">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Certified Public Accountant"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="D.C.">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Doctor of Chiropractic"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="D.D.">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Doctor of Divinity"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="D.D.S.">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Doctor of Dental Surgery"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="D.M.D.">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Doctor of Dental Medicine"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="D.O.">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Doctor of Osteopathy"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="D.V.M.">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Doctor of Veterinary Medicine"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="Ed.D.">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Doctor of Education"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="Esq.">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Esquire"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="II">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="The Second"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="III">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="The Third"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="IV">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="The Fourth"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="IX">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="IX"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="Inc.">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Incorporated"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="J.D.">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Juris Doctor"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="Jr.">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Junior"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="LL.D">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Doctor of Laws"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="Ltd.">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Limited"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="M.D.">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Doctor of Medicine"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="O.D.">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Doctor of Optometry"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="O.S.B.">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Order of St Benedict"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="P.C.">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Past Commander, Police Constable"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="P.E.">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Protestant Episcopal"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="Ph.D.">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Doctor of Philosophy"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="R.G.S">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Sisters of Good Shepherd"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="R.N.">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Registered Nurse"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="R.N.C.">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Registered Nurse Clinician"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="Ret.">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Retired"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="S.H.C.J.">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Society of Holy Child Jesus"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="S.J.">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Society of Jesus"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="S.N.J.M.">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Sisters of Holy Names Jesus &amp; Mary"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="S.S.M.O.">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Sister of Saint Mary Order"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="Sr.">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Senior"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="USA">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="United States Army"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="USAF">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="United States Air Force"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="USAFR">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="United States Air Force Reserve"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="USAR">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="United States Army Reserve"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="USCG">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="United States Coast Guard"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="USMC">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="United States Marine Corps"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="USMCR">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="United States Marine Corps Reserve"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="USN">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="United States Navy"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="USNR">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="United States Navy Reserve"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="V">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="V"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="VI">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="VI"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="VII">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="VII"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="VIII">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="VIII"/>
+    </remarks>
+  </vettingTable>
+</localref:LocalRef>

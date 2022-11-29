@@ -1,0 +1,13 @@
+!SESSION 2022-11-29 11:53:10.777 -----------------------------------------------
+eclipse.buildId=8.0.0.20120704062212I
+java.version=1.8.0_121
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_IN
+Framework arguments:  -application com.odcgroup.workbench.generation.headless
+Command-line arguments:  -application com.odcgroup.workbench.generation.headless -data C:\R20\R20_DesignStudioT24-R20.1\nani\ft-modelbank-models-gen\target\workspace -clean
+
+!ENTRY com.odcgroup.workbench.core 1 0 2022-11-29 11:53:20.239
+!MESSAGE Target Platform selected: 20.0.0.20200425194254 (default version). Available versions found: [].
+
+!ENTRY org.eclipse.core.resources 2 10035 2022-11-29 11:54:31.009
+!MESSAGE The workspace will exit with unsaved changes in this session.

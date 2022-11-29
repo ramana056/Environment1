@@ -1,0 +1,939 @@
+# UTF-8
+/* NSF Queues */
+Domain NSFDES_Queue
+    @t24:i (module=NSFDES)
+    @java:Package (value=com.temenos.t24.datamodel.nsfdes.nsfdes_queue)
+namespace "http://www.temenos.com/t24/NSFDES_Queue"
+metamodelVersion 1.30.6
+Classes {
+    NOFILE_NSF_ACCT_AVG_BALANCES
+        @i18n:Description (en="")
+        @t24:i (t24Name=NOFILE.NSF.ACCT.AVG.BALANCES, level=I, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        NSF_ACCT -> AC_AccountOpening:ACCOUNT
+            @t24:i (align=R, inputBehaviour=N, maxLength=36, core=false, t24Name=NSF.ACCT, mandatory=false)
+        NSF_BAL_DETAILS : T24BusinessTypes:N
+            @t24:i (align=L, inputBehaviour=N, maxLength=25, core=false, t24Name=NSF.BAL.DETAILS, genOperation=E.NSF.ACCT.AVG.BALANCES, mandatory=true)
+    }
+    NOFILE_NSF_ACCT_BAL_DETAILS
+        @i18n:Description (en="")
+        @t24:i (t24Name=NOFILE.NSF.ACCT.BAL.DETAILS, level=I, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        NSF_ACCT -> AC_AccountOpening:ACCOUNT
+            @t24:i (align=R, inputBehaviour=N, maxLength=36, core=false, t24Name=NSF.ACCT, mandatory=false)
+        NSF_BAL_DETAILS : T24BusinessTypes:N
+            @t24:i (align=L, inputBehaviour=N, maxLength=25, core=false, t24Name=NSF.BAL.DETAILS, genOperation=E.NSF.ACCT.BAL.DETAILS, mandatory=true)
+    }
+    NOFILE_NSF_ACCT_DAILY_BALANCES
+        @i18n:Description (en="")
+        @t24:i (t24Name=NOFILE.NSF.ACCT.DAILY.BALANCES, level=I, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        NSF_ACCT -> AC_AccountOpening:ACCOUNT
+            @t24:i (align=R, inputBehaviour=N, maxLength=36, core=false, t24Name=NSF.ACCT, mandatory=false)
+        NSF_BAL_DETAILS : T24BusinessTypes:N
+            @t24:i (align=L, inputBehaviour=N, maxLength=25, core=false, t24Name=NSF.BAL.DETAILS, genOperation=E.NSF.ACCT.DAILY.BALANCES, mandatory=true)
+    }
+    NOFILE_NSF_ACCT_DETAILS
+        @i18n:Description (en="")
+        @t24:i (t24Name=NOFILE.NSF.ACCT.DETAILS, level=I, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        NSF_ACCT -> AC_AccountOpening:ACCOUNT
+            @t24:i (align=R, inputBehaviour=N, maxLength=36, core=false, t24Name=NSF.ACCT, mandatory=false)
+        NSF_ACCT_DETAILS : T24BusinessTypes:N
+            @t24:i (align=L, inputBehaviour=N, maxLength=25, core=false, t24Name=NSF.ACCT.DETAILS, genOperation=E.NSF.ACCT.DETAILS, mandatory=true)
+    }
+    NOFILE_NSF_ACCT_OD_DETAILS
+        @i18n:Description (en="")
+        @t24:i (t24Name=NOFILE.NSF.ACCT.OD.DETAILS, level=I, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        NSF_ACCT -> AC_AccountOpening:ACCOUNT
+            @t24:i (align=R, inputBehaviour=N, maxLength=36, core=false, t24Name=NSF.ACCT, mandatory=false)
+        NSF_OD_DETAILS : T24BusinessTypes:N
+            @t24:i (align=L, inputBehaviour=N, maxLength=25, core=false, t24Name=NSF.OD.DETAILS, genOperation=E.NSF.ACCT.OD.DETAILS, mandatory=true)
+    }
+    NOFILE_NSF_ACCT_REGE_OPT_DETAILS
+        @i18n:Description (en="")
+        @t24:i (t24Name=NOFILE.NSF.ACCT.REGE.OPT.DETAILS, level=I, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        ARRANGEMENT_ID -> AA_Framework:AA_ARRANGEMENT
+            @i18n:Label (en="Arrangement Id")
+            @t24:i (align=R, inputBehaviour=N, maxLength=40, core=false, t24Name=ARRANGEMENT.ID, mandatory=false)
+        REGE_DETAILS : T24BusinessTypes:N
+            @t24:i (align=L, inputBehaviour=N, maxLength=25, core=false, t24Name=REGE.DETAILS, genOperation=E.NSF.ACCT.REGE.OPTIN.OUT, mandatory=true)
+    }
+    NOFILE_NSF_DECISION_QUEUE
+        @i18n:Description (en="")
+        @t24:i (t24Name=NOFILE.NSF.DECISION.QUEUE, level=I, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        ACCOUNT -> AC_AccountOpening:ACCOUNT
+            @i18n:Label (en=Account)
+            @i18n:Tooltip (en="Identifies the customer account")
+            @t24:i (align=R, inputBehaviour=N, maxLength=36, core=false, t24Name=ACCOUNT, mandatory=false)
+        BRANCH -> ST_OrganizationStructure:ST_BRANCH
+            @t24:i (align=R, inputBehaviour=N, maxLength=16, core=false, t24Name=BRANCH, mandatory=false)
+        DAO -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Relationship Mgr")
+            @t24:i (align=R, inputBehaviour=N, maxLength=20, core=false, t24Name=DAO, mandatory=false)
+        NSF_DECISION : T24BusinessTypes:N
+            @t24:i (align=L, inputBehaviour=N, maxLength=25, core=false, t24Name=NSF.DECISION, genOperation=E.NSF.DECISION.QUEUE, mandatory=true)
+        NSF_DESK -> NSFDES_DeskMgmt:NSF_DESK_DEFINITION
+            @t24:i (align=R, inputBehaviour=N, maxLength=40, core=false, t24Name=NSF.DESK, mandatory=false)
+        NSF_DESK_GROUP -> NSFDES_DeskMgmt:NSF_DESK_GROUP
+            @t24:i (align=R, inputBehaviour=N, maxLength=16, core=false, t24Name=NSF.DESK.GROUP, mandatory=false)
+    }
+    NOFILE_NSF_HOLD_TYPE
+        @i18n:Description (en="")
+        @t24:i (t24Name=NOFILE.NSF.HOLD.TYPE, level=I, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        HOLD_TYPE : T24BusinessTypes:N
+            @t24:i (align=L, inputBehaviour=N, maxLength=25, core=false, t24Name=HOLD.TYPE, genOperation=E.NSF.GET.HOLD.TYPES, mandatory=true)
+    }
+    NOFILE_NSF_PERIODIC_DETS
+        @i18n:Description (en="")
+        @t24:i (t24Name=NOFILE.NSF.PERIODIC.DETS, level=I, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        ARR_ID : T24BusinessTypes:ARR
+            @i18n:Label (en="Arrangement Id")
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=1.0, core=true, t24Name=ARR.ID, mandatory=false)
+        OUT_ARRAY : T24BusinessTypes:N
+            @t24:i (align=L, inputBehaviour=N, maxLength=145, core=false, t24Name=OUT.ARRAY, genOperation=E.NSF.GET.PERIODIC.DETS, mandatory=true)
+    }
+    NOFILE_NSF_SUMMARY
+        @i18n:Description (en="")
+        @t24:i (t24Name=NOFILE.NSF.SUMMARY, level=I, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        ARR_ID : T24BusinessTypes:ARR
+            @i18n:Label (en="Arrangement Id")
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=1.0, core=true, t24Name=ARR.ID, mandatory=false)
+        OUT_ARRAY : T24BusinessTypes:N
+            @t24:i (align=L, inputBehaviour=N, maxLength=145, core=false, t24Name=OUT.ARRAY, genOperation=E.NSF.GET.SUMMARY, mandatory=true)
+        REQUEST_TYPE : T24BusinessTypes:A
+            @i18n:Label (en="Request Type")
+            @t24:i (align=L, inputBehaviour=N, maxLength=30, sysNumber=2.0, core=true, t24Name=REQUEST.TYPE, mandatory=false)
+    }
+/* The table is used to capture the NSF exceptions for an Account.
+All unauthorised NSF exceptions will be updated in this table for review by NSF officers.
+The table will be updated as part of COB process. All ACFA exceptions for an account for the day will be added to the table.
+All updates done to the NSF.ACCOUNT.DETAILS will be captured in the ACFA record along with the audit trail.
+@ID will be the combination of ACCOUNT.ID*EXPR.DATE */
+    NSF_ACCOUNT_DETAILS
+        @i18n:Description (en="")
+        @t24:i (t24Name=NSF.ACCOUNT.DETAILS, level=I, type=H, allowedFunctions="A C D E H I L P Q S", localRefApplicationSysNo=77.0, localRefAllowed=true)
+    {
+        /* Account Currency */
+        ACCOUNT_CCY -> ST_CurrencyConfig:CURRENCY
+            @i18n:Label (en="Account Ccy")
+            @i18n:Tooltip (en="Indicates the currency of the account")
+            @t24:i (align=L, inputBehaviour=N, maxLength=3, sysNumber=2.0, core=true, businessType=CCY, t24Name=ACCOUNT.CCY, mandatory=false)
+        ACCOUNT_TITLE_1 -> byValue NSFDES_Queue:NSF_ACCOUNT_DETAILS__ACCOUNT_TITLE_1 *
+            @t24:i (t24Name=ACCOUNT.TITLE.1)
+        /* Arrangement Number */
+        ARRANGEMENT_ID -> AA_Framework:AA_ARRANGEMENT
+            @i18n:Label (en="Arrangement Id")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=1.0, core=true, businessType=A, t24Name=ARRANGEMENT.ID, mandatory=false)
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=86.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=87.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=83.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=84.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=80.0, core=true, t24Name=CURR.NO, mandatory=false)
+        CUSTOMER -> byValue NSFDES_Queue:NSF_ACCOUNT_DETAILS__CUSTOMER *
+            @t24:i (t24Name=CUSTOMER)
+        /* Cutoff service indicator */
+        CUTOFF_COMPLETE : NSFDES_Queue:NSF_ACCOUNT_DETAILS__CUTOFF_COMPLETE
+            @t24:i (align=L, inputBehaviour=I, maxLength=11, sysNumber=55.0, core=true, t24Name=CUTOFF.COMPLETE, mandatory=false)
+        DAO_ID -> byValue NSFDES_Queue:NSF_ACCOUNT_DETAILS__DAO_ID *
+            @t24:i (t24Name=DAO.ID)
+        DATE_TIME -> byValue NSFDES_Queue:NSF_ACCOUNT_DETAILS__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=85.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        /* Expiry date of the ACFA record. Expiry date will be Request date from ACFA record plus the expiry days set for the Settlement type in ACFA.TYPE table(L1) */
+        EXPIRY_DATE : T24BusinessTypes:D
+            @i18n:Label (en="Expiry Date")
+            @i18n:Tooltip (en="Indicates the Expiry Date of the Transaction")
+            @t24:i (align=R, inputBehaviour=N, maxLength=11, sysNumber=52.0, core=true, t24Name=EXPIRY.DATE, mandatory=false)
+/* The uncollected funds available which could be used for clearing the exception.
+The balance will not displayed separtely if the balance component FLOAT is already included in AC.CREDIT.CHECK for NSF processing */
+        FLOAT_BALANCE : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=N, maxLength=19, sysNumber=48.0, core=true, t24Name=FLOAT.BALANCE, typeModifiers="2", mandatory=false)
+        ID -> NSFDES_Queue:NSF_ACCOUNT_DETAILS PK required
+            @i18n:Label (en="Transaction Ref")
+            @i18n:Tooltip (en="Transaction Reference")
+            @t24:i (align=L, inputBehaviour=I, maxLength=25, sysNumber=0.0, core=true, businessType=A, t24Name="@ID", mandatory=true)
+        INPUTTER -> byValue NSFDES_Queue:NSF_ACCOUNT_DETAILS__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        /* System Date when the record is created(COB Date) */
+        NSF_DATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=N, maxLength=11, sysNumber=47.0, core=true, t24Name=NSF.DATE, mandatory=false)
+        /* ID of NSF Desk where the account belongs.Will be updated based on the NSF desk condition and desk definition available. */
+        NSF_DESK_ID : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=46.0, core=true, t24Name=NSF.DESK.ID, mandatory=false)
+        OVERRIDE -> byValue NSFDES_Queue:NSF_ACCOUNT_DETAILS__OVERRIDE *
+            @t24:i (t24Name=OVERRIDE)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=79.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        RESERVED_1 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=76.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_10 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=67.0, core=true, t24Name=RESERVED.10, mandatory=false)
+        RESERVED_11 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=66.0, core=true, t24Name=RESERVED.11, mandatory=false)
+        RESERVED_12 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=65.0, core=true, t24Name=RESERVED.12, mandatory=false)
+        RESERVED_13 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=64.0, core=true, t24Name=RESERVED.13, mandatory=false)
+        RESERVED_14 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=63.0, core=true, t24Name=RESERVED.14, mandatory=false)
+        RESERVED_15 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=62.0, core=true, t24Name=RESERVED.15, mandatory=false)
+        RESERVED_16 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=61.0, core=true, t24Name=RESERVED.16, mandatory=false)
+        RESERVED_17 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=60.0, core=true, t24Name=RESERVED.17, mandatory=false)
+        RESERVED_18 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=59.0, core=true, t24Name=RESERVED.18, mandatory=false)
+        RESERVED_19 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=58.0, core=true, t24Name=RESERVED.19, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=75.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_20 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=57.0, core=true, t24Name=RESERVED.20, mandatory=false)
+        RESERVED_21 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=44.0, core=true, t24Name=RESERVED.21, mandatory=false)
+        RESERVED_22 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=43.0, core=true, t24Name=RESERVED.22, mandatory=false)
+        RESERVED_23 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=42.0, core=true, t24Name=RESERVED.23, mandatory=false)
+        RESERVED_24 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=41.0, core=true, t24Name=RESERVED.24, mandatory=false)
+        RESERVED_25 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=40.0, core=true, t24Name=RESERVED.25, mandatory=false)
+        RESERVED_26 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=39.0, core=true, t24Name=RESERVED.26, mandatory=false)
+        RESERVED_27 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=38.0, core=true, t24Name=RESERVED.27, mandatory=false)
+        RESERVED_28 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=37.0, core=true, t24Name=RESERVED.28, mandatory=false)
+        RESERVED_29 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=36.0, core=true, t24Name=RESERVED.29, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=74.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=73.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        RESERVED_5 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=72.0, core=true, t24Name=RESERVED.5, mandatory=false)
+        RESERVED_6 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=71.0, core=true, t24Name=RESERVED.6, mandatory=false)
+        RESERVED_7 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=70.0, core=true, t24Name=RESERVED.7, mandatory=false)
+        RESERVED_8 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=69.0, core=true, t24Name=RESERVED.8, mandatory=false)
+        RESERVED_9 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=68.0, core=true, t24Name=RESERVED.9, mandatory=false)
+/* Check box to determine is All items are to be marked as Reviewed.
+This field should be cleared every time a record is opened.
+If the field is set, the Review Flag in each multi-value set in ACFA records should be set as well. */
+        REVIEW_ALL : NSFDES_Queue:NSF_ACCOUNT_DETAILS__REVIEW_ALL
+            @t24:i (align=L, inputBehaviour=I, maxLength=1, sysNumber=3.0, core=true, t24Name=REVIEW.ALL, mandatory=false)
+        REVIEW_FLAG -> byValue NSFDES_Queue:NSF_ACCOUNT_DETAILS__REVIEW_FLAG *
+            @t24:i (t24Name=REVIEW.FLAG)
+        /* Next statement due date for the account */
+        STATEMENT_DATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=N, maxLength=11, sysNumber=54.0, core=true, t24Name=STATEMENT.DATE, mandatory=false)
+        /* Field to indicate if NSF Notice has to be suppressed by external mailing system for the Customer. */
+        SUPPRESS_NOTICE : NSFDES_Queue:NSF_ACCOUNT_DETAILS__SUPPRESS_NOTICE
+            @t24:i (align=L, inputBehaviour=I, maxLength=1, sysNumber=53.0, core=true, t24Name=SUPPRESS.NOTICE, mandatory=false)
+        /* sum of all charge amounts */
+        TOTAL_CHARGE : T24BusinessTypes:AMT
+            @i18n:Label (en=Charge)
+            @t24:i (align=R, inputBehaviour=I, maxLength=19, sysNumber=56.0, core=true, t24Name=TOTAL.CHARGE, typeModifiers="2", mandatory=false)
+    }
+    NSF_ACCOUNT_DETAILS__ACCOUNT_TITLE_1
+    {
+        /* Account Title 1 defined for the Account in AA.PRD.DES.ACCOUNT table ACCOUNT.TITLE.1 field */
+        ACCOUNT_TITLE_1 : T24BusinessTypes:A
+            @i18n:Label (en=Name)
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=49.0, core=true, t24Name=ACCOUNT.TITLE.1, mandatory=false)
+    }
+    NSF_ACCOUNT_DETAILS__CUSTOMER
+    {
+        /* Customer Numbers of the NSF Account */
+        CUSTOMER -> ST_Customer:CUSTOMER
+            @i18n:Label (en=Customer)
+            @i18n:Tooltip (en="Customer Liability")
+            @t24:i (align=R, inputBehaviour=N, maxLength=10, sysNumber=50.0, core=true, businessType=CUS, t24Name=CUSTOMER, mandatory=false)
+        /* Address record linked for the Customer */
+        DE_ADDRESS_ID -> PY_Config:DE_ADDRESS
+            @t24:i (align=L, inputBehaviour=N, maxLength=39, sysNumber=51.0, core=true, businessType=A, t24Name=DE.ADDRESS.ID, mandatory=false)
+    }
+    NSF_ACCOUNT_DETAILS__DAO_ID
+    {
+        /* DAO’s linked to the Account. Officer defined as Account officer and Other Officer will be linked to this field */
+        DAO_ID -> ST_Config:DEPT_ACCT_OFFICER
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=45.0, core=true, businessType=DAO, t24Name=DAO.ID, mandatory=false)
+    }
+    NSF_ACCOUNT_DETAILS__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=82.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    NSF_ACCOUNT_DETAILS__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=81.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    NSF_ACCOUNT_DETAILS__OVERRIDE
+    {
+        OVERRIDE : T24BusinessTypes:N
+            @i18n:Label (en=Override)
+            @i18n:Tooltip (en="Overrides generated by this transaction")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=78.0, core=true, t24Name=OVERRIDE, mandatory=false)
+    }
+    NSF_ACCOUNT_DETAILS__REVIEW_FLAG
+    {
+        /* ACFA Record ID */
+        ACFA_ID : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=16, sysNumber=6.0, core=true, t24Name=ACFA.ID, mandatory=false)
+/* The actual charge amount entered by the Account Officer. If the charge has been Waived then amount = 0.
+Adjusted charge will also be updated through this field. Data in this field will be updated in Charge amount field in ACFA record */
+        ADJ_CHG_AMT : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=19, sysNumber=22.0, core=true, t24Name=ADJ.CHG.AMT, typeModifiers="2", mandatory=false)
+        /* Field to capture if Charge decision was made by System or User */
+        CHARGE_DECISION : NSFDES_Queue:NSF_ACCOUNT_DETAILS__REVIEW_FLAG__CHARGE_DECISION
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=29.0, core=true, t24Name=CHARGE.DECISION, mandatory=false)
+/* Field to capture if Charge is negotiable or not for the ACFA record based on the setup defined in NSF.PARAMETER.
+If Charge negotiable is is N, then WAIVE.CHG cannot be setup to Y and ADJ.CHG.AMT cannot be input */
+        CHARGE_NEGOTIABLE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=3, sysNumber=27.0, core=true, t24Name=CHARGE.NEGOTIABLE, mandatory=false)
+        /* Check Number */
+        CHEQUE_NUMBER : T24BusinessTypes:A
+            @i18n:Label (en="Cheque No")
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=34.0, core=true, t24Name=CHEQUE.NUMBER, mandatory=false)
+        /* Original Charge amount, from new field Default Chg amount in ACFA record. No input field */
+        CHG_AMT : T24BusinessTypes:AMT
+            @i18n:Label (en="Charge Amount")
+            @i18n:Tooltip (en="The actual charge amount which is computed")
+            @t24:i (align=R, inputBehaviour=N, maxLength=19, sysNumber=21.0, core=true, t24Name=CHG.AMT, typeModifiers="2", mandatory=false)
+/* Description for changing the charge decision. Will be linked to the lookup table NSF.CHG.WAIVE.REASON.
+Allows options vetted from EB.LOOKUP table.
+01-Bank Error
+02-Minimum Times Overdrawn
+03-Loan Pending
+04-Low Amount Overdrawn
+05-Account To Be Closed
+06-High Balance Customer
+07-Non-Profit or Charitable Group
+08-Public Funds
+09-Deposit Made To Account */
+        CHG_WAIVE_REASON : NSFDES_Queue:NSF_ACCOUNT_DETAILS__REVIEW_FLAG__CHG_WAIVE_REASON
+            @t24:i (align=R, inputBehaviour=I, maxLength=35, sysNumber=23.0, core=true, t24Name=CHG.WAIVE.REASON, mandatory=false)
+        /* AC.INWARD.ENTRY Id */
+        CLEARING_ID : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=31.0, core=true, t24Name=CLEARING.ID, mandatory=false)
+        /* Clearing  channel(ACH,CHECK and OTHER) */
+        CLR_CHANNEL : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=18.0, core=true, t24Name=CLR.CHANNEL, mandatory=false)
+        FUNDS_AUTH_STATUS : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=16, sysNumber=26.0, core=true, t24Name=FUNDS.AUTH.STATUS, mandatory=false)
+/* The approval decision entered by the account officer in the field OFFICER.REASON will be translated to this field.
+Funds Decision will be updated through Officer decision field. Officer decision to PC or PW will update the Funds decision as PAY.
+Officer decision to RC or RW will update the Funds decision as RETURN
+Funds decision cannot be changed by User for records with Settlement Type set to 'SET'.
+Information will be used to update field FUNDS.DECISION in ACFA record.
+When this field is set to PAY, AC.FUNDS.AUTHORISATION record will be set to APPROVED else it will be set to REJECTED. */
+        FUNDS_DECISION : NSFDES_Queue:NSF_ACCOUNT_DETAILS__REVIEW_FLAG__FUNDS_DECISION
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=16.0, core=true, t24Name=FUNDS.DECISION, mandatory=false)
+/* The date that the ACFA record was created.Data from DDA.INIT.REQ.DATE in ACFA record
+No input field. */
+        INIT_REQ_DATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=N, maxLength=11, sysNumber=12.0, core=true, t24Name=INIT.REQ.DATE, mandatory=false)
+/* The Time when the transaction request came in. Data from DDA.INIT.REQ.TIME in ACFA record.
+No input Field. */
+        INIT_REQ_TIME : T24BusinessTypes:TIME
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=13.0, core=true, t24Name=INIT.REQ.TIME, mandatory=false)
+        /* Should be defaulted to 'i' if the Settlement type is SET */
+        ITEM_TYPE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=1, sysNumber=5.0, core=true, t24Name=ITEM.TYPE, mandatory=false)
+/* NSF exception amount for the transaction. To be updated from OD.AMT field in ACFA record
+No input field */
+        OD_AMT : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=N, maxLength=19, sysNumber=10.0, core=true, t24Name=OD.AMT, typeModifiers="2", mandatory=false)
+/* Field to make the officer decision. The Fund decision and Waive/Pay charge decision will be cumulatively made through this field. Allowed options are PC, PW, RC and RW.
+PC - Pay and Charge
+PW - Pay and Waive
+RC - Return and Charge
+RW - Return and Waive */
+        OFFICER_DECISION : NSFDES_Queue:NSF_ACCOUNT_DETAILS__REVIEW_FLAG__OFFICER_DECISION
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=24.0, core=true, t24Name=OFFICER.DECISION, mandatory=false)
+        /* Arrangement Activity reference of the transaction that created the exception */
+        ORIG_AAA_ID : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=40, sysNumber=30.0, core=true, t24Name=ORIG.AAA.ID, mandatory=false)
+        /* Transaction reference from Originating System. */
+        ORIG_TRANS_REF : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=15.0, core=true, t24Name=ORIG.TRANS.REF, mandatory=false)
+/* The amount that will be considered as Uncollect funds for determinng the Return Reason code.
+Update to this field will be controlled by the setup defined in NSF.FLOAT.COMPONENT in NSF.PARAMETER. */
+        PAY_BALANCE : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=N, maxLength=19, sysNumber=11.0, core=true, t24Name=PAY.BALANCE, typeModifiers="2", mandatory=false)
+        REASON -> byValue NSFDES_Queue:NSF_ACCOUNT_DETAILS__REVIEW_FLAG__REASON *
+            @t24:i (t24Name=REASON)
+/* Return reason code for the exception.
+Reason will be insufficient funds for NSF exception and 'Uncollected Funds' if the uncollected funds will be sufficient ot cover the transaction */
+        REASON_CODE : NSFDES_Queue:NSF_ACCOUNT_DETAILS__REVIEW_FLAG__REASON_CODE
+            @i18n:Label (en="Reason code")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=19.0, core=true, t24Name=REASON.CODE, mandatory=false)
+        /* Transaction Currency */
+        REQUEST_CCY -> ST_CurrencyConfig:CURRENCY
+            @t24:i (align=L, inputBehaviour=N, maxLength=3, sysNumber=7.0, core=true, businessType=CCY, t24Name=REQUEST.CCY, mandatory=false)
+        /* Date on which the ACFA record was created */
+        REQUEST_DATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=N, maxLength=11, sysNumber=14.0, core=true, t24Name=REQUEST.DATE, mandatory=false)
+        /* Field to capture if the ACFA funds decision is reviewed. Check Box type field */
+        REVIEW_FLAG : NSFDES_Queue:NSF_ACCOUNT_DETAILS__REVIEW_FLAG__REVIEW_FLAG
+            @t24:i (align=L, inputBehaviour=I, maxLength=1, sysNumber=4.0, core=true, t24Name=REVIEW.FLAG, mandatory=false)
+/* The field can be set to USER or SYSTEM.Will be defaulted to SYSTEM. If USER modified FUNDS.DECISION field, then it should be updated as USER.
+When it is SYSTEM, it is a System made decision. For those records FUNDS.DECISION cannot be changed. */
+        SETTLEMENT_DECISION : NSFDES_Queue:NSF_ACCOUNT_DETAILS__REVIEW_FLAG__SETTLEMENT_DECISION
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=28.0, core=true, t24Name=SETTLEMENT.DECISION, mandatory=false)
+        /* Field to be updated based on SET.TYPE.OR.DEC field in ACFA record. Possible options for NSF transactions are PTL (Paid through Limit), POL(Paid outside Limit), SET(Settled) */
+        SETTLEMENT_TYPE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=4, sysNumber=25.0, core=true, t24Name=SETTLEMENT.TYPE, mandatory=false)
+        /* STMT.ENTRY Id */
+        STMT_ID : T24BusinessTypes:A
+            @i18n:Label (en="Statement Id")
+            @t24:i (align=L, inputBehaviour=N, maxLength=90, sysNumber=33.0, core=true, t24Name=STMT.ID, mandatory=false)
+/* The transaction amount.Data from field REQUESTED.AMT in ACFA record
+No input field */
+        TRANSACTION_AMT : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=N, maxLength=19, sysNumber=8.0, core=true, t24Name=TRANSACTION.AMT, typeModifiers="2", mandatory=false)
+        /* Transaction Code */
+        TRANSACTION_CODE -> ST_Config:TRANSACTION
+            @i18n:Label (en="Transaction Code")
+            @i18n:Tooltip (en="Indicates the Transaction Type")
+            @t24:i (align=L, inputBehaviour=N, maxLength=10, sysNumber=35.0, core=true, businessType=TXN, t24Name=TRANSACTION.CODE, mandatory=false)
+        TXN_NARRATIVE -> byValue NSFDES_Queue:NSF_ACCOUNT_DETAILS__REVIEW_FLAG__TXN_NARRATIVE *
+            @t24:i (t24Name=TXN.NARRATIVE)
+        TXN_SYSTEM_ID : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=20, sysNumber=32.0, core=true, t24Name=TXN.SYSTEM.ID, mandatory=false)
+/* To indicate if the charges are waived.
+YES or No
+Value to be carried forward from ACFA record. Charges can be waived by default setup at balance availability.
+If the office chooses to change the default decision, then this field will be modified by user
+Field wil be updated based on Officer decision. If Officer Decision is Charge, then WAIVE.CHG will set to Null or N.
+If Officer decision is Waive, the field will be set to Y */
+        WAIVE_CHG : NSFDES_Queue:NSF_ACCOUNT_DETAILS__REVIEW_FLAG__WAIVE_CHG
+            @i18n:Label (en="Waive Charges")
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=20.0, core=true, t24Name=WAIVE.CHG, mandatory=false)
+    }
+    NSF_ACCOUNT_DETAILS__REVIEW_FLAG__REASON
+    {
+        /* The narrative describing the reason for rejection by the account officer.Used to update the field DECISION.REASON in ACFA record */
+        REASON : T24BusinessTypes:A
+            @i18n:Label (en=Reason)
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=17.0, core=true, t24Name=REASON, mandatory=false)
+    }
+    NSF_ACCOUNT_DETAILS__REVIEW_FLAG__TXN_NARRATIVE
+    {
+        /* Field to capture transaction narrative */
+        TXN_NARRATIVE : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=9.0, core=true, t24Name=TXN.NARRATIVE, mandatory=false)
+    }
+    /* This table holds NSF activity history for an account by year month. Itholds information on NSF count, Fees, Paid item count, return item count,fee waived by User, Fee waived by System, Refund item count and Refund feeamounts. Updates to this table will be done during cut off processing inCOB, and for cancellation/reversals updates will be done online.Information in this table will be used to display in inquiries */
+    NSF_ACCT_ACTIVITY
+        @i18n:Description (en="")
+        @t24:i (t24Name=NSF.ACCT.ACTIVITY, level=I, type=L, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        DAY_NO -> byValue NSFDES_Queue:NSF_ACCT_ACTIVITY__DAY_NO *
+            @t24:i (t24Name=DAY.NO)
+        /* ID Comprises of Account number and Year month separated by  ' * ' */
+        ID -> NSFDES_Queue:NSF_ACCT_ACTIVITY PK required
+            @i18n:Label (en="Transaction Ref")
+            @i18n:Tooltip (en="Transaction Reference")
+            @t24:i (align=L, inputBehaviour=I, maxLength=36, sysNumber=0.0, core=true, businessType=A, t24Name="@ID", mandatory=true)
+    }
+    NSF_ACCT_ACTIVITY__DAY_NO
+    {
+        /* Day for which the nsf summary is being listed */
+        DAY_NO : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=2, sysNumber=1.0, core=true, t24Name=DAY.NO, mandatory=false)
+        /* OD Count */
+        OD_COUNT : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=36.0, core=true, t24Name=OD.COUNT, mandatory=false)
+        RETURN_CODE -> byValue NSFDES_Queue:NSF_ACCT_ACTIVITY__DAY_NO__RETURN_CODE *
+            @t24:i (t24Name=RETURN.CODE)
+        /* Number of Refunds done by the system for NSF exceptions that were Paid */
+        SYSPAYREF_CNT : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=26.0, core=true, t24Name=SYSPAYREF.CNT, mandatory=false)
+        /* Fees refund by the system for NSF exceptions that were paid */
+        SYSPAYREF_FEE : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=19, sysNumber=27.0, core=true, t24Name=SYSPAYREF.FEE, mandatory=false)
+        /* Number of NSF exceptions that were paid for that day based on system/default setup */
+        SYSPAY_CNT : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=2.0, core=true, t24Name=SYSPAY.CNT, mandatory=false)
+        /* Fees received from the NSF exception that were paid based on system/default setup */
+        SYSPAY_FEE : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=19, sysNumber=3.0, core=true, t24Name=SYSPAY.FEE, mandatory=false)
+        /* Count of Items fee Waived by System/default setup for Items paid through System/default decision */
+        SYSPAY_SYSWAIVE_CNT : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=4.0, core=true, t24Name=SYSPAY.SYSWAIVE.CNT, mandatory=false)
+        /* Fee Waived by System for Items paid through system/default setup */
+        SYSPAY_SYSWAIVE_FEE : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=19, sysNumber=5.0, core=true, t24Name=SYSPAY.SYSWAIVE.FEE, mandatory=false)
+        /* Count of Items fee Waived by User for Items paid through system/default setup */
+        SYSPAY_USRWAIVE_CNT : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=6.0, core=true, t24Name=SYSPAY.USRWAIVE.CNT, mandatory=false)
+        /* Fee Waived by User for Items paid based on system/default setup */
+        SYSPAY_USRWAIVE_FEE : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=19, sysNumber=7.0, core=true, t24Name=SYSPAY.USRWAIVE.FEE, mandatory=false)
+        /* Number of Refunds done by the system for NSF exceptions that were returned */
+        SYSRETREF_CNT : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=28.0, core=true, t24Name=SYSRETREF.CNT, mandatory=false)
+        /* Fees refund by the system for NSF exceptions that were returned */
+        SYSRETREF_FEE : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=19, sysNumber=29.0, core=true, t24Name=SYSRETREF.FEE, mandatory=false)
+        /* Number of NSF exceptions that were returned for that day based on system/default setup */
+        SYSRET_CNT : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=14.0, core=true, t24Name=SYSRET.CNT, mandatory=false)
+        /* Fees received from the NSF exception that were returned based on system/default setup */
+        SYSRET_FEE : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=19, sysNumber=15.0, core=true, t24Name=SYSRET.FEE, mandatory=false)
+        /* Count of Items fee Waived by System/default setup for Items returned through System/default decision */
+        SYSRET_SYSWAIVE_CNT : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=16.0, core=true, t24Name=SYSRET.SYSWAIVE.CNT, mandatory=false)
+        /* Fee Waived by System for Items returned through system/default setup */
+        SYSRET_SYSWAIVE_FEE : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=19, sysNumber=17.0, core=true, t24Name=SYSRET.SYSWAIVE.FEE, mandatory=false)
+        /* Count of Items fee Waived by User for Items returned through system/default setup */
+        SYSRET_USRWAIVE_CNT : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=18.0, core=true, t24Name=SYSRET.USRWAIVE.CNT, mandatory=false)
+        /* Fee Waived by User for Items returned based on system/default setup */
+        SYSRET_USRWAIVE_FEE : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=19, sysNumber=19.0, core=true, t24Name=SYSRET.USRWAIVE.FEE, mandatory=false)
+        /* Number of Refunds done by the user for NSF exceptions that were Paid */
+        USRPAYREF_CNT : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=30.0, core=true, t24Name=USRPAYREF.CNT, mandatory=false)
+        /* Fees refund by the user for NSF exceptions that were paid */
+        USRPAYREF_FEE : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=19, sysNumber=31.0, core=true, t24Name=USRPAYREF.FEE, mandatory=false)
+        /* Number of NSF exceptions that were paid for that day based on User decision */
+        USRPAY_CNT : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=8.0, core=true, t24Name=USRPAY.CNT, mandatory=false)
+        /* Fees received from the NSF exception that were paid based on User decision */
+        USRPAY_FEE : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=19, sysNumber=9.0, core=true, t24Name=USRPAY.FEE, mandatory=false)
+        /* Count of Items fee Waived based on System/default setup for Items paid based on User decision */
+        USRPAY_SYSWAIVE_CNT : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=10.0, core=true, t24Name=USRPAY.SYSWAIVE.CNT, mandatory=false)
+        /* Fee Waived by System for Items paid based on User decision */
+        USRPAY_SYSWAIVE_FEE : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=19, sysNumber=11.0, core=true, t24Name=USRPAY.SYSWAIVE.FEE, mandatory=false)
+        /* Count of Items fee Waived by User for Items paid based on User decision */
+        USRPAY_USRWAIVE_CNT : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=12.0, core=true, t24Name=USRPAY.USRWAIVE.CNT, mandatory=false)
+        /* Fee Waived by User for Items paid based on User decision */
+        USRPAY_USRWAIVE_FEE : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=19, sysNumber=13.0, core=true, t24Name=USRPAY.USRWAIVE.FEE, mandatory=false)
+        /* Number of Refunds done by the user for NSF exceptions that were returned */
+        USRRETREF_CNT : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=32.0, core=true, t24Name=USRRETREF.CNT, mandatory=false)
+        /* Fees refund by the user for NSF exceptions that were returned */
+        USRRETREF_FEE : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=19, sysNumber=33.0, core=true, t24Name=USRRETREF.FEE, mandatory=false)
+        /* Number of NSF exceptions that were returned for that day based on User decision */
+        USRRET_CNT : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=20.0, core=true, t24Name=USRRET.CNT, mandatory=false)
+        /* Fees received from the NSF exception that were returned based on User decision */
+        USRRET_FEE : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=19, sysNumber=21.0, core=true, t24Name=USRRET.FEE, mandatory=false)
+        /* Count of Items fee Waived based on System/default setup for Items returned based on User decision */
+        USRRET_SYSWAIVE_CNT : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=22.0, core=true, t24Name=USRRET.SYSWAIVE.CNT, mandatory=false)
+        /* Fee Waived by System for Items returned based on User decision */
+        USRRET_SYSWAIVE_FEE : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=19, sysNumber=23.0, core=true, t24Name=USRRET.SYSWAIVE.FEE, mandatory=false)
+        /* Count of Items fee Waived by User for Items returned based on User decision */
+        USRRET_USRWAIVE_CNT : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=24.0, core=true, t24Name=USRRET.USRWAIVE.CNT, mandatory=false)
+        /* Fee Waived by User for Items returned based on User decision */
+        USRRET_USRWAIVE_FEE : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=19, sysNumber=25.0, core=true, t24Name=USRRET.USRWAIVE.FEE, mandatory=false)
+    }
+    NSF_ACCT_ACTIVITY__DAY_NO__RETURN_CODE
+    {
+        RETURN_CODE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=4, sysNumber=34.0, core=true, t24Name=RETURN.CODE, mandatory=false)
+        RETURN_COUNT : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=35.0, core=true, t24Name=RETURN.COUNT, mandatory=false)
+    }
+/* Table to capture the changes done in AC.FUNDS.AUTHORISATION record through NSF.ACCOUNT.DETAILS table.
+Each change done to NSF.ACCOUNT.DETAILS record will be updated to AC.FUNDS.AUTHORISATION table which will be in IHLD status.
+This table will be used to track the history of modifications done to the AC.FUNDS.AUTHORATION table while it was in exception status.
+@ID of this table is AC.FUNDS.AUTHORISATION record ID */
+    NSF_ACFA_LOG
+        @i18n:Description (en="")
+        @t24:i (t24Name=NSF.ACFA.LOG, level=I, type=H, allowedFunctions="A C D E H I L P Q R S", localRefAllowed=false)
+    {
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=17.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=18.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=14.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        CHG_DATE -> byValue NSFDES_Queue:NSF_ACFA_LOG__CHG_DATE *
+            @t24:i (t24Name=CHG.DATE)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=15.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=11.0, core=true, t24Name=CURR.NO, mandatory=false)
+        DATE_TIME -> byValue NSFDES_Queue:NSF_ACFA_LOG__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=16.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        ID -> NSFDES_Queue:NSF_ACFA_LOG PK required
+            @i18n:Label (en="Transaction Ref")
+            @i18n:Tooltip (en="Transaction Reference")
+            @t24:i (align=L, inputBehaviour=I, maxLength=16, sysNumber=0.0, core=true, businessType=A, t24Name="@ID", mandatory=true)
+        INPUTTER -> byValue NSFDES_Queue:NSF_ACFA_LOG__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=10.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        /* Record ID of reversal transaction */
+        REVERSAL_KEY : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=39, sysNumber=7.0, core=true, t24Name=REVERSAL.KEY, mandatory=false)
+        REVE_DETAILS -> byValue NSFDES_Queue:NSF_ACFA_LOG__REVE_DETAILS *
+            @t24:i (t24Name=REVE.DETAILS)
+        /* Status of Reversal transaction */
+        STATUS : T24BusinessTypes:A
+            @i18n:Label (en=Status)
+            @t24:i (align=L, inputBehaviour=N, maxLength=7, sysNumber=8.0, core=true, t24Name=STATUS, mandatory=false)
+    }
+    NSF_ACFA_LOG__CHG_DATE
+    {
+/* All changes done to the ACFA record since the record was created is to be updated in this multi-value set
+This field holds the date when the change was made */
+        CHG_DATE : T24BusinessTypes:A
+            @i18n:Label (en="Date de frais")
+            @t24:i (align=L, inputBehaviour=N, maxLength=8, sysNumber=1.0, core=true, t24Name=CHG.DATE, mandatory=false)
+        CHG_FIELD -> byValue NSFDES_Queue:NSF_ACFA_LOG__CHG_DATE__CHG_FIELD *
+            @t24:i (t24Name=CHG.FIELD)
+        /* This field holds the time when the change was made */
+        CHG_TIME : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=19, sysNumber=2.0, core=true, t24Name=CHG.TIME, mandatory=false)
+        /* This field holds the Sign on of the user who made the change */
+        CHG_USER : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=19, sysNumber=3.0, core=true, t24Name=CHG.USER, mandatory=false)
+    }
+    NSF_ACFA_LOG__CHG_DATE__CHG_FIELD
+    {
+        /* This field holds the Field name which was changed */
+        CHG_FIELD : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=4.0, core=true, t24Name=CHG.FIELD, mandatory=false)
+        /* This fields holds information on the old value in the mentioned field */
+        CHG_FROM : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=5.0, core=true, t24Name=CHG.FROM, mandatory=false)
+        /* This field holds information on the changed value in the mentioned field */
+        CHG_TO : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=6.0, core=true, t24Name=CHG.TO, mandatory=false)
+    }
+    NSF_ACFA_LOG__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=13.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    NSF_ACFA_LOG__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=12.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    NSF_ACFA_LOG__REVE_DETAILS
+    {
+        /* Error details if status is 'FAILURE' */
+        REVE_DETAILS : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=9.0, core=true, t24Name=REVE.DETAILS, mandatory=false)
+    }
+    /* NSF Counter can be adjusted through named activities and NSF fees can bewaived through FUNDS.TRANSFER transactions. This table will be used torecord NSF counter or fee updates through applications other thanAC.FUNDS.AUTHORISATION */
+    NSF_ACTIVITY_HISTORY
+        @i18n:Description (en="")
+        @t24:i (t24Name=NSF.ACTIVITY.HISTORY, level=I, type=L, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        /* Table will hold information on NSF transactions for an account on a givendate. Account number and date will be separated by  ' * ' . */
+        ID -> NSFDES_Queue:NSF_ACTIVITY_HISTORY PK required
+            @i18n:Label (en="Transaction Ref")
+            @i18n:Tooltip (en="Transaction Reference")
+            @t24:i (align=L, inputBehaviour=I, maxLength=36, sysNumber=0.0, core=true, businessType=A, t24Name="@ID", mandatory=true)
+        TXN_ID -> byValue NSFDES_Queue:NSF_ACTIVITY_HISTORY__TXN_ID *
+            @t24:i (t24Name=TXN.ID)
+    }
+    NSF_ACTIVITY_HISTORY__TXN_ID
+    {
+        /* Field to hold the counter amount to be updated as part of the transaction. Will hold a negative number */
+        COUNTER : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=9, sysNumber=3.0, core=true, t24Name=COUNTER, mandatory=false)
+        /* This field will hold the status of the NSF exception for which the update is being done. It will be a PAY or RETURN. */
+        EXCEP_TYPE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=9, sysNumber=2.0, core=true, t24Name=EXCEP.TYPE, mandatory=false)
+        /* Amount of charges that is being refund towards the exception type */
+        REFUND_AMT : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=19, sysNumber=4.0, core=true, t24Name=REFUND.AMT, mandatory=false)
+        /* Will hold the transaction ID of NSF Activity to update counters, or Fee refund transactions. These are the transactions that make up the NSF counters for an account */
+        TXN_ID : T24BusinessTypes:A
+            @i18n:Label (en="Transaction Ref")
+            @t24:i (align=L, inputBehaviour=I, maxLength=16, sysNumber=1.0, core=true, t24Name=TXN.ID, mandatory=false)
+    }
+/* Table to capture failure in posting reversal or correction transaction for NSF transaction which are being rejected
+ID is formed using the Exception transaction details, AC.FUNDS.AUTHORISATION id, AA.ARRANGEMENT.ACTIVITY of the underlying Exception transaction and the originating transaction reference available in TXN.CONTRACT.ID field of the arrangement activity.
+All are separated by a '*' */
+    NSF_RETURNS_EXCEPTION
+        @i18n:Description (en="")
+        @t24:i (t24Name=NSF.RETURNS.EXCEPTION, level=I, type=H, allowedFunctions="A C D E H I L P Q R S", localRefAllowed=false)
+    {
+        /* Debit transaction reference that caused the NSF exception, available in AA.ARRANGEMENT.ACTIVITY */
+        AAA_ID : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=40, sysNumber=5.0, core=true, t24Name=AAA.ID, mandatory=false)
+        /* Account number which has the exception transaction */
+        ACCOUNT_NUMBER -> AC_AccountOpening:ACCOUNT
+            @i18n:Label (en="Account Number")
+            @t24:i (align=L, inputBehaviour=N, maxLength=36, sysNumber=1.0, core=true, businessType=A, t24Name=ACCOUNT.NUMBER, mandatory=false)
+        /* ID NSF Exception transaction available in AC.FUNDS.AUTHORISATION table */
+        ACFA_ID -> AC_AccountOpening:AC_FUNDS_AUTHORISATION
+            @t24:i (align=L, inputBehaviour=N, maxLength=16, sysNumber=3.0, core=true, businessType=A, t24Name=ACFA.ID, mandatory=false)
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=31.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=32.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=28.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        /* Any comments to be captured by the officer while resolving the correcting the return transaction record posting. */
+        COMMENTS : T24BusinessTypes:TEXT
+            @i18n:Label (en=Comments)
+            @i18n:Tooltip (en="Comments if any")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=12.0, core=true, t24Name=COMMENTS, mandatory=false)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=29.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=25.0, core=true, t24Name=CURR.NO, mandatory=false)
+        CUSTOMER_NUMBER -> byValue NSFDES_Queue:NSF_RETURNS_EXCEPTION__CUSTOMER_NUMBER *
+            @t24:i (t24Name=CUSTOMER.NUMBER)
+        DATE_TIME -> byValue NSFDES_Queue:NSF_RETURNS_EXCEPTION__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=30.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        ID -> NSFDES_Queue:NSF_RETURNS_EXCEPTION PK required
+            @i18n:Label (en="Transaction Ref")
+            @i18n:Tooltip (en="Transaction Reference")
+            @t24:i (align=L, inputBehaviour=I, maxLength=120, sysNumber=0.0, core=true, businessType=A, t24Name="@ID", mandatory=true)
+        INPUTTER -> byValue NSFDES_Queue:NSF_RETURNS_EXCEPTION__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        OVERRIDE -> byValue NSFDES_Queue:NSF_RETURNS_EXCEPTION__OVERRIDE *
+            @t24:i (t24Name=OVERRIDE)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=24.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        RESERVED_1 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=22.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_10 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=13.0, core=true, t24Name=RESERVED.10, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=21.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=20.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=19.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        RESERVED_5 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=18.0, core=true, t24Name=RESERVED.5, mandatory=false)
+        RESERVED_6 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=17.0, core=true, t24Name=RESERVED.6, mandatory=false)
+        RESERVED_7 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=16.0, core=true, t24Name=RESERVED.7, mandatory=false)
+        RESERVED_8 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=15.0, core=true, t24Name=RESERVED.8, mandatory=false)
+        RESERVED_9 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=14.0, core=true, t24Name=RESERVED.9, mandatory=false)
+        /* To be updated manualy by an officer to classify if the correction for Return transactions were posted or not */
+        RESOLVED : NSFDES_Queue:NSF_RETURNS_EXCEPTION__RESOLVED
+            @t24:i (align=L, inputBehaviour=I, maxLength=1, sysNumber=11.0, core=true, t24Name=RESOLVED, mandatory=false)
+        REV_TXN_DETAILS -> byValue NSFDES_Queue:NSF_RETURNS_EXCEPTION__REV_TXN_DETAILS *
+            @t24:i (t24Name=REV.TXN.DETAILS)
+        /* The reversal or correction transaction reference that was attempted, but failed */
+        REV_TXN_ID : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=60, sysNumber=8.0, core=true, t24Name=REV.TXN.ID, mandatory=false)
+/* Status of the reversal or correction transaction. Can be IHLD or DELETE. If it is IHLD, then the reversal record is in exception.
+If it is DELETE, then the reversal transaction does not exist in exception or live */
+        STATUS : T24BusinessTypes:A
+            @i18n:Label (en=Status)
+            @t24:i (align=L, inputBehaviour=I, maxLength=10, sysNumber=10.0, core=true, t24Name=STATUS, mandatory=false)
+        /* Transaction amount of the exception transaction */
+        TXN_AMT : T24BusinessTypes:AMT
+            @i18n:Label (en="Transaction Amount")
+            @t24:i (align=R, inputBehaviour=N, maxLength=19, sysNumber=4.0, core=true, t24Name=TXN.AMT, mandatory=false)
+        /* Originating transaction reference of the underlying NSF transaction. It can be clearing, PH or FT reference for example */
+        TXN_CONTRACT_ID : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=6.0, core=true, t24Name=TXN.CONTRACT.ID, mandatory=false)
+/* The EB.SYSTEM.ID used by the underlying transaction for posting accounting entries.
+This information will be useful in identifying the source of the original transaction */
+        TXN_SYSTEM_ID : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=7.0, core=true, t24Name=TXN.SYSTEM.ID, mandatory=false)
+    }
+    NSF_RETURNS_EXCEPTION__CUSTOMER_NUMBER
+    {
+        /* Primary customers of the account. */
+        CUSTOMER_NUMBER -> ST_Customer:CUSTOMER
+            @i18n:Label (en="Customer No")
+            @i18n:Tooltip (en="Identifies the Customer for the transaction.")
+            @t24:i (align=R, inputBehaviour=N, maxLength=10, sysNumber=2.0, core=true, businessType=CUS, t24Name=CUSTOMER.NUMBER, mandatory=false)
+    }
+    NSF_RETURNS_EXCEPTION__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=27.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    NSF_RETURNS_EXCEPTION__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=26.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    NSF_RETURNS_EXCEPTION__OVERRIDE
+    {
+        OVERRIDE : T24BusinessTypes:N
+            @i18n:Label (en=Override)
+            @i18n:Tooltip (en="Overrides generated by this transaction")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=23.0, core=true, t24Name=OVERRIDE, mandatory=false)
+    }
+    NSF_RETURNS_EXCEPTION__REV_TXN_DETAILS
+    {
+        /* Error messages faced during reversal or correction transaction posting. */
+        REV_TXN_DETAILS : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=9.0, core=true, t24Name=REV.TXN.DETAILS, mandatory=false)
+    }
+}
+Enumerations {
+    NSF_ACCOUNT_DETAILS__CUTOFF_COMPLETE : mml:string
+        NULL=NULL
+        Y=Y
+    NSF_ACCOUNT_DETAILS__REVIEW_ALL : mml:string
+        NULL=NULL
+        Y=Y
+    NSF_ACCOUNT_DETAILS__REVIEW_FLAG__CHARGE_DECISION : mml:string
+        SYSTEM=SYSTEM
+        USER=USER
+    NSF_ACCOUNT_DETAILS__REVIEW_FLAG__CHG_WAIVE_REASON : mml:string
+        01=01
+        02=02
+        03=03
+        04=04
+        05=05
+        06=06
+        07=07
+        08=08
+        09=09
+    NSF_ACCOUNT_DETAILS__REVIEW_FLAG__FUNDS_DECISION : mml:string
+        NULL=NULL
+        PAY=PAY
+        RETURN=RETURN
+    NSF_ACCOUNT_DETAILS__REVIEW_FLAG__OFFICER_DECISION : mml:string
+        C=C
+        PC=PC
+        PW=PW
+        RC=RC
+        RW=RW
+        W=W
+    NSF_ACCOUNT_DETAILS__REVIEW_FLAG__REASON_CODE : mml:string
+        A=A
+        B=B
+        C=C
+        D=D
+        E=E
+        F=F
+        G=G
+        H=H
+        I=I
+        J=J
+        K=K
+        L=L
+        N=N
+        R01=R01
+        R02=R02
+        R03=R03
+        R06=R06
+        R07=R07
+        R08=R08
+        R09=R09
+        R10=R10
+        R14=R14
+        R15=R15
+        R16=R16
+        R20=R20
+        R24=R24
+        R29=R29
+        R31=R31
+        R35=R35
+        R41=R41
+        R45=R45
+        S=S
+        T=T
+        U=U
+        W=W
+    NSF_ACCOUNT_DETAILS__REVIEW_FLAG__REVIEW_FLAG : mml:string
+        NULL=NULL
+        Y=Y
+    NSF_ACCOUNT_DETAILS__REVIEW_FLAG__SETTLEMENT_DECISION : mml:string
+        SYSTEM=SYSTEM
+        USER=USER
+    NSF_ACCOUNT_DETAILS__REVIEW_FLAG__WAIVE_CHG : mml:string
+        C=C
+        NULL=NULL
+        W=W
+    NSF_ACCOUNT_DETAILS__SUPPRESS_NOTICE : mml:string
+        NULL=NULL
+        Y=Y
+    NSF_RETURNS_EXCEPTION__RESOLVED : mml:string
+        N=N
+        NULL=NULL
+        Y=Y
+}

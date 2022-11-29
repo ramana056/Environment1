@@ -1,0 +1,150 @@
+# UTF-8
+/* USCORE Holds */
+Domain USCORE_Holds
+    @t24:i (module=USCORE)
+    @java:Package (value=com.temenos.t24.datamodel.uscore.uscore_holds)
+namespace "http://www.temenos.com/t24/USCORE_Holds"
+metamodelVersion 1.30.6
+Classes {
+    USCORE_FULL_HOLD_CNT
+        @i18n:Description (en="")
+        @t24:i (t24Name=USCORE.FULL.HOLD.CNT, level=F, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        ID -> USCORE_Holds:USCORE_FULL_HOLD_CNT PK required
+            @i18n:Label (en="Transaction Ref")
+            @i18n:Tooltip (en="Transaction Reference")
+            @t24:i (align=L, inputBehaviour=I, maxLength=19, sysNumber=0.0, core=true, businessType=POSANT, t24Name="@ID", mandatory=true)
+        LOCKED_EVENTS_REF -> byValue USCORE_Holds:USCORE_FULL_HOLD_CNT__LOCKED_EVENTS_REF *
+            @t24:i (t24Name=LOCKED.EVENTS.REF)
+    }
+    USCORE_FULL_HOLD_CNT__LOCKED_EVENTS_REF
+    {
+        LOCKED_EVENTS_REF -> AC_AccountOpening:AC_LOCKED_EVENTS
+            @t24:i (align=L, inputBehaviour=I, maxLength=20, sysNumber=1.0, core=true, businessType=A, t24Name=LOCKED.EVENTS.REF, mandatory=false)
+    }
+    /* Parameter table to define hold types. */
+    USCORE_HOLD_PARAMETER
+        @i18n:Description (en="")
+        @t24:i (t24Name=USCORE.HOLD.PARAMETER, level=I, type=H, allowedFunctions="A C D E H I L P Q R S", localRefApplicationSysNo=14.0, localRefAllowed=true)
+    {
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=23.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=24.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=20.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=21.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=17.0, core=true, t24Name=CURR.NO, mandatory=false)
+        DATE_TIME -> byValue USCORE_Holds:USCORE_HOLD_PARAMETER__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=22.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        DESCRIPTION -> byValue USCORE_Holds:USCORE_HOLD_PARAMETER__DESCRIPTION *
+            @t24:i (t24Name=DESCRIPTION)
+        /* Field to define the expiration period. Value can be defined in days, weeks, months or years. Example: 5D, 2W, 3M or 1Y. */
+        EXPIRATION_PERIOD : T24BusinessTypes:PERIOD
+            @t24:i (align=L, inputBehaviour=I, maxLength=4, sysNumber=2.0, core=true, t24Name=EXPIRATION.PERIOD, mandatory=false)
+/* If marked as YES, then entire balance in the account will be held.
+If marked as NULL, then user would need to manually update Hold amount at the Hold transaction input level. */
+        HOLD_FULL_BALANCE : USCORE_Holds:USCORE_HOLD_PARAMETER__HOLD_FULL_BALANCE
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=4.0, core=true, t24Name=HOLD.FULL.BALANCE, mandatory=false)
+        /* ID of the parameter must be a valid alphanumeric character. */
+        ID -> USCORE_Holds:USCORE_HOLD_PARAMETER PK required
+            @i18n:Label (en="Transaction Ref")
+            @i18n:Tooltip (en="Transaction Reference")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=0.0, core=true, businessType=A, t24Name="@ID", mandatory=true)
+        INPUTTER -> byValue USCORE_Holds:USCORE_HOLD_PARAMETER__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        OVERRIDE -> byValue USCORE_Holds:USCORE_HOLD_PARAMETER__OVERRIDE *
+            @t24:i (t24Name=OVERRIDE)
+/* If the Expiration Period is defined in days, then user will be prompted to select one of the two values in this field: Calendar Day or Business Day.
+Based on which it will be determined whether the Expiration Period. */
+        PERIOD_TYPE : USCORE_Holds:USCORE_HOLD_PARAMETER__PERIOD_TYPE
+            @i18n:Label (en="Period Type")
+            @t24:i (align=L, inputBehaviour=I, maxLength=13, sysNumber=3.0, core=true, t24Name=PERIOD.TYPE, mandatory=false)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=16.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        RESERVED_1 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=13.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=12.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=11.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=10.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        RESERVED_5 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=9.0, core=true, t24Name=RESERVED.5, mandatory=false)
+        RESERVED_6 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=8.0, core=true, t24Name=RESERVED.6, mandatory=false)
+        RESERVED_7 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=7.0, core=true, t24Name=RESERVED.7, mandatory=false)
+        RESERVED_8 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=6.0, core=true, t24Name=RESERVED.8, mandatory=false)
+        RESERVED_9 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=5.0, core=true, t24Name=RESERVED.9, mandatory=false)
+    }
+    USCORE_HOLD_PARAMETER__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=19.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    USCORE_HOLD_PARAMETER__DESCRIPTION
+    {
+        /* Free-text field to provide description of the parameter record. */
+        DESCRIPTION : T24BusinessTypes:A required
+            @i18n:Label (en=Description)
+            @i18n:Tooltip (en=Description)
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, multiLanguage=true, sysNumber=1.0, core=true, t24Name=DESCRIPTION, mandatory=true)
+    }
+    USCORE_HOLD_PARAMETER__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=18.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    USCORE_HOLD_PARAMETER__OVERRIDE
+    {
+        OVERRIDE : T24BusinessTypes:N
+            @i18n:Label (en=Override)
+            @i18n:Tooltip (en="Overrides generated by this transaction")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=15.0, core=true, t24Name=OVERRIDE, mandatory=false)
+    }
+    USCORE_REG_HOLD_CNT
+        @i18n:Description (en="")
+        @t24:i (t24Name=USCORE.REG.HOLD.CNT, level=F, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        ID -> USCORE_Holds:USCORE_REG_HOLD_CNT PK required
+            @i18n:Label (en="Transaction Ref")
+            @i18n:Tooltip (en="Transaction Reference")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=0.0, core=true, businessType=A, t24Name="@ID", mandatory=true)
+        LOCKED_EVENTS_REF -> byValue USCORE_Holds:USCORE_REG_HOLD_CNT__LOCKED_EVENTS_REF *
+            @t24:i (t24Name=LOCKED.EVENTS.REF)
+    }
+    USCORE_REG_HOLD_CNT__LOCKED_EVENTS_REF
+    {
+        LOCKED_EVENTS_REF -> AC_AccountOpening:AC_LOCKED_EVENTS
+            @t24:i (align=L, inputBehaviour=I, maxLength=20, sysNumber=1.0, core=true, businessType=A, t24Name=LOCKED.EVENTS.REF, mandatory=false)
+    }
+}
+Enumerations {
+    USCORE_HOLD_PARAMETER__HOLD_FULL_BALANCE : mml:string
+        YES=YES
+    USCORE_HOLD_PARAMETER__PERIOD_TYPE : mml:string
+        Business_Days="Business Days"
+        Calendar_Days="Calendar Days"
+}

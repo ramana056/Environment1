@@ -1,0 +1,128 @@
+# UTF-8
+/* System Integrity Checks and its related processing for Arrangement Architecture */
+Domain AA_Util
+    @t24:i (module=AA)
+    @java:Package (value=com.temenos.t24.datamodel.aa.aa_util)
+namespace "http://www.temenos.com/t24/AA_Util"
+metamodelVersion 1.30.6
+Classes {
+    AA_ACCRUAL_MISMATCH_REPORT
+        @i18n:Description (en="")
+        @t24:i (t24Name=AA.ACCRUAL.MISMATCH.REPORT, level=F, type=L, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        ACCOUNT_ID -> AC_AccountOpening:ACCOUNT
+            @i18n:Label (en="Account No")
+            @i18n:Tooltip (en="Indicates the Account Number")
+            @t24:i (align=L, inputBehaviour=I, maxLength=36, sysNumber=1.0, core=true, businessType=A, t24Name=ACCOUNT.ID, mandatory=false)
+        ARRANGEMENT_ID -> AA_Util:AA_ACCRUAL_MISMATCH_REPORT PK required
+            @i18n:Label (en="Arrangement Id")
+            @t24:i (align=L, inputBehaviour=I, maxLength=17, sysNumber=0.0, core=true, businessType=A, t24Name=ARRANGEMENT.ID, mandatory=true)
+        CUSTOMER -> byValue AA_Util:AA_ACCRUAL_MISMATCH_REPORT__CUSTOMER *
+            @t24:i (t24Name=CUSTOMER)
+        DRAWDOWN_DATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=8, sysNumber=3.0, core=true, t24Name=DRAWDOWN.DATE, mandatory=false)
+        PRODUCT_LINE -> AA_ProductFramework:AA_PRODUCT_LINE
+            @i18n:Label (en="Product Line")
+            @t24:i (align=L, inputBehaviour=I, maxLength=10, sysNumber=4.0, core=true, businessType=A, t24Name=PRODUCT.LINE, mandatory=false)
+        RUN_DATE -> byValue AA_Util:AA_ACCRUAL_MISMATCH_REPORT__RUN_DATE *
+            @t24:i (t24Name=RUN.DATE)
+    }
+    AA_ACCRUAL_MISMATCH_REPORT__CUSTOMER
+    {
+        CUSTOMER -> ST_Customer:CUSTOMER
+            @i18n:Label (en=Customer)
+            @i18n:Tooltip (en="Customer Liability")
+            @t24:i (align=L, inputBehaviour=I, maxLength=10, sysNumber=2.0, core=true, businessType=A, t24Name=CUSTOMER, mandatory=false)
+    }
+    AA_ACCRUAL_MISMATCH_REPORT__RUN_DATE
+    {
+        PROBLEM_CATEGORY -> byValue AA_Util:AA_ACCRUAL_MISMATCH_REPORT__RUN_DATE__PROBLEM_CATEGORY *
+            @t24:i (t24Name=PROBLEM.CATEGORY)
+        PRODUCT -> AA_ProductManagement:AA_PRODUCT
+            @i18n:Label (en=Product)
+            @t24:i (align=L, inputBehaviour=I, maxLength=30, sysNumber=6.0, core=true, businessType=A, t24Name=PRODUCT, mandatory=false)
+        RUN_DATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=8, sysNumber=5.0, core=true, t24Name=RUN.DATE, mandatory=false)
+        STATUS : T24BusinessTypes:A
+            @i18n:Label (en=Status)
+            @t24:i (align=L, inputBehaviour=I, maxLength=15, sysNumber=7.0, core=true, t24Name=STATUS, mandatory=false)
+        TOTAL_PROBLEMS : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=11.0, core=true, t24Name=TOTAL.PROBLEMS, mandatory=false)
+    }
+    AA_ACCRUAL_MISMATCH_REPORT__RUN_DATE__PROBLEM_CATEGORY
+    {
+        CATEGORY_SEVERITY : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=10, sysNumber=9.0, core=true, t24Name=CATEGORY.SEVERITY, mandatory=false)
+        PROBLEM_CATEGORY : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=100, sysNumber=8.0, core=true, t24Name=PROBLEM.CATEGORY, mandatory=false)
+        PROBLEM_DETAILS : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=100, sysNumber=10.0, core=true, t24Name=PROBLEM.DETAILS, mandatory=false)
+    }
+    AA_INTEGRITY_REPORT
+        @i18n:Description (en="")
+        @t24:i (t24Name=AA.INTEGRITY.REPORT, level=F, type=L, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        ACCOUNT_ID -> AC_AccountOpening:ACCOUNT
+            @i18n:Label (en="Account No")
+            @i18n:Tooltip (en="Indicates the Account Number")
+            @t24:i (align=L, inputBehaviour=I, maxLength=36, sysNumber=1.0, core=true, businessType=A, t24Name=ACCOUNT.ID, mandatory=false)
+        ARRANGEMENT_ID -> AA_Util:AA_INTEGRITY_REPORT PK required
+            @i18n:Label (en="Arrangement Id")
+            @t24:i (align=L, inputBehaviour=I, maxLength=17, sysNumber=0.0, core=true, businessType=A, t24Name=ARRANGEMENT.ID, mandatory=true)
+        CUSTOMER -> byValue AA_Util:AA_INTEGRITY_REPORT__CUSTOMER *
+            @t24:i (t24Name=CUSTOMER)
+        DRAWDOWN_DATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=8, sysNumber=3.0, core=true, t24Name=DRAWDOWN.DATE, mandatory=false)
+        PRODUCT_LINE -> AA_ProductFramework:AA_PRODUCT_LINE
+            @i18n:Label (en="Product Line")
+            @t24:i (align=L, inputBehaviour=I, maxLength=10, sysNumber=4.0, core=true, businessType=A, t24Name=PRODUCT.LINE, mandatory=false)
+        RUN_DATE -> byValue AA_Util:AA_INTEGRITY_REPORT__RUN_DATE *
+            @t24:i (t24Name=RUN.DATE)
+    }
+    AA_INTEGRITY_REPORT__CUSTOMER
+    {
+        CUSTOMER -> ST_Customer:CUSTOMER
+            @i18n:Label (en=Customer)
+            @i18n:Tooltip (en="Customer Liability")
+            @t24:i (align=L, inputBehaviour=I, maxLength=10, sysNumber=2.0, core=true, businessType=A, t24Name=CUSTOMER, mandatory=false)
+    }
+    AA_INTEGRITY_REPORT__RUN_DATE
+    {
+        PROBLEM_CATEGORY -> byValue AA_Util:AA_INTEGRITY_REPORT__RUN_DATE__PROBLEM_CATEGORY *
+            @t24:i (t24Name=PROBLEM.CATEGORY)
+        PRODUCT -> AA_ProductManagement:AA_PRODUCT
+            @i18n:Label (en=Product)
+            @t24:i (align=L, inputBehaviour=I, maxLength=30, sysNumber=6.0, core=true, businessType=A, t24Name=PRODUCT, mandatory=false)
+        RUN_DATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=8, sysNumber=5.0, core=true, t24Name=RUN.DATE, mandatory=false)
+        STATUS : T24BusinessTypes:A
+            @i18n:Label (en=Status)
+            @t24:i (align=L, inputBehaviour=I, maxLength=15, sysNumber=7.0, core=true, t24Name=STATUS, mandatory=false)
+        TOTAL_PROBLEMS : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=11.0, core=true, t24Name=TOTAL.PROBLEMS, mandatory=false)
+    }
+    AA_INTEGRITY_REPORT__RUN_DATE__PROBLEM_CATEGORY
+    {
+        CATEGORY_SEVERITY : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=10, sysNumber=9.0, core=true, t24Name=CATEGORY.SEVERITY, mandatory=false)
+        PROBLEM_CATEGORY : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=100, sysNumber=8.0, core=true, t24Name=PROBLEM.CATEGORY, mandatory=false)
+        PROBLEM_DETAILS : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=100, sysNumber=10.0, core=true, t24Name=PROBLEM.DETAILS, mandatory=false)
+    }
+    NOFILE_DIAGNOSTIC_SUMMARY
+        @i18n:Description (en="")
+        @t24:i (t24Name=NOFILE.DIAGNOSTIC.SUMMARY, level=I, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        DESCRIPTION : T24BusinessTypes:N
+            @i18n:Label (en=Description)
+            @i18n:Tooltip (en=Description)
+            @t24:i (align=R, inputBehaviour=N, maxLength=11, sysNumber=1.0, core=true, t24Name=DESCRIPTION, mandatory=false)
+        SCAN_DATE : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=11, core=false, t24Name=SCAN.DATE, mandatory=false)
+        TOTAL_COUNT : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=19, sysNumber=2.0, core=true, t24Name=TOTAL.COUNT, mandatory=false)
+        XID : T24BusinessTypes:N
+            @t24:i (align=L, inputBehaviour=N, maxLength=55, core=false, t24Name=XID, genOperation=E.AA.DIAGNOSTIC.SUMMARY, mandatory=true)
+    }
+}

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<localReferenceApplication:LocalReferenceApplication xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:localReferenceApplication="http://www.odcgroup.com/t24/application/localRefApplication/model/LocalReferenceApplication"
+    xmlns:translationDsl="http://www.odcgroup.com/translation/TranslationDsl" forApplication="name://AC_AccountOpening:ACCOUNT#">
+  <localField groupName="No" localRefID="WELCOME.PACK">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="WELCOME.PACK"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+  <localField groupName="No" localRefID="ALLOW.SEPA.TXN">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="ALLOW.SEPA.TXN"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+  <localField groupName="No" localRefID="LBACTR.PRINTING.CODE">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="PRINTING.CODE"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+  <localField groupName="No" localRefID="RLGAAP.PLEDGE.PURPOSE">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="PLEDGE.PURPOSE"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+  <localField groupName="No" localRefID="RLGAAP.PLEDGE.FLAG">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="PLEDGE.FLAG"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+  <localField groupName="No" localRefID="USLEND.SOLD.DATE">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="SOLD.DATE"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+  <localField groupName="No" localRefID="USLEND.REPURCHASE.DATE">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="REPURCHASE.DATE"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+  <localField groupName="No" localRefID="USLEND.MERS.ID">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="MERS.ID"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+  <localField groupName="No" localRefID="USLEND.SECONDARY.MARKET.LOAN.ID">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="SEC.MKT.LOAN.ID"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+  <localField groupName="No" localRefID="USRETL.COL.LINKED.LOAN">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="COL.LINKED.LOAN"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+  <localField groupName="No" localRefID="USRETL.FFIEC.CODE">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="FFIEC.CODE"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+  <localField groupName="No" localRefID="RSRV.PRIMARY.AC">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="RSRV.PRIMARY.AC"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+  <localField groupName="No" localRefID="TAX.BENEFICIARY.NUMBER">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="TX.BEN.NUM"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+</localReferenceApplication:LocalReferenceApplication>

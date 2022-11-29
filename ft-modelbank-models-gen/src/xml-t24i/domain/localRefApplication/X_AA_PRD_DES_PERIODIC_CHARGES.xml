@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<localReferenceApplication:LocalReferenceApplication xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:localReferenceApplication="http://www.odcgroup.com/t24/application/localRefApplication/model/LocalReferenceApplication"
+    xmlns:translationDsl="http://www.odcgroup.com/translation/TranslationDsl" forApplication="name://AA_PeriodicCharges:AA_PRD_DES_PERIODIC_CHARGES#">
+  <localField groupName="No" localRefID="USRETL.ANL.FLAG">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="USRETL.ANL.FLAG"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+  <localField groupName="USRETL_MAX_CHG_AMT" localRefID="USRETL.MAX.CHG.AMT">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="USRETL.CHG.AMT"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+  <localField groupName="USRETL_MAX_CHG_AMT" localRefID="USRETL.MAX.CHG.AMT.CR">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="USRETL.AMT.CR"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+  <localField groupName="USRETL_MAX_CHG_AMT" localRefID="USRETL.CHG.CCY">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="USRETL.CHG.CCY"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+</localReferenceApplication:LocalReferenceApplication>

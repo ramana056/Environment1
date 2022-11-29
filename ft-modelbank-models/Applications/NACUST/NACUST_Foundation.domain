@@ -1,0 +1,760 @@
+# UTF-8
+/* NACUST Foundation */
+Domain NACUST_Foundation
+    @t24:i (module=NACUST)
+    @java:Package (value=com.temenos.t24.datamodel.nacust.nacust_foundation)
+namespace "http://www.temenos.com/t24/NACUST_Foundation"
+metamodelVersion 1.30.6
+Classes {
+    /* The table is used to capture arrangement information for inquiry, selection and interface. ID of this table is a valid arrangement ID. */
+    NACUST_ARRANGEMENT_DETAILS
+        @i18n:Description (en="")
+        @t24:i (t24Name=NACUST.ARRANGEMENT.DETAILS, level=F, type=L, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        /* The total of accrued interest if any during OD period as on closing date. */
+        ACCRUED_INTEREST : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=19, sysNumber=8.0, core=true, t24Name=ACCRUED.INTEREST, mandatory=false)
+        ACTIVITY_REF -> byValue NACUST_Foundation:NACUST_ARRANGEMENT_DETAILS__ACTIVITY_REF *
+            @t24:i (t24Name=ACTIVITY.REF)
+/* Arrangement ID is the record key of this table.
+Validation Rules */
+        ARRANGEMENT_ID -> NACUST_Foundation:NACUST_ARRANGEMENT_DETAILS PK required
+            @i18n:Label (en="Arrangement Id")
+            @t24:i (align=L, inputBehaviour=I, maxLength=17, sysNumber=0.0, core=true, businessType=ARR, t24Name=ARRANGEMENT.ID, mandatory=true)
+        /* Date when the account closure process moved to the corresponding status. */
+        AUTO_CLOSURE_DATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=3.0, core=true, t24Name=AUTO.CLOSURE.DATE, mandatory=false)
+        /* The reason for account closure. */
+        AUTO_CLOSURE_REASON : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=45, sysNumber=6.0, core=true, t24Name=AUTO.CLOSURE.REASON, mandatory=false)
+        /* Status to indicate the level of account closure process. If will have corresponding status for Pre closure and Account Closure process. */
+        AUTO_CLOSURE_STATUS : NACUST_Foundation:NACUST_ARRANGEMENT_DETAILS__AUTO_CLOSURE_STATUS
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=5.0, core=true, t24Name=AUTO.CLOSURE.STATUS, mandatory=false)
+        /* Type of account closure. The root cause which is used to trigger auto account closure. The closure process and accounting can be customizable based on the type of closure. E.g The account closure can be requested due to Overdraft, dormancy, etc. */
+        AUTO_CLOSURE_TYPE : NACUST_Foundation:NACUST_ARRANGEMENT_DETAILS__AUTO_CLOSURE_TYPE
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=4.0, core=true, t24Name=AUTO.CLOSURE.TYPE, mandatory=false)
+        /* The charge off amount of the account during closure excluding NSF/OD Charge. */
+        CHGOFF_AMOUNT : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=19, sysNumber=11.0, core=true, t24Name=CHGOFF.AMOUNT, mandatory=false)
+        /* Number of attempts made to perform the account closure. */
+        CLOSE_ATTEMPTS_CNT : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=3, sysNumber=12.0, core=true, t24Name=CLOSE.ATTEMPTS.CNT, mandatory=false)
+        CLOSURE_ERROR_REASON -> byValue NACUST_Foundation:NACUST_ARRANGEMENT_DETAILS__CLOSURE_ERROR_REASON *
+            @t24:i (t24Name=CLOSURE.ERROR.REASON)
+/* Date on which the last financial activity occurred in the arrangement.
+Validation Rules */
+        FIN_MVMT_DATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=2.0, core=true, t24Name=FIN.MVMT.DATE, mandatory=false)
+/* Y or N field to indicate if there were any financial activity in the arrangement.
+Validation Rules */
+        FIN_MVMT_FLAG : NACUST_Foundation:NACUST_ARRANGEMENT_DETAILS__FIN_MVMT_FLAG
+            @t24:i (align=L, inputBehaviour=I, maxLength=1, sysNumber=1.0, core=true, t24Name=FIN.MVMT.FLAG, mandatory=false)
+        /* Maintains the activity date for qualified customer initiated transaction. */
+        LAST_ACTIVITY_DATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=13.0, core=true, t24Name=LAST.ACTIVITY.DATE, mandatory=false)
+        /* The total of NSF/OD charges on account closure. */
+        OD_CHARGE : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=19, sysNumber=10.0, core=true, t24Name=OD.CHARGE, mandatory=false)
+        RESERVED_1 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=27.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_10 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=18.0, core=true, t24Name=RESERVED.10, mandatory=false)
+        RESERVED_11 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=17.0, core=true, t24Name=RESERVED.11, mandatory=false)
+        RESERVED_12 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=16.0, core=true, t24Name=RESERVED.12, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=26.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=25.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=24.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        RESERVED_5 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=23.0, core=true, t24Name=RESERVED.5, mandatory=false)
+        RESERVED_6 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=22.0, core=true, t24Name=RESERVED.6, mandatory=false)
+        RESERVED_7 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=21.0, core=true, t24Name=RESERVED.7, mandatory=false)
+        RESERVED_8 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=20.0, core=true, t24Name=RESERVED.8, mandatory=false)
+        RESERVED_9 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=19.0, core=true, t24Name=RESERVED.9, mandatory=false)
+        /* The total of deferred and due charges on account closure. */
+        RETAINED_CHARGES : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=19, sysNumber=9.0, core=true, t24Name=RETAINED.CHARGES, mandatory=false)
+    }
+    NACUST_ARRANGEMENT_DETAILS__ACTIVITY_REF
+    {
+        /* Date of activity */
+        ACTIVITY_DATE : T24BusinessTypes:D
+            @i18n:Label (en="Activity Date")
+            @i18n:Tooltip (en="indicates the date on which activity is generated")
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=15.0, core=true, t24Name=ACTIVITY.DATE, mandatory=false)
+        /* Valid customer activity. The most recent ten customer activities will be stored here. */
+        ACTIVITY_REF : T24BusinessTypes:A
+            @i18n:Label (en="Activity ID")
+            @t24:i (align=L, inputBehaviour=I, maxLength=40, sysNumber=14.0, core=true, t24Name=ACTIVITY.REF, mandatory=false)
+    }
+    NACUST_ARRANGEMENT_DETAILS__CLOSURE_ERROR_REASON
+    {
+        /* The reason for account close failure. Multivalued field. */
+        CLOSURE_ERROR_REASON : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=45, sysNumber=7.0, core=true, t24Name=CLOSURE.ERROR.REASON, mandatory=false)
+    }
+    /* This is a live file that would store the details of the CUSTOMERinteraction from CUTOMER,CR.CONTACT.LOG,DE.ADDRESS and any other relatedapplications. */
+    NACUST_CUSTOMER_DETAILS
+        @i18n:Description (en="")
+        @t24:i (t24Name=NACUST.CUSTOMER.DETAILS, level=C, type=L, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        APPLICATION -> byValue NACUST_Foundation:NACUST_CUSTOMER_DETAILS__APPLICATION *
+            @t24:i (t24Name=APPLICATION)
+        /* The record is valid T24 customer id. */
+        ID -> NACUST_Foundation:NACUST_CUSTOMER_DETAILS PK required
+            @i18n:Label (en="Transaction Ref")
+            @i18n:Tooltip (en="Transaction Reference")
+            @t24:i (align=R, inputBehaviour=I, maxLength=10, sysNumber=0.0, core=true, businessType=CUS, t24Name="@ID", mandatory=true)
+        /* This field have the latest customer contact. */
+        LAST_CUSTOMER_CONTACT : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=1.0, core=true, t24Name=LAST.CUSTOMER.CONTACT, mandatory=false)
+        RESERVED_1 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=20.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_10 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=11.0, core=true, t24Name=RESERVED.10, mandatory=false)
+        RESERVED_11 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=10.0, core=true, t24Name=RESERVED.11, mandatory=false)
+        RESERVED_12 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=9.0, core=true, t24Name=RESERVED.12, mandatory=false)
+        RESERVED_13 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=8.0, core=true, t24Name=RESERVED.13, mandatory=false)
+        RESERVED_14 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=7.0, core=true, t24Name=RESERVED.14, mandatory=false)
+        RESERVED_15 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=6.0, core=true, t24Name=RESERVED.15, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=19.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=18.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=17.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        RESERVED_5 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=16.0, core=true, t24Name=RESERVED.5, mandatory=false)
+        RESERVED_6 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=15.0, core=true, t24Name=RESERVED.6, mandatory=false)
+        RESERVED_7 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=14.0, core=true, t24Name=RESERVED.7, mandatory=false)
+        RESERVED_8 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=13.0, core=true, t24Name=RESERVED.8, mandatory=false)
+        RESERVED_9 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=12.0, core=true, t24Name=RESERVED.9, mandatory=false)
+    }
+    NACUST_CUSTOMER_DETAILS__APPLICATION
+    {
+        /* The application that raised the customer activity. */
+        APPLICATION : T24BusinessTypes:A
+            @i18n:Label (en=Application)
+            @t24:i (align=L, inputBehaviour=I, maxLength=42, sysNumber=2.0, core=true, t24Name=APPLICATION, mandatory=false)
+        /* The id of the record that initiated the customer activity. */
+        APPLICATION_ID : T24BusinessTypes:A
+            @i18n:Label (en="Application Id")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=3.0, core=true, t24Name=APPLICATION.ID, mandatory=false)
+        /* Date of contact */
+        CONTACT_DATE : T24BusinessTypes:D
+            @i18n:Label (en="Contact Date")
+            @i18n:Tooltip (en="Stores the client contact date")
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=5.0, core=true, t24Name=CONTACT.DATE, mandatory=false)
+        /* Interface reference that updated this activity. */
+        INTERFACE_REF : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=45, sysNumber=4.0, core=true, t24Name=INTERFACE.REF, mandatory=false)
+    }
+    /* The table is used to store the event details that will be executed during COB. */
+    NACUST_EVENT_DETAILS
+        @i18n:Description (en="")
+        @t24:i (t24Name=NACUST.EVENT.DETAILS, level=I, type=H, allowedFunctions="A C D E H I L P Q R S", localRefApplicationSysNo=33.0, localRefAllowed=true)
+    {
+/* Field to capture the ADVICES ID. If this field is setup, then Delivery message will be generated.
+Validation Rules
+Optional Field.
+Field value should be a valid record in EB.ADVICES. */
+        ADVICE_NO -> EB_Delivery:EB_ADVICES
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=12.0, core=true, businessType=ANY, t24Name=ADVICE.NO, mandatory=false)
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=42.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=43.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=39.0, core=true, t24Name=AUTHORISER, mandatory=false)
+/* Component through which this event is triggered.
+Validation Rules
+Mandatory Field.
+Field value should be a valid record in the EB.COMPONENT application. */
+        COMPONENT_NAME -> EB_SystemTables:EB_COMPONENT required
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=11.0, core=true, businessType=ANY, t24Name=COMPONENT.NAME, mandatory=true)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=40.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=36.0, core=true, t24Name=CURR.NO, mandatory=false)
+        DATE_TIME -> byValue NACUST_Foundation:NACUST_EVENT_DETAILS__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=41.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        DESCRIPTION -> byValue NACUST_Foundation:NACUST_EVENT_DETAILS__DESCRIPTION *
+            @t24:i (t24Name=DESCRIPTION)
+        EVENT_NAME -> NACUST_Foundation:NACUST_EVENT_DETAILS PK required
+            @i18n:Label (en="Event Name")
+            @t24:i (align=L, inputBehaviour=I, maxLength=45, sysNumber=0.0, core=true, businessType=A, t24Name=EVENT.NAME, mandatory=true)
+/* Event api that will be triggered during the defined EXECUTION.STAGE of CoB.
+Validation Rules
+Mandatory Field.
+Routine should have an entry in the application EB.API. */
+        EVENT_PROCESS_API -> EB_SystemTables:EB_API required
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=10.0, core=true, businessType=A, t24Name=EVENT.PROCESS.API, mandatory=true)
+        EXECUTION_STAGE -> byValue NACUST_Foundation:NACUST_EVENT_DETAILS__EXECUTION_STAGE *
+            @t24:i (t24Name=EXECUTION.STAGE)
+/* Text Field to enter the full description of the event.
+Validation Rules
+Mandatory field, 50 characters. */
+        FULL_DESC : T24BusinessTypes:TEXT required
+            @i18n:Label (en="Full Description")
+            @i18n:Tooltip (en="Detailed Description ")
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=2.0, core=true, t24Name=FULL.DESC, mandatory=true)
+        INPUTTER -> byValue NACUST_Foundation:NACUST_EVENT_DETAILS__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        OVERRIDE -> byValue NACUST_Foundation:NACUST_EVENT_DETAILS__OVERRIDE *
+            @t24:i (t24Name=OVERRIDE)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=35.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        RESERVED_1 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=32.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_10 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=23.0, core=true, t24Name=RESERVED.10, mandatory=false)
+        RESERVED_11 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=22.0, core=true, t24Name=RESERVED.11, mandatory=false)
+        RESERVED_12 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=21.0, core=true, t24Name=RESERVED.12, mandatory=false)
+        RESERVED_13 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=20.0, core=true, t24Name=RESERVED.13, mandatory=false)
+        RESERVED_14 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=19.0, core=true, t24Name=RESERVED.14, mandatory=false)
+        RESERVED_15 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=18.0, core=true, t24Name=RESERVED.15, mandatory=false)
+        RESERVED_16 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=17.0, core=true, t24Name=RESERVED.16, mandatory=false)
+        RESERVED_17 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=16.0, core=true, t24Name=RESERVED.17, mandatory=false)
+        RESERVED_18 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=15.0, core=true, t24Name=RESERVED.18, mandatory=false)
+        RESERVED_19 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=14.0, core=true, t24Name=RESERVED.19, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=31.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_20 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=13.0, core=true, t24Name=RESERVED.20, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=30.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=29.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        RESERVED_5 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=28.0, core=true, t24Name=RESERVED.5, mandatory=false)
+        RESERVED_6 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=27.0, core=true, t24Name=RESERVED.6, mandatory=false)
+        RESERVED_7 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=26.0, core=true, t24Name=RESERVED.7, mandatory=false)
+        RESERVED_8 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=25.0, core=true, t24Name=RESERVED.8, mandatory=false)
+        RESERVED_9 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=24.0, core=true, t24Name=RESERVED.9, mandatory=false)
+    }
+    NACUST_EVENT_DETAILS__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=38.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    NACUST_EVENT_DETAILS__DESCRIPTION
+    {
+/* Field to enter the description for the event record. Language specific field.
+Validation Rules
+Mandatory field, 35 AlphaNumeric characters. */
+        DESCRIPTION : T24BusinessTypes:A required
+            @i18n:Label (en=Description)
+            @i18n:Tooltip (en=Description)
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, multiLanguage=true, sysNumber=1.0, core=true, t24Name=DESCRIPTION, mandatory=true)
+    }
+    NACUST_EVENT_DETAILS__EXECUTION_STAGE
+    {
+/* Sequence in which the event will be executed in the associated CoB stage.
+Validation Rules
+Mandatory Field.
+Any Numeric values, upto 3 */
+        EXECUTION_SEQ : T24BusinessTypes:N required
+            @t24:i (align=R, inputBehaviour=I, maxLength=3, sysNumber=4.0, core=true, t24Name=EXECUTION.SEQ, mandatory=true)
+/* CoB stage when the event will be executed. Field is linked to the virtual table EVENT.EXE.STAGE.
+Possible values:
+NACORE.SYSTEM.WIDE.PROCESS  (System Wide)
+NACORE.START.OF.DAY.PROCESS (Start of Day)
+Validation Rules
+Mandatory field, 35 AlphaNumeric characters. */
+        EXECUTION_STAGE : NACUST_Foundation:NACUST_EVENT_DETAILS__EXECUTION_STAGE__EXECUTION_STAGE
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=3.0, core=true, t24Name=EXECUTION.STAGE, mandatory=false)
+        RESERVED_21 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=9.0, core=true, t24Name=RESERVED.21, mandatory=false)
+        RESERVED_22 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=8.0, core=true, t24Name=RESERVED.22, mandatory=false)
+        RESERVED_23 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=7.0, core=true, t24Name=RESERVED.23, mandatory=false)
+        RESERVED_24 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=6.0, core=true, t24Name=RESERVED.24, mandatory=false)
+        RESERVED_25 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=5.0, core=true, t24Name=RESERVED.25, mandatory=false)
+    }
+    NACUST_EVENT_DETAILS__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=37.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    NACUST_EVENT_DETAILS__OVERRIDE
+    {
+        OVERRIDE : T24BusinessTypes:N
+            @i18n:Label (en=Override)
+            @i18n:Tooltip (en="Overrides generated by this transaction")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=34.0, core=true, t24Name=OVERRIDE, mandatory=false)
+    }
+    /* Live table which is used to log the events that were executed. */
+    NACUST_EVENT_HISTORY
+        @i18n:Description (en="")
+        @t24:i (t24Name=NACUST.EVENT.HISTORY, level=F, type=L, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        ARR_DATE -> NACUST_Foundation:NACUST_EVENT_HISTORY PK required
+            @i18n:Label (en="Arrangement date")
+            @t24:i (align=L, inputBehaviour=I, maxLength=45, sysNumber=0.0, core=true, businessType=A, t24Name=ARR.DATE, mandatory=true)
+        EVENT_NAME -> byValue NACUST_Foundation:NACUST_EVENT_HISTORY__EVENT_NAME *
+            @t24:i (t24Name=EVENT.NAME)
+        RESERVED_1 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=18.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=17.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=16.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=15.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        RESERVED_5 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=14.0, core=true, t24Name=RESERVED.5, mandatory=false)
+    }
+    NACUST_EVENT_HISTORY__EVENT_NAME
+    {
+        CONTEXT_NAME -> byValue NACUST_Foundation:NACUST_EVENT_HISTORY__EVENT_NAME__CONTEXT_NAME *
+            @t24:i (t24Name=CONTEXT.NAME)
+        DELIVERY_REF : T24BusinessTypes:ANY
+            @i18n:Label (en="Delivery Ref")
+            @i18n:Tooltip (en="System generated Delivery ref key")
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=7.0, core=true, t24Name=DELIVERY.REF, mandatory=false)
+        EVENT_DATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=12, sysNumber=2.0, core=true, t24Name=EVENT.DATE, mandatory=false)
+/* The Event name that was processed.
+Validation Rules
+Multi-value field.
+Linked to NACORE.EVENT.DETAILS table */
+        EVENT_NAME -> NACUST_Foundation:NACUST_EVENT_DETAILS
+            @i18n:Label (en="Event Name")
+            @t24:i (align=L, inputBehaviour=I, maxLength=45, sysNumber=1.0, core=true, businessType=A, t24Name=EVENT.NAME, mandatory=false)
+        RESERVED_10 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=9.0, core=true, t24Name=RESERVED.10, mandatory=false)
+        RESERVED_11 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=8.0, core=true, t24Name=RESERVED.11, mandatory=false)
+        RESERVED_6 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=13.0, core=true, t24Name=RESERVED.6, mandatory=false)
+        RESERVED_7 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=12.0, core=true, t24Name=RESERVED.7, mandatory=false)
+        RESERVED_8 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=11.0, core=true, t24Name=RESERVED.8, mandatory=false)
+        RESERVED_9 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=10.0, core=true, t24Name=RESERVED.9, mandatory=false)
+/* Calendar day when the event was run.
+Validation Rules
+Multi-value field associated to EVENT.NAME */
+        SYSTEM_DATE : T24BusinessTypes:D
+            @i18n:Label (en="System Date")
+            @t24:i (align=R, inputBehaviour=I, maxLength=12, sysNumber=3.0, core=true, t24Name=SYSTEM.DATE, mandatory=false)
+/* Time stamp when the event was executed.
+Validation Rules
+Multi-value field associated to EVENT.NAME */
+        TIME_STAMP : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=12, sysNumber=4.0, core=true, t24Name=TIME.STAMP, mandatory=false)
+    }
+    NACUST_EVENT_HISTORY__EVENT_NAME__CONTEXT_NAME
+    {
+/* Component invoking NACORE.EVENT.SCHEDULER method may record additional information by means of different context names that could be used by the Event API during event execution.
+Validation Rules
+Optional field.
+Sub-value field associated to EVENT.NAME */
+        CONTEXT_NAME : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=5.0, core=true, t24Name=CONTEXT.NAME, mandatory=false)
+/* Value specific to the context name..
+Validation Rules
+Value should be in valid date format.
+Sub-value field associated to EVENT.NAME */
+        CONTEXT_VALUE : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=6.0, core=true, t24Name=CONTEXT.VALUE, mandatory=false)
+    }
+    /* Live table to record the nearest event execution for a given arrangement. */
+    NACUST_NEXT_EVENT
+        @i18n:Description (en="")
+        @t24:i (t24Name=NACUST.NEXT.EVENT, level=F, type=L, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        NEXT_EVENT_DATE -> NACUST_Foundation:NACUST_NEXT_EVENT PK required
+            @t24:i (align=L, inputBehaviour=I, maxLength=75, sysNumber=0.0, core=true, businessType=A, t24Name=NEXT.EVENT.DATE, mandatory=true)
+    }
+    /* Live table to store all events scheduled to be run during CoB for a given arrangement. */
+    NACUST_SCHEDULED_EVENTS
+        @i18n:Description (en="")
+        @t24:i (t24Name=NACUST.SCHEDULED.EVENTS, level=F, type=L, allowedFunctions="L P S", localRefAllowed=false)
+    {
+/* ID is a an Arrangement record Key.
+Validation Rules
+Should be a valid arrangement record ID. */
+        ARRANGEMENT_ID -> NACUST_Foundation:NACUST_SCHEDULED_EVENTS PK required
+            @i18n:Label (en="Arrangement Id")
+            @t24:i (align=L, inputBehaviour=I, maxLength=45, sysNumber=0.0, core=true, businessType=ARR, t24Name=ARRANGEMENT.ID, mandatory=true)
+        EVENT_NAME -> byValue NACUST_Foundation:NACUST_SCHEDULED_EVENTS__EVENT_NAME *
+            @t24:i (t24Name=EVENT.NAME)
+/* Nearest NEXT.DATE from today. It would be the next run date for the event.
+Validation Rules
+Value should be in valid date format. */
+        NEXT_RUN_DATE : T24BusinessTypes:D
+            @i18n:Label (en="Next Run Date")
+            @t24:i (align=R, inputBehaviour=I, maxLength=12, sysNumber=11.0, core=true, t24Name=NEXT.RUN.DATE, mandatory=false)
+        RESERVED_1 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=26.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_10 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=17.0, core=true, t24Name=RESERVED.10, mandatory=false)
+        RESERVED_11 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=16.0, core=true, t24Name=RESERVED.11, mandatory=false)
+        RESERVED_12 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=15.0, core=true, t24Name=RESERVED.12, mandatory=false)
+        RESERVED_13 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=14.0, core=true, t24Name=RESERVED.13, mandatory=false)
+        RESERVED_14 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=13.0, core=true, t24Name=RESERVED.14, mandatory=false)
+        RESERVED_15 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=12.0, core=true, t24Name=RESERVED.15, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=25.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=24.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=23.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        RESERVED_5 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=22.0, core=true, t24Name=RESERVED.5, mandatory=false)
+        RESERVED_6 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=21.0, core=true, t24Name=RESERVED.6, mandatory=false)
+        RESERVED_7 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=20.0, core=true, t24Name=RESERVED.7, mandatory=false)
+        RESERVED_8 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=19.0, core=true, t24Name=RESERVED.8, mandatory=false)
+        RESERVED_9 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=18.0, core=true, t24Name=RESERVED.9, mandatory=false)
+    }
+    NACUST_SCHEDULED_EVENTS__EVENT_NAME
+    {
+        CONTEXT_NAME -> byValue NACUST_Foundation:NACUST_SCHEDULED_EVENTS__EVENT_NAME__CONTEXT_NAME *
+            @t24:i (t24Name=CONTEXT.NAME)
+/* Field to store the Event Name. Linked to NACORE.EVENT.DETAILS table.
+Validation Rules
+Multi-value field
+45 characters, Should be a valid NACORE.EVENT.DETAILS record key. */
+        EVENT_NAME -> NACUST_Foundation:NACUST_EVENT_DETAILS
+            @i18n:Label (en="Event Name")
+            @t24:i (align=L, inputBehaviour=I, maxLength=45, sysNumber=1.0, core=true, businessType=A, t24Name=EVENT.NAME, mandatory=false)
+/* Event last run date. This field will contain value for recurring events.
+Validation Rules
+Value should be in valid date format.
+Multi-value field associated to EVENT.NAME */
+        LAST_DATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=12, sysNumber=2.0, core=true, t24Name=LAST.DATE, mandatory=false)
+/* Event next run date.
+Validation Rules
+Value should be in valid date format.
+Multi-value field associated to EVENT.NAME */
+        NEXT_DATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=12, sysNumber=3.0, core=true, t24Name=NEXT.DATE, mandatory=false)
+        RESERVED_16 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=10.0, core=true, t24Name=RESERVED.16, mandatory=false)
+        RESERVED_17 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=9.0, core=true, t24Name=RESERVED.17, mandatory=false)
+        RESERVED_18 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=8.0, core=true, t24Name=RESERVED.18, mandatory=false)
+        RESERVED_19 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=7.0, core=true, t24Name=RESERVED.19, mandatory=false)
+        RESERVED_20 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=6.0, core=true, t24Name=RESERVED.20, mandatory=false)
+    }
+    NACUST_SCHEDULED_EVENTS__EVENT_NAME__CONTEXT_NAME
+    {
+/* Component invoking NACORE.EVENT.SCHEDULER method may record additional information by means of different context names that could be used by the Event API during event execution.
+Validation Rules
+Optional field.
+Sub-value field associated to EVENT.NAME */
+        CONTEXT_NAME : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=250, sysNumber=4.0, core=true, t24Name=CONTEXT.NAME, mandatory=false)
+/* Value specific to the context name..
+Validation Rules
+Value should be in valid date format.
+Sub-value field associated to EVENT.NAME */
+        CONTEXT_VALUE : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=250, sysNumber=5.0, core=true, t24Name=CONTEXT.VALUE, mandatory=false)
+    }
+    /* The table will store all US States */
+    US_STATE
+        @i18n:Description (en="")
+        @t24:i (t24Name=US.STATE, level=I, type=H, allowedFunctions="A C D E H I L P Q R S", localRefApplicationSysNo=3.0, localRefAllowed=true)
+    {
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=17.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=18.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=14.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        COUNTRY_CODE : NACUST_Foundation:US_STATE__COUNTRY_CODE
+            @i18n:Label (en=Country)
+            @t24:i (align=L, inputBehaviour=I, maxLength=2, sysNumber=8.0, core=true, t24Name=COUNTRY.CODE, mandatory=false)
+        COUNTY_NAME -> byValue NACUST_Foundation:US_STATE__COUNTY_NAME *
+            @t24:i (t24Name=COUNTY.NAME)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=15.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=11.0, core=true, t24Name=CURR.NO, mandatory=false)
+        DATE_TIME -> byValue NACUST_Foundation:US_STATE__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=16.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        /* The field will have the name of the US State. */
+        DESCRIPTION : T24BusinessTypes:A
+            @i18n:Label (en=Description)
+            @i18n:Tooltip (en=Description)
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=1.0, core=true, t24Name=DESCRIPTION, mandatory=false)
+        ESCHEAT_HDR_BRANCH -> USCORE_Foundation:USCORE_COMPANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=11, sysNumber=7.0, core=true, businessType=COM, t24Name=ESCHEAT.HDR.BRANCH, mandatory=false)
+        INPUTTER -> byValue NACUST_Foundation:US_STATE__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+/* Shows the IRS code of the State
+Max 2 numeric characters */
+        IRS_CODE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=2.0, core=true, t24Name=IRS.CODE, mandatory=false)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=10.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        STATE_CODE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=5, sysNumber=4.0, core=true, t24Name=STATE.CODE, mandatory=false)
+        STATE_ID -> NACUST_Foundation:US_STATE PK required
+            @t24:i (align=L, inputBehaviour=I, maxLength=2, sysNumber=0.0, core=true, businessType=A, t24Name=STATE.ID, mandatory=true)
+        STATE_WHT_APPLICABLE : NACUST_Foundation:US_STATE__STATE_WHT_APPLICABLE
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=9.0, core=true, t24Name=STATE.WHT.APPLICABLE, mandatory=false)
+    }
+    /* This table will allow definition of groups of states, which will be usedby the system when determining state specific details of dormancy andescheatment processing. */
+    US_STATE_GROUP
+        @i18n:Description (en="")
+        @t24:i (t24Name=US.STATE.GROUP, level=I, type=H, allowedFunctions="A C D E H I L P Q R S", localRefApplicationSysNo=14.0, localRefAllowed=true)
+    {
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=23.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=24.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=20.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=21.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=17.0, core=true, t24Name=CURR.NO, mandatory=false)
+        DATE_TIME -> byValue NACUST_Foundation:US_STATE_GROUP__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=22.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        DESCRIPTION -> byValue NACUST_Foundation:US_STATE_GROUP__DESCRIPTION *
+            @t24:i (t24Name=DESCRIPTION)
+        /* The group context would be released by Temenos. The group context released for dormancy will be DORMANCY in EB.LOOKUP NACUST.STATE.GROUP.CONTEXT. */
+        GROUP_CONTEXT : NACUST_Foundation:US_STATE_GROUP__GROUP_CONTEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=2.0, core=true, t24Name=GROUP.CONTEXT, mandatory=false)
+        /* The format of the ID is GRP-nn, where nn is two digit number.Group ID can be used as part of Regulation Parameter ID for the recordwith configuration of dormancy and escheatment details for the statesgroup.Validation RulesAlphaNumeric, upto 6 characters */
+        ID -> NACUST_Foundation:US_STATE_GROUP PK required
+            @i18n:Label (en="Transaction Ref")
+            @i18n:Tooltip (en="Transaction Reference")
+            @t24:i (align=L, inputBehaviour=I, maxLength=6, sysNumber=0.0, core=true, businessType=A, t24Name="@ID", mandatory=true)
+        INPUTTER -> byValue NACUST_Foundation:US_STATE_GROUP__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        OVERRIDE -> byValue NACUST_Foundation:US_STATE_GROUP__OVERRIDE *
+            @t24:i (t24Name=OVERRIDE)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=16.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        RESERVED_1 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=13.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_10 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=4.0, core=true, t24Name=RESERVED.10, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=12.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=11.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=10.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        RESERVED_5 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=9.0, core=true, t24Name=RESERVED.5, mandatory=false)
+        RESERVED_6 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=8.0, core=true, t24Name=RESERVED.6, mandatory=false)
+        RESERVED_7 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=7.0, core=true, t24Name=RESERVED.7, mandatory=false)
+        RESERVED_8 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=6.0, core=true, t24Name=RESERVED.8, mandatory=false)
+        RESERVED_9 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=5.0, core=true, t24Name=RESERVED.9, mandatory=false)
+        US_STATE -> byValue NACUST_Foundation:US_STATE_GROUP__US_STATE *
+            @t24:i (t24Name=US.STATE)
+    }
+    /* This is a live file that would store the details of the group that thestate is defined under for the CONTEXT. */
+    US_STATE_GROUP_CONCAT
+        @i18n:Description (en="")
+        @t24:i (t24Name=US.STATE.GROUP.CONCAT, level=I, type=L, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        /* The group under which this state is defined will be stored here. If any state used for dormancy state level parameter then the string STATE will be updated as group id. If any state used as default state in dormancy parameter then the group id will be blank. */
+        GROUP_ID : T24BusinessTypes:A
+            @i18n:Label (en="Group Id")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=1.0, core=true, t24Name=GROUP.ID, mandatory=false)
+        /* The id of the file would be the  < GROUP.CONTEXT > * < US.STATE > . */
+        ID -> NACUST_Foundation:US_STATE_GROUP_CONCAT PK required
+            @i18n:Label (en="Transaction Ref")
+            @i18n:Tooltip (en="Transaction Reference")
+            @t24:i (align=L, inputBehaviour=I, maxLength=20, sysNumber=0.0, core=true, businessType=A, t24Name="@ID", mandatory=true)
+        RESERVED_1 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=11.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_10 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=2.0, core=true, t24Name=RESERVED.10, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=10.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=9.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=8.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        RESERVED_5 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=7.0, core=true, t24Name=RESERVED.5, mandatory=false)
+        RESERVED_6 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=6.0, core=true, t24Name=RESERVED.6, mandatory=false)
+        RESERVED_7 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=5.0, core=true, t24Name=RESERVED.7, mandatory=false)
+        RESERVED_8 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=4.0, core=true, t24Name=RESERVED.8, mandatory=false)
+        RESERVED_9 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=3.0, core=true, t24Name=RESERVED.9, mandatory=false)
+    }
+    US_STATE_GROUP__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=19.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    US_STATE_GROUP__DESCRIPTION
+    {
+        /* It used to capture description of the record. */
+        DESCRIPTION : T24BusinessTypes:A required
+            @i18n:Label (en=Description)
+            @i18n:Tooltip (en=Description)
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, multiLanguage=true, sysNumber=1.0, core=true, t24Name=DESCRIPTION, mandatory=true)
+    }
+    US_STATE_GROUP__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=18.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    US_STATE_GROUP__OVERRIDE
+    {
+        OVERRIDE : T24BusinessTypes:N
+            @i18n:Label (en=Override)
+            @i18n:Tooltip (en="Overrides generated by this transaction")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=15.0, core=true, t24Name=OVERRIDE, mandatory=false)
+    }
+    US_STATE_GROUP__US_STATE
+    {
+        /* This field defines states, which belong to the same group checked by the system for dormancy and escheatment processing. System will prevent defining the same state in multiple states’ groups. Upon record ' s commitment it will generate error. message:  " State XX belongs to GRP-nn " , for example: State FL belongs to GRP-01 */
+        US_STATE -> NACUST_Foundation:US_STATE required
+            @t24:i (align=L, inputBehaviour=I, maxLength=2, sysNumber=3.0, core=true, businessType=A, t24Name=US.STATE, mandatory=true)
+    }
+    US_STATE__COUNTY_NAME
+    {
+        COUNTY_CODE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=5, sysNumber=6.0, core=true, t24Name=COUNTY.CODE, mandatory=false)
+        COUNTY_NAME : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=5.0, core=true, t24Name=COUNTY.NAME, mandatory=false)
+    }
+    US_STATE__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=13.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    US_STATE__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=12.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+}
+Enumerations {
+    NACUST_ARRANGEMENT_DETAILS__AUTO_CLOSURE_STATUS : mml:string
+        CLOSURE_MAINTENANCE=CLOSURE.MAINTENANCE
+        COMPLETED=COMPLETED
+        PRE_CLOSURE=PRE.CLOSURE
+        STOPPED=STOPPED
+        TXN_CLOSURE=TXN.CLOSURE
+    NACUST_ARRANGEMENT_DETAILS__AUTO_CLOSURE_TYPE : mml:string
+        DORMANT=DORMANT
+        OVERDRAFT=OVERDRAFT
+    NACUST_ARRANGEMENT_DETAILS__FIN_MVMT_FLAG : mml:string
+        N=N
+        Y=Y
+    NACUST_EVENT_DETAILS__EXECUTION_STAGE__EXECUTION_STAGE : mml:string
+        NACUST_SCHEDULER_EOD=NACUST.SCHEDULER.EOD
+        NACUST_SCHEDULER_ONLINE=NACUST.SCHEDULER.ONLINE
+        NACUST_SCHEDULER_SOD=NACUST.SCHEDULER.SOD
+    US_STATE_GROUP__GROUP_CONTEXT : mml:string
+        DORMANCY=DORMANCY
+    US_STATE__COUNTRY_CODE : mml:string
+        CA=CA
+        US=US
+    US_STATE__STATE_WHT_APPLICABLE : mml:string
+        NO=NO
+        YES=YES
+}

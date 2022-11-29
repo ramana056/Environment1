@@ -1,0 +1,996 @@
+# UTF-8
+/* Quotation for AA */
+Domain AA_Quotation
+    @t24:i (module=AA)
+    @java:Package (value=com.temenos.t24.datamodel.aa.aa_quotation)
+namespace "http://www.temenos.com/t24/AA_Quotation"
+metamodelVersion 1.30.6
+Classes {
+    /* This table contains the high-level definition of a class of type QUOTATION.CLASS. This is table is maintained by the system, and will be updated when a new definition is created and authorised in AA.CLASS.DEFINITION */
+    AA_QUOTATION_CLASS
+        @i18n:Description (en="")
+        @t24:i (t24Name=AA.QUOTATION.CLASS, level=I, type=H, additionalInfo="TABS ..,-..,-..", allowedFunctions="A C D E H I L P Q S", localRefApplicationSysNo=14.0, localRefAllowed=true)
+    {
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=23.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=24.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=20.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=21.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=17.0, core=true, t24Name=CURR.NO, mandatory=false)
+        DATE_TIME -> byValue AA_Quotation:AA_QUOTATION_CLASS__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=22.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        DESCRIPTION -> byValue AA_Quotation:AA_QUOTATION_CLASS__DESCRIPTION *
+            @t24:i (t24Name=DESCRIPTION)
+        FULL_DESC -> byValue AA_Quotation:AA_QUOTATION_CLASS__FULL_DESC *
+            @t24:i (t24Name=FULL.DESC)
+        INPUTTER -> byValue AA_Quotation:AA_QUOTATION_CLASS__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        K_TYPE -> byValue AA_Quotation:AA_QUOTATION_CLASS__K_TYPE *
+            @t24:i (t24Name=K.TYPE)
+        OVERRIDE -> byValue AA_Quotation:AA_QUOTATION_CLASS__OVERRIDE *
+            @t24:i (t24Name=OVERRIDE)
+        /* Class name of type QuotationClass, updated by the system based on the definition in AA.CLASS.DEFINITION */
+        QUOTATION_CLASS -> AA_Quotation:AA_QUOTATION_CLASS PK required
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=0.0, core=true, businessType=A, t24Name=QUOTATION.CLASS, mandatory=true)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=16.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        RESERVED_1 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=13.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_10 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=4.0, core=true, t24Name=RESERVED.10, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=12.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=11.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=10.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        RESERVED_5 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=9.0, core=true, t24Name=RESERVED.5, mandatory=false)
+        RESERVED_6 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=8.0, core=true, t24Name=RESERVED.6, mandatory=false)
+        RESERVED_7 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=7.0, core=true, t24Name=RESERVED.7, mandatory=false)
+        RESERVED_8 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=6.0, core=true, t24Name=RESERVED.8, mandatory=false)
+        RESERVED_9 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=5.0, core=true, t24Name=RESERVED.9, mandatory=false)
+        TYPE -> byValue AA_Quotation:AA_QUOTATION_CLASS__TYPE *
+            @t24:i (t24Name=TYPE)
+    }
+    AA_QUOTATION_CLASS__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=19.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    AA_QUOTATION_CLASS__DESCRIPTION
+    {
+        /* Short description of the class, updated from AA.CLASS.DEFINITION. Used for enrichment when this table is used as vetting table */
+        DESCRIPTION : T24BusinessTypes:A required
+            @i18n:Label (en=Description)
+            @i18n:Tooltip (en=Description)
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, multiLanguage=true, sysNumber=1.0, core=true, t24Name=DESCRIPTION, mandatory=true)
+    }
+    AA_QUOTATION_CLASS__FULL_DESC
+    {
+        FULL_DESC : T24BusinessTypes:A required
+            @i18n:Label (en="Full Description")
+            @i18n:Tooltip (en="Detailed Description ")
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=2.0, core=true, t24Name=FULL.DESC, isTextarea=true, mandatory=true)
+    }
+    AA_QUOTATION_CLASS__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=18.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    AA_QUOTATION_CLASS__K_TYPE
+    {
+        K_TYPE : AA_Quotation:AA_QUOTATION_CLASS__K_TYPE__K_TYPE
+            @i18n:Label (en=KType)
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=3.0, core=false, t24Name=K.TYPE, mandatory=false)
+    }
+    AA_QUOTATION_CLASS__OVERRIDE
+    {
+        OVERRIDE : T24BusinessTypes:N
+            @i18n:Label (en=Override)
+            @i18n:Tooltip (en="Overrides generated by this transaction")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=15.0, core=true, t24Name=OVERRIDE, mandatory=false)
+    }
+    AA_QUOTATION_CLASS__TYPE
+    {
+/* This multi-valued field controls attributes that a property of this class may or may not have.
+Valid options are,
+Version Type - Each amendment of the definition in the quotation class is identified by unique version */
+        TYPE : AA_Quotation:AA_QUOTATION_CLASS__TYPE__TYPE
+            @i18n:Label (en=Type)
+            @i18n:Tooltip (en=Type)
+            @t24:i (align=L, inputBehaviour=I, maxLength=15, sysNumber=3.0, core=true, t24Name=TYPE, mandatory=false)
+    }
+    /* The objective of this table is to record ‘every activity’ or event happening as part of the Application. */
+    AA_QUOTATION_DIARY
+        @i18n:Description (en="")
+        @t24:i (t24Name=AA.QUOTATION.DIARY, level=I, type=L, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        ACTIVITY -> byValue AA_Quotation:AA_QUOTATION_DIARY__ACTIVITY *
+            @t24:i (t24Name=ACTIVITY)
+        /* The record ID of AA.QUOTATION.DIARY */
+        QUOTATION_DIARY_ID -> AA_Quotation:AA_QUOTATION_DIARY PK required
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=0.0, core=true, businessType=A, t24Name=QUOTATION.DIARY.ID, mandatory=true)
+        RESERVED_1 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=28.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_15 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=5.0, core=true, t24Name=RESERVED.15, mandatory=false)
+        RESERVED_16 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=4.0, core=true, t24Name=RESERVED.16, mandatory=false)
+        RESERVED_17 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=3.0, core=true, t24Name=RESERVED.17, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=27.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=26.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=25.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        RESERVED_5 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=24.0, core=true, t24Name=RESERVED.5, mandatory=false)
+        RESERVED_6 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=23.0, core=true, t24Name=RESERVED.6, mandatory=false)
+/* The status of the Application. Could hold 3 values:
+ACTIVE - Application is in progress
+INACTIVE - Application began, but no activity has happened for a long time. The time is controlled by a parameter in AA.ORIGINATION.PARAMETER table.
+COMPLETE - Application reached its logical end.
+READY.FOR.ARCHIVE - Indicates the record has crossed its threshold of inactivity or completion and is ready to be picked by Archival service. */
+        STATUS : AA_Quotation:AA_QUOTATION_DIARY__STATUS
+            @i18n:Label (en=Status)
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=1.0, core=true, t24Name=STATUS, mandatory=false)
+        /* The date on which the above status was updated. Would be useful to know when the system moved to READY.FOR.ARCHIVE status so that the same can be compared against the RETENTION.PERIOD stated in the ARCHIVE record. Would also be a useful indicator on how long has it remained in this status. */
+        STATUS_DATE : T24BusinessTypes:D
+            @i18n:Label (en="Status Date")
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=2.0, core=true, t24Name=STATUS.DATE, mandatory=false)
+    }
+    AA_QUOTATION_DIARY__ACTIVITY
+    {
+/* Name of the activity that was performed - like NEW-QUOTATION.REQUEST etc.
+Should be a valid AA.CLASS.TYPE.ACTIVITY entry */
+        ACTIVITY -> AA_ClassFramework:AA_CLASS_TYPE_ACTIVITY
+            @i18n:Label (en=Activity)
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=6.0, core=true, businessType=A, t24Name=ACTIVITY, mandatory=false)
+/* Indicates the status of the activity. If the activity is in INAU, then this would indicate it as UNAUTH and if it is Authorized, this would be in AUTH.
+Valid Statuses are UNAUTH and AUTH. */
+        ACTIVITY_STATUS : AA_Quotation:AA_QUOTATION_DIARY__ACTIVITY__ACTIVITY_STATUS
+            @i18n:Label (en="Activity Status")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=14.0, core=true, t24Name=ACTIVITY.STATUS, mandatory=false)
+/* Indicates the application involved in this activity. Since an origination could involve activities in multiple components, this would indicate the valid Application of those components.
+For example, if the activity is NEW-QUOTATION.REQUEST, then this field would hold AA.QUOTATION.REQUEST. */
+        APPLICATION -> EB_SystemTables:PGM_FILE
+            @i18n:Label (en=Application)
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=15.0, core=true, businessType=A, t24Name=APPLICATION, mandatory=false)
+        /* Date on which the event happened. */
+        DATE : T24BusinessTypes:D
+            @i18n:Label (en=Date)
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=10.0, core=true, t24Name=DATE, mandatory=false)
+/* Indicates the definition id used in the above activity. For example, if the activity is a NEW-QUOTATION.REQUEST, this would hold the AA.QUOTATION.TYPE reference.
+This is only relevant for Quotation, Needs, and Decision activities. For Application level activities, a TRANSIT.STAGE would populate this activity to indicate on what purpose was the stage activity run against. */
+        DEFINITION : T24BusinessTypes:A
+            @i18n:Label (en="Process Name")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=17.0, core=true, t24Name=DEFINITION, mandatory=false)
+        /* Would hold the OFS source that was used for the activity. The value could be used to identify the source of update - for example, a mobile channel could use a different source from internet and storing this could show from which channel was a formlet updated or submitted. Should be a valid entry in OFS.SOURCE */
+        OFS_SOURCE -> EB_Interface:OFS_SOURCE
+            @i18n:Label (en="OFS Source")
+            @i18n:Tooltip (en="The OFS Source record ID")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=13.0, core=true, businessType=A, t24Name=OFS.SOURCE, mandatory=false)
+        /* Would hold the reference of the APPLICATION on which the activity was performed. */
+        REFERENCE : T24BusinessTypes:A
+            @i18n:Label (en="Search by Referece")
+            @t24:i (align=L, inputBehaviour=I, maxLength=100, sysNumber=16.0, core=true, t24Name=REFERENCE, mandatory=false)
+        RESERVED_10 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=19.0, core=true, t24Name=RESERVED.10, mandatory=false)
+        RESERVED_11 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=18.0, core=true, t24Name=RESERVED.11, mandatory=false)
+        RESERVED_12 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=9.0, core=true, t24Name=RESERVED.12, mandatory=false)
+        RESERVED_13 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=8.0, core=true, t24Name=RESERVED.13, mandatory=false)
+        RESERVED_14 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=7.0, core=true, t24Name=RESERVED.14, mandatory=false)
+        RESERVED_7 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=22.0, core=true, t24Name=RESERVED.7, mandatory=false)
+        RESERVED_8 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=21.0, core=true, t24Name=RESERVED.8, mandatory=false)
+        RESERVED_9 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=20.0, core=true, t24Name=RESERVED.9, mandatory=false)
+        /* Time of the recorded event. When the status is ‘UNAUTH’ the date and time would indicate when the activity was input. When the status is ‘AUTH’, they indicate the details on when the activity was authorized. */
+        TIME : T24BusinessTypes:TIME
+            @i18n:Label (en=Time)
+            @t24:i (align=L, inputBehaviour=I, maxLength=15, sysNumber=11.0, core=true, t24Name=TIME, mandatory=false)
+        /* Indicates the user who input this activity. For example, if it was self-filled by the user, this would be the User name(external user id possibly) and if it is bank user, would indicate which user. Should be a valid USER record */
+        USER -> EB_Security:USER
+            @i18n:Label (en=User)
+            @i18n:Tooltip (en="Indicates teller id")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=12.0, core=true, businessType=A, t24Name=USER, mandatory=false)
+    }
+    /* This table is updated when a quotation request is processed, based on the output definition in Quotation Class, the data is formatted based on XML schema and updated */
+    AA_QUOTATION_OUTPUT
+        @i18n:Description (en="")
+        @t24:i (t24Name=AA.QUOTATION.OUTPUT, level=F, type=L, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        ARRANGEMENT : T24BusinessTypes:A
+            @i18n:Label (en="Arrangement Id")
+            @i18n:Tooltip (en="Unique number for the arrangement contract")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=8.0, core=true, t24Name=ARRANGEMENT, mandatory=false)
+        /* Effective date when the quotation was requested */
+        EFFECTIVE_DATE : T24BusinessTypes:D
+            @i18n:Label (en="Effective Date")
+            @i18n:Tooltip (en="Effective date of the transaction")
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=3.0, core=true, t24Name=EFFECTIVE.DATE, mandatory=false)
+        NOTES -> byValue AA_Quotation:AA_QUOTATION_OUTPUT__NOTES *
+            @t24:i (t24Name=NOTES)
+        OUTPUT_NAME -> byValue AA_Quotation:AA_QUOTATION_OUTPUT__OUTPUT_NAME *
+            @t24:i (t24Name=OUTPUT.NAME)
+        /* Unique ID for the table, in the format AAQRJJJJJAAAAA - where JJJJJ is system date in the Julian date format and AAAAA is the random alphanumeric character, which is unique */
+        QUOTATION_ID -> AA_Quotation:AA_QUOTATION_OUTPUT PK required
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=0.0, core=true, businessType=A, t24Name=QUOTATION.ID, mandatory=true)
+        QUOTATION_STATUS : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=12.0, core=true, t24Name=QUOTATION.STATUS, mandatory=false)
+        /* Quotation Type that needs to be processed for the arrangement specified in Quotation Class */
+        QUOTATION_TYPE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=1.0, core=true, t24Name=QUOTATION.TYPE, mandatory=false)
+        SIM_RUN_REF -> byValue AA_Quotation:AA_QUOTATION_OUTPUT__SIM_RUN_REF *
+            @t24:i (t24Name=SIM.RUN.REF)
+        /* Version of AA.QUOTATION.TYPE that needs to be used for processing the quotation */
+        VERSION : T24BusinessTypes:N
+            @i18n:Label (en=Version)
+            @t24:i (align=R, inputBehaviour=I, maxLength=35, sysNumber=2.0, core=true, t24Name=VERSION, mandatory=false)
+        XML_DATA -> byValue AA_Quotation:AA_QUOTATION_OUTPUT__XML_DATA *
+            @t24:i (t24Name=XML.DATA)
+    }
+    AA_QUOTATION_OUTPUT__NOTES
+    {
+        /* Any notes that needs to be captured for the request */
+        NOTES : T24BusinessTypes:A
+            @i18n:Label (en=Notes)
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=4.0, core=true, t24Name=NOTES, isTextarea=true, mandatory=false)
+    }
+    AA_QUOTATION_OUTPUT__OUTPUT_NAME
+    {
+        OUTPUT_NAME : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=6.0, core=true, t24Name=OUTPUT.NAME, mandatory=false)
+        OUTPUT_VALUE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=7.0, core=true, t24Name=OUTPUT.VALUE, mandatory=false)
+    }
+    AA_QUOTATION_OUTPUT__SIM_RUN_REF
+    {
+        SIM_CAP_REF -> byValue AA_Quotation:AA_QUOTATION_OUTPUT__SIM_RUN_REF__SIM_CAP_REF *
+            @t24:i (t24Name=SIM.CAP.REF)
+        SIM_RUN_REF : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=9.0, core=true, t24Name=SIM.RUN.REF, mandatory=false)
+        SIM_STATUS : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=11.0, core=true, t24Name=SIM.STATUS, mandatory=false)
+    }
+    AA_QUOTATION_OUTPUT__SIM_RUN_REF__SIM_CAP_REF
+    {
+        SIM_CAP_REF : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=10.0, core=true, t24Name=SIM.CAP.REF, mandatory=false)
+    }
+    AA_QUOTATION_OUTPUT__XML_DATA
+    {
+        /* XML data */
+        XML_DATA : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=5.0, core=true, t24Name=XML.DATA, isTextarea=true, mandatory=false)
+    }
+    /* This is the Runtime Master table for Quotation class type. The application AA.QUOTATION.REQUEST is similar to AA.ARRANGEMENT.ACTIVITY, and it is used to get the quotation. */
+    AA_QUOTATION_REQUEST
+        @i18n:Description (en="")
+        @t24:i (t24Name=AA.QUOTATION.REQUEST, nonStop=true, level=F, type=H, additionalInfo="TABS AA.QUO.,-AA.QUO.DES.,-AA.QUO.CAT.", allowedFunctions="A C D E H I L P Q R S", localRefApplicationSysNo=27.0, localRefAllowed=true)
+    {
+/* This field defines the Activity to be processed against the Quotation. The activity may be a user activity or a system generated activity. The business functionality of the activity would be defined in the action routines which are defined in ACTIVITY.ACTION or ACTION fields.
+Validation Rules
+1. Input is mandatory in this field.
+2. It must be a valid record in AA.CLASS.TYPE.ACTIVITY and valid evidence activity.
+3. The very first activity for quotation would be NEW-QUOTATION.REQUEST. */
+        ACTIVITY -> AA_ClassFramework:AA_CLASS_TYPE_ACTIVITY
+            @i18n:Label (en=Activity)
+            @t24:i (align=L, inputBehaviour=I, maxLength=60, sysNumber=3.0, core=true, businessType=A, t24Name=ACTIVITY, mandatory=false)
+        /* It is a valid record from the OA.APPLICATION table.  If the user gives input this field then the system will link the current quotation Request along with Application. And the Linked quotation details will get updated in the OA.APPLICATION.STATUS record. */
+        APPLICATION -> OA_Framework:OA_APPLICATION
+            @i18n:Label (en=Application)
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=22.0, core=true, businessType=A, t24Name=APPLICATION, mandatory=false)
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=37.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=38.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=34.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        CLASS_INSTANCE -> byValue AA_Quotation:AA_QUOTATION_REQUEST__CLASS_INSTANCE *
+            @t24:i (t24Name=CLASS.INSTANCE)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=35.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=31.0, core=true, t24Name=CURR.NO, mandatory=false)
+        CUSTOMER -> byValue AA_Quotation:AA_QUOTATION_REQUEST__CUSTOMER *
+            @t24:i (t24Name=CUSTOMER)
+        DATE_TIME -> byValue AA_Quotation:AA_QUOTATION_REQUEST__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+/* This field defines that type of the quotation for the customer.
+Validation Rules
+1. It should be valid record from AA.QUOTATION.TYPE.
+2. It should be a published definition */
+        DEFINITION -> AA_Quotation:AA_QUOTATION_TYPE required
+            @i18n:Label (en="Process Name")
+            @t24:i (align=L, inputBehaviour=I, maxLength=30, sysNumber=1.0, core=true, businessType=A, t24Name=DEFINITION, mandatory=true)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=36.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        /* Effective date when the quotation was requested */
+        EFFECTIVE_DATE : T24BusinessTypes:D
+            @i18n:Label (en="Effective Date")
+            @i18n:Tooltip (en="Effective date of the transaction")
+            @t24:i (align=R, inputBehaviour=I, maxLength=8, sysNumber=4.0, core=true, t24Name=EFFECTIVE.DATE, mandatory=false)
+        INPUTTER -> byValue AA_Quotation:AA_QUOTATION_REQUEST__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        /* Details of last activity performed on the current record. */
+        LAST_ACTIVITY : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=50, sysNumber=16.0, core=true, t24Name=LAST.ACTIVITY, mandatory=false)
+        NOTES -> byValue AA_Quotation:AA_QUOTATION_REQUEST__NOTES *
+            @t24:i (t24Name=NOTES)
+        OVERRIDE -> byValue AA_Quotation:AA_QUOTATION_REQUEST__OVERRIDE *
+            @t24:i (t24Name=OVERRIDE)
+        PURPOSE -> byValue AA_Quotation:AA_QUOTATION_REQUEST__PURPOSE *
+            @t24:i (t24Name=PURPOSE)
+        /* Unique ID for the table, in the format AAQRJJJJJAAAAA - where JJJJJ is system date in the Julian date format and AAAAA is the random alphanumeric character, which is unique */
+        QUOTATION_ID -> AA_Quotation:AA_QUOTATION_REQUEST PK required
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=0.0, core=true, businessType=A, t24Name=QUOTATION.ID, mandatory=true)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=30.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        RESERVED_1 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=26.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=25.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=24.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        /* Reserved field for future purpose */
+        STD_RESERVE1 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=20.0, core=true, t24Name=STD.RESERVE1, mandatory=false)
+        /* Reserved field for future purpose */
+        STD_RESERVE2 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=19.0, core=true, t24Name=STD.RESERVE2, mandatory=false)
+        /* Reserved field for future purpose */
+        STD_RESERVE3 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=18.0, core=true, t24Name=STD.RESERVE3, mandatory=false)
+        /* Reserved field for future purpose */
+        STD_RESERVE4 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=17.0, core=true, t24Name=STD.RESERVE4, mandatory=false)
+        /* Reserved field for future purpose */
+        STD_RESERVE6 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=10.0, core=true, t24Name=STD.RESERVE6, mandatory=false)
+        /* Reserved field for future purpose */
+        STD_RESERVE7 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=9.0, core=true, t24Name=STD.RESERVE7, mandatory=false)
+        /* Reserved field for future purpose */
+        STD_RESERVE8 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=8.0, core=true, t24Name=STD.RESERVE8, mandatory=false)
+        STMT_NOS -> byValue AA_Quotation:AA_QUOTATION_REQUEST__STMT_NOS *
+            @t24:i (t24Name=STMT.NOS)
+        TO_CLASS_INSTANCE -> byValue AA_Quotation:AA_QUOTATION_REQUEST__TO_CLASS_INSTANCE *
+            @t24:i (t24Name=TO.CLASS.INSTANCE)
+        /* Version of AA.QUOTATION.TYPE that needs to be used for processing the quotation */
+        VERSION : T24BusinessTypes:A
+            @i18n:Label (en=Version)
+            @t24:i (align=L, inputBehaviour=I, maxLength=10, sysNumber=2.0, core=true, t24Name=VERSION, mandatory=false)
+    }
+    AA_QUOTATION_REQUEST__CLASS_INSTANCE
+    {
+        /* This field will hold the list of INSTANCES or CLASSES processed as part of current quotation record. It should be a valid record from AA.QUOTATION.CLASS. */
+        CLASS_INSTANCE -> AA_Quotation:AA_QUOTATION_CLASS
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=5.0, core=true, businessType=A, t24Name=CLASS.INSTANCE, mandatory=false)
+        /* This field would hold the list of all applications and those record keys that were processed as part of current transactions. The format for storing is - Application: Space : Function : Space : Record Id. */
+        INSTANCE_KEY : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=60, sysNumber=6.0, core=true, t24Name=INSTANCE.KEY, mandatory=false)
+        /* Currently this field is not in use. Introduced for future purpose. */
+        INSTANCE_STATUS : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=30, sysNumber=7.0, core=true, t24Name=INSTANCE.STATUS, mandatory=false)
+    }
+    AA_QUOTATION_REQUEST__CUSTOMER
+    {
+        /* Reserved field for future purpose. */
+        CUSTOMER -> ST_Customer:CUSTOMER
+            @i18n:Label (en=Customer)
+            @i18n:Tooltip (en="Customer Liability")
+            @t24:i (align=R, inputBehaviour=I, maxLength=10, sysNumber=11.0, core=true, businessType=CUS, t24Name=CUSTOMER, mandatory=false)
+        /* Reserved field for future purpose. */
+        CUSTOMER_ROLE -> AA_Customer:AA_CUSTOMER_ROLE
+            @t24:i (align=L, inputBehaviour=I, maxLength=30, sysNumber=12.0, core=true, businessType=ANY, t24Name=CUSTOMER.ROLE, mandatory=false)
+    }
+    AA_QUOTATION_REQUEST__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=33.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    AA_QUOTATION_REQUEST__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=32.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    AA_QUOTATION_REQUEST__NOTES
+    {
+        /* Any notes that needs to be captured for the request */
+        NOTES : T24BusinessTypes:A
+            @i18n:Label (en=Notes)
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=21.0, core=true, t24Name=NOTES, isTextarea=true, mandatory=false)
+    }
+    AA_QUOTATION_REQUEST__OVERRIDE
+    {
+        /* Standard override field */
+        OVERRIDE : T24BusinessTypes:N
+            @i18n:Label (en=Override)
+            @i18n:Tooltip (en="Overrides generated by this transaction")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=29.0, core=true, t24Name=OVERRIDE, mandatory=false)
+    }
+    AA_QUOTATION_REQUEST__PURPOSE
+    {
+/* "It is the PURPOSE of the APPLICATION, which is linked to the current quotation.  If the APPLICATION is having a single purpose then the system will default the PURPOSE if the user does not input also. But if APPLICATION is created with multiple PURPOSES then the user should input one of the purposes from the APPLICATION purposes.   It is an associative multi-value field.
+
+Validation Rules - The user input PURPOSE should be a valid PURPOSE from the purposes of the OA.APPLICATION record which is input in previous APPLICATION field. Otherwise, the system will raise an error message.  This purpose is linked to AA.PURPOSE table. " */
+        PURPOSE -> AA_ProductFramework:AA_PURPOSE
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=23.0, core=true, businessType=A, t24Name=PURPOSE, mandatory=false)
+    }
+    AA_QUOTATION_REQUEST__STMT_NOS
+    {
+        /* Standard statement number field, not used at the moment */
+        STMT_NOS : T24BusinessTypes:N
+            @i18n:Label (en="Stmt Nos")
+            @i18n:Tooltip (en="Stmt Nos")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=28.0, core=true, t24Name=STMT.NOS, mandatory=false)
+    }
+    AA_QUOTATION_REQUEST__TO_CLASS_INSTANCE
+    {
+        /* The fields from TO.CLASS.INSTANCE, TO.FIELD & TO.VALUE are used for scripting test scenarios. The field TO.CLASS.INSTANCE will accept the valid record id from AA.QUOTATION.CLASS. The value in the TO.FIELD should be a valid field name from quotation table, and value to this field can be defined in TO.VALUE field. An OFS message would be formed for the given AA.QUOTATION.CLASS application with the fields and values defined. */
+        TO_CLASS_INSTANCE -> AA_Quotation:AA_QUOTATION_CLASS
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=13.0, core=true, businessType=A, t24Name=TO.CLASS.INSTANCE, mandatory=false)
+        TO_FIELD -> byValue AA_Quotation:AA_QUOTATION_REQUEST__TO_CLASS_INSTANCE__TO_FIELD *
+            @t24:i (t24Name=TO.FIELD)
+    }
+    AA_QUOTATION_REQUEST__TO_CLASS_INSTANCE__TO_FIELD
+    {
+        /* The fields from TO.CLASS.INSTANCE, TO.FIELD & TO.VALUE are used for scripting test scenarios. The field TO.CLASS.INSTANCE will accept the valid record id from AA.QUOTATION.CLASS. The value in the TO.FIELD should be a valid field name from quotation table, and value to this field can be defined in TO.VALUE field. An OFS message would be formed for the given AA.QUOTATION.CLASS application with the fields and values defined. */
+        TO_FIELD : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=14.0, core=true, t24Name=TO.FIELD, mandatory=false)
+        /* The fields from TO.CLASS.INSTANCE, TO.FIELD & TO.VALUE are used for scripting test scenarios. The field TO.CLASS.INSTANCE will accept the valid record id from AA.QUOTATION.CLASS. The value in the TO.FIELD should be a valid field name from quotation table, and value to this field can be defined in TO.VALUE field. An OFS message would be formed for the given AA.QUOTATION.CLASS application with the fields and values defined. */
+        TO_VALUE : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=100, sysNumber=15.0, core=true, t24Name=TO.VALUE, mandatory=false)
+    }
+    /* This table is system maintained and is updated when a new QuotationType definition is published through AA.DEFINITION.MANAGER application. */
+    AA_QUOTATION_TYPE
+        @i18n:Description (en="")
+        @t24:i (t24Name=AA.QUOTATION.TYPE, level=I, type=L, allowedFunctions="L S", localRefAllowed=false)
+    {
+        /* The Date from which the Evidence Type is Valid. Standard T24 Date, format is YYYYMMDD. */
+        AVAILABLE_DATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=4.0, core=true, t24Name=AVAILABLE.DATE, mandatory=false)
+        /* Class name as given in AA.DEFINITION.MANAGER. Should belong to AA.QUOTATION.CLASS */
+        CLASS_NAME : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=2.0, core=true, t24Name=CLASS.NAME, mandatory=false)
+        DESCRIPTION -> byValue AA_Quotation:AA_QUOTATION_TYPE__DESCRIPTION *
+            @t24:i (t24Name=DESCRIPTION)
+        /* The Date beyond which the Quotation Type is no longer Valid.Standard T24 Date, format is YYYYMMDD. */
+        EXPIRY_DATE : T24BusinessTypes:D
+            @i18n:Label (en="Expiry Date")
+            @i18n:Tooltip (en="Indicates the Expiry Date of the Transaction")
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=5.0, core=true, t24Name=EXPIRY.DATE, mandatory=false)
+        /* The Date at which the Quotation Type is published. It will be TODAY's date.Standard T24 Date, format is YYYYMMDD. */
+        LAST_PUBLISHED : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=6.0, core=true, t24Name=LAST.PUBLISHED, mandatory=false)
+        /* The record ID of AA.QUOTATION.TYPE. */
+        QUOTATION_TYPE -> AA_Quotation:AA_QUOTATION_TYPE PK required
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=0.0, core=true, businessType=A, t24Name=QUOTATION.TYPE, mandatory=true)
+        /* It specifies the STATUS of the current  quotation type. The only status PUBLISHED is updated after publishing the quotation type. */
+        STATUS : T24BusinessTypes:A
+            @i18n:Label (en=Status)
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=3.0, core=true, t24Name=STATUS, mandatory=false)
+    }
+    /* This table is system mainted and is updated when a new QuotationType is defined in AA.DEFINITION.MANAGER is published, this is used by the system for processing Quotation Request and serves to separate the design-time definition in AA.DEFINITION.MANAGER */
+    AA_QUOTATION_TYPE_CATALOG
+        @i18n:Description (en="")
+        @t24:i (t24Name=AA.QUOTATION.TYPE.CATALOG, level=I, type=H, allowedFunctions="A C D E H I L P Q R S", localRefApplicationSysNo=39.0, localRefAllowed=true)
+    {
+/* Allowed options are
+1. "Null"- the record is simply being updated.
+2. PUBLISH - record is proofed and published. */
+        ACTION : AA_Quotation:AA_QUOTATION_TYPE_CATALOG__ACTION
+            @i18n:Label (en=Action)
+            @t24:i (align=L, inputBehaviour=I, maxLength=7, sysNumber=34.0, core=true, t24Name=ACTION, mandatory=false)
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=52.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=53.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=49.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        CLASS -> byValue AA_Quotation:AA_QUOTATION_TYPE_CATALOG__CLASS *
+            @t24:i (t24Name=CLASS)
+        /* Valid entry in AA.CLASS.TYPE. */
+        CLASS_TYPE -> AA_Framework:AA_CLASS_TYPE
+            @i18n:Label (en="Class Type")
+            @t24:i (align=L, inputBehaviour=N, maxLength=25, sysNumber=40.0, core=true, businessType=ANY, t24Name=CLASS.TYPE, mandatory=true)
+        COMMON_CLASS_TYPE -> byValue AA_Quotation:AA_QUOTATION_TYPE_CATALOG__COMMON_CLASS_TYPE *
+            @t24:i (t24Name=COMMON.CLASS.TYPE)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=50.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=46.0, core=true, t24Name=CURR.NO, mandatory=false)
+        DATE_TIME -> byValue AA_Quotation:AA_QUOTATION_TYPE_CATALOG__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DEFAULT_ROLE -> byValue AA_Quotation:AA_QUOTATION_TYPE_CATALOG__DEFAULT_ROLE *
+            @t24:i (t24Name=DEFAULT.ROLE)
+        /* The record ID of AA.QUOTATION.TYPE.CATALOG */
+        DEFINITION_MANAGER -> AA_Quotation:AA_QUOTATION_TYPE_CATALOG PK required
+            @t24:i (align=L, inputBehaviour=I, maxLength=60, sysNumber=0.0, core=true, businessType=A, t24Name=DEFINITION.MANAGER, mandatory=true)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=51.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        DESCRIPTION -> byValue AA_Quotation:AA_QUOTATION_TYPE_CATALOG__DESCRIPTION *
+            @t24:i (t24Name=DESCRIPTION)
+        /* Used for Form Definition to specify which domain type the form is used in and therefore will default the Instances (i.e. the formlets) in the domain type into the mv set. */
+        DOMAIN_TYPE -> OA_Framework:OA_DOMAIN_TYPE
+            @t24:i (align=L, inputBehaviour=I, maxLength=36, sysNumber=3.0, core=true, businessType=ANY, t24Name=DOMAIN.TYPE, mandatory=false)
+        /* Date from which the Quotation type will no longer be available for use. */
+        EXPIRY_DATE : T24BusinessTypes:D
+            @i18n:Label (en="Expiry Date")
+            @i18n:Tooltip (en="Indicates the Expiry Date of the Transaction")
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=35.0, core=true, t24Name=EXPIRY.DATE, mandatory=false)
+        FORM_OWNER -> OA_Framework:OA_ROLE
+            @t24:i (align=L, inputBehaviour=I, maxLength=30, sysNumber=4.0, core=true, businessType=ANY, t24Name=FORM.OWNER, mandatory=false)
+        FULL_DESC -> byValue AA_Quotation:AA_QUOTATION_TYPE_CATALOG__FULL_DESC *
+            @t24:i (t24Name=FULL.DESC)
+        INPUTTER -> byValue AA_Quotation:AA_QUOTATION_TYPE_CATALOG__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        OVERRIDE -> byValue AA_Quotation:AA_QUOTATION_TYPE_CATALOG__OVERRIDE *
+            @t24:i (t24Name=OVERRIDE)
+        PUBLISH_ERROR -> byValue AA_Quotation:AA_QUOTATION_TYPE_CATALOG__PUBLISH_ERROR *
+            @t24:i (t24Name=PUBLISH.ERROR)
+        /* This field will contain the result of the publishing effort. Validation Rules - Non Inputtable, System Maintained, Allowed values are : Completed Successfully or Completed with Errors. */
+        PUBLISH_STATUS : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=36.0, core=true, t24Name=PUBLISH.STATUS, mandatory=false)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=45.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        /* ID Component 2: Is the main "ID" of the item being designed. For quotation this is the name of the quotation type */
+        REFERENCE : T24BusinessTypes:ANY
+            @i18n:Label (en="Search by Referece")
+            @t24:i (align=L, inputBehaviour=N, maxLength=25, sysNumber=41.0, core=true, t24Name=REFERENCE, mandatory=true)
+        RESERVED_1 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=33.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=32.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=31.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=30.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        RESERVED_5 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=29.0, core=true, t24Name=RESERVED.5, mandatory=false)
+        RESERVED_6 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=28.0, core=true, t24Name=RESERVED.6, mandatory=false)
+        RESERVED_7 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=27.0, core=true, t24Name=RESERVED.7, mandatory=false)
+        RESERVED_8 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=26.0, core=true, t24Name=RESERVED.8, mandatory=false)
+        RESERVED_9 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=25.0, core=true, t24Name=RESERVED.9, mandatory=false)
+        /* This field will allow a user to specify which mapping definition to use when syncing data for the form */
+        SYNC_MAPPING -> AA_Mapping:AA_MAPPING_TYPE
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=24.0, core=true, businessType=ANY, t24Name=SYNC.MAPPING, mandatory=false)
+        /* ID Component 3: Version number identifier. */
+        VERSION : T24BusinessTypes:ANY
+            @i18n:Label (en=Version)
+            @t24:i (align=L, inputBehaviour=N, maxLength=5, sysNumber=42.0, core=true, t24Name=VERSION, mandatory=true)
+        /* ID Component 4: Date when the version becomes effective. */
+        VERSION_DATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=N, maxLength=11, sysNumber=43.0, core=true, t24Name=VERSION.DATE, mandatory=true)
+    }
+    AA_QUOTATION_TYPE_CATALOG__CLASS
+    {
+        /* ID from corresponding *.CLASS table. (e.g. AA.QUOTATION.CLASS) */
+        CLASS : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=7.0, core=true, t24Name=CLASS, mandatory=false)
+/* Name of an the CONDITION being included on the definition line.
+
+1. Associated Multivalue Field beginning with CLASS, including INSTANCE , CONDITION and ending with CONDITION.VERSION.
+
+2. Mandatory Input
+
+3. Validation Rules:
+
+I. Must be a valid condition previously defined in the condition class file indicated in the CLASS field or implied from the INSTANCE field. The condition file name is formed by concatenating values of the PRODUCT.CODE, PREFIX.DESIGN fields from AA.CLASS.TYPE and the value of the CLASS field.
+
+Examples CLASS : BASIC.INFO CLASS.TYPE : FORMLET.CLASS PRODUCT.CODE in AA.CLASS.TYPE for FORMLET.CLASS : OA PREFIX.DESIGN in AA.CLASS.TYPE for FORMLET.CLASS : DES CONDITION FILE NAME : OA.DES.BASIC.INFO
+
+II. T24 String of 35 Characters Maximum */
+        CONDITION : T24BusinessTypes:ANY required
+            @i18n:Label (en=Condition)
+            @i18n:Tooltip (en="Value that the field name is to be compared with")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=14.0, core=true, t24Name=CONDITION, mandatory=true)
+/* Indicate which version of the condition the definition uses. A class may have one or more CONDITIONS, and CONDITIONs may have one or more VERSIONs
+
+1. Associated Multivalue Field beginning with CLASS, including INSTANCE , CONDITION and ending with CONDITION.VERSION
+
+2. Optional Input
+
+3. Validation Rules:
+
+I. Must be a valid condition-version previously defined in the condition class file indicated in the CLASS field or implied from the INSTANCE field. If not provided the system will default the current applicable version of the condition on file
+
+II. T24 Numeric Input */
+        CONDITION_VERSION : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=5, sysNumber=15.0, core=true, t24Name=CONDITION.VERSION, mandatory=false)
+        /* Used when designing Forms to indicated the instance of a formlet class.(e.g. Home Address vs. Work Address) */
+        INSTANCE : T24BusinessTypes:A
+            @i18n:Label (en=Instance)
+            @i18n:Tooltip (en=Instance)
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=8.0, core=true, t24Name=INSTANCE, mandatory=false)
+        OWNER -> OA_Framework:OA_ROLE
+            @i18n:Label (en=Owner)
+            @t24:i (align=L, inputBehaviour=I, maxLength=30, sysNumber=16.0, core=true, businessType=ANY, t24Name=OWNER, mandatory=false)
+        RESERVED_11 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=13.0, core=true, t24Name=RESERVED.11, mandatory=false)
+        RESERVED_12 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=12.0, core=true, t24Name=RESERVED.12, mandatory=false)
+        RESERVED_13 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=11.0, core=true, t24Name=RESERVED.13, mandatory=false)
+        RESERVED_14 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=10.0, core=true, t24Name=RESERVED.14, mandatory=false)
+        RESERVED_15 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=9.0, core=true, t24Name=RESERVED.15, mandatory=false)
+        ROLE -> byValue AA_Quotation:AA_QUOTATION_TYPE_CATALOG__CLASS__ROLE *
+            @t24:i (t24Name=ROLE)
+    }
+    AA_QUOTATION_TYPE_CATALOG__CLASS__ROLE
+    {
+        PRIVILEGE : AA_Quotation:AA_QUOTATION_TYPE_CATALOG__CLASS__ROLE__PRIVILEGE
+            @t24:i (align=L, inputBehaviour=I, maxLength=7, sysNumber=18.0, core=true, t24Name=PRIVILEGE, mandatory=false)
+        ROLE -> OA_Framework:OA_ROLE
+            @i18n:Label (en=Role)
+            @i18n:Tooltip (en="Roles are user defined and specified in EB.LOOKUP")
+            @t24:i (align=L, inputBehaviour=I, maxLength=30, sysNumber=17.0, core=true, businessType=ANY, t24Name=ROLE, mandatory=false)
+    }
+    AA_QUOTATION_TYPE_CATALOG__COMMON_CLASS_TYPE
+    {
+        /* It should be the valid CLASS record belongs to the class type defined in above COMMON.CLASS.TYPE field.   It is an associative multi-value set beginning with COMMON.CLASS.TYPE, Including COMMON.CLASS, COMMON.CLASS.CONDITION, COMMON.CONDITION.VERSION. */
+        COMMON_CLASS : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=20.0, core=true, t24Name=COMMON.CLASS, mandatory=false)
+/* Name of the CONDITION being included on the definition line
+1) It is an associative multi-value set beginning with COMMON.CLASS.TYPE, Including COMMON.CLASS, COMMON.CLASS.CONDITION and ending with COMMON.CONDITION.VERSION.
+2) Mandatory Input
+3) Validation Rules
+a. Must be a valid condition previously defined in the condition class file indicated in the COMMON.CLASS field.  The condition file name is formed by concatenating values of the PRODUCT.CODE and PREFIX.DESIGN fields from AA.CLASS.TYPE and the value of the CLASS field Examples COMMON.CLASS : MORTGAGE
+CLASS.TYPE : ACTIVITY.PROCESSING
+PRODUCT.CODE in AA.CLASS.TYPE for ACTIVITY.PROCESSING : AA
+PREFIX.DESIGN in AA.CLASS.TYPE for ACTIVITY.PROCESSING : ACT.DES
+CONDITION FILE NAME : AA.ACT.DES.MORTGAGE
+b. T24 String of 35 Characters Maximum */
+        COMMON_CLASS_CONDITION : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=22.0, core=true, t24Name=COMMON.CLASS.CONDITION, mandatory=false)
+/* This field specifies the name of the common class which is going to link to the current product definition.  Currently, three common class types exist in the system.
+Those are
+1. ACTIVITY.PROCESSING.CLASS
+2. API.CLASS
+3. DYNAMIC.DESCRIPTION.CLASS
+It is an associative multi-value set beginning with COMMON.CLASS.TYPE, Including COMMON.CLASS, COMMON.CLASS.CONDITION and ending with COMMON.CONDITION.VERSION.
+Validation Rule –
+1. It should be a valid class type record from AA.CLASS.TYPE application.
+2. The class types which are having the FUTURE attribute Value as COMMON only allowed as Common class types. */
+        COMMON_CLASS_TYPE -> AA_Framework:AA_CLASS_TYPE
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=19.0, core=true, businessType=ANY, t24Name=COMMON.CLASS.TYPE, mandatory=false)
+/* Indicate which version of the condition the definition  uses. A class may have one or more CONDITIONS, and CONDITIONs may have one or more VERSIONs
+1) It is an associative multi-value set beginning with COMMON.CLASS.TYPE, Including COMMON.CLASS, COMMON.CLASS.CONDITION and ending with COMMON.CONDITION.VERSION.
+2)Optional Input
+3) Validation Rules
+a. Must be a valid condition-version previously defined in the condition class file indicated in the COMMON.CLASS field. If not provided then system will default the latest version of the given CONDITION for the COMMON.CLASS.
+b.T24 Numeric Input */
+        COMMON_CONDITION_VERSION : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=5, sysNumber=23.0, core=true, t24Name=COMMON.CONDITION.VERSION, mandatory=false)
+        RESERVED_16 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=21.0, core=true, t24Name=RESERVED.16, mandatory=false)
+    }
+    AA_QUOTATION_TYPE_CATALOG__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=48.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    AA_QUOTATION_TYPE_CATALOG__DEFAULT_ROLE
+    {
+        DEFAULT_PRIVILEGE : AA_Quotation:AA_QUOTATION_TYPE_CATALOG__DEFAULT_ROLE__DEFAULT_PRIVILEGE
+            @t24:i (align=L, inputBehaviour=I, maxLength=7, sysNumber=6.0, core=true, t24Name=DEFAULT.PRIVILEGE, mandatory=false)
+        DEFAULT_ROLE -> OA_Framework:OA_ROLE
+            @t24:i (align=L, inputBehaviour=I, maxLength=30, sysNumber=5.0, core=true, businessType=ANY, t24Name=DEFAULT.ROLE, mandatory=false)
+    }
+    AA_QUOTATION_TYPE_CATALOG__DESCRIPTION
+    {
+        /* The Description of the Quotation as defined in AA.DEFINITION.MANAGER. */
+        DESCRIPTION : T24BusinessTypes:ANY required
+            @i18n:Label (en=Description)
+            @i18n:Tooltip (en=Description)
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, multiLanguage=true, sysNumber=1.0, core=true, t24Name=DESCRIPTION, mandatory=true)
+    }
+    AA_QUOTATION_TYPE_CATALOG__FULL_DESC
+    {
+        /* Detailed description as input in AA.DEFINITION.MANAGER */
+        FULL_DESC : T24BusinessTypes:ANY required
+            @i18n:Label (en="Full Description")
+            @i18n:Tooltip (en="Detailed Description ")
+            @t24:i (align=L, inputBehaviour=I, maxLength=60, multiLanguage=true, sysNumber=2.0, core=true, t24Name=FULL.DESC, mandatory=true)
+    }
+    AA_QUOTATION_TYPE_CATALOG__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=47.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    AA_QUOTATION_TYPE_CATALOG__OVERRIDE
+    {
+        /* Standard override field */
+        OVERRIDE : T24BusinessTypes:N
+            @i18n:Label (en=Override)
+            @i18n:Tooltip (en="Overrides generated by this transaction")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=44.0, core=true, t24Name=OVERRIDE, mandatory=false)
+    }
+    AA_QUOTATION_TYPE_CATALOG__PUBLISH_ERROR
+    {
+        /* Suggestion on how to correct the associated error. */
+        ERROR_SUGGESTION : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=38.0, core=true, t24Name=ERROR.SUGGESTION, mandatory=false)
+        /* In the event of the publishing effort resulting in a error,the PUBLISH.ERROR field being set to "Completed with Error". This field will contain error messages encountered. Validation Rules - Non Inputtable, System Maintained. */
+        PUBLISH_ERROR : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=37.0, core=true, t24Name=PUBLISH.ERROR, mandatory=false)
+    }
+    AA_QUOTATION_TYPE__DESCRIPTION
+    {
+        /* The Description of the Quotation as defined in AA.DEFINITION.MANAGER. */
+        DESCRIPTION : T24BusinessTypes:ANY
+            @i18n:Label (en=Description)
+            @i18n:Tooltip (en=Description)
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, multiLanguage=true, sysNumber=1.0, core=true, t24Name=DESCRIPTION, mandatory=false)
+    }
+    /* Simulation Type allows to define simulation activities and the data, i.e. the details required to be updated in AA.ARRANGEMENT.ACTIVITY and AA.SIM.XXX, where XXX is the property class for the Simulation to be processed for the defined activity. These then could be grouped to define a quotaton scenario for a Product Line */
+    AA_SIMULATION_TYPE
+        @i18n:Description (en="")
+        @t24:i (t24Name=AA.SIMULATION.TYPE, level=I, type=H, allowedFunctions="A C D E I L Q S", localRefApplicationSysNo=20.0, localRefAllowed=true)
+    {
+        /* The activity that is associated with the Simulation Type, i.e. when the activity that will be processed when the Simulation Type is included in the scenario in the Quotation Class. Mandatory field. */
+        ACTIVITY -> AA_ProductFramework:AA_ACTIVITY
+            @i18n:Label (en=Activity)
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=4.0, core=true, businessType=A, t24Name=ACTIVITY, mandatory=false)
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=29.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=30.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=26.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=27.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=23.0, core=true, t24Name=CURR.NO, mandatory=false)
+        DATE_TIME -> byValue AA_Quotation:AA_SIMULATION_TYPE__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=28.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        DESCRIPTION -> byValue AA_Quotation:AA_SIMULATION_TYPE__DESCRIPTION *
+            @t24:i (t24Name=DESCRIPTION)
+        INPUT -> byValue AA_Quotation:AA_SIMULATION_TYPE__INPUT *
+            @t24:i (t24Name=INPUT)
+        INPUTTER -> byValue AA_Quotation:AA_SIMULATION_TYPE__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        NAME -> byValue AA_Quotation:AA_SIMULATION_TYPE__NAME *
+            @t24:i (t24Name=NAME)
+        OVERRIDE -> byValue AA_Quotation:AA_SIMULATION_TYPE__OVERRIDE *
+            @t24:i (t24Name=OVERRIDE)
+        /* Simulation Type defined only applies to the ProductLine defined in this field. Mandatory field */
+        PRODUCT_LINE -> AA_ProductFramework:AA_PRODUCT_LINE
+            @i18n:Label (en="Product Line")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=3.0, core=true, businessType=A, t24Name=PRODUCT.LINE, mandatory=false)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=22.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        RESERVED_1 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=19.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_10 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=5.0, core=true, t24Name=RESERVED.10, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=18.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=17.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=16.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        RESERVED_5 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=15.0, core=true, t24Name=RESERVED.5, mandatory=false)
+        RESERVED_6 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=9.0, core=true, t24Name=RESERVED.6, mandatory=false)
+        RESERVED_7 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=8.0, core=true, t24Name=RESERVED.7, mandatory=false)
+        RESERVED_8 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=7.0, core=true, t24Name=RESERVED.8, mandatory=false)
+        RESERVED_9 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=6.0, core=true, t24Name=RESERVED.9, mandatory=false)
+/* Describes the Id of the Simulation Type
+
+Validation Rules
+Text field with a maximum of 35 characters */
+        SIMULATION_TYPE -> AA_Quotation:AA_SIMULATION_TYPE PK required
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=0.0, core=true, businessType=A, t24Name=SIMULATION.TYPE, mandatory=true)
+    }
+    AA_SIMULATION_TYPE__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=25.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    AA_SIMULATION_TYPE__DESCRIPTION
+    {
+        /* Detailed description of the Simulation Type record, describing the Simulation Type definition and purpose */
+        DESCRIPTION : T24BusinessTypes:A
+            @i18n:Label (en=Description)
+            @i18n:Tooltip (en=Description)
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=2.0, core=true, t24Name=DESCRIPTION, isTextarea=true, mandatory=false)
+    }
+    AA_SIMULATION_TYPE__INPUT
+    {
+/* Allows users to define a custom field name for the mapping definition which could be mapped either to AA.ARRANGEMENT.ACTIVITY field or to Property field
+
+Validation Rules
+Associated set of fields starting from this field to MAP.TO.PROPERTY.FIELD
+Mandatory when either MAP.TO.AAA.FIELD or MAP.TO.PROPERTY is defined
+Duplicates not allowed
+No special characters allowed except for .
+Only alphanumeric characters upto a maximum of 35 characters allowed */
+        INPUT : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=10.0, core=true, t24Name=INPUT, mandatory=false)
+        INPUT_MANDATORY : AA_Quotation:AA_SIMULATION_TYPE__INPUT__INPUT_MANDATORY
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=11.0, core=true, t24Name=INPUT.MANDATORY, mandatory=false)
+        /* When the field defined in INPUT needs to be mapped to AA.ARRANGEMENT.ACTIVITY the field name to which it needs to be mapped in AA.ARRANGEMENT.ACTIVITY is specified in this field. Either this field or MAP.TO.PROPERTY.FIELD is mandatory if any value is defined INPUT field */
+        MAP_TO_AAA_FIELD : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=12.0, core=true, t24Name=MAP.TO.AAA.FIELD, mandatory=false)
+        /* When the field defined in INPUT needs to be mapped to property , i.e. to AA.SIM.XXX where XXX is the property class, the field allows to capture the name of the property. Mandatory if any value is defined in INPUT field and no value is defined in MAP.TO.AAA.FIELD, i.e. either this field or MAP.TO.AAA.FIELD is mandatory when INPUT is defined */
+        MAP_TO_PROPERTY -> AA_ProductFramework:AA_PROPERTY
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=13.0, core=true, businessType=A, t24Name=MAP.TO.PROPERTY, mandatory=false)
+        /* When the field defined in INPUT needs to be mapped to property, the field to which it needs to be mapped in AA.SIM.XXX is specified in this field. Mandatory when MAP.TO.PROPERTY is defined */
+        MAP_TO_PROPERTY_FIELD : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=14.0, core=true, t24Name=MAP.TO.PROPERTY.FIELD, mandatory=false)
+    }
+    AA_SIMULATION_TYPE__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=24.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    AA_SIMULATION_TYPE__NAME
+    {
+        /* Short description of the Simulation Type record, describing the definition and purpose. Used for enrichment as well, when AA.SIMULATION.TYPE is defined VettingTable in any of the application */
+        NAME : T24BusinessTypes:A
+            @i18n:Label (en=Name)
+            @i18n:Tooltip (en="Indicates the Name ")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, multiLanguage=true, sysNumber=1.0, core=true, t24Name=NAME, mandatory=false)
+    }
+    AA_SIMULATION_TYPE__OVERRIDE
+    {
+        /* Standard HelptText for Override */
+        OVERRIDE : T24BusinessTypes:N
+            @i18n:Label (en=Override)
+            @i18n:Tooltip (en="Overrides generated by this transaction")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=21.0, core=true, t24Name=OVERRIDE, mandatory=false)
+    }
+}
+Enumerations {
+    AA_QUOTATION_CLASS__K_TYPE__K_TYPE : mml:string
+        CCY=CCY
+        COMMON=COMMON
+        DATED=DATED
+        DELAYED_TRACKING=DELAYED.TRACKING
+        EXTERNAL=EXTERNAL
+        EXTERNAL_FINANCIAL=EXTERNAL.FINANCIAL
+        FORWARD_DATED=FORWARD.DATED
+        INHERITANCE=INHERITANCE
+        MERGE=MERGE
+        MULTIPLE=MULTIPLE
+        NON_TRACKING=NON.TRACKING
+        OPT_CCY=OPT.CCY
+        TRACKING=TRACKING
+        TRACKING_ONLY=TRACKING.ONLY
+        TRANSACTION=TRANSACTION
+        TRIGGER=TRIGGER
+        VARIATION=VARIATION
+        VERSION=VERSION
+    AA_QUOTATION_CLASS__TYPE__TYPE : mml:string
+        CCY=CCY
+        COMMON=COMMON
+        DATED=DATED
+        DELAYED_TRACKING=DELAYED.TRACKING
+        EXTERNAL=EXTERNAL
+        EXTERNAL_FINANCIAL=EXTERNAL.FINANCIAL
+        FORWARD_DATED=FORWARD.DATED
+        INHERITANCE=INHERITANCE
+        MEMO_ENABLED=MEMO.ENABLED
+        MERGE=MERGE
+        MULTIPLE=MULTIPLE
+        NON_TRACKING=NON.TRACKING
+        OPT_CCY=OPT.CCY
+        TRACKING=TRACKING
+        TRACKING_ONLY=TRACKING.ONLY
+        TRANSACTION=TRANSACTION
+        TRIGGER=TRIGGER
+        VARIATION=VARIATION
+        VERSION=VERSION
+    AA_QUOTATION_DIARY__ACTIVITY__ACTIVITY_STATUS : mml:string
+        AUTH=AUTH
+        NULL=NULL
+        UNAUTH=UNAUTH
+    AA_QUOTATION_DIARY__STATUS : mml:string
+        ACTIVE=ACTIVE
+        COMPLETE=COMPLETE
+        INACTIVE=INACTIVE
+        NULL=NULL
+        READY_FOR_ARCHIVE=READY.FOR.ARCHIVE
+    AA_QUOTATION_TYPE_CATALOG__ACTION : mml:string
+        PUBLISH=PUBLISH
+    AA_QUOTATION_TYPE_CATALOG__CLASS__ROLE__PRIVILEGE : mml:string
+        INPUT=INPUT
+        NULL=NULL
+        SEE=SEE
+    AA_QUOTATION_TYPE_CATALOG__DEFAULT_ROLE__DEFAULT_PRIVILEGE : mml:string
+        INPUT=INPUT
+        NULL=NULL
+        SEE=SEE
+    AA_SIMULATION_TYPE__INPUT__INPUT_MANDATORY : mml:string
+        NO=NO
+        YES=YES
+}

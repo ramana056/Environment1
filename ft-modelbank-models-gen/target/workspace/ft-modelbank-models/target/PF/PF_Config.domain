@@ -1,0 +1,749 @@
+# UTF-8
+/* Configurations for PF */
+Domain PF_Config
+    @t24:i (module=PF)
+    @java:Package (value=com.temenos.t24.datamodel.pf.pf_config)
+namespace "http://www.temenos.com/t24/PF_Config"
+metamodelVersion 1.30.6
+Classes {
+/* When REROUTE is specified for a Message, this table is used by the Outward Message Formatting module to replace the original carrier.
+The Disposition field in the Message Header may be set to REROUTE using Message Management, or the Disposition Control Table may be used to set a condition on which to 'Reroute' all Messages where that condition applies. */
+    DE_ALTERNATE
+        @i18n:Description (en="")
+        @t24:i (t24Name=DE.ALTERNATE, level=I, type=H, allowedFunctions="A C D E H I L P Q R S", localRefAllowed=false)
+    {
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=12.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=13.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=9.0, core=true, t24Name=AUTHORISER, mandatory=false)
+/* Specifies a new Carrier and Address Number to replace the usual one obtained from the delivery Product file.
+Validation Rules:
+a)    The carrier, e.g. SWIFT, PRINT, TELEX (Mandatory input.) b)    '.' c)    1-3 numeric character Address Version Number as in the ID of       the Address file. (Optional input, default value '.1')
+Carrier must reference a record on the carrier definition file, DE.CARRIER.
+A record must exist on the DE.ADDRESS file, with a key composed of:     -  the customer or company code in the ID of this record    -  the address field from the carrier record (DE.CARRIER)    -  the address number field from this field  e.g. If the ID of the record is US0010001.C-100001.PRINT.1 and this field contains TELEXF.1, the carrier record for TELEXF is accessed initially to find out the addresses used for TELEXF.  So, if the ADDRESS field for TELEXF is TELEX, a record must exist on DE.ADDRESS with a key of US0010001.C-100001.TELEX.1.
+The carrier module, as defined in the field CARRIER.MODULE on the DE.CARRIER record, must be in the list of outward carriers on DE.PARM. */
+        CARRIER_ADDR_NO : T24BusinessTypes:A required
+            @i18n:Label (en=Carrier)
+            @i18n:Tooltip (en="Will this message go as SWIFT or PRINT or TELEX etc")
+            @t24:i (align=L, inputBehaviour=I, maxLength=14, sysNumber=1.0, core=true, t24Name=CARRIER.ADDR.NO, mandatory=true)
+/* Specifies the number of copies of a message to be generated.  If not entered the value on the message Header will be unchanged.
+Validation Rules:
+1-2 numeric characters. (Optional input)  Must be blank if alternate carrier is EUCLID. */
+        COPIES : T24BusinessTypes:N
+            @i18n:Label (en="Copies ")
+            @t24:i (align=R, inputBehaviour=I, maxLength=3, sysNumber=4.0, core=true, t24Name=COPIES, mandatory=false)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=10.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=6.0, core=true, t24Name=CURR.NO, mandatory=false)
+        DATE_TIME -> byValue PF_Config:DE_ALTERNATE__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=11.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+/* Specifies the Format version to be used when reading the DE.FORMAT.PRINT file.  If not entered, the value on the message header will be retained.
+Validation Rules:
+1-3 numeric characters. (Optional input)  If entered for alternate carrier of SWIFT, TELEXF or TELEX, must be 1.  Must be blank if alternate carrier is EUCLID. */
+        FORMAT : T24BusinessTypes:N
+            @i18n:Label (en=Format)
+            @t24:i (align=R, inputBehaviour=I, maxLength=3, sysNumber=3.0, core=true, t24Name=FORMAT, mandatory=false)
+/* Specifies the ID of the Company, Customer or Account that is to be rerouted.
+When the ID is a Customer or Account number it is prefixed with the appropriate Company Code when building the key of this file.
+The entire key may be input if desired, otherwise the Company code used will be from the user sign on.
+When routing messages the Company Code used is 'CUS COMPANY' (from the Message header) for a Customer level ID, and 'COMPANY' for other IDs.
+When a Message is to be 'Rerouted' this file is searched for a record providing a replacement for the Carrier Addr-No, Language, Format and Copies parameters that would otherwise be taken from the DE.PRODUCT file. The original Language, Format and Copies will be unchanged if they are not on the alternate file.
+Only a record at the same level as the Product record will be accessed. Therefore, if Product routing was at customer level, the ALTERNATE table will be accessed at customer level.
+Validation Rules:
+a)    Either a Company code               or       'C-'followed by a Customer number   or       'A-'followed by an Account number b)    '.' c)    The carrier, e.g. PRINT, SWIFT, TELEX d)    '.' e)    1-3 numeric characters  (Mandatory input.)
+The carrier must reference a carrier defined on the carrier definition file, DE.CARRIER.
+The carrier module, as defined in the field CARRIER.MODULE on the DE.CARRIER record, must be in the list of outward carriers on DE.PARM. */
+        ID -> PF_Config:DE_ALTERNATE PK required
+            @i18n:Label (en="Transaction Ref")
+            @i18n:Tooltip (en="Transaction Reference")
+            @t24:i (align=L, inputBehaviour=I, maxLength=45, sysNumber=0.0, core=true, businessType=A, t24Name=ID, mandatory=true)
+        INPUTTER -> byValue PF_Config:DE_ALTERNATE__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+/* Defines the Language to be used for printed messages.  If not entered the Language on the message Header will remain unchanged.
+If the alternate carrier is Print, then Language is required in order to select the appropriate record from the Format Print table.
+Validation Rules:
+1-2 type A (alphanumeric) characters. (Optional input)  If entered it must be a valid Language mnemonic.  Must be blank if alternate carrier is EUCLID. */
+        LANGUAGE : T24BusinessTypes:A
+            @i18n:Label (en=Language)
+            @i18n:Tooltip (en="Indicates the Language used")
+            @t24:i (align=L, inputBehaviour=I, maxLength=2, sysNumber=2.0, core=true, t24Name=LANGUAGE, mandatory=false)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=5.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+    }
+    DE_ALTERNATE__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=8.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    DE_ALTERNATE__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=7.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    DE_APP_FORMAT
+        @i18n:Description (en="")
+        @t24:i (t24Name=DE.APP.FORMAT, level=I, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        APP_FORMAT -> byValue PF_Config:DE_APP_FORMAT__APP_FORMAT *
+            @t24:i (t24Name=APP.FORMAT)
+        DE_APP_FORMAT_ID : PF_Config:DE_APP_FORMAT__DE_APP_FORMAT_ID PK required
+            @t24:i (align=L, inputBehaviour=I, maxLength=6, sysNumber=0.0, core=true, t24Name=DE.APP.FORMAT.ID, mandatory=true)
+    }
+    DE_APP_FORMAT__APP_FORMAT
+    {
+        APP_FORMAT : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=1.0, core=true, t24Name=APP.FORMAT, mandatory=false)
+    }
+/* Customer Preferences is a user friendly interface for creating records in DE.PRODUCT.
+
+The record can be created for a CUSTOMER or an Account.  For each Message Group (from the new DE.MESSAGE.GROUP table), customer can define the following:
+
+a) Carrier in which the messages should be sent through
+b) Address version where the message has to be delivered
+c) Special format of the message
+d) Language definition
+e) Copy customer - the other customer/employee to receive that message group
+f) Number of copies needed
+g) The blackout SMS start and end times
+h) The local time offset from UST.
+
+When the Preferences are set and the record is authorised, DE.PRODUCT records will be created and DE.ADDRESS for the customer SMS addresses will be updated with the blackout start and end time. */
+    DE_CUSTOMER_PREFERENCES
+        @i18n:Description (en="")
+        @t24:i (t24Name=DE.CUSTOMER.PREFERENCES, level=I, type=H, allowedFunctions="A D E H I L P Q R S", localRefApplicationSysNo=35.0, localRefAllowed=true)
+    {
+        ACCOUNT_NO -> byValue PF_Config:DE_CUSTOMER_PREFERENCES__ACCOUNT_NO *
+            @t24:i (t24Name=ACCOUNT.NO)
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=44.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=45.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=41.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=42.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=38.0, core=true, t24Name=CURR.NO, mandatory=false)
+        DATE_TIME -> byValue PF_Config:DE_CUSTOMER_PREFERENCES__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+/* Validation rules:
+Must be a valid Date Frequency
+At the time of Creating the new Arrangements, the system would default Statement Frequency 1 */
+        DEFAULT_STMT_FQU1 : T24BusinessTypes:FQU
+            @t24:i (align=L, inputBehaviour=I, maxLength=16, sysNumber=25.0, core=true, t24Name=DEFAULT.STMT.FQU1, mandatory=false)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=43.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        INPUTTER -> byValue PF_Config:DE_CUSTOMER_PREFERENCES__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        MESSAGE_GROUP -> byValue PF_Config:DE_CUSTOMER_PREFERENCES__MESSAGE_GROUP *
+            @t24:i (t24Name=MESSAGE.GROUP)
+/* Holds the time zone differences between the customers Home time zone and UST (Universal Standard Time).
+
+Validation rules:
+Entered in  PLUS HH:MM or MINUS HH:MM format ,
+Example, Customer in Paris will enter +01:00 hours and Customer in Central America will enter -06:00 hours denoting time difference with UST */
+        OFFSET : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=6, sysNumber=24.0, core=true, t24Name=OFFSET, mandatory=false)
+        OVERRIDE -> byValue PF_Config:DE_CUSTOMER_PREFERENCES__OVERRIDE *
+            @t24:i (t24Name=OVERRIDE)
+/* Flag to force the rebuild of the DE.PRODUCT keys updated in Customer preferences
+DE.PRODUCT.ID keys will be generated based on Message type defined in DE.MESSAGE.GROUP
+When DE.MESSAGE.GROUP is modified ,then corresponding Customer Preferences record need to
+be rebuild.
+
+Validation Rules:
+1) Tick box field. */
+        PRD_ID_REBUILD : PF_Config:DE_CUSTOMER_PREFERENCES__PRD_ID_REBUILD
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=20.0, core=true, t24Name=PRD.ID.REBUILD, mandatory=false)
+/* Key to this application is a Customer number or an Account number facilitating the user to provide message preferences in terms of selecting carrier, address, related customers to be copied and so.
+
+Validation rules:
+1)Key can be valid Customer number or A-Account number
+Eg: 1000 or A-25143
+2)DE.PRODUCT records will be created / updated using the  MESSAGE.GROUP and PREFERENCE.ID as the id. */
+        PREFERENCE_ID -> PF_Config:DE_CUSTOMER_PREFERENCES PK required
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=0.0, core=true, businessType=A, t24Name=PREFERENCE.ID, mandatory=true)
+        PRINT_ATTR_NAME -> byValue PF_Config:DE_CUSTOMER_PREFERENCES__PRINT_ATTR_NAME *
+            @t24:i (t24Name=PRINT.ATTR.NAME)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=37.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        RESERVED_1 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=29.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_11 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=34.0, core=true, t24Name=RESERVED.11, mandatory=false)
+        RESERVED_12 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=33.0, core=true, t24Name=RESERVED.12, mandatory=false)
+        RESERVED_13 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=32.0, core=true, t24Name=RESERVED.13, mandatory=false)
+        RESERVED_14 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=31.0, core=true, t24Name=RESERVED.14, mandatory=false)
+        RESERVED_15 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=30.0, core=true, t24Name=RESERVED.15, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=28.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        SMS_ADDRESS -> byValue PF_Config:DE_CUSTOMER_PREFERENCES__SMS_ADDRESS *
+            @t24:i (t24Name=SMS.ADDRESS)
+/* Interest or statement service charge schedule will be synced with statement cycle based on the option selected.
+Valid Values : CHARGE.ONLY - Periodic charge(STATEMENTCHARGE) to be updated.
+INTEREST.ONLY - Interest schedule will be updated.
+BOTH - Both Interest and charge. */
+        UPDATE_SCHEDULE : PF_Config:DE_CUSTOMER_PREFERENCES__UPDATE_SCHEDULE
+            @t24:i (align=L, inputBehaviour=I, maxLength=30, sysNumber=35.1, core=false, t24Name=UPDATE.SCHEDULE, mandatory=false)
+    }
+    DE_CUSTOMER_PREFERENCES__ACCOUNT_NO
+    {
+        /* Interest and statement service charge schedule will be synced with statement cycle for the Account selected, Based on the option selcted in Update schedule field. */
+        ACCOUNT_NO -> AC_AccountOpening:ACCOUNT
+            @i18n:Label (en=Account)
+            @i18n:Tooltip (en="Indicates Customer Account Number")
+            @t24:i (align=L, inputBehaviour=I, maxLength=36, sysNumber=35.2, core=false, businessType=POSANT, t24Name=ACCOUNT.NO, mandatory=false)
+    }
+    DE_CUSTOMER_PREFERENCES__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=40.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    DE_CUSTOMER_PREFERENCES__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=39.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    DE_CUSTOMER_PREFERENCES__MESSAGE_GROUP
+    {
+        CARRIER -> byValue PF_Config:DE_CUSTOMER_PREFERENCES__MESSAGE_GROUP__CARRIER *
+            @t24:i (t24Name=CARRIER)
+        COPY_CUSTOMER -> byValue PF_Config:DE_CUSTOMER_PREFERENCES__MESSAGE_GROUP__COPY_CUSTOMER *
+            @t24:i (t24Name=COPY.CUSTOMER)
+        DE_PRODUCT_ID -> byValue PF_Config:DE_CUSTOMER_PREFERENCES__MESSAGE_GROUP__DE_PRODUCT_ID *
+            @t24:i (t24Name=DE.PRODUCT.ID)
+/* Specifies the Message group name that provides details of all Messages to be triggered.
+
+Validation rules:
+1)Must be a valid entry in DE.MESSAGE.GROUP
+2)Mandatory Input */
+        MESSAGE_GROUP -> DE_Config:DE_MESSAGE_GROUP required
+            @i18n:Label (en="Message Group")
+            @i18n:Tooltip (en="Message Group")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=1.0, core=true, businessType=A, t24Name=MESSAGE.GROUP, mvSvExpansionAccess=NODELETE, mandatory=true)
+/* Specifies the role of the customer for the MESSAGE.GROUP
+Subvalue field. Part of MESSAGE.GROUP multivalue set.
+
+Validation rules:
+1)Valid record in AA.CUSTOMER.ROLE */
+        ROLE -> AA_Customer:AA_CUSTOMER_ROLE
+            @i18n:Label (en=Role)
+            @i18n:Tooltip (en="Roles are user defined and specified in EB.LOOKUP")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=2.0, core=true, businessType=A, t24Name=ROLE, mandatory=false)
+    }
+    DE_CUSTOMER_PREFERENCES__MESSAGE_GROUP__CARRIER
+    {
+/* Specifies the Version of address to which the message should be sent to.
+Validation rules:
+1)Mandatory Input
+2)Address version number must be 1-3 numeric character
+3)Record must exist in DE.ADDRESS file with this version specific to the Carrier. */
+        ADDRESS : T24BusinessTypes:A
+            @i18n:Label (en=Address)
+            @i18n:Tooltip (en="Define the address")
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=6.0, core=true, t24Name=ADDRESS, mandatory=false)
+/* Specifies the Carrier to be used for sending messages
+Validation rules:
+1)Mandatory Input
+2)Carrier must reference a record on the carrier definition file, DE.CARRIER
+3) Must be in the list of outward carriers on DE.PARM. */
+        CARRIER -> DE_Config:DE_CARRIER required
+            @i18n:Label (en=Carrier)
+            @i18n:Tooltip (en=Carrier)
+            @t24:i (align=L, inputBehaviour=I, maxLength=10, sysNumber=4.0, core=true, businessType=A, t24Name=CARRIER, mandatory=true)
+/* Specifies the number of copies of a message required.
+
+Validation Rules:
+1)1-3 numeric characters
+2)Allowed only for Print carrier
+3)Not valid for formatting carrier module of 'SWIFT'.
+4)Default value is'1' */
+        COPIES : T24BusinessTypes:N
+            @i18n:Label (en="Copies ")
+            @t24:i (align=R, inputBehaviour=I, maxLength=2, sysNumber=8.0, core=true, t24Name=COPIES, mandatory=false)
+/* Specifies the format version to be used, and must always be '1' if the formatting module is SWIFT.
+
+Validation Rules::
+1) 1-2 numeric characters
+2) Optional Input
+3) Defaults to 1 */
+        FORMAT : T24BusinessTypes:N
+            @i18n:Label (en=Format)
+            @t24:i (align=R, inputBehaviour=I, maxLength=2, sysNumber=7.0, core=true, t24Name=FORMAT, mandatory=false)
+        /* Defines the Hold Mail End Date if Hold Output is set to Y and Hold Start Date is provided. Optional Input. */
+        HOLD_MAIL_END : T24BusinessTypes:D
+            @i18n:Label (en="HM End")
+            @i18n:Tooltip (en="Specifies if the end of Hold Mail period")
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=12.0, core=true, t24Name=HOLD.MAIL.END, mandatory=false)
+/* Defines the Hold Options Available when Hold Output is set to Y.
+Valid Values : HELD, DELETED, CLEAR and SEND
+HELD option is to hold the output delivery message for the carrier address during Hold period. Hold needs to be manually released post the Hold Expiry date
+DELETED option does not generate output delivery message for the carrier address during Hold Period
+CLEAR and SEND are applicable only for PRINT Carrier. Once Hold Expiry is reached for a Carrier Address, CLEAR deletes the Hold Records, created during Hold Period, and SEND automatically pushes Held records to PRINT.CUST.OUTPUT file for processing them using Online Service HOLD.MAIL.ONLINE. */
+        HOLD_MAIL_OPT : PF_Config:DE_CUSTOMER_PREFERENCES__MESSAGE_GROUP__CARRIER__HOLD_MAIL_OPT
+            @i18n:Label (en="Hold Option")
+            @i18n:Tooltip (en="Specifies Hold Mail Option")
+            @t24:i (align=L, inputBehaviour=I, maxLength=7, sysNumber=13.0, core=true, t24Name=HOLD.MAIL.OPT, mandatory=false)
+        /* Defines the Hold Mail Start Date if Hold Output is set to Y. Optional Input */
+        HOLD_MAIL_START : T24BusinessTypes:D
+            @i18n:Label (en="HM Start")
+            @i18n:Tooltip (en="Specifies if the start of Hold Mail period")
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=11.0, core=true, t24Name=HOLD.MAIL.START, mandatory=false)
+/* Defines whether or not the output delivery message is to be held.
+This field can only be populated for Carriers for which ALLOW.HOLD is set to YES in DE.CARRIER. If this field is set to 'Y' then Hold Mail Options, when populated, get auto-updated in carrier Address Record in DE.ADDRESS.
+Validation Rules: Error is thrown when Allow Hold is not set for Carrier.
+Valid Values Y or NO.  Optional input. */
+        HOLD_OUTPUT : PF_Config:DE_CUSTOMER_PREFERENCES__MESSAGE_GROUP__CARRIER__HOLD_OUTPUT
+            @i18n:Label (en="Hold Output")
+            @i18n:Tooltip (en="Specifies if the mail needs to be held Y or N")
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=10.0, core=true, t24Name=HOLD.OUTPUT, mandatory=false)
+/* Specifies the language to be used for messages
+Validation Rules:
+
+1)1-2  A (alphanumeric) characters. (A valid language mnemonic.)
+2) Optional input. If it is not entered the 1st language in the LANGUAGE table will be used.
+If entered it must be a key to the LANGUAGE table. */
+        LANGUAGE : T24BusinessTypes:A
+            @i18n:Label (en=Language)
+            @i18n:Tooltip (en="Indicates the Language used")
+            @t24:i (align=L, inputBehaviour=I, maxLength=2, sysNumber=9.0, core=true, t24Name=LANGUAGE, mandatory=false)
+/* Provides an option to the user to specify if the Preference details provided in the associated set of fields of Carrier, Address are indeed correct and messages could be triggered by the system.  Otherwise, the details entered will be treated as informatory or yet to be confirmed.
+
+Validation Rules:
+1)1 to 3 Alpha numeric Characters
+2)Can be YES or NO
+When YES is opted, DE.PRODUCT records will be created and delivery messages will be triggered.  Option NO will not trigger the creation of DE.PRODUCT records.
+When an YES option is changed to NO, all related preference details will be removed from DE.PRODUCT */
+        REQUIRED : PF_Config:DE_CUSTOMER_PREFERENCES__MESSAGE_GROUP__CARRIER__REQUIRED
+            @i18n:Label (en=Required)
+            @i18n:Tooltip (en=Required)
+            @t24:i (align=L, inputBehaviour=I, maxLength=8, sysNumber=5.0, core=true, t24Name=REQUIRED, mandatory=false)
+        RESERVED_10 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=18.0, core=true, t24Name=RESERVED.10, mandatory=false)
+        RESERVED_6 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=14.0, core=true, t24Name=RESERVED.6, mandatory=false)
+        RESERVED_7 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=15.0, core=true, t24Name=RESERVED.7, mandatory=false)
+        RESERVED_8 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=16.0, core=true, t24Name=RESERVED.8, mandatory=false)
+        RESERVED_9 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=17.0, core=true, t24Name=RESERVED.9, mandatory=false)
+    }
+    DE_CUSTOMER_PREFERENCES__MESSAGE_GROUP__COPY_CUSTOMER
+    {
+/* Specify other Customers for whom a copy of the message needs to be sent.
+
+Validation rules:
+1)Valid customer
+2)Copy customers will be updated in DE.PRODUCT only for PRINT,SMS and EMAIL carriers */
+        COPY_CUSTOMER -> ST_Customer:CUSTOMER
+            @t24:i (align=R, inputBehaviour=I, maxLength=10, sysNumber=3.0, core=true, businessType=CUS, t24Name=COPY.CUSTOMER, mandatory=false)
+    }
+    DE_CUSTOMER_PREFERENCES__MESSAGE_GROUP__DE_PRODUCT_ID
+    {
+/* Specifies the Key of DE.PRODUCT record which will be
+created on authorisation of this Customer preferences
+
+Validation rules:
+1)System updated field */
+        DE_PRODUCT_ID : T24BusinessTypes:A
+            @i18n:Label (en="DE Product Id")
+            @i18n:Tooltip (en="DE Product Id")
+            @t24:i (align=L, inputBehaviour=N, maxLength=50, sysNumber=19.0, core=true, t24Name=DE.PRODUCT.ID, mandatory=false)
+    }
+    DE_CUSTOMER_PREFERENCES__OVERRIDE
+    {
+/* Contains all the override messages which the user has
+confirmed during input.
+At validation,the system may generate a series of screen
+override messages to indicate some anomaly within the
+transaction (e.g. maturity date is not a working day for
+this currency). User may change the data or override the
+message.
+
+Validation Rules:
+(System generated. Multivalue field.)
+This is a NOINPUT field. */
+        OVERRIDE : T24BusinessTypes:A
+            @i18n:Label (en=Override)
+            @i18n:Tooltip (en="Overrides generated by this transaction")
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=36.0, core=true, t24Name=OVERRIDE, mandatory=false)
+    }
+    DE_CUSTOMER_PREFERENCES__PRINT_ATTR_NAME
+    {
+/* Associated MultiValue Fields
+Lookup Field for giving Printing Options */
+        PRINT_ATTR_NAME : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=26.0, core=true, t24Name=PRINT.ATTR.NAME, mandatory=false)
+/* Associated MultiValue Fields
+Lookup Field for giving Printing Options Value */
+        PRINT_ATTR_VALUE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=27.0, core=true, t24Name=PRINT.ATTR.VALUE, mandatory=false)
+    }
+    DE_CUSTOMER_PREFERENCES__SMS_ADDRESS
+    {
+        BLACKOUT_START -> byValue PF_Config:DE_CUSTOMER_PREFERENCES__SMS_ADDRESS__BLACKOUT_START *
+            @t24:i (t24Name=BLACKOUT.START)
+/* Specifies the Customers SMS address to define the blackout periods.  During the blackout period, SMS message will not reach the Customer.
+
+Validation rules
+SMS address should be defined in the format like SMS.1, SMS.2 where SMS.1 represents the first SMS number provided in Customer table, SMS.2 represents the second SMS number in Customer table. */
+        SMS_ADDRESS : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=8, sysNumber=21.0, core=true, t24Name=SMS.ADDRESS, mandatory=false)
+    }
+    DE_CUSTOMER_PREFERENCES__SMS_ADDRESS__BLACKOUT_START
+    {
+/* Indicates the End time of blackout period.
+It is possible to specify one or more time periods using fields BLACKOUT.START and BLACKOUT.END
+during which customer may not wish to receive a SMS message during a day.
+
+Validation rules
+1)Time should be entered in HH:MM format (24 hour format).
+HH denoting hours and MM -  denoting minutes
+2) Applicable to SMS carrier only. Valid only for SMS carrier */
+        BLACKOUT_END : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=5, sysNumber=23.0, core=true, t24Name=BLACKOUT.END, mandatory=false)
+/* Indicates the start time of blackout period.
+It is possible to specify one or more time periods using fields BLACKOUT.START and BLACKOUT.END
+during which customer may not wish to receive a SMS message during a day.
+
+
+Validation rules:
+
+1)Time should be entered in HH:MM format (24 hour format).
+HH denoting hours and MM -  denoting minutes
+2)Applicable to SMS carrier only. */
+        BLACKOUT_START : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=5, sysNumber=22.0, core=true, t24Name=BLACKOUT.START, mandatory=false)
+    }
+/* Product information is used by the Outward Message Formatting routine when expanding a header for the copies of a message required.  Product information consists of the Status (Normal, Hold or Delete) and Priority (Normal, Priority or Urgent) that a message must be set to.  It also specifies for each Carrier/Delivery Address, which version of the format should be used, and how many copies should be made.
+After a header has been expanded (Disposition is FORMATTED) the Product file is not read again if the message returns to the Unformatted Queue (RESUBMITted).  Therefore, it is necessary instead to use REROUTE to change the Language, Format or copies.
+Product records may be specified for:
+a particular company            a customer            an account
+and each of the above may be specified for:
+all message types            specific message types            all banking applications            a specific application.
+If a record for a particular customer, message type, application, etc. does not exist a more general record must be available.
+
+Example:
+For company 'X', type 100 messages normally go by Telex, except for Funds Transfer messages to customers 20000 and 30000 which go by SWIFT.  The following records are required to define these conditions:
+Field 0:  X.100.ALL         CARRIER.ADDR NO:  TELEX.1 Field 0:  C-20000.100.FT    CARRIER.ADDR NO:  SWIFT.1 Field 0:  C-30000.100.FT    CARRIER.ADDR NO:  SWIFT.1
+
+Note:
+Product can set both Status and Priority for a specific Company, Customer or Account, but far greater flexibility is available if DE.DISP.CONTROL is used as Status and Priority can then be set according to the values in many different fields in the message header.
+In order to hold output for a customer/account a carrier should be chosen with with HOLD.OUTPUT set to 'Y', (see DE.ADDRESS for details). */
+    DE_PRODUCT
+        @i18n:Description (en="")
+        @t24:i (t24Name=DE.PRODUCT, level=I, type=H, allowedFunctions="A C D E H I L P Q R S", localRefApplicationSysNo=12.0, localRefAllowed=true)
+    {
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=21.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=22.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=18.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        CARRIER_ADDR_NO -> byValue PF_Config:DE_PRODUCT__CARRIER_ADDR_NO *
+            @t24:i (t24Name=CARRIER.ADDR.NO)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=19.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=15.0, core=true, t24Name=CURR.NO, mandatory=false)
+/* Field to indicate the status of customer mailing address.
+Value in this field are defined under the virtual table(EB.LOOKUP) CUSTOMER.MAIL.INDICATOR.
+Example:
+M = Mail (default)
+H = Hold Mail
+O = No Mailings
+F = Foreign
+B = Bad Address; this lookup record will have Data name as BAD.ADDRESS and data value as YES.
+Any other code(lookup id) can be used to indicate bad address through data name and value in lookup record as mentioned for B. */
+        CUS_MAIL_IND : PF_Config:DE_PRODUCT__CUS_MAIL_IND
+            @t24:i (align=L, inputBehaviour=I, maxLength=1, sysNumber=12.1, core=false, t24Name=CUS.MAIL.IND, mandatory=false)
+        DATE_TIME -> byValue PF_Config:DE_PRODUCT__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=20.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+/* Identifies a Company, Customer or Account, Message Type or Report Mnemonic, and Application Mnemonic whose messages are controlled by this record.
+When the ID is a Customer or Account number a Company Code can be allowed to default when building the key of this file. If the Delivery System is 'Resident' (as specified in the DE.PARM file) mnemonics may be used for Company, Customer and Account.
+When inputting to this table the Company Code used will be for the Company the user signed on to. When a Customer file is shared care must be taken to sign onto the Company where the Customers are held.
+When the Outward Message Formatting routine looks up a Delivery Product record it uses
+-  the CUS COMPANY field at the Customer level
+-  the COMPANY CODE field at account level
+-  default definition at COMPANY CODE and if not found, DEFAULT.FINAN.COM is used.
+The format of the id is as follows:
+1) 9 type A (alphanumeric) characters. (This must be the sign-on Company, which defaults when the next part of the key is 'C-' or 'A-'.)
+2) '.' (entered only if company code is entered)
+3) Either 'C-' followed by 1-10 numeric character customer number or 'C-' followed by 1-10 alphanumeric customer mnemonic. or 'A-' followed by 1-16 numeric character account number. or 'A-' followed by 1-10 alphanumeric account mnemonic or nothing (if the record is to apply to the whole company).
+4) '.'
+5) Either 1-4 (entered if 3) is entered) numeric character Message Type or up to 10 type 'MNE' characters. Report Mnemonic. or 'ALL'
+6) '.'
+7) Either 'FX' 'FT' 'MM' 'LD' 'AC' 'EF' 'SC' 'BD' or 'ALL' or XXYY where XX is a valid application code (such as AC) and YY is set by the Application (eg. ACN1 which is used to produce a Nostro statement).
+See the appropriate section of the User Guide for further details for each specific application.
+When the Delivery Product file is used by Outward Message Formatting it looks for a record specific to the message being processed before searching for more general records.
+It uses the Account Number, Customer Number, Cus Company and Company Code from the Message Header to search for keys in the following sequence; NOTE : Message type may indicate the report mnemonic:
+Company Code.A-Account.Message Type.Application inc. Product Code Company Code.A-Account.Message Type.Application Company Code.A-Account.Message Type.ALL Company Code.A-Account.ALL.Application inc. Product Code Company Code.A-Account.ALL.Application Company Code.A-Account.ALL.ALL Cus Company.C-Customer.Message Type.Application inc. Product Code Cus Company.C-Customer.Message Type.Application Cus Company.C-Customer.Message-Type.ALL Cus Company.C-Customer.ALL.Application inc. Product Code Cus Company.C-Customer.ALL.Application Company Code.C-Customer.ALL.ALL Company Code.Message Type.Application inc. Product Code Company Code.Message Type.Application Company Code.Message Type.ALL Company Code.ALL.Application inc. Product Code Company Code.ALL.Application Company Code.ALL.ALL
+Validation Rules:
+
+(See also 'Details') 1) Company Code or Mnemonic. This         can be allowed to default for Customer or Account level         records. 2) 'C-' and Customer Number or Mnemonic or 'A-'         and Account Number or Mnemonic (Not present for Company         level records.) 3) Message Type, or Report Mnemonic or         'ALL' (Mandatory.) 4) Application, or 'ALL' (Mandatory.) */
+        ID -> PF_Config:DE_PRODUCT PK required
+            @i18n:Label (en="Transaction Ref")
+            @i18n:Tooltip (en="Transaction Reference")
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=0.0, core=true, businessType=A, t24Name=ID, mandatory=true)
+        INPUTTER -> byValue PF_Config:DE_PRODUCT__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        K_COPIES -> byValue PF_Config:DE_PRODUCT__K_COPIES *
+            @t24:i (t24Name=K.COPIES)
+        K_FORMAT -> byValue PF_Config:DE_PRODUCT__K_FORMAT *
+            @t24:i (t24Name=K.FORMAT)
+        K_PRIORITY : PF_Config:DE_PRODUCT__K_PRIORITY
+            @i18n:Label (en=Priority)
+            @i18n:Tooltip (en="Original Priorityof the message in Mapping")
+            @t24:i (align=L, inputBehaviour=N, maxLength=1, sysNumber=2.0, core=false, t24Name=K.PRIORITY, mandatory=false)
+/* Specifies the status that a message matching this product key should be set to.
+During formatting, if delete is specified on the product record, the message record is checked to see if delete is allowed for the message type currently being processed.  If delete is not allowed, the status of 'DELETE' on the product record is ignored.
+Validation Rules:
+'HOLD'  'DELETE' or nothing. (Optional input)
+If the product record is for a specific message type and delete is not allowed for the message type, 'DELETE' cannot be entered. */
+        MESSAGE_STATUS : PF_Config:DE_PRODUCT__MESSAGE_STATUS
+            @i18n:Label (en="Message Status")
+            @i18n:Tooltip (en="Message Status")
+            @t24:i (align=L, inputBehaviour=I, maxLength=6, sysNumber=1.0, core=true, t24Name=MESSAGE.STATUS, mandatory=false)
+        OVERRIDE -> byValue PF_Config:DE_PRODUCT__OVERRIDE *
+            @t24:i (t24Name=OVERRIDE)
+/* Specifies the Priority that a message matching this product key should be set to.
+Urgent ('U') is the highest priority, and requires immediate confirmation of delivery if this can be provided by the carrier.
+Priority ('P') has a lower priority than 'U'.
+Everything else is Normal ('N').
+Note : The priority defined in this table will increase the priority of a        message but will never decrease it, e.g. a product record is set up        with a priority of 'P'.  If a message matching the product key has        a priority of 'U' it will remain unchanged.  However, if a message        has a priority of 'N', it will be changed to 'P'.
+Validation Rules:
+'U', 'P' or nothing. (Optional input) */
+        PRIORITY : PF_Config:DE_PRODUCT__PRIORITY
+            @i18n:Label (en=Priority)
+            @t24:i (align=L, inputBehaviour=I, maxLength=1, sysNumber=2.0, core=true, t24Name=PRIORITY, mandatory=false)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=14.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=3, sysNumber=11.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=3, sysNumber=10.0, core=true, t24Name=RESERVED.3, mandatory=false)
+    }
+    DE_PRODUCT__CARRIER_ADDR_NO
+    {
+/* Specifies the carrier to be used, and the version of the address.
+Although a record may exist on the Product Table to send all messages to a particular customer by TELEX and PRINT for example, if copies are not allowed for a particular message type (copies on the message table is 'NO'), only the first carrier will be used when the message is formatted.
+Validation Rules:
+Can be entered as either   carrier.address-no  or just   carrier
+Carrier must reference a record on the carrier definition file, DE.CARRIER.
+The carrier module, as defined in the field CARRIER.MODULE on the DE.CARRIER record, must be in the list of outward carriers on DE.PARM.
+If address version number is entered, it must be 1-3 numeric characters.
+Address number defaults to 1.
+If the Product record is for a customer or a company and the carrier is not Euclid, an address must exist on the Address file for the Carrier Address number.  The ADDRESS field from the carrier record (DE.CARRIER) is used for looking-up the address file.  Example: If record ID is C-1234.ALL.ALL and TELEXP.2 is specified, there must be an address on file for C-1234.TELEX.2, since the address field for TELEXP on the carrier file is TELEX.
+CARRIER.ADDR NO, LANGUAGE, FORMAT and COPIES form a multivalue set.
+Mandatory input */
+        CARRIER_ADDR_NO : T24BusinessTypes:A required
+            @i18n:Label (en=Carrier)
+            @i18n:Tooltip (en="Will this message go as SWIFT or PRINT or TELEX etc")
+            @t24:i (align=L, inputBehaviour=I, maxLength=14, sysNumber=3.0, core=true, t24Name=CARRIER.ADDR.NO, mandatory=true)
+/* Specifies the number of copies of a message required.
+Validation Rules:
+1-3 numeric characters
+CARRIER.ADDR NO, LANGUAGE, FORMAT and COPIES form a multivalue set.
+Optional input
+Default 1
+Not valid for formatting carrier module of 'SWIFT'.
+Must be blank if the formatting carrier module is EUCLID. */
+        COPIES : T24BusinessTypes:N
+            @i18n:Label (en="Copies ")
+            @t24:i (align=R, inputBehaviour=I, maxLength=3, sysNumber=6.0, core=true, t24Name=COPIES, mandatory=false)
+/* Specifies the format version to be used, and must always be '1' if the formatting module (obtained from the carrier file) is SWIFT or TELEXF.
+Validation Rules:
+1-3 numeric characters.
+CARRIER.ADDR NO, LANGUAGE, FORMAT and COPIES form a multivalue set.
+Optional input Default '1') If entered for SWIFT, TELEX or TELEXF, must be 1. Must be blank if carrier is EUCLID.
+Default '1'
+If entered for formatting module of SWIFT or TELEXF, must be 1.
+Must be blank if carrier is EUCLID. */
+        FORMAT : T24BusinessTypes:N
+            @i18n:Label (en=Format)
+            @t24:i (align=R, inputBehaviour=I, maxLength=3, sysNumber=5.0, core=true, t24Name=FORMAT, mandatory=false)
+/* Specifies the language to be used to select an appropriate record from the DE.FORMAT.PRINT table.
+Validation Rules:
+1-2 type A (alphanumeric) characters. (A valid language mnemonic.)  CARRIER.ADDR.NO, LANGUAGE, FORMAT and COPIES form a multivalue set.  (Optional input  If it is not entered the 1st language in the LANGUAGE table will be used when formatting printout.)  If entered it must be a key to the LANGUAGE table.  Must be blank if carrier is EUCLID. */
+        LANGUAGE : T24BusinessTypes:A
+            @i18n:Label (en=Language)
+            @i18n:Tooltip (en="Indicates the Language used")
+            @t24:i (align=L, inputBehaviour=I, maxLength=2, sysNumber=4.0, core=true, t24Name=LANGUAGE, mandatory=false)
+        MDR_CUSTOMER -> byValue PF_Config:DE_PRODUCT__CARRIER_ADDR_NO__MDR_CUSTOMER *
+            @t24:i (t24Name=MDR.CUSTOMER)
+        RESERVED_4 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=3, sysNumber=9.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        RESERVED_5 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=3, sysNumber=8.0, core=true, t24Name=RESERVED.5, mandatory=false)
+    }
+    DE_PRODUCT__CARRIER_ADDR_NO__MDR_CUSTOMER
+    {
+/* This field is used to specify other customers for whom a copy of the message needs to be printed.
+Validation Rules:
+
+Value in this field is acceptable only for the PRINT carrier.
+For the SWIFT carrier the value in this field is allowed only if IX product is installed.
+Value in this field can be specified only when the product is set up for a customer or an account.
+If the customer or account set up for this DE.PRODUCT is not related to the customers listed in this field, either through the RELATION.CODE of the CUSTOMER record or through the JOINT.HOLDER field of the ACCOUNT record, an override will be produced. */
+        MDR_CUSTOMER -> ST_Customer:CUSTOMER
+            @i18n:Label (en="Additional Recipient")
+            @i18n:Tooltip (en="Customers who receives additional copy of msg")
+            @t24:i (align=R, inputBehaviour=I, maxLength=10, sysNumber=7.0, core=true, businessType=CUS, t24Name=MDR.CUSTOMER, mandatory=false)
+    }
+    DE_PRODUCT__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=17.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    DE_PRODUCT__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=16.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    DE_PRODUCT__K_COPIES
+    {
+        K_COPIES : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=3, sysNumber=6.0, core=false, t24Name=K.COPIES, mandatory=false)
+    }
+    DE_PRODUCT__K_FORMAT
+    {
+        K_FORMAT : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=3, sysNumber=5.0, core=false, t24Name=K.FORMAT, mandatory=false)
+    }
+    DE_PRODUCT__OVERRIDE
+    {
+/* Contains all the override messages which the user has
+confirmed during input.
+At validation,the system may generate a series of screen
+override messages to indicate some anomaly within the
+transaction (e.g. maturity date is not a working day for
+this currency). User may change the data or override the
+message.
+
+Validation Rules:
+(System generated. Multivalue field.)
+This is a NOINPUT field. */
+        OVERRIDE : T24BusinessTypes:A
+            @i18n:Label (en=Override)
+            @i18n:Tooltip (en="Overrides generated by this transaction")
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=13.0, core=true, t24Name=OVERRIDE, mandatory=false)
+    }
+/* This application holds a cross reference between customer and account numbers, and company codes, and any DE.PRODUCT records relating to them.
+This is used by the delivery system to locate any special conditions defined for an account, customer or company, defined on the DE.PRODUCT table. */
+    DE_ROUTING
+        @i18n:Description (en="")
+        @t24:i (t24Name=DE.ROUTING, level=I, type=L, allowedFunctions="L P S", localRefAllowed=false)
+    {
+/* The COMPANY, CUSTOMER NUMBER or ACCOUNT NUMBER for which DE.PRODUCT details exist.
+In all cases the appropriate mnemonic can be entered. For all account and customer records the preceeding company code will be defaulted to the current company code if not input specified.
+Validation Rules:
+a)     For a COMPANY level record the standard 9 alphanumeric        company code.  b)     For a CUSTOMER level record in the format        ccccccccc.C-nnnnnn        where cccccccccc is the company code of the customer, and        nnnnnn is the 1 - 6 digit standard customer number.  c)     For an ACCOUNT level record in the format        ccccccccc.A-nnnnnn        where cccccccccc is the company code of the customer of the        account, and nnnnnn is the 2 - 14 digit standard account        number. */
+        COMPANY_CUST_ACCT -> PF_Config:DE_ROUTING PK required
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=0.0, core=true, businessType=A, t24Name=COMPANY.CUST.ACCT, mandatory=true)
+        PRODUCT_ID -> byValue PF_Config:DE_ROUTING__PRODUCT_ID *
+            @t24:i (t24Name=PRODUCT.ID)
+    }
+    DE_ROUTING__PRODUCT_ID
+    {
+/* The key to the DE.PRODUCT file relating to the company, customer or account defined by the key to this record.
+Validation Rules:
+5-37 alphanumeric characters.
+System field - this is a NOINPUT field. */
+        PRODUCT_ID -> PF_Config:DE_PRODUCT
+            @t24:i (align=L, inputBehaviour=I, maxLength=40, sysNumber=1.0, core=true, businessType=A, t24Name=PRODUCT.ID, mandatory=false)
+    }
+}
+Enumerations {
+    DE_APP_FORMAT__DE_APP_FORMAT_ID : mml:string
+        SYSTEM=SYSTEM
+    DE_CUSTOMER_PREFERENCES__MESSAGE_GROUP__CARRIER__HOLD_MAIL_OPT : mml:string
+        CLEAR=CLEAR
+        HELD=HELD
+        NO_MAIL=NO.MAIL
+        NULL=NULL
+        SEND=SEND
+    DE_CUSTOMER_PREFERENCES__MESSAGE_GROUP__CARRIER__HOLD_OUTPUT : mml:string
+        NULL=NULL
+        Y=Y
+    DE_CUSTOMER_PREFERENCES__MESSAGE_GROUP__CARRIER__REQUIRED : mml:string
+        NO=NO
+        NULL=NULL
+        REMOVE=REMOVE
+        YES=YES
+    DE_CUSTOMER_PREFERENCES__PRD_ID_REBUILD : mml:string
+        NULL=NULL
+        YES=YES
+    DE_CUSTOMER_PREFERENCES__UPDATE_SCHEDULE : mml:string
+        BOTH=BOTH
+        CHARGE_ONLY=CHARGE.ONLY
+        INTEREST_ONLY=INTEREST.ONLY
+    DE_PRODUCT__CUS_MAIL_IND : mml:string
+        B=B
+        F=F
+        H=H
+        M=M
+        O=O
+    DE_PRODUCT__K_PRIORITY : mml:string
+        P=P
+        U=U
+    DE_PRODUCT__MESSAGE_STATUS : mml:string
+        DELETE=DELETE
+        HOLD=HOLD
+    DE_PRODUCT__PRIORITY : mml:string
+        P=P
+        U=U
+}

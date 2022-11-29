@@ -1,0 +1,152 @@
+# UTF-8
+/* Transaction data Processing */
+Domain AC_TransactionData
+    @t24:i (module=AC)
+    @java:Package (value=com.temenos.t24.datamodel.ac.ac_transactiondata)
+namespace "http://www.temenos.com/t24/AC_TransactionData"
+metamodelVersion 1.30.6
+Classes {
+    AC_TRANS_DATA
+        @i18n:Description (en="")
+        @t24:i (t24Name=AC.TRANS.DATA, level=I, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        AC_TRANS_DATA_ID -> AC_TransactionData:AC_TRANS_DATA PK required
+            @t24:i (align=L, inputBehaviour=I, maxLength=60, sysNumber=0.0, core=true, businessType=ANY, t24Name=AC.TRANS.DATA.ID, mandatory=true)
+        RECORD_INFO -> byValue AC_TransactionData:AC_TRANS_DATA__RECORD_INFO *
+            @t24:i (t24Name=RECORD.INFO)
+    }
+    AC_TRANS_DATA_SUBSCRIPTION
+        @i18n:Description (en="")
+        @t24:i (t24Name=AC.TRANS.DATA.SUBSCRIPTION, level=I, type=H, allowedFunctions="A C D E H L P Q R S", localRefApplicationSysNo=10.0, localRefAllowed=true)
+    {
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=19.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=20.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=16.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        CACHE_BUCKET : T24BusinessTypes:A required
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=3.0, core=true, t24Name=CACHE.BUCKET, mandatory=true)
+        CONSUMER_SERVICE -> EB_Service:TSA_SERVICE
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=9.0, core=true, businessType=A, t24Name=CONSUMER.SERVICE, mandatory=false)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=17.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=13.0, core=true, t24Name=CURR.NO, mandatory=false)
+        DATE_TIME -> byValue AC_TransactionData:AC_TRANS_DATA_SUBSCRIPTION__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=18.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        INPUTTER -> byValue AC_TransactionData:AC_TRANS_DATA_SUBSCRIPTION__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        OUTPUT_LOCATION -> EB_SystemTables:FILE_CONTROL
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=8.0, core=true, businessType=A, t24Name=OUTPUT.LOCATION, mandatory=false)
+        OVERRIDE -> byValue AC_TransactionData:AC_TRANS_DATA_SUBSCRIPTION__OVERRIDE *
+            @t24:i (t24Name=OVERRIDE)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=12.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        SUB_ACTIVE : AC_TransactionData:AC_TRANS_DATA_SUBSCRIPTION__SUB_ACTIVE required
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=2.0, core=true, t24Name=SUB.ACTIVE, mandatory=true)
+        SUB_APPLICATION -> byValue AC_TransactionData:AC_TRANS_DATA_SUBSCRIPTION__SUB_APPLICATION *
+            @t24:i (t24Name=SUB.APPLICATION)
+        SUB_DESCRIPTION -> byValue AC_TransactionData:AC_TRANS_DATA_SUBSCRIPTION__SUB_DESCRIPTION *
+            @t24:i (t24Name=SUB.DESCRIPTION)
+        TRANS_DATA_SUB_ID -> AC_TransactionData:AC_TRANS_DATA_SUBSCRIPTION PK required
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=0.0, core=true, businessType=A, t24Name=TRANS.DATA.SUB.ID, mandatory=true)
+    }
+    AC_TRANS_DATA_SUBSCRIPTION__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=15.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    AC_TRANS_DATA_SUBSCRIPTION__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=14.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    AC_TRANS_DATA_SUBSCRIPTION__OVERRIDE
+    {
+        OVERRIDE : T24BusinessTypes:N
+            @i18n:Label (en=Override)
+            @i18n:Tooltip (en="Overrides generated by this transaction")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=11.0, core=true, t24Name=OVERRIDE, mandatory=false)
+    }
+    AC_TRANS_DATA_SUBSCRIPTION__SUB_APPLICATION
+    {
+        SUB_APPLICATION : T24BusinessTypes:A required
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=4.0, core=true, t24Name=SUB.APPLICATION, mandatory=true)
+        SUB_APP_ACTIVE : AC_TransactionData:AC_TRANS_DATA_SUBSCRIPTION__SUB_APPLICATION__SUB_APP_ACTIVE
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=5.0, core=true, t24Name=SUB.APP.ACTIVE, mandatory=false)
+        SUB_COMPANY -> byValue AC_TransactionData:AC_TRANS_DATA_SUBSCRIPTION__SUB_APPLICATION__SUB_COMPANY *
+            @t24:i (t24Name=SUB.COMPANY)
+        SUB_STAGE : AC_TransactionData:AC_TRANS_DATA_SUBSCRIPTION__SUB_APPLICATION__SUB_STAGE
+            @t24:i (align=L, inputBehaviour=I, maxLength=6, sysNumber=6.0, core=true, t24Name=SUB.STAGE, mandatory=false)
+    }
+    AC_TRANS_DATA_SUBSCRIPTION__SUB_APPLICATION__SUB_COMPANY
+    {
+        SUB_COMPANY -> ST_CompanyCreation:COMPANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=15, sysNumber=7.0, core=true, businessType=COM, t24Name=SUB.COMPANY, mandatory=false)
+    }
+    AC_TRANS_DATA_SUBSCRIPTION__SUB_DESCRIPTION
+    {
+        SUB_DESCRIPTION : T24BusinessTypes:A required
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, multiLanguage=true, sysNumber=1.0, core=true, t24Name=SUB.DESCRIPTION, mandatory=true)
+    }
+    AC_TRANS_DATA_SUB_XREF
+        @i18n:Description (en="")
+        @t24:i (t24Name=AC.TRANS.DATA.SUB.XREF, level=I, type=L, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        BUCKET_ACTIVE : AC_TransactionData:AC_TRANS_DATA_SUB_XREF__BUCKET_ACTIVE
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=1.0, core=true, t24Name=BUCKET.ACTIVE, mandatory=false)
+        SUBSCRIPTION_ID -> byValue AC_TransactionData:AC_TRANS_DATA_SUB_XREF__SUBSCRIPTION_ID *
+            @t24:i (t24Name=SUBSCRIPTION.ID)
+        TRANS_DATA_SUB_XREF_ID -> AC_TransactionData:AC_TRANS_DATA_SUB_XREF PK required
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=0.0, core=true, businessType=A, t24Name=TRANS.DATA.SUB.XREF.ID, mandatory=true)
+    }
+    AC_TRANS_DATA_SUB_XREF__SUBSCRIPTION_ID
+    {
+        SUBSCRIPTION_ACTIVE : AC_TransactionData:AC_TRANS_DATA_SUB_XREF__SUBSCRIPTION_ID__SUBSCRIPTION_ACTIVE
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=3.0, core=true, t24Name=SUBSCRIPTION.ACTIVE, mandatory=false)
+        SUBSCRIPTION_ID -> AC_TransactionData:AC_TRANS_DATA_SUBSCRIPTION
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=2.0, core=true, businessType=A, t24Name=SUBSCRIPTION.ID, mandatory=false)
+    }
+    AC_TRANS_DATA__RECORD_INFO
+    {
+        RECORD_INFO : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=1000, sysNumber=1.0, core=true, t24Name=RECORD.INFO, mandatory=false)
+    }
+}
+Enumerations {
+    AC_TRANS_DATA_SUBSCRIPTION__SUB_ACTIVE : mml:string
+        NO=NO
+        YES=YES
+    AC_TRANS_DATA_SUBSCRIPTION__SUB_APPLICATION__SUB_APP_ACTIVE : mml:string
+        NO=NO
+        NULL=NULL
+        YES=YES
+    AC_TRANS_DATA_SUBSCRIPTION__SUB_APPLICATION__SUB_STAGE : mml:string
+        AFTER=AFTER
+        BEFORE=BEFORE
+        BOTH=BOTH
+        NULL=NULL
+    AC_TRANS_DATA_SUB_XREF__BUCKET_ACTIVE : mml:string
+        NO=NO
+        YES=YES
+    AC_TRANS_DATA_SUB_XREF__SUBSCRIPTION_ID__SUBSCRIPTION_ACTIVE : mml:string
+        NO=NO
+        YES=YES
+}

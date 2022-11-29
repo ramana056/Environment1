@@ -1,0 +1,739 @@
+# UTF-8
+/* Config records for Txn Restriction */
+Domain TZ_Config
+    @t24:i (module=TZ)
+    @java:Package (value=com.temenos.t24.datamodel.tz.tz_config)
+namespace "http://www.temenos.com/t24/TZ_Config"
+metamodelVersion 1.30.6
+Classes {
+    TZ_STOP_INSTR_ACCOUNT
+        @i18n:Description (en="")
+        @t24:i (t24Name=TZ.STOP.INSTR.ACCOUNT, level=F, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        ACCOUNT_ID -> TZ_Config:TZ_STOP_INSTR_ACCOUNT PK required
+            @i18n:Label (en="Account No")
+            @i18n:Tooltip (en="Indicates the Account Number")
+            @t24:i (align=L, inputBehaviour=I, maxLength=16, sysNumber=0.0, core=true, businessType=A, t24Name=ACCOUNT.ID, mandatory=true)
+        INSTRUCTION_ID -> byValue TZ_Config:TZ_STOP_INSTR_ACCOUNT__INSTRUCTION_ID *
+            @t24:i (t24Name=INSTRUCTION.ID)
+    }
+    TZ_STOP_INSTR_ACCOUNT__INSTRUCTION_ID
+    {
+        INSTRUCTION_ID : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=16, sysNumber=1.0, core=true, t24Name=INSTRUCTION.ID, mandatory=false)
+    }
+/* Parameter table which stores the attributes and allowed operands. The Stop Condition Record with id DEFAULT will be reffered in Stop Instruction,
+
+When STOP.CONDITION field in TZ.TRANSACTION.STOP.INSTRUCTION is blank.
+
+ID Validation Rule:
+The record ID for this table is a Maximum 35 character free-text. */
+    TZ_TRANSACTION_STOP_CONDITION
+        @i18n:Description (en="")
+        @t24:i (t24Name=TZ.TRANSACTION.STOP.CONDITION, level=F, type=H, allowedFunctions="A C D E H I L Q R S", localRefApplicationSysNo=9.0, localRefAllowed=true)
+    {
+        ATTRIBUTE_NAME -> byValue TZ_Config:TZ_TRANSACTION_STOP_CONDITION__ATTRIBUTE_NAME *
+            @t24:i (t24Name=ATTRIBUTE.NAME)
+/* Field to attach any API routines for processing/modifications of Stop Instruction Attributes and Values defined as required
+
+Arguments:
+StopInstructionAttributes - Input - Contains the Attributes defined
+StopInstructionAttributeValues - Input - Contains Attributes values - Output - Contains Processed Attributes values
+ReturnInfo
+Spare1
+Spare2
+Spare3
+
+Validation Rule:
+
+Should have an Entry in EB.API */
+        ATTRIB_FMT_API : T24BusinessTypes:HOOK
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=4.0, core=true, t24Name=ATTRIB.FMT.API, mandatory=false)
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=18.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=19.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=15.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=16.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=12.0, core=true, t24Name=CURR.NO, mandatory=false)
+        DATE_TIME -> byValue TZ_Config:TZ_TRANSACTION_STOP_CONDITION__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=17.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        DESCRIPTION -> byValue TZ_Config:TZ_TRANSACTION_STOP_CONDITION__DESCRIPTION *
+            @t24:i (t24Name=DESCRIPTION)
+        INPUTTER -> byValue TZ_Config:TZ_TRANSACTION_STOP_CONDITION__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        OVERRIDE -> byValue TZ_Config:TZ_TRANSACTION_STOP_CONDITION__OVERRIDE *
+            @t24:i (t24Name=OVERRIDE)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=11.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        RESERVED_1 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=8.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=7.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=6.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=5.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        TRANS_STOP_COND_ID -> TZ_Config:TZ_TRANSACTION_STOP_CONDITION PK required
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=0.0, core=true, businessType=A, t24Name=TRANS.STOP.COND.ID, mandatory=true)
+    }
+    TZ_TRANSACTION_STOP_CONDITION__ATTRIBUTE_NAME
+    {
+        ALLOWED_OPERAND -> byValue TZ_Config:TZ_TRANSACTION_STOP_CONDITION__ATTRIBUTE_NAME__ALLOWED_OPERAND *
+            @t24:i (t24Name=ALLOWED.OPERAND)
+/* Will allow the bank to indicate the matching attributes.
+
+Validation Rule:
+
+Mandatory field.
+
+This is a multi-value LOOKUP field . The values for this field will get fetched via EB.LOOKUP with record id as 'ATTRIBUTE'. */
+        ATTRIBUTE_NAME : TZ_Config:TZ_TRANSACTION_STOP_CONDITION__ATTRIBUTE_NAME__ATTRIBUTE_NAME
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=2.0, core=true, t24Name=ATTRIBUTE.NAME, mandatory=false)
+    }
+    TZ_TRANSACTION_STOP_CONDITION__ATTRIBUTE_NAME__ALLOWED_OPERAND
+    {
+/* Allowed Operands for the respective Attribute.
+
+Validation Rule:
+
+This is a mandatory multi-value field. Allowed Values : EQ - Equals, NE - Not Equals, LT - Less than, LE - Less than or Equals, GT - Greater than, GE - Greater than or Equals, RG - Range (in between), CT - Contains, NC - Not Contains.
+As enquiry criteria use 'EQ_NE_LE_LT_GE_GT_RG_CT_NC' to fetch the record. */
+        ALLOWED_OPERAND : TZ_Config:TZ_TRANSACTION_STOP_CONDITION__ATTRIBUTE_NAME__ALLOWED_OPERAND__ALLOWED_OPERAND
+            @t24:i (align=L, inputBehaviour=I, maxLength=20, sysNumber=3.0, core=true, t24Name=ALLOWED.OPERAND, mandatory=false)
+    }
+    TZ_TRANSACTION_STOP_CONDITION__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=14.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    TZ_TRANSACTION_STOP_CONDITION__DESCRIPTION
+    {
+/* Give any meaningful description for the conditions created.
+
+Validation Rule:
+
+Maximum length is '35' characters. */
+        DESCRIPTION : T24BusinessTypes:A
+            @i18n:Label (en=Description)
+            @i18n:Tooltip (en=Description)
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, multiLanguage=true, sysNumber=1.0, core=true, t24Name=DESCRIPTION, mandatory=false)
+    }
+    TZ_TRANSACTION_STOP_CONDITION__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=13.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    TZ_TRANSACTION_STOP_CONDITION__OVERRIDE
+    {
+        OVERRIDE : T24BusinessTypes:N
+            @i18n:Label (en=Override)
+            @i18n:Tooltip (en="Overrides generated by this transaction")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=10.0, core=true, t24Name=OVERRIDE, mandatory=false)
+    }
+/* A Transaction Stop Mapping Rules is a table in T24 which is used to define the transactions sources which are in scope of Transaction Stop Check and how the transaction details will be passed to the Transaction Check API.
+
+Transaction Stop Mapping Rules will also enable the rules for payment stop. */
+    TZ_TRANSACTION_STOP_MAP_RULES
+        @i18n:Description (en="")
+        @t24:i (t24Name=TZ.TRANSACTION.STOP.MAP.RULES, level=F, type=H, allowedFunctions="A C D E H I L Q R S", localRefApplicationSysNo=23.0, localRefAllowed=true)
+    {
+/* This is the field available in the application from where account details can be extracted. For example, DEBIT.ACCT.NO/CREDIT.ACCT.NO in Funds Transfer.
+This account detail is used to get the Transaction stop Instruction types for cross verification.
+
+Validation Rule:
+
+Fields defined in T24 for the application mentioned in the APPLICATION field are the only allowed values. */
+        ACCOUNT_FIELD : T24BusinessTypes:A required
+            @i18n:Label (en="Account Field")
+            @i18n:Tooltip (en="Valid field in application which holds account no")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=9.0, core=true, t24Name=ACCOUNT.FIELD, mandatory=true)
+/* This will be the first part of the ID, before the *  for which the Mapping rules are being defined
+
+Validation Rule:
+
+Should be valid T24 Application */
+        APPLICATION_NAME : T24BusinessTypes:A required
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=1.0, core=true, t24Name=APPLICATION.NAME, mandatory=true)
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=32.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=33.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=29.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=30.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=26.0, core=true, t24Name=CURR.NO, mandatory=false)
+        DATE_TIME -> byValue TZ_Config:TZ_TRANSACTION_STOP_MAP_RULES__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=31.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+/* Field to attach any API routines for processing/modifications of transaction involved Attributes and Values taken during processing
+
+Arguments:
+MapRulesAttributes - Input - Contains the Attributes defined
+MapRulesAttributeValues - Input - Contains Attributes values - Output - Contains Processed Attributes values
+ReturnInfo
+Spare1
+Spare2
+Spare3
+
+Validation Rule:
+
+Should have an Entry in EB.API */
+        HOOK_API : T24BusinessTypes:HOOK
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=22.0, core=true, t24Name=HOOK.API, mandatory=false)
+        INPUTTER -> byValue TZ_Config:TZ_TRANSACTION_STOP_MAP_RULES__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        LINKED_APPLN -> byValue TZ_Config:TZ_TRANSACTION_STOP_MAP_RULES__LINKED_APPLN *
+            @t24:i (t24Name=LINKED.APPLN)
+        MAP_RULES_ID -> TZ_Config:TZ_TRANSACTION_STOP_MAP_RULES PK required
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=0.0, core=true, businessType=A, t24Name=MAP.RULES.ID, mandatory=true)
+        MATCH_ATTR -> byValue TZ_Config:TZ_TRANSACTION_STOP_MAP_RULES__MATCH_ATTR *
+            @t24:i (t24Name=MATCH.ATTR)
+        OVERRIDE -> byValue TZ_Config:TZ_TRANSACTION_STOP_MAP_RULES__OVERRIDE *
+            @t24:i (t24Name=OVERRIDE)
+/* Purpose, will be added in this table to indicate the purpose of the rule. For now the Purpose field in the TZ.TRANSACTION.STOP.MAPP.RULES will support two values, but this can be extended in future:
+TransStop - will indicate the purpose of this rule is Transaction Stop Check
+RegReport - will indicate the purpose of this rule is to capture the payment regulatory reporting details
+The Purpose field will be automatically populated based on the third value in the ID,  after the second *. If only one * is specified the Purpose will be considered as blank it'll be updated as TranStop */
+        PURPOSE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=8.0, core=true, t24Name=PURPOSE, mandatory=false)
+        QUALIFIER_FIELD -> byValue TZ_Config:TZ_TRANSACTION_STOP_MAP_RULES__QUALIFIER_FIELD *
+            @t24:i (t24Name=QUALIFIER.FIELD)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=25.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+/* This field will be used to indicate the Stop Type/Channel represented by this transaction
+e.g ACH, Cheque clearing, etc
+
+Validation Rule:
+
+Should be a valid record id in TRASACTION.STOP.TYPE */
+        STOP_TYPE -> TZ_Config:TZ_TRANSACTION_STOP_TYPE
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=7.0, core=true, businessType=A, t24Name=STOP.TYPE, mandatory=false)
+    }
+    TZ_TRANSACTION_STOP_MAP_RULES__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=28.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    TZ_TRANSACTION_STOP_MAP_RULES__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=27.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    TZ_TRANSACTION_STOP_MAP_RULES__LINKED_APPLN
+    {
+        LINKED_APPLN : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=15.0, core=true, t24Name=LINKED.APPLN, mandatory=false)
+/* This field holds the FieldName of the Parent Application - APPLICATION.NAME by which the LINKED.APPLICATION record can be fetched for processing
+
+Validation Rule:
+
+Should be valid T24 Fieldname of the Application defined in APPLICATION.NAME or it can be ID
+By defining ID, it indicates that both APPLICATION.NAME and LINKED.APPLICATION share the same record key */
+        LINKED_BY : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=16.0, core=true, t24Name=LINKED.BY, mandatory=false)
+        LINKED_MATCH_ATTR -> byValue TZ_Config:TZ_TRANSACTION_STOP_MAP_RULES__LINKED_APPLN__LINKED_MATCH_ATTR *
+            @t24:i (t24Name=LINKED.MATCH.ATTR)
+    }
+    TZ_TRANSACTION_STOP_MAP_RULES__LINKED_APPLN__LINKED_MATCH_ATTR
+    {
+/* This field holds the attributes which will be passed for further processing of the transaction stop check process
+Its a Sub value set, hence multiple attributes can be defined for single LINKED.APPLICATION
+
+Validation Rule:
+
+Valid entry from the EB.LOOKUP defined. */
+        LINKED_MATCH_ATTR : TZ_Config:TZ_TRANSACTION_STOP_MAP_RULES__LINKED_APPLN__LINKED_MATCH_ATTR__LINKED_MATCH_ATTR
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=17.0, core=true, t24Name=LINKED.MATCH.ATTR, mandatory=false)
+/* This field holds the T24 field name of the Application for which the Attribute is defined in the LINKED.MATCHING.ATTR field, this is used to get the required the details
+from the LINKED.APPLICATION and passed on to further processing of the transaction stop check process. Associated subset of LINKED.MATCHING.ATTR
+
+Validation Rule:
+
+Fields defined in T24 for the application mentioned in the LINKED.APPLICATION field are the only allowed values. */
+        LINKED_MATCH_ATTR_EXT : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=18.0, core=true, t24Name=LINKED.MATCH.ATTR.EXT, mandatory=false)
+        /* Part of linked match attribute multi value set. A field in the linked application which will be used as a condition. Optional field. Associated subset of LINKED.MATCHING.ATTR */
+        LINKED_MATCH_COND_FLD : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=19.0, core=true, t24Name=LINKED.MATCH.COND.FLD, mandatory=false)
+        /* Part of linked match attribute multi value set. An operand to filter the linked match attribute condition.Optional field. Associated subset of LINKED.MATCHING.ATTR */
+        LINKED_MATCH_COND_OPR : TZ_Config:TZ_TRANSACTION_STOP_MAP_RULES__LINKED_APPLN__LINKED_MATCH_ATTR__LINKED_MATCH_COND_OPR
+            @t24:i (align=L, inputBehaviour=I, maxLength=20, sysNumber=20.0, core=true, t24Name=LINKED.MATCH.COND.OPR, mandatory=false)
+        /* Part of linked match attribute multi value set. The value with which will be compare the value extracted from the linked Match Attribute Condition Field.Optional field. Associated subset of LINKED.MATCHING.ATTR */
+        LINKED_MATCH_COND_VAL : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=21.0, core=true, t24Name=LINKED.MATCH.COND.VAL, mandatory=false)
+    }
+    TZ_TRANSACTION_STOP_MAP_RULES__MATCH_ATTR
+    {
+/* This field holds the attributes which will be passed for further processing of the transaction stop check process
+
+Validation Rule:
+
+Mandatory Field.
+Valid entry from the EB.LOOKUP defined. */
+        MATCH_ATTR : TZ_Config:TZ_TRANSACTION_STOP_MAP_RULES__MATCH_ATTR__MATCH_ATTR
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=10.0, core=true, t24Name=MATCH.ATTR, mandatory=false)
+        /* Part of match attribute multi value set. A field in the main application which will be used as a condition. Optional field. Associated subset of MATCH.ATTR */
+        MATCH_ATTR_COND_FLD : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=12.0, core=true, t24Name=MATCH.ATTR.COND.FLD, mandatory=false)
+        /* Part of match attribute multi value set. An operand to filter the match attribute condition.Optional field. Associated subset of MATCH.ATTR */
+        MATCH_ATTR_COND_OPR : TZ_Config:TZ_TRANSACTION_STOP_MAP_RULES__MATCH_ATTR__MATCH_ATTR_COND_OPR
+            @t24:i (align=L, inputBehaviour=I, maxLength=20, sysNumber=13.0, core=true, t24Name=MATCH.ATTR.COND.OPR, mandatory=false)
+        /* Part of match attribute multi value set. The value with which will be compare the value extracted from the Match Attribute Condition Field.Optional field. Associated subset of MATCH.ATTR */
+        MATCH_ATTR_COND_VAL : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=14.0, core=true, t24Name=MATCH.ATTR.COND.VAL, mandatory=false)
+/* This field holds the T24 field name of the Application for which the Attribute is defined in the MATCHING.ATTR field, this is used to get the required the details
+from the transaction and passed on to further processing of the transaction stop check process.
+
+Validation Rule:
+
+Mandatory Field. Fields defined in T24 for the application mentioned in the APPLICATION field are the only allowed values. */
+        MATCH_ATTR_EXT : T24BusinessTypes:A required
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=11.0, core=true, t24Name=MATCH.ATTR.EXT, mandatory=true)
+    }
+    TZ_TRANSACTION_STOP_MAP_RULES__OVERRIDE
+    {
+        OVERRIDE : T24BusinessTypes:N
+            @i18n:Label (en=Override)
+            @i18n:Tooltip (en="Overrides generated by this transaction")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=24.0, core=true, t24Name=OVERRIDE, mandatory=false)
+    }
+    TZ_TRANSACTION_STOP_MAP_RULES__QUALIFIER_FIELD
+    {
+/* Condition fields to be checked for processing a transaction stop check process. When No conditions are defined, all the transaction of such type will be made available under the scope of transcation check process
+
+Validation Rule:
+
+Blank or Field name
+
+When Field name is entered it should only be the fields defined for the application mentioned in the APPLICATION field. */
+        QUALIFIER_FIELD : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=2.0, core=true, t24Name=QUALIFIER.FIELD, mandatory=false)
+/* Operation to be performed on the field defined in QUALIFIER.FIELD.
+
+Validation Rule:
+
+Allowed Values : EQ - Equals, NE - Not Equals, LT - Less than, LE - Less than or Equals, GT - Greater than, GE - Greater than or Equals, RG - Range (in between), CT - Contains, NC - Not Contains.
+As enquiry criteria use 'EQ_NE_LE_LT_GE_GT_RG_CT_NC' to fetch the record.
+This field must contain a value when the associated set field - QUALIFIER.FIELD is defined. */
+        QUALIFIER_OPERAND : TZ_Config:TZ_TRANSACTION_STOP_MAP_RULES__QUALIFIER_FIELD__QUALIFIER_OPERAND
+            @t24:i (align=L, inputBehaviour=I, maxLength=20, sysNumber=3.0, core=true, t24Name=QUALIFIER.OPERAND, mandatory=false)
+        VALUE -> byValue TZ_Config:TZ_TRANSACTION_STOP_MAP_RULES__QUALIFIER_FIELD__VALUE *
+            @t24:i (t24Name=VALUE)
+        VALUE_START -> byValue TZ_Config:TZ_TRANSACTION_STOP_MAP_RULES__QUALIFIER_FIELD__VALUE_START *
+            @t24:i (t24Name=VALUE.START)
+    }
+    TZ_TRANSACTION_STOP_MAP_RULES__QUALIFIER_FIELD__VALUE
+    {
+/* This field holds the value to be checked for the field defined in QUALIFIER.FIELD along with the QUALIFIER.OPERAND.
+This field can hold multiple values defined for the same QUALIFIER.FIELD
+
+Validation Rule:
+
+Blank or Free text. Can't be blank if the QUALIFIER.FIELD is entered.
+This field should not be entered when the QUALIFIER.OPERAND is set to perform range operation
+If Numeric value is input, the decimals also as to match.
+For date values the format has to be in 'YYYYMMDD'. */
+        VALUE : T24BusinessTypes:A
+            @i18n:Label (en=Value)
+            @i18n:Tooltip (en=Value)
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=4.0, core=true, t24Name=VALUE, mandatory=false)
+    }
+    TZ_TRANSACTION_STOP_MAP_RULES__QUALIFIER_FIELD__VALUE_START
+    {
+/* This field holds the End value to be checked for the condition field incase RG (Range) is chosen as Operand
+
+Validation Rule:
+
+Blank or Numeric value. Can't be blank if the QUALIFIER.FIELD is entered and QUALIFIER.OPERAND is range */
+        VALUE_END : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=35, sysNumber=6.0, core=true, t24Name=VALUE.END, mandatory=false)
+/* This field holds the Start value to be checked for the condition field incase RG (Range) is chosen as Operand
+
+Validation Rule:
+
+Blank or Numeric value. Can't be blank if the QUALIFIER.FIELD is entered and QUALIFIER.OPERAND is range */
+        VALUE_START : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=35, sysNumber=5.0, core=true, t24Name=VALUE.START, mandatory=false)
+    }
+/* Table define parameterization conditions for Transaction Stop Instruction and stop conditions at the lead company level.
+
+ID Validation Rule:
+The record ID for this table should be a valid lead company. */
+    TZ_TRANSACTION_STOP_PARAMETER
+        @i18n:Description (en="")
+        @t24:i (t24Name=TZ.TRANSACTION.STOP.PARAMETER, level=I, type=H, allowedFunctions="A C D E H I L Q R S", localRefApplicationSysNo=9.0, localRefAllowed=true)
+    {
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=18.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=19.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=15.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=16.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=12.0, core=true, t24Name=CURR.NO, mandatory=false)
+        DATE_TIME -> byValue TZ_Config:TZ_TRANSACTION_STOP_PARAMETER__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+/* A number of working days which the TRANSACTION.STOP.INSTRUCTION will be moved to history.
+
+Validation Rule:
+
+This is a mandatory field. Allowed values are 1C - 99C and 1W - 99W. Maximum allowed number of digits is '2'.
+
+If only number of days is provided, systems defaults as calender days. */
+        DAYS_TO_HISTORY : T24BusinessTypes:A required
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=2.0, core=true, t24Name=DAYS.TO.HISTORY, mandatory=true)
+/* A number of working/calendars days after which the TRANSACTION.STOP.INSTRUCTION will be marked as EXPIRED.
+
+Validation Rule:
+
+This is an optional field. Allowed values are 1C - 999C and 1W - 999W. Maximum allowed number of digits is '3'.
+
+If only number of days is provided, systems defaults as calender days */
+        DEFAULT_EXPIRY_DAYS : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=4, sysNumber=1.0, core=true, t24Name=DEFAULT.EXPIRY.DAYS, mandatory=false)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=17.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+/* Will define the duplicate criteria which will be used if the Transaction Stop Instruction has been already captured.
+
+Input to this field must be a valid record id from the EB.DUPLICATE.TYPE file
+
+Validation Rule:
+
+Optional Input. Input to this field must be a valid record id from the EB.DUPLICATE.TYPE file,, when the APPLICATION is set to 'TZ.TRANSACTION.STOP.INSTRUCTION' */
+        DUP_STOP_CRITERIA -> FT_Contract:EB_DUPLICATE_TYPE
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=3.0, core=true, businessType=A, t24Name=DUP.STOP.CRITERIA, mandatory=false)
+        INPUTTER -> byValue TZ_Config:TZ_TRANSACTION_STOP_PARAMETER__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+/* Represents the user defined period of time used for a new or amended stop payment instruction to look back for previous
+matching transactions.
+
+Validation Rule:
+
+Optional Input. Should be a valid number of days */
+        LOOK_BACK_PRD : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=2, sysNumber=9.1, core=false, t24Name=LOOK.BACK.PRD, mandatory=false)
+        OVERRIDE -> byValue TZ_Config:TZ_TRANSACTION_STOP_PARAMETER__OVERRIDE *
+            @t24:i (t24Name=OVERRIDE)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=11.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        RESERVED_1 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=8.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=7.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=6.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=5.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        RESERVED_5 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=4.0, core=true, t24Name=RESERVED.5, mandatory=false)
+        STOP_PAY_PROD -> byValue TZ_Config:TZ_TRANSACTION_STOP_PARAMETER__STOP_PAY_PROD *
+            @t24:i (t24Name=STOP.PAY.PROD)
+        TRANS_STOP_PARAM_ID -> TZ_Config:TZ_TRANSACTION_STOP_PARAMETER PK required
+            @t24:i (align=L, inputBehaviour=I, maxLength=11, sysNumber=0.0, core=true, businessType=COM, t24Name=TRANS.STOP.PARAM.ID, mask="R##-###-####", mandatory=true)
+    }
+    TZ_TRANSACTION_STOP_PARAMETER__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=14.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    TZ_TRANSACTION_STOP_PARAMETER__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=13.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    TZ_TRANSACTION_STOP_PARAMETER__OVERRIDE
+    {
+        OVERRIDE : T24BusinessTypes:N
+            @i18n:Label (en=Override)
+            @i18n:Tooltip (en="Overrides generated by this transaction")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=10.0, core=true, t24Name=OVERRIDE, mandatory=false)
+    }
+    TZ_TRANSACTION_STOP_PARAMETER__STOP_PAY_PROD
+    {
+/* Represents the expiration period for the Stop payment type parameter product.  This is the period that will be
+applied to the current business day to calculate the expiration date of the Stop Payment instructions,
+
+Validation Rule:
+
+Optional Input. Values can be like 1Y, 180D, 3M */
+        PRODUCT_EXP_PRD : T24BusinessTypes:PERIOD
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=9.3, core=false, t24Name=PRODUCT.EXP.PRD, mandatory=false)
+/* Represents a drop-down menu of AA products
+
+Validation Rule:
+
+Optional Input. Accounts Product Line Only. This is a multi-value set field. */
+        STOP_PAY_PROD -> AA_ProductManagement:AA_PRODUCT
+            @t24:i (align=L, inputBehaviour=I, maxLength=30, sysNumber=9.2, core=false, businessType=A, t24Name=STOP.PAY.PROD, mandatory=false)
+    }
+/* This application will allow the bank to define the matching criteria for each Channel/Payment Type.
+
+ID Validation Rule:
+The record ID for this table is a Maximum 35 character free-text. */
+    TZ_TRANSACTION_STOP_TYPE
+        @i18n:Description (en="")
+        @t24:i (t24Name=TZ.TRANSACTION.STOP.TYPE, level=F, type=H, allowedFunctions="A C D E H I L Q R S", localRefApplicationSysNo=10.0, localRefAllowed=true)
+    {
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=19.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=20.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=16.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=17.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=13.0, core=true, t24Name=CURR.NO, mandatory=false)
+        DATE_TIME -> byValue TZ_Config:TZ_TRANSACTION_STOP_TYPE__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=18.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+/* Description of the MatchType that can be defined.
+
+Validation Rule:
+
+Mandatory field. Value can be free-text. */
+        DESCRIPTION : T24BusinessTypes:A required
+            @i18n:Label (en=Description)
+            @i18n:Tooltip (en=Description)
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=1.0, core=true, t24Name=DESCRIPTION, mandatory=true)
+        INPUTTER -> byValue TZ_Config:TZ_TRANSACTION_STOP_TYPE__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        MATCH_TYPE -> byValue TZ_Config:TZ_TRANSACTION_STOP_TYPE__MATCH_TYPE *
+            @t24:i (t24Name=MATCH.TYPE)
+        OVERRIDE -> byValue TZ_Config:TZ_TRANSACTION_STOP_TYPE__OVERRIDE *
+            @t24:i (t24Name=OVERRIDE)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=12.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        RESERVED_1 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=9.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=8.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=7.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=6.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        RESERVED_5 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=5.0, core=true, t24Name=RESERVED.5, mandatory=false)
+        STOP_PAY_PROD -> byValue TZ_Config:TZ_TRANSACTION_STOP_TYPE__STOP_PAY_PROD *
+            @t24:i (t24Name=STOP.PAY.PROD)
+        TRANS_STOP_TYPE_ID -> TZ_Config:TZ_TRANSACTION_STOP_TYPE PK required
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=0.0, core=true, businessType=A, t24Name=TRANS.STOP.TYPE.ID, mandatory=true)
+    }
+    TZ_TRANSACTION_STOP_TYPE__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=15.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    TZ_TRANSACTION_STOP_TYPE__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=14.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    TZ_TRANSACTION_STOP_TYPE__MATCH_TYPE
+    {
+        MATCHING_ATTRIBUTE -> byValue TZ_Config:TZ_TRANSACTION_STOP_TYPE__MATCH_TYPE__MATCHING_ATTRIBUTE *
+            @t24:i (t24Name=MATCHING.ATTRIBUTE)
+/* To define decision for matching attribute.
+
+Validation Rule:
+
+Optional field. Allowed values are Pay or Return. */
+        MATCH_DEFAULT_DECISION : TZ_Config:TZ_TRANSACTION_STOP_TYPE__MATCH_TYPE__MATCH_DEFAULT_DECISION
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=4.0, core=true, t24Name=MATCH.DEFAULT.DECISION, mandatory=false)
+/* Will allow the bank to indicate the match types Hit or Suspect.
+
+Validation Rule:
+
+This is a multi-value LOOKUP field . The values for this field will get fetched via the EB.LOOKUP > 'MATCHTYPE'. */
+        MATCH_TYPE : TZ_Config:TZ_TRANSACTION_STOP_TYPE__MATCH_TYPE__MATCH_TYPE
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=2.0, core=true, t24Name=MATCH.TYPE, mandatory=false)
+    }
+    TZ_TRANSACTION_STOP_TYPE__MATCH_TYPE__MATCHING_ATTRIBUTE
+    {
+/* Will allow the bank to indicate the matching attributes. Optional field.
+
+Validation Rule:
+
+This is a multi-value LOOKUP field . The values for this field will get fetched via the EB.LOOKUP > 'ATTRIBUTE'. */
+        MATCHING_ATTRIBUTE : TZ_Config:TZ_TRANSACTION_STOP_TYPE__MATCH_TYPE__MATCHING_ATTRIBUTE__MATCHING_ATTRIBUTE
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=3.0, core=true, t24Name=MATCHING.ATTRIBUTE, mandatory=false)
+    }
+    TZ_TRANSACTION_STOP_TYPE__OVERRIDE
+    {
+        OVERRIDE : T24BusinessTypes:N
+            @i18n:Label (en=Override)
+            @i18n:Tooltip (en="Overrides generated by this transaction")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=11.0, core=true, t24Name=OVERRIDE, mandatory=false)
+    }
+    TZ_TRANSACTION_STOP_TYPE__STOP_PAY_PROD
+    {
+/* Represents the expiration period for the Stop payment type parameter product.  This is the period that will be
+applied to the current business day to calculate the expiration date of the Stop Payment instructions,
+
+Validation Rule:
+
+Optional Input. Values can be like 1Y, 180D, 3M */
+        PRODUCT_EXP_PRD : T24BusinessTypes:PERIOD
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=10.2, core=false, t24Name=PRODUCT.EXP.PRD, mandatory=false)
+/* Represents a drop-down menu of AA products
+
+Validation Rule:
+
+Optional Input. Accounts Product Line Only. This is a multi-value set field. */
+        STOP_PAY_PROD -> AA_ProductManagement:AA_PRODUCT
+            @t24:i (align=L, inputBehaviour=I, maxLength=30, sysNumber=10.1, core=false, businessType=A, t24Name=STOP.PAY.PROD, mandatory=false)
+    }
+}
+Enumerations {
+    TZ_TRANSACTION_STOP_CONDITION__ATTRIBUTE_NAME__ALLOWED_OPERAND__ALLOWED_OPERAND : mml:string
+        CT=CT
+        EQ=EQ
+        GE=GE
+        GT=GT
+        LE=LE
+        LT=LT
+        NC=NC
+        NE=NE
+        NULL=NULL
+        RG=RG
+    TZ_TRANSACTION_STOP_CONDITION__ATTRIBUTE_NAME__ATTRIBUTE_NAME : mml:string
+        AMOUNT=AMOUNT
+        CHECKNUMBER=CHECKNUMBER
+        CREDITORID=CREDITORID
+        CREDITORNAME=CREDITORNAME
+        MANDATEREFERENCE=MANDATEREFERENCE
+        PARTYIDENTIFIER=PARTYIDENTIFIER
+        PARTYNAME=PARTYNAME
+    TZ_TRANSACTION_STOP_MAP_RULES__LINKED_APPLN__LINKED_MATCH_ATTR__LINKED_MATCH_ATTR : mml:string
+        AMOUNT=AMOUNT
+        CHECKNUMBER=CHECKNUMBER
+        CREDITORID=CREDITORID
+        CREDITORNAME=CREDITORNAME
+        MANDATEREFERENCE=MANDATEREFERENCE
+        PARTYIDENTIFIER=PARTYIDENTIFIER
+        PARTYNAME=PARTYNAME
+    TZ_TRANSACTION_STOP_MAP_RULES__LINKED_APPLN__LINKED_MATCH_ATTR__LINKED_MATCH_COND_OPR : mml:string
+        CT=CT
+        EQ=EQ
+        GE=GE
+        GT=GT
+        LE=LE
+        LT=LT
+        NC=NC
+        NE=NE
+        NULL=NULL
+        RG=RG
+    TZ_TRANSACTION_STOP_MAP_RULES__MATCH_ATTR__MATCH_ATTR : mml:string
+        AMOUNT=AMOUNT
+        CHECKNUMBER=CHECKNUMBER
+        CREDITORID=CREDITORID
+        CREDITORNAME=CREDITORNAME
+        MANDATEREFERENCE=MANDATEREFERENCE
+        PARTYIDENTIFIER=PARTYIDENTIFIER
+        PARTYNAME=PARTYNAME
+    TZ_TRANSACTION_STOP_MAP_RULES__MATCH_ATTR__MATCH_ATTR_COND_OPR : mml:string
+        CT=CT
+        EQ=EQ
+        GE=GE
+        GT=GT
+        LE=LE
+        LT=LT
+        NC=NC
+        NE=NE
+        NULL=NULL
+        RG=RG
+    TZ_TRANSACTION_STOP_MAP_RULES__QUALIFIER_FIELD__QUALIFIER_OPERAND : mml:string
+        CT=CT
+        EQ=EQ
+        GE=GE
+        GT=GT
+        LE=LE
+        LT=LT
+        NC=NC
+        NE=NE
+        NULL=NULL
+        RG=RG
+    TZ_TRANSACTION_STOP_TYPE__MATCH_TYPE__MATCHING_ATTRIBUTE__MATCHING_ATTRIBUTE : mml:string
+        AMOUNT=AMOUNT
+        CHECKNUMBER=CHECKNUMBER
+        CREDITORID=CREDITORID
+        CREDITORNAME=CREDITORNAME
+        MANDATEREFERENCE=MANDATEREFERENCE
+        PARTYIDENTIFIER=PARTYIDENTIFIER
+        PARTYNAME=PARTYNAME
+    TZ_TRANSACTION_STOP_TYPE__MATCH_TYPE__MATCH_DEFAULT_DECISION : mml:string
+        NULL=NULL
+        PAY=PAY
+        RETURN=RETURN
+    TZ_TRANSACTION_STOP_TYPE__MATCH_TYPE__MATCH_TYPE : mml:string
+        HIT=HIT
+        SUSPECT=SUSPECT
+}

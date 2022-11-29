@@ -1,0 +1,162 @@
+# UTF-8
+/* Foundation for Swift Alliance */
+Domain SWFTAL_Foundation
+    @t24:i (module=SWFTAL)
+    @java:Package (value=com.temenos.t24.datamodel.swftal.swftal_foundation)
+namespace "http://www.temenos.com/t24/SWFTAL_Foundation"
+metamodelVersion 1.30.6
+Classes {
+    /* This Application is used to store the log information of the Alliance’s messages. */
+    ALLIANCE_LOG_DETAILS
+        @i18n:Description (en="")
+        @t24:i (t24Name=ALLIANCE.LOG.DETAILS, level=I, type=L, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        /* It specifies the messages as INBOUND/OUTBOUND. */
+        CONNECTION_TYPE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=8, sysNumber=1.0, core=true, t24Name=CONNECTION.TYPE, mandatory=false)
+        /* It specifies the messages as INBOUND/OUTBOUND. */
+        CREATION_DATE : T24BusinessTypes:D
+            @i18n:Label (en="Creation Date")
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=2.0, core=true, t24Name=CREATION.DATE, mandatory=false)
+        /* The @id is the 108 Tag/UETR no which exists in the message. */
+        ID -> SWFTAL_Foundation:ALLIANCE_LOG_DETAILS PK required
+            @i18n:Label (en="Transaction Ref")
+            @i18n:Tooltip (en="Transaction Reference")
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=0.0, core=true, businessType=ANY, t24Name=ID, mandatory=true)
+        /* It holds the entire Alliance message coming in to /out from the T24. */
+        MSG_DETAIL : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=4.0, core=true, t24Name=MSG.DETAIL, mandatory=false)
+        RESERVED_1 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=9.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=8.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=7.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=6.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        RESERVED_5 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=5.0, core=true, t24Name=RESERVED.5, mandatory=false)
+        TIME_STAMP : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=3.0, core=true, t24Name=TIME.STAMP, mandatory=false)
+    }
+    /* An application SWIFT.ALLIANCE.PARAM is used to configure the settings of Incoming and outgoing Alliance’s messages. */
+    SWIFT_ALLIANCE_PARAM
+        @i18n:Description (en="")
+        @t24:i (t24Name=SWIFT.ALLIANCE.PARAM, level=I, type=H, allowedFunctions="A C D E H I L P Q R S", localRefApplicationSysNo=16.0, localRefAllowed=true)
+    {
+        ALLIANCE_FILEPATH : T24BusinessTypes:BCON_FILEPATH
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=9.0, core=true, t24Name=ALLIANCE.FILEPATH, mandatory=false)
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=24.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=25.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=21.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=22.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=18.0, core=true, t24Name=CURR.NO, mandatory=false)
+        DATE_TIME -> byValue SWFTAL_Foundation:SWIFT_ALLIANCE_PARAM__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=23.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+/* To define the guard queue details. It is used to get the Outgoing message if Out queue is not ready.
+Validation Rule:
+Input mandatory when MQ.ENABLE is OUTWARD */
+        GUARD_QUEUE_NAME : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=7.0, core=true, t24Name=GUARD.QUEUE.NAME, mandatory=false)
+/* It holds the activation string which has to be passed as a parameter to the CALLJEE and used in TAFC runtime.
+Validation Rule:
+Input mandatory when MQ.ENABLE is OUTWARD and running in TAFC runtime. */
+        HANDLER : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=10.0, core=true, t24Name=HANDLER, mandatory=false)
+        INPUTTER -> byValue SWFTAL_Foundation:SWIFT_ALLIANCE_PARAM__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        /* It defines incoming format for the Alliance message. Possible values are  DOS-PCC/RJE. */
+        IN_MSG_FORMAT : SWFTAL_Foundation:SWIFT_ALLIANCE_PARAM__IN_MSG_FORMAT required
+            @t24:i (align=L, inputBehaviour=I, maxLength=7, sysNumber=2.0, core=true, t24Name=IN.MSG.FORMAT, mandatory=true)
+/* It is used to define the connection factory details to processed the Alliance outgoing message into Out queue defined in the MQ.OUT.QUEUE.NAME.
+Validation Rule:
+No input when MQ.ENABLE is selected to NONE. Input mandatory when MQ.ENABLE is OUTWARD and running in TAFJ */
+        MQ_CONN_FACTORY : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=5.0, core=true, t24Name=MQ.CONN.FACTORY, mandatory=false)
+/* It defines to enable whether MQ is  used for the Alliance’s outgoing processing or not.If MQ_ENABLE is set as OUTWARD then the fields MQ.CONN.FACTORY
+MQ.OUT.QUEUE.NAME
+GUARD.QUEUE.NAME
+TIME.TO.LIVE are mandatory for the TAFJ runtime and field HANDLER,TIME.TO.LIVE and GUARD.QUEUE.NAME is mandatory for the TAFC runtime. */
+        MQ_ENABLE : SWFTAL_Foundation:SWIFT_ALLIANCE_PARAM__MQ_ENABLE required
+            @t24:i (align=L, inputBehaviour=I, maxLength=7, sysNumber=4.0, core=true, t24Name=MQ.ENABLE, mandatory=true)
+/* It is used to define Out queue name.
+It is used to define the connection factory details to processed the Alliance outgoing message into Out queue defined in the MQ.OUT.QUEUE.NAME.
+Validation Rule:
+No input when MQ.ENABLE is selected to NONE. Input mandatory when MQ.ENABLE is OUTWARD and running in TAFJ */
+        MQ_OUT_QUEUE_NAME : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=6.0, core=true, t24Name=MQ.OUT.QUEUE.NAME, mandatory=false)
+        /* It defines message prefix and suffix for the message.Possible values are PREFIX/SUFFIX. */
+        MSG_TYPE : SWFTAL_Foundation:SWIFT_ALLIANCE_PARAM__MSG_TYPE required
+            @i18n:Label (en="Message Type")
+            @t24:i (align=L, inputBehaviour=I, maxLength=6, sysNumber=1.0, core=true, t24Name=MSG.TYPE, mandatory=true)
+        /* It defines the Outgoing format for the Alliance message – Possible values are  DOS-PCC/RJE. */
+        OUT_MSG_FORMAT : SWFTAL_Foundation:SWIFT_ALLIANCE_PARAM__OUT_MSG_FORMAT required
+            @t24:i (align=L, inputBehaviour=I, maxLength=7, sysNumber=3.0, core=true, t24Name=OUT.MSG.FORMAT, mandatory=true)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=17.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        RESERVED_1 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=15.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=14.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=13.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=12.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        RESERVED_5 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=11.0, core=true, t24Name=RESERVED.5, mandatory=false)
+        SWIFT_ALLIANCE_PARAM : SWFTAL_Foundation:SWIFT_ALLIANCE_PARAM__SWIFT_ALLIANCE_PARAM PK required
+            @t24:i (align=L, inputBehaviour=I, maxLength=6, sysNumber=0.0, core=true, t24Name=SWIFT.ALLIANCE.PARAM, mandatory=true)
+/* To define the time retain in the message in the Guard queue.
+Validation Rule:
+Input mandatory when MQ.ENABLE is OUTWARD */
+        TIME_TO_LIVE : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=35, sysNumber=8.0, core=true, t24Name=TIME.TO.LIVE, mandatory=false)
+    }
+    SWIFT_ALLIANCE_PARAM__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=20.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    SWIFT_ALLIANCE_PARAM__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=19.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+}
+Enumerations {
+    SWIFT_ALLIANCE_PARAM__IN_MSG_FORMAT : mml:string
+        DOS__PCC=DOS-PCC
+        RJE=RJE
+    SWIFT_ALLIANCE_PARAM__MQ_ENABLE : mml:string
+        NONE=NONE
+        OUTWARD=OUTWARD
+    SWIFT_ALLIANCE_PARAM__MSG_TYPE : mml:string
+        PREFIX=PREFIX
+        SUFFIX=SUFFIX
+    SWIFT_ALLIANCE_PARAM__OUT_MSG_FORMAT : mml:string
+        DOS__PCC=DOS-PCC
+        RJE=RJE
+    SWIFT_ALLIANCE_PARAM__SWIFT_ALLIANCE_PARAM : mml:string
+        SYSTEM=SYSTEM
+}

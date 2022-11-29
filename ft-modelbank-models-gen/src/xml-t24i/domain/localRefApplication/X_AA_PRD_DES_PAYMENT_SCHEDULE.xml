@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<localReferenceApplication:LocalReferenceApplication xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:localReferenceApplication="http://www.odcgroup.com/t24/application/localRefApplication/model/LocalReferenceApplication"
+    xmlns:translationDsl="http://www.odcgroup.com/translation/TranslationDsl" forApplication="name://AA_PaymentSchedule:AA_PRD_DES_PAYMENT_SCHEDULE#">
+  <localField groupName="No" localRefID="USCORE.BILLING.METHOD">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="BILLING.METHOD"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+  <localField groupName="No" localRefID="USLEND.NO.OF.COUPON">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="NO.OF.COUPON"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+  <localField groupName="No" localRefID="USLEND.INITIAL.AMOUNT">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="INITIAL.AMOUNT"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+  <localField groupName="No" localRefID="USLEND.ANNUAL.ANALYSIS.FQU">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="ANNUAL.ANALYSIS"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+  <localField groupName="No" localRefID="USLEND.NXT.SCHED.FQU">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="NXT.SCHED.FQU"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+  <localField groupName="No" localRefID="USLEND.LAST.RECALC.DATE">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="LAST.RECALC.DT"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+  <localField groupName="No" localRefID="USLEND.INSTALMENT.AMT">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="INSTALL.AMOUNT"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+  <localField groupName="No" localRefID="USLEND.TEST.ANALYSIS.DATE">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="TEST.ANLYSIS.DT"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+  <localField groupName="No" localRefID="USLEND.REPRINT.COUPON">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="REPRINT.COUPON"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+  <localField groupName="No" localRefID="USLEND.NEW.ESCROW.AMT">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="NEW.ESCROW.AMT"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+  <localField groupName="No" localRefID="USLEND.REPRINT.DATE">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="REPRINT.DATE"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+</localReferenceApplication:LocalReferenceApplication>

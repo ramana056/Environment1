@@ -1,0 +1,24 @@
+# UTF-8
+/* Auto Account Closure */
+Domain USRETL_AutoAccountClosure
+    @t24:i (module=USRETL)
+    @java:Package (value=com.temenos.t24.datamodel.usretl.usretl_autoaccountclosure)
+namespace "http://www.temenos.com/t24/USRETL_AutoAccountClosure"
+metamodelVersion 1.30.6
+Classes {
+    NOFILE_AC_AUTO_CLOSE_DETAIL
+        @i18n:Description (en="")
+        @t24:i (t24Name=NOFILE.AC.AUTO.CLOSE.DETAIL, level=I, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        AUTO_CLOSURE : T24BusinessTypes:N
+            @t24:i (align=L, inputBehaviour=N, maxLength=25, core=false, t24Name=AUTO.CLOSURE, genOperation=USRETL.E.ACCT.AUTO.CLOSE.DETAIL, mandatory=true)
+        AUTO_CLOSURE_DATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=N, maxLength=11, core=false, t24Name=AUTO.CLOSURE.DATE, mandatory=false)
+        AUTO_CLOSURE_STATUS : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, core=false, t24Name=AUTO.CLOSURE.STATUS, mandatory=false)
+        CURRENT_DAO : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=3, core=false, t24Name=CURRENT.DAO, mandatory=false)
+        ERROR_REASON : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, core=false, t24Name=ERROR.REASON, mandatory=false)
+    }
+}

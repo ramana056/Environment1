@@ -1,0 +1,3021 @@
+# UTF-8
+/* IRA USIRAC */
+Domain USIRAC_IRA
+    @t24:i (module=USIRAC)
+    @java:Package (value=com.temenos.t24.datamodel.usirac.usirac_ira)
+namespace "http://www.temenos.com/t24/USIRAC_IRA"
+metamodelVersion 1.30.6
+Classes {
+    /* The XIRA Property Condition establishes basic information on the arrangement, specific to an Individual Retirement Account (IRA) in the US. Information such as the IRA plan type, IRA beneficiary details, funding source and inherited/beneficiary is setup within the product. */
+    AA_ARR_XIRA
+        @i18n:Description (en="")
+        @t24:i (t24Name=AA.ARR.XIRA, level=F, type=D, allowedFunctions="A C D E H I L P Q R S", localRefApplicationSysNo=15.0, localRefAllowed=true)
+    {
+        ACTION -> byValue USIRAC_IRA:AA_ARR_XIRA__ACTION *
+            @t24:i (t24Name=ACTION)
+        ACTIVITY : T24BusinessTypes:A required
+            @i18n:Label (en=Activity)
+            @t24:i (align=L, inputBehaviour=I, maxLength=80, sysNumber=1.0, core=true, t24Name=ACTIVITY, mandatory=true)
+        API_ATTRIBUTE -> byValue USIRAC_IRA:AA_ARR_XIRA__API_ATTRIBUTE *
+            @t24:i (t24Name=API.ATTRIBUTE)
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=62.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=63.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=59.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        BENEFICIARY -> byValue USIRAC_IRA:AA_ARR_XIRA__BENEFICIARY *
+            @t24:i (t24Name=BENEFICIARY)
+        CHANGED_FIELDS -> byValue USIRAC_IRA:AA_ARR_XIRA__CHANGED_FIELDS *
+            @t24:i (t24Name=CHANGED.FIELDS)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=60.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=56.0, core=true, t24Name=CURR.NO, mandatory=false)
+        DATE_TIME -> byValue USIRAC_IRA:AA_ARR_XIRA__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DEAL_NO -> USIRAC_IRA:AA_ARR_XIRA PK required
+            @i18n:Label (en="Deal Number")
+            @t24:i (align=L, inputBehaviour=I, maxLength=80, sysNumber=0.0, core=true, businessType=ANY, t24Name=DEAL.NO, mandatory=true)
+/* The customer ID of the individual that passed and who’s funds are funding the IRA at hand
+This field will have a context inquiry providing the following decedent’s details:
+•    Name
+• Date of Birth
+• Date of Death
+• SSN */
+        DECEDENT_CUSTOMER -> ST_Customer:CUSTOMER
+            @t24:i (align=R, inputBehaviour=I, maxLength=10, sysNumber=11.0, core=true, businessType=CUS, t24Name=DECEDENT.CUSTOMER, mandatory=false)
+/* Denotes the relationship of primary owner to the decedent. Valid values are:
+• Spouse
+• Non-spouse
+• Other */
+        DECEDENT_RELATIONSHIP : USIRAC_IRA:AA_ARR_XIRA__DECEDENT_RELATIONSHIP
+            @t24:i (align=L, inputBehaviour=I, maxLength=10, sysNumber=12.0, core=true, t24Name=DECEDENT.RELATIONSHIP, mandatory=false)
+        DEFAULT_ATTR_OPTION : USIRAC_IRA:AA_ARR_XIRA__DEFAULT_ATTR_OPTION
+            @i18n:Label (en="Default Attribute Option")
+            @i18n:Tooltip (en="Allowed Values are RESETTING and NON-RESETTING")
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=33.0, core=true, t24Name=DEFAULT.ATTR.OPTION, mandatory=false)
+        DEFAULT_NEGOTIABLE : USIRAC_IRA:AA_ARR_XIRA__DEFAULT_NEGOTIABLE
+            @i18n:Label (en="Default Negotiable")
+            @i18n:Tooltip (en="IF all attributes can be negotiable or not")
+            @t24:i (align=L, inputBehaviour=N, maxLength=3, sysNumber=34.0, core=true, t24Name=DEFAULT.NEGOTIABLE, mandatory=false)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=61.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        /* A free text fields that allows the bank to enter where the funds came from to fund the IRA Account */
+        FINANCIAL_INSTITUTION : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=9.0, core=true, t24Name=FINANCIAL.INSTITUTION, isTextarea=true, mandatory=false)
+        ID_COMP_1 : T24BusinessTypes:A
+            @i18n:Label (en="Arrangement Id")
+            @t24:i (align=L, inputBehaviour=N, maxLength=30, sysNumber=45.0, core=true, t24Name=ID.COMP.1, mandatory=false)
+        ID_COMP_2 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=30, sysNumber=46.0, core=true, t24Name=ID.COMP.2, mandatory=false)
+        ID_COMP_3 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=30, sysNumber=47.0, core=true, t24Name=ID.COMP.3, mandatory=false)
+        ID_COMP_4 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=30, sysNumber=48.0, core=true, t24Name=ID.COMP.4, mandatory=false)
+        ID_COMP_5 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=30, sysNumber=49.0, core=true, t24Name=ID.COMP.5, mandatory=false)
+        ID_COMP_6 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=30, sysNumber=50.0, core=true, t24Name=ID.COMP.6, mandatory=false)
+/* The field with a drop down of:
+• Blank – processes the same as NO
+• No – this a normal IRA
+• Yes – this IRA is opened due to the death of a customer who had an IRA account
+If Yes then the following context inquiry values are required:
+• Decedent’s Cust ID
+• Relationship
+• Inherited IRA RMD Calculation Mthd
+• Calculation */
+        INHERIT_IRA : USIRAC_IRA:AA_ARR_XIRA__INHERIT_IRA
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=10.0, core=true, t24Name=INHERIT.IRA, mandatory=false)
+/* This a drop down that includes values of:
+•    Reducing
+•    Non-Reducing
+This only is available when the Inherited IRS RMD Calculation Mthd field value is  Life Expectancy */
+        INHERIT_RMD_CALCULATION : USIRAC_IRA:AA_ARR_XIRA__INHERIT_RMD_CALCULATION
+            @t24:i (align=L, inputBehaviour=I, maxLength=12, sysNumber=14.0, core=true, t24Name=INHERIT.RMD.CALCULATION, mandatory=false)
+/* Describes the client-requested distribution method for the inherited funds. Options are:
+•    Lump Sum – this option is available for the spouse of the deceased only. Once deposited in the IRA the funds will be withdrawn in the Lump Sum. There is no logic supporting this choice
+•    Five-Year Method – this choice is a manual five-year distribution of the IRA taken at the discretion of the client. There is no logic supporting this choice
+• Life Expectancy – This allows the inheritor to defer a large tax event. This value will require an entry in the Calculation field. This will supported by logic */
+        INHERIT_RMD_CALC_METHOD : USIRAC_IRA:AA_ARR_XIRA__INHERIT_RMD_CALC_METHOD
+            @t24:i (align=L, inputBehaviour=I, maxLength=16, sysNumber=13.0, core=true, t24Name=INHERIT.RMD.CALC.METHOD, mandatory=false)
+        INPUTTER -> byValue USIRAC_IRA:AA_ARR_XIRA__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        NEGOTIATED_FLDS -> byValue USIRAC_IRA:AA_ARR_XIRA__NEGOTIATED_FLDS *
+            @t24:i (t24Name=NEGOTIATED.FLDS)
+        NR_ATTRIBUTE -> byValue USIRAC_IRA:AA_ARR_XIRA__NR_ATTRIBUTE *
+            @t24:i (t24Name=NR.ATTRIBUTE)
+        OVERRIDE -> byValue USIRAC_IRA:AA_ARR_XIRA__OVERRIDE *
+            @t24:i (t24Name=OVERRIDE)
+        OWNING_COMPANY -> byValue USIRAC_IRA:AA_ARR_XIRA__OWNING_COMPANY *
+            @t24:i (t24Name=OWNING.COMPANY)
+/* This field contains drop down of the current IRS plans:
+•   Simple
+•   Traditional
+•   SEP
+•   Roth
+And only these values are valid as these are maintained by Temenos */
+        PLAN_TYPE : USIRAC_IRA:AA_ARR_XIRA__PLAN_TYPE
+            @i18n:Label (en="Plan Type")
+            @t24:i (align=L, inputBehaviour=F, maxLength=15, sysNumber=3.0, core=true, t24Name=PLAN.TYPE, mandatory=false)
+        PR_ATTRIBUTE -> byValue USIRAC_IRA:AA_ARR_XIRA__PR_ATTRIBUTE *
+            @t24:i (t24Name=PR.ATTRIBUTE)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=55.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        RESERVED2_ID : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=30, sysNumber=51.0, core=true, t24Name=RESERVED2.ID, mandatory=false)
+/* A field with a drop down containing values:
+•  New Deposit
+• Rollover
+•  Transfer
+•  New Money
+• New Account
+This list can be changed as need via EB.LOOKUP */
+        SOURCE_OF_FUNDS : USIRAC_IRA:AA_ARR_XIRA__SOURCE_OF_FUNDS
+            @t24:i (align=L, inputBehaviour=I, maxLength=26, sysNumber=8.0, core=true, t24Name=SOURCE.OF.FUNDS, mandatory=false)
+        STMT_NOS -> byValue USIRAC_IRA:AA_ARR_XIRA__STMT_NOS *
+            @t24:i (t24Name=STMT.NOS)
+        SYS_RESERVE1 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=32.0, core=true, t24Name=SYS.RESERVE1, mandatory=false)
+        SYS_RESERVE2 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=31.0, core=true, t24Name=SYS.RESERVE2, mandatory=false)
+        SYS_RESERVE3 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=30.0, core=true, t24Name=SYS.RESERVE3, mandatory=false)
+        SYS_RESERVE6 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=27.0, core=true, t24Name=SYS.RESERVE6, mvSvExpansionAccess=NOEXPAND, mandatory=false)
+        SYS_RESERVE7 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=26.0, core=true, t24Name=SYS.RESERVE7, mvSvExpansionAccess=NOEXPAND, mandatory=false)
+        TARGET_PRODUCT : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=10, sysNumber=52.0, core=true, t24Name=TARGET.PRODUCT, mandatory=false)
+    }
+    AA_ARR_XIRA__ACTION
+    {
+        ACTION : T24BusinessTypes:A
+            @i18n:Label (en=Action)
+            @t24:i (align=L, inputBehaviour=I, maxLength=30, sysNumber=2.0, core=true, t24Name=ACTION, mandatory=false)
+    }
+    AA_ARR_XIRA__API_ATTRIBUTE
+    {
+        API_ATTRIBUTE : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=29.0, core=true, t24Name=API.ATTRIBUTE, mandatory=false)
+    }
+    AA_ARR_XIRA__BENEFICIARY
+    {
+        /* The person that will receive the distribution that will be required for all Pay Method values and is linked to the Beneficiary Table */
+        BENEFICIARY : T24BusinessTypes:A
+            @i18n:Label (en=Beneficiary)
+            @t24:i (align=L, inputBehaviour=I, maxLength=10, sysNumber=4.0, core=true, t24Name=BENEFICIARY, mandatory=false)
+/* Denotes the relationship of beneficiary or contingent beneficiary to the primary owner. Valid values are:
+•    Spouse
+• Non-spouse
+•    Other
+These values assist the bank in making choice in the Inherited IRS RMD Calculation Mthd but there are not coding supporting the choices made */
+        BEN_RELATION : USIRAC_IRA:AA_ARR_XIRA__BENEFICIARY__BEN_RELATION
+            @t24:i (align=L, inputBehaviour=I, maxLength=10, sysNumber=6.0, core=true, t24Name=BEN.RELATION, mandatory=false)
+/* This field determines, in the event of death of the IRA, who will receive the IRA funds. It has a drop down with values of:
+•    Beneficiary
+•   Contingent Beneficiary
+A customer cannot be both a beneficiary and a contingent beneficiary */
+        BEN_ROLE : USIRAC_IRA:AA_ARR_XIRA__BENEFICIARY__BEN_ROLE
+            @t24:i (align=L, inputBehaviour=I, maxLength=22, sysNumber=5.0, core=true, t24Name=BEN.ROLE, mandatory=false)
+/* A field that determines the amount of the account balance that is due to the beneficiary/contingent beneficiary.
+The sum of the percent in each role (Beneficiary / Contingent Beneficiary) must equal 100 else an edit is produced */
+        BEN_SHARE : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=3, sysNumber=7.0, core=true, t24Name=BEN.SHARE, mandatory=false)
+    }
+    AA_ARR_XIRA__CHANGED_FIELDS
+    {
+        CHANGED_FIELDS : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=19, sysNumber=43.0, core=true, t24Name=CHANGED.FIELDS, mandatory=false)
+    }
+    AA_ARR_XIRA__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=58.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    AA_ARR_XIRA__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=57.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    AA_ARR_XIRA__NEGOTIATED_FLDS
+    {
+        NEGOTIATED_FLDS : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=19, sysNumber=44.0, core=true, t24Name=NEGOTIATED.FLDS, mandatory=false)
+    }
+    AA_ARR_XIRA__NR_ATTRIBUTE
+    {
+        NR_ATTRIBUTE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=25, sysNumber=35.0, core=true, t24Name=NR.ATTRIBUTE, mandatory=false)
+        NR_ATTRIBUTE_RULE : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=37.0, core=true, t24Name=NR.ATTRIBUTE.RULE, mandatory=false)
+        NR_OPTIONS -> byValue USIRAC_IRA:AA_ARR_XIRA__NR_ATTRIBUTE__NR_OPTIONS *
+            @t24:i (t24Name=NR.OPTIONS)
+        NR_STD_COMP -> AA_Rules:EB_STANDARD_COMPARISON
+            @t24:i (align=L, inputBehaviour=N, maxLength=25, sysNumber=39.0, core=true, businessType=A, t24Name=NR.STD.COMP, mandatory=false)
+        NR_TYPE -> byValue USIRAC_IRA:AA_ARR_XIRA__NR_ATTRIBUTE__NR_TYPE *
+            @t24:i (t24Name=NR.TYPE)
+        NR_VALUE_SOURCE : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=N, maxLength=60, sysNumber=38.0, core=true, t24Name=NR.VALUE.SOURCE, mandatory=false)
+    }
+    AA_ARR_XIRA__NR_ATTRIBUTE__NR_OPTIONS
+    {
+        NR_OPTIONS : USIRAC_IRA:AA_ARR_XIRA__NR_ATTRIBUTE__NR_OPTIONS__NR_OPTIONS
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=36.0, core=true, t24Name=NR.OPTIONS, mandatory=false)
+    }
+    AA_ARR_XIRA__NR_ATTRIBUTE__NR_TYPE
+    {
+        NR_MESSAGE : USIRAC_IRA:AA_ARR_XIRA__NR_ATTRIBUTE__NR_TYPE__NR_MESSAGE
+            @t24:i (align=L, inputBehaviour=N, maxLength=10, sysNumber=42.0, core=true, t24Name=NR.MESSAGE, mandatory=false)
+        NR_TYPE -> AA_Rules:EB_COMPARISON_TYPE
+            @t24:i (align=L, inputBehaviour=N, maxLength=25, sysNumber=40.0, core=true, businessType=A, t24Name=NR.TYPE, mandatory=false)
+        NR_VALUE : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=N, maxLength=60, sysNumber=41.0, core=true, t24Name=NR.VALUE, mandatory=false)
+    }
+    AA_ARR_XIRA__OVERRIDE
+    {
+        OVERRIDE : T24BusinessTypes:A
+            @i18n:Label (en=Override)
+            @i18n:Tooltip (en="Overrides generated by this transaction")
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=54.0, core=true, t24Name=OVERRIDE, mandatory=false)
+    }
+    AA_ARR_XIRA__OWNING_COMPANY
+    {
+        OWNING_COMPANY -> ST_CompanyCreation:COMPANY
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=28.0, core=true, businessType=A, t24Name=OWNING.COMPANY, mvSvExpansionAccess=NOEXPAND, mandatory=false)
+    }
+    AA_ARR_XIRA__PR_ATTRIBUTE
+    {
+        PR_APP_METHOD : USIRAC_IRA:AA_ARR_XIRA__PR_ATTRIBUTE__PR_APP_METHOD
+            @i18n:Label (en="Application Method")
+            @i18n:Tooltip (en="This will hold two values either DUE or CAPITALISE")
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=24.0, core=true, t24Name=PR.APP.METHOD, mvSvExpansionAccess=NOEXPAND, mandatory=false)
+        PR_APP_PERIOD : T24BusinessTypes:PERIOD
+            @i18n:Label (en="Application Period")
+            @i18n:Tooltip (en="Denote the period for current aplication method")
+            @t24:i (align=L, inputBehaviour=N, maxLength=4, sysNumber=25.0, core=true, t24Name=PR.APP.PERIOD, mvSvExpansionAccess=NOEXPAND, mandatory=false)
+        PR_ATTRIBUTE -> AA_Rules:AA_PERIODIC_ATTRIBUTE
+            @i18n:Label (en=Attribute)
+            @i18n:Tooltip (en="Attributes defining the names of the rule applied")
+            @t24:i (align=L, inputBehaviour=N, maxLength=30, sysNumber=16.0, core=true, businessType=A, t24Name=PR.ATTRIBUTE, mvSvExpansionAccess=NOEXPAND, mandatory=false)
+        PR_BRK_CHARGE -> AA_ProductFramework:AA_PROPERTY
+            @i18n:Label (en=Charge)
+            @i18n:Tooltip (en="Charge collected when the periodic rule is broken")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=20.0, core=true, businessType=A, t24Name=PR.BRK.CHARGE, mvSvExpansionAccess=NOEXPAND, mandatory=false)
+        PR_BRK_MSG : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=19.0, core=true, t24Name=PR.BRK.MSG, mvSvExpansionAccess=NOEXPAND, mandatory=false)
+        PR_BRK_RES : USIRAC_IRA:AA_ARR_XIRA__PR_ATTRIBUTE__PR_BRK_RES
+            @i18n:Label (en=Rule)
+            @i18n:Tooltip (en="Action to be taken when rule is broken")
+            @t24:i (align=L, inputBehaviour=N, maxLength=13, sysNumber=18.0, core=true, t24Name=PR.BRK.RES, mvSvExpansionAccess=NOEXPAND, mandatory=false)
+        PR_RESERVED_1 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=23.0, core=true, t24Name=PR.RESERVED.1, mvSvExpansionAccess=NOEXPAND, mandatory=false)
+        PR_RESERVED_2 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=22.0, core=true, t24Name=PR.RESERVED.2, mvSvExpansionAccess=NOEXPAND, mandatory=false)
+        PR_RESERVED_3 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=21.0, core=true, t24Name=PR.RESERVED.3, mvSvExpansionAccess=NOEXPAND, mandatory=false)
+        PR_VALUE : T24BusinessTypes:A
+            @i18n:Label (en="Value ")
+            @i18n:Tooltip (en="Value of rule applied on certain attributes")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=17.0, core=true, t24Name=PR.VALUE, mvSvExpansionAccess=NOEXPAND, mandatory=false)
+    }
+    AA_ARR_XIRA__STMT_NOS
+    {
+        STMT_NOS : T24BusinessTypes:A
+            @i18n:Label (en="Stmt Nos")
+            @i18n:Tooltip (en="Stmt Nos")
+            @t24:i (align=L, inputBehaviour=N, maxLength=20, sysNumber=53.0, core=true, t24Name=STMT.NOS, mandatory=false)
+    }
+    /* The XIRA Property Condition establishes basic information on the arrangement, specific to an Individual Retirement Account (IRA) in the US. Information such as the IRA plan type, IRA beneficiary details, funding source and inherited/beneficiary is setup within the product. */
+    AA_PRD_CAT_XIRA
+        @i18n:Description (en="")
+        @t24:i (t24Name=AA.PRD.CAT.XIRA, level=I, type=D, allowedFunctions="A C D E H I L P Q R S", localRefApplicationSysNo=15.0, localRefAllowed=true)
+    {
+        API_ATTRIBUTE -> byValue USIRAC_IRA:AA_PRD_CAT_XIRA__API_ATTRIBUTE *
+            @t24:i (t24Name=API.ATTRIBUTE)
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=62.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=63.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=59.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        BENEFICIARY -> byValue USIRAC_IRA:AA_PRD_CAT_XIRA__BENEFICIARY *
+            @t24:i (t24Name=BENEFICIARY)
+        CHANGED_FIELDS -> byValue USIRAC_IRA:AA_PRD_CAT_XIRA__CHANGED_FIELDS *
+            @t24:i (t24Name=CHANGED.FIELDS)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=60.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=56.0, core=true, t24Name=CURR.NO, mandatory=false)
+        DATE_TIME -> byValue USIRAC_IRA:AA_PRD_CAT_XIRA__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DEAL_NO -> USIRAC_IRA:AA_PRD_CAT_XIRA PK required
+            @i18n:Label (en="Deal Number")
+            @t24:i (align=L, inputBehaviour=I, maxLength=80, sysNumber=0.0, core=true, businessType=ANY, t24Name=DEAL.NO, mandatory=true)
+/* The customer ID of the individual that passed and who’s funds are funding the IRA at hand
+This field will have a context inquiry providing the following decedent’s details:
+•    Name
+• Date of Birth
+• Date of Death
+• SSN */
+        DECEDENT_CUSTOMER -> ST_Customer:CUSTOMER
+            @t24:i (align=R, inputBehaviour=I, maxLength=10, sysNumber=11.0, core=true, businessType=CUS, t24Name=DECEDENT.CUSTOMER, mandatory=false)
+/* Denotes the relationship of primary owner to the decedent. Valid values are:
+• Spouse
+• Non-spouse
+• Other */
+        DECEDENT_RELATIONSHIP : USIRAC_IRA:AA_PRD_CAT_XIRA__DECEDENT_RELATIONSHIP
+            @t24:i (align=L, inputBehaviour=I, maxLength=10, sysNumber=12.0, core=true, t24Name=DECEDENT.RELATIONSHIP, mandatory=false)
+        DEFAULT_ATTR_OPTION : USIRAC_IRA:AA_PRD_CAT_XIRA__DEFAULT_ATTR_OPTION
+            @i18n:Label (en="Default Attribute Option")
+            @i18n:Tooltip (en="Allowed Values are RESETTING and NON-RESETTING")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=33.0, core=true, t24Name=DEFAULT.ATTR.OPTION, mandatory=false)
+        DEFAULT_NEGOTIABLE : USIRAC_IRA:AA_PRD_CAT_XIRA__DEFAULT_NEGOTIABLE
+            @i18n:Label (en="Default Negotiable")
+            @i18n:Tooltip (en="IF all attributes can be negotiable or not")
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=34.0, core=true, t24Name=DEFAULT.NEGOTIABLE, mandatory=false)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=61.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        DESCRIPTION -> byValue USIRAC_IRA:AA_PRD_CAT_XIRA__DESCRIPTION *
+            @t24:i (t24Name=DESCRIPTION)
+        /* A free text fields that allows the bank to enter where the funds came from to fund the IRA Account */
+        FINANCIAL_INSTITUTION : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=9.0, core=true, t24Name=FINANCIAL.INSTITUTION, isTextarea=true, mandatory=false)
+        FULL_DESCRIPTION : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=100, sysNumber=2.0, core=true, t24Name=FULL.DESCRIPTION, mandatory=false)
+        ID_COMP_1 : T24BusinessTypes:A
+            @i18n:Label (en="Arrangement Id")
+            @t24:i (align=L, inputBehaviour=N, maxLength=30, sysNumber=45.0, core=true, t24Name=ID.COMP.1, mandatory=false)
+        ID_COMP_2 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=30, sysNumber=46.0, core=true, t24Name=ID.COMP.2, mandatory=false)
+        ID_COMP_3 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=30, sysNumber=47.0, core=true, t24Name=ID.COMP.3, mandatory=false)
+        ID_COMP_4 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=30, sysNumber=48.0, core=true, t24Name=ID.COMP.4, mandatory=false)
+        ID_COMP_5 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=30, sysNumber=49.0, core=true, t24Name=ID.COMP.5, mandatory=false)
+        ID_COMP_6 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=30, sysNumber=50.0, core=true, t24Name=ID.COMP.6, mandatory=false)
+/* The field with a drop down of:
+• Blank – processes the same as NO
+• No – this a normal IRA
+• Yes – this IRA is opened due to the death of a customer who had an IRA account
+If Yes then the following context inquiry values are required:
+• Decedent’s Cust ID
+• Relationship
+• Inherited IRA RMD Calculation Mthd
+• Calculation */
+        INHERIT_IRA : USIRAC_IRA:AA_PRD_CAT_XIRA__INHERIT_IRA
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=10.0, core=true, t24Name=INHERIT.IRA, mandatory=false)
+/* This a drop down that includes values of:
+•    Reducing
+•    Non-Reducing
+This only is available when the Inherited IRS RMD Calculation Mthd field value is  Life Expectancy */
+        INHERIT_RMD_CALCULATION : USIRAC_IRA:AA_PRD_CAT_XIRA__INHERIT_RMD_CALCULATION
+            @t24:i (align=L, inputBehaviour=I, maxLength=12, sysNumber=14.0, core=true, t24Name=INHERIT.RMD.CALCULATION, mandatory=false)
+/* Describes the client-requested distribution method for the inherited funds. Options are:
+•    Lump Sum – this option is available for the spouse of the deceased only. Once deposited in the IRA the funds will be withdrawn in the Lump Sum. There is no logic supporting this choice
+•    Five-Year Method – this choice is a manual five-year distribution of the IRA taken at the discretion of the client. There is no logic supporting this choice
+• Life Expectancy – This allows the inheritor to defer a large tax event. This value will require an entry in the Calculation field. This will supported by logic */
+        INHERIT_RMD_CALC_METHOD : USIRAC_IRA:AA_PRD_CAT_XIRA__INHERIT_RMD_CALC_METHOD
+            @t24:i (align=L, inputBehaviour=I, maxLength=16, sysNumber=13.0, core=true, t24Name=INHERIT.RMD.CALC.METHOD, mandatory=false)
+        INPUTTER -> byValue USIRAC_IRA:AA_PRD_CAT_XIRA__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        NEGOTIATED_FLDS -> byValue USIRAC_IRA:AA_PRD_CAT_XIRA__NEGOTIATED_FLDS *
+            @t24:i (t24Name=NEGOTIATED.FLDS)
+        NR_ATTRIBUTE -> byValue USIRAC_IRA:AA_PRD_CAT_XIRA__NR_ATTRIBUTE *
+            @t24:i (t24Name=NR.ATTRIBUTE)
+        OVERRIDE -> byValue USIRAC_IRA:AA_PRD_CAT_XIRA__OVERRIDE *
+            @t24:i (t24Name=OVERRIDE)
+        OWNING_COMPANY -> byValue USIRAC_IRA:AA_PRD_CAT_XIRA__OWNING_COMPANY *
+            @t24:i (t24Name=OWNING.COMPANY)
+/* This field contains drop down of the current IRS plans:
+•   Simple
+•   Traditional
+•   SEP
+•   Roth
+And only these values are valid as these are maintained by Temenos */
+        PLAN_TYPE : USIRAC_IRA:AA_PRD_CAT_XIRA__PLAN_TYPE
+            @i18n:Label (en="Plan Type")
+            @t24:i (align=L, inputBehaviour=F, maxLength=15, sysNumber=3.0, core=true, t24Name=PLAN.TYPE, mandatory=false)
+        PR_ATTRIBUTE -> byValue USIRAC_IRA:AA_PRD_CAT_XIRA__PR_ATTRIBUTE *
+            @t24:i (t24Name=PR.ATTRIBUTE)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=55.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        RESERVED2_ID : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=30, sysNumber=51.0, core=true, t24Name=RESERVED2.ID, mandatory=false)
+/* A field with a drop down containing values:
+•  New Deposit
+• Rollover
+•  Transfer
+•  New Money
+• New Account
+This list can be changed as need via EB.LOOKUP */
+        SOURCE_OF_FUNDS : USIRAC_IRA:AA_PRD_CAT_XIRA__SOURCE_OF_FUNDS
+            @t24:i (align=L, inputBehaviour=I, maxLength=26, sysNumber=8.0, core=true, t24Name=SOURCE.OF.FUNDS, mandatory=false)
+        STMT_NOS -> byValue USIRAC_IRA:AA_PRD_CAT_XIRA__STMT_NOS *
+            @t24:i (t24Name=STMT.NOS)
+        SYS_RESERVE1 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=32.0, core=true, t24Name=SYS.RESERVE1, mandatory=false)
+        SYS_RESERVE2 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=31.0, core=true, t24Name=SYS.RESERVE2, mandatory=false)
+        SYS_RESERVE3 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=30.0, core=true, t24Name=SYS.RESERVE3, mandatory=false)
+        SYS_RESERVE6 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=27.0, core=true, t24Name=SYS.RESERVE6, mandatory=false)
+        SYS_RESERVE7 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=26.0, core=true, t24Name=SYS.RESERVE7, mandatory=false)
+        TARGET_PRODUCT : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=10, sysNumber=52.0, core=true, t24Name=TARGET.PRODUCT, mandatory=false)
+    }
+    AA_PRD_CAT_XIRA__API_ATTRIBUTE
+    {
+        API_ATTRIBUTE : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=29.0, core=true, t24Name=API.ATTRIBUTE, mandatory=false)
+    }
+    AA_PRD_CAT_XIRA__BENEFICIARY
+    {
+        /* The person that will receive the distribution that will be required for all Pay Method values and is linked to the Beneficiary Table */
+        BENEFICIARY : T24BusinessTypes:A
+            @i18n:Label (en=Beneficiary)
+            @t24:i (align=L, inputBehaviour=I, maxLength=10, sysNumber=4.0, core=true, t24Name=BENEFICIARY, mandatory=false)
+/* Denotes the relationship of beneficiary or contingent beneficiary to the primary owner. Valid values are:
+•    Spouse
+• Non-spouse
+•    Other
+These values assist the bank in making choice in the Inherited IRS RMD Calculation Mthd but there are not coding supporting the choices made */
+        BEN_RELATION : USIRAC_IRA:AA_PRD_CAT_XIRA__BENEFICIARY__BEN_RELATION
+            @t24:i (align=L, inputBehaviour=I, maxLength=10, sysNumber=6.0, core=true, t24Name=BEN.RELATION, mandatory=false)
+/* This field determines, in the event of death of the IRA, who will receive the IRA funds. It has a drop down with values of:
+•    Beneficiary
+•   Contingent Beneficiary
+A customer cannot be both a beneficiary and a contingent beneficiary */
+        BEN_ROLE : USIRAC_IRA:AA_PRD_CAT_XIRA__BENEFICIARY__BEN_ROLE
+            @t24:i (align=L, inputBehaviour=I, maxLength=22, sysNumber=5.0, core=true, t24Name=BEN.ROLE, mandatory=false)
+/* A field that determines the amount of the account balance that is due to the beneficiary/contingent beneficiary.
+The sum of the percent in each role (Beneficiary / Contingent Beneficiary) must equal 100 else an edit is produced */
+        BEN_SHARE : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=3, sysNumber=7.0, core=true, t24Name=BEN.SHARE, mandatory=false)
+    }
+    AA_PRD_CAT_XIRA__CHANGED_FIELDS
+    {
+        CHANGED_FIELDS : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=19, sysNumber=43.0, core=true, t24Name=CHANGED.FIELDS, mandatory=false)
+    }
+    AA_PRD_CAT_XIRA__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=58.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    AA_PRD_CAT_XIRA__DESCRIPTION
+    {
+        DESCRIPTION : T24BusinessTypes:ANY required
+            @i18n:Label (en=Description)
+            @i18n:Tooltip (en=Description)
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, multiLanguage=true, sysNumber=1.0, core=true, t24Name=DESCRIPTION, mandatory=true)
+    }
+    AA_PRD_CAT_XIRA__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=57.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    AA_PRD_CAT_XIRA__NEGOTIATED_FLDS
+    {
+        NEGOTIATED_FLDS : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=19, sysNumber=44.0, core=true, t24Name=NEGOTIATED.FLDS, mandatory=false)
+    }
+    AA_PRD_CAT_XIRA__NR_ATTRIBUTE
+    {
+        NR_ATTRIBUTE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=25, sysNumber=35.0, core=true, t24Name=NR.ATTRIBUTE, mandatory=false)
+        NR_ATTRIBUTE_RULE : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=100, sysNumber=37.0, core=true, t24Name=NR.ATTRIBUTE.RULE, mandatory=false)
+        NR_OPTIONS -> byValue USIRAC_IRA:AA_PRD_CAT_XIRA__NR_ATTRIBUTE__NR_OPTIONS *
+            @t24:i (t24Name=NR.OPTIONS)
+        NR_STD_COMP -> AA_Rules:EB_STANDARD_COMPARISON
+            @t24:i (align=L, inputBehaviour=I, maxLength=25, sysNumber=39.0, core=true, businessType=A, t24Name=NR.STD.COMP, mandatory=false)
+        NR_TYPE -> byValue USIRAC_IRA:AA_PRD_CAT_XIRA__NR_ATTRIBUTE__NR_TYPE *
+            @t24:i (t24Name=NR.TYPE)
+        NR_VALUE_SOURCE : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=60, sysNumber=38.0, core=true, t24Name=NR.VALUE.SOURCE, mandatory=false)
+    }
+    AA_PRD_CAT_XIRA__NR_ATTRIBUTE__NR_OPTIONS
+    {
+        NR_OPTIONS : USIRAC_IRA:AA_PRD_CAT_XIRA__NR_ATTRIBUTE__NR_OPTIONS__NR_OPTIONS
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=36.0, core=true, t24Name=NR.OPTIONS, mandatory=false)
+    }
+    AA_PRD_CAT_XIRA__NR_ATTRIBUTE__NR_TYPE
+    {
+        NR_MESSAGE : USIRAC_IRA:AA_PRD_CAT_XIRA__NR_ATTRIBUTE__NR_TYPE__NR_MESSAGE
+            @t24:i (align=L, inputBehaviour=I, maxLength=10, sysNumber=42.0, core=true, t24Name=NR.MESSAGE, mandatory=false)
+        NR_TYPE -> AA_Rules:EB_COMPARISON_TYPE
+            @t24:i (align=L, inputBehaviour=I, maxLength=25, sysNumber=40.0, core=true, businessType=A, t24Name=NR.TYPE, mandatory=false)
+        NR_VALUE : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=60, sysNumber=41.0, core=true, t24Name=NR.VALUE, mandatory=false)
+    }
+    AA_PRD_CAT_XIRA__OVERRIDE
+    {
+        OVERRIDE : T24BusinessTypes:A
+            @i18n:Label (en=Override)
+            @i18n:Tooltip (en="Overrides generated by this transaction")
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=54.0, core=true, t24Name=OVERRIDE, mandatory=false)
+    }
+    AA_PRD_CAT_XIRA__OWNING_COMPANY
+    {
+        OWNING_COMPANY -> ST_CompanyCreation:COMPANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=28.0, core=true, businessType=A, t24Name=OWNING.COMPANY, mandatory=false)
+    }
+    AA_PRD_CAT_XIRA__PR_ATTRIBUTE
+    {
+        PR_APP_METHOD : USIRAC_IRA:AA_PRD_CAT_XIRA__PR_ATTRIBUTE__PR_APP_METHOD
+            @i18n:Label (en="Application Method")
+            @i18n:Tooltip (en="This will hold two values either DUE or CAPITALISE")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=24.0, core=true, t24Name=PR.APP.METHOD, mandatory=false)
+        PR_APP_PERIOD : T24BusinessTypes:PERIOD
+            @i18n:Label (en="Application Period")
+            @i18n:Tooltip (en="Denote the period for current aplication method")
+            @t24:i (align=L, inputBehaviour=I, maxLength=4, sysNumber=25.0, core=true, t24Name=PR.APP.PERIOD, mandatory=false)
+        PR_ATTRIBUTE -> AA_Rules:AA_PERIODIC_ATTRIBUTE
+            @i18n:Label (en=Attribute)
+            @i18n:Tooltip (en="Attributes defining the names of the rule applied")
+            @t24:i (align=L, inputBehaviour=I, maxLength=30, sysNumber=16.0, core=true, businessType=A, t24Name=PR.ATTRIBUTE, mandatory=false)
+        PR_BRK_CHARGE -> AA_ProductFramework:AA_PROPERTY
+            @i18n:Label (en=Charge)
+            @i18n:Tooltip (en="Charge collected when the periodic rule is broken")
+            @t24:i (align=L, inputBehaviour=I, maxLength=15, sysNumber=20.0, core=true, businessType=A, t24Name=PR.BRK.CHARGE, mandatory=false)
+        PR_BRK_MSG : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=19.0, core=true, t24Name=PR.BRK.MSG, mandatory=false)
+        PR_BRK_RES : USIRAC_IRA:AA_PRD_CAT_XIRA__PR_ATTRIBUTE__PR_BRK_RES
+            @i18n:Label (en=Rule)
+            @i18n:Tooltip (en="Action to be taken when rule is broken")
+            @t24:i (align=L, inputBehaviour=I, maxLength=13, sysNumber=18.0, core=true, t24Name=PR.BRK.RES, mandatory=false)
+        PR_RESERVED_1 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=23.0, core=true, t24Name=PR.RESERVED.1, mandatory=false)
+        PR_RESERVED_2 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=22.0, core=true, t24Name=PR.RESERVED.2, mandatory=false)
+        PR_RESERVED_3 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=21.0, core=true, t24Name=PR.RESERVED.3, mandatory=false)
+        PR_VALUE : T24BusinessTypes:A
+            @i18n:Label (en="Value ")
+            @i18n:Tooltip (en="Value of rule applied on certain attributes")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=17.0, core=true, t24Name=PR.VALUE, mandatory=false)
+    }
+    AA_PRD_CAT_XIRA__STMT_NOS
+    {
+        STMT_NOS : T24BusinessTypes:A
+            @i18n:Label (en="Stmt Nos")
+            @i18n:Tooltip (en="Stmt Nos")
+            @t24:i (align=L, inputBehaviour=N, maxLength=20, sysNumber=53.0, core=true, t24Name=STMT.NOS, mandatory=false)
+    }
+    /* The XIRA Property Condition establishes basic information on the arrangement, specific to an Individual Retirement Account (IRA) in the US. Information such as the IRA plan type, IRA beneficiary details, funding source and inherited/beneficiary is setup within the product. */
+    AA_PRD_DES_XIRA
+        @i18n:Description (en="")
+        @t24:i (t24Name=AA.PRD.DES.XIRA, level=I, type=D, allowedFunctions="A C D E H I L P Q R S", localRefApplicationSysNo=15.0, localRefAllowed=true)
+    {
+        API_ATTRIBUTE -> byValue USIRAC_IRA:AA_PRD_DES_XIRA__API_ATTRIBUTE *
+            @t24:i (t24Name=API.ATTRIBUTE)
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=62.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=63.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=59.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        BENEFICIARY -> byValue USIRAC_IRA:AA_PRD_DES_XIRA__BENEFICIARY *
+            @t24:i (t24Name=BENEFICIARY)
+        CHANGED_FIELDS -> byValue USIRAC_IRA:AA_PRD_DES_XIRA__CHANGED_FIELDS *
+            @t24:i (t24Name=CHANGED.FIELDS)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=60.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=56.0, core=true, t24Name=CURR.NO, mandatory=false)
+        DATE_TIME -> byValue USIRAC_IRA:AA_PRD_DES_XIRA__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DEAL_NO -> USIRAC_IRA:AA_PRD_DES_XIRA PK required
+            @i18n:Label (en="Deal Number")
+            @t24:i (align=L, inputBehaviour=I, maxLength=80, sysNumber=0.0, core=true, businessType=ANY, t24Name=DEAL.NO, mandatory=true)
+/* The customer ID of the individual that passed and who’s funds are funding the IRA at hand
+This field will have a context inquiry providing the following decedent’s details:
+•    Name
+• Date of Birth
+• Date of Death
+• SSN */
+        DECEDENT_CUSTOMER -> ST_Customer:CUSTOMER
+            @t24:i (align=R, inputBehaviour=I, maxLength=10, sysNumber=11.0, core=true, businessType=CUS, t24Name=DECEDENT.CUSTOMER, mandatory=false)
+/* Denotes the relationship of primary owner to the decedent. Valid values are:
+• Spouse
+• Non-spouse
+• Other */
+        DECEDENT_RELATIONSHIP : USIRAC_IRA:AA_PRD_DES_XIRA__DECEDENT_RELATIONSHIP
+            @t24:i (align=L, inputBehaviour=I, maxLength=10, sysNumber=12.0, core=true, t24Name=DECEDENT.RELATIONSHIP, mandatory=false)
+        DEFAULT_ATTR_OPTION : USIRAC_IRA:AA_PRD_DES_XIRA__DEFAULT_ATTR_OPTION
+            @i18n:Label (en="Default Attribute Option")
+            @i18n:Tooltip (en="Allowed Values are RESETTING and NON-RESETTING")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=33.0, core=true, t24Name=DEFAULT.ATTR.OPTION, mandatory=false)
+        DEFAULT_NEGOTIABLE : USIRAC_IRA:AA_PRD_DES_XIRA__DEFAULT_NEGOTIABLE
+            @i18n:Label (en="Default Negotiable")
+            @i18n:Tooltip (en="IF all attributes can be negotiable or not")
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=34.0, core=true, t24Name=DEFAULT.NEGOTIABLE, mandatory=false)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=61.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        DESCRIPTION -> byValue USIRAC_IRA:AA_PRD_DES_XIRA__DESCRIPTION *
+            @t24:i (t24Name=DESCRIPTION)
+        /* A free text fields that allows the bank to enter where the funds came from to fund the IRA Account */
+        FINANCIAL_INSTITUTION : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=9.0, core=true, t24Name=FINANCIAL.INSTITUTION, isTextarea=true, mandatory=false)
+        FULL_DESCRIPTION : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=100, sysNumber=2.0, core=true, t24Name=FULL.DESCRIPTION, mandatory=false)
+        ID_COMP_1 : T24BusinessTypes:A
+            @i18n:Label (en="Arrangement Id")
+            @t24:i (align=L, inputBehaviour=N, maxLength=30, sysNumber=45.0, core=true, t24Name=ID.COMP.1, mandatory=false)
+        ID_COMP_2 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=30, sysNumber=46.0, core=true, t24Name=ID.COMP.2, mandatory=false)
+        ID_COMP_3 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=30, sysNumber=47.0, core=true, t24Name=ID.COMP.3, mandatory=false)
+        ID_COMP_4 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=30, sysNumber=48.0, core=true, t24Name=ID.COMP.4, mandatory=false)
+        ID_COMP_5 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=30, sysNumber=49.0, core=true, t24Name=ID.COMP.5, mandatory=false)
+        ID_COMP_6 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=30, sysNumber=50.0, core=true, t24Name=ID.COMP.6, mandatory=false)
+/* The field with a drop down of:
+• Blank – processes the same as NO
+• No – this a normal IRA
+• Yes – this IRA is opened due to the death of a customer who had an IRA account
+If Yes then the following context inquiry values are required:
+• Decedent’s Cust ID
+• Relationship
+• Inherited IRA RMD Calculation Mthd
+• Calculation */
+        INHERIT_IRA : USIRAC_IRA:AA_PRD_DES_XIRA__INHERIT_IRA
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=10.0, core=true, t24Name=INHERIT.IRA, mandatory=false)
+/* This a drop down that includes values of:
+•    Reducing
+•    Non-Reducing
+This only is available when the Inherited IRS RMD Calculation Mthd field value is  Life Expectancy */
+        INHERIT_RMD_CALCULATION : USIRAC_IRA:AA_PRD_DES_XIRA__INHERIT_RMD_CALCULATION
+            @t24:i (align=L, inputBehaviour=I, maxLength=12, sysNumber=14.0, core=true, t24Name=INHERIT.RMD.CALCULATION, mandatory=false)
+/* Describes the client-requested distribution method for the inherited funds. Options are:
+•    Lump Sum – this option is available for the spouse of the deceased only. Once deposited in the IRA the funds will be withdrawn in the Lump Sum. There is no logic supporting this choice
+•    Five-Year Method – this choice is a manual five-year distribution of the IRA taken at the discretion of the client. There is no logic supporting this choice
+• Life Expectancy – This allows the inheritor to defer a large tax event. This value will require an entry in the Calculation field. This will supported by logic */
+        INHERIT_RMD_CALC_METHOD : USIRAC_IRA:AA_PRD_DES_XIRA__INHERIT_RMD_CALC_METHOD
+            @t24:i (align=L, inputBehaviour=I, maxLength=16, sysNumber=13.0, core=true, t24Name=INHERIT.RMD.CALC.METHOD, mandatory=false)
+        INPUTTER -> byValue USIRAC_IRA:AA_PRD_DES_XIRA__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        NEGOTIATED_FLDS -> byValue USIRAC_IRA:AA_PRD_DES_XIRA__NEGOTIATED_FLDS *
+            @t24:i (t24Name=NEGOTIATED.FLDS)
+        NR_ATTRIBUTE -> byValue USIRAC_IRA:AA_PRD_DES_XIRA__NR_ATTRIBUTE *
+            @t24:i (t24Name=NR.ATTRIBUTE)
+        OVERRIDE -> byValue USIRAC_IRA:AA_PRD_DES_XIRA__OVERRIDE *
+            @t24:i (t24Name=OVERRIDE)
+        OWNING_COMPANY -> byValue USIRAC_IRA:AA_PRD_DES_XIRA__OWNING_COMPANY *
+            @t24:i (t24Name=OWNING.COMPANY)
+/* This field contains drop down of the current IRS plans:
+•   Simple
+•   Traditional
+•   SEP
+•   Roth
+And only these values are valid as these are maintained by Temenos */
+        PLAN_TYPE : USIRAC_IRA:AA_PRD_DES_XIRA__PLAN_TYPE
+            @i18n:Label (en="Plan Type")
+            @t24:i (align=L, inputBehaviour=I, maxLength=15, sysNumber=3.0, core=true, t24Name=PLAN.TYPE, mandatory=false)
+        PR_ATTRIBUTE -> byValue USIRAC_IRA:AA_PRD_DES_XIRA__PR_ATTRIBUTE *
+            @t24:i (t24Name=PR.ATTRIBUTE)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=55.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        RESERVED2_ID : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=30, sysNumber=51.0, core=true, t24Name=RESERVED2.ID, mandatory=false)
+/* A field with a drop down containing values:
+•  New Deposit
+• Rollover
+•  Transfer
+•  New Money
+• New Account
+This list can be changed as need via EB.LOOKUP */
+        SOURCE_OF_FUNDS : USIRAC_IRA:AA_PRD_DES_XIRA__SOURCE_OF_FUNDS
+            @t24:i (align=L, inputBehaviour=I, maxLength=26, sysNumber=8.0, core=true, t24Name=SOURCE.OF.FUNDS, mandatory=false)
+        STMT_NOS -> byValue USIRAC_IRA:AA_PRD_DES_XIRA__STMT_NOS *
+            @t24:i (t24Name=STMT.NOS)
+        SYS_RESERVE1 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=32.0, core=true, t24Name=SYS.RESERVE1, mandatory=false)
+        SYS_RESERVE2 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=31.0, core=true, t24Name=SYS.RESERVE2, mandatory=false)
+        SYS_RESERVE3 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=30.0, core=true, t24Name=SYS.RESERVE3, mandatory=false)
+        SYS_RESERVE6 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=27.0, core=true, t24Name=SYS.RESERVE6, mandatory=false)
+        SYS_RESERVE7 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=26.0, core=true, t24Name=SYS.RESERVE7, mandatory=false)
+        TARGET_PRODUCT : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=10, sysNumber=52.0, core=true, t24Name=TARGET.PRODUCT, mandatory=false)
+    }
+    AA_PRD_DES_XIRA__API_ATTRIBUTE
+    {
+        API_ATTRIBUTE : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=29.0, core=true, t24Name=API.ATTRIBUTE, mandatory=false)
+    }
+    AA_PRD_DES_XIRA__BENEFICIARY
+    {
+        /* The person that will receive the distribution that will be required for all Pay Method values and is linked to the Beneficiary Table */
+        BENEFICIARY : T24BusinessTypes:A
+            @i18n:Label (en=Beneficiary)
+            @t24:i (align=L, inputBehaviour=I, maxLength=10, sysNumber=4.0, core=true, t24Name=BENEFICIARY, mandatory=false)
+/* Denotes the relationship of beneficiary or contingent beneficiary to the primary owner. Valid values are:
+•    Spouse
+• Non-spouse
+•    Other
+These values assist the bank in making choice in the Inherited IRS RMD Calculation Mthd but there are not coding supporting the choices made */
+        BEN_RELATION : USIRAC_IRA:AA_PRD_DES_XIRA__BENEFICIARY__BEN_RELATION
+            @t24:i (align=L, inputBehaviour=I, maxLength=10, sysNumber=6.0, core=true, t24Name=BEN.RELATION, mandatory=false)
+/* This field determines, in the event of death of the IRA, who will receive the IRA funds. It has a drop down with values of:
+•    Beneficiary
+•   Contingent Beneficiary
+A customer cannot be both a beneficiary and a contingent beneficiary */
+        BEN_ROLE : USIRAC_IRA:AA_PRD_DES_XIRA__BENEFICIARY__BEN_ROLE
+            @t24:i (align=L, inputBehaviour=I, maxLength=22, sysNumber=5.0, core=true, t24Name=BEN.ROLE, mandatory=false)
+/* A field that determines the amount of the account balance that is due to the beneficiary/contingent beneficiary.
+The sum of the percent in each role (Beneficiary / Contingent Beneficiary) must equal 100 else an edit is produced */
+        BEN_SHARE : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=3, sysNumber=7.0, core=true, t24Name=BEN.SHARE, mandatory=false)
+    }
+    AA_PRD_DES_XIRA__CHANGED_FIELDS
+    {
+        CHANGED_FIELDS : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=19, sysNumber=43.0, core=true, t24Name=CHANGED.FIELDS, mandatory=false)
+    }
+    AA_PRD_DES_XIRA__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=58.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    AA_PRD_DES_XIRA__DESCRIPTION
+    {
+        DESCRIPTION : T24BusinessTypes:ANY required
+            @i18n:Label (en=Description)
+            @i18n:Tooltip (en=Description)
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, multiLanguage=true, sysNumber=1.0, core=true, t24Name=DESCRIPTION, mandatory=true)
+    }
+    AA_PRD_DES_XIRA__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=57.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    AA_PRD_DES_XIRA__NEGOTIATED_FLDS
+    {
+        NEGOTIATED_FLDS : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=19, sysNumber=44.0, core=true, t24Name=NEGOTIATED.FLDS, mandatory=false)
+    }
+    AA_PRD_DES_XIRA__NR_ATTRIBUTE
+    {
+        NR_ATTRIBUTE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=25, sysNumber=35.0, core=true, t24Name=NR.ATTRIBUTE, mandatory=false)
+        NR_ATTRIBUTE_RULE : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=100, sysNumber=37.0, core=true, t24Name=NR.ATTRIBUTE.RULE, mandatory=false)
+        NR_OPTIONS -> byValue USIRAC_IRA:AA_PRD_DES_XIRA__NR_ATTRIBUTE__NR_OPTIONS *
+            @t24:i (t24Name=NR.OPTIONS)
+        NR_STD_COMP -> AA_Rules:EB_STANDARD_COMPARISON
+            @t24:i (align=L, inputBehaviour=I, maxLength=25, sysNumber=39.0, core=true, businessType=A, t24Name=NR.STD.COMP, mandatory=false)
+        NR_TYPE -> byValue USIRAC_IRA:AA_PRD_DES_XIRA__NR_ATTRIBUTE__NR_TYPE *
+            @t24:i (t24Name=NR.TYPE)
+        NR_VALUE_SOURCE : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=60, sysNumber=38.0, core=true, t24Name=NR.VALUE.SOURCE, mandatory=false)
+    }
+    AA_PRD_DES_XIRA__NR_ATTRIBUTE__NR_OPTIONS
+    {
+        NR_OPTIONS : USIRAC_IRA:AA_PRD_DES_XIRA__NR_ATTRIBUTE__NR_OPTIONS__NR_OPTIONS
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=36.0, core=true, t24Name=NR.OPTIONS, mandatory=false)
+    }
+    AA_PRD_DES_XIRA__NR_ATTRIBUTE__NR_TYPE
+    {
+        NR_MESSAGE : USIRAC_IRA:AA_PRD_DES_XIRA__NR_ATTRIBUTE__NR_TYPE__NR_MESSAGE
+            @t24:i (align=L, inputBehaviour=I, maxLength=10, sysNumber=42.0, core=true, t24Name=NR.MESSAGE, mandatory=false)
+        NR_TYPE -> AA_Rules:EB_COMPARISON_TYPE
+            @t24:i (align=L, inputBehaviour=I, maxLength=25, sysNumber=40.0, core=true, businessType=A, t24Name=NR.TYPE, mandatory=false)
+        NR_VALUE : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=60, sysNumber=41.0, core=true, t24Name=NR.VALUE, mandatory=false)
+    }
+    AA_PRD_DES_XIRA__OVERRIDE
+    {
+        OVERRIDE : T24BusinessTypes:A
+            @i18n:Label (en=Override)
+            @i18n:Tooltip (en="Overrides generated by this transaction")
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=54.0, core=true, t24Name=OVERRIDE, mandatory=false)
+    }
+    AA_PRD_DES_XIRA__OWNING_COMPANY
+    {
+        OWNING_COMPANY -> ST_CompanyCreation:COMPANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=28.0, core=true, businessType=A, t24Name=OWNING.COMPANY, mandatory=false)
+    }
+    AA_PRD_DES_XIRA__PR_ATTRIBUTE
+    {
+        PR_APP_METHOD : USIRAC_IRA:AA_PRD_DES_XIRA__PR_ATTRIBUTE__PR_APP_METHOD
+            @i18n:Label (en="Application Method")
+            @i18n:Tooltip (en="This will hold two values either DUE or CAPITALISE")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=24.0, core=true, t24Name=PR.APP.METHOD, mandatory=false)
+        PR_APP_PERIOD : T24BusinessTypes:PERIOD
+            @i18n:Label (en="Application Period")
+            @i18n:Tooltip (en="Denote the period for current aplication method")
+            @t24:i (align=L, inputBehaviour=I, maxLength=4, sysNumber=25.0, core=true, t24Name=PR.APP.PERIOD, mandatory=false)
+        PR_ATTRIBUTE -> AA_Rules:AA_PERIODIC_ATTRIBUTE
+            @i18n:Label (en=Attribute)
+            @i18n:Tooltip (en="Attributes defining the names of the rule applied")
+            @t24:i (align=L, inputBehaviour=I, maxLength=30, sysNumber=16.0, core=true, businessType=A, t24Name=PR.ATTRIBUTE, mandatory=false)
+        PR_BRK_CHARGE -> AA_ProductFramework:AA_PROPERTY
+            @i18n:Label (en=Charge)
+            @i18n:Tooltip (en="Charge collected when the periodic rule is broken")
+            @t24:i (align=L, inputBehaviour=I, maxLength=15, sysNumber=20.0, core=true, businessType=A, t24Name=PR.BRK.CHARGE, mandatory=false)
+        PR_BRK_MSG : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=19.0, core=true, t24Name=PR.BRK.MSG, mandatory=false)
+        PR_BRK_RES : USIRAC_IRA:AA_PRD_DES_XIRA__PR_ATTRIBUTE__PR_BRK_RES
+            @i18n:Label (en=Rule)
+            @i18n:Tooltip (en="Action to be taken when rule is broken")
+            @t24:i (align=L, inputBehaviour=I, maxLength=13, sysNumber=18.0, core=true, t24Name=PR.BRK.RES, mandatory=false)
+        PR_RESERVED_1 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=23.0, core=true, t24Name=PR.RESERVED.1, mandatory=false)
+        PR_RESERVED_2 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=22.0, core=true, t24Name=PR.RESERVED.2, mandatory=false)
+        PR_RESERVED_3 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=21.0, core=true, t24Name=PR.RESERVED.3, mandatory=false)
+        PR_VALUE : T24BusinessTypes:A
+            @i18n:Label (en="Value ")
+            @i18n:Tooltip (en="Value of rule applied on certain attributes")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=17.0, core=true, t24Name=PR.VALUE, mandatory=false)
+    }
+    AA_PRD_DES_XIRA__STMT_NOS
+    {
+        STMT_NOS : T24BusinessTypes:A
+            @i18n:Label (en="Stmt Nos")
+            @i18n:Tooltip (en="Stmt Nos")
+            @t24:i (align=L, inputBehaviour=N, maxLength=20, sysNumber=53.0, core=true, t24Name=STMT.NOS, mandatory=false)
+    }
+    /* The XIRA Property Condition establishes basic information on the arrangement, specific to an Individual Retirement Account (IRA) in the US. Information such as the IRA plan type, IRA beneficiary details, funding source and inherited/beneficiary is setup within the product. */
+    AA_PRD_PRF_XIRA
+        @i18n:Description (en="")
+        @t24:i (t24Name=AA.PRD.PRF.XIRA, level=I, type=D, allowedFunctions="A C D E H I L P Q R S", localRefApplicationSysNo=15.0, localRefAllowed=true)
+    {
+        API_ATTRIBUTE -> byValue USIRAC_IRA:AA_PRD_PRF_XIRA__API_ATTRIBUTE *
+            @t24:i (t24Name=API.ATTRIBUTE)
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=62.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=63.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=59.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        BENEFICIARY -> byValue USIRAC_IRA:AA_PRD_PRF_XIRA__BENEFICIARY *
+            @t24:i (t24Name=BENEFICIARY)
+        CHANGED_FIELDS -> byValue USIRAC_IRA:AA_PRD_PRF_XIRA__CHANGED_FIELDS *
+            @t24:i (t24Name=CHANGED.FIELDS)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=60.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=56.0, core=true, t24Name=CURR.NO, mandatory=false)
+        DATE_TIME -> byValue USIRAC_IRA:AA_PRD_PRF_XIRA__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DEAL_NO -> USIRAC_IRA:AA_PRD_PRF_XIRA PK required
+            @i18n:Label (en="Deal Number")
+            @t24:i (align=L, inputBehaviour=I, maxLength=80, sysNumber=0.0, core=true, businessType=ANY, t24Name=DEAL.NO, mandatory=true)
+/* The customer ID of the individual that passed and who’s funds are funding the IRA at hand
+This field will have a context inquiry providing the following decedent’s details:
+•    Name
+• Date of Birth
+• Date of Death
+• SSN */
+        DECEDENT_CUSTOMER -> ST_Customer:CUSTOMER
+            @t24:i (align=R, inputBehaviour=I, maxLength=10, sysNumber=11.0, core=true, businessType=CUS, t24Name=DECEDENT.CUSTOMER, mandatory=false)
+/* Denotes the relationship of primary owner to the decedent. Valid values are:
+• Spouse
+• Non-spouse
+• Other */
+        DECEDENT_RELATIONSHIP : USIRAC_IRA:AA_PRD_PRF_XIRA__DECEDENT_RELATIONSHIP
+            @t24:i (align=L, inputBehaviour=I, maxLength=10, sysNumber=12.0, core=true, t24Name=DECEDENT.RELATIONSHIP, mandatory=false)
+        DEFAULT_ATTR_OPTION : USIRAC_IRA:AA_PRD_PRF_XIRA__DEFAULT_ATTR_OPTION
+            @i18n:Label (en="Default Attribute Option")
+            @i18n:Tooltip (en="Allowed Values are RESETTING and NON-RESETTING")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=33.0, core=true, t24Name=DEFAULT.ATTR.OPTION, mandatory=false)
+        DEFAULT_NEGOTIABLE : USIRAC_IRA:AA_PRD_PRF_XIRA__DEFAULT_NEGOTIABLE
+            @i18n:Label (en="Default Negotiable")
+            @i18n:Tooltip (en="IF all attributes can be negotiable or not")
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=34.0, core=true, t24Name=DEFAULT.NEGOTIABLE, mandatory=false)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=61.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        DESCRIPTION -> byValue USIRAC_IRA:AA_PRD_PRF_XIRA__DESCRIPTION *
+            @t24:i (t24Name=DESCRIPTION)
+        /* A free text fields that allows the bank to enter where the funds came from to fund the IRA Account */
+        FINANCIAL_INSTITUTION : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=9.0, core=true, t24Name=FINANCIAL.INSTITUTION, isTextarea=true, mandatory=false)
+        FULL_DESCRIPTION : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=100, sysNumber=2.0, core=true, t24Name=FULL.DESCRIPTION, mandatory=false)
+        ID_COMP_1 : T24BusinessTypes:A
+            @i18n:Label (en="Arrangement Id")
+            @t24:i (align=L, inputBehaviour=N, maxLength=30, sysNumber=45.0, core=true, t24Name=ID.COMP.1, mandatory=false)
+        ID_COMP_2 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=30, sysNumber=46.0, core=true, t24Name=ID.COMP.2, mandatory=false)
+        ID_COMP_3 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=30, sysNumber=47.0, core=true, t24Name=ID.COMP.3, mandatory=false)
+        ID_COMP_4 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=30, sysNumber=48.0, core=true, t24Name=ID.COMP.4, mandatory=false)
+        ID_COMP_5 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=30, sysNumber=49.0, core=true, t24Name=ID.COMP.5, mandatory=false)
+        ID_COMP_6 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=30, sysNumber=50.0, core=true, t24Name=ID.COMP.6, mandatory=false)
+/* The field with a drop down of:
+• Blank – processes the same as NO
+• No – this a normal IRA
+• Yes – this IRA is opened due to the death of a customer who had an IRA account
+If Yes then the following context inquiry values are required:
+• Decedent’s Cust ID
+• Relationship
+• Inherited IRA RMD Calculation Mthd
+• Calculation */
+        INHERIT_IRA : USIRAC_IRA:AA_PRD_PRF_XIRA__INHERIT_IRA
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=10.0, core=true, t24Name=INHERIT.IRA, mandatory=false)
+/* This a drop down that includes values of:
+•    Reducing
+•    Non-Reducing
+This only is available when the Inherited IRS RMD Calculation Mthd field value is  Life Expectancy */
+        INHERIT_RMD_CALCULATION : USIRAC_IRA:AA_PRD_PRF_XIRA__INHERIT_RMD_CALCULATION
+            @t24:i (align=L, inputBehaviour=I, maxLength=12, sysNumber=14.0, core=true, t24Name=INHERIT.RMD.CALCULATION, mandatory=false)
+/* Describes the client-requested distribution method for the inherited funds. Options are:
+•    Lump Sum – this option is available for the spouse of the deceased only. Once deposited in the IRA the funds will be withdrawn in the Lump Sum. There is no logic supporting this choice
+•    Five-Year Method – this choice is a manual five-year distribution of the IRA taken at the discretion of the client. There is no logic supporting this choice
+• Life Expectancy – This allows the inheritor to defer a large tax event. This value will require an entry in the Calculation field. This will supported by logic */
+        INHERIT_RMD_CALC_METHOD : USIRAC_IRA:AA_PRD_PRF_XIRA__INHERIT_RMD_CALC_METHOD
+            @t24:i (align=L, inputBehaviour=I, maxLength=16, sysNumber=13.0, core=true, t24Name=INHERIT.RMD.CALC.METHOD, mandatory=false)
+        INPUTTER -> byValue USIRAC_IRA:AA_PRD_PRF_XIRA__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        NEGOTIATED_FLDS -> byValue USIRAC_IRA:AA_PRD_PRF_XIRA__NEGOTIATED_FLDS *
+            @t24:i (t24Name=NEGOTIATED.FLDS)
+        NR_ATTRIBUTE -> byValue USIRAC_IRA:AA_PRD_PRF_XIRA__NR_ATTRIBUTE *
+            @t24:i (t24Name=NR.ATTRIBUTE)
+        OVERRIDE -> byValue USIRAC_IRA:AA_PRD_PRF_XIRA__OVERRIDE *
+            @t24:i (t24Name=OVERRIDE)
+        OWNING_COMPANY -> byValue USIRAC_IRA:AA_PRD_PRF_XIRA__OWNING_COMPANY *
+            @t24:i (t24Name=OWNING.COMPANY)
+/* This field contains drop down of the current IRS plans:
+•   Simple
+•   Traditional
+•   SEP
+•   Roth
+And only these values are valid as these are maintained by Temenos */
+        PLAN_TYPE : USIRAC_IRA:AA_PRD_PRF_XIRA__PLAN_TYPE
+            @i18n:Label (en="Plan Type")
+            @t24:i (align=L, inputBehaviour=F, maxLength=15, sysNumber=3.0, core=true, t24Name=PLAN.TYPE, mandatory=false)
+        PR_ATTRIBUTE -> byValue USIRAC_IRA:AA_PRD_PRF_XIRA__PR_ATTRIBUTE *
+            @t24:i (t24Name=PR.ATTRIBUTE)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=55.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        RESERVED2_ID : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=30, sysNumber=51.0, core=true, t24Name=RESERVED2.ID, mandatory=false)
+/* A field with a drop down containing values:
+•  New Deposit
+• Rollover
+•  Transfer
+•  New Money
+• New Account
+This list can be changed as need via EB.LOOKUP */
+        SOURCE_OF_FUNDS : USIRAC_IRA:AA_PRD_PRF_XIRA__SOURCE_OF_FUNDS
+            @t24:i (align=L, inputBehaviour=I, maxLength=26, sysNumber=8.0, core=true, t24Name=SOURCE.OF.FUNDS, mandatory=false)
+        STMT_NOS -> byValue USIRAC_IRA:AA_PRD_PRF_XIRA__STMT_NOS *
+            @t24:i (t24Name=STMT.NOS)
+        SYS_RESERVE1 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=32.0, core=true, t24Name=SYS.RESERVE1, mandatory=false)
+        SYS_RESERVE2 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=31.0, core=true, t24Name=SYS.RESERVE2, mandatory=false)
+        SYS_RESERVE3 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=30.0, core=true, t24Name=SYS.RESERVE3, mandatory=false)
+        SYS_RESERVE6 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=27.0, core=true, t24Name=SYS.RESERVE6, mandatory=false)
+        SYS_RESERVE7 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=26.0, core=true, t24Name=SYS.RESERVE7, mandatory=false)
+        TARGET_PRODUCT : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=10, sysNumber=52.0, core=true, t24Name=TARGET.PRODUCT, mandatory=false)
+    }
+    AA_PRD_PRF_XIRA__API_ATTRIBUTE
+    {
+        API_ATTRIBUTE : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=29.0, core=true, t24Name=API.ATTRIBUTE, mandatory=false)
+    }
+    AA_PRD_PRF_XIRA__BENEFICIARY
+    {
+        /* The person that will receive the distribution that will be required for all Pay Method values and is linked to the Beneficiary Table */
+        BENEFICIARY : T24BusinessTypes:A
+            @i18n:Label (en=Beneficiary)
+            @t24:i (align=L, inputBehaviour=I, maxLength=10, sysNumber=4.0, core=true, t24Name=BENEFICIARY, mandatory=false)
+/* Denotes the relationship of beneficiary or contingent beneficiary to the primary owner. Valid values are:
+•    Spouse
+• Non-spouse
+•    Other
+These values assist the bank in making choice in the Inherited IRS RMD Calculation Mthd but there are not coding supporting the choices made */
+        BEN_RELATION : USIRAC_IRA:AA_PRD_PRF_XIRA__BENEFICIARY__BEN_RELATION
+            @t24:i (align=L, inputBehaviour=I, maxLength=10, sysNumber=6.0, core=true, t24Name=BEN.RELATION, mandatory=false)
+/* This field determines, in the event of death of the IRA, who will receive the IRA funds. It has a drop down with values of:
+•    Beneficiary
+•   Contingent Beneficiary
+A customer cannot be both a beneficiary and a contingent beneficiary */
+        BEN_ROLE : USIRAC_IRA:AA_PRD_PRF_XIRA__BENEFICIARY__BEN_ROLE
+            @t24:i (align=L, inputBehaviour=I, maxLength=22, sysNumber=5.0, core=true, t24Name=BEN.ROLE, mandatory=false)
+/* A field that determines the amount of the account balance that is due to the beneficiary/contingent beneficiary.
+The sum of the percent in each role (Beneficiary / Contingent Beneficiary) must equal 100 else an edit is produced */
+        BEN_SHARE : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=3, sysNumber=7.0, core=true, t24Name=BEN.SHARE, mandatory=false)
+    }
+    AA_PRD_PRF_XIRA__CHANGED_FIELDS
+    {
+        CHANGED_FIELDS : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=19, sysNumber=43.0, core=true, t24Name=CHANGED.FIELDS, mandatory=false)
+    }
+    AA_PRD_PRF_XIRA__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=58.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    AA_PRD_PRF_XIRA__DESCRIPTION
+    {
+        DESCRIPTION : T24BusinessTypes:ANY required
+            @i18n:Label (en=Description)
+            @i18n:Tooltip (en=Description)
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, multiLanguage=true, sysNumber=1.0, core=true, t24Name=DESCRIPTION, mandatory=true)
+    }
+    AA_PRD_PRF_XIRA__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=57.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    AA_PRD_PRF_XIRA__NEGOTIATED_FLDS
+    {
+        NEGOTIATED_FLDS : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=19, sysNumber=44.0, core=true, t24Name=NEGOTIATED.FLDS, mandatory=false)
+    }
+    AA_PRD_PRF_XIRA__NR_ATTRIBUTE
+    {
+        NR_ATTRIBUTE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=25, sysNumber=35.0, core=true, t24Name=NR.ATTRIBUTE, mandatory=false)
+        NR_ATTRIBUTE_RULE : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=100, sysNumber=37.0, core=true, t24Name=NR.ATTRIBUTE.RULE, mandatory=false)
+        NR_OPTIONS -> byValue USIRAC_IRA:AA_PRD_PRF_XIRA__NR_ATTRIBUTE__NR_OPTIONS *
+            @t24:i (t24Name=NR.OPTIONS)
+        NR_STD_COMP -> AA_Rules:EB_STANDARD_COMPARISON
+            @t24:i (align=L, inputBehaviour=I, maxLength=25, sysNumber=39.0, core=true, businessType=A, t24Name=NR.STD.COMP, mandatory=false)
+        NR_TYPE -> byValue USIRAC_IRA:AA_PRD_PRF_XIRA__NR_ATTRIBUTE__NR_TYPE *
+            @t24:i (t24Name=NR.TYPE)
+        NR_VALUE_SOURCE : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=60, sysNumber=38.0, core=true, t24Name=NR.VALUE.SOURCE, mandatory=false)
+    }
+    AA_PRD_PRF_XIRA__NR_ATTRIBUTE__NR_OPTIONS
+    {
+        NR_OPTIONS : USIRAC_IRA:AA_PRD_PRF_XIRA__NR_ATTRIBUTE__NR_OPTIONS__NR_OPTIONS
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=36.0, core=true, t24Name=NR.OPTIONS, mandatory=false)
+    }
+    AA_PRD_PRF_XIRA__NR_ATTRIBUTE__NR_TYPE
+    {
+        NR_MESSAGE : USIRAC_IRA:AA_PRD_PRF_XIRA__NR_ATTRIBUTE__NR_TYPE__NR_MESSAGE
+            @t24:i (align=L, inputBehaviour=I, maxLength=10, sysNumber=42.0, core=true, t24Name=NR.MESSAGE, mandatory=false)
+        NR_TYPE -> AA_Rules:EB_COMPARISON_TYPE
+            @t24:i (align=L, inputBehaviour=I, maxLength=25, sysNumber=40.0, core=true, businessType=A, t24Name=NR.TYPE, mandatory=false)
+        NR_VALUE : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=60, sysNumber=41.0, core=true, t24Name=NR.VALUE, mandatory=false)
+    }
+    AA_PRD_PRF_XIRA__OVERRIDE
+    {
+        OVERRIDE : T24BusinessTypes:A
+            @i18n:Label (en=Override)
+            @i18n:Tooltip (en="Overrides generated by this transaction")
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=54.0, core=true, t24Name=OVERRIDE, mandatory=false)
+    }
+    AA_PRD_PRF_XIRA__OWNING_COMPANY
+    {
+        OWNING_COMPANY -> ST_CompanyCreation:COMPANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=28.0, core=true, businessType=A, t24Name=OWNING.COMPANY, mandatory=false)
+    }
+    AA_PRD_PRF_XIRA__PR_ATTRIBUTE
+    {
+        PR_APP_METHOD : USIRAC_IRA:AA_PRD_PRF_XIRA__PR_ATTRIBUTE__PR_APP_METHOD
+            @i18n:Label (en="Application Method")
+            @i18n:Tooltip (en="This will hold two values either DUE or CAPITALISE")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=24.0, core=true, t24Name=PR.APP.METHOD, mandatory=false)
+        PR_APP_PERIOD : T24BusinessTypes:PERIOD
+            @i18n:Label (en="Application Period")
+            @i18n:Tooltip (en="Denote the period for current aplication method")
+            @t24:i (align=L, inputBehaviour=I, maxLength=4, sysNumber=25.0, core=true, t24Name=PR.APP.PERIOD, mandatory=false)
+        PR_ATTRIBUTE -> AA_Rules:AA_PERIODIC_ATTRIBUTE
+            @i18n:Label (en=Attribute)
+            @i18n:Tooltip (en="Attributes defining the names of the rule applied")
+            @t24:i (align=L, inputBehaviour=I, maxLength=30, sysNumber=16.0, core=true, businessType=A, t24Name=PR.ATTRIBUTE, mandatory=false)
+        PR_BRK_CHARGE -> AA_ProductFramework:AA_PROPERTY
+            @i18n:Label (en=Charge)
+            @i18n:Tooltip (en="Charge collected when the periodic rule is broken")
+            @t24:i (align=L, inputBehaviour=I, maxLength=15, sysNumber=20.0, core=true, businessType=A, t24Name=PR.BRK.CHARGE, mandatory=false)
+        PR_BRK_MSG : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=19.0, core=true, t24Name=PR.BRK.MSG, mandatory=false)
+        PR_BRK_RES : USIRAC_IRA:AA_PRD_PRF_XIRA__PR_ATTRIBUTE__PR_BRK_RES
+            @i18n:Label (en=Rule)
+            @i18n:Tooltip (en="Action to be taken when rule is broken")
+            @t24:i (align=L, inputBehaviour=I, maxLength=13, sysNumber=18.0, core=true, t24Name=PR.BRK.RES, mandatory=false)
+        PR_RESERVED_1 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=23.0, core=true, t24Name=PR.RESERVED.1, mandatory=false)
+        PR_RESERVED_2 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=22.0, core=true, t24Name=PR.RESERVED.2, mandatory=false)
+        PR_RESERVED_3 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=21.0, core=true, t24Name=PR.RESERVED.3, mandatory=false)
+        PR_VALUE : T24BusinessTypes:A
+            @i18n:Label (en="Value ")
+            @i18n:Tooltip (en="Value of rule applied on certain attributes")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=17.0, core=true, t24Name=PR.VALUE, mandatory=false)
+    }
+    AA_PRD_PRF_XIRA__STMT_NOS
+    {
+        STMT_NOS : T24BusinessTypes:A
+            @i18n:Label (en="Stmt Nos")
+            @i18n:Tooltip (en="Stmt Nos")
+            @t24:i (align=L, inputBehaviour=N, maxLength=20, sysNumber=53.0, core=true, t24Name=STMT.NOS, mandatory=false)
+    }
+    /* The XIRA Property Condition establishes basic information on the arrangement, specific to an Individual Retirement Account (IRA) in the US. Information such as the IRA plan type, IRA beneficiary details, funding source and inherited/beneficiary is setup within the product. */
+    AA_SIM_XIRA
+        @i18n:Description (en="")
+        @t24:i (t24Name=AA.SIM.XIRA, level=F, type=D, allowedFunctions="A C D E H I L P Q R S", localRefApplicationSysNo=15.0, localRefAllowed=true)
+    {
+        ACTION -> byValue USIRAC_IRA:AA_SIM_XIRA__ACTION *
+            @t24:i (t24Name=ACTION)
+        ACTIVITY : T24BusinessTypes:A required
+            @i18n:Label (en=Activity)
+            @t24:i (align=L, inputBehaviour=I, maxLength=80, sysNumber=1.0, core=true, t24Name=ACTIVITY, mandatory=true)
+        API_ATTRIBUTE -> byValue USIRAC_IRA:AA_SIM_XIRA__API_ATTRIBUTE *
+            @t24:i (t24Name=API.ATTRIBUTE)
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=62.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=63.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=59.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        BENEFICIARY -> byValue USIRAC_IRA:AA_SIM_XIRA__BENEFICIARY *
+            @t24:i (t24Name=BENEFICIARY)
+        CHANGED_FIELDS -> byValue USIRAC_IRA:AA_SIM_XIRA__CHANGED_FIELDS *
+            @t24:i (t24Name=CHANGED.FIELDS)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=60.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=56.0, core=true, t24Name=CURR.NO, mandatory=false)
+        DATE_TIME -> byValue USIRAC_IRA:AA_SIM_XIRA__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DEAL_NO -> USIRAC_IRA:AA_SIM_XIRA PK required
+            @i18n:Label (en="Deal Number")
+            @t24:i (align=L, inputBehaviour=I, maxLength=80, sysNumber=0.0, core=true, businessType=ANY, t24Name=DEAL.NO, mandatory=true)
+/* The customer ID of the individual that passed and who’s funds are funding the IRA at hand
+This field will have a context inquiry providing the following decedent’s details:
+•    Name
+• Date of Birth
+• Date of Death
+• SSN */
+        DECEDENT_CUSTOMER -> ST_Customer:CUSTOMER
+            @t24:i (align=R, inputBehaviour=I, maxLength=10, sysNumber=11.0, core=true, businessType=CUS, t24Name=DECEDENT.CUSTOMER, mandatory=false)
+/* Denotes the relationship of primary owner to the decedent. Valid values are:
+• Spouse
+• Non-spouse
+• Other */
+        DECEDENT_RELATIONSHIP : USIRAC_IRA:AA_SIM_XIRA__DECEDENT_RELATIONSHIP
+            @t24:i (align=L, inputBehaviour=I, maxLength=10, sysNumber=12.0, core=true, t24Name=DECEDENT.RELATIONSHIP, mandatory=false)
+        DEFAULT_ATTR_OPTION : USIRAC_IRA:AA_SIM_XIRA__DEFAULT_ATTR_OPTION
+            @i18n:Label (en="Default Attribute Option")
+            @i18n:Tooltip (en="Allowed Values are RESETTING and NON-RESETTING")
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=33.0, core=true, t24Name=DEFAULT.ATTR.OPTION, mandatory=false)
+        DEFAULT_NEGOTIABLE : USIRAC_IRA:AA_SIM_XIRA__DEFAULT_NEGOTIABLE
+            @i18n:Label (en="Default Negotiable")
+            @i18n:Tooltip (en="IF all attributes can be negotiable or not")
+            @t24:i (align=L, inputBehaviour=N, maxLength=3, sysNumber=34.0, core=true, t24Name=DEFAULT.NEGOTIABLE, mandatory=false)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=61.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        /* A free text fields that allows the bank to enter where the funds came from to fund the IRA Account */
+        FINANCIAL_INSTITUTION : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=9.0, core=true, t24Name=FINANCIAL.INSTITUTION, isTextarea=true, mandatory=false)
+        ID_COMP_1 : T24BusinessTypes:A
+            @i18n:Label (en="Arrangement Id")
+            @t24:i (align=L, inputBehaviour=N, maxLength=30, sysNumber=45.0, core=true, t24Name=ID.COMP.1, mandatory=false)
+        ID_COMP_2 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=30, sysNumber=46.0, core=true, t24Name=ID.COMP.2, mandatory=false)
+        ID_COMP_3 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=30, sysNumber=47.0, core=true, t24Name=ID.COMP.3, mandatory=false)
+        ID_COMP_4 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=30, sysNumber=48.0, core=true, t24Name=ID.COMP.4, mandatory=false)
+        ID_COMP_5 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=30, sysNumber=49.0, core=true, t24Name=ID.COMP.5, mandatory=false)
+        ID_COMP_6 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=30, sysNumber=50.0, core=true, t24Name=ID.COMP.6, mandatory=false)
+/* The field with a drop down of:
+• Blank – processes the same as NO
+• No – this a normal IRA
+• Yes – this IRA is opened due to the death of a customer who had an IRA account
+If Yes then the following context inquiry values are required:
+• Decedent’s Cust ID
+• Relationship
+• Inherited IRA RMD Calculation Mthd
+• Calculation */
+        INHERIT_IRA : USIRAC_IRA:AA_SIM_XIRA__INHERIT_IRA
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=10.0, core=true, t24Name=INHERIT.IRA, mandatory=false)
+/* This a drop down that includes values of:
+•    Reducing
+•    Non-Reducing
+This only is available when the Inherited IRS RMD Calculation Mthd field value is  Life Expectancy */
+        INHERIT_RMD_CALCULATION : USIRAC_IRA:AA_SIM_XIRA__INHERIT_RMD_CALCULATION
+            @t24:i (align=L, inputBehaviour=I, maxLength=12, sysNumber=14.0, core=true, t24Name=INHERIT.RMD.CALCULATION, mandatory=false)
+/* Describes the client-requested distribution method for the inherited funds. Options are:
+•    Lump Sum – this option is available for the spouse of the deceased only. Once deposited in the IRA the funds will be withdrawn in the Lump Sum. There is no logic supporting this choice
+•    Five-Year Method – this choice is a manual five-year distribution of the IRA taken at the discretion of the client. There is no logic supporting this choice
+• Life Expectancy – This allows the inheritor to defer a large tax event. This value will require an entry in the Calculation field. This will supported by logic */
+        INHERIT_RMD_CALC_METHOD : USIRAC_IRA:AA_SIM_XIRA__INHERIT_RMD_CALC_METHOD
+            @t24:i (align=L, inputBehaviour=I, maxLength=16, sysNumber=13.0, core=true, t24Name=INHERIT.RMD.CALC.METHOD, mandatory=false)
+        INPUTTER -> byValue USIRAC_IRA:AA_SIM_XIRA__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        NEGOTIATED_FLDS -> byValue USIRAC_IRA:AA_SIM_XIRA__NEGOTIATED_FLDS *
+            @t24:i (t24Name=NEGOTIATED.FLDS)
+        NR_ATTRIBUTE -> byValue USIRAC_IRA:AA_SIM_XIRA__NR_ATTRIBUTE *
+            @t24:i (t24Name=NR.ATTRIBUTE)
+        OVERRIDE -> byValue USIRAC_IRA:AA_SIM_XIRA__OVERRIDE *
+            @t24:i (t24Name=OVERRIDE)
+        OWNING_COMPANY -> byValue USIRAC_IRA:AA_SIM_XIRA__OWNING_COMPANY *
+            @t24:i (t24Name=OWNING.COMPANY)
+/* This field contains drop down of the current IRS plans:
+•   Simple
+•   Traditional
+•   SEP
+•   Roth
+And only these values are valid as these are maintained by Temenos */
+        PLAN_TYPE : USIRAC_IRA:AA_SIM_XIRA__PLAN_TYPE
+            @i18n:Label (en="Plan Type")
+            @t24:i (align=L, inputBehaviour=F, maxLength=15, sysNumber=3.0, core=true, t24Name=PLAN.TYPE, mandatory=false)
+        PR_ATTRIBUTE -> byValue USIRAC_IRA:AA_SIM_XIRA__PR_ATTRIBUTE *
+            @t24:i (t24Name=PR.ATTRIBUTE)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=55.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        RESERVED2_ID : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=30, sysNumber=51.0, core=true, t24Name=RESERVED2.ID, mandatory=false)
+/* A field with a drop down containing values:
+•  New Deposit
+• Rollover
+•  Transfer
+•  New Money
+• New Account
+This list can be changed as need via EB.LOOKUP */
+        SOURCE_OF_FUNDS : USIRAC_IRA:AA_SIM_XIRA__SOURCE_OF_FUNDS
+            @t24:i (align=L, inputBehaviour=I, maxLength=26, sysNumber=8.0, core=true, t24Name=SOURCE.OF.FUNDS, mandatory=false)
+        STMT_NOS -> byValue USIRAC_IRA:AA_SIM_XIRA__STMT_NOS *
+            @t24:i (t24Name=STMT.NOS)
+        SYS_RESERVE1 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=32.0, core=true, t24Name=SYS.RESERVE1, mandatory=false)
+        SYS_RESERVE2 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=31.0, core=true, t24Name=SYS.RESERVE2, mandatory=false)
+        SYS_RESERVE3 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=30.0, core=true, t24Name=SYS.RESERVE3, mandatory=false)
+        SYS_RESERVE6 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=27.0, core=true, t24Name=SYS.RESERVE6, mvSvExpansionAccess=NOEXPAND, mandatory=false)
+        SYS_RESERVE7 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=26.0, core=true, t24Name=SYS.RESERVE7, mvSvExpansionAccess=NOEXPAND, mandatory=false)
+        TARGET_PRODUCT : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=10, sysNumber=52.0, core=true, t24Name=TARGET.PRODUCT, mandatory=false)
+    }
+    AA_SIM_XIRA__ACTION
+    {
+        ACTION : T24BusinessTypes:A
+            @i18n:Label (en=Action)
+            @t24:i (align=L, inputBehaviour=I, maxLength=30, sysNumber=2.0, core=true, t24Name=ACTION, mandatory=false)
+    }
+    AA_SIM_XIRA__API_ATTRIBUTE
+    {
+        API_ATTRIBUTE : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=29.0, core=true, t24Name=API.ATTRIBUTE, mandatory=false)
+    }
+    AA_SIM_XIRA__BENEFICIARY
+    {
+        /* The person that will receive the distribution that will be required for all Pay Method values and is linked to the Beneficiary Table */
+        BENEFICIARY : T24BusinessTypes:A
+            @i18n:Label (en=Beneficiary)
+            @t24:i (align=L, inputBehaviour=I, maxLength=10, sysNumber=4.0, core=true, t24Name=BENEFICIARY, mandatory=false)
+/* Denotes the relationship of beneficiary or contingent beneficiary to the primary owner. Valid values are:
+•    Spouse
+• Non-spouse
+•    Other
+These values assist the bank in making choice in the Inherited IRS RMD Calculation Mthd but there are not coding supporting the choices made */
+        BEN_RELATION : USIRAC_IRA:AA_SIM_XIRA__BENEFICIARY__BEN_RELATION
+            @t24:i (align=L, inputBehaviour=I, maxLength=10, sysNumber=6.0, core=true, t24Name=BEN.RELATION, mandatory=false)
+/* This field determines, in the event of death of the IRA, who will receive the IRA funds. It has a drop down with values of:
+•    Beneficiary
+•   Contingent Beneficiary
+A customer cannot be both a beneficiary and a contingent beneficiary */
+        BEN_ROLE : USIRAC_IRA:AA_SIM_XIRA__BENEFICIARY__BEN_ROLE
+            @t24:i (align=L, inputBehaviour=I, maxLength=22, sysNumber=5.0, core=true, t24Name=BEN.ROLE, mandatory=false)
+/* A field that determines the amount of the account balance that is due to the beneficiary/contingent beneficiary.
+The sum of the percent in each role (Beneficiary / Contingent Beneficiary) must equal 100 else an edit is produced */
+        BEN_SHARE : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=3, sysNumber=7.0, core=true, t24Name=BEN.SHARE, mandatory=false)
+    }
+    AA_SIM_XIRA__CHANGED_FIELDS
+    {
+        CHANGED_FIELDS : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=19, sysNumber=43.0, core=true, t24Name=CHANGED.FIELDS, mandatory=false)
+    }
+    AA_SIM_XIRA__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=58.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    AA_SIM_XIRA__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=57.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    AA_SIM_XIRA__NEGOTIATED_FLDS
+    {
+        NEGOTIATED_FLDS : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=19, sysNumber=44.0, core=true, t24Name=NEGOTIATED.FLDS, mandatory=false)
+    }
+    AA_SIM_XIRA__NR_ATTRIBUTE
+    {
+        NR_ATTRIBUTE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=25, sysNumber=35.0, core=true, t24Name=NR.ATTRIBUTE, mandatory=false)
+        NR_ATTRIBUTE_RULE : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=37.0, core=true, t24Name=NR.ATTRIBUTE.RULE, mandatory=false)
+        NR_OPTIONS -> byValue USIRAC_IRA:AA_SIM_XIRA__NR_ATTRIBUTE__NR_OPTIONS *
+            @t24:i (t24Name=NR.OPTIONS)
+        NR_STD_COMP -> AA_Rules:EB_STANDARD_COMPARISON
+            @t24:i (align=L, inputBehaviour=N, maxLength=25, sysNumber=39.0, core=true, businessType=A, t24Name=NR.STD.COMP, mandatory=false)
+        NR_TYPE -> byValue USIRAC_IRA:AA_SIM_XIRA__NR_ATTRIBUTE__NR_TYPE *
+            @t24:i (t24Name=NR.TYPE)
+        NR_VALUE_SOURCE : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=N, maxLength=60, sysNumber=38.0, core=true, t24Name=NR.VALUE.SOURCE, mandatory=false)
+    }
+    AA_SIM_XIRA__NR_ATTRIBUTE__NR_OPTIONS
+    {
+        NR_OPTIONS : USIRAC_IRA:AA_SIM_XIRA__NR_ATTRIBUTE__NR_OPTIONS__NR_OPTIONS
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=36.0, core=true, t24Name=NR.OPTIONS, mandatory=false)
+    }
+    AA_SIM_XIRA__NR_ATTRIBUTE__NR_TYPE
+    {
+        NR_MESSAGE : USIRAC_IRA:AA_SIM_XIRA__NR_ATTRIBUTE__NR_TYPE__NR_MESSAGE
+            @t24:i (align=L, inputBehaviour=N, maxLength=10, sysNumber=42.0, core=true, t24Name=NR.MESSAGE, mandatory=false)
+        NR_TYPE -> AA_Rules:EB_COMPARISON_TYPE
+            @t24:i (align=L, inputBehaviour=N, maxLength=25, sysNumber=40.0, core=true, businessType=A, t24Name=NR.TYPE, mandatory=false)
+        NR_VALUE : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=N, maxLength=60, sysNumber=41.0, core=true, t24Name=NR.VALUE, mandatory=false)
+    }
+    AA_SIM_XIRA__OVERRIDE
+    {
+        OVERRIDE : T24BusinessTypes:A
+            @i18n:Label (en=Override)
+            @i18n:Tooltip (en="Overrides generated by this transaction")
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=54.0, core=true, t24Name=OVERRIDE, mandatory=false)
+    }
+    AA_SIM_XIRA__OWNING_COMPANY
+    {
+        OWNING_COMPANY -> ST_CompanyCreation:COMPANY
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=28.0, core=true, businessType=A, t24Name=OWNING.COMPANY, mvSvExpansionAccess=NOEXPAND, mandatory=false)
+    }
+    AA_SIM_XIRA__PR_ATTRIBUTE
+    {
+        PR_APP_METHOD : USIRAC_IRA:AA_SIM_XIRA__PR_ATTRIBUTE__PR_APP_METHOD
+            @i18n:Label (en="Application Method")
+            @i18n:Tooltip (en="This will hold two values either DUE or CAPITALISE")
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=24.0, core=true, t24Name=PR.APP.METHOD, mvSvExpansionAccess=NOEXPAND, mandatory=false)
+        PR_APP_PERIOD : T24BusinessTypes:PERIOD
+            @i18n:Label (en="Application Period")
+            @i18n:Tooltip (en="Denote the period for current aplication method")
+            @t24:i (align=L, inputBehaviour=N, maxLength=4, sysNumber=25.0, core=true, t24Name=PR.APP.PERIOD, mvSvExpansionAccess=NOEXPAND, mandatory=false)
+        PR_ATTRIBUTE -> AA_Rules:AA_PERIODIC_ATTRIBUTE
+            @i18n:Label (en=Attribute)
+            @i18n:Tooltip (en="Attributes defining the names of the rule applied")
+            @t24:i (align=L, inputBehaviour=N, maxLength=30, sysNumber=16.0, core=true, businessType=A, t24Name=PR.ATTRIBUTE, mvSvExpansionAccess=NOEXPAND, mandatory=false)
+        PR_BRK_CHARGE -> AA_ProductFramework:AA_PROPERTY
+            @i18n:Label (en=Charge)
+            @i18n:Tooltip (en="Charge collected when the periodic rule is broken")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=20.0, core=true, businessType=A, t24Name=PR.BRK.CHARGE, mvSvExpansionAccess=NOEXPAND, mandatory=false)
+        PR_BRK_MSG : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=19.0, core=true, t24Name=PR.BRK.MSG, mvSvExpansionAccess=NOEXPAND, mandatory=false)
+        PR_BRK_RES : USIRAC_IRA:AA_SIM_XIRA__PR_ATTRIBUTE__PR_BRK_RES
+            @i18n:Label (en=Rule)
+            @i18n:Tooltip (en="Action to be taken when rule is broken")
+            @t24:i (align=L, inputBehaviour=N, maxLength=13, sysNumber=18.0, core=true, t24Name=PR.BRK.RES, mvSvExpansionAccess=NOEXPAND, mandatory=false)
+        PR_RESERVED_1 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=23.0, core=true, t24Name=PR.RESERVED.1, mvSvExpansionAccess=NOEXPAND, mandatory=false)
+        PR_RESERVED_2 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=22.0, core=true, t24Name=PR.RESERVED.2, mvSvExpansionAccess=NOEXPAND, mandatory=false)
+        PR_RESERVED_3 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=21.0, core=true, t24Name=PR.RESERVED.3, mvSvExpansionAccess=NOEXPAND, mandatory=false)
+        PR_VALUE : T24BusinessTypes:A
+            @i18n:Label (en="Value ")
+            @i18n:Tooltip (en="Value of rule applied on certain attributes")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=17.0, core=true, t24Name=PR.VALUE, mvSvExpansionAccess=NOEXPAND, mandatory=false)
+    }
+    AA_SIM_XIRA__STMT_NOS
+    {
+        STMT_NOS : T24BusinessTypes:A
+            @i18n:Label (en="Stmt Nos")
+            @i18n:Tooltip (en="Stmt Nos")
+            @t24:i (align=L, inputBehaviour=N, maxLength=20, sysNumber=53.0, core=true, t24Name=STMT.NOS, mandatory=false)
+    }
+    NOFILE_LIST_EARLY_DIST_REASON
+        @i18n:Description (en="")
+        @t24:i (t24Name=NOFILE.LIST.EARLY.DIST.REASON, level=I, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        DISTRIBUTION_TYPE : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=75, core=false, t24Name=DISTRIBUTION.TYPE, mandatory=true)
+        EARLY_DIST_REASON : T24BusinessTypes:N
+            @t24:i (align=L, inputBehaviour=N, maxLength=45, core=false, t24Name=EARLY.DIST.REASON, genOperation=USIRAC.LIST.EARLY.DIST.REASON, mandatory=false)
+    }
+    NOFILE_USIRAC_IRA_1099
+        @i18n:Description (en="")
+        @t24:i (t24Name=NOFILE.USIRAC.IRA.1099, level=I, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        CUSTOMER_ID : T24BusinessTypes:N
+            @i18n:Label (en="Customer Id")
+            @i18n:Tooltip (en="Identifies the Customer for the transaction.")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, core=false, t24Name=CUSTOMER.ID, mandatory=false)
+        IRA_PARAM_ID : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=1.0, core=true, t24Name=IRA.PARAM.ID, mandatory=false)
+        RET_ARRAY : T24BusinessTypes:N
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, core=false, t24Name=RET.ARRAY, genOperation=USIRAC.E.NOF.IRA.1099, mandatory=true)
+    }
+    NOFILE_USIRAC_IRA_5498
+        @i18n:Description (en="")
+        @t24:i (t24Name=NOFILE.USIRAC.IRA.5498, level=I, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        CUSTOMER_ID : T24BusinessTypes:N
+            @i18n:Label (en="Customer Id")
+            @i18n:Tooltip (en="Identifies the Customer for the transaction.")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, core=false, t24Name=CUSTOMER.ID, mandatory=false)
+        IRA_PARAM_ID : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=1.0, core=true, t24Name=IRA.PARAM.ID, mandatory=false)
+        RET_ARRAY : T24BusinessTypes:N
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, core=false, t24Name=RET.ARRAY, genOperation=USIRAC.E.NOF.IRA.5498, mandatory=true)
+    }
+    NOFILE_USIRAC_IRA_ACCOUNT
+        @i18n:Description (en="")
+        @t24:i (t24Name=NOFILE.USIRAC.IRA.ACCOUNT, level=I, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        CUSTOMER_ID : T24BusinessTypes:N
+            @i18n:Label (en="Customer Id")
+            @i18n:Tooltip (en="Identifies the Customer for the transaction.")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, core=false, t24Name=CUSTOMER.ID, mandatory=false)
+        IRA_PARAM_ID : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=1.0, core=true, t24Name=IRA.PARAM.ID, mandatory=false)
+        OUT_ARRAY : T24BusinessTypes:N
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, core=false, t24Name=OUT.ARRAY, genOperation=USIRAC.E.NOF.IRAACCOUNT.DETAILS, mandatory=true)
+    }
+    NOFILE_USIRAC_IRA_PLAN
+        @i18n:Description (en="")
+        @t24:i (t24Name=NOFILE.USIRAC.IRA.PLAN, level=I, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        CUSTOMER_ID : T24BusinessTypes:N
+            @i18n:Label (en="Customer Id")
+            @i18n:Tooltip (en="Identifies the Customer for the transaction.")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, core=false, t24Name=CUSTOMER.ID, mandatory=false)
+        IRA_PARAM_ID : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=1.0, core=true, t24Name=IRA.PARAM.ID, mandatory=false)
+        OUT_ARRAY : T24BusinessTypes:N
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, core=false, t24Name=OUT.ARRAY, genOperation=USIRAC.E.NOF.IRAPLAN.DETAILS, mandatory=true)
+    }
+    NOFILE_USIRAC_RMD_AMOUNT
+        @i18n:Description (en="")
+        @t24:i (t24Name=NOFILE.USIRAC.RMD.AMOUNT, level=I, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        AGE_IRA_OWNER : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=4, core=false, t24Name=AGE.IRA.OWNER, mandatory=false)
+        BENEFICIARY_NONSPOUSE : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=15, core=false, t24Name=BENEFICIARY.NONSPOUSE, mandatory=false)
+        BENEFICIARY_SPOUSE : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=15, core=false, t24Name=BENEFICIARY.SPOUSE, mandatory=false)
+        OUT_ARRAY : T24BusinessTypes:N
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, core=false, t24Name=OUT.ARRAY, genOperation=USIRAC.E.NOF.ONLINE.RMDAMOUNT, mandatory=true)
+        PROJECTED_IRA_BALANCE : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=N, maxLength=19, core=false, t24Name=PROJECTED.IRA.BALANCE, mandatory=false)
+        SPOUSE_AGE : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=4, core=false, t24Name=SPOUSE.AGE, mandatory=false)
+    }
+    /* Parameter table IRA Reports */
+    USIRAC_1099R_PARAMETER
+        @i18n:Description (en="")
+        @t24:i (t24Name=USIRAC.1099R.PARAMETER, level=F, type=H, allowedFunctions="A C D E H I L P Q R S", localRefAllowed=false)
+    {
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=24.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=25.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=21.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=22.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=18.0, core=true, t24Name=CURR.NO, mandatory=false)
+        DATE_TIME -> byValue USIRAC_IRA:USIRAC_1099R_PARAMETER__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=23.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        INPUTTER -> byValue USIRAC_IRA:USIRAC_1099R_PARAMETER__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        PARAM_ID : USIRAC_IRA:USIRAC_1099R_PARAMETER__PARAM_ID PK required
+            @i18n:Label (en="Parameter Id")
+            @t24:i (align=L, inputBehaviour=I, maxLength=15, sysNumber=0.0, core=true, t24Name=PARAM.ID, mandatory=true)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=17.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        RESERVED_1 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=16.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_10 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=7.0, core=true, t24Name=RESERVED.10, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=15.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=14.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=13.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        RESERVED_5 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=12.0, core=true, t24Name=RESERVED.5, mandatory=false)
+        RESERVED_6 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=11.0, core=true, t24Name=RESERVED.6, mandatory=false)
+        RESERVED_7 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=10.0, core=true, t24Name=RESERVED.7, mandatory=false)
+        RESERVED_8 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=9.0, core=true, t24Name=RESERVED.8, mandatory=false)
+        RESERVED_9 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=8.0, core=true, t24Name=RESERVED.9, mandatory=false)
+        TAX_PROPERTY -> byValue USIRAC_IRA:USIRAC_1099R_PARAMETER__TAX_PROPERTY *
+            @t24:i (t24Name=TAX.PROPERTY)
+        TRANS_CODE -> byValue USIRAC_IRA:USIRAC_1099R_PARAMETER__TRANS_CODE *
+            @t24:i (t24Name=TRANS.CODE)
+    }
+    USIRAC_1099R_PARAMETER__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=20.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    USIRAC_1099R_PARAMETER__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=19.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    USIRAC_1099R_PARAMETER__TAX_PROPERTY
+    {
+/* Shows the property for Withdrawal Charge
+Alpha Numeric Field
+Should be a valid record in AA.PROPERTY */
+        TAX_PROPERTY -> AA_ProductFramework:AA_PROPERTY
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=6.0, core=true, businessType=A, t24Name=TAX.PROPERTY, mandatory=false)
+    }
+    USIRAC_1099R_PARAMETER__TRANS_CODE
+    {
+/* Shows the IRA Distribution code
+Alpha Numeric Field
+Associated multivalue field */
+        DISTRIBUTION_CODE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=2.0, core=true, t24Name=DISTRIBUTION.CODE, mandatory=false)
+        RESERVED_11 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=5.0, core=true, t24Name=RESERVED.11, mandatory=false)
+        RESERVED_12 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=4.0, core=true, t24Name=RESERVED.12, mandatory=false)
+        TRANS_CODE -> byValue USIRAC_IRA:USIRAC_1099R_PARAMETER__TRANS_CODE__TRANS_CODE *
+            @t24:i (t24Name=TRANS.CODE)
+        TRANS_DESC -> byValue USIRAC_IRA:USIRAC_1099R_PARAMETER__TRANS_CODE__TRANS_DESC *
+            @t24:i (t24Name=TRANS.DESC)
+    }
+    USIRAC_1099R_PARAMETER__TRANS_CODE__TRANS_CODE
+    {
+/* Transaction Code for the IRA Transaction
+T24 TRANSACTION
+Associated Multi value Field
+Should be a valid record in TRANSACTION */
+        TRANS_CODE -> ST_Config:TRANSACTION
+            @i18n:Label (en="Trans Code")
+            @i18n:Tooltip (en="Indicates the Transaction Code")
+            @t24:i (align=R, inputBehaviour=I, maxLength=35, sysNumber=1.0, core=true, t24Name=TRANS.CODE, mandatory=false)
+    }
+    USIRAC_1099R_PARAMETER__TRANS_CODE__TRANS_DESC
+    {
+/* Shows the description for the distrubution code
+Text Field
+Associated multivalue field */
+        TRANS_DESC : T24BusinessTypes:ANY
+            @i18n:Label (en="Transaction Desc")
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=3.0, core=true, t24Name=TRANS.DESC, mandatory=false)
+    }
+    USIRAC_DISTRIBUTION_DETAILS
+        @i18n:Description (en="")
+        @t24:i (t24Name=USIRAC.DISTRIBUTION.DETAILS, level=F, type=L, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        DISTRIBUTION_DATE -> byValue USIRAC_IRA:USIRAC_DISTRIBUTION_DETAILS__DISTRIBUTION_DATE *
+            @t24:i (t24Name=DISTRIBUTION.DATE)
+        ID -> USIRAC_IRA:USIRAC_DISTRIBUTION_DETAILS PK required
+            @i18n:Label (en="Transaction Ref")
+            @i18n:Tooltip (en="Transaction Reference")
+            @t24:i (align=L, inputBehaviour=I, maxLength=30, sysNumber=0.0, core=true, businessType=A, t24Name="@ID", mandatory=true)
+        RESERVED_1 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=19.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_10 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=10.0, core=true, t24Name=RESERVED.10, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=18.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=17.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=16.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        RESERVED_5 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=15.0, core=true, t24Name=RESERVED.5, mandatory=false)
+        RESERVED_6 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=14.0, core=true, t24Name=RESERVED.6, mandatory=false)
+        RESERVED_7 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=13.0, core=true, t24Name=RESERVED.7, mandatory=false)
+        RESERVED_8 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=12.0, core=true, t24Name=RESERVED.8, mandatory=false)
+        RESERVED_9 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=11.0, core=true, t24Name=RESERVED.9, mandatory=false)
+    }
+    USIRAC_DISTRIBUTION_DETAILS__DISTRIBUTION_DATE
+    {
+        DISTRIBUTION_DATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=35, sysNumber=1.0, core=true, t24Name=DISTRIBUTION.DATE, mandatory=false)
+        IRA_ID -> byValue USIRAC_IRA:USIRAC_DISTRIBUTION_DETAILS__DISTRIBUTION_DATE__IRA_ID *
+            @t24:i (t24Name=IRA.ID)
+        RESERVED_11 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=9.0, core=true, t24Name=RESERVED.11, mandatory=false)
+        RESERVED_12 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=8.0, core=true, t24Name=RESERVED.12, mandatory=false)
+        RESERVED_13 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=7.0, core=true, t24Name=RESERVED.13, mandatory=false)
+    }
+    USIRAC_DISTRIBUTION_DETAILS__DISTRIBUTION_DATE__IRA_ID
+    {
+        DISTRIBUTION_AMT : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=35, sysNumber=3.0, core=true, t24Name=DISTRIBUTION.AMT, mandatory=false)
+        DISTRIBUTION_TXN : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=4.0, core=true, t24Name=DISTRIBUTION.TXN, mandatory=false)
+        IRA_ID : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=2.0, core=true, t24Name=IRA.ID, mandatory=false)
+        RESERVED_14 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=6.0, core=true, t24Name=RESERVED.14, mandatory=false)
+        RESERVED_15 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=5.0, core=true, t24Name=RESERVED.15, mandatory=false)
+    }
+    /* IRA Distribution Plan */
+    USIRAC_DISTRIBUTION_PLAN
+        @i18n:Description (en="")
+        @t24:i (t24Name=USIRAC.DISTRIBUTION.PLAN, level=F, type=H, allowedFunctions="A C D E H I L P Q R S", localRefApplicationSysNo=38.0, localRefAllowed=true)
+    {
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=47.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=48.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=44.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=45.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=41.0, core=true, t24Name=CURR.NO, mandatory=false)
+        DATE_TIME -> byValue USIRAC_IRA:USIRAC_DISTRIBUTION_PLAN__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=46.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+/* Identifies the Record ID and is considered
+the same as the customer number */
+        ID -> USIRAC_IRA:USIRAC_DISTRIBUTION_PLAN PK required
+            @i18n:Label (en="Transaction Ref")
+            @i18n:Tooltip (en="Transaction Reference")
+            @t24:i (align=R, inputBehaviour=I, maxLength=15, sysNumber=0.0, core=true, businessType=CUS, t24Name="@ID", mandatory=true)
+        INPUTTER -> byValue USIRAC_IRA:USIRAC_DISTRIBUTION_PLAN__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        OVERRIDE -> byValue USIRAC_IRA:USIRAC_DISTRIBUTION_PLAN__OVERRIDE *
+            @t24:i (t24Name=OVERRIDE)
+        PLAN -> byValue USIRAC_IRA:USIRAC_DISTRIBUTION_PLAN__PLAN *
+            @t24:i (t24Name=PLAN)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=40.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        RESERVED_1 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=37.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_10 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=28.0, core=true, t24Name=RESERVED.10, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=36.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=35.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=34.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        RESERVED_5 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=33.0, core=true, t24Name=RESERVED.5, mandatory=false)
+        RESERVED_6 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=32.0, core=true, t24Name=RESERVED.6, mandatory=false)
+        RESERVED_7 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=31.0, core=true, t24Name=RESERVED.7, mandatory=false)
+        RESERVED_8 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=30.0, core=true, t24Name=RESERVED.8, mandatory=false)
+        RESERVED_9 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=29.0, core=true, t24Name=RESERVED.9, mandatory=false)
+    }
+    USIRAC_DISTRIBUTION_PLAN__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=43.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    USIRAC_DISTRIBUTION_PLAN__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=42.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    USIRAC_DISTRIBUTION_PLAN__OVERRIDE
+    {
+        OVERRIDE : T24BusinessTypes:N
+            @i18n:Label (en=Override)
+            @i18n:Tooltip (en="Overrides generated by this transaction")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=39.0, core=true, t24Name=OVERRIDE, mandatory=false)
+    }
+    USIRAC_DISTRIBUTION_PLAN__PLAN
+    {
+        ACCOUNT -> byValue USIRAC_IRA:USIRAC_DISTRIBUTION_PLAN__PLAN__ACCOUNT *
+            @t24:i (t24Name=ACCOUNT)
+/* This field is required when the Pay Method is
+denoted as an internal transfer from an IRA to
+another customer defined field with in the
+system. */
+        DISTRIBUTION_ACCOUNT : T24BusinessTypes:ACC
+            @t24:i (align=R, inputBehaviour=I, maxLength=18, sysNumber=14.0, core=true, t24Name=DISTRIBUTION.ACCOUNT, mandatory=false)
+/* This field allows a bank entry of the amount to
+be distributed, per plan, when the RMD Calculation
+is set to No or when RMD calculation does not
+apply */
+        DISTRIBUTION_AMT : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=18, sysNumber=9.0, core=true, t24Name=DISTRIBUTION.AMT, mandatory=false)
+/* This field defines the periodicity of the
+distribution and is initialized with the
+Distribution Start Date. This field can be used
+with either auto or manual RMD processing. */
+        DISTRIBUTION_FREQUENCY : USIRAC_IRA:USIRAC_DISTRIBUTION_PLAN__PLAN__DISTRIBUTION_FREQUENCY required
+            @t24:i (align=L, inputBehaviour=I, maxLength=13, sysNumber=12.0, core=true, t24Name=DISTRIBUTION.FREQUENCY, typeModifiers=EXTENDED, mandatory=true)
+/* Defines the IRA accounts that funds the
+calculated RMD. This field provides a drop down
+that contains the following values:
+
+Lowest Account Balance -
+sequentially uses the IRA account, based on
+lowest balance first, within the designated
+plan to fund the RMD with exhausted accounts
+moving through the closing process.
+
+Lowest Interest Rate -
+sequentially uses the IRA account, based on
+lowest rate first, within the designated plan
+to fund RMD with exhausted accounts moving
+through the closing process.
+
+Earliest Maturity -
+sequentially uses the IRA account, based on
+earliest maturity date first, within the
+designated plan to fund the RMD with exhausted
+accounts moving through the closing process.
+
+Manual -
+provides the bank the ability to selected a
+client-defined, funding-priority of funding. */
+        DISTRIBUTION_SEQ : USIRAC_IRA:USIRAC_DISTRIBUTION_PLAN__PLAN__DISTRIBUTION_SEQ
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=16.0, core=true, t24Name=DISTRIBUTION.SEQ, mandatory=false)
+/* This date field sets the beginning of the
+distribution period. This date works in harmony
+with the Distribution Frequency. This field can
+be used with either auto or manual RMD processing. */
+        DISTRIBUTION_START_DATE : T24BusinessTypes:D required
+            @t24:i (align=R, inputBehaviour=I, maxLength=12, sysNumber=10.0, core=true, t24Name=DISTRIBUTION.START.DATE, mandatory=true)
+/* Drop down of all the distribution funds
+transfers (FT):
+
+Auto RMD -
+Normal Distribution
+IRS Qualified Charitable Distributions
+
+Auto Non-RMD -
+Early Distribution, No Exception
+Early Distribution, Exception Applies
+Disability Distribution
+Death Distribution
+Early Distribution from ROTH
+IRS Qualified Charitable Distributions
+Qualified Distribution from ROTH
+Early Distribution from SIMPLE
+Roth IRA Distribution, Exception Applies
+
+The system will allow specific distributions
+depending on the setting of the RMD indicator.
+If Yes then Auto RMD processing occurs. If no
+Manual processing occurs */
+        DISTRIBUTION_TYPE : USIRAC_IRA:USIRAC_DISTRIBUTION_PLAN__PLAN__DISTRIBUTION_TYPE
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=5.0, core=true, t24Name=DISTRIBUTION.TYPE, mandatory=false)
+/* If the value for the Distribution Type is Early
+Distribution, Exception Applies then following
+list is available
+Unreimbursed Medical Expenses
+Medical Insurance Costs
+Annuity Distribution
+Higher Education Expenses
+First Home Expense
+IRS Levy
+Qualified Reservists
+Hardship
+Government Declared Disaster
+
+The system will produce an edit if these values
+are chose with any other value in Distribution
+Type */
+        EARLY_DISTRIBUTION_REASON : USIRAC_IRA:USIRAC_DISTRIBUTION_PLAN__PLAN__EARLY_DISTRIBUTION_REASON
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=6.0, core=true, t24Name=EARLY.DISTRIBUTION.REASON, mandatory=false)
+/* The product that defines the payment method
+(ACH, check production). */
+        PAY_METHOD : USIRAC_IRA:USIRAC_DISTRIBUTION_PLAN__PLAN__PAY_METHOD
+            @i18n:Label (en="Pay Method")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=13.0, core=true, t24Name=PAY.METHOD, mandatory=false)
+/* Identifies the plan within the multi-value
+set; Valid values:
+Simple
+Traditional
+SEP
+Roth
+Inherited IRA */
+        PLAN : USIRAC_IRA:USIRAC_DISTRIBUTION_PLAN__PLAN__PLAN required
+            @t24:i (align=L, inputBehaviour=I, maxLength=15, sysNumber=1.0, core=true, t24Name=PLAN, mandatory=true)
+/* The person that will receive the distribution
+that will be required for all Pay Method values
+and is linked to the Beneficiary Table */
+        RECIPIENT -> ST_Payments:BENEFICIARY
+            @t24:i (align=L, inputBehaviour=I, maxLength=17, sysNumber=15.0, core=true, businessType=A, t24Name=RECIPIENT, mandatory=false)
+        RESERVED_11 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=27.0, core=true, t24Name=RESERVED.11, mandatory=false)
+        RESERVED_12 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=26.0, core=true, t24Name=RESERVED.12, mandatory=false)
+        RESERVED_13 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=25.0, core=true, t24Name=RESERVED.13, mandatory=false)
+        RESERVED_14 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=24.0, core=true, t24Name=RESERVED.14, mandatory=false)
+        RESERVED_15 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=23.0, core=true, t24Name=RESERVED.15, mandatory=false)
+        RESERVED_16 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=22.0, core=true, t24Name=RESERVED.16, mandatory=false)
+        RESERVED_17 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=21.0, core=true, t24Name=RESERVED.17, mandatory=false)
+        RESERVED_18 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=20.0, core=true, t24Name=RESERVED.18, mandatory=false)
+        RESERVED_19 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=19.0, core=true, t24Name=RESERVED.19, mandatory=false)
+/* This field contains a drop down list containing:
+Blank - processes the same as No
+No - system will not use RMD calculation for
+determining disbursement
+Yes - system will use RMD calculation for
+determining disbursement
+
+For Auto RMD processing this needs to be set to
+Yes */
+        RMD_CALCULATION : USIRAC_IRA:USIRAC_DISTRIBUTION_PLAN__PLAN__RMD_CALCULATION
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=7.0, core=true, t24Name=RMD.CALCULATION, mandatory=false)
+/* Defines the periodic computation of the automatic
+RMD of accounts in the named plan. Examples:
+Monthly
+Quarterly
+Semi annually
+Annually
+
+The above are samples as other frequencies are
+available. This field is only available when the
+RMD Calculation is set to Yes */
+        RMD_CALC_FREQ : USIRAC_IRA:USIRAC_DISTRIBUTION_PLAN__PLAN__RMD_CALC_FREQ
+            @t24:i (align=L, inputBehaviour=I, maxLength=30, sysNumber=8.0, core=true, t24Name=RMD.CALC.FREQ, typeModifiers=EXTENDED, mandatory=false)
+/* This selection determines if the client is
+able to take RMDs. It contains a drop down
+of
+Blank - processes as NO
+No - Client is not RMD eligible
+Yes - Client is RMD eligible
+
+For auto RMD processing Yes must be selected
+with No indicating a manual processing */
+        RMD_INDICATOR : USIRAC_IRA:USIRAC_DISTRIBUTION_PLAN__PLAN__RMD_INDICATOR
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=4.0, core=true, t24Name=RMD.INDICATOR, mandatory=false)
+/* A field is provided to waive at the client's
+request, the plan RMD amount with drop down
+values of:
+Blank - processes the same as No
+No - the plan RMD Value has not been waived
+Yes - the Plan RMD value has been waived
+
+Note the following will occur with a setting
+of Yes:
+The system will still continue to calculate
+the value for notices.
+At year end the value will be reset back to
+No and the waive reason will be removed.
+The arrangement overview will capture the
+fact that the plan RMD has been waived. */
+        RMD_WAIVE : USIRAC_IRA:USIRAC_DISTRIBUTION_PLAN__PLAN__RMD_WAIVE
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=2.0, core=true, t24Name=RMD.WAIVE, mandatory=false)
+/* This field allows the bank to apply or waive any
+calculated penalty on a per customer rand per plan
+basis. Note is only the bank interest penalty
+amount it does include any IRS penalty amounts. If
+Yes then distribution will not include any penalty
+amounts whereas No will permit the penalty to be
+assessed on the distribution. */
+        WAIVE_BANK_PENALTY : USIRAC_IRA:USIRAC_DISTRIBUTION_PLAN__PLAN__WAIVE_BANK_PENALTY
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=11.0, core=true, t24Name=WAIVE.BANK.PENALTY, mandatory=false)
+        WAIVE_REASON -> byValue USIRAC_IRA:USIRAC_DISTRIBUTION_PLAN__PLAN__WAIVE_REASON *
+            @t24:i (t24Name=WAIVE.REASON)
+        WV_BANK_PENALTY_REASON : USIRAC_IRA:USIRAC_DISTRIBUTION_PLAN__PLAN__WV_BANK_PENALTY_REASON
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=18.0, core=true, t24Name=WV.BANK.PENALTY.REASON, mandatory=false)
+    }
+    USIRAC_DISTRIBUTION_PLAN__PLAN__ACCOUNT
+    {
+/* If the Distribution Sequence value is Manual,
+This field is contains a drop down populated
+with the accounts in this plan for this
+customer. As it is a multi-value, can be
+selected to fund the RMD.
+If not all of the accounts are not selected
+here, and the RMD value is greater than the
+account balances selected, the funding of the
+remainging RMD amount will be according to
+the sequence set in the Bank IRA parameter. */
+        ACCOUNT : T24BusinessTypes:ACC
+            @i18n:Label (en=Account)
+            @i18n:Tooltip (en="Identifies the customer account")
+            @t24:i (align=R, inputBehaviour=I, maxLength=18, sysNumber=17.0, core=true, t24Name=ACCOUNT, mandatory=false)
+    }
+    USIRAC_DISTRIBUTION_PLAN__PLAN__WAIVE_REASON
+    {
+/* This is a free text field to capture the
+reason the plan RMD was waived. */
+        WAIVE_REASON : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=55, sysNumber=3.0, core=true, t24Name=WAIVE.REASON, mandatory=false)
+    }
+    /* Live Table to store the IRA contribution and withdrawal details */
+    USIRAC_IRA_DETAILS
+        @i18n:Description (en="")
+        @t24:i (t24Name=USIRAC.IRA.DETAILS, level=F, type=L, allowedFunctions="L P S", localRefAllowed=false)
+    {
+/* Shows the IRA contribution made for the current year
+Standard T24 AMOUNT field
+Defaulted or value added with CREDIT.AMOUNT from the contribution transactions made to IRA for the current year */
+        CONTRIBUTION : T24BusinessTypes:R
+            @t24:i (align=R, inputBehaviour=I, maxLength=20, sysNumber=2.0, core=true, t24Name=CONTRIBUTION, mandatory=false)
+/* Shows the conversion contribution made for the year
+Standard T24 AMOUNT field
+Defaulted or value added with CREDIT.AMOUNT from the conversion transactions made to IRA for the current year */
+        CONVERSION : T24BusinessTypes:R
+            @i18n:Label (en=Conversion)
+            @t24:i (align=R, inputBehaviour=I, maxLength=20, sysNumber=8.0, core=true, t24Name=CONVERSION, mandatory=false)
+/* Shows the deposits made to the IRA by the employer for the current year
+Standard T24 AMOUNT field
+Defaulted or value added with CREDIT.AMOUNT from the all the deposit transactions made to IRA for the current year when the employer flag is set to Yes */
+        EMPLOYER_DEPOSITS : T24BusinessTypes:R
+            @t24:i (align=R, inputBehaviour=I, maxLength=20, sysNumber=11.0, core=true, t24Name=EMPLOYER.DEPOSITS, mandatory=false)
+        ID -> USIRAC_IRA:USIRAC_IRA_DETAILS PK required
+            @i18n:Label (en="Transaction Ref")
+            @i18n:Tooltip (en="Transaction Reference")
+            @t24:i (align=R, inputBehaviour=I, maxLength=16, sysNumber=0.0, core=true, businessType=ACC, t24Name="@ID", mandatory=true)
+/* Type of the IRA record.
+Updated from the Account Title of the IRA
+Text Field */
+        IRA_TYPE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=1.0, core=true, t24Name=IRA.TYPE, mandatory=false)
+        OVERRIDE -> byValue USIRAC_IRA:USIRAC_IRA_DETAILS__OVERRIDE *
+            @t24:i (t24Name=OVERRIDE)
+/* Shows the IRA contribution made for the previous year
+Standard T24 AMOUNT field
+Defaulted or value added with CREDIT.AMOUNT from the contribution transactions made to IRA for the previous year */
+        PREV_CONTRIBUTION : T24BusinessTypes:R
+            @t24:i (align=R, inputBehaviour=I, maxLength=20, sysNumber=3.0, core=true, t24Name=PREV.CONTRIBUTION, mandatory=false)
+/* Shows the IRA conversion contribution made for the previous year
+Standard T24 AMOUNT field
+Defaulted or value added with CREDIT.AMOUNT from the conversion transactions made to IRA for the previous year */
+        PREV_CONVERSION : T24BusinessTypes:R
+            @t24:i (align=R, inputBehaviour=I, maxLength=20, sysNumber=9.0, core=true, t24Name=PREV.CONVERSION, mandatory=false)
+/* Shows the deposits made to the IRA for the previous year
+Standard T24 AMOUNT field
+Defaulted or value added with CREDIT.AMOUNT from the all the deposit transactions made to IRA for the current year
+Value in this field is cleared during year end cob */
+        PREV_DEPOSITS : T24BusinessTypes:R
+            @t24:i (align=R, inputBehaviour=I, maxLength=20, sysNumber=10.0, core=true, t24Name=PREV.DEPOSITS, mandatory=false)
+/* Shows the deposits made to the IRA by the employer for the previous year
+Standard T24 AMOUNT field
+Defaulted or value added with CREDIT.AMOUNT from the all the deposit transactions made to IRA for the previous year when the employer flag is set to Yes
+Value in this field is cleared during year end cob */
+        PREV_EMP_CONTRIB : T24BusinessTypes:R
+            @t24:i (align=R, inputBehaviour=I, maxLength=20, sysNumber=13.0, core=true, t24Name=PREV.EMP.CONTRIB, mandatory=false)
+/* Shows the deposits made to the IRA by the employer for the previous year
+Standard T24 AMOUNT field
+Defaulted or value added with CREDIT.AMOUNT from the all the deposit transactions made to IRA for the previous year when the employer flag is set to Yes */
+        PREV_EMP_DEPOSITS : T24BusinessTypes:R
+            @t24:i (align=R, inputBehaviour=I, maxLength=20, sysNumber=12.0, core=true, t24Name=PREV.EMP.DEPOSITS, mandatory=false)
+/* Shows the IRA recharacterization contribution made for the previous year
+Standard T24 AMOUNT field
+Defaulted or value added with CREDIT.AMOUNT from the recharacterization transactions made to IRA for the previous year */
+        PREV_RECHARACTERIZATION : T24BusinessTypes:R
+            @t24:i (align=R, inputBehaviour=I, maxLength=20, sysNumber=7.0, core=true, t24Name=PREV.RECHARACTERIZATION, mandatory=false)
+/* Shows the IRA rollover contribution made for the previous year
+Standard T24 AMOUNT field
+Defaulted or value added with CREDIT.AMOUNT from the rollover transactions made to IRA for the previous year */
+        PREV_ROLLOVER : T24BusinessTypes:R
+            @t24:i (align=R, inputBehaviour=I, maxLength=20, sysNumber=5.0, core=true, t24Name=PREV.ROLLOVER, mandatory=false)
+        QCD_AMOUNT : T24BusinessTypes:R
+            @t24:i (align=R, inputBehaviour=I, maxLength=20, sysNumber=17.0, core=true, t24Name=QCD.AMOUNT, mandatory=false)
+/* Shows the recharacterization contribution made for the year
+Standard T24 AMOUNT field
+Defaulted or value added with CREDIT.AMOUNT from the recharacterization transactions made to IRA for the current year */
+        RECHARACTERIZATION : T24BusinessTypes:R
+            @t24:i (align=R, inputBehaviour=I, maxLength=20, sysNumber=6.0, core=true, t24Name=RECHARACTERIZATION, mandatory=false)
+        RESERVED_1 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=26.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=25.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=24.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=23.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        RESERVED_5 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=22.0, core=true, t24Name=RESERVED.5, mandatory=false)
+        RESERVED_6 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=21.0, core=true, t24Name=RESERVED.6, mandatory=false)
+        RESERVED_7 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=20.0, core=true, t24Name=RESERVED.7, mandatory=false)
+        RESERVED_8 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=19.0, core=true, t24Name=RESERVED.8, mandatory=false)
+/* The Required Minimum Distribution of the IRA
+The field is updated in year end cob after the required begin date
+Standard T24 AMOUNT field */
+        RMD : T24BusinessTypes:R
+            @t24:i (align=R, inputBehaviour=I, maxLength=20, sysNumber=14.0, core=true, t24Name=RMD, mandatory=false)
+/* shows the IRA participants required begin date
+Standard T24 Date format
+Default date should be equal to REQ.BEGIN.AGE parameterized age of IRA participant
+For example
+REQ.BEGIN.AGE = 70.5
+DATE.OF.BIRTH = 27 NOV 1950
+SYSTEM.DATE = 27 MAR 2013
+So required begin date would be defaulted with 27 MAY 2021
+That is IRA participants 70.5 years of age */
+        RMD_DATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=8, sysNumber=15.0, core=true, t24Name=RMD.DATE, mandatory=false)
+/* Shows the rollover contribution made for the year
+Standard T24 AMOUNT field
+Defaulted or value added with CREDIT.AMOUNT from the rollover transactions made to IRA for the current year */
+        ROLLOVER : T24BusinessTypes:R
+            @t24:i (align=R, inputBehaviour=I, maxLength=20, sysNumber=4.0, core=true, t24Name=ROLLOVER, mandatory=false)
+        TRUSTEE_TRF : T24BusinessTypes:R
+            @t24:i (align=R, inputBehaviour=I, maxLength=20, sysNumber=18.0, core=true, t24Name=TRUSTEE.TRF, mandatory=false)
+        WITHHOLD_DATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=8, sysNumber=16.0, core=true, t24Name=WITHHOLD.DATE, mandatory=false)
+    }
+    USIRAC_IRA_DETAILS_HIST
+        @i18n:Description (en="")
+        @t24:i (t24Name=USIRAC.IRA.DETAILS.HIST, level=F, type=L, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        CONTRIBUTION : T24BusinessTypes:R
+            @t24:i (align=R, inputBehaviour=I, maxLength=20, sysNumber=2.0, core=true, t24Name=CONTRIBUTION, mandatory=false)
+        CONVERSION : T24BusinessTypes:R
+            @i18n:Label (en=Conversion)
+            @t24:i (align=R, inputBehaviour=I, maxLength=20, sysNumber=8.0, core=true, t24Name=CONVERSION, mandatory=false)
+        EMPLOYER_DEPOSITS : T24BusinessTypes:R
+            @t24:i (align=R, inputBehaviour=I, maxLength=20, sysNumber=11.0, core=true, t24Name=EMPLOYER.DEPOSITS, mandatory=false)
+        ID -> USIRAC_IRA:USIRAC_IRA_DETAILS_HIST PK required
+            @i18n:Label (en="Transaction Ref")
+            @i18n:Tooltip (en="Transaction Reference")
+            @t24:i (align=L, inputBehaviour=I, maxLength=30, sysNumber=0.0, core=true, businessType=A, t24Name="@ID", mandatory=true)
+        IRA_TYPE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=1.0, core=true, t24Name=IRA.TYPE, mandatory=false)
+        OVERRIDE -> byValue USIRAC_IRA:USIRAC_IRA_DETAILS_HIST__OVERRIDE *
+            @t24:i (t24Name=OVERRIDE)
+        PREV_CONTRIBUTION : T24BusinessTypes:R
+            @t24:i (align=R, inputBehaviour=I, maxLength=20, sysNumber=3.0, core=true, t24Name=PREV.CONTRIBUTION, mandatory=false)
+        PREV_CONVERSION : T24BusinessTypes:R
+            @t24:i (align=R, inputBehaviour=I, maxLength=20, sysNumber=9.0, core=true, t24Name=PREV.CONVERSION, mandatory=false)
+        PREV_DEPOSITS : T24BusinessTypes:R
+            @t24:i (align=R, inputBehaviour=I, maxLength=20, sysNumber=10.0, core=true, t24Name=PREV.DEPOSITS, mandatory=false)
+        PREV_EMP_CONTRIB : T24BusinessTypes:R
+            @t24:i (align=R, inputBehaviour=I, maxLength=20, sysNumber=13.0, core=true, t24Name=PREV.EMP.CONTRIB, mandatory=false)
+        PREV_EMP_DEPOSITS : T24BusinessTypes:R
+            @t24:i (align=R, inputBehaviour=I, maxLength=20, sysNumber=12.0, core=true, t24Name=PREV.EMP.DEPOSITS, mandatory=false)
+        PREV_RECHARACTERIZATION : T24BusinessTypes:R
+            @t24:i (align=R, inputBehaviour=I, maxLength=20, sysNumber=7.0, core=true, t24Name=PREV.RECHARACTERIZATION, mandatory=false)
+        PREV_ROLLOVER : T24BusinessTypes:R
+            @t24:i (align=R, inputBehaviour=I, maxLength=20, sysNumber=5.0, core=true, t24Name=PREV.ROLLOVER, mandatory=false)
+        QCD_AMOUNT : T24BusinessTypes:R
+            @t24:i (align=R, inputBehaviour=I, maxLength=20, sysNumber=17.0, core=true, t24Name=QCD.AMOUNT, mandatory=false)
+        RECHARACTERIZATION : T24BusinessTypes:R
+            @t24:i (align=R, inputBehaviour=I, maxLength=20, sysNumber=6.0, core=true, t24Name=RECHARACTERIZATION, mandatory=false)
+        RESERVED_1 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=26.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=25.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=24.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=23.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        RESERVED_5 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=22.0, core=true, t24Name=RESERVED.5, mandatory=false)
+        RESERVED_6 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=21.0, core=true, t24Name=RESERVED.6, mandatory=false)
+        RESERVED_7 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=20.0, core=true, t24Name=RESERVED.7, mandatory=false)
+        RESERVED_8 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=19.0, core=true, t24Name=RESERVED.8, mandatory=false)
+        RMD : T24BusinessTypes:R
+            @t24:i (align=R, inputBehaviour=I, maxLength=20, sysNumber=14.0, core=true, t24Name=RMD, mandatory=false)
+        RMD_DATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=8, sysNumber=15.0, core=true, t24Name=RMD.DATE, mandatory=false)
+        ROLLOVER : T24BusinessTypes:R
+            @t24:i (align=R, inputBehaviour=I, maxLength=20, sysNumber=4.0, core=true, t24Name=ROLLOVER, mandatory=false)
+        TRUSTEE_TRF : T24BusinessTypes:R
+            @t24:i (align=R, inputBehaviour=I, maxLength=20, sysNumber=18.0, core=true, t24Name=TRUSTEE.TRF, mandatory=false)
+        WITHHOLD_DATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=8, sysNumber=16.0, core=true, t24Name=WITHHOLD.DATE, mandatory=false)
+    }
+    USIRAC_IRA_DETAILS_HIST__OVERRIDE
+    {
+        OVERRIDE : T24BusinessTypes:A
+            @i18n:Label (en=Override)
+            @i18n:Tooltip (en="Overrides generated by this transaction")
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=27.0, core=true, t24Name=OVERRIDE, mandatory=false)
+    }
+    USIRAC_IRA_DETAILS__OVERRIDE
+    {
+        OVERRIDE : T24BusinessTypes:A
+            @i18n:Label (en=Override)
+            @i18n:Tooltip (en="Overrides generated by this transaction")
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=27.0, core=true, t24Name=OVERRIDE, mandatory=false)
+    }
+    /* Table to store the Life expectancy factor */
+    USIRAC_JOINT_LIFE_EXP
+        @i18n:Description (en="")
+        @t24:i (t24Name=USIRAC.JOINT.LIFE.EXP, level=F, type=H, allowedFunctions="A C D E H I L P Q R S", localRefAllowed=false)
+    {
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=19.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=20.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=16.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        BEN_LIFE_EXPECTANCY : T24BusinessTypes:R
+            @t24:i (align=R, inputBehaviour=I, maxLength=5, sysNumber=1.0, core=true, t24Name=BEN.LIFE.EXPECTANCY, mandatory=false)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=17.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=13.0, core=true, t24Name=CURR.NO, mandatory=false)
+        DATE_TIME -> byValue USIRAC_IRA:USIRAC_JOINT_LIFE_EXP__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=18.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        ID -> USIRAC_IRA:USIRAC_JOINT_LIFE_EXP PK required
+            @i18n:Label (en="Transaction Ref")
+            @i18n:Tooltip (en="Transaction Reference")
+            @t24:i (align=L, inputBehaviour=I, maxLength=7, sysNumber=0.0, core=true, businessType=A, t24Name="@ID", mandatory=true)
+        INPUTTER -> byValue USIRAC_IRA:USIRAC_JOINT_LIFE_EXP__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        OVERRIDE -> byValue USIRAC_IRA:USIRAC_JOINT_LIFE_EXP__OVERRIDE *
+            @t24:i (t24Name=OVERRIDE)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=12.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        RESERVED_1 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=10.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=9.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=8.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=7.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        RESERVED_5 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=6.0, core=true, t24Name=RESERVED.5, mandatory=false)
+        RESERVED_6 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=5.0, core=true, t24Name=RESERVED.6, mandatory=false)
+        RESERVED_7 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=4.0, core=true, t24Name=RESERVED.7, mandatory=false)
+        RESERVED_8 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=3.0, core=true, t24Name=RESERVED.8, mandatory=false)
+        RESERVED_9 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=2.0, core=true, t24Name=RESERVED.9, mandatory=false)
+    }
+    USIRAC_JOINT_LIFE_EXP__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=15.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    USIRAC_JOINT_LIFE_EXP__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=14.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    USIRAC_JOINT_LIFE_EXP__OVERRIDE
+    {
+        OVERRIDE : T24BusinessTypes:A
+            @i18n:Label (en=Override)
+            @i18n:Tooltip (en="Overrides generated by this transaction")
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=11.0, core=true, t24Name=OVERRIDE, mandatory=false)
+    }
+    /* IRA Parameter Table */
+    USIRAC_PARAMETER
+        @i18n:Description (en="")
+        @t24:i (t24Name=USIRAC.PARAMETER, level=I, type=H, allowedFunctions="A C D E H I L P Q R S", localRefAllowed=false)
+    {
+        5YR_PRE_NOTICE_DAYS : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=2, sysNumber=16.0, core=true, t24Name=5YR.PRE.NOTICE.DAYS, mandatory=false)
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=27.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=28.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=24.0, core=true, t24Name=AUTHORISER, mandatory=false)
+/* This field shows the contribution deadline for the previous year IRA subscription
+Mandatory Field
+Standard T24 DATE field
+Text Field
+For example 15th APR 2013 */
+        CONTRB_END_DATE : T24BusinessTypes:N required
+            @t24:i (align=R, inputBehaviour=I, maxLength=8, sysNumber=6.0, core=true, t24Name=CONTRB.END.DATE, mandatory=true)
+/* This field shows the previous year contribution deadline
+Mandatory Field
+Standard T24 DATE field
+Text Field
+For example 15th APR 2013 */
+        CONTRIB_CONCES : T24BusinessTypes:N required
+            @t24:i (align=R, inputBehaviour=I, maxLength=8, sysNumber=7.0, core=true, t24Name=CONTRIB.CONCES, mandatory=true)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=25.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=21.0, core=true, t24Name=CURR.NO, mandatory=false)
+        DATE_TIME -> byValue USIRAC_IRA:USIRAC_PARAMETER__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=26.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+/* Description of the record
+Mandatory Field
+Text Field */
+        DESCRIPTION : T24BusinessTypes:A required
+            @i18n:Label (en=Description)
+            @i18n:Tooltip (en=Description)
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=1.0, core=true, t24Name=DESCRIPTION, mandatory=true)
+/* This field specifies the maximum contribution amount for employee participant who are equal to or
+less than 49 years old. This field is applicable only for SIMPLE IRA
+Optional Field
+Standard T24 AMOUNT field
+Text Field
+For example 12000.00 */
+        EMP_MAX_CONT : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=10, sysNumber=4.0, core=true, t24Name=EMP.MAX.CONT, mandatory=false)
+/* This field specifies the maximum contribution amount for employee participant who are equal to or
+greater than 50 years old. This field is applicable only for SIMPLE IRA
+Optional Field
+Standard T24 AMOUNT field
+Text Field
+For example 14500.00 */
+        EMP_MAX_CONT_50 : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=10, sysNumber=5.0, core=true, t24Name=EMP.MAX.CONT.50, mandatory=false)
+        INPUTTER -> byValue USIRAC_IRA:USIRAC_PARAMETER__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+/* This field specifies the maximum contribution amount for participant who are equal to or less than
+49 years old
+Mandatory Field
+Standard T24 AMOUNT field
+Text Field
+For example 5500.00 */
+        MAX_CONTRIB : T24BusinessTypes:AMT required
+            @t24:i (align=R, inputBehaviour=I, maxLength=10, sysNumber=2.0, core=true, t24Name=MAX.CONTRIB, mandatory=true)
+/* This field specifies the maximum contribution amount for participant who are equal to or greater
+than 50 years old
+Mandatory Field
+Standard T24 AMOUNT field
+Text Field
+For example 6500.00 */
+        MAX_CONTRIB_50 : T24BusinessTypes:AMT required
+            @t24:i (align=R, inputBehaviour=I, maxLength=10, sysNumber=3.0, core=true, t24Name=MAX.CONTRIB.50, mandatory=true)
+        OVERRIDE -> byValue USIRAC_IRA:USIRAC_PARAMETER__OVERRIDE *
+            @t24:i (t24Name=OVERRIDE)
+        PARAM_ID : USIRAC_IRA:USIRAC_PARAMETER__PARAM_ID PK required
+            @i18n:Label (en="Parameter Id")
+            @t24:i (align=L, inputBehaviour=I, maxLength=15, sysNumber=0.0, core=true, t24Name=PARAM.ID, mandatory=true)
+/* This amount, dictated by the IRS, determine the maximum an employee who is equal
+to or less than 49 years old can contribute in a given tax year.
+Optional Field
+Standard T24 Amount field
+Text Field
+For example 6500.00 */
+        PY_EMP_MAX_CONTR : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=10, sysNumber=12.0, core=true, t24Name=PY.EMP.MAX.CONTR, mandatory=false)
+/* This amount, dictated by the IRS, determine the maximum an employee who is equal
+to or greater than 50 years old can contribute in a given tax year.
+Optional Field
+Standard T24 Amount field
+Text Field
+For example 6500.00 */
+        PY_EMP_MAX_CONTR_50 : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=10, sysNumber=13.0, core=true, t24Name=PY.EMP.MAX.CONTR.50, mandatory=false)
+/* This amount, dictated by the IRS, determine the maximum a person who is equal to
+or less than 49 years old can contribute in a given tax year.
+Optional Field
+Standard T24 Amount field
+Text Field
+For example 6500.00 */
+        PY_MAX_CONTR : T24BusinessTypes:AMT required
+            @t24:i (align=R, inputBehaviour=I, maxLength=10, sysNumber=10.0, core=true, t24Name=PY.MAX.CONTR, mandatory=true)
+/* This amount, dictated by the IRS, determine the maximum a person who is equal to
+or greater than 50 years old can contribute in a given tax year.
+Optional Field
+Standard T24 Amount field
+Text Field
+For example 6500.00 */
+        PY_MAX_CONTR_50 : T24BusinessTypes:AMT required
+            @t24:i (align=R, inputBehaviour=I, maxLength=10, sysNumber=11.0, core=true, t24Name=PY.MAX.CONTR.50, mandatory=true)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=20.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+/* This field will indicate the minimum required age to withdraw from IRA accounts
+Optional Field
+Text Field
+Including 2 decimal points
+For example 70.5. or 55.10 */
+        REQ_BEGIN_AGE : T24BusinessTypes:R
+            @t24:i (align=R, inputBehaviour=I, maxLength=5, sysNumber=8.0, core=true, t24Name=REQ.BEGIN.AGE, mandatory=false)
+        RESERVED_1 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=18.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=17.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        /* Determines the frequency the RMD calculation occurs. */
+        RMD_CALC_FREQ : USIRAC_IRA:USIRAC_PARAMETER__RMD_CALC_FREQ
+            @t24:i (align=L, inputBehaviour=I, maxLength=30, sysNumber=15.0, core=true, t24Name=RMD.CALC.FREQ, typeModifiers=EXTENDED, mandatory=false)
+/* This new field allows the bank to determine per plan what notice will be provided
+per plan with valid values of:
+Account
+Plan */
+        RMD_NOTICE_PREF : USIRAC_IRA:USIRAC_PARAMETER__RMD_NOTICE_PREF required
+            @t24:i (align=L, inputBehaviour=I, maxLength=10, sysNumber=14.0, core=true, t24Name=RMD.NOTICE.PREF, mandatory=true)
+/* This field shows the withdrawal age limit for normal withdrawals
+Mandatory Field
+Standard T24 DATE field
+Text Field
+For example 15th APR 2013 */
+        WITHDRAWAL_AGE : T24BusinessTypes:R
+            @t24:i (align=R, inputBehaviour=I, maxLength=5, sysNumber=9.0, core=true, t24Name=WITHDRAWAL.AGE, mandatory=false)
+    }
+    USIRAC_PARAMETER__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=23.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    USIRAC_PARAMETER__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=22.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    USIRAC_PARAMETER__OVERRIDE
+    {
+        OVERRIDE : T24BusinessTypes:A
+            @i18n:Label (en=Override)
+            @i18n:Tooltip (en="Overrides generated by this transaction")
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=19.0, core=true, t24Name=OVERRIDE, mandatory=false)
+    }
+    /* Table to store the Life expectancy factor */
+    USIRAC_SINGLE_LIFE_EXP
+        @i18n:Description (en="")
+        @t24:i (t24Name=USIRAC.SINGLE.LIFE.EXP, level=F, type=H, allowedFunctions="A C D E H I L P Q R S", localRefAllowed=false)
+    {
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=20.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=21.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=17.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=18.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=14.0, core=true, t24Name=CURR.NO, mandatory=false)
+        DATE_TIME -> byValue USIRAC_IRA:USIRAC_SINGLE_LIFE_EXP__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=19.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        DISTRIB_PERIOD : T24BusinessTypes:R
+            @t24:i (align=R, inputBehaviour=I, maxLength=5, sysNumber=2.0, core=true, t24Name=DISTRIB.PERIOD, mandatory=false)
+        ID -> USIRAC_IRA:USIRAC_SINGLE_LIFE_EXP PK required
+            @i18n:Label (en="Transaction Ref")
+            @i18n:Tooltip (en="Transaction Reference")
+            @t24:i (align=R, inputBehaviour=I, maxLength=3, sysNumber=0.0, core=true, t24Name="@ID", mandatory=true)
+        INPUTTER -> byValue USIRAC_IRA:USIRAC_SINGLE_LIFE_EXP__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+/* This field shows the life expectancy of IRA participants
+Mandatory Field, Text Field
+5 digits is inclusive of decimal points
+For example 70.50, 20.60 */
+        LIFE_EXPECTANCY : T24BusinessTypes:R
+            @t24:i (align=R, inputBehaviour=I, maxLength=5, sysNumber=1.0, core=true, t24Name=LIFE.EXPECTANCY, mandatory=false)
+        OVERRIDE -> byValue USIRAC_IRA:USIRAC_SINGLE_LIFE_EXP__OVERRIDE *
+            @t24:i (t24Name=OVERRIDE)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=13.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        RESERVED_1 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=11.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=10.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=9.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=8.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        RESERVED_5 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=7.0, core=true, t24Name=RESERVED.5, mandatory=false)
+        RESERVED_6 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=6.0, core=true, t24Name=RESERVED.6, mandatory=false)
+        RESERVED_7 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=5.0, core=true, t24Name=RESERVED.7, mandatory=false)
+        RESERVED_8 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=4.0, core=true, t24Name=RESERVED.8, mandatory=false)
+        RESERVED_9 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=3.0, core=true, t24Name=RESERVED.9, mandatory=false)
+    }
+    USIRAC_SINGLE_LIFE_EXP__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=16.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    USIRAC_SINGLE_LIFE_EXP__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=15.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    USIRAC_SINGLE_LIFE_EXP__OVERRIDE
+    {
+        OVERRIDE : T24BusinessTypes:A
+            @i18n:Label (en=Override)
+            @i18n:Tooltip (en="Overrides generated by this transaction")
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=12.0, core=true, t24Name=OVERRIDE, mandatory=false)
+    }
+    US_LEGAL_DOCUMENT
+        @i18n:Description (en="")
+        @t24:i (t24Name=US.LEGAL.DOCUMENT, level=C, type=L, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        DOCUMENT_TYPE : T24BusinessTypes:A
+            @i18n:Label (en="Document Type")
+            @t24:i (align=L, inputBehaviour=I, maxLength=25, sysNumber=2.0, core=true, t24Name=DOCUMENT.TYPE, mandatory=false)
+        ID -> USIRAC_IRA:US_LEGAL_DOCUMENT PK required
+            @i18n:Label (en="Transaction Ref")
+            @i18n:Tooltip (en="Transaction Reference")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=0.0, core=true, businessType=A, t24Name="@ID", mandatory=true)
+        OVERRIDE -> byValue USIRAC_IRA:US_LEGAL_DOCUMENT__OVERRIDE *
+            @t24:i (t24Name=OVERRIDE)
+        PERSON_ENTITY -> ST_Customer:PERSON_ENTITY
+            @i18n:Label (en="Person or Entity")
+            @i18n:Tooltip (en="Person or Entity")
+            @t24:i (align=R, inputBehaviour=I, maxLength=25, sysNumber=1.0, core=true, t24Name=PERSON.ENTITY, mandatory=false)
+        RESERVED_1 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=11.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=10.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=9.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=8.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        RESERVED_5 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=7.0, core=true, t24Name=RESERVED.5, mandatory=false)
+        RESERVED_6 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=6.0, core=true, t24Name=RESERVED.6, mandatory=false)
+        RESERVED_7 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=5.0, core=true, t24Name=RESERVED.7, mandatory=false)
+        RESERVED_8 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=4.0, core=true, t24Name=RESERVED.8, mandatory=false)
+        RESERVED_9 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=3.0, core=true, t24Name=RESERVED.9, mandatory=false)
+    }
+    US_LEGAL_DOCUMENT__OVERRIDE
+    {
+        OVERRIDE : T24BusinessTypes:A
+            @i18n:Label (en=Override)
+            @i18n:Tooltip (en="Overrides generated by this transaction")
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=12.0, core=true, t24Name=OVERRIDE, mandatory=false)
+    }
+}
+Enumerations {
+    AA_ARR_XIRA__BENEFICIARY__BEN_RELATION : mml:string
+        NON__SPOUSE=NON-SPOUSE
+        OTHERS=OTHERS
+        SPOUSE=SPOUSE
+    AA_ARR_XIRA__BENEFICIARY__BEN_ROLE : mml:string
+        BENEFICIARY=BENEFICIARY
+        CONTINGENT_BENEFICIARY=CONTINGENT.BENEFICIARY
+    AA_ARR_XIRA__DECEDENT_RELATIONSHIP : mml:string
+        NON__SPOUSE=NON-SPOUSE
+        OTHER=OTHER
+        SPOUSE=SPOUSE
+    AA_ARR_XIRA__DEFAULT_ATTR_OPTION : mml:string
+        NON__RESETTING=NON-RESETTING
+        RESETTING=RESETTING
+    AA_ARR_XIRA__DEFAULT_NEGOTIABLE : mml:string
+        NO=NO
+        YES=YES
+    AA_ARR_XIRA__INHERIT_IRA : mml:string
+        NO=NO
+        YES=YES
+    AA_ARR_XIRA__INHERIT_RMD_CALCULATION : mml:string
+        NON_REDUCING=NON.REDUCING
+        REDUCING=REDUCING
+    AA_ARR_XIRA__INHERIT_RMD_CALC_METHOD : mml:string
+        FIVE_YEAR_METHOD=FIVE.YEAR.METHOD
+        LIFE_EXPECTANCY=LIFE.EXPECTANCY
+        LUMP_SUM=LUMP.SUM
+    AA_ARR_XIRA__NR_ATTRIBUTE__NR_OPTIONS__NR_OPTIONS : mml:string
+        FIX__VALUE=FIX-VALUE
+        MANDATORY=MANDATORY
+        NEGOTIABLE=NEGOTIABLE
+        NON__NEGOTIABLE=NON-NEGOTIABLE
+        NON__RESETTING=NON-RESETTING
+        OVERRIDE=OVERRIDE
+        RESETTING=RESETTING
+    AA_ARR_XIRA__NR_ATTRIBUTE__NR_TYPE__NR_MESSAGE : mml:string
+        CAP=CAP
+        ERROR=ERROR
+        FLOOR=FLOOR
+        OVERRIDE=OVERRIDE
+    AA_ARR_XIRA__PLAN_TYPE : mml:string
+        ROTH_IRA=ROTH.IRA
+        SEP_IRA=SEP.IRA
+        SIMPLE_IRA=SIMPLE.IRA
+        TRADITIONAL_IRA=TRADITIONAL.IRA
+    AA_ARR_XIRA__PR_ATTRIBUTE__PR_APP_METHOD : mml:string
+        CAPITALISE=CAPITALISE
+        DEFER=DEFER
+        DUE=DUE
+    AA_ARR_XIRA__PR_ATTRIBUTE__PR_BRK_RES : mml:string
+        CAP=CAP
+        ERROR=ERROR
+        FLOOR=FLOOR
+        INFORMATION=INFORMATION
+        OVERRIDE=OVERRIDE
+    AA_ARR_XIRA__SOURCE_OF_FUNDS : mml:string
+        DEPOSITED_CHECK__OTHER_BANK=DEPOSITED.CHECK-OTHER.BANK
+        DEPOSITED_CHECK__OUR_BANK=DEPOSITED.CHECK-OUR.BANK
+        NEW_ACCOUNT=NEW.ACCOUNT
+        NEW_MONEY=NEW.MONEY
+        ROLLOVER=ROLLOVER
+        TRANSFER=TRANSFER
+    AA_PRD_CAT_XIRA__BENEFICIARY__BEN_RELATION : mml:string
+        NON__SPOUSE=NON-SPOUSE
+        OTHERS=OTHERS
+        SPOUSE=SPOUSE
+    AA_PRD_CAT_XIRA__BENEFICIARY__BEN_ROLE : mml:string
+        BENEFICIARY=BENEFICIARY
+        CONTINGENT_BENEFICIARY=CONTINGENT.BENEFICIARY
+    AA_PRD_CAT_XIRA__DECEDENT_RELATIONSHIP : mml:string
+        NON__SPOUSE=NON-SPOUSE
+        OTHER=OTHER
+        SPOUSE=SPOUSE
+    AA_PRD_CAT_XIRA__DEFAULT_ATTR_OPTION : mml:string
+        NON__RESETTING=NON-RESETTING
+        RESETTING=RESETTING
+    AA_PRD_CAT_XIRA__DEFAULT_NEGOTIABLE : mml:string
+        NO=NO
+        YES=YES
+    AA_PRD_CAT_XIRA__INHERIT_IRA : mml:string
+        NO=NO
+        YES=YES
+    AA_PRD_CAT_XIRA__INHERIT_RMD_CALCULATION : mml:string
+        NON_REDUCING=NON.REDUCING
+        REDUCING=REDUCING
+    AA_PRD_CAT_XIRA__INHERIT_RMD_CALC_METHOD : mml:string
+        FIVE_YEAR_METHOD=FIVE.YEAR.METHOD
+        LIFE_EXPECTANCY=LIFE.EXPECTANCY
+        LUMP_SUM=LUMP.SUM
+    AA_PRD_CAT_XIRA__NR_ATTRIBUTE__NR_OPTIONS__NR_OPTIONS : mml:string
+        FIX__VALUE=FIX-VALUE
+        MANDATORY=MANDATORY
+        NEGOTIABLE=NEGOTIABLE
+        NON__NEGOTIABLE=NON-NEGOTIABLE
+        NON__RESETTING=NON-RESETTING
+        OVERRIDE=OVERRIDE
+        RESETTING=RESETTING
+    AA_PRD_CAT_XIRA__NR_ATTRIBUTE__NR_TYPE__NR_MESSAGE : mml:string
+        CAP=CAP
+        ERROR=ERROR
+        FLOOR=FLOOR
+        OVERRIDE=OVERRIDE
+    AA_PRD_CAT_XIRA__PLAN_TYPE : mml:string
+        ROTH_IRA=ROTH.IRA
+        SEP_IRA=SEP.IRA
+        SIMPLE_IRA=SIMPLE.IRA
+        TRADITIONAL_IRA=TRADITIONAL.IRA
+    AA_PRD_CAT_XIRA__PR_ATTRIBUTE__PR_APP_METHOD : mml:string
+        CAPITALISE=CAPITALISE
+        DEFER=DEFER
+        DUE=DUE
+    AA_PRD_CAT_XIRA__PR_ATTRIBUTE__PR_BRK_RES : mml:string
+        CAP=CAP
+        ERROR=ERROR
+        FLOOR=FLOOR
+        INFORMATION=INFORMATION
+        OVERRIDE=OVERRIDE
+    AA_PRD_CAT_XIRA__SOURCE_OF_FUNDS : mml:string
+        DEPOSITED_CHECK__OTHER_BANK=DEPOSITED.CHECK-OTHER.BANK
+        DEPOSITED_CHECK__OUR_BANK=DEPOSITED.CHECK-OUR.BANK
+        NEW_ACCOUNT=NEW.ACCOUNT
+        NEW_MONEY=NEW.MONEY
+        ROLLOVER=ROLLOVER
+        TRANSFER=TRANSFER
+    AA_PRD_DES_XIRA__BENEFICIARY__BEN_RELATION : mml:string
+        NON__SPOUSE=NON-SPOUSE
+        OTHERS=OTHERS
+        SPOUSE=SPOUSE
+    AA_PRD_DES_XIRA__BENEFICIARY__BEN_ROLE : mml:string
+        BENEFICIARY=BENEFICIARY
+        CONTINGENT_BENEFICIARY=CONTINGENT.BENEFICIARY
+    AA_PRD_DES_XIRA__DECEDENT_RELATIONSHIP : mml:string
+        NON__SPOUSE=NON-SPOUSE
+        OTHER=OTHER
+        SPOUSE=SPOUSE
+    AA_PRD_DES_XIRA__DEFAULT_ATTR_OPTION : mml:string
+        NON__RESETTING=NON-RESETTING
+        RESETTING=RESETTING
+    AA_PRD_DES_XIRA__DEFAULT_NEGOTIABLE : mml:string
+        NO=NO
+        YES=YES
+    AA_PRD_DES_XIRA__INHERIT_IRA : mml:string
+        NO=NO
+        YES=YES
+    AA_PRD_DES_XIRA__INHERIT_RMD_CALCULATION : mml:string
+        NON_REDUCING=NON.REDUCING
+        REDUCING=REDUCING
+    AA_PRD_DES_XIRA__INHERIT_RMD_CALC_METHOD : mml:string
+        FIVE_YEAR_METHOD=FIVE.YEAR.METHOD
+        LIFE_EXPECTANCY=LIFE.EXPECTANCY
+        LUMP_SUM=LUMP.SUM
+    AA_PRD_DES_XIRA__NR_ATTRIBUTE__NR_OPTIONS__NR_OPTIONS : mml:string
+        FIX__VALUE=FIX-VALUE
+        MANDATORY=MANDATORY
+        NEGOTIABLE=NEGOTIABLE
+        NON__NEGOTIABLE=NON-NEGOTIABLE
+        NON__RESETTING=NON-RESETTING
+        OVERRIDE=OVERRIDE
+        RESETTING=RESETTING
+    AA_PRD_DES_XIRA__NR_ATTRIBUTE__NR_TYPE__NR_MESSAGE : mml:string
+        CAP=CAP
+        ERROR=ERROR
+        FLOOR=FLOOR
+        OVERRIDE=OVERRIDE
+    AA_PRD_DES_XIRA__PLAN_TYPE : mml:string
+        ROTH_IRA=ROTH.IRA
+        SEP_IRA=SEP.IRA
+        SIMPLE_IRA=SIMPLE.IRA
+        TRADITIONAL_IRA=TRADITIONAL.IRA
+    AA_PRD_DES_XIRA__PR_ATTRIBUTE__PR_APP_METHOD : mml:string
+        CAPITALISE=CAPITALISE
+        DEFER=DEFER
+        DUE=DUE
+    AA_PRD_DES_XIRA__PR_ATTRIBUTE__PR_BRK_RES : mml:string
+        CAP=CAP
+        ERROR=ERROR
+        FLOOR=FLOOR
+        INFORMATION=INFORMATION
+        OVERRIDE=OVERRIDE
+    AA_PRD_DES_XIRA__SOURCE_OF_FUNDS : mml:string
+        DEPOSITED_CHECK__OTHER_BANK=DEPOSITED.CHECK-OTHER.BANK
+        DEPOSITED_CHECK__OUR_BANK=DEPOSITED.CHECK-OUR.BANK
+        NEW_ACCOUNT=NEW.ACCOUNT
+        NEW_MONEY=NEW.MONEY
+        ROLLOVER=ROLLOVER
+        TRANSFER=TRANSFER
+    AA_PRD_PRF_XIRA__BENEFICIARY__BEN_RELATION : mml:string
+        NON__SPOUSE=NON-SPOUSE
+        OTHERS=OTHERS
+        SPOUSE=SPOUSE
+    AA_PRD_PRF_XIRA__BENEFICIARY__BEN_ROLE : mml:string
+        BENEFICIARY=BENEFICIARY
+        CONTINGENT_BENEFICIARY=CONTINGENT.BENEFICIARY
+    AA_PRD_PRF_XIRA__DECEDENT_RELATIONSHIP : mml:string
+        NON__SPOUSE=NON-SPOUSE
+        OTHER=OTHER
+        SPOUSE=SPOUSE
+    AA_PRD_PRF_XIRA__DEFAULT_ATTR_OPTION : mml:string
+        NON__RESETTING=NON-RESETTING
+        RESETTING=RESETTING
+    AA_PRD_PRF_XIRA__DEFAULT_NEGOTIABLE : mml:string
+        NO=NO
+        YES=YES
+    AA_PRD_PRF_XIRA__INHERIT_IRA : mml:string
+        NO=NO
+        YES=YES
+    AA_PRD_PRF_XIRA__INHERIT_RMD_CALCULATION : mml:string
+        NON_REDUCING=NON.REDUCING
+        REDUCING=REDUCING
+    AA_PRD_PRF_XIRA__INHERIT_RMD_CALC_METHOD : mml:string
+        FIVE_YEAR_METHOD=FIVE.YEAR.METHOD
+        LIFE_EXPECTANCY=LIFE.EXPECTANCY
+        LUMP_SUM=LUMP.SUM
+    AA_PRD_PRF_XIRA__NR_ATTRIBUTE__NR_OPTIONS__NR_OPTIONS : mml:string
+        FIX__VALUE=FIX-VALUE
+        MANDATORY=MANDATORY
+        NEGOTIABLE=NEGOTIABLE
+        NON__NEGOTIABLE=NON-NEGOTIABLE
+        NON__RESETTING=NON-RESETTING
+        OVERRIDE=OVERRIDE
+        RESETTING=RESETTING
+    AA_PRD_PRF_XIRA__NR_ATTRIBUTE__NR_TYPE__NR_MESSAGE : mml:string
+        CAP=CAP
+        ERROR=ERROR
+        FLOOR=FLOOR
+        OVERRIDE=OVERRIDE
+    AA_PRD_PRF_XIRA__PLAN_TYPE : mml:string
+        ROTH_IRA=ROTH.IRA
+        SEP_IRA=SEP.IRA
+        SIMPLE_IRA=SIMPLE.IRA
+        TRADITIONAL_IRA=TRADITIONAL.IRA
+    AA_PRD_PRF_XIRA__PR_ATTRIBUTE__PR_APP_METHOD : mml:string
+        CAPITALISE=CAPITALISE
+        DEFER=DEFER
+        DUE=DUE
+    AA_PRD_PRF_XIRA__PR_ATTRIBUTE__PR_BRK_RES : mml:string
+        CAP=CAP
+        ERROR=ERROR
+        FLOOR=FLOOR
+        INFORMATION=INFORMATION
+        OVERRIDE=OVERRIDE
+    AA_PRD_PRF_XIRA__SOURCE_OF_FUNDS : mml:string
+        DEPOSITED_CHECK__OTHER_BANK=DEPOSITED.CHECK-OTHER.BANK
+        DEPOSITED_CHECK__OUR_BANK=DEPOSITED.CHECK-OUR.BANK
+        NEW_ACCOUNT=NEW.ACCOUNT
+        NEW_MONEY=NEW.MONEY
+        ROLLOVER=ROLLOVER
+        TRANSFER=TRANSFER
+    AA_SIM_XIRA__BENEFICIARY__BEN_RELATION : mml:string
+        NON__SPOUSE=NON-SPOUSE
+        OTHERS=OTHERS
+        SPOUSE=SPOUSE
+    AA_SIM_XIRA__BENEFICIARY__BEN_ROLE : mml:string
+        BENEFICIARY=BENEFICIARY
+        CONTINGENT_BENEFICIARY=CONTINGENT.BENEFICIARY
+    AA_SIM_XIRA__DECEDENT_RELATIONSHIP : mml:string
+        NON__SPOUSE=NON-SPOUSE
+        OTHER=OTHER
+        SPOUSE=SPOUSE
+    AA_SIM_XIRA__DEFAULT_ATTR_OPTION : mml:string
+        NON__RESETTING=NON-RESETTING
+        RESETTING=RESETTING
+    AA_SIM_XIRA__DEFAULT_NEGOTIABLE : mml:string
+        NO=NO
+        YES=YES
+    AA_SIM_XIRA__INHERIT_IRA : mml:string
+        NO=NO
+        YES=YES
+    AA_SIM_XIRA__INHERIT_RMD_CALCULATION : mml:string
+        NON_REDUCING=NON.REDUCING
+        REDUCING=REDUCING
+    AA_SIM_XIRA__INHERIT_RMD_CALC_METHOD : mml:string
+        FIVE_YEAR_METHOD=FIVE.YEAR.METHOD
+        LIFE_EXPECTANCY=LIFE.EXPECTANCY
+        LUMP_SUM=LUMP.SUM
+    AA_SIM_XIRA__NR_ATTRIBUTE__NR_OPTIONS__NR_OPTIONS : mml:string
+        FIX__VALUE=FIX-VALUE
+        MANDATORY=MANDATORY
+        NEGOTIABLE=NEGOTIABLE
+        NON__NEGOTIABLE=NON-NEGOTIABLE
+        NON__RESETTING=NON-RESETTING
+        OVERRIDE=OVERRIDE
+        RESETTING=RESETTING
+    AA_SIM_XIRA__NR_ATTRIBUTE__NR_TYPE__NR_MESSAGE : mml:string
+        CAP=CAP
+        ERROR=ERROR
+        FLOOR=FLOOR
+        OVERRIDE=OVERRIDE
+    AA_SIM_XIRA__PLAN_TYPE : mml:string
+        ROTH_IRA=ROTH.IRA
+        SEP_IRA=SEP.IRA
+        SIMPLE_IRA=SIMPLE.IRA
+        TRADITIONAL_IRA=TRADITIONAL.IRA
+    AA_SIM_XIRA__PR_ATTRIBUTE__PR_APP_METHOD : mml:string
+        CAPITALISE=CAPITALISE
+        DEFER=DEFER
+        DUE=DUE
+    AA_SIM_XIRA__PR_ATTRIBUTE__PR_BRK_RES : mml:string
+        CAP=CAP
+        ERROR=ERROR
+        FLOOR=FLOOR
+        INFORMATION=INFORMATION
+        OVERRIDE=OVERRIDE
+    AA_SIM_XIRA__SOURCE_OF_FUNDS : mml:string
+        DEPOSITED_CHECK__OTHER_BANK=DEPOSITED.CHECK-OTHER.BANK
+        DEPOSITED_CHECK__OUR_BANK=DEPOSITED.CHECK-OUR.BANK
+        NEW_ACCOUNT=NEW.ACCOUNT
+        NEW_MONEY=NEW.MONEY
+        ROLLOVER=ROLLOVER
+        TRANSFER=TRANSFER
+    USIRAC_1099R_PARAMETER__PARAM_ID : mml:string
+        ROTH_IRA=ROTH.IRA
+        SEP_IRA=SEP.IRA
+        SIMPLE_IRA=SIMPLE.IRA
+        TRADITIONAL_IRA=TRADITIONAL.IRA
+    USIRAC_DISTRIBUTION_PLAN__PLAN__DISTRIBUTION_FREQUENCY : mml:string
+        No=No
+        Yes=Yes
+    USIRAC_DISTRIBUTION_PLAN__PLAN__DISTRIBUTION_SEQ : mml:string
+        EARLIEST_MATURITY=EARLIEST.MATURITY
+        LOWEST_ACCOUNT_BALANCE=LOWEST.ACCOUNT.BALANCE
+        LOWEST_INTEREST_RATE=LOWEST.INTEREST.RATE
+        MANUAL=MANUAL
+    USIRAC_DISTRIBUTION_PLAN__PLAN__DISTRIBUTION_TYPE : mml:string
+        DEATH_DISTRIBUTION=DEATH.DISTRIBUTION
+        DIRECT_ROLLOVER=DIRECT.ROLLOVER
+        DISABILITY_DISTRIBUTION=DISABILITY.DISTRIBUTION
+        EARLY_DISTRIBUTION_FROM_ROTH=EARLY.DISTRIBUTION.FROM.ROTH
+        EARLY_DISTRIBUTION_FROM_SIMPLE=EARLY.DISTRIBUTION.FROM.SIMPLE
+        EARLY_DISTRIBUTION_NO_EXCEPTION=EARLY.DISTRIBUTION.NO.EXCEPTION
+        EARLY_DIST_EXCEPTION_APPLIES=EARLY.DIST.EXCEPTION.APPLIES
+        EXCESS_CONT_CURR_YR=EXCESS.CONT.CURR.YR
+        EXCESS_CONT_PREV_YR=EXCESS.CONT.PREV.YR
+        NORMAL_DISTRIBUTION=NORMAL.DISTRIBUTION
+        QUALIFIED_CHARITABLE_DISTRIBUTION=QUALIFIED.CHARITABLE.DISTRIBUTION
+        QUALIFIED_DISTRIBUTION_FROM_ROTH=QUALIFIED.DISTRIBUTION.FROM.ROTH
+        RECHAR_IRA_CURR_YR=RECHAR.IRA.CURR.YR
+        RECHAR_IRA_PREV_YR=RECHAR.IRA.PREV.YR
+        ROTH_DISTRIBUTION_EXCEPTION_APPL=ROTH.DISTRIBUTION.EXCEPTION.APPL
+        ROTH_DISTRIBUTION_EXCEPTION_APPLIES=ROTH.DISTRIBUTION.EXCEPTION.APPLIES
+        TRUSTEE_TRANSFER=TRUSTEE.TRANSFER
+    USIRAC_DISTRIBUTION_PLAN__PLAN__EARLY_DISTRIBUTION_REASON : mml:string
+        ANNUITY_DISTRIBUTION=ANNUITY.DISTRIBUTION
+        FIRST_HOME_EXPENSE=FIRST.HOME.EXPENSE
+        GOVERNMENT_DECLARED_DISASTER=GOVERNMENT.DECLARED.DISASTER
+        HARDSHIP=HARDSHIP
+        HIGHER_EDUCATION_EXPENSE=HIGHER.EDUCATION.EXPENSE
+        IRS_LEVY=IRS.LEVY
+        MEDICAL_INSURANCE_COSTS=MEDICAL.INSURANCE.COSTS
+        QUALIFIED_RESERVISTS=QUALIFIED.RESERVISTS
+        UNREIMBURSED_MEDICAL_EXPENSES=UNREIMBURSED.MEDICAL.EXPENSES
+    USIRAC_DISTRIBUTION_PLAN__PLAN__PAY_METHOD : mml:string
+        IRA_ACH=IRA.ACH
+        IRA_CHECK=IRA.CHECK
+    USIRAC_DISTRIBUTION_PLAN__PLAN__PLAN : mml:string
+        INHERITED=INHERITED
+        ROTH_IRA=ROTH.IRA
+        SEP_IRA=SEP.IRA
+        SIMPLE_IRA=SIMPLE.IRA
+        TRADITIONAL_IRA=TRADITIONAL.IRA
+    USIRAC_DISTRIBUTION_PLAN__PLAN__RMD_CALCULATION : mml:string
+        No=No
+        Yes=Yes
+    USIRAC_DISTRIBUTION_PLAN__PLAN__RMD_CALC_FREQ : mml:string
+        No=No
+        Yes=Yes
+    USIRAC_DISTRIBUTION_PLAN__PLAN__RMD_INDICATOR : mml:string
+        No=No
+        Yes=Yes
+    USIRAC_DISTRIBUTION_PLAN__PLAN__RMD_WAIVE : mml:string
+        No=No
+        Yes=Yes
+    USIRAC_DISTRIBUTION_PLAN__PLAN__WAIVE_BANK_PENALTY : mml:string
+        No=No
+        Yes=Yes
+    USIRAC_DISTRIBUTION_PLAN__PLAN__WV_BANK_PENALTY_REASON : mml:string
+        IRA_DEATH_DIST=IRA.DEATH.DIST
+        IRA_DIST_STATUS=IRA.DIST.STATUS
+        IRA_USER_WAIVE=IRA.USER.WAIVE
+        RETAIN_CUSTOMERS_BUSINESS=RETAIN.CUSTOMERS.BUSINESS
+        VALUED_CUSTOMER=VALUED.CUSTOMER
+    USIRAC_PARAMETER__PARAM_ID : mml:string
+        ROTH_IRA=ROTH.IRA
+        SEP_IRA=SEP.IRA
+        SIMPLE_IRA=SIMPLE.IRA
+        TRADITIONAL_IRA=TRADITIONAL.IRA
+    USIRAC_PARAMETER__RMD_CALC_FREQ : mml:string
+        Account=Account
+        Plan=Plan
+    USIRAC_PARAMETER__RMD_NOTICE_PREF : mml:string
+        Account=Account
+        Plan=Plan
+}

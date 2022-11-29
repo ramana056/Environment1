@@ -1,0 +1,2308 @@
+# UTF-8
+/* Template Servicing for Payment orde */
+Domain PI_Contract
+    @t24:i (module=PI)
+    @java:Package (value=com.temenos.t24.datamodel.pi.pi_contract)
+namespace "http://www.temenos.com/t24/PI_Contract"
+metamodelVersion 1.30.6
+Classes {
+    /* Payment order Application is to obtain the Payment Related Information based on the Payment product */
+    PAYMENT_ORDER
+        @i18n:Description (en="")
+        @t24:i (t24Name=PAYMENT.ORDER, nonStop=true, level=F, type=H, allowedFunctions="A C D E I L P Q R S", localRefApplicationSysNo=265.0, localRefAllowed=true)
+    {
+/* Optional
+This field is used to store the timestamp created in ESB for an instant payment. Instant payment instructions received via Channels should be timestamped once the payment is received
+As the payment is first received at the ESB, timestamping (with milli-seconds accuracy) is done as soon as the pain.001 (single or bulk payment) file is schema validated.
+The payment instruction is then sent to the underlying payment system for further processing along with the timestamp. */
+        ACCEPTANCE_DATE_TIME : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=F, maxLength=17, sysNumber=207.0, core=true, t24Name=ACCEPTANCE.DATE.TIME, mask="RDDDD DD  DD ##:##:##.###", mandatory=false)
+/* Optional
+The Account Number inputted here along with the Account with Bank details as given in ACCT.WITH.BANK will be used in tag 57 of Swift message. */
+        ACCT_WITH_BANK_ACC : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=34, sysNumber=47.0, core=true, t24Name=ACCT.WITH.BANK.ACC, mandatory=false)
+/* BIC of Account with Bank
+Validation Rules:1.Not allowed for Internal payment or if Beneficiary id is defined. Defaulted from Beneficiary record-ACCT.WITH.BANK field when the value has SW- prefix. If ACCT.WITH.BANK is null, then the value is fetched from the field BIC.IBAN.BEN. If Derive BIC functionality is not enabled, it is defaulted from the ISO.CLEARING.SYSTEM.ID record, corresponding to the ACCT.WITH.BANK.IDENTIFIER given
+2.Mandatory/Not allowed based on the PAYMENT.ORDER.COUNTRY.RULES/PAYMENT.ORDER.PRODUCT */
+        ACCT_WITH_BANK_BIC : T24BusinessTypes:SW
+            @t24:i (align=L, inputBehaviour=I, maxLength=27, sysNumber=39.0, core=true, t24Name=ACCT.WITH.BANK.BIC, mandatory=false)
+/* Clearing code or sort code of the account with bank
+Validation Rules:Not allowed for Internal payment or if Beneficiary id is defined. Defaulted from Beneficiary record-ACCT.WITH.BANK.BK.SORT.CODE field. Mandatory/Not allowed based on the PAYMENT.ORDER.COUNTRY.RULES/PAYMENT.ORDER.PRODUCT */
+        ACCT_WITH_BANK_CLEARING_CODE : T24BusinessTypes:SW
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=44.0, core=true, t24Name=ACCT.WITH.BANK.CLEARING.CODE, mandatory=false)
+/* Country for account with bank
+Validation Rules:OtherIdentification code for Beneficiary. Valid record from Country application */
+        ACCT_WITH_BANK_COUNTRY -> ST_Config:COUNTRY
+            @t24:i (align=L, inputBehaviour=I, maxLength=2, sysNumber=46.0, core=true, businessType=A, t24Name=ACCT.WITH.BANK.COUNTRY, mandatory=false)
+/* Account with Bank's customer id
+Validation Rules:Not allowed for Internal payment or if Beneficiary id is defined. Defaulted from Beneficiary record-ACCT.WITH.BANK field if the customer is a T24 customer */
+        ACCT_WITH_BANK_CUSTOMER : T24BusinessTypes:SW
+            @t24:i (align=L, inputBehaviour=I, maxLength=27, sysNumber=40.0, core=true, t24Name=ACCT.WITH.BANK.CUSTOMER, mandatory=false)
+/* IBAN of Account with Bank
+Validation Rules:Not allowed for Internal payment or if Beneficiary id is defined. Defaulted from Beneficiary record-ACCT.WITH.BANK.IBAN field. Should be in Valid IBAN structure */
+        ACCT_WITH_BANK_IBAN : T24BusinessTypes:SW
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=38.0, core=true, t24Name=ACCT.WITH.BANK.IBAN, mandatory=false)
+/* This field will hold the 5 letter ISO identifier
+Example : GBDSC. When payment is sent to TPH, this will be stored in field CLEARING.SYSTEM.ID.CODE in table POR.SUPPLIMENTARY.INFO
+System uses this code, looks up the table ISO.CLEARING.SYSTEM.ID and fetches the 2 letter SWIFT prefix from field SWIFT.PREFIX.
+System concatenates '//' followed by the extracted swift prefix followed by the value in ACCT.BANK.CLEARING.CODE.
+This concatenated value is also sent to TPH and stored in field PARTY.ACCOUNT.LINE in POR.SUPPLIMENTARY.INFO (For role ACWINS).
+Example : If Swift Prefix for GBDSC is SC and ACCOUNT.WITH.BANK.CLEARING.CODE contains 4352, value formed would be //SC4352 */
+        ACCT_WITH_BANK_IDENTIFIER -> DE_Config:ISO_CLEARING_SYSTEM_ID
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=45.0, core=true, businessType=A, t24Name=ACCT.WITH.BANK.IDENTIFIER, mandatory=false)
+        ACCT_WITH_BANK_POST_ADDR_LN -> byValue PI_Contract:PAYMENT_ORDER__ACCT_WITH_BANK_POST_ADDR_LN *
+            @t24:i (t24Name=ACCT.WITH.BANK.POST.ADDR.LN)
+/* Account with bank's address type
+Validation Rules: */
+        ACCT_WITH_BANK_POST_ADDR_TYPE : PI_Contract:PAYMENT_ORDER__ACCT_WITH_BANK_POST_ADDR_TYPE
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=41.0, core=true, t24Name=ACCT.WITH.BANK.POST.ADDR.TYPE, mandatory=false)
+        /* Validation Rules:Reserved fields for Account with bank */
+        ACCT_WITH_BANK_RESERVED_1 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=50.0, core=true, t24Name=ACCT.WITH.BANK.RESERVED.1, mandatory=false)
+        /* Validation Rules:Reserved fields for Account with bank */
+        ACCT_WITH_BANK_RESERVED_2 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=49.0, core=true, t24Name=ACCT.WITH.BANK.RESERVED.2, mandatory=false)
+        /* Validation Rules:Reserved fields for Account with bank */
+        ACCT_WITH_BANK_RESERVED_3 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=48.0, core=true, t24Name=ACCT.WITH.BANK.RESERVED.3, mandatory=false)
+        ACCT_WITH_BANK_SWIFT_ADDR -> byValue PI_Contract:PAYMENT_ORDER__ACCT_WITH_BANK_SWIFT_ADDR *
+            @t24:i (t24Name=ACCT.WITH.BANK.SWIFT.ADDR)
+        ACTIVITY_CODE -> byValue PI_Contract:PAYMENT_ORDER__ACTIVITY_CODE *
+            @t24:i (t24Name=ACTIVITY.CODE)
+/* To capture the record id of AC.FUNDS.AUTHORISATION if AUTO.RETRY is set to YES in PAYMENT.ORDER.PRODUCT.
+Validation Rules:
+User input will not be allowed, only updated by system when creating AC.FUNDS.AUTHORISATION record. */
+        AC_FUNDS_AUTH_ID : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=16, sysNumber=176.0, core=true, t24Name=AC.FUNDS.AUTH.ID, mandatory=false)
+        AC_WITH_BR_CTRY -> byValue PI_Contract:PAYMENT_ORDER__AC_WITH_BR_CTRY *
+            @t24:i (t24Name=AC.WITH.BR.CTRY)
+        ADDITIONAL_INFO -> byValue PI_Contract:PAYMENT_ORDER__ADDITIONAL_INFO *
+            @t24:i (t24Name=ADDITIONAL.INFO)
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=274.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=275.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+/* Free text field to hold the Authoriser Id of the Payment Order. This field is expected be updated by external API.
+Field is enabled only when PX is installed
+Input allowed only if the payment has been previously submitted by the external API */
+        AUTHORISATION_ID : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=25, sysNumber=235.0, core=true, t24Name=AUTHORISATION.ID, mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=271.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        BANK_TO_BANK_INFO -> byValue PI_Contract:PAYMENT_ORDER__BANK_TO_BANK_INFO *
+            @t24:i (t24Name=BANK.TO.BANK.INFO)
+/* Beneficiary Account number
+Validation Rules:Not allowed for Internal payment. For external payment:1. Defaulted from Beneficiary record-BEN.ACCT.NO field. Cannot be overwritten2. Not allowed if Beneficiary id is defined */
+        BENEFICIARY_ACCOUNT_NO : T24BusinessTypes:S
+            @t24:i (align=L, inputBehaviour=I, maxLength=34, sysNumber=22.0, core=true, t24Name=BENEFICIARY.ACCOUNT.NO, mandatory=false)
+        /* Field to indicate the Type of the Alias */
+        BENEFICIARY_ALIAS_TYPE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=258.0, core=true, t24Name=BENEFICIARY.ALIAS.TYPE, mandatory=false)
+/* BIC of the beneficiary customer
+Validation Rules:Not allowed for Internal payment or if Beneficiary id is defined. Defaulted from Beneficiary record-BEN.CUSTOMER field when the value has SW- prefix */
+        BENEFICIARY_BIC : T24BusinessTypes:SW
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=24.0, core=true, t24Name=BENEFICIARY.BIC, mandatory=false)
+/* Holds the birth city of the beneficiary
+Validation Rules:
+If populated then Beneficiary Identifier Type must be set to Private
+Beneficiary Birth Date is mandatory when this field is captured */
+        BENEFICIARY_BR_CITY : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=35.0, core=true, t24Name=BENEFICIARY.BR.CITY, mandatory=false)
+/* Holds the birth country of the beneficiary
+Validation Rules:
+It must be a valid code on the COUNTRY table
+It will be used when Beneficiary is a person (private)
+Beneficiary Birth Date is mandatory when this field is captured */
+        BENEFICIARY_BR_COUNTRY -> ST_Config:COUNTRY
+            @t24:i (align=L, inputBehaviour=I, maxLength=2, sysNumber=36.0, core=true, businessType=A, t24Name=BENEFICIARY.BR.COUNTRY, mandatory=false)
+/* Holds the birth province of the beneficiary
+Validation Rules:
+If populated then Beneficiary Identifier Type must be set to Private
+Beneficiary Birth Date is mandatory when this field is captured */
+        BENEFICIARY_BR_PRVNC : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=34.0, core=true, t24Name=BENEFICIARY.BR.PRVNC, mandatory=false)
+/* Optional
+Email on which the beneficiary can be contacted. */
+        BENEFICIARY_CONT_EML : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=256, sysNumber=212.0, core=true, t24Name=BENEFICIARY.CONT.EML, mandatory=false)
+/* Optional
+Fax number on which the beneficiary can be contacted. */
+        BENEFICIARY_CONT_FAX : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=211.0, core=true, t24Name=BENEFICIARY.CONT.FAX, mandatory=false)
+/* Optional
+Mobile phone number on which the beneficiary can be contacted. */
+        BENEFICIARY_CONT_MOB : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=210.0, core=true, t24Name=BENEFICIARY.CONT.MOB, mandatory=false)
+/* Optional
+Contact details in another form on which the beneficiary can be contacted. */
+        BENEFICIARY_CONT_OTH : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=213.0, core=true, t24Name=BENEFICIARY.CONT.OTH, mandatory=false)
+/* Beneficiary country
+Validation Rules:Not allowed for Internal payment or if beneficiar id is defined. Defaulted from Beneficiary record-BEN.PYMT.COUNTRY. Override raised when the Country code is not ALLOWED.COUNTRY.CODE as per PAYMENT.ORDER.PRODUCT */
+        BENEFICIARY_COUNTRY_CODE -> ST_Config:COUNTRY
+            @t24:i (align=L, inputBehaviour=I, maxLength=2, sysNumber=31.0, core=true, businessType=A, t24Name=BENEFICIARY.COUNTRY.CODE, mandatory=false)
+/* Customer number of the beneficiary
+Validation Rules:Not allowed for Internal payment or if Beneficiary id is defined. Defaulted from Beneficiary record-BEN.CUSTOMER field it the customer is a T24 customer */
+        BENEFICIARY_CUSTOMER : T24BusinessTypes:CUS
+            @t24:i (align=R, inputBehaviour=I, maxLength=35, sysNumber=25.0, core=true, t24Name=BENEFICIARY.CUSTOMER, mandatory=false)
+/* Holds the birth date of the beneficiary
+Validation Rules:
+If populated then Beneficiary Identifier Type must be set to Private */
+        BENEFICIARY_DOB : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=33.0, core=true, t24Name=BENEFICIARY.DOB, typeModifiers=1000, mandatory=false)
+/* IBAN of the beneficiary account
+Validation Rules:Not allowed for Internal payment or if Beneficiary id is defined. Defaulted from Beneficiary record-IBAN.BEN field. Should be in Valid IBAN structure. Mandatory/Not allowed based on the PAYMENT.ORDER.COUNTRY.RULES/PAYMENT.ORDER.PRODUCT */
+        BENEFICIARY_IBAN : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=23.0, core=true, t24Name=BENEFICIARY.IBAN, mandatory=false)
+/* Valid Beneficiary id
+Validation Rules:Id of the Beneficiary. Must be a valid record in BENEFICIARY application.
+Allowed only when Pay Through Beneficiary is set to Yes in PAYMENT.ORDER.PRODUCT.
+Mandatory if PAY.THROUGH.BENEFICIARY is set to YES and Beneficiary Account number and Beneficiary Account IBAN are not defined.
+If the beneficairy ID is input and validated, system defaults the related beneficairy details from the BENEFICIARY application into the current PO record.
+Once system defaults the beneficiary details, all the beneficiary fields in the PO record are disabled for user input
+If the Beneficairy ID is modified, corresponding details are again defaulted into the PO record. */
+        BENEFICIARY_ID -> ST_Payments:BENEFICIARY
+            @t24:i (align=L, inputBehaviour=I, maxLength=17, sysNumber=17.0, core=true, businessType=A, t24Name=BENEFICIARY.ID, mandatory=false)
+/* Name of the beneficiary, can contain upto 70 chars
+Validation Rules:Not allowed for Internal payment or if Beneficiary id is defined.
+It is defaulted with the values in BenNameOne or BenNameTwo is mentioned in the Benficiary Record. If both the names are present, they are concatenated with a space and then defaulted here
+If Beneficiary doesnot contain the names, but the Customer is a valid T24customer, then the names are obtained from the Customer record and are defaulted in the same manner
+Defaulted from Beneficiary record-BEN.CUSTOMER field if the value does not have SW- prefix and not a valid T24 customer */
+        BENEFICIARY_NAME : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=70, sysNumber=26.0, core=true, t24Name=BENEFICIARY.NAME, mandatory=false)
+/* Holds other identifications such as could be a Social Security Number, a Tax Identification Number, Passport Number, a Clearing Id ,etc., of the beneficiary
+Optional
+Validation Rules:
+Beneficiary Id Type is mandatory when this field is captured
+If populated then either Beneficiary Scheme Code or Beneficiary Scheme Proprietary must be populated */
+        BENEFICIARY_OT_ID : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=188.0, core=true, t24Name=BENEFICIARY.OT.ID, mandatory=false)
+/* Holds other identifications such as could be a Social Security Number, a Tax Identification Number, Passport
+                    Number, a Clearing Id ,etc., of the beneficiary.
+Validation Rules:
+Optional
+Beneficiary Id Type is mandatory when this field is captured
+If populated then either Beneficiary Scheme Code or Beneficiary Scheme Proprietary must be populated */
+        BENEFICIARY_OT_ID_TYPE : PI_Contract:PAYMENT_ORDER__BENEFICIARY_OT_ID_TYPE
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=37.0, core=true, t24Name=BENEFICIARY.OT.ID.TYPE, mandatory=false)
+/* The code of the scheme which issued the identifier for the Beneficiary
+It will indicate what is captured in the Beneficiary Other Identifier - Social Security Number, Tax Identification Number, Passport Number, Clearing Id
+Validation Rules:
+Beneficiary Id Type is mandatory when this field is captured */
+        BENEFICIARY_SCHME_CDE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=189.0, core=true, t24Name=BENEFICIARY.SCHME.CDE, mandatory=false)
+/* Holds the Id of the Issuer of Ben Other ID
+Validation Rules:
+Beneficiary Id Type is mandatory when this field is captured */
+        BENEFICIARY_SCH_ISSUR : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=191.0, core=true, t24Name=BENEFICIARY.SCH.ISSUR, mandatory=false)
+/* The proprietary code of the scheme which issued the identifier for the Beneficiary
+Validation Rules:
+Beneficiary Id Type is mandatory when this field is captured */
+        BENEFICIARY_SCH_PRTY : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=190.0, core=true, t24Name=BENEFICIARY.SCH.PRTY, mandatory=false)
+/* Location of the beneficiary account returned from the locator service – it is either "Own" meaning it belongs to T24.
+External it is not in the bank, or a location code returned by the account locator service.
+Its a NOINPUT field. */
+        BEN_ACCOUNT_LOCATION : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=10, sysNumber=182.0, core=true, t24Name=BEN.ACCOUNT.LOCATION, mandatory=false)
+/* Indicator to note that validation has been done for the beneficiary account.
+Its a NOINPUT field. */
+        BEN_ACCOUNT_VALIDATED : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=3, sysNumber=183.0, core=true, t24Name=BEN.ACCOUNT.VALIDATED, mandatory=false)
+        /* This field is used to capture the beneficiary account number for the IAT entry. */
+        BEN_ACCT_NUMBER : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=265.13, core=false, t24Name=BEN.ACCT.NUMBER, mandatory=false)
+/* Clearing code or sort code of the beneficiary bank
+Validation Rules:Not allowed for Internal payment or if Beneficiary id is defined. Defaulted from Beneficiary record-BANK.SORT.CODE field */
+        BEN_BANK_CLEARING_CODE : T24BusinessTypes:SW
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=30.0, core=true, t24Name=BEN.BANK.CLEARING.CODE, mandatory=false)
+/* This field will hold the 5 letter ISO identifier
+Example : GBDSC. When payment is sent to TPH, this will be stored in field CLEARING.SYSTEM.ID.CODE in table POR.SUPPLIMENTARY.INFO.
+Sytsem uses this code, looks up the table ISO.CLEARING.SYSTEM.ID and fetches the 2 letter SWIFT prefix from field SWIFT.PREFIX.
+Sytem concatenates '//' followed by the extracted swift prefix followed by the value in BEN.BANK.CLEARING.CODE.
+This concatenated value is also sent to TPH and stored in field PARTY.ACCOUNT.LINE in POR.SUPPLIMENTARY.INFO (For role BENFCY).
+Example : If Swift Prefix for GBDSC is SC and BEN.BANK.CLEARING.CODE contains 4352, value formed would be //SC4352 */
+        BEN_IDENTIFIER : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=32.0, core=true, t24Name=BEN.IDENTIFIER, mandatory=false)
+/* Beneficiary customer's address type
+Validation Rules: */
+        BEN_POST_ADDRESS_TYPE : PI_Contract:PAYMENT_ORDER__BEN_POST_ADDRESS_TYPE
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=27.0, core=true, t24Name=BEN.POST.ADDRESS.TYPE, mandatory=false)
+        BEN_POST_ADDR_LINE -> byValue PI_Contract:PAYMENT_ORDER__BEN_POST_ADDR_LINE *
+            @t24:i (t24Name=BEN.POST.ADDR.LINE)
+        BEN_POST_SWIFT_ADDR -> byValue PI_Contract:PAYMENT_ORDER__BEN_POST_SWIFT_ADDR *
+            @t24:i (t24Name=BEN.POST.SWIFT.ADDR)
+/* Process the bulk in batch mode or transaction mode
+Allowed values 'SINGLE' or 'MULTI' */
+        BULK_PROCESSING_MODE : PI_Contract:PAYMENT_ORDER__BULK_PROCESSING_MODE
+            @t24:i (align=L, inputBehaviour=I, maxLength=6, sysNumber=231.0, core=true, t24Name=BULK.PROCESSING.MODE, mandatory=false)
+/* Optional
+This field contains the Bulk Reference generated in ESB for a batch containing more than one transaction and will be used as a unique identifier for each bulk present/part of the Payment Initiation message (pain.001).
+If the Bulk Reference is associated with a payment then it helps in identifying/tracing the payments that is part of a bulk containing other transactions (more than 1). */
+        BULK_REFERENCE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=125, sysNumber=206.0, core=true, t24Name=BULK.REFERENCE, mandatory=false)
+/* Optional
+Payment Information Identification ID (Bulk level)  in  a pain.001 received from the sender. */
+        BULK_SENDER_REFERENCE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=125, sysNumber=208.0, core=true, t24Name=BULK.SENDER.REFERENCE, mandatory=false)
+/* Optional
+User initiated the cancellation */
+        CANCEL_INITIATED_BY : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=16, sysNumber=229.0, core=true, t24Name=CANCEL.INITIATED.BY, mandatory=false)
+/* Optional
+If the order is cancelled by the user, User can update reason for cancellation */
+        CANCEL_REASON : T24BusinessTypes:A
+            @i18n:Label (en="Cancellation Reason")
+            @t24:i (align=L, inputBehaviour=I, maxLength=70, sysNumber=227.0, core=true, t24Name=CANCEL.REASON, mandatory=false)
+/* Optional
+If the order is cancelled by the user, this field will get updated with Cancel Remarks */
+        CANCEL_REMARK : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=70, sysNumber=228.0, core=true, t24Name=CANCEL.REMARK, mandatory=false)
+/* Indicates the account to which the charges has to be levied.
+Validation Rules: User Inputtable. */
+        CHARGE_ACCOUNT : T24BusinessTypes:S
+            @i18n:Label (en="Charge Debit Account")
+            @t24:i (align=L, inputBehaviour=F, maxLength=34, sysNumber=154.0, core=true, t24Name=CHARGE.ACCOUNT, mandatory=false)
+/* Represent the currency of the CHARGE.ACCOUNT.
+Validation Rules:
+When CHARGE.ACCOUNT has value then the currency will be validated against the CHARGE.ACCOUNT field.
+When the field is blank and the Account being T24.ACCOUNT system will auto populate the currency of the account defined in CHARGE.ACCOUNT.
+else if the Account is external, then system will insist user to input the currency. So that charges can be calculated in that currency also. */
+        CHARGE_ACCOUNT_CCY -> ST_CurrencyConfig:CURRENCY
+            @t24:i (align=L, inputBehaviour=F, maxLength=3, sysNumber=155.0, core=true, businessType=CCY, t24Name=CHARGE.ACCOUNT.CCY, mandatory=false)
+/* Bearer of the charges of the order
+Validation Rules:1. Value can be manually selected or defaulted2. If not manually input, the value is defaulted as follows:    i. From the Beneficiary record (BEN.OUR.CHARGES field)    ii. If not present in Beneficiary, then from the DEFAULT.CHARGE.OPTION field of PAYMENT.ORDER.PRODUCT3. The field is validated as follows:    i. For the PAYMENT.ORDER.PRODUCT, the ALLOWED.CHARGE.OPTIONS are obtained    ii. The value defined in this field, is checked with the allowed charges     iii. If it is not present, then an override is raised */
+        CHARGE_BEARER : PI_Contract:PAYMENT_ORDER__CHARGE_BEARER
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=78.0, core=true, t24Name=CHARGE.BEARER, mandatory=false)
+        CHARGE_TYPE -> byValue PI_Contract:PAYMENT_ORDER__CHARGE_TYPE *
+            @t24:i (t24Name=CHARGE.TYPE)
+/* Optional field which indicates the Cheque/Draft number in case of Draft Payments via TPH payment system
+Validation Rules:
+Cannot be blank in case of Draft Payments. If the Stock Register Id and Stock Series Id are mentioned, then the cheque/Draft number must be available in the Stock Register */
+        CHEQUE_NUMBER : T24BusinessTypes:A
+            @i18n:Label (en="Cheque No")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=184.0, core=true, t24Name=CHEQUE.NUMBER, mandatory=false)
+/* Clearing channel for the order
+Validation Rules:1. Can be manually defined or defaulted2. For external payment, if beneficiary id is defined, defaulted from beneficiary record-CLEARING.TYPE field - 38th field3. It is validated as follows:    i. Check PAYMENT.ORDER.PRODUCT record    ii. If CLEARING.CHANNEL is defined, then locate the clearing channel defined in payment order with the clearing channels defined in payment order product    iii. If it is not located, then raise override that Clearing channel not allowed for the product */
+        CLEARING_CHANNEL : PI_Contract:PAYMENT_ORDER__CLEARING_CHANNEL
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=88.0, core=true, t24Name=CLEARING.CHANNEL, mandatory=false)
+        /* The Company Identification is an alphameric code used to identify an Originator. The Company Identification Field must be included on all Entries. */
+        COMPANY_ID : T24BusinessTypes:A
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=I, maxLength=10, sysNumber=265.12, core=false, t24Name=COMPANY.ID, mandatory=false)
+        /* The Originator establishes the value of this field to provide the Receiver with a description of the purpose of the Entry. For example, 'Gas bill', "Trade Pay" etc. */
+        COMP_ENT_DESC : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=10, sysNumber=265.11, core=false, t24Name=COMP.ENT.DESC, mandatory=false)
+        CONTEXT_NAME -> byValue PI_Contract:PAYMENT_ORDER__CONTEXT_NAME *
+            @t24:i (t24Name=CONTEXT.NAME)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=272.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+/* Credit Account number. T24 account
+Validation Rules:Not allowed for External payment. For Internal Payment:1. Can be manually input or defaulted from SEC.ACC.MASTER if CREDIT.PORTFOLIO is defined 2. Valid T24 account 3. Mandatory when CREDIT.IBAN and CREDIT.PL are not defined4. If CREDIT.ACCOUNT and CREDIT.IBAN are defined, then check is done to ensure that IBAN is for the credit account else error will be thrown5. If CREDIT.ACCOUNT is defined and CREDIT.IBAN is not defined, if IN is installed and IBAN is allowed for the product, then CREDIT.IBAN for the account is defaulted */
+        CREDIT_ACCOUNT -> AC_AccountOpening:ACCOUNT
+            @i18n:Label (en="Credit Acct")
+            @t24:i (align=L, inputBehaviour=I, maxLength=36, sysNumber=18.0, core=true, businessType=ANT, t24Name=CREDIT.ACCOUNT, mandatory=false)
+/* IBAN of the credit account
+Validation Rules:Not allowed for External Payment. For Internal payment:1. Inputtable field only if IN is installed (done in record routine)2. Allowed only if IBAN is allowed for the product3. Can be manually input or defaulted4. If manually input, must be a valid IBAN number for the credit account5. IBAN should be a valid T24 IBAN 6. If not manually defined, then will be populated based on the credit account if IN is installed and IBAN is allowed for the product7. If CREDIT.IBAN is defined, but CREDIT.ACCOUNT is not defined, then the credit account number will be defaulted */
+        CREDIT_ACCOUNT_IBAN : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=20.0, core=true, t24Name=CREDIT.ACCOUNT.IBAN, mandatory=false)
+        CREDIT_NOSTRO_ACCOUNT -> AC_AccountOpening:ACCOUNT
+            @t24:i (align=L, inputBehaviour=I, maxLength=36, sysNumber=264.0, core=true, businessType=ANT, t24Name=CREDIT.NOSTRO.ACCOUNT, mandatory=false)
+/* PL category to be credited
+Validation Rules:1. Can be manually input2. Must be a valid PL category3. If CREDIT.PL is defined, then PAYMENT.CCY should be mandatorily input */
+        CREDIT_PL : T24BusinessTypes:CAT
+            @t24:i (align=L, inputBehaviour=I, maxLength=6, sysNumber=21.0, core=true, t24Name=CREDIT.PL, mandatory=false)
+/* Portfolio id to be credit
+Validation Rules:Not allowed for External Payment. For Internal Payment:1. Inputtable field only if SC is installed 2. Validation will be done as follows:    i.  Pass the customer id from ORDERING.CUST field and portfolio no. to GET.SETTLEMENT.DEFAULTS routine    ii. If no error is returned, the field CREDIT.ACCOUNT will be checked   iii. If CREDIT.ACCOUNT field has value, then the account will be checked if it is an account in the portfolio else error will be thrown    iv. If CREDIT.ACCOUNT field is null, then the account from portfolio will be defaulted based on the setup in                         ACCOUNT.PARAMETER. This will also be done in the routine GET.SETTLEMENT.DEFAULTS */
+        CREDIT_PORTFOLIO : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=18, sysNumber=19.0, core=true, t24Name=CREDIT.PORTFOLIO, mandatory=false)
+/* This field contains the Credit value Date calculated based on the setup in the Payment Order Product
+Validation Rules:
+No inputtable field */
+        CREDIT_VALUE_DATE : T24BusinessTypes:D
+            @i18n:Label (en="Credit Value Date")
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=161.0, core=true, t24Name=CREDIT.VALUE.DATE, mandatory=false)
+/* Currency market
+Validation Rules:Default value 1. NOINPUT field */
+        CURRENCY_MARKET : T24BusinessTypes:A
+            @i18n:Label (en=Market)
+            @t24:i (align=L, inputBehaviour=N, maxLength=2, sysNumber=87.0, core=true, t24Name=CURRENCY.MARKET, mandatory=false)
+/* Current state of the payment order
+Validation Rules:NOINPUT field. Will be updated by StateMachine */
+        CURRENT_STATE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=65, sysNumber=101.0, core=true, t24Name=CURRENT.STATE, mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=268.0, core=true, t24Name=CURR.NO, mandatory=false)
+/* Optional
+This field indicates if Ordering customer has provided consent for this payment order to be initiated.
+The field is relevant only in case of Open Banking.
+Value can be up to three characters. (example – Y, YES, N, NO) */
+        CUSTOMER_CONSENT : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=234.0, core=true, t24Name=CUSTOMER.CONSENT, mandatory=false)
+/* Time until which transaction can be submitted to payment system
+Validation Rules:
+NOINPUT field. Mapped during simulation */
+        CUT_OFF_TIME : T24BusinessTypes:TIME
+            @i18n:Label (en="Cut off time")
+            @i18n:Tooltip (en="Cut off time")
+            @t24:i (align=L, inputBehaviour=I, maxLength=5, sysNumber=162.0, core=true, t24Name=CUT.OFF.TIME, mandatory=false)
+        DATE_TIME -> byValue PI_Contract:PAYMENT_ORDER__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+/* Debit account id
+Validation Rules:1. Can be manually input or defaulted from SEC.ACC.MASTER if ORDERING.PORTFOLIO is defined2. Valid T24 account 3. Mandatory whenDEBIT.IBAN and DEBIT.PL are not defined4. If DEBIT.ACCOUNT and DEBIT.IBAN are defined, then check is done to ensure that IBAN is for the debit account else error will be thrown.5. If DEBIT.ACCOUNT is defined and DEBIT.IBAN is not defined, if IN is installed, then DEBIT.IBAN for the account is defaulted */
+        DEBIT_ACCOUNT : T24BusinessTypes:S
+            @i18n:Label (en="Debit account")
+            @i18n:Tooltip (en="Indicates the account to be debited ")
+            @t24:i (align=L, inputBehaviour=I, maxLength=34, sysNumber=10.0, core=true, t24Name=DEBIT.ACCOUNT, mandatory=false)
+/* IBAN of the debit account
+Validation Rules:1. Inputtable field only if IN is installed 2. Can be manually input or defaulted3. If manually input, must be a valid IBAN number for the debit account4. IBAN should be a valid T24 IBAN 5. If not manually defined, then will be populated based on the debit account6. If DEBIT.IBAN is defined, but DEBIT.ACCOUNT is not defined, then the debit account number will be defaulted7. If DEBIT.IBAN is not defined, but ORDERING.CUST.BIC is defined, then BIC will be derived from IBAN and populated8. If DEBIT.IBAN and DEBIT.ACCOUNT are not defined, but ORDERING.CUST.BIC is defined, then IBAN will be derived from BIC and populated9. If ORDERING.CUST.BIC and DEBIT.IBAN are defined, then check must be done to ensure that the IBAN is valid for the BIC defined */
+        DEBIT_ACCOUNT_IBAN : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=12.0, core=true, t24Name=DEBIT.ACCOUNT.IBAN, mandatory=false)
+/* Currency of the debit account
+Validation Rules: 1. Can be manually input or it will be defaulted from the debit account in case of T24 accounts 2. For external accounts, Currency should be keyed in by the user 3. If the currency is not allowed currency in the PAYMENT.ORDER.PRODUCT, then error will be thrown4. If the currency is different from PAYMENT.CURRENCY, then the field ALLOW.FX will be checked in PAYMENT.ORDER.PRODUCT. If it not set to YES, then error will be thrown5. If DEBIT.PL is defined, then DEBIT.CCY should be mandatorily input else error will be thrown 6. If it is bulk PO (BULK.PROCESSING.MODE is present) then debit currency has to be same as payment currency if the field ALLOW.MULTI.CURRENCY = No in FT.BULK.UPDATE.TYPE table */
+        DEBIT_CCY -> ST_CurrencyConfig:CURRENCY
+            @i18n:Label (en="Debit Ccy")
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=11.0, core=true, businessType=CCY, t24Name=DEBIT.CCY, mandatory=false)
+/* PL category to be debited
+Validation Rules:1. Can be manually input2. Must be a valid PL category3. If DEBIT.PL is defined, then DEBIT.CCY should be mandatorily input4. Allowed only when DEBIT.ACCOUNT and DEBIT.IBAN are not defined */
+        DEBIT_PL : T24BusinessTypes:CAT
+            @t24:i (align=L, inputBehaviour=I, maxLength=6, sysNumber=13.0, core=true, t24Name=DEBIT.PL, mandatory=false)
+/* Value date for debit
+Validation Rules:1. Debit Value date passed to Payment system2. Optional field3. Override will be raised if less then TODAY */
+        DEBIT_VALUE_DATE : T24BusinessTypes:D
+            @i18n:Label (en="Debit Value Date")
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=14.0, core=true, t24Name=DEBIT.VALUE.DATE, mandatory=false)
+        DEBTOR_AGENT_ADDR_LINE -> byValue PI_Contract:PAYMENT_ORDER__DEBTOR_AGENT_ADDR_LINE *
+            @t24:i (t24Name=DEBTOR.AGENT.ADDR.LINE)
+        /* Address type to be used for the Debtor Agent of payment. */
+        DEBTOR_AGENT_ADDR_TYPE : PI_Contract:PAYMENT_ORDER__DEBTOR_AGENT_ADDR_TYPE
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=114.0, core=true, t24Name=DEBTOR.AGENT.ADDR.TYPE, mandatory=false)
+        /* BIC code of Debtor Agent of payment. */
+        DEBTOR_AGENT_BIC : T24BusinessTypes:SW
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=113.0, core=true, t24Name=DEBTOR.AGENT.BIC, mandatory=false)
+/* Clearing code or sort code of the Debtor Agent.
+Validation Rules:
+Optional field. */
+        DEBTOR_AGENT_CLEARING_CODE : T24BusinessTypes:SW
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=116.0, core=true, t24Name=DEBTOR.AGENT.CLEARING.CODE, mandatory=false)
+/* Other Identification Code for Debtor Agent.
+Validation Rules:
+Optional field. */
+        DEBTOR_AGENT_IDENTIFIER : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=117.0, core=true, t24Name=DEBTOR.AGENT.IDENTIFIER, mandatory=false)
+        /* Name of the debtor agent of payment. */
+        DEBTOR_AGENT_NAME : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=70, sysNumber=112.0, core=true, t24Name=DEBTOR.AGENT.NAME, mandatory=false)
+/* Reserved fields of Debtor Agent.
+Validation Rules:
+Optional field. */
+        DEBTOR_AGENT_RESERVED_1 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=122.0, core=true, t24Name=DEBTOR.AGENT.RESERVED.1, mandatory=false)
+/* Reserved fields of Debtor Agent.
+Validation Rules:
+Optional field. */
+        DEBTOR_AGENT_RESERVED_2 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=121.0, core=true, t24Name=DEBTOR.AGENT.RESERVED.2, mandatory=false)
+/* Reserved fields of Debtor Agent.
+Validation Rules:
+Optional field. */
+        DEBTOR_AGENT_RESERVED_3 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=120.0, core=true, t24Name=DEBTOR.AGENT.RESERVED.3, mandatory=false)
+/* Reserved fields of Debtor Agent.
+Validation Rules:
+Optional field. */
+        DEBTOR_AGENT_RESERVED_4 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=119.0, core=true, t24Name=DEBTOR.AGENT.RESERVED.4, mandatory=false)
+/* Reserved fields of Debtor Agent.
+Validation Rules:
+Optional field. */
+        DEBTOR_AGENT_RESERVED_5 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=118.0, core=true, t24Name=DEBTOR.AGENT.RESERVED.5, mandatory=false)
+        /* Address for electronic mail. */
+        DEBTOR_EMAIL_ADR : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=256, sysNumber=254.0, core=true, t24Name=DEBTOR.EMAIL.ADR, mandatory=false)
+        /* Collection of information that identifies a FAX number, as defined by telecom services. */
+        DEBTOR_FAX : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=253.0, core=true, t24Name=DEBTOR.FAX, mandatory=false)
+        /* Collection of information that identifies a mobile number, as defined by telecom services. */
+        DEBTOR_MOBILE_NUMBER : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=252.0, core=true, t24Name=DEBTOR.MOBILE.NUMBER, mandatory=false)
+        /* Name by which a party is known and which is usually used to identify that party . */
+        DEBTOR_NAME : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=140, sysNumber=250.0, core=true, t24Name=DEBTOR.NAME, mandatory=false)
+        /* Specifies the terms used to formally address a person. */
+        DEBTOR_NAME_PREFIX : PI_Contract:PAYMENT_ORDER__DEBTOR_NAME_PREFIX
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=249.0, core=true, t24Name=DEBTOR.NAME.PREFIX, mandatory=false)
+        /* Contact Details in other form. */
+        DEBTOR_OTHER : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=255.0, core=true, t24Name=DEBTOR.OTHER, mandatory=false)
+        /* Collection of information that identifies a phone number, as defined by telecom services. */
+        DEBTOR_PHONE_NUMBER : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=251.0, core=true, t24Name=DEBTOR.PHONE.NUMBER, mandatory=false)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=273.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+/* Used for SEPA
+Validation Rules:Free Text of 35 characters. Optional. No validation */
+        END_TO_END_REFERENCE : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=76.0, core=true, t24Name=END.TO.END.REFERENCE, mandatory=false)
+/* Optional Field
+Field is enabled only when PX is installed
+System should set this flag to YES, if PAYMENT.ORDER initiated from external API are SCA (Strong Customer Authentication) exempted */
+        EXEMPT_FROM_SCA : PI_Contract:PAYMENT_ORDER__EXEMPT_FROM_SCA
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=236.0, core=true, t24Name=EXEMPT.FROM.SCA, mandatory=false)
+        FC_BANK_ID -> byValue PI_Contract:PAYMENT_ORDER__FC_BANK_ID *
+            @t24:i (t24Name=FC.BANK.ID)
+        /* This field contains the amount for which the Entry was originated by the Foreign ODFI in the currency denomination expressed in the Originating Currency Code Field of the Company/Batch Header Record. */
+        FGN_PAYMENT_AMT : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=19, sysNumber=265.9, core=false, t24Name=FGN.PAYMENT.AMT, mandatory=false)
+/* Indicates whether the fraud check has been successfully completed or not
+Possible values are SUCCESS, FAILED, PENDING or TIMEOUT. Based on this field, further processing of Payment order will take place
+Validation Rules:
+- This is a NOINPUT field generally but when the status of the Payment order is FraudCheck input is allowed. */
+        FRAUD_CHECK_INDICATOR : PI_Contract:PAYMENT_ORDER__FRAUD_CHECK_INDICATOR
+            @t24:i (align=L, inputBehaviour=N, maxLength=10, sysNumber=174.0, core=true, t24Name=FRAUD.CHECK.INDICATOR, mandatory=false)
+/* Mandatory Field
+This field contains a code used to indicate the foreign exchange conversion methodology applied to an IAT Entry. Use may be dependent on the particular exchange services offered by a Gateway Operator.
+Allowed Values are:
+FV - Fixed-to-Variable - Entry is originated in a fixed-value amount and is to be received in a variable amount resulting from the execution of the foreign exchange conversion.
+VF - Variable-to-Fixed - Entry is originated in a variable-value amount based on a specific foreign exchange rate for conversion to a fixed-value amount in which the Entry is to be received.
+FF - Fixed-to-Fixed - Entry is originated in a fixed-value amount and is to be received in the same fixed-value amount in the same currency denomination. There is no foreign exchnage convesion for Entryies Transmitted using this code. 
+                                          For Entries originated in a fixed-value amount, the Foreign Exchange Reference Field will be space filled. */
+        FX_EXCH_IND : PI_Contract:PAYMENT_ORDER__FX_EXCH_IND
+            @t24:i (align=L, inputBehaviour=I, maxLength=2, sysNumber=265.7, core=false, t24Name=FX.EXCH.IND, mandatory=false)
+/* This field contains either the foreign exchange rate used to execute the foreign exchange conversion of an IAT Entry or another reference to the foreign exchange transaction.
+Content is defined by the Foreign Exchange Reference Indicator Field. If the Foreign Exchange Indicator Field contains FF, this field will always be space filled. */
+        FX_EXCH_REF : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=15, sysNumber=265.10, core=false, t24Name=FX.EXCH.REF, mandatory=false)
+        /* This field contains a code used to indicate the content of the Foreign Exchange Reference Field. Code values are 1 - Foreign Exchange Rate, 2 - Foreign Exchange Reference Number, 3 - Space Filled */
+        FX_EXCH_REF_IND : PI_Contract:PAYMENT_ORDER__FX_EXCH_REF_IND
+            @t24:i (align=R, inputBehaviour=I, maxLength=1, sysNumber=265.8, core=false, t24Name=FX.EXCH.REF.IND, mandatory=false)
+/* Field store the date and time when the confirmation is generated, when status code is ACSP/RJCT.
+When the code is ACSP, it means that gCOV instructed agent has been credited and can use the funds on date and time. */
+        GPI_DATE_TIME : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=16, sysNumber=261.0, core=true, t24Name=GPI.DATE.TIME, mandatory=false)
+        /* This field to store the reason code (which is along with GPI status like ACSP, RJCT) as received in gpi confirmation tracker. */
+        GPI_REASON : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=10, sysNumber=260.0, core=true, t24Name=GPI.REASON, mandatory=false)
+        /* This field to store the GPI status as received in gpi confirmation tracker. */
+        GPI_STATUS : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=10, sysNumber=259.0, core=true, t24Name=GPI.STATUS, mandatory=false)
+        /* This is used to uniquely identify an Originator. This field is used only for the IAT entry. */
+        IAT_COMPANY_ID : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=10, sysNumber=265.14, core=false, t24Name=IAT.COMPANY.ID, mandatory=false)
+        IAT_PAYINFO_ONE -> byValue PI_Contract:PAYMENT_ORDER__IAT_PAYINFO_ONE *
+            @t24:i (t24Name=IAT.PAYINFO.ONE)
+        IAT_PAYINFO_TWO -> byValue PI_Contract:PAYMENT_ORDER__IAT_PAYINFO_TWO *
+            @t24:i (t24Name=IAT.PAYINFO.TWO)
+        /* This field is required for IAT entry. Allowed values are ANN, BUS, DEP, LOA, MIS, MOR, PEN, REM, RLS, SAL, TAX, ARC, BOC, MTE, POP, POS, RCK, SHR, TEL, WEB */
+        IAT_TXN_TYPE : PI_Contract:PAYMENT_ORDER__IAT_TXN_TYPE
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=265.15, core=false, t24Name=IAT.TXN.TYPE, mandatory=false)
+        /* ID of the payment order record */
+        ID -> PI_Contract:PAYMENT_ORDER PK required
+            @i18n:Label (en="Transaction Ref")
+            @i18n:Tooltip (en="Transaction Reference")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=0.0, core=true, businessType=A, t24Name=ID, mandatory=true)
+/* Indicative rate for debit and payment ccy at time of booking the payment order
+Validation Rules:Indicative rate for debit and payment ccy at time of booking the payment order. Default Rate. NOINPUT field. Populated by system
+The value will be the sell rate of the curreny in the Currency application. */
+        INDICATIVE_RATE : T24BusinessTypes:R
+            @t24:i (align=R, inputBehaviour=N, maxLength=11, sysNumber=86.0, core=true, t24Name=INDICATIVE.RATE, mandatory=false)
+/* This field is used to store the product that was initially given when the Payment Order is initiated
+Validation Rules:
+This field contains value only when the Product is changed to Cut off product or product determined from Rule or API
+No inputtable field */
+        INITIAL_PRODUCT -> PI_Config:PAYMENT_ORDER_PRODUCT
+            @t24:i (align=L, inputBehaviour=N, maxLength=10, sysNumber=178.0, core=true, businessType=A, t24Name=INITIAL.PRODUCT, mandatory=false)
+        /* BIC code of initiator of payment. */
+        INITIATOR_BIC : T24BusinessTypes:SW
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=108.0, core=true, t24Name=INITIATOR.BIC, mandatory=false)
+        /* Name of the initiator of payment. */
+        INITIATOR_NAME : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=70, sysNumber=107.0, core=true, t24Name=INITIATOR.NAME, mandatory=false)
+        INITIATOR_POST_ADDR_LINE -> byValue PI_Contract:PAYMENT_ORDER__INITIATOR_POST_ADDR_LINE *
+            @t24:i (t24Name=INITIATOR.POST.ADDR.LINE)
+        /* Address type of the initiator of payment. */
+        INITIATOR_POST_ADDR_TYPE : PI_Contract:PAYMENT_ORDER__INITIATOR_POST_ADDR_TYPE
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=109.0, core=true, t24Name=INITIATOR.POST.ADDR.TYPE, mandatory=false)
+        INITIATOR_SWIFT_ADDRESS -> byValue PI_Contract:PAYMENT_ORDER__INITIATOR_SWIFT_ADDRESS *
+            @t24:i (t24Name=INITIATOR.SWIFT.ADDRESS)
+        INIT_OTHER_ID : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=173.0, core=true, t24Name=INIT.OTHER.ID, mandatory=false)
+        INIT_OTHER_ID_TYPE : PI_Contract:PAYMENT_ORDER__INIT_OTHER_ID_TYPE
+            @t24:i (align=L, inputBehaviour=I, maxLength=18, sysNumber=172.0, core=true, t24Name=INIT.OTHER.ID.TYPE, mandatory=false)
+        INPUTTER -> byValue PI_Contract:PAYMENT_ORDER__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        INSTRUCTION_CODE -> byValue PI_Contract:PAYMENT_ORDER__INSTRUCTION_CODE *
+            @t24:i (t24Name=INSTRUCTION.CODE)
+/* Text to describe the instruction code which has to be sent to account with bank.
+Validation Rules:
+Optional Free Text field. */
+        INSTRUCTION_CODE_TEXT : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=140, sysNumber=144.0, core=true, t24Name=INSTRUCTION.CODE.TEXT, mandatory=false)
+/* Used for SEPA
+Validation Rules:Free Text of 35 characters. Optional. No validation */
+        INSTRUCTION_ID_REF : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=77.0, core=true, t24Name=INSTRUCTION.ID.REF, mandatory=false)
+/* Optional
+The Account Number inputted here along with the Intermediary Bank details as given in INTERMED.BANK will be used in tag 56 of Swift message. */
+        INTERMED_BANK_ACC : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=34, sysNumber=60.0, core=true, t24Name=INTERMED.BANK.ACC, mandatory=false)
+/* Clearing code of Intermediary bank.
+Validation Rules:Will be NOINPUT when transfer is not done through beneficairy. */
+        INTERMED_BANK_CLEARING_CODE : T24BusinessTypes:SW
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=57.0, core=true, t24Name=INTERMED.BANK.CLEARING.CODE, mandatory=false)
+/* Country of Intermediary bank.
+Validation Rules:Will be NOINPUT when transfer is not done through beneficairy. */
+        INTERMED_BANK_COUNTRY -> ST_Config:COUNTRY
+            @t24:i (align=L, inputBehaviour=I, maxLength=2, sysNumber=59.0, core=true, businessType=A, t24Name=INTERMED.BANK.COUNTRY, mandatory=false)
+/* Customer name of Intermediary bank.
+Validation Rules:Will be NOINPUT when transfer is not done through beneficairy. */
+        INTERMED_BANK_CUSTOMER : T24BusinessTypes:SW
+            @t24:i (align=L, inputBehaviour=I, maxLength=27, sysNumber=53.0, core=true, t24Name=INTERMED.BANK.CUSTOMER, mandatory=false)
+/* IBAN of Intermediary bank
+Validation Rules:Will be NOINPUT when transfer is not done through beneficairy. */
+        INTERMED_BANK_IBAN : T24BusinessTypes:SW
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=51.0, core=true, t24Name=INTERMED.BANK.IBAN, mandatory=false)
+/* Other Identifier of Intermediary bank.
+Validation Rules:Will be NOINPUT when transfer is not done through beneficairy. */
+        INTERMED_BANK_IDENTIFIER : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=58.0, core=true, t24Name=INTERMED.BANK.IDENTIFIER, mandatory=false)
+/* Address type of Intermediary bank.
+Validation Rules:Will be NOINPUT when transfer is not done through beneficairy. */
+        INTERMED_BANK_POSTAL_ADDR_TYPE : PI_Contract:PAYMENT_ORDER__INTERMED_BANK_POSTAL_ADDR_TYPE
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=54.0, core=true, t24Name=INTERMED.BANK.POSTAL.ADDR.TYPE, mandatory=false)
+/* Reserved fields for Intermed Bank.
+Validation Rules:NOINPUT field. */
+        INTERMED_BANK_RESERVED_1 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=63.0, core=true, t24Name=INTERMED.BANK.RESERVED.1, mandatory=false)
+/* Reserved fields for Intermed Bank.
+Validation Rules:NOINPUT field. */
+        INTERMED_BANK_RESERVED_2 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=62.0, core=true, t24Name=INTERMED.BANK.RESERVED.2, mandatory=false)
+/* Reserved fields for Intermed Bank.
+Validation Rules:NOINPUT field. */
+        INTERMED_BANK_RESERVED_3 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=61.0, core=true, t24Name=INTERMED.BANK.RESERVED.3, mandatory=false)
+/* BIC of Intermediary bank.
+Validation Rules:Valid BIC record from DE.BIC. Will be NOINPUT when transfer is not done through beneficairy. */
+        INTERMED_BIC : T24BusinessTypes:SW
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=52.0, core=true, t24Name=INTERMED.BIC, mandatory=false)
+        INTERMED_POSTAL_ADDR_LINE -> byValue PI_Contract:PAYMENT_ORDER__INTERMED_POSTAL_ADDR_LINE *
+            @t24:i (t24Name=INTERMED.POSTAL.ADDR.LINE)
+        INTERMED_SWIFT_ADDR -> byValue PI_Contract:PAYMENT_ORDER__INTERMED_SWIFT_ADDR *
+            @t24:i (t24Name=INTERMED.SWIFT.ADDR)
+        INTERNAL_ORDER_DETAILS -> byValue PI_Contract:PAYMENT_ORDER__INTERNAL_ORDER_DETAILS *
+            @t24:i (t24Name=INTERNAL.ORDER.DETAILS)
+/* Status of the order
+Validation Rules:RETURN_REJECT_CANCEL_ERROR */
+        INTERNAL_STATUS : PI_Contract:PAYMENT_ORDER__INTERNAL_STATUS
+            @t24:i (align=L, inputBehaviour=I, maxLength=10, sysNumber=95.0, core=true, t24Name=INTERNAL.STATUS, mandatory=false)
+        INT_OVERRIDE_ID -> byValue PI_Contract:PAYMENT_ORDER__INT_OVERRIDE_ID *
+            @t24:i (t24Name=INT.OVERRIDE.ID)
+        INVOICE_REFERENCE -> byValue PI_Contract:PAYMENT_ORDER__INVOICE_REFERENCE *
+            @t24:i (t24Name=INVOICE.REFERENCE)
+        /* This field contains currency code, to identify the currency denomination in which the Entry is to be received. */
+        ISO_DES_CCYCODE -> ST_CurrencyConfig:CURRENCY
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=265.25, core=false, businessType=CCY, t24Name=ISO.DES.CCYCODE, mandatory=false)
+/* Optional field which contains the type of Cheque issued such as Current, Savings or Drafts
+Validation Rules:
+Must be a valid record from CHEQUE.TYPE */
+        ISSUE_CHEQUE_TYPE -> CQ_ChqConfig:CHEQUE_TYPE
+            @t24:i (align=L, inputBehaviour=I, maxLength=4, sysNumber=185.0, core=true, businessType=SSS, t24Name=ISSUE.CHEQUE.TYPE, mandatory=false)
+/* Field to indicate time when payment order was last simulated
+Validation Rules:
+NOINPUT field. */
+        LAST_TC_SIM_TIME : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=16, sysNumber=164.0, core=true, t24Name=LAST.TC.SIM.TIME, mandatory=false)
+        LOCAL_INSTR_CODE : PI_Contract:PAYMENT_ORDER__LOCAL_INSTR_CODE
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=171.0, core=true, t24Name=LOCAL.INSTR.CODE, mandatory=false)
+        LOCAL_INSTR_PROP : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=175.0, core=true, t24Name=LOCAL.INSTR.PROP, mandatory=false)
+/* To capture the AC.LOCKED.EVENTS id if in case the funds is available and reserved.
+Validation Rules:
+User input will not be allowed, only updated by system when creating AC.LOCKED.EVENTS record. */
+        LOCKED_EVENT_ID : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=20, sysNumber=177.0, core=true, t24Name=LOCKED.EVENT.ID, mandatory=false)
+/* Field to indicate if the payment order has been manually marked for completion and is updated by the user for exceptional cases where payment system could not update the status of payment order. Once this flag is set, the current state of the payment order is moved to Complete.
+
+Validation Rules:
+1. Standard T24 flag field.
+2. Field no-input and cleared by copy function.
+3. Available for input by the user only through browser when the order state is "AwaitingAck" or "Placed" or "Complete". */
+        MANUAL_COMPLETE : PI_Contract:PAYMENT_ORDER__MANUAL_COMPLETE
+            @t24:i (align=L, inputBehaviour=N, maxLength=3, sysNumber=152.0, core=true, t24Name=MANUAL.COMPLETE, mandatory=false)
+/* Field to indicate the current status of the order in payment system and is manually updated by the user in exceptional scenarios. Values to the field are defined in the EB.LOOKUP table with prefix "PAYMENT.STATUS".
+
+Validation Rules:
+1. Standard T24 Alphanumeric field.
+2. Field no-input and cleared by copy function.
+3. Available for input by the user only through browser when the order state is "AwaitingAck" or "Placed" or "Complete". */
+        MANUAL_PAYMENT_STATUS : PI_Contract:PAYMENT_ORDER__MANUAL_PAYMENT_STATUS
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=150.0, core=true, t24Name=MANUAL.PAYMENT.STATUS, mandatory=false)
+/* Field to record additional status information or narratives which describes the current status of the payment order in the payment system.This is updated by the user while updating the manual payment status.
+
+Validation Rules:
+1. Standard T24 free text field.
+2. Field No-input and cleared by copy function.
+3. Available for input by the user only through browser when the order state is "AwaitingAck" or "Placed" or "Complete". */
+        MANUAL_PAY_STATUS_ADD_INFO : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=N, maxLength=65, sysNumber=151.0, core=true, t24Name=MANUAL.PAY.STATUS.ADD.INFO, mandatory=false)
+/* Date and time when the manual payment status is last updated.
+
+Validation Rules:
+1. Standard T24 Alphanumeric field.
+2. Field no-input and cleared by copy function.
+3. Updated by system when MANUAL.PAYMENT.STATUS or MANUAL.PAY.STATUS.ADD.INFO or  MANUAL.COMPLETE fields are updated. */
+        MANUAL_STATUS_UPDATE_DATE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=65, sysNumber=153.0, core=true, t24Name=MANUAL.STATUS.UPDATE.DATE, mandatory=false)
+/* Priority of the message
+Validation Rules:Free text of 35 characters. No validations */
+        MESSAGE_PRIORITY : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=90.0, core=true, t24Name=MESSAGE.PRIORITY, mandatory=false)
+        NARRATIVE -> byValue PI_Contract:PAYMENT_ORDER__NARRATIVE *
+            @t24:i (t24Name=NARRATIVE)
+/* Indicates if the transaction is a ONUS payment
+Allowed options are either "YES" or "NO".
+Validation Rules:
+No input field */
+        ONUS_INDICATOR : PI_Contract:PAYMENT_ORDER__ONUS_INDICATOR
+            @t24:i (align=L, inputBehaviour=N, maxLength=3, sysNumber=179.0, core=true, t24Name=ONUS.INDICATOR, mandatory=false)
+/* Optional
+City where a person was born. */
+        ORDERING_BR_CITY : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=221.0, core=true, t24Name=ORDERING.BR.CITY, mandatory=false)
+/* Optional
+Country where a person was born. */
+        ORDERING_BR_COUNTRY : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=222.0, core=true, t24Name=ORDERING.BR.COUNTRY, mandatory=false)
+/* Optional
+Province where a person was born. */
+        ORDERING_BR_PRVNC : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=220.0, core=true, t24Name=ORDERING.BR.PRVNC, mandatory=false)
+/* Company from which the transaction is done or debit account's customer's company
+
+No Input field */
+        ORDERING_COMPANY : T24BusinessTypes:COM
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=2.0, core=true, t24Name=ORDERING.COMPANY, mandatory=false)
+/* Holds the Country of residence for Debtor
+Validation Rules:
+Default
+CUSTOMER>RESIDENCE
+It must be a valid code on the COUNTRY table. */
+        ORDERING_COUNTRY_RESIDENCE -> ST_Config:COUNTRY
+            @t24:i (align=L, inputBehaviour=I, maxLength=2, sysNumber=196.0, core=true, businessType=A, t24Name=ORDERING.COUNTRY.RESIDENCE, mandatory=false)
+        /* Debit Account customer */
+        ORDERING_CUSTOMER : T24BusinessTypes:CUS
+            @t24:i (align=R, inputBehaviour=I, maxLength=35, sysNumber=3.0, core=true, t24Name=ORDERING.CUSTOMER, mandatory=false)
+        /* BIC of the Ordering customer */
+        ORDERING_CUSTOMER_BIC : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=4.0, core=true, t24Name=ORDERING.CUSTOMER.BIC, mandatory=false)
+/* Indicates the record which stores the Ordering Customer SSI details. If defined, system defaults the related values from the corresponding beneficiary record to the debit information in the payment order record.
+Debit Account details that are manually provided by user would take priority and default will not be done even is Ordering CUstomer SSI is provided
+
+Validation Rules:
+- Valid Id in the BENEFICIARY table */
+        ORDERING_CUSTOMER_SSI -> ST_Payments:BENEFICIARY
+            @t24:i (align=L, inputBehaviour=I, maxLength=19, sysNumber=146.0, core=true, businessType=A, t24Name=ORDERING.CUSTOMER.SSI, mandatory=false)
+/* Ordering customer name
+Validation Rules: 1. Name of Ordering customer                      2. Mandatory when the customer is not in T24 and ORDERING.CUSTOMER.BIC is not defined */
+        ORDERING_CUST_NAME : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=140, sysNumber=5.0, core=true, t24Name=ORDERING.CUST.NAME, mandatory=false)
+/* Optional
+Date on which a person is born. */
+        ORDERING_DOB : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=219.0, core=true, t24Name=ORDERING.DOB, typeModifiers=1000, mandatory=false)
+/* Optional
+Unique identification as assigned by an institution, using an identification scheme. */
+        ORDERING_OT_ID : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=215.0, core=true, t24Name=ORDERING.OT.ID, mandatory=false)
+/* Optional
+Unique identification assigned by the account servicer. */
+        ORDERING_OT_ID_TYPE : PI_Contract:PAYMENT_ORDER__ORDERING_OT_ID_TYPE
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=214.0, core=true, t24Name=ORDERING.OT.ID.TYPE, mandatory=false)
+/* Customer rate for the conversion between payment currency and ordering currency
+Validation Rules:
+Allowed only when ALLOW.FX.RATE is set to YES in PAYMENT.ORDER.PRODUCT
+Customer rate needs to be equal to the sum of FX spread and Treasury rate
+When all the 3 fields -Cust rate, Spread and Treasury are- are input, get the default treasury rate for the currency pair from Currency application.
+If the user input treasury rate is equal to the default treasury rate, calculate the spread, and repopulate,if required
+When only Customer rate is input, treasury rate and spread are calculated and populated into the application.
+Override is raised if the spread is negative
+Override is raised if the rate tolerance percentage exceeds that of the value maintained in the PO Product
+Not all the 3 fields can be changed during amendment */
+        ORDERING_PAYMENT_FX_CUST_RATE : T24BusinessTypes:R
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=83.0, core=true, t24Name=ORDERING.PAYMENT.FX.CUST.RATE, mandatory=false)
+/* Customer spread for the conversion between payment currency and ordering currency
+Validation Rules:
+Allowed only when ALLOW.FX.RATE is set to YES in PAYMENT.ORDER.PRODUCT
+FX spread is added to the treasury rate to calculate the Cust rate
+When FX spread and treasury rates are input, Cust rate is calculated and populated back to the PO record.
+When only FX spread is input, both Cust rate and treasury rate are arrived at and populated back to the PO record.
+When Cust rate and FX spread are input, spread is calculated again and populated into the PO record. Treasury rate is calculated as well.
+Override is raised if the rate tolerance percentage exceeds that of the value maintained in the PO Product
+Not all the 3 fields can be changed during amendment */
+        ORDERING_PAYMENT_FX_SPREAD : T24BusinessTypes:R
+            @t24:i (align=R, inputBehaviour=I, maxLength=12, sysNumber=84.0, core=true, t24Name=ORDERING.PAYMENT.FX.SPREAD, typeModifiers=-, mandatory=false)
+/* Treasury rate for the conversion between payment currency and ordering currency
+Validation Rules:
+Allowed only when ALLOW.FX.RATE is set to YES in PAYMENT.ORDER.PRODUCT
+When only treasury rate is input, both Cust rate and FX spread are calculated and defaulted into the PO application.
+When Cust rate and treasury rates are input, both spread and treasury rates are calculated.
+Override is raised if the spread is negative
+Override is raised if the rate tolerance percentage exceeds that of the value maintained in the PO Product */
+        ORDERING_PAYMENT_TREASURY_RATE : T24BusinessTypes:R
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=85.0, core=true, t24Name=ORDERING.PAYMENT.TREASURY.RATE, mandatory=false)
+/* Debit portfolio id
+Validation Rules:1. Inputtable field only if SC is installed    2. If DEBIT.ACCOUNT field has value, then the account will be checked if it is an account in the portfolio else error will be thrown    3. If DEBIT.ACCOUNT field is null, then the account from portfolio will be defaulted based on the setup in ACCOUNT.PARAMETER. */
+        ORDERING_PORTFOLIO : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=18, sysNumber=9.0, core=true, t24Name=ORDERING.PORTFOLIO, mandatory=false)
+/* Ordering customer's address type
+Validation Rules: */
+        ORDERING_POST_ADDRESS_TYPE : PI_Contract:PAYMENT_ORDER__ORDERING_POST_ADDRESS_TYPE
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=6.0, core=true, t24Name=ORDERING.POST.ADDRESS.TYPE, mandatory=false)
+        ORDERING_POST_ADDR_LINE -> byValue PI_Contract:PAYMENT_ORDER__ORDERING_POST_ADDR_LINE *
+            @t24:i (t24Name=ORDERING.POST.ADDR.LINE)
+        ORDERING_POST_SWIFT_ADDR -> byValue PI_Contract:PAYMENT_ORDER__ORDERING_POST_SWIFT_ADDR *
+            @t24:i (t24Name=ORDERING.POST.SWIFT.ADDR)
+/* Reference related to the ordering details
+Validation Rules:Free Text of 18 characters. Optional. No validation */
+        ORDERING_REFERENCE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=18, sysNumber=15.0, core=true, t24Name=ORDERING.REFERENCE, mandatory=false)
+/* Optional
+Name of the identification scheme, in a coded form as published in an external list. */
+        ORDERING_SCHME_CDE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=216.0, core=true, t24Name=ORDERING.SCHME.CDE, mandatory=false)
+/* Optional
+Entity that assigns the identification. */
+        ORDERING_SCH_ISSUR : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=218.0, core=true, t24Name=ORDERING.SCH.ISSUR, mandatory=false)
+/* Optional
+Name of the identification scheme, in a free text form. */
+        ORDERING_SCH_PRTY : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=217.0, core=true, t24Name=ORDERING.SCH.PRTY, mandatory=false)
+/* Date and time the order sent to payment system
+Validation Rules:NOINPUT field. Date and Time set in this field when order is sent to the payment system */
+        ORDER_EXECUTION_DATE_TIME : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=65, sysNumber=96.0, core=true, t24Name=ORDER.EXECUTION.DATE.TIME, mandatory=false)
+/* An indicator to show whether the payment was initiated by bank user, corporate or private client
+Validation Rules:An indicator to show whether the payment was initiated by bank user, corporate or private client. EB.LOOKUP to be used */
+        ORDER_INITIATION_TYPE : PI_Contract:PAYMENT_ORDER__ORDER_INITIATION_TYPE
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=103.0, core=true, t24Name=ORDER.INITIATION.TYPE, mandatory=false)
+        /* Options field indicating whether Order is for Customer or Bank transfer, which is required when it is to be processed through payment suites. */
+        ORDER_TYPE : PI_Contract:PAYMENT_ORDER__ORDER_TYPE
+            @i18n:Label (en="Order Type")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=106.0, core=true, t24Name=ORDER.TYPE, mandatory=false)
+/* Location of the ordering account returned from the locator service – it is either "Own" meaning it belongs to T24.
+External it is not in the bank, or a location code returned by the account locator service.
+Its a NOINPUT field. */
+        ORD_ACCOUNT_LOCATION : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=10, sysNumber=180.0, core=true, t24Name=ORD.ACCOUNT.LOCATION, mandatory=false)
+/* Indicator to note that validation has been done for the ordering account.
+Its a NOINPUT field. */
+        ORD_ACCOUNT_VALIDATED : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=3, sysNumber=181.0, core=true, t24Name=ORD.ACCOUNT.VALIDATED, mandatory=false)
+/* Optional
+This field will store the transaction content from the xml file .Each transaction will also include group header and bulk level details from the XML. */
+        ORIGINAL_MSG_CONTENT : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=99, sysNumber=209.0, core=true, t24Name=ORIGINAL.MSG.CONTENT, mandatory=false)
+        /* Stores RED as received in payment initiation request.No Change field.Its an Optional Field */
+        ORIGINAL_REQ_EXECUTION_DATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=F, maxLength=11, sysNumber=257.0, core=true, t24Name=ORIGINAL.REQ.EXECUTION.DATE, mandatory=false)
+        OVERRIDE -> byValue PI_Contract:PAYMENT_ORDER__OVERRIDE *
+            @t24:i (t24Name=OVERRIDE)
+/* Amount to be paid i.e transaction amount
+Validation Rules:1. Defaulted from Beneficiary record - Preferred Payment amount field (37th field) for external payment2. Mandatory field */
+        PAYMENT_AMOUNT : T24BusinessTypes:AMT
+            @i18n:Label (en="Payment Amount")
+            @i18n:Tooltip (en="Specify the Amount to be transferred")
+            @t24:i (align=R, inputBehaviour=I, maxLength=19, sysNumber=66.0, core=true, t24Name=PAYMENT.AMOUNT, mandatory=false)
+        /* Field to define additional information related to SEPA standing order transactions which can be provided when a payment is initiated within T24 to be processed through payment suites. */
+        PAYMENT_CATEGORY -> AC_StandingOrders:PAYMENT_CATEG_PURPOSE
+            @t24:i (align=L, inputBehaviour=I, maxLength=4, sysNumber=104.0, core=true, businessType=A, t24Name=PAYMENT.CATEGORY, mandatory=false)
+/* Optional
+The proprietary code of the scheme which issued the identifier related to SEPA standing order transactions which can be provided when a payment is initiated within T24 to be processed through payment suites */
+        PAYMENT_CATEGORYPURP_PRTY : PI_Contract:PAYMENT_ORDER__PAYMENT_CATEGORYPURP_PRTY
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=233.0, core=true, t24Name=PAYMENT.CATEGORYPURP.PRTY, mandatory=false)
+/* Filed to indicate if the payment order processing is complete. This is updated by the payment system through which the payment order is processed. Once this flag is set, the current state of the payment order is moved to Complete.
+
+Validation Rules:
+1. Standard T24 flag field.
+2. Field no-input and cleared by copy function.
+3. Can be updated only through other applications. */
+        PAYMENT_COMPLETE : PI_Contract:PAYMENT_ORDER__PAYMENT_COMPLETE
+            @t24:i (align=L, inputBehaviour=E, maxLength=3, sysNumber=149.0, core=true, t24Name=PAYMENT.COMPLETE, mandatory=false)
+/* Credit account currency or Payment currency for the beneficiary
+Validation Rules:1. Valid T24 Currency2. Must be present in the ALLOWED.PAYMENT.CCY in PAYMENT.ORDER.PRODUCT else error should be thrown3. Defaulted from PAYMENT.CCY field (36th field) of Beneficiary application for external payments */
+        PAYMENT_CURRENCY -> ST_CurrencyConfig:CURRENCY
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=65.0, core=true, businessType=CCY, t24Name=PAYMENT.CURRENCY, mandatory=false)
+/* Processing date of the transaction
+Validation Rules:1. Can be manually input or defaulted2. If not manually input, defaulted to TODAY's date3. Error must be thrown in following cases:    i. If Execution date is less than today   ii. If Execution date is greater than today and ALLOW.FUTURE.DATE is set to NO in PAYMENT.ORDER.PRODUCT */
+        PAYMENT_EXECUTION_DATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=69.0, core=true, t24Name=PAYMENT.EXECUTION.DATE, mandatory=false)
+        PAYMENT_EXECUTION_TIME : T24BusinessTypes:TIME
+            @t24:i (align=L, inputBehaviour=N, maxLength=5, sysNumber=263.0, core=true, t24Name=PAYMENT.EXECUTION.TIME, mandatory=false)
+        /* Field to define method of transfer being initiated, which is required when it is to be processed through payment suites. */
+        PAYMENT_METHOD : PI_Contract:PAYMENT_ORDER__PAYMENT_METHOD
+            @i18n:Label (en="Payment Method")
+            @i18n:Tooltip (en="Specify if the amount will be Due or Capitalised")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=105.0, core=true, t24Name=PAYMENT.METHOD, mandatory=false)
+/* Payment order product
+
+Mandatory field.Defaulted in case field left blank and populated from PREF.PYMT.PRODUCT of beneficiary id used in the payment order contract
+If PREF.PYMT.PRODUCT is blank for beneficiary id defined in the contract then prompted for a valid product from PAYMENT.ORDER.PRODUCT application */
+        PAYMENT_ORDER_PRODUCT -> PI_Config:PAYMENT_ORDER_PRODUCT
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=1.0, core=true, businessType=A, t24Name=PAYMENT.ORDER.PRODUCT, mandatory=false)
+/* Purpose code of the payment
+Validation Rules:Valid record in the table PAYMENT.PURPOSE.CODE */
+        PAYMENT_PURPOSE -> AC_StandingOrders:PAYMENT_PURPOSE_CODE
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=71.0, core=true, businessType=SW, t24Name=PAYMENT.PURPOSE, mandatory=false)
+/* Field to record additional status information or narratives which describes the current status of the payment order in the payment system. This value will be updated by the payment system which has processed the contract.
+
+Validation Rules:
+1. Standard T24 free text field.
+2. Field no-input and cleared by copy function.
+3. Can be updated only through other applications. */
+        PAYMENT_STATUS_ADD_INFO : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=E, maxLength=65, sysNumber=148.0, core=true, t24Name=PAYMENT.STATUS.ADD.INFO, mandatory=false)
+/* Date and time when the payment system status as last updated
+Validation Rules:NOINPUT field. Updated by system when PAYMENT.SYSTEM.STATUS field is updated */
+        PAYMENT_STATUS_UPDATE_DATE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=65, sysNumber=99.0, core=true, t24Name=PAYMENT.STATUS.UPDATE.DATE, mandatory=false)
+/* Indicates the payment system through which the requests/transactions initiated by the payment order is processed.
+
+Valid Values:
+1. External - Requests are processed by external system
+2. TPS      - Requests are processed by TPS
+3. FT       - Requests are processed by FT
+
+Validation Rules:
+- No input field, updated while authorising the payment order record. */
+        PAYMENT_SYSTEM : PI_Contract:PAYMENT_ORDER__PAYMENT_SYSTEM
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=147.0, core=true, t24Name=PAYMENT.SYSTEM, mandatory=false)
+/* Reference sent from payment system
+Validation Rules:Free Text of 35 characters. Optional. No validation */
+        PAYMENT_SYSTEM_ID : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=97.0, core=true, t24Name=PAYMENT.SYSTEM.ID, mandatory=false)
+/* Current status of the order in payment system. Values to the field are defined in the EB.LOOKUP table with prefix "PAYMENT.STATUS".
+
+Validation Rules:
+1. Standard T24 free text field.
+2. Field no-input and cleared by copy function.
+3. Can be updated only through other applications. */
+        PAYMENT_SYSTEM_STATUS : PI_Contract:PAYMENT_ORDER__PAYMENT_SYSTEM_STATUS
+            @t24:i (align=L, inputBehaviour=E, maxLength=35, sysNumber=98.0, core=true, t24Name=PAYMENT.SYSTEM.STATUS, mandatory=false)
+        /* Validation Rules:Not allowed if PAY.REQ.FX.SPREAD and PAY.REQ.TREASURY.RATE fields have value. NOINPUT for Phase I */
+        PAY_REQ_FX_CUST_RATE : T24BusinessTypes:R
+            @t24:i (align=R, inputBehaviour=N, maxLength=11, sysNumber=80.0, core=true, t24Name=PAY.REQ.FX.CUST.RATE, mandatory=false)
+        /* Validation Rules:Not allowed if PAY.REQ.FX.CUST.RATE is defined. NOINPUT for Phase I */
+        PAY_REQ_FX_SPREAD : T24BusinessTypes:R
+            @t24:i (align=R, inputBehaviour=N, maxLength=11, sysNumber=81.0, core=true, t24Name=PAY.REQ.FX.SPREAD, mandatory=false)
+        /* Validation Rules:Not allowed if PAY.REQ.FX.CUST.RATE is defined. NOINPUT for Phase I */
+        PAY_REQ_TREASURY_RATE : T24BusinessTypes:R
+            @t24:i (align=R, inputBehaviour=N, maxLength=11, sysNumber=82.0, core=true, t24Name=PAY.REQ.TREASURY.RATE, mandatory=false)
+/* Field to indicate if transaction is PSD compliant or Not
+Validation Rules:
+NOINPUT field. */
+        PSD_COMPLIANT : PI_Contract:PAYMENT_ORDER__PSD_COMPLIANT
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=163.0, core=true, t24Name=PSD.COMPLIANT, mandatory=false)
+        /* This field to store additional details related to purpose of payment which is specific to Clearing */
+        PURPOSE_PROPRIETARY : PI_Contract:PAYMENT_ORDER__PURPOSE_PROPRIETARY
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=256.0, core=true, t24Name=PURPOSE.PROPRIETARY, mandatory=false)
+        PYMT_EXTRACTED : PI_Contract:PAYMENT_ORDER__PYMT_EXTRACTED
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=265.4, core=false, t24Name=PYMT.EXTRACTED, mandatory=false)
+/* Payment service level code to be sent to account with bank, which describes the priority and execution type of payment.
+Validation Rules: Valid record from lookup table PAYMENT.SERVICE.LEVEL.CODE.
+Optional field. */
+        PYMT_INFO_SER_LEVEL_CODE : PI_Contract:PAYMENT_ORDER__PYMT_INFO_SER_LEVEL_CODE
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=145.0, core=true, t24Name=PYMT.INFO.SER.LEVEL.CODE, mandatory=false)
+        /* For outbound IAT Entries, this field contains the routing number of the U.S. Gateway operator. */
+        RDFI_ID : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=34, sysNumber=265.27, core=false, t24Name=RDFI.ID, mandatory=false)
+        /* This field contains a 2-digit code that identifies the numbering scheme used in the Receiving DFI Identification Number field. Code values for this field are 01-National Clearing System Number, 02-BIC Code, 03-IBAN) */
+        RDFI_IDNUM_QFR : PI_Contract:PAYMENT_ORDER__RDFI_IDNUM_QFR
+            @t24:i (align=R, inputBehaviour=I, maxLength=2, sysNumber=265.17, core=false, t24Name=RDFI.IDNUM.QFR, mandatory=false)
+        /* This field contains the name of the Receiving DFI holding the Receiver's account. This is used for IAT entry. */
+        RDFI_NAME : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=265.16, core=false, t24Name=RDFI.NAME, mandatory=false)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=267.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        REGULATORY_REPORT -> byValue PI_Contract:PAYMENT_ORDER__REGULATORY_REPORT *
+            @t24:i (t24Name=REGULATORY.REPORT)
+        REG_DEBTOR_CREDITOR_RPT -> byValue PI_Contract:PAYMENT_ORDER__REG_DEBTOR_CREDITOR_RPT *
+            @t24:i (t24Name=REG.DEBTOR.CREDITOR.RPT)
+/* Optional
+User who Rejected the order in the approval chain */
+        REJECTED_BY : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=16, sysNumber=223.0, core=true, t24Name=REJECTED.BY, mandatory=false)
+/* Optional
+Date and time in which the order is rejected */
+        REJECT_DATE_TIME : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=17, sysNumber=224.0, core=true, t24Name=REJECT.DATE.TIME, mask="RDDDD DD  DD ##:##:##.###", mandatory=false)
+        REMITTANCE_INFORMATION -> byValue PI_Contract:PAYMENT_ORDER__REMITTANCE_INFORMATION *
+            @t24:i (t24Name=REMITTANCE.INFORMATION)
+        /* Details on the amounts of the referred document - Amount of money remitted for the referred document. */
+        REMITTED_AMOUNT : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=19, sysNumber=238.0, core=true, t24Name=REMITTED.AMOUNT, mandatory=false)
+        /* Details on the amounts of the referred document - Currency of the remitted amount. */
+        REMITTED_CCY -> ST_CurrencyConfig:CURRENCY
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=237.0, core=true, businessType=CCY, t24Name=REMITTED.CCY, mandatory=false)
+        /* Validation Rules:Optional amount in the request currency. Either requested amount or payment amount must be present. Allowed only when ALLOW.REQUESTED.CURRENCY is set to YES in PAYMENT.ORDER.PRODUCT. No Input for Phase I */
+        REQUESTED_AMOUNT : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=N, maxLength=19, sysNumber=68.0, core=true, t24Name=REQUESTED.AMOUNT, mandatory=false)
+        /* Validation Rules:Optional currency used to specify the request amount to pay prior to conversion to payment currency. Allowed only when ALLOW.REQUESTED.CURRENCY is set to YES in PAYMENT.ORDER.PRODUCT. No Input for Phase I */
+        REQUESTED_CURRENCY : T24BusinessTypes:CCY
+            @t24:i (align=L, inputBehaviour=N, maxLength=3, sysNumber=67.0, core=true, t24Name=REQUESTED.CURRENCY, mandatory=false)
+/* Credit value date i.e. tentative date on which the payment system will process the payment
+Validation Rules:Override to be raised in the following scenarios:1. If ALLOW.REQUIRED.CREDIT.VALUE.DATE field is set to NO in PAYMENT.ORDER.PRODUCT2. If the date is less than today3. If the date is less the calculated float date */
+        REQUIRED_CREDIT_VALUE_DATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=70.0, core=true, t24Name=REQUIRED.CREDIT.VALUE.DATE, mandatory=false)
+/* Mandatory Field
+This field contains a three-character code used to identify various types of Entries. */
+        SEC_CODE : PI_Contract:PAYMENT_ORDER__SEC_CODE
+            @i18n:Label (en="Security Code")
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=265.6, core=false, t24Name=SEC.CODE, mandatory=false)
+        SIGNATORY -> byValue PI_Contract:PAYMENT_ORDER__SIGNATORY *
+            @t24:i (t24Name=SIGNATORY)
+/* Optional
+Manual or UPLOAD */
+        SOURCE : PI_Contract:PAYMENT_ORDER__SOURCE
+            @i18n:Label (en=Source)
+            @t24:i (align=L, inputBehaviour=I, maxLength=10, sysNumber=230.0, core=true, t24Name=SOURCE, mandatory=false)
+        STATE_HIST -> byValue PI_Contract:PAYMENT_ORDER__STATE_HIST *
+            @t24:i (t24Name=STATE.HIST)
+/* Optional
+If the order was previously rejected by the supervisor, user will be able to view the reject reason code and remark.
+User can add a reject response */
+        STATUS_REASON_CODE : PI_Contract:PAYMENT_ORDER__STATUS_REASON_CODE
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=170.0, core=true, t24Name=STATUS.REASON.CODE, mandatory=false)
+        STATUS_REASON_REMARK -> byValue PI_Contract:PAYMENT_ORDER__STATUS_REASON_REMARK *
+            @t24:i (t24Name=STATUS.REASON.REMARK)
+/* Optional field to indicate the Stock Register Id which must be checked to confirm if the given Cheque number is available or not
+When the Contract is committed, the given Cheque number is made unavailable from the respective register, and it is restored when the payment is reversed or cancelled or rejected
+Validation Rules:
+Must be a valid record from STOCK.REGISTER */
+        STOCK_REGISTER_ID -> CQ_ChqStockControl:STOCK_REGISTER
+            @t24:i (align=L, inputBehaviour=I, maxLength=32, sysNumber=186.0, core=true, businessType=A, t24Name=STOCK.REGISTER.ID, mandatory=false)
+/* Optional field to indicate the Stock Series Id against which the Cheque number must be checked in the Stock Register for availability
+Validation Rules:
+Though no error is raised, both Stock Register and Stock Series Id is required to check if the given Cheque number is available in the Register */
+        STOCK_SERIES_ID : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=187.0, core=true, t24Name=STOCK.SERIES.ID, mandatory=false)
+/* Used for SEPA
+Validation Rules: */
+        STRUCTURED_COMMUNICATION_CODE : PI_Contract:PAYMENT_ORDER__STRUCTURED_COMMUNICATION_CODE
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=73.0, core=true, t24Name=STRUCTURED.COMMUNICATION.CODE, mandatory=false)
+/* Used for SEPA
+Validation Rules:Free Text of 25 characters. Optional. No validation */
+        STRUCTURED_CREDITOR_REFERENCE : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=75.0, core=true, t24Name=STRUCTURED.CREDITOR.REFERENCE, mandatory=false)
+/* Used for SEPA
+Validation Rules:Free Text of 65 characters. Optional. No validation */
+        STRUCTURED_ISSUER : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=74.0, core=true, t24Name=STRUCTURED.ISSUER, mandatory=false)
+/* Field to trigger Awaiting Ext Submit state
+Validation Rules:
+YES - Order submitted to first state
+NO - Order placed in AwaitingExtSubmit */
+        SUBMIT_ORDER : PI_Contract:PAYMENT_ORDER__SUBMIT_ORDER
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=168.0, core=true, t24Name=SUBMIT.ORDER, mandatory=false)
+/* Serive class code identifies the general classification of dollar Entries to be exchanged. Ach entries are assigned Service Class Codes series 200-299
+200 - Ach entries Mixed debits and credits
+220 - Ach Credits Only
+225 - Ach Debits Only
+280 - Ach Automated Accounting Advices */
+        SVC_CLASS_CODE : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=3, sysNumber=265.26, core=false, t24Name=SVC.CLASS.CODE, mandatory=false)
+        TAP_EVENT_ID : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=265.2, core=false, t24Name=TAP.EVENT.ID, mandatory=false)
+        TAP_OPER_NATURE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=2, sysNumber=265.3, core=false, t24Name=TAP.OPER.NATURE, mandatory=false)
+        TAP_REF_ID : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=265.1, core=false, t24Name=TAP.REF.ID, mandatory=false)
+/* Field to indicate if simulation verified or not
+Validation Rules:
+NOINPUT field.
+Yes - Simulation verified
+No - Simulation not verified */
+        TC_SIM_CHECKED : PI_Contract:PAYMENT_ORDER__TC_SIM_CHECKED
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=165.0, core=true, t24Name=TC.SIM.CHECKED, mandatory=false)
+        TERMS_AND_CONDITIONS : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=120, sysNumber=100.0, core=true, t24Name=TERMS.AND.CONDITIONS, mandatory=false)
+/* Field holding total debit amount including charge and transaction debit amount
+Validation Rules:
+NOINPUT field. Populated from TPS during simulation */
+        TOTAL_DEBIT_AMOUNT : T24BusinessTypes:AMT
+            @i18n:Label (en="Total Debit Amount")
+            @t24:i (align=R, inputBehaviour=I, maxLength=19, sysNumber=169.0, core=true, t24Name=TOTAL.DEBIT.AMOUNT, mandatory=false)
+/* Mandatory Field
+Transaction Code identifies various types of debit and credit entries. */
+        TXN_CODE : PI_Contract:PAYMENT_ORDER__TXN_CODE
+            @i18n:Label (en="Transaction Code")
+            @t24:i (align=L, inputBehaviour=I, maxLength=2, sysNumber=265.5, core=false, t24Name=TXN.CODE, mandatory=false)
+        /* Address type to be used for the Ultimate creditor of payment. */
+        ULTIMATE_CREDITOR_ADDR_TYPE : PI_Contract:PAYMENT_ORDER__ULTIMATE_CREDITOR_ADDR_TYPE
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=134.0, core=true, t24Name=ULTIMATE.CREDITOR.ADDR.TYPE, mandatory=false)
+        /* BIC code of Ultimate creditor of payment. */
+        ULTIMATE_CREDITOR_BIC : T24BusinessTypes:SW
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=136.0, core=true, t24Name=ULTIMATE.CREDITOR.BIC, mandatory=false)
+/* Holds the birth city of the Ultimate Creditor
+Validation Rules:
+It can be used when Ultimate Creditor Identifier Type is set to Private
+Ultimate Creditor Birth Date is mandatory when this field is captured */
+        ULTIMATE_CREDITOR_BR_CITY : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=140.0, core=true, t24Name=ULTIMATE.CREDITOR.BR.CITY, mandatory=false)
+/* Holds the birth country of the Ultimate Creditor
+Validation Rules:
+It must be a valid code on the COUNTRY table
+It can be used when Ultimate Creditor Identifier Type is set to Private
+Ultimate Creditor Birth Date is mandatory when this field is captured */
+        ULTIMATE_CREDITOR_BR_COUNTRY -> ST_Config:COUNTRY
+            @t24:i (align=L, inputBehaviour=I, maxLength=2, sysNumber=141.0, core=true, businessType=A, t24Name=ULTIMATE.CREDITOR.BR.COUNTRY, mandatory=false)
+/* Holds the birth province of the Ultimate Creditor
+Validation Rules:
+It can be used when Ultimate Creditor Identifier Type is set to Private
+Ultimate Creditor Birth Date is mandatory when this field is captured */
+        ULTIMATE_CREDITOR_BR_PRVNC : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=139.0, core=true, t24Name=ULTIMATE.CREDITOR.BR.PRVNC, mandatory=false)
+        /* Country of Ultimate creditor of payment. */
+        ULTIMATE_CREDITOR_COUNTRY -> ST_Config:COUNTRY
+            @t24:i (align=L, inputBehaviour=I, maxLength=2, sysNumber=137.0, core=true, businessType=A, t24Name=ULTIMATE.CREDITOR.COUNTRY, mandatory=false)
+/* Holds the birth date of the Ultimate Creditor
+Validation Rules:
+It can be used when Ultimate Creditor Identifier Type is set to Private */
+        ULTIMATE_CREDITOR_DOB : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=138.0, core=true, t24Name=ULTIMATE.CREDITOR.DOB, typeModifiers=1000, mandatory=false)
+        /* Name of the Ultimate creditor of payment. */
+        ULTIMATE_CREDITOR_NAME : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=70, sysNumber=133.0, core=true, t24Name=ULTIMATE.CREDITOR.NAME, mandatory=false)
+/* Holds other identifications such as could be a Social Security Number, a Tax Identification Number, Passport Number, a Clearing Id ,etc., of the Ultimate Creditor
+Validation Rules:
+Ultimate Creditor Id Type is mandatory when this field is captured */
+        ULTIMATE_CREDITOR_OT_ID : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=192.0, core=true, t24Name=ULTIMATE.CREDITOR.OT.ID, mandatory=false)
+/* Optional
+Ultimate Creditor Id Type identifies if the Ultimate Creditor is an Organisation or an Individual
+Possible values:
+None
+Organisation
+Private */
+        ULTIMATE_CREDITOR_OT_ID_TYPE : PI_Contract:PAYMENT_ORDER__ULTIMATE_CREDITOR_OT_ID_TYPE
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=142.0, core=true, t24Name=ULTIMATE.CREDITOR.OT.ID.TYPE, mandatory=false)
+/* The code of the scheme, which issued the identifier for the Ultimate Creditor
+It will indicate what is captured in the Beneficiary Other Identifier - Social Security Number, Tax Identification Number, Passport Number, Clearing Id
+Validation Rules:
+Ultimate Creditor Id Type is mandatory when this field is captured */
+        ULTIMATE_CREDITOR_SCHME_CDE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=193.0, core=true, t24Name=ULTIMATE.CREDITOR.SCHME.CDE, mandatory=false)
+/* Issuer of the identifier
+Validation Rules:
+Ultimate Creditor Id Type is mandatory when this field is captured */
+        ULTIMATE_CREDITOR_SCH_ISSUR : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=195.0, core=true, t24Name=ULTIMATE.CREDITOR.SCH.ISSUR, mandatory=false)
+/* The proprietary code of the scheme which issued the identifier for the Ultimate Creditor.
+Validation Rules:
+Ultimate Creditor Id Type is mandatory when this field is captured */
+        ULTIMATE_CREDITOR_SCH_PRTY : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=194.0, core=true, t24Name=ULTIMATE.CREDITOR.SCH.PRTY, mandatory=false)
+        ULTIMATE_CRED_ADDR_LN -> byValue PI_Contract:PAYMENT_ORDER__ULTIMATE_CRED_ADDR_LN *
+            @t24:i (t24Name=ULTIMATE.CRED.ADDR.LN)
+        ULTIMATE_DEBTOR_ADDR_LINE -> byValue PI_Contract:PAYMENT_ORDER__ULTIMATE_DEBTOR_ADDR_LINE *
+            @t24:i (t24Name=ULTIMATE.DEBTOR.ADDR.LINE)
+        /* Address type to be used for the Ultimate debtor of payment. */
+        ULTIMATE_DEBTOR_ADDR_TYPE : PI_Contract:PAYMENT_ORDER__ULTIMATE_DEBTOR_ADDR_TYPE
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=124.0, core=true, t24Name=ULTIMATE.DEBTOR.ADDR.TYPE, mandatory=false)
+        /* BIC code of Ultimate debtor of payment. */
+        ULTIMATE_DEBTOR_BIC : T24BusinessTypes:SW
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=126.0, core=true, t24Name=ULTIMATE.DEBTOR.BIC, mandatory=false)
+/* Holds the birth City of the Ultimate Debtor
+Validation Rules:
+It can be used when Ultimate Debtor Identifier Type is set to Private
+Ultimate Debtor Birth Date is mandatory when this field is captured. */
+        ULTIMATE_DEBTOR_BR_CITY : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=199.0, core=true, t24Name=ULTIMATE.DEBTOR.BR.CITY, mandatory=false)
+/* Holds the birth Country of the Ultimate Debtor
+Validation Rules:
+It must be a valid code on the COUNTRY table.
+It can be used when Ultimate Debtor Identifier Type is set to Private
+Ultimate Debtor Birth Date is mandatory when this field is captured. */
+        ULTIMATE_DEBTOR_BR_COUNTRY -> ST_Config:COUNTRY
+            @t24:i (align=L, inputBehaviour=I, maxLength=2, sysNumber=200.0, core=true, businessType=A, t24Name=ULTIMATE.DEBTOR.BR.COUNTRY, mandatory=false)
+/* Holds the birth Province of the Ultimate Debtor
+Validation Rules:
+It can be used when Ultimate Debtor Identifier Type is set to Private
+Ultimate Debtor Birth Date is mandatory when this field is captured. */
+        ULTIMATE_DEBTOR_BR_PRVNC : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=198.0, core=true, t24Name=ULTIMATE.DEBTOR.BR.PRVNC, mandatory=false)
+        /* Country of Ultimate debtor of payment. */
+        ULTIMATE_DEBTOR_COUNTRY -> ST_Config:COUNTRY
+            @t24:i (align=L, inputBehaviour=I, maxLength=2, sysNumber=127.0, core=true, businessType=A, t24Name=ULTIMATE.DEBTOR.COUNTRY, mandatory=false)
+/* Holds the birth date of the Ultimate Debtor
+Validation Rules:
+It can be used when Ultimate Debtor Identifier Type is set to Private */
+        ULTIMATE_DEBTOR_DOB : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=197.0, core=true, t24Name=ULTIMATE.DEBTOR.DOB, typeModifiers=1000, mandatory=false)
+        /* Name of the Ultimate debitor of payment. */
+        ULTIMATE_DEBTOR_NAME : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=70, sysNumber=123.0, core=true, t24Name=ULTIMATE.DEBTOR.NAME, mandatory=false)
+/* Holds other identifications such as could be a Social Security Number, a Tax Identification Number, Passport Number, a Clearing Id ,etc., of the Ultimate Debtor.
+Validation Rules:
+Ultimate Debtor Id Type is mandatory when this field is captured */
+        ULTIMATE_DEBTOR_OT_ID : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=202.0, core=true, t24Name=ULTIMATE.DEBTOR.OT.ID, mandatory=false)
+/* Optional
+Ultimate Debtor Id Type identifies if the Ultimate Debtor is an Organisation or an Individual
+Possible values:
+None
+Organisation
+Private */
+        ULTIMATE_DEBTOR_OT_ID_TYPE : PI_Contract:PAYMENT_ORDER__ULTIMATE_DEBTOR_OT_ID_TYPE
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=201.0, core=true, t24Name=ULTIMATE.DEBTOR.OT.ID.TYPE, mandatory=false)
+/* The code of the scheme, which issued the identifier for the Ultimate Debtor
+It will indicate what is captured in the Beneficiary Other Identifier - Social Security Number,Tax Identification Number, Passport Number, Clearing Id
+Validation Rules:
+Ultimate Debtor Id Type is mandatory when this field is captured. */
+        ULTIMATE_DEBTOR_SCHME_CDE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=203.0, core=true, t24Name=ULTIMATE.DEBTOR.SCHME.CDE, mandatory=false)
+/* Issuer of the identifier
+Validation Rules:
+Ultimate Debtor Id Type is mandatory when this field is captured */
+        ULTIMATE_DEBTOR_SCH_ISSUR : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=205.0, core=true, t24Name=ULTIMATE.DEBTOR.SCH.ISSUR, mandatory=false)
+/* The proprietary code of the scheme, which issued the identifier for the Ultimate Debtor
+Validation Rules:
+Ultimate Debtor Id Type is mandatory when this field is captured. */
+        ULTIMATE_DEBTOR_SCH_PRTY : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=204.0, core=true, t24Name=ULTIMATE.DEBTOR.SCH.PRTY, mandatory=false)
+        /* Field to store the UETR in gpi confirmation. */
+        UNIQUE_TXN_REFERENCE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=36, sysNumber=262.0, core=true, t24Name=UNIQUE.TXN.REFERENCE, mandatory=false)
+/* Optional
+User can select the action that needs to be performed on the Bulk payment order
+Authorise, Reject, Cancel, Discard */
+        USER_ACTION : PI_Contract:PAYMENT_ORDER__USER_ACTION
+            @t24:i (align=L, inputBehaviour=I, maxLength=19, sysNumber=232.0, core=true, t24Name=USER.ACTION, mandatory=false)
+/* Whether charges to be waived or not
+Validation Rules:Optional field. Value allowed is YES or Null. No validation */
+        WAIVE_ALL_CHARGES : PI_Contract:PAYMENT_ORDER__WAIVE_ALL_CHARGES
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=79.0, core=true, t24Name=WAIVE.ALL.CHARGES, mandatory=false)
+    }
+    PAYMENT_ORDER_HIST
+        @i18n:Description (en="")
+        @t24:i (t24Name=PAYMENT.ORDER.HIST, level=F, type=L, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        PAYMENT_ORDER_HIST_ID -> PI_Contract:PAYMENT_ORDER_HIST PK required
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=0.0, core=true, businessType=A, t24Name=PAYMENT.ORDER.HIST.ID, mandatory=true)
+        PO_HIST_CURR_NO : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=9, sysNumber=1.0, core=true, t24Name=PO.HIST.CURR.NO, mandatory=false)
+        PO_NOTIFICATION_SEQ : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=9, sysNumber=2.0, core=true, t24Name=PO.NOTIFICATION.SEQ, mandatory=false)
+    }
+    PAYMENT_ORDER_NOTIFICATION
+        @i18n:Description (en="")
+        @t24:i (t24Name=PAYMENT.ORDER.NOTIFICATION, nonStop=true, level=F, type=H, allowedFunctions="A C D E I L P Q R S", localRefApplicationSysNo=36.0, localRefAllowed=true)
+    {
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=45.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=46.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=42.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        BULK_FILE_ID : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=2.0, core=true, t24Name=BULK.FILE.ID, mandatory=false)
+        CONTEXT_NAME -> byValue PI_Contract:PAYMENT_ORDER_NOTIFICATION__CONTEXT_NAME *
+            @t24:i (t24Name=CONTEXT.NAME)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=43.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CREATED_BY : PI_Contract:PAYMENT_ORDER_NOTIFICATION__CREATED_BY
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=11.0, core=true, t24Name=CREATED.BY, mandatory=false)
+        CREATION_DATE : T24BusinessTypes:D
+            @i18n:Label (en="Creation Date")
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=15.0, core=true, t24Name=CREATION.DATE, mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=39.0, core=true, t24Name=CURR.NO, mandatory=false)
+        DATE_TIME -> byValue PI_Contract:PAYMENT_ORDER_NOTIFICATION__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=44.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        FILE_MSG_ID : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=1.0, core=true, t24Name=FILE.MSG.ID, mandatory=false)
+        INPUTTER -> byValue PI_Contract:PAYMENT_ORDER_NOTIFICATION__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        OVERRIDE -> byValue PI_Contract:PAYMENT_ORDER_NOTIFICATION__OVERRIDE *
+            @t24:i (t24Name=OVERRIDE)
+        PAYMENT_COMPLETE : PI_Contract:PAYMENT_ORDER_NOTIFICATION__PAYMENT_COMPLETE
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=4.0, core=true, t24Name=PAYMENT.COMPLETE, mandatory=false)
+        PAYMENT_ORDER_ID : T24BusinessTypes:A required
+            @t24:i (align=L, inputBehaviour=I, maxLength=70, sysNumber=3.0, core=true, t24Name=PAYMENT.ORDER.ID, mandatory=true)
+        PAYMENT_ORDER_NOTIFICATION_ID -> PI_Contract:PAYMENT_ORDER_NOTIFICATION PK required
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=0.0, core=true, businessType=A, t24Name=PAYMENT.ORDER.NOTIFICATION.ID, mandatory=true)
+        PAYMENT_STATUS_ADD_INFO : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=9.0, core=true, t24Name=PAYMENT.STATUS.ADD.INFO, mandatory=false)
+        PAYMENT_SYSTEM_ID : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=7.0, core=true, t24Name=PAYMENT.SYSTEM.ID, mandatory=false)
+        PAYMENT_SYSTEM_RESPONSE_ID : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=8.0, core=true, t24Name=PAYMENT.SYSTEM.RESPONSE.ID, mandatory=false)
+        PAYMENT_SYSTEM_STATUS : PI_Contract:PAYMENT_ORDER_NOTIFICATION__PAYMENT_SYSTEM_STATUS
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=5.0, core=true, t24Name=PAYMENT.SYSTEM.STATUS, mandatory=false)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=38.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        RESERVED_1 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=35.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_10 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=26.0, core=true, t24Name=RESERVED.10, mandatory=false)
+        RESERVED_11 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=25.0, core=true, t24Name=RESERVED.11, mandatory=false)
+        RESERVED_12 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=24.0, core=true, t24Name=RESERVED.12, mandatory=false)
+        RESERVED_13 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=23.0, core=true, t24Name=RESERVED.13, mandatory=false)
+        RESERVED_14 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=22.0, core=true, t24Name=RESERVED.14, mandatory=false)
+        RESERVED_15 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=21.0, core=true, t24Name=RESERVED.15, mandatory=false)
+        RESERVED_16 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=20.0, core=true, t24Name=RESERVED.16, mandatory=false)
+        RESERVED_17 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=19.0, core=true, t24Name=RESERVED.17, mandatory=false)
+        RESERVED_18 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=18.0, core=true, t24Name=RESERVED.18, mandatory=false)
+        RESERVED_19 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=17.0, core=true, t24Name=RESERVED.19, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=34.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_20 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=16.0, core=true, t24Name=RESERVED.20, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=33.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=32.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        RESERVED_5 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=31.0, core=true, t24Name=RESERVED.5, mandatory=false)
+        RESERVED_6 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=30.0, core=true, t24Name=RESERVED.6, mandatory=false)
+        RESERVED_7 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=29.0, core=true, t24Name=RESERVED.7, mandatory=false)
+        RESERVED_8 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=28.0, core=true, t24Name=RESERVED.8, mandatory=false)
+        RESERVED_9 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=27.0, core=true, t24Name=RESERVED.9, mandatory=false)
+        RESPONSE_ORIGINATOR : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=10.0, core=true, t24Name=RESPONSE.ORIGINATOR, mandatory=false)
+        STATUS : PI_Contract:PAYMENT_ORDER_NOTIFICATION__STATUS
+            @i18n:Label (en=Status)
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=12.0, core=true, t24Name=STATUS, mandatory=false)
+        STATUS_REASON_CODE : PI_Contract:PAYMENT_ORDER_NOTIFICATION__STATUS_REASON_CODE
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=6.0, core=true, t24Name=STATUS.REASON.CODE, mandatory=false)
+    }
+    PAYMENT_ORDER_NOTIFICATION__CONTEXT_NAME
+    {
+        CONTEXT_NAME : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=70, sysNumber=13.0, core=true, t24Name=CONTEXT.NAME, mandatory=false)
+        CONTEXT_VALUE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=70, sysNumber=14.0, core=true, t24Name=CONTEXT.VALUE, mandatory=false)
+    }
+    PAYMENT_ORDER_NOTIFICATION__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=41.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    PAYMENT_ORDER_NOTIFICATION__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=40.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    PAYMENT_ORDER_NOTIFICATION__OVERRIDE
+    {
+        OVERRIDE : T24BusinessTypes:N
+            @i18n:Label (en=Override)
+            @i18n:Tooltip (en="Overrides generated by this transaction")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=37.0, core=true, t24Name=OVERRIDE, mandatory=false)
+    }
+    PAYMENT_ORDER__ACCT_WITH_BANK_POST_ADDR_LN
+    {
+/* Account with bank's long address
+Validation Rules:1. Maximum of 7 multi value set allowed2. Error must be thrown if multi value is more than 7.3. Each multi-value set must allow 70 characters */
+        ACCT_WITH_BANK_POST_ADDR_LN : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=70, sysNumber=43.0, core=true, t24Name=ACCT.WITH.BANK.POST.ADDR.LN, mandatory=false)
+    }
+    PAYMENT_ORDER__ACCT_WITH_BANK_SWIFT_ADDR
+    {
+/* Account with bank's swift address
+Validation Rules:1. Maximum of 4 multi value set allowed2. Error must be thrown if multi value is more than 43. Each multi-value set must allow 35 characters */
+        ACCT_WITH_BANK_SWIFT_ADDR : T24BusinessTypes:SW
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=42.0, core=true, t24Name=ACCT.WITH.BANK.SWIFT.ADDR, mandatory=false)
+    }
+    PAYMENT_ORDER__ACTIVITY_CODE
+    {
+        ACTIVITY_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Activity Code")
+            @i18n:Tooltip (en="Indicates activity code")
+            @t24:i (align=L, inputBehaviour=N, maxLength=8, sysNumber=130.0, core=true, t24Name=ACTIVITY.CODE, mandatory=false)
+        MESSAGE_TYPE -> byValue PI_Contract:PAYMENT_ORDER__ACTIVITY_CODE__MESSAGE_TYPE *
+            @t24:i (t24Name=MESSAGE.TYPE)
+    }
+    PAYMENT_ORDER__ACTIVITY_CODE__MESSAGE_TYPE
+    {
+        DELIVERY_REF : T24BusinessTypes:A
+            @i18n:Label (en="Delivery Ref")
+            @i18n:Tooltip (en="System generated Delivery ref key")
+            @t24:i (align=L, inputBehaviour=N, maxLength=70, sysNumber=132.0, core=true, t24Name=DELIVERY.REF, mandatory=false)
+        MESSAGE_TYPE : T24BusinessTypes:A
+            @i18n:Label (en="Message Type")
+            @i18n:Tooltip (en="Delivery message types generated for this record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=131.0, core=true, t24Name=MESSAGE.TYPE, mandatory=false)
+    }
+    PAYMENT_ORDER__AC_WITH_BR_CTRY
+    {
+        AC_WITH_BR_CTRY -> ST_Config:COUNTRY
+            @t24:i (align=L, inputBehaviour=I, maxLength=9, sysNumber=265.18, core=false, businessType=S, t24Name=AC.WITH.BR.CTRY, mandatory=false)
+        /* This field identifies the name of the Foreign Correspondent Bank. */
+        FC_BANK_NAME : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=265.19, core=false, t24Name=FC.BANK.NAME, mandatory=false)
+/* This field contains a 2 - digit code that identifies the numbering scheme used in the Foreign Correspondent Bank Identification Number field. Code values for this field are: 
+                 01 National Clearing System Number (e.g., U.S. Routing Transit Number), 02 BIC Code, 03 IBAN */
+        FC_BANK_QFR : PI_Contract:PAYMENT_ORDER__AC_WITH_BR_CTRY__FC_BANK_QFR
+            @t24:i (align=R, inputBehaviour=I, maxLength=2, sysNumber=265.20, core=false, t24Name=FC.BANK.QFR, mandatory=false)
+        /* This field contains a two - character alphabetic country code, as defined within the International Organization for Standardization's (ISO) 3166 - 1 -  alpha - 2 code list, to identify the country in which the branch of the Foreign Correspondent Bank is located. */
+        FC_BR_COCODE -> ST_Config:COUNTRY
+            @t24:i (align=L, inputBehaviour=I, maxLength=9, sysNumber=265.21, core=false, businessType=S, t24Name=FC.BR.COCODE, mandatory=false)
+    }
+    PAYMENT_ORDER__ADDITIONAL_INFO
+    {
+/* Additional information
+Validation Rules:TEXT field. Free text of 65 characters. Optional. No validation */
+        ADDITIONAL_INFO : T24BusinessTypes:ANY
+            @i18n:Label (en=Narrative)
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=93.0, core=true, t24Name=ADDITIONAL.INFO, mandatory=false)
+    }
+    PAYMENT_ORDER__BANK_TO_BANK_INFO
+    {
+/* Information passed from one bank to other
+Validation Rules:Used to include information to be passed to payment system. Free Text  of 35 characters. Optional. Call EB.VAL.BK.TO.BK for Validation */
+        BANK_TO_BANK_INFO : T24BusinessTypes:SW
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=91.0, core=true, t24Name=BANK.TO.BANK.INFO, mandatory=false)
+    }
+    PAYMENT_ORDER__BEN_POST_ADDR_LINE
+    {
+/* Beneficiary customer's long address
+Validation Rules:1. Maximum of 7 multi value set allowed2. Error must be thrown if multi value is more than 73. Each multi-value set must allow 70 characters */
+        BEN_POST_ADDR_LINE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=70, sysNumber=29.0, core=true, t24Name=BEN.POST.ADDR.LINE, mandatory=false)
+    }
+    PAYMENT_ORDER__BEN_POST_SWIFT_ADDR
+    {
+/* Beneficiary customer's swift address
+Validation Rules:1. Maximum of 4 multi value set allowed2. Error must be thrown if multi value is more than 43. Each multi-value set must allow 35 characters */
+        BEN_POST_SWIFT_ADDR : T24BusinessTypes:SW
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=28.0, core=true, t24Name=BEN.POST.SWIFT.ADDR, mandatory=false)
+    }
+    PAYMENT_ORDER__CHARGE_TYPE
+    {
+/* Holds the charge to be applied for the corresponding CHARGE.TYPE for the order in the currency of the CHARGE.ACCOUNT.
+Validation Rules:
+User input allowed only when CHARGE.ACCOUNT.CCY is defined.
+When left blank, charge based on charge type will be calculated by the system and amount will be updated in terms of the currency defined in CHARGE.ACCOUNT.CCY field. */
+        CHARGE_AC_CCY_AMOUNT : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=F, maxLength=19, sysNumber=160.0, core=true, t24Name=CHARGE.AC.CCY.AMOUNT, typeModifiers="155", mandatory=false)
+/* Holds the charge to be applied for the corresponding CHARGE.TYPE for the order.
+Validation Rules:
+User input allowed only when CHARGE.CURRENCY is defined.
+Both CHARGE.AMOUNT and CHARGE.AC.CCY.AMOUNT cannot be defined together.
+When left blank, charge based on charge type will be calculated by the system and amount will be updated in terms of the currency defined in CHARGE.CURRENCY field.
+When this field is left blank and CHARGE.AC.CCY.AMOUNT has value then the amount will be converted into equivalent CHARGE.AMOUNT in terms of currency in the field CHARGE.CURRENCY.
+If CHARGE.CURRENCY is blank then the amount will be converted into equivalent PAYMENT.CURRENCY. */
+        CHARGE_AMOUNT : T24BusinessTypes:AMT
+            @i18n:Label (en="Charge Amount")
+            @i18n:Tooltip (en="Indicates charge amount")
+            @t24:i (align=R, inputBehaviour=F, maxLength=19, sysNumber=159.0, core=true, t24Name=CHARGE.AMOUNT, typeModifiers="158.X", mandatory=false)
+/* Represents the currency of the amount in the field CHARGE.AMOUNT.
+Validation Rules:
+Input to this field is allowed only when CHARGE.TYPE is defined.
+When left blank system will update the field with the PAYMENT.CURRENCY.
+When this field has value then CHARGE.AMOUNT becomes mandatory */
+        CHARGE_CURRENCY -> ST_CurrencyConfig:CURRENCY
+            @i18n:Label (en="Charge Currency")
+            @t24:i (align=L, inputBehaviour=F, maxLength=3, sysNumber=158.0, core=true, businessType=CCY, t24Name=CHARGE.CURRENCY, mandatory=false)
+/* Holds the description of the Charge type.
+Validation Rules:
+Allows user input only when CHARGE.TYPE is defined.
+When left blank the description from the respective FT.COMMISSION.TYPE/FT.CHARGE.TYPE will be updated by the system. */
+        CHARGE_DESCRIPTION : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=F, maxLength=50, sysNumber=157.0, core=true, t24Name=CHARGE.DESCRIPTION, mandatory=false)
+/* Holds the type of the charges to be collected.
+Validation Rules:
+Any number of commission/charge types can be defined by the user.
+When user defines the type, system will not consider the commission/charge type defined in PAYMENT.ORDER.PRODUCT.
+When left blank system will update the field based on the set up in the field MULTI.FEES on PAYMENT.ORDER.PRODUCT.
+The combination of user defined and system defined types is not possible. */
+        CHARGE_TYPE : T24BusinessTypes:A
+            @i18n:Label (en="Charge Type")
+            @i18n:Tooltip (en="Type of Charge")
+            @t24:i (align=L, inputBehaviour=F, maxLength=20, sysNumber=156.0, core=true, t24Name=CHARGE.TYPE, mandatory=false)
+    }
+    PAYMENT_ORDER__CONTEXT_NAME
+    {
+/* Text field to hold field name of TPS used during submission or next simulation. Paired field with CONTEXT.VALUE
+Validation Rules:
+NOINPUT field. */
+        CONTEXT_NAME : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=70, sysNumber=166.0, core=true, t24Name=CONTEXT.NAME, mandatory=false)
+        CONTEXT_VALUE -> byValue PI_Contract:PAYMENT_ORDER__CONTEXT_NAME__CONTEXT_VALUE *
+            @t24:i (t24Name=CONTEXT.VALUE)
+    }
+    PAYMENT_ORDER__CONTEXT_NAME__CONTEXT_VALUE
+    {
+/* Text field to hold field value of TPS used during submission or next simulation. Paired field with CONTEXT.NAME
+Validation Rules:
+NOINPUT field. */
+        CONTEXT_VALUE : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=150, sysNumber=167.0, core=true, t24Name=CONTEXT.VALUE, mandatory=false)
+    }
+    PAYMENT_ORDER__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=270.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    PAYMENT_ORDER__DEBTOR_AGENT_ADDR_LINE
+    {
+        /* Address fields of Debtor Agent of payment. */
+        DEBTOR_AGENT_ADDR_LINE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=70, sysNumber=115.0, core=true, t24Name=DEBTOR.AGENT.ADDR.LINE, mandatory=false)
+    }
+    PAYMENT_ORDER__FC_BANK_ID
+    {
+        /* This field contains the bank identification number (i.e., the National Clearing System Number, BIC Code, or IBAN) of the Foreign Correspondent Bank. */
+        FC_BANK_ID : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=34, sysNumber=265.22, core=false, t24Name=FC.BANK.ID, mandatory=false)
+    }
+    PAYMENT_ORDER__IAT_PAYINFO_ONE
+    {
+        /* Payment Information for IAT entry. This is for first remittance information addenda record. */
+        IAT_PAYINFO_ONE : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=265.23, core=false, t24Name=IAT.PAYINFO.ONE, mandatory=false)
+    }
+    PAYMENT_ORDER__IAT_PAYINFO_TWO
+    {
+        /* Payment Information for IAT entry. This is for second remittance information addenda record. */
+        IAT_PAYINFO_TWO : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=265.24, core=false, t24Name=IAT.PAYINFO.TWO, mandatory=false)
+    }
+    PAYMENT_ORDER__INITIATOR_POST_ADDR_LINE
+    {
+        /* Address fields of initiator of payment. */
+        INITIATOR_POST_ADDR_LINE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=70, sysNumber=111.0, core=true, t24Name=INITIATOR.POST.ADDR.LINE, mandatory=false)
+    }
+    PAYMENT_ORDER__INITIATOR_SWIFT_ADDRESS
+    {
+/* Initiator's swift address
+Validation Rules: Maximum of 4 multi value set allowed. */
+        INITIATOR_SWIFT_ADDRESS : T24BusinessTypes:SW
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=110.0, core=true, t24Name=INITIATOR.SWIFT.ADDRESS, mandatory=false)
+    }
+    PAYMENT_ORDER__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=269.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    PAYMENT_ORDER__INSTRUCTION_CODE
+    {
+/* Instruction code which has to be sent to account with bank.
+Validation Rules: Valid record from lookup table PAYMENT.INSTRUCTION.CODE.
+Optional field. MUltivalue field. */
+        INSTRUCTION_CODE : PI_Contract:PAYMENT_ORDER__INSTRUCTION_CODE__INSTRUCTION_CODE
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=143.0, core=true, t24Name=INSTRUCTION.CODE, mandatory=false)
+    }
+    PAYMENT_ORDER__INTERMED_POSTAL_ADDR_LINE
+    {
+/* Address fields of Intermediary bank.
+Validation Rules:Will be NOINPUT when transfer is not done through beneficairy.
+Maximum of 7 multi value set allowed. */
+        INTERMED_POSTAL_ADDR_LINE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=70, sysNumber=56.0, core=true, t24Name=INTERMED.POSTAL.ADDR.LINE, mandatory=false)
+    }
+    PAYMENT_ORDER__INTERMED_SWIFT_ADDR
+    {
+/* Swift address field of Intermediary bank.
+Validation Rules:Will be NOINPUT when transfer is not done through beneficairy.
+Maximum of 4 multi value set allowed. */
+        INTERMED_SWIFT_ADDR : T24BusinessTypes:SW
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=55.0, core=true, t24Name=INTERMED.SWIFT.ADDR, mandatory=false)
+    }
+    PAYMENT_ORDER__INTERNAL_ORDER_DETAILS
+    {
+/* Details of the order
+Validation Rules:Free Text of 35 characters. Optional. No validation */
+        INTERNAL_ORDER_DETAILS : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=150, sysNumber=94.0, core=true, t24Name=INTERNAL.ORDER.DETAILS, mandatory=false)
+    }
+    PAYMENT_ORDER__INT_OVERRIDE_ID
+    {
+        INT_OVERRIDE_ID : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=128.0, core=true, t24Name=INT.OVERRIDE.ID, mandatory=false)
+        INT_OVERRIDE_VAL : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=255, sysNumber=129.0, core=true, t24Name=INT.OVERRIDE.VAL, mandatory=false)
+    }
+    PAYMENT_ORDER__INVOICE_REFERENCE
+    {
+/* Invoice reference
+Validation Rules:Free Text of 35 characters. Optional. No validation */
+        INVOICE_REFERENCE : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=72.0, core=true, t24Name=INVOICE.REFERENCE, mandatory=false)
+    }
+    PAYMENT_ORDER__NARRATIVE
+    {
+/* Narrative of the transaction
+Validation Rules:String of 65 characters. Optional. No validation */
+        NARRATIVE : T24BusinessTypes:ANY
+            @i18n:Label (en=Narrative)
+            @i18n:Tooltip (en="Any narrative to be input for user information")
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=92.0, core=true, t24Name=NARRATIVE, mandatory=false)
+    }
+    PAYMENT_ORDER__ORDERING_POST_ADDR_LINE
+    {
+/* Ordering customer's address line
+Validation Rules:1. Maximum of 7 multi value set allowed2. Error must be thrown if multi value is more than 73. Each multi-value set must allow 70 characters */
+        ORDERING_POST_ADDR_LINE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=70, sysNumber=8.0, core=true, t24Name=ORDERING.POST.ADDR.LINE, mandatory=false)
+    }
+    PAYMENT_ORDER__ORDERING_POST_SWIFT_ADDR
+    {
+/* Ordering customer's swift address
+Validation Rules: 1. Maximum of 4 multi value set allowed2. Error must be thrown if multi value is more than 43. Each multi-value set must allow 35 characters */
+        ORDERING_POST_SWIFT_ADDR : T24BusinessTypes:SW
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=7.0, core=true, t24Name=ORDERING.POST.SWIFT.ADDR, mandatory=false)
+    }
+    PAYMENT_ORDER__OVERRIDE
+    {
+/* This is a multi valued field.
+Contains details of any override applicable to this record.
+
+A maximum of 35 characters may be entered. This is a NOINPUT field. */
+        OVERRIDE : T24BusinessTypes:N
+            @i18n:Label (en=Override)
+            @i18n:Tooltip (en="Overrides generated by this transaction")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=266.0, core=true, t24Name=OVERRIDE, mandatory=false)
+    }
+    PAYMENT_ORDER__REGULATORY_REPORT
+    {
+/* Regulatory report
+Validation Rules:1. Value can be manually defined2. Maximum three multi value set each with 35 characters */
+        REGULATORY_REPORT : T24BusinessTypes:SW
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=89.0, core=true, t24Name=REGULATORY.REPORT, mandatory=false)
+    }
+    PAYMENT_ORDER__REG_DEBTOR_CREDITOR_RPT
+    {
+        /* Country of the entity that requires the regulatory reporting information */
+        REG_AUTHORITY_CTRY_CODE -> ST_Config:COUNTRY
+            @t24:i (align=L, inputBehaviour=I, maxLength=2, sysNumber=241.0, core=true, businessType=A, t24Name=REG.AUTHORITY.CTRY.CODE, mandatory=false)
+        /* Name of the entity requiring the regulatory reporting information */
+        REG_AUTHORITY_NAME : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=140, sysNumber=240.0, core=true, t24Name=REG.AUTHORITY.NAME, mandatory=false)
+/* Identifies whether the regulatory reporting information applies to the debit side, to the credit side or to both debit and credit sides of the transaction
+Allowed values 'CRED', 'DEBT' or 'BOTH' */
+        REG_DEBTOR_CREDITOR_RPT : PI_Contract:PAYMENT_ORDER__REG_DEBTOR_CREDITOR_RPT__REG_DEBTOR_CREDITOR_RPT
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=239.0, core=true, t24Name=REG.DEBTOR.CREDITOR.RPT, mandatory=false)
+        REG_REP_TYPE -> byValue PI_Contract:PAYMENT_ORDER__REG_DEBTOR_CREDITOR_RPT__REG_REP_TYPE *
+            @t24:i (t24Name=REG.REP.TYPE)
+    }
+    PAYMENT_ORDER__REG_DEBTOR_CREDITOR_RPT__REG_REP_TYPE
+    {
+        /* Amount of money to be reported for regulatory and statutory requirements */
+        REG_REP_AMOUNT : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=19, sysNumber=247.0, core=true, t24Name=REG.REP.AMOUNT, mandatory=false)
+        /* A code allocated to a currency by a Maintenance Agency under an international identification scheme, as described in the latest edition of the international standard ISO 4217 codes for the representation of currencies and funds */
+        REG_REP_CCY : T24BusinessTypes:CCY
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=246.0, core=true, t24Name=REG.REP.CCY, mandatory=false)
+        /* Specifies the nature, purpose and reason for the transaction to be reported for regulatory and statutory requirements in a coded form */
+        REG_REP_CODE : PI_Contract:PAYMENT_ORDER__REG_DEBTOR_CREDITOR_RPT__REG_REP_TYPE__REG_REP_CODE
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=245.0, core=true, t24Name=REG.REP.CODE, mandatory=false)
+        /* Country related to the specified type of regulatory reporting information */
+        REG_REP_COUNTRY_CODE -> ST_Config:COUNTRY
+            @t24:i (align=L, inputBehaviour=I, maxLength=2, sysNumber=244.0, core=true, businessType=A, t24Name=REG.REP.COUNTRY.CODE, mandatory=false)
+        /* Date related to the specified type of regulatory reporting information */
+        REG_REP_DATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=243.0, core=true, t24Name=REG.REP.DATE, mandatory=false)
+        /* Additional details that cater for specific domestic regulatory requirements */
+        REG_REP_INFORMATION : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=248.0, core=true, t24Name=REG.REP.INFORMATION, mandatory=false)
+        /* Specifies the type of the information supplied in the regulatory reporting information */
+        REG_REP_TYPE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=242.0, core=true, t24Name=REG.REP.TYPE, mandatory=false)
+    }
+    PAYMENT_ORDER__REMITTANCE_INFORMATION
+    {
+/* Information about remittance
+Validation Rules:1. Value can be manually defined2. Maximum four multi value set each with 35 characters */
+        REMITTANCE_INFORMATION : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=140, sysNumber=64.0, core=true, t24Name=REMITTANCE.INFORMATION, mandatory=false)
+    }
+    PAYMENT_ORDER__SIGNATORY
+    {
+/* Valid signatories to authorize the payment order transaction
+Validation Rules:Valid T24 Customer. No Duplicates and null multi value allowed. It will be made null during amendment of record */
+        SIGNATORY : T24BusinessTypes:CUS
+            @i18n:Label (en=Signatory)
+            @i18n:Tooltip (en="Customers signing this particular transaction .")
+            @t24:i (align=R, inputBehaviour=I, maxLength=35, sysNumber=16.0, core=true, t24Name=SIGNATORY, mandatory=false)
+    }
+    PAYMENT_ORDER__STATE_HIST
+    {
+        STATE_HIST -> byValue PI_Contract:PAYMENT_ORDER__STATE_HIST__STATE_HIST *
+            @t24:i (t24Name=STATE.HIST)
+    }
+    PAYMENT_ORDER__STATE_HIST__STATE_HIST
+    {
+/* Traverse history of the payment order
+Validation Rules:NOINPUT field. Will be updated by StateMachine */
+        STATE_HIST : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=102.0, core=true, t24Name=STATE.HIST, mandatory=false)
+    }
+    PAYMENT_ORDER__STATUS_REASON_REMARK
+    {
+/* Optional
+If the order was previously rejected by the supervisor, user will be able to view the reject reason and remark.
+User can add a reject response */
+        STATUS_REASON_REMARK : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=70, sysNumber=225.0, core=true, t24Name=STATUS.REASON.REMARK, mandatory=false)
+/* Optional
+If the order was previously rejected by the supervisor, user will be able to view the reject reason and remark.
+User can add a reject response */
+        STATUS_REASON_RESPONSE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=70, sysNumber=226.0, core=true, t24Name=STATUS.REASON.RESPONSE, mandatory=false)
+    }
+    PAYMENT_ORDER__ULTIMATE_CRED_ADDR_LN
+    {
+        /* Address fields of Ultimate creditor of payment. */
+        ULTIMATE_CRED_ADDR_LN : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=70, sysNumber=135.0, core=true, t24Name=ULTIMATE.CRED.ADDR.LN, mandatory=false)
+    }
+    PAYMENT_ORDER__ULTIMATE_DEBTOR_ADDR_LINE
+    {
+        /* Address fields of Ultimate debtor of payment. */
+        ULTIMATE_DEBTOR_ADDR_LINE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=70, sysNumber=125.0, core=true, t24Name=ULTIMATE.DEBTOR.ADDR.LINE, mandatory=false)
+    }
+}
+Enumerations {
+    PAYMENT_ORDER_NOTIFICATION__CREATED_BY : mml:string
+        AUTOMATIC=AUTOMATIC
+        MANUAL=MANUAL
+    PAYMENT_ORDER_NOTIFICATION__PAYMENT_COMPLETE : mml:string
+        NULL=NULL
+        YES=YES
+    PAYMENT_ORDER_NOTIFICATION__PAYMENT_SYSTEM_STATUS : mml:string
+        ACCP=ACCP
+        ACSC=ACSC
+        ACSP=ACSP
+        ACWC=ACWC
+        PNDG=PNDG
+        RJCT=RJCT
+    PAYMENT_ORDER_NOTIFICATION__STATUS : mml:string
+        NULL=NULL
+        PROCESSED=PROCESSED
+    PAYMENT_ORDER_NOTIFICATION__STATUS_REASON_CODE : mml:string
+        00=00
+        01=01
+        02=02
+        03=03
+        04=04
+        05=05
+        06=06
+        07=07
+        08=08
+        09=09
+        10=10
+        11=11
+        12=12
+        13=13
+        14=14
+        15=15
+        16=16
+        17=17
+        18=18
+        19=19
+        20=20
+        21=21
+        22=22
+        23=23
+        24=24
+        25=25
+        27=27
+        30=30
+        31=31
+        33=33
+        34=34
+        35=35
+        36=36
+        37=37
+        38=38
+        39=39
+        40=40
+        41=41
+        45=45
+        46=46
+        80=80
+        83=83
+        87=87
+        99=99
+        AB05=AB05
+        AC01=AC01
+        AC03=AC03
+        AC04=AC04
+        AC06=AC06
+        AC09=AC09
+        AG01=AG01
+        AG02=AG02
+        AG04=AG04
+        AG05=AG05
+        AG06=AG06
+        AG07=AG07
+        AG08=AG08
+        AG09=AG09
+        AG10=AG10
+        AM01=AM01
+        AM02=AM02
+        AM04=AM04
+        AM05=AM05
+        AM12=AM12
+        BE01=BE01
+        BE04=BE04
+        BE05=BE05
+        BE07=BE07
+        BE22=BE22
+        CNOR=CNOR
+        DNOR=DNOR
+        DS02=DS02
+        DS04=DS04
+        DU03=DU03
+        DUPL=DUPL
+        FF01=FF01
+        MD01=MD01
+        MD02=MD02
+        MD07=MD07
+        MS03=MS03
+        NARR=NARR
+        RC01=RC01
+        RC02=RC02
+        RC05=RC05
+        RF01=RF01
+        RR01=RR01
+        RR02=RR02
+        RR03=RR03
+        RR04=RR04
+        TM01=TM01
+        XD19=XD19
+    PAYMENT_ORDER__ACCT_WITH_BANK_POST_ADDR_TYPE : mml:string
+        ADDR=ADDR
+        BIZZ=BIZZ
+        DLVY=DLVY
+        HOME=HOME
+        MLTO=MLTO
+        PBOX=PBOX
+    PAYMENT_ORDER__AC_WITH_BR_CTRY__FC_BANK_QFR : mml:string
+        01=01
+        02=02
+        03=03
+    PAYMENT_ORDER__BENEFICIARY_OT_ID_TYPE : mml:string
+        NULL=NULL
+        ORGANISATION=ORGANISATION
+        PRIVATE=PRIVATE
+    PAYMENT_ORDER__BEN_POST_ADDRESS_TYPE : mml:string
+        ADDR=ADDR
+        BIZZ=BIZZ
+        DLVY=DLVY
+        HOME=HOME
+        MLTO=MLTO
+        PBOX=PBOX
+    PAYMENT_ORDER__BULK_PROCESSING_MODE : mml:string
+        MULTI=MULTI
+        NULL=NULL
+        SINGLE=SINGLE
+    PAYMENT_ORDER__CHARGE_BEARER : mml:string
+        BEN=BEN
+        OUR=OUR
+        SHA=SHA
+    PAYMENT_ORDER__CLEARING_CHANNEL : mml:string
+        ATBLZ=ATBLZ
+        AUBSB=AUBSB
+        BACS=BACS
+        CHAPS=CHAPS
+        CHBCC=CHBCC
+        CHSIC=CHSIC
+        CNAPS=CNAPS
+        CNCC=CNCC
+        DEBLZ=DEBLZ
+        ESNCC=ESNCC
+        FPS=FPS
+        Fedwire=Fedwire
+        GBDSC=GBDSC
+        GBDSD=GBDSD
+        HKNCC=HKNCC
+        IENCC=IENCC
+        IFSC=IFSC
+        INFSC=INFSC
+        ITNCC=ITNCC
+        NZNCC=NZNCC
+        PLKNR=PLKNR
+        PTNCC=PTNCC
+        RUCBC=RUCBC
+        SEPA=SEPA
+        SGIBG=SGIBG
+        STEP2=STEP2
+        SWIFT=SWIFT
+        USABA=USABA
+        sepa__instant__payment=sepa-instant-payment
+        sepa__transfer=sepa-transfer
+    PAYMENT_ORDER__DEBTOR_AGENT_ADDR_TYPE : mml:string
+        ADDR=ADDR
+        BIZZ=BIZZ
+        DLVY=DLVY
+        HOME=HOME
+        MLTO=MLTO
+        PBOX=PBOX
+    PAYMENT_ORDER__DEBTOR_NAME_PREFIX : mml:string
+        DOCT=DOCT
+        MADM=MADM
+        MISS=MISS
+        MIST=MIST
+    PAYMENT_ORDER__EXEMPT_FROM_SCA : mml:string
+        NO=NO
+        YES=YES
+    PAYMENT_ORDER__FRAUD_CHECK_INDICATOR : mml:string
+        FAILED=FAILED
+        HOLD=HOLD
+        PENDING=PENDING
+        SUCCESS=SUCCESS
+        TIMEOUT=TIMEOUT
+    PAYMENT_ORDER__FX_EXCH_IND : mml:string
+        FF=FF
+        FV=FV
+        VF=VF
+    PAYMENT_ORDER__FX_EXCH_REF_IND : mml:string
+        1=1
+        2=2
+        3=3
+    PAYMENT_ORDER__IAT_TXN_TYPE : mml:string
+        ANN=ANN
+        ARC=ARC
+        BOC=BOC
+        BUS=BUS
+        DEP=DEP
+        LOA=LOA
+        MIS=MIS
+        MOR=MOR
+        MTE=MTE
+        PEN=PEN
+        POP=POP
+        POS=POS
+        RCK=RCK
+        REM=REM
+        RLS=RLS
+        SAL=SAL
+        SHR=SHR
+        TAX=TAX
+        TEL=TEL
+        WEB=WEB
+    PAYMENT_ORDER__INITIATOR_POST_ADDR_TYPE : mml:string
+        ADDR=ADDR
+        BIZZ=BIZZ
+        DLVY=DLVY
+        HOME=HOME
+        MLTO=MLTO
+        PBOX=PBOX
+    PAYMENT_ORDER__INIT_OTHER_ID_TYPE : mml:string
+        ORGANISATION=ORGANISATION
+        PRIVATE=PRIVATE
+    PAYMENT_ORDER__INSTRUCTION_CODE__INSTRUCTION_CODE : mml:string
+        CHQB=CHQB
+        CORT=CORT
+        HOLD=HOLD
+        INTC=INTC
+        PHOB=PHOB
+        PHOI=PHOI
+        PHON=PHON
+        TELB=TELB
+        TELE=TELE
+        TELI=TELI
+    PAYMENT_ORDER__INTERMED_BANK_POSTAL_ADDR_TYPE : mml:string
+        ADDR=ADDR
+        BIZZ=BIZZ
+        DLVY=DLVY
+        HOME=HOME
+        MLTO=MLTO
+        PBOX=PBOX
+    PAYMENT_ORDER__INTERNAL_STATUS : mml:string
+        CANCEL=CANCEL
+        ERROR=ERROR
+        REJECT=REJECT
+        RETURN=RETURN
+    PAYMENT_ORDER__LOCAL_INSTR_CODE : mml:string
+        0002=0002
+        BTR=BTR
+        CKS=CKS
+        CTP=CTP
+        CTR=CTR
+        DEP=DEP
+        IAT=IAT
+        IN=IN
+        INST=INST
+        INSTNT01=INSTNT01
+        INSTTC01=INSTTC01
+        ONCL=ONCL
+        RTR=RTR
+        SDCL=SDCL
+        TRF=TRF
+    PAYMENT_ORDER__MANUAL_COMPLETE : mml:string
+        NULL=NULL
+        YES=YES
+    PAYMENT_ORDER__MANUAL_PAYMENT_STATUS : mml:string
+        ACCP=ACCP
+        ACSC=ACSC
+        ACSP=ACSP
+        ACWC=ACWC
+        PNDG=PNDG
+        RJCT=RJCT
+    PAYMENT_ORDER__ONUS_INDICATOR : mml:string
+        NO=NO
+        YES=YES
+    PAYMENT_ORDER__ORDERING_OT_ID_TYPE : mml:string
+        NULL=NULL
+        ORGANISATION=ORGANISATION
+        PRIVATE=PRIVATE
+    PAYMENT_ORDER__ORDERING_POST_ADDRESS_TYPE : mml:string
+        ADDR=ADDR
+        BIZZ=BIZZ
+        DLVY=DLVY
+        HOME=HOME
+        MLTO=MLTO
+        PBOX=PBOX
+    PAYMENT_ORDER__ORDER_INITIATION_TYPE : mml:string
+        ACCLM=ACCLM
+        ACCLOSE=ACCLOSE
+        AD=AD
+        AG=AG
+        AL=AL
+        AR=AR
+        BX=BX
+        CERTCQ=CERTCQ
+        DEBORDER=DEBORDER
+        ESTXPY=ESTXPY
+        FL=FL
+        INSPAY=INSPAY
+        ISAINT=ISAINT
+        MISCPY=MISCPY
+        POA=POA
+        RW=RW
+        STO=STO
+        USACH=USACH
+    PAYMENT_ORDER__ORDER_TYPE : mml:string
+        BANK=BANK
+        CUSTOMER=CUSTOMER
+    PAYMENT_ORDER__PAYMENT_CATEGORYPURP_PRTY : mml:string
+        0=0
+        1=1
+        2=2
+        3=3
+        4=4
+        5=5
+        6=6
+        7=7
+        8=8
+        9=9
+        A=A
+        B=B
+        Branch__Institution=Branch-Institution
+        C=C
+        D=D
+        EMAIL=EMAIL
+        Internet__Banking=Internet-Banking
+        Letter=Letter
+        MobilePaymentServices=MobilePaymentServices
+        Telephone__Banking=Telephone-Banking
+    PAYMENT_ORDER__PAYMENT_COMPLETE : mml:string
+        NULL=NULL
+        YES=YES
+    PAYMENT_ORDER__PAYMENT_METHOD : mml:string
+        CreditTransfer=CreditTransfer
+        TRF=TRF
+    PAYMENT_ORDER__PAYMENT_SYSTEM : mml:string
+        EXTERNAL=EXTERNAL
+        FT=FT
+        TPS=TPS
+    PAYMENT_ORDER__PAYMENT_SYSTEM_STATUS : mml:string
+        ACCP=ACCP
+        ACSC=ACSC
+        ACSP=ACSP
+        ACWC=ACWC
+        PNDG=PNDG
+        RJCT=RJCT
+    PAYMENT_ORDER__PSD_COMPLIANT : mml:string
+        C=C
+        D=D
+        I=I
+        N=N
+        PSD_NOK=PSD.NOK
+        PSD_NON=PSD.NON
+        PSD_OK=PSD.OK
+        Y=Y
+    PAYMENT_ORDER__PURPOSE_PROPRIETARY : mml:string
+        ALQ=ALQ
+        CUO=CUO
+        EXP=EXP
+        FAC=FAC
+        HAB=HAB
+        HON=HON
+        OIN=OIN
+        PRE=PRE
+        SEG=SEG
+        VAR=VAR
+    PAYMENT_ORDER__PYMT_EXTRACTED : mml:string
+        NO=NO
+        YES=YES
+    PAYMENT_ORDER__PYMT_INFO_SER_LEVEL_CODE : mml:string
+        99=99
+        BKTR=BKTR
+        FEDWIRE_BTR__1000=FEDWIRE.BTR-1000
+        FEDWIRE_BTR__1002=FEDWIRE.BTR-1002
+        FEDWIRE_BTR__1008=FEDWIRE.BTR-1008
+        FEDWIRE_BTR__1500=FEDWIRE.BTR-1500
+        FEDWIRE_BTR__1502=FEDWIRE.BTR-1502
+        FEDWIRE_BTR__1508=FEDWIRE.BTR-1508
+        FEDWIRE_BTR__1600=FEDWIRE.BTR-1600
+        FEDWIRE_BTR__1602=FEDWIRE.BTR-1602
+        FEDWIRE_BTR__1608=FEDWIRE.BTR-1608
+        FEDWIRE_CKS__1600=FEDWIRE.CKS-1600
+        FEDWIRE_CKS__1602=FEDWIRE.CKS-1602
+        FEDWIRE_CKS__1608=FEDWIRE.CKS-1608
+        FEDWIRE_CTP__1000=FEDWIRE.CTP-1000
+        FEDWIRE_CTP__1002=FEDWIRE.CTP-1002
+        FEDWIRE_CTP__1008=FEDWIRE.CTP-1008
+        FEDWIRE_CTP__1500=FEDWIRE.CTP-1500
+        FEDWIRE_CTP__1502=FEDWIRE.CTP-1502
+        FEDWIRE_CTP__1508=FEDWIRE.CTP-1508
+        FEDWIRE_CTP__1600=FEDWIRE.CTP-1600
+        FEDWIRE_CTP__1602=FEDWIRE.CTP-1602
+        FEDWIRE_CTP__1608=FEDWIRE.CTP-1608
+        FEDWIRE_CTR__1000=FEDWIRE.CTR-1000
+        FEDWIRE_CTR__1002=FEDWIRE.CTR-1002
+        FEDWIRE_CTR__1008=FEDWIRE.CTR-1008
+        FEDWIRE_CTR__1500=FEDWIRE.CTR-1500
+        FEDWIRE_CTR__1502=FEDWIRE.CTR-1502
+        FEDWIRE_CTR__1508=FEDWIRE.CTR-1508
+        FEDWIRE_CTR__1600=FEDWIRE.CTR-1600
+        FEDWIRE_CTR__1602=FEDWIRE.CTR-1602
+        FEDWIRE_CTR__1608=FEDWIRE.CTR-1608
+        FEDWIRE_DEP__1600=FEDWIRE.DEP-1600
+        FEDWIRE_DEP__1602=FEDWIRE.DEP-1602
+        FEDWIRE_DEP__1608=FEDWIRE.DEP-1608
+        FEDWIRE_DRW__1032=FEDWIRE.DRW-1032
+        FEDWIRE_DRW__1632=FEDWIRE.DRW-1632
+        FEDWIRE_FFR__1600=FEDWIRE.FFR-1600
+        FEDWIRE_FFR__1602=FEDWIRE.FFR-1602
+        FEDWIRE_FFR__1608=FEDWIRE.FFR-1608
+        FEDWIRE_FFS__1600=FEDWIRE.FFS-1600
+        FEDWIRE_FFS__1602=FEDWIRE.FFS-1602
+        FEDWIRE_FFS__1608=FEDWIRE.FFS-1608
+        NUGP=NUGP
+        NURG=NURG
+        PRPT=PRPT
+        SDVA=SDVA
+        SEPA=SEPA
+        URGP=URGP
+        URNS=URNS
+    PAYMENT_ORDER__RDFI_IDNUM_QFR : mml:string
+        01=01
+        02=02
+        03=03
+    PAYMENT_ORDER__REG_DEBTOR_CREDITOR_RPT__REG_DEBTOR_CREDITOR_RPT : mml:string
+        BOTH=BOTH
+        CRED=CRED
+        DEBT=DEBT
+    PAYMENT_ORDER__REG_DEBTOR_CREDITOR_RPT__REG_REP_TYPE__REG_REP_CODE : mml:string
+        CredTranID=CredTranID
+        CustomerID=CustomerID
+        InvoiceID=InvoiceID
+        LoyaltyID=LoyaltyID
+        MerchDevID=MerchDevID
+        NAVCheckID=NAVCheckID
+        ShopID=ShopID
+    PAYMENT_ORDER__SEC_CODE : mml:string
+        CIE=CIE
+        IAT=IAT
+        PPD=PPD
+        TEL=TEL
+        WEB=WEB
+    PAYMENT_ORDER__SOURCE : mml:string
+        Manual=Manual
+        NULL=NULL
+        UPLOAD=UPLOAD
+    PAYMENT_ORDER__STATUS_REASON_CODE : mml:string
+        00=00
+        01=01
+        02=02
+        03=03
+        04=04
+        05=05
+        06=06
+        07=07
+        08=08
+        09=09
+        10=10
+        11=11
+        12=12
+        13=13
+        14=14
+        15=15
+        16=16
+        17=17
+        18=18
+        19=19
+        20=20
+        21=21
+        22=22
+        23=23
+        24=24
+        25=25
+        27=27
+        30=30
+        31=31
+        33=33
+        34=34
+        35=35
+        36=36
+        37=37
+        38=38
+        39=39
+        40=40
+        41=41
+        45=45
+        46=46
+        80=80
+        83=83
+        87=87
+        99=99
+        AB05=AB05
+        AC01=AC01
+        AC03=AC03
+        AC04=AC04
+        AC06=AC06
+        AC09=AC09
+        AG01=AG01
+        AG02=AG02
+        AG04=AG04
+        AG05=AG05
+        AG06=AG06
+        AG07=AG07
+        AG08=AG08
+        AG09=AG09
+        AG10=AG10
+        AM01=AM01
+        AM02=AM02
+        AM04=AM04
+        AM05=AM05
+        AM12=AM12
+        BE01=BE01
+        BE04=BE04
+        BE05=BE05
+        BE07=BE07
+        BE22=BE22
+        CNOR=CNOR
+        DNOR=DNOR
+        DS02=DS02
+        DS04=DS04
+        DU03=DU03
+        DUPL=DUPL
+        FF01=FF01
+        MD01=MD01
+        MD02=MD02
+        MD07=MD07
+        MS03=MS03
+        NARR=NARR
+        RC01=RC01
+        RC02=RC02
+        RC05=RC05
+        RF01=RF01
+        RR01=RR01
+        RR02=RR02
+        RR03=RR03
+        RR04=RR04
+        TM01=TM01
+        XD19=XD19
+    PAYMENT_ORDER__STRUCTURED_COMMUNICATION_CODE : mml:string
+        DISP=DISP
+        FXDR=FXDR
+        PUOR=PUOR
+        RADM=RADM
+        RPIN=RPIN
+        SCOR=SCOR
+    PAYMENT_ORDER__SUBMIT_ORDER : mml:string
+        NO=NO
+        YES=YES
+    PAYMENT_ORDER__TC_SIM_CHECKED : mml:string
+        NO=NO
+        YES=YES
+    PAYMENT_ORDER__TXN_CODE : mml:string
+        22=22
+        32=32
+    PAYMENT_ORDER__ULTIMATE_CREDITOR_ADDR_TYPE : mml:string
+        ADDR=ADDR
+        BIZZ=BIZZ
+        DLVY=DLVY
+        HOME=HOME
+        MLTO=MLTO
+        PBOX=PBOX
+    PAYMENT_ORDER__ULTIMATE_CREDITOR_OT_ID_TYPE : mml:string
+        NULL=NULL
+        ORGANISATION=ORGANISATION
+        PRIVATE=PRIVATE
+    PAYMENT_ORDER__ULTIMATE_DEBTOR_ADDR_TYPE : mml:string
+        ADDR=ADDR
+        BIZZ=BIZZ
+        DLVY=DLVY
+        HOME=HOME
+        MLTO=MLTO
+        PBOX=PBOX
+    PAYMENT_ORDER__ULTIMATE_DEBTOR_OT_ID_TYPE : mml:string
+        NULL=NULL
+        ORGANISATION=ORGANISATION
+        PRIVATE=PRIVATE
+    PAYMENT_ORDER__USER_ACTION : mml:string
+        Authorise=Authorise
+        Cancel=Cancel
+        Discard=Discard
+        NULL=NULL
+        Reject=Reject
+    PAYMENT_ORDER__WAIVE_ALL_CHARGES : mml:string
+        NULL=NULL
+        YES=YES
+}

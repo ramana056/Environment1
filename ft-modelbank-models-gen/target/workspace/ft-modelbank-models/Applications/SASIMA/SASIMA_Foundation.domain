@@ -1,0 +1,1783 @@
+# UTF-8
+/* Component for SASIMA Foundation */
+Domain SASIMA_Foundation
+    @t24:i (module=SASIMA)
+    @java:Package (value=com.temenos.t24.datamodel.sasima.sasima_foundation)
+namespace "http://www.temenos.com/t24/SASIMA_Foundation"
+metamodelVersion 1.30.6
+Classes {
+    SASIMA_ENQUIRY_RESPONSE
+        @i18n:Description (en="")
+        @t24:i (t24Name=SASIMA.ENQUIRY.RESPONSE, level=C, type=L, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        ACCOUNT_TYPE : T24BusinessTypes:ANY
+            @i18n:Label (en="Account Type")
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=7.0, core=true, t24Name=ACCOUNT.TYPE, mandatory=false)
+        AMOUNT : T24BusinessTypes:ANY
+            @i18n:Label (en=Amount)
+            @i18n:Tooltip (en="Indicates the Amount")
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=8.0, core=true, t24Name=AMOUNT, mandatory=false)
+        CAPL -> byValue SASIMA_Foundation:SASIMA_ENQUIRY_RESPONSE__CAPL *
+            @t24:i (t24Name=CAPL)
+        CUSTOMER_CODE : T24BusinessTypes:A
+            @i18n:Label (en=Customer)
+            @t24:i (align=L, inputBehaviour=I, maxLength=16, sysNumber=178.0, core=true, t24Name=CUSTOMER.CODE, mandatory=false)
+        ENQUIRY_NO : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=4.0, core=true, t24Name=ENQUIRY.NO, mandatory=false)
+        ENQUIRY_REFERENCE : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=1.0, core=true, t24Name=ENQUIRY.REFERENCE, mandatory=false)
+        ENQUIRY_TYPE : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=2.0, core=true, t24Name=ENQUIRY.TYPE, mandatory=false)
+        MBR_STS : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=10.0, core=true, t24Name=MBR.STS, mandatory=false)
+        MBR_TYPE : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=9.0, core=true, t24Name=MBR.TYPE, mandatory=false)
+        NO_OF_APPLICANTS : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=6.0, core=true, t24Name=NO.OF.APPLICANTS, mandatory=false)
+        PRODUCT_TYPE : T24BusinessTypes:ANY
+            @i18n:Label (en="Product Type")
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=5.0, core=true, t24Name=PRODUCT.TYPE, mandatory=false)
+        REFERENCE_ID -> SASIMA_Foundation:SASIMA_ENQUIRY_RESPONSE PK required
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=0.0, core=true, businessType=ANY, t24Name=REFERENCE.ID, mandatory=true)
+        REPORT_DATE : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=3.0, core=true, t24Name=REPORT.DATE, mandatory=false)
+        RESERVED_1 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=179.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_10 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=188.0, core=true, t24Name=RESERVED.10, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=180.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=181.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=182.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        RESERVED_5 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=183.0, core=true, t24Name=RESERVED.5, mandatory=false)
+        RESERVED_6 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=184.0, core=true, t24Name=RESERVED.6, mandatory=false)
+        RESERVED_7 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=185.0, core=true, t24Name=RESERVED.7, mandatory=false)
+        RESERVED_8 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=186.0, core=true, t24Name=RESERVED.8, mandatory=false)
+        RESERVED_9 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=187.0, core=true, t24Name=RESERVED.9, mandatory=false)
+    }
+    SASIMA_ENQUIRY_RESPONSE__CAPL
+    {
+        ACDOB : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=39.0, core=true, t24Name=ACDOB, mandatory=false)
+        ACEML : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=43.0, core=true, t24Name=ACEML, mandatory=false)
+        ACGND : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=40.0, core=true, t24Name=ACGND, mandatory=false)
+        ACMAR : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=41.0, core=true, t24Name=ACMAR, mandatory=false)
+        ACNAT : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=42.0, core=true, t24Name=ACNAT, mandatory=false)
+        ACNM1A -> byValue SASIMA_Foundation:SASIMA_ENQUIRY_RESPONSE__CAPL__ACNM1A *
+            @t24:i (t24Name=ACNM1A)
+        ACNM1E -> byValue SASIMA_Foundation:SASIMA_ENQUIRY_RESPONSE__CAPL__ACNM1E *
+            @t24:i (t24Name=ACNM1E)
+        ACNM2A -> byValue SASIMA_Foundation:SASIMA_ENQUIRY_RESPONSE__CAPL__ACNM2A *
+            @t24:i (t24Name=ACNM2A)
+        ACNM2E -> byValue SASIMA_Foundation:SASIMA_ENQUIRY_RESPONSE__CAPL__ACNM2E *
+            @t24:i (t24Name=ACNM2E)
+        ACNM3A -> byValue SASIMA_Foundation:SASIMA_ENQUIRY_RESPONSE__CAPL__ACNM3A *
+            @t24:i (t24Name=ACNM3A)
+        ACNM3E -> byValue SASIMA_Foundation:SASIMA_ENQUIRY_RESPONSE__CAPL__ACNM3E *
+            @t24:i (t24Name=ACNM3E)
+        ACNM7A -> byValue SASIMA_Foundation:SASIMA_ENQUIRY_RESPONSE__CAPL__ACNM7A *
+            @t24:i (t24Name=ACNM7A)
+        ACNM7E -> byValue SASIMA_Foundation:SASIMA_ENQUIRY_RESPONSE__CAPL__ACNM7E *
+            @t24:i (t24Name=ACNM7E)
+        ACNMFA -> byValue SASIMA_Foundation:SASIMA_ENQUIRY_RESPONSE__CAPL__ACNMFA *
+            @t24:i (t24Name=ACNMFA)
+        ACNMFE -> byValue SASIMA_Foundation:SASIMA_ENQUIRY_RESPONSE__CAPL__ACNMFE *
+            @t24:i (t24Name=ACNMFE)
+        BC_PRD -> byValue SASIMA_Foundation:SASIMA_ENQUIRY_RESPONSE__CAPL__BC_PRD *
+            @t24:i (t24Name=BC.PRD)
+        CAPL : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=11.0, core=true, t24Name=CAPL, mandatory=false)
+        CA_CAD1A -> byValue SASIMA_Foundation:SASIMA_ENQUIRY_RESPONSE__CAPL__CA_CAD1A *
+            @t24:i (t24Name=CA.CAD1A)
+        CA_CAD1E -> byValue SASIMA_Foundation:SASIMA_ENQUIRY_RESPONSE__CAPL__CA_CAD1E *
+            @t24:i (t24Name=CA.CAD1E)
+        CA_CAD2A -> byValue SASIMA_Foundation:SASIMA_ENQUIRY_RESPONSE__CAPL__CA_CAD2A *
+            @t24:i (t24Name=CA.CAD2A)
+        CA_CAD2E -> byValue SASIMA_Foundation:SASIMA_ENQUIRY_RESPONSE__CAPL__CA_CAD2E *
+            @t24:i (t24Name=CA.CAD2E)
+        CA_CAD6 -> byValue SASIMA_Foundation:SASIMA_ENQUIRY_RESPONSE__CAPL__CA_CAD6 *
+            @t24:i (t24Name=CA.CAD6)
+        CA_CAD7 -> byValue SASIMA_Foundation:SASIMA_ENQUIRY_RESPONSE__CAPL__CA_CAD7 *
+            @t24:i (t24Name=CA.CAD7)
+        CA_CAD8A -> byValue SASIMA_Foundation:SASIMA_ENQUIRY_RESPONSE__CAPL__CA_CAD8A *
+            @t24:i (t24Name=CA.CAD8A)
+        CA_CAD8E -> byValue SASIMA_Foundation:SASIMA_ENQUIRY_RESPONSE__CAPL__CA_CAD8E *
+            @t24:i (t24Name=CA.CAD8E)
+        CA_CAD9 -> byValue SASIMA_Foundation:SASIMA_ENQUIRY_RESPONSE__CAPL__CA_CAD9 *
+            @t24:i (t24Name=CA.CAD9)
+        CA_CADT -> byValue SASIMA_Foundation:SASIMA_ENQUIRY_RESPONSE__CAPL__CA_CADT *
+            @t24:i (t24Name=CA.CADT)
+        CA_LOAD_DT -> byValue SASIMA_Foundation:SASIMA_ENQUIRY_RESPONSE__CAPL__CA_LOAD_DT *
+            @t24:i (t24Name=CA.LOAD.DT)
+        CCN1 -> byValue SASIMA_Foundation:SASIMA_ENQUIRY_RESPONSE__CAPL__CCN1 *
+            @t24:i (t24Name=CCN1)
+        CCN2 -> byValue SASIMA_Foundation:SASIMA_ENQUIRY_RESPONSE__CAPL__CCN2 *
+            @t24:i (t24Name=CCN2)
+        CCN3 -> byValue SASIMA_Foundation:SASIMA_ENQUIRY_RESPONSE__CAPL__CCN3 *
+            @t24:i (t24Name=CCN3)
+        CCN4 -> byValue SASIMA_Foundation:SASIMA_ENQUIRY_RESPONSE__CAPL__CCN4 *
+            @t24:i (t24Name=CCN4)
+        CCN5 -> byValue SASIMA_Foundation:SASIMA_ENQUIRY_RESPONSE__CAPL__CCN5 *
+            @t24:i (t24Name=CCN5)
+        CID1 : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=12.0, core=true, t24Name=CID1, mandatory=false)
+        CID2 : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=13.0, core=true, t24Name=CID2, mandatory=false)
+        CID3 : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=14.0, core=true, t24Name=CID3, mandatory=false)
+        CI_CRDTR -> byValue SASIMA_Foundation:SASIMA_ENQUIRY_RESPONSE__CAPL__CI_CRDTR *
+            @t24:i (t24Name=CI.CRDTR)
+        CNT_CI -> byValue SASIMA_Foundation:SASIMA_ENQUIRY_RESPONSE__CAPL__CNT_CI *
+            @t24:i (t24Name=CNT.CI)
+        CNT_DEF : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=162.0, core=true, t24Name=CNT.DEF, mandatory=false)
+        CNT_GCI -> byValue SASIMA_Foundation:SASIMA_ENQUIRY_RESPONSE__CAPL__CNT_GCI *
+            @t24:i (t24Name=CNT.GCI)
+        CNT_MTDE : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=159.0, core=true, t24Name=CNT.MTDE, mandatory=false)
+        CNT_PE : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=158.0, core=true, t24Name=CNT.PE, mandatory=false)
+        CUR_DB : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=169.0, core=true, t24Name=CUR.DB, mandatory=false)
+        CVIP : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=15.0, core=true, t24Name=CVIP, mandatory=false)
+        DF_PRD -> byValue SASIMA_Foundation:SASIMA_ENQUIRY_RESPONSE__CAPL__DF_PRD *
+            @t24:i (t24Name=DF.PRD)
+        DI_TEXT : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=176.0, core=true, t24Name=DI.TEXT, mandatory=false)
+        DI_TEXT_AR : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=177.0, core=true, t24Name=DI.TEXT.AR, mandatory=false)
+        EAD1A -> byValue SASIMA_Foundation:SASIMA_ENQUIRY_RESPONSE__CAPL__EAD1A *
+            @t24:i (t24Name=EAD1A)
+        EAD1E -> byValue SASIMA_Foundation:SASIMA_ENQUIRY_RESPONSE__CAPL__EAD1E *
+            @t24:i (t24Name=EAD1E)
+        EAD2A -> byValue SASIMA_Foundation:SASIMA_ENQUIRY_RESPONSE__CAPL__EAD2A *
+            @t24:i (t24Name=EAD2A)
+        EAD2E -> byValue SASIMA_Foundation:SASIMA_ENQUIRY_RESPONSE__CAPL__EAD2E *
+            @t24:i (t24Name=EAD2E)
+        EAD6 -> byValue SASIMA_Foundation:SASIMA_ENQUIRY_RESPONSE__CAPL__EAD6 *
+            @t24:i (t24Name=EAD6)
+        EAD7 -> byValue SASIMA_Foundation:SASIMA_ENQUIRY_RESPONSE__CAPL__EAD7 *
+            @t24:i (t24Name=EAD7)
+        EAD8A -> byValue SASIMA_Foundation:SASIMA_ENQUIRY_RESPONSE__CAPL__EAD8A *
+            @t24:i (t24Name=EAD8A)
+        EAD8E -> byValue SASIMA_Foundation:SASIMA_ENQUIRY_RESPONSE__CAPL__EAD8E *
+            @t24:i (t24Name=EAD8E)
+        EAD9 -> byValue SASIMA_Foundation:SASIMA_ENQUIRY_RESPONSE__CAPL__EAD9 *
+            @t24:i (t24Name=EAD9)
+        EADT -> byValue SASIMA_Foundation:SASIMA_ENQUIRY_RESPONSE__CAPL__EADT *
+            @t24:i (t24Name=EADT)
+        EIID -> byValue SASIMA_Foundation:SASIMA_ENQUIRY_RESPONSE__CAPL__EIID *
+            @t24:i (t24Name=EIID)
+        EJ_ENFORCE_DATE -> byValue SASIMA_Foundation:SASIMA_ENQUIRY_RESPONSE__CAPL__EJ_ENFORCE_DATE *
+            @t24:i (t24Name=EJ.ENFORCE.DATE)
+        ENMA -> byValue SASIMA_Foundation:SASIMA_ENQUIRY_RESPONSE__CAPL__ENMA *
+            @t24:i (t24Name=ENMA)
+        ENME -> byValue SASIMA_Foundation:SASIMA_ENQUIRY_RESPONSE__CAPL__ENME *
+            @t24:i (t24Name=ENME)
+        EOCA -> byValue SASIMA_Foundation:SASIMA_ENQUIRY_RESPONSE__CAPL__EOCA *
+            @t24:i (t24Name=EOCA)
+        EOCE -> byValue SASIMA_Foundation:SASIMA_ENQUIRY_RESPONSE__CAPL__EOCE *
+            @t24:i (t24Name=EOCE)
+        ETYP -> byValue SASIMA_Foundation:SASIMA_ENQUIRY_RESPONSE__CAPL__ETYP *
+            @t24:i (t24Name=ETYP)
+        NA_LOADED_BY : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=116.0, core=true, t24Name=NA.LOADED.BY, mandatory=false)
+        NA_LOAD_DT : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=115.0, core=true, t24Name=NA.LOAD.DT, mandatory=false)
+        NA_TEXT : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=118.0, core=true, t24Name=NA.TEXT, mandatory=false)
+        NA_TEXT_AR : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=119.0, core=true, t24Name=NA.TEXT.AR, mandatory=false)
+        NA_TYPE : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=117.0, core=true, t24Name=NA.TYPE, mandatory=false)
+        PCDOB : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=24.0, core=true, t24Name=PCDOB, mandatory=false)
+        PCEML : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=28.0, core=true, t24Name=PCEML, mandatory=false)
+        PCGND : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=25.0, core=true, t24Name=PCGND, mandatory=false)
+        PCMAR : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=26.0, core=true, t24Name=PCMAR, mandatory=false)
+        PCNAT : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=27.0, core=true, t24Name=PCNAT, mandatory=false)
+        PCNM1A -> byValue SASIMA_Foundation:SASIMA_ENQUIRY_RESPONSE__CAPL__PCNM1A *
+            @t24:i (t24Name=PCNM1A)
+        PCNM1E -> byValue SASIMA_Foundation:SASIMA_ENQUIRY_RESPONSE__CAPL__PCNM1E *
+            @t24:i (t24Name=PCNM1E)
+        PCNM2A -> byValue SASIMA_Foundation:SASIMA_ENQUIRY_RESPONSE__CAPL__PCNM2A *
+            @t24:i (t24Name=PCNM2A)
+        PCNM2E -> byValue SASIMA_Foundation:SASIMA_ENQUIRY_RESPONSE__CAPL__PCNM2E *
+            @t24:i (t24Name=PCNM2E)
+        PCNM3A -> byValue SASIMA_Foundation:SASIMA_ENQUIRY_RESPONSE__CAPL__PCNM3A *
+            @t24:i (t24Name=PCNM3A)
+        PCNM3E -> byValue SASIMA_Foundation:SASIMA_ENQUIRY_RESPONSE__CAPL__PCNM3E *
+            @t24:i (t24Name=PCNM3E)
+        PCNMFA -> byValue SASIMA_Foundation:SASIMA_ENQUIRY_RESPONSE__CAPL__PCNMFA *
+            @t24:i (t24Name=PCNMFA)
+        PCNMFE -> byValue SASIMA_Foundation:SASIMA_ENQUIRY_RESPONSE__CAPL__PCNMFE *
+            @t24:i (t24Name=PCNMFE)
+        PE_DATE -> byValue SASIMA_Foundation:SASIMA_ENQUIRY_RESPONSE__CAPL__PE_DATE *
+            @t24:i (t24Name=PE.DATE)
+        PE_NM1A -> byValue SASIMA_Foundation:SASIMA_ENQUIRY_RESPONSE__CAPL__PE_NM1A *
+            @t24:i (t24Name=PE.NM1A)
+        PE_NM1E -> byValue SASIMA_Foundation:SASIMA_ENQUIRY_RESPONSE__CAPL__PE_NM1E *
+            @t24:i (t24Name=PE.NM1E)
+        PE_NM2A -> byValue SASIMA_Foundation:SASIMA_ENQUIRY_RESPONSE__CAPL__PE_NM2A *
+            @t24:i (t24Name=PE.NM2A)
+        PE_NM2E -> byValue SASIMA_Foundation:SASIMA_ENQUIRY_RESPONSE__CAPL__PE_NM2E *
+            @t24:i (t24Name=PE.NM2E)
+        PE_NM3A -> byValue SASIMA_Foundation:SASIMA_ENQUIRY_RESPONSE__CAPL__PE_NM3A *
+            @t24:i (t24Name=PE.NM3A)
+        PE_NM3E -> byValue SASIMA_Foundation:SASIMA_ENQUIRY_RESPONSE__CAPL__PE_NM3E *
+            @t24:i (t24Name=PE.NM3E)
+        PE_NMFA -> byValue SASIMA_Foundation:SASIMA_ENQUIRY_RESPONSE__CAPL__PE_NMFA *
+            @t24:i (t24Name=PE.NMFA)
+        PE_NMFE -> byValue SASIMA_Foundation:SASIMA_ENQUIRY_RESPONSE__CAPL__PE_NMFE *
+            @t24:i (t24Name=PE.NMFE)
+        PE_RSN -> byValue SASIMA_Foundation:SASIMA_ENQUIRY_RESPONSE__CAPL__PE_RSN *
+            @t24:i (t24Name=PE.RSN)
+        PN_COMMENT -> byValue SASIMA_Foundation:SASIMA_ENQUIRY_RESPONSE__CAPL__PN_COMMENT *
+            @t24:i (t24Name=PN.COMMENT)
+        PN_COMMENT_AR -> byValue SASIMA_Foundation:SASIMA_ENQUIRY_RESPONSE__CAPL__PN_COMMENT_AR *
+            @t24:i (t24Name=PN.COMMENT.AR)
+        PN_LOAD_DT -> byValue SASIMA_Foundation:SASIMA_ENQUIRY_RESPONSE__CAPL__PN_LOAD_DT *
+            @t24:i (t24Name=PN.LOAD.DT)
+        PN_PUBLICATION -> byValue SASIMA_Foundation:SASIMA_ENQUIRY_RESPONSE__CAPL__PN_PUBLICATION *
+            @t24:i (t24Name=PN.PUBLICATION)
+        PN_PUBLICATION_AR -> byValue SASIMA_Foundation:SASIMA_ENQUIRY_RESPONSE__CAPL__PN_PUBLICATION_AR *
+            @t24:i (t24Name=PN.PUBLICATION.AR)
+        SC_MAXIMUM : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=175.0, core=true, t24Name=SC.MAXIMUM, mandatory=false)
+        SC_MINIMUM : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=174.0, core=true, t24Name=SC.MINIMUM, mandatory=false)
+        SC_REASON_CODE -> byValue SASIMA_Foundation:SASIMA_ENQUIRY_RESPONSE__CAPL__SC_REASON_CODE *
+            @t24:i (t24Name=SC.REASON.CODE)
+        SC_SCORE : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=170.0, core=true, t24Name=SC.SCORE, mandatory=false)
+        SC_SCORECARD : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=172.0, core=true, t24Name=SC.SCORECARD, mandatory=false)
+        SC_SCOREINDEX : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=173.0, core=true, t24Name=SC.SCOREINDEX, mandatory=false)
+        TOT_DEF : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=168.0, core=true, t24Name=TOT.DEF, mandatory=false)
+        TOT_GLIAB -> byValue SASIMA_Foundation:SASIMA_ENQUIRY_RESPONSE__CAPL__TOT_GLIAB *
+            @t24:i (t24Name=TOT.GLIAB)
+        TOT_GLIM -> byValue SASIMA_Foundation:SASIMA_ENQUIRY_RESPONSE__CAPL__TOT_GLIM *
+            @t24:i (t24Name=TOT.GLIM)
+        TOT_LIAB -> byValue SASIMA_Foundation:SASIMA_ENQUIRY_RESPONSE__CAPL__TOT_LIAB *
+            @t24:i (t24Name=TOT.LIAB)
+        TOT_LIM -> byValue SASIMA_Foundation:SASIMA_ENQUIRY_RESPONSE__CAPL__TOT_LIM *
+            @t24:i (t24Name=TOT.LIM)
+    }
+    SASIMA_ENQUIRY_RESPONSE__CAPL__ACNM1A
+    {
+        ACNM1A : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=30.0, core=true, t24Name=ACNM1A, mandatory=false)
+    }
+    SASIMA_ENQUIRY_RESPONSE__CAPL__ACNM1E
+    {
+        ACNM1E : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=35.0, core=true, t24Name=ACNM1E, mandatory=false)
+    }
+    SASIMA_ENQUIRY_RESPONSE__CAPL__ACNM2A
+    {
+        ACNM2A : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=31.0, core=true, t24Name=ACNM2A, mandatory=false)
+    }
+    SASIMA_ENQUIRY_RESPONSE__CAPL__ACNM2E
+    {
+        ACNM2E : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=36.0, core=true, t24Name=ACNM2E, mandatory=false)
+    }
+    SASIMA_ENQUIRY_RESPONSE__CAPL__ACNM3A
+    {
+        ACNM3A : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=32.0, core=true, t24Name=ACNM3A, mandatory=false)
+    }
+    SASIMA_ENQUIRY_RESPONSE__CAPL__ACNM3E
+    {
+        ACNM3E : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=37.0, core=true, t24Name=ACNM3E, mandatory=false)
+    }
+    SASIMA_ENQUIRY_RESPONSE__CAPL__ACNM7A
+    {
+        ACNM7A : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=33.0, core=true, t24Name=ACNM7A, mandatory=false)
+    }
+    SASIMA_ENQUIRY_RESPONSE__CAPL__ACNM7E
+    {
+        ACNM7E : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=38.0, core=true, t24Name=ACNM7E, mandatory=false)
+    }
+    SASIMA_ENQUIRY_RESPONSE__CAPL__ACNMFA
+    {
+        ACNMFA : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=29.0, core=true, t24Name=ACNMFA, mandatory=false)
+    }
+    SASIMA_ENQUIRY_RESPONSE__CAPL__ACNMFE
+    {
+        ACNMFE : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=34.0, core=true, t24Name=ACNMFE, mandatory=false)
+    }
+    SASIMA_ENQUIRY_RESPONSE__CAPL__BC_PRD
+    {
+        BC_CHECK_NO : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=91.0, core=true, t24Name=BC.CHECK.NO, mandatory=false)
+        BC_CRDTR : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=90.0, core=true, t24Name=BC.CRDTR, mandatory=false)
+        BC_CUB : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=94.0, core=true, t24Name=BC.CUB, mandatory=false)
+        BC_LOAD_DT : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=92.0, core=true, t24Name=BC.LOAD.DT, mandatory=false)
+        BC_ORIG_AMT : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=93.0, core=true, t24Name=BC.ORIG.AMT, mandatory=false)
+        BC_PRD : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=89.0, core=true, t24Name=BC.PRD, mandatory=false)
+        BC_SETTLD_DATE : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=96.0, core=true, t24Name=BC.SETTLD.DATE, mandatory=false)
+        BC_STAT : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=95.0, core=true, t24Name=BC.STAT, mandatory=false)
+    }
+    SASIMA_ENQUIRY_RESPONSE__CAPL__CA_CAD1A
+    {
+        CA_CAD1A : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=122.0, core=true, t24Name=CA.CAD1A, mandatory=false)
+    }
+    SASIMA_ENQUIRY_RESPONSE__CAPL__CA_CAD1E
+    {
+        CA_CAD1E : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=124.0, core=true, t24Name=CA.CAD1E, mandatory=false)
+    }
+    SASIMA_ENQUIRY_RESPONSE__CAPL__CA_CAD2A
+    {
+        CA_CAD2A : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=123.0, core=true, t24Name=CA.CAD2A, mandatory=false)
+    }
+    SASIMA_ENQUIRY_RESPONSE__CAPL__CA_CAD2E
+    {
+        CA_CAD2E : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=125.0, core=true, t24Name=CA.CAD2E, mandatory=false)
+    }
+    SASIMA_ENQUIRY_RESPONSE__CAPL__CA_CAD6
+    {
+        CA_CAD6 : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=126.0, core=true, t24Name=CA.CAD6, mandatory=false)
+    }
+    SASIMA_ENQUIRY_RESPONSE__CAPL__CA_CAD7
+    {
+        CA_CAD7 : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=127.0, core=true, t24Name=CA.CAD7, mandatory=false)
+    }
+    SASIMA_ENQUIRY_RESPONSE__CAPL__CA_CAD8A
+    {
+        CA_CAD8A : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=128.0, core=true, t24Name=CA.CAD8A, mandatory=false)
+    }
+    SASIMA_ENQUIRY_RESPONSE__CAPL__CA_CAD8E
+    {
+        CA_CAD8E : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=129.0, core=true, t24Name=CA.CAD8E, mandatory=false)
+    }
+    SASIMA_ENQUIRY_RESPONSE__CAPL__CA_CAD9
+    {
+        CA_CAD9 : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=130.0, core=true, t24Name=CA.CAD9, mandatory=false)
+        RESERVED_27 : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=N, maxLength=65, sysNumber=131.0, core=true, t24Name=RESERVED.27, mandatory=false)
+    }
+    SASIMA_ENQUIRY_RESPONSE__CAPL__CA_CADT
+    {
+        CA_CADT : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=121.0, core=true, t24Name=CA.CADT, mandatory=false)
+    }
+    SASIMA_ENQUIRY_RESPONSE__CAPL__CA_LOAD_DT
+    {
+        CA_LOAD_DT : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=120.0, core=true, t24Name=CA.LOAD.DT, mandatory=false)
+    }
+    SASIMA_ENQUIRY_RESPONSE__CAPL__CCN1
+    {
+        CCN1 : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=132.0, core=true, t24Name=CCN1, mandatory=false)
+    }
+    SASIMA_ENQUIRY_RESPONSE__CAPL__CCN2
+    {
+        CCN2 : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=133.0, core=true, t24Name=CCN2, mandatory=false)
+    }
+    SASIMA_ENQUIRY_RESPONSE__CAPL__CCN3
+    {
+        CCN3 : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=134.0, core=true, t24Name=CCN3, mandatory=false)
+    }
+    SASIMA_ENQUIRY_RESPONSE__CAPL__CCN4
+    {
+        CCN4 : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=135.0, core=true, t24Name=CCN4, mandatory=false)
+    }
+    SASIMA_ENQUIRY_RESPONSE__CAPL__CCN5
+    {
+        CCN5 : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=136.0, core=true, t24Name=CCN5, mandatory=false)
+    }
+    SASIMA_ENQUIRY_RESPONSE__CAPL__CI_CRDTR
+    {
+        CI_ACC_NO : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=62.0, core=true, t24Name=CI.ACC.NO, mandatory=false)
+        CI_AS_OF_DT : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=77.0, core=true, t24Name=CI.AS.OF.DT, mandatory=false)
+        CI_CLSD_DT : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=67.0, core=true, t24Name=CI.CLSD.DT, mandatory=false)
+        CI_CRDTR : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=60.0, core=true, t24Name=CI.CRDTR, mandatory=false)
+        CI_CUB : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=73.0, core=true, t24Name=CI.CUB, mandatory=false)
+        CI_FRQ : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=69.0, core=true, t24Name=CI.FRQ, mandatory=false)
+        CI_INSTL : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=70.0, core=true, t24Name=CI.INSTL, mandatory=false)
+        CI_ISSU_DT : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=64.0, core=true, t24Name=CI.ISSU.DT, mandatory=false)
+        CI_LAST_AMT_PD : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=75.0, core=true, t24Name=CI.LAST.AMT.PD, mandatory=false)
+        CI_LAST_PAY_DT : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=76.0, core=true, t24Name=CI.LAST.PAY.DT, mandatory=false)
+        CI_LIMIT : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=63.0, core=true, t24Name=CI.LIMIT, mandatory=false)
+        CI_NXT_DU_DT : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=78.0, core=true, t24Name=CI.NXT.DU.DT, mandatory=false)
+        CI_ODB : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=74.0, core=true, t24Name=CI.ODB, mandatory=false)
+        CI_PRD : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=61.0, core=true, t24Name=CI.PRD, mandatory=false)
+        CI_PROD_EXP_DT : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=65.0, core=true, t24Name=CI.PROD.EXP.DT, mandatory=false)
+        CI_SAL : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=71.0, core=true, t24Name=CI.SAL, mandatory=false)
+        CI_SEC : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=72.0, core=true, t24Name=CI.SEC, mandatory=false)
+        CI_STATUS : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=66.0, core=true, t24Name=CI.STATUS, mandatory=false)
+        CI_SUMMRY : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=79.0, core=true, t24Name=CI.SUMMRY, mandatory=false)
+        CI_TNR : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=68.0, core=true, t24Name=CI.TNR, mandatory=false)
+    }
+    SASIMA_ENQUIRY_RESPONSE__CAPL__CNT_CI
+    {
+        CNT_CI : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=160.0, core=true, t24Name=CNT.CI, mandatory=false)
+    }
+    SASIMA_ENQUIRY_RESPONSE__CAPL__CNT_GCI
+    {
+        CNT_GCI : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=161.0, core=true, t24Name=CNT.GCI, mandatory=false)
+    }
+    SASIMA_ENQUIRY_RESPONSE__CAPL__DF_PRD
+    {
+        DF_ACC_NO : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=82.0, core=true, t24Name=DF.ACC.NO, mandatory=false)
+        DF_CAPL : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=81.0, core=true, t24Name=DF.CAPL, mandatory=false)
+        DF_CRDTR : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=83.0, core=true, t24Name=DF.CRDTR, mandatory=false)
+        DF_CUB : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=86.0, core=true, t24Name=DF.CUB, mandatory=false)
+        DF_LOAD_DT : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=84.0, core=true, t24Name=DF.LOAD.DT, mandatory=false)
+        DF_ORIG_AMT : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=85.0, core=true, t24Name=DF.ORIG.AMT, mandatory=false)
+        DF_PRD : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=80.0, core=true, t24Name=DF.PRD, mandatory=false)
+        DF_SETTLD_DATE : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=88.0, core=true, t24Name=DF.SETTLD.DATE, mandatory=false)
+        DF_STAT : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=87.0, core=true, t24Name=DF.STAT, mandatory=false)
+    }
+    SASIMA_ENQUIRY_RESPONSE__CAPL__EAD1A
+    {
+        EAD1A : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=141.0, core=true, t24Name=EAD1A, mandatory=false)
+    }
+    SASIMA_ENQUIRY_RESPONSE__CAPL__EAD1E
+    {
+        EAD1E : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=143.0, core=true, t24Name=EAD1E, mandatory=false)
+    }
+    SASIMA_ENQUIRY_RESPONSE__CAPL__EAD2A
+    {
+        EAD2A : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=142.0, core=true, t24Name=EAD2A, mandatory=false)
+    }
+    SASIMA_ENQUIRY_RESPONSE__CAPL__EAD2E
+    {
+        EAD2E : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=144.0, core=true, t24Name=EAD2E, mandatory=false)
+    }
+    SASIMA_ENQUIRY_RESPONSE__CAPL__EAD6
+    {
+        EAD6 : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=145.0, core=true, t24Name=EAD6, mandatory=false)
+    }
+    SASIMA_ENQUIRY_RESPONSE__CAPL__EAD7
+    {
+        EAD7 : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=146.0, core=true, t24Name=EAD7, mandatory=false)
+    }
+    SASIMA_ENQUIRY_RESPONSE__CAPL__EAD8A
+    {
+        EAD8A : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=147.0, core=true, t24Name=EAD8A, mandatory=false)
+    }
+    SASIMA_ENQUIRY_RESPONSE__CAPL__EAD8E
+    {
+        EAD8E : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=148.0, core=true, t24Name=EAD8E, mandatory=false)
+    }
+    SASIMA_ENQUIRY_RESPONSE__CAPL__EAD9
+    {
+        EAD9 : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=149.0, core=true, t24Name=EAD9, mandatory=false)
+    }
+    SASIMA_ENQUIRY_RESPONSE__CAPL__EADT
+    {
+        EADT : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=140.0, core=true, t24Name=EADT, mandatory=false)
+    }
+    SASIMA_ENQUIRY_RESPONSE__CAPL__EIID
+    {
+        EIID : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=163.0, core=true, t24Name=EIID, mandatory=false)
+    }
+    SASIMA_ENQUIRY_RESPONSE__CAPL__EJ_ENFORCE_DATE
+    {
+        EJ_CASE_NUMBER : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=102.0, core=true, t24Name=EJ.CASE.NUMBER, mandatory=false)
+        EJ_CITY : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=100.0, core=true, t24Name=EJ.CITY, mandatory=false)
+        EJ_CLAIM_AMT : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=105.0, core=true, t24Name=EJ.CLAIM.AMT, mandatory=false)
+        EJ_COURT_CODE : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=101.0, core=true, t24Name=EJ.COURT.CODE, mandatory=false)
+        EJ_DATE_LOADED : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=103.0, core=true, t24Name=EJ.DATE.LOADED, mandatory=false)
+        EJ_ENFORCE_DATE : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=97.0, core=true, t24Name=EJ.ENFORCE.DATE, mandatory=false)
+        EJ_EXEC_TYPE : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=99.0, core=true, t24Name=EJ.EXEC.TYPE, mandatory=false)
+        EJ_ORIG_CLAIM_AMT : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=104.0, core=true, t24Name=EJ.ORIG.CLAIM.AMT, mandatory=false)
+        EJ_RES_NUMBER : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=98.0, core=true, t24Name=EJ.RES.NUMBER, mandatory=false)
+        EJ_SETTLE_DATE : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=107.0, core=true, t24Name=EJ.SETTLE.DATE, mandatory=false)
+        EJ_STATUS : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=106.0, core=true, t24Name=EJ.STATUS, mandatory=false)
+    }
+    SASIMA_ENQUIRY_RESPONSE__CAPL__ENMA
+    {
+        ENMA : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=139.0, core=true, t24Name=ENMA, mandatory=false)
+    }
+    SASIMA_ENQUIRY_RESPONSE__CAPL__ENME
+    {
+        ENME : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=138.0, core=true, t24Name=ENME, mandatory=false)
+    }
+    SASIMA_ENQUIRY_RESPONSE__CAPL__EOCA
+    {
+        EOCA : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=150.0, core=true, t24Name=EOCA, mandatory=false)
+    }
+    SASIMA_ENQUIRY_RESPONSE__CAPL__EOCE
+    {
+        ECEX : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=154.0, core=true, t24Name=ECEX, mandatory=false)
+        EDLD : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=155.0, core=true, t24Name=EDLD, mandatory=false)
+        EDOE : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=152.0, core=true, t24Name=EDOE, mandatory=false)
+        ELEN : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=153.0, core=true, t24Name=ELEN, mandatory=false)
+        EMBS : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=156.0, core=true, t24Name=EMBS, mandatory=false)
+        EOCE : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=151.0, core=true, t24Name=EOCE, mandatory=false)
+        ETMS : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=157.0, core=true, t24Name=ETMS, mandatory=false)
+    }
+    SASIMA_ENQUIRY_RESPONSE__CAPL__ETYP
+    {
+        ETYP : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=137.0, core=true, t24Name=ETYP, mandatory=false)
+    }
+    SASIMA_ENQUIRY_RESPONSE__CAPL__PCNM1A
+    {
+        PCNM1A : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=17.0, core=true, t24Name=PCNM1A, mandatory=false)
+    }
+    SASIMA_ENQUIRY_RESPONSE__CAPL__PCNM1E
+    {
+        PCNM1E : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=21.0, core=true, t24Name=PCNM1E, mandatory=false)
+    }
+    SASIMA_ENQUIRY_RESPONSE__CAPL__PCNM2A
+    {
+        PCNM2A : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=18.0, core=true, t24Name=PCNM2A, mandatory=false)
+    }
+    SASIMA_ENQUIRY_RESPONSE__CAPL__PCNM2E
+    {
+        PCNM2E : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=22.0, core=true, t24Name=PCNM2E, mandatory=false)
+    }
+    SASIMA_ENQUIRY_RESPONSE__CAPL__PCNM3A
+    {
+        PCNM3A : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=19.0, core=true, t24Name=PCNM3A, mandatory=false)
+    }
+    SASIMA_ENQUIRY_RESPONSE__CAPL__PCNM3E
+    {
+        PCNM3E : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=23.0, core=true, t24Name=PCNM3E, mandatory=false)
+    }
+    SASIMA_ENQUIRY_RESPONSE__CAPL__PCNMFA
+    {
+        PCNMFA : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=16.0, core=true, t24Name=PCNMFA, mandatory=false)
+    }
+    SASIMA_ENQUIRY_RESPONSE__CAPL__PCNMFE
+    {
+        PCNMFE : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=20.0, core=true, t24Name=PCNMFE, mandatory=false)
+    }
+    SASIMA_ENQUIRY_RESPONSE__CAPL__PE_DATE
+    {
+        PE_AMOUNT : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=49.0, core=true, t24Name=PE.AMOUNT, mandatory=false)
+        PE_DATE : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=44.0, core=true, t24Name=PE.DATE, mandatory=false)
+        PE_INQR : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=45.0, core=true, t24Name=PE.INQR, mandatory=false)
+        PE_MEMB_REF : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=47.0, core=true, t24Name=PE.MEMB.REF, mandatory=false)
+        PE_PRD : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=48.0, core=true, t24Name=PE.PRD, mandatory=false)
+        PE_TYPE : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=46.0, core=true, t24Name=PE.TYPE, mandatory=false)
+    }
+    SASIMA_ENQUIRY_RESPONSE__CAPL__PE_NM1A
+    {
+        PE_NM1A : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=51.0, core=true, t24Name=PE.NM1A, mandatory=false)
+    }
+    SASIMA_ENQUIRY_RESPONSE__CAPL__PE_NM1E
+    {
+        PE_NM1E : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=55.0, core=true, t24Name=PE.NM1E, mandatory=false)
+    }
+    SASIMA_ENQUIRY_RESPONSE__CAPL__PE_NM2A
+    {
+        PE_NM2A : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=52.0, core=true, t24Name=PE.NM2A, mandatory=false)
+    }
+    SASIMA_ENQUIRY_RESPONSE__CAPL__PE_NM2E
+    {
+        PE_NM2E : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=56.0, core=true, t24Name=PE.NM2E, mandatory=false)
+    }
+    SASIMA_ENQUIRY_RESPONSE__CAPL__PE_NM3A
+    {
+        PE_NM3A : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=53.0, core=true, t24Name=PE.NM3A, mandatory=false)
+    }
+    SASIMA_ENQUIRY_RESPONSE__CAPL__PE_NM3E
+    {
+        PE_NM3E : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=57.0, core=true, t24Name=PE.NM3E, mandatory=false)
+    }
+    SASIMA_ENQUIRY_RESPONSE__CAPL__PE_NMFA
+    {
+        PE_NMFA : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=50.0, core=true, t24Name=PE.NMFA, mandatory=false)
+    }
+    SASIMA_ENQUIRY_RESPONSE__CAPL__PE_NMFE
+    {
+        PE_NMFE : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=54.0, core=true, t24Name=PE.NMFE, mandatory=false)
+    }
+    SASIMA_ENQUIRY_RESPONSE__CAPL__PE_RSN
+    {
+        PE_RSN : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=58.0, core=true, t24Name=PE.RSN, mandatory=false)
+        RESERVED_25 : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=N, maxLength=65, sysNumber=59.0, core=true, t24Name=RESERVED.25, mandatory=false)
+    }
+    SASIMA_ENQUIRY_RESPONSE__CAPL__PN_COMMENT
+    {
+        PN_COMMENT : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=111.0, core=true, t24Name=PN.COMMENT, mandatory=false)
+    }
+    SASIMA_ENQUIRY_RESPONSE__CAPL__PN_COMMENT_AR
+    {
+        PN_COMMENT_AR : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=113.0, core=true, t24Name=PN.COMMENT.AR, mandatory=false)
+        RESERVED_26 : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=N, maxLength=65, sysNumber=114.0, core=true, t24Name=RESERVED.26, mandatory=false)
+    }
+    SASIMA_ENQUIRY_RESPONSE__CAPL__PN_LOAD_DT
+    {
+        PN_LOAD_DT : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=108.0, core=true, t24Name=PN.LOAD.DT, mandatory=false)
+        PN_TYPE : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=109.0, core=true, t24Name=PN.TYPE, mandatory=false)
+    }
+    SASIMA_ENQUIRY_RESPONSE__CAPL__PN_PUBLICATION
+    {
+        PN_PUBLICATION : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=110.0, core=true, t24Name=PN.PUBLICATION, mandatory=false)
+    }
+    SASIMA_ENQUIRY_RESPONSE__CAPL__PN_PUBLICATION_AR
+    {
+        PN_PUBLICATION_AR : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=112.0, core=true, t24Name=PN.PUBLICATION.AR, mandatory=false)
+    }
+    SASIMA_ENQUIRY_RESPONSE__CAPL__SC_REASON_CODE
+    {
+        SC_REASON_CODE : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=171.0, core=true, t24Name=SC.REASON.CODE, mandatory=false)
+    }
+    SASIMA_ENQUIRY_RESPONSE__CAPL__TOT_GLIAB
+    {
+        TOT_GLIAB : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=167.0, core=true, t24Name=TOT.GLIAB, mandatory=false)
+    }
+    SASIMA_ENQUIRY_RESPONSE__CAPL__TOT_GLIM
+    {
+        TOT_GLIM : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=165.0, core=true, t24Name=TOT.GLIM, mandatory=false)
+    }
+    SASIMA_ENQUIRY_RESPONSE__CAPL__TOT_LIAB
+    {
+        TOT_LIAB : T24BusinessTypes:ANY
+            @i18n:Label (en=Liabilities)
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=166.0, core=true, t24Name=TOT.LIAB, mandatory=false)
+    }
+    SASIMA_ENQUIRY_RESPONSE__CAPL__TOT_LIM
+    {
+        TOT_LIM : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=164.0, core=true, t24Name=TOT.LIM, mandatory=false)
+    }
+    SASIMA_ENQ_REQ_CONCAT
+        @i18n:Description (en="")
+        @t24:i (t24Name=SASIMA.ENQ.REQ.CONCAT, level=F, type=L, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        CUSTOMER_ID -> SASIMA_Foundation:SASIMA_ENQ_REQ_CONCAT PK required
+            @i18n:Label (en="Customer Id")
+            @i18n:Tooltip (en="Identifies the Customer for the transaction.")
+            @t24:i (align=L, inputBehaviour=I, maxLength=16, sysNumber=0.0, core=true, businessType=A, t24Name=CUSTOMER.ID, mandatory=true)
+        ENQUIRY_REFERENCE -> byValue SASIMA_Foundation:SASIMA_ENQ_REQ_CONCAT__ENQUIRY_REFERENCE *
+            @t24:i (t24Name=ENQUIRY.REFERENCE)
+    }
+    SASIMA_ENQ_REQ_CONCAT__ENQUIRY_REFERENCE
+    {
+        ENQUIRY_REFERENCE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=16, sysNumber=1.0, core=true, t24Name=ENQUIRY.REFERENCE, mandatory=false)
+        ENQUIRY_REQUEST : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=2.0, core=true, t24Name=ENQUIRY.REQUEST, mandatory=false)
+        ENQUIRY_RESPONSE : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=3.0, core=true, t24Name=ENQUIRY.RESPONSE, mandatory=false)
+    }
+    SASIMA_LOG
+        @i18n:Description (en="")
+        @t24:i (t24Name=SASIMA.LOG, level=F, type=L, allowedFunctions="L P S", localRefApplicationSysNo=14.0, localRefAllowed=true)
+    {
+        ACTION : T24BusinessTypes:A
+            @i18n:Label (en=Action)
+            @t24:i (align=L, inputBehaviour=I, maxLength=10, sysNumber=1.0, core=true, t24Name=ACTION, mandatory=false)
+        AREF -> byValue SASIMA_Foundation:SASIMA_LOG__AREF *
+            @t24:i (t24Name=AREF)
+        COMM_RESPONSE -> byValue SASIMA_Foundation:SASIMA_LOG__COMM_RESPONSE *
+            @t24:i (t24Name=COMM.RESPONSE)
+        ERR_ITEMS : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=10, sysNumber=6.0, core=true, t24Name=ERR.ITEMS, mandatory=false)
+        ID -> SASIMA_Foundation:SASIMA_LOG PK required
+            @i18n:Label (en="Transaction Ref")
+            @i18n:Tooltip (en="Transaction Reference")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=0.0, core=true, businessType=ANY, t24Name="@ID", mandatory=true)
+        MEMBER_ID : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=10, sysNumber=3.0, core=true, t24Name=MEMBER.ID, mandatory=false)
+        RESERVED_1 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=15.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_10 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=24.0, core=true, t24Name=RESERVED.10, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=16.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=17.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=18.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        RESERVED_5 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=19.0, core=true, t24Name=RESERVED.5, mandatory=false)
+        RESERVED_6 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=20.0, core=true, t24Name=RESERVED.6, mandatory=false)
+        RESERVED_7 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=21.0, core=true, t24Name=RESERVED.7, mandatory=false)
+        RESERVED_8 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=22.0, core=true, t24Name=RESERVED.8, mandatory=false)
+        RESERVED_9 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=23.0, core=true, t24Name=RESERVED.9, mandatory=false)
+        STATUS : T24BusinessTypes:A
+            @i18n:Label (en=Status)
+            @t24:i (align=L, inputBehaviour=I, maxLength=10, sysNumber=2.0, core=true, t24Name=STATUS, mandatory=false)
+        TOT_ITEMS : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=10, sysNumber=5.0, core=true, t24Name=TOT.ITEMS, mandatory=false)
+        USER_ID : T24BusinessTypes:A
+            @i18n:Label (en="User Id")
+            @t24:i (align=L, inputBehaviour=I, maxLength=10, sysNumber=4.0, core=true, t24Name=USER.ID, mandatory=false)
+    }
+    SASIMA_LOG__AREF
+    {
+        APRD : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=10, sysNumber=8.0, core=true, t24Name=APRD, mandatory=false)
+        AREF : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=12, sysNumber=7.0, core=true, t24Name=AREF, mandatory=false)
+        FIELD -> byValue SASIMA_Foundation:SASIMA_LOG__AREF__FIELD *
+            @t24:i (t24Name=FIELD)
+        NO_OF_ERRORS : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=10, sysNumber=12.0, core=true, t24Name=NO.OF.ERRORS, mandatory=false)
+    }
+    SASIMA_LOG__AREF__FIELD
+    {
+        DATA : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=36, sysNumber=11.0, core=true, t24Name=DATA, mandatory=false)
+        FIELD : T24BusinessTypes:ANY
+            @i18n:Label (en=Field)
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=9.0, core=true, t24Name=FIELD, mandatory=false)
+        RSP_MSG : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=10.0, core=true, t24Name=RSP.MSG, mandatory=false)
+    }
+    SASIMA_LOG__COMM_RESPONSE
+    {
+        COMM_RESPONSE : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=13.0, core=true, t24Name=COMM.RESPONSE, mandatory=false)
+    }
+    SASIMA_MAPPING
+        @i18n:Description (en="")
+        @t24:i (t24Name=SASIMA.MAPPING, level=I, type=H, allowedFunctions="A C D E H I L P Q R S", localRefAllowed=false)
+    {
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=12.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=13.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=9.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=10.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=6.0, core=true, t24Name=CURR.NO, mandatory=false)
+        DATE_TIME -> byValue SASIMA_Foundation:SASIMA_MAPPING__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=11.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        ID -> SASIMA_Foundation:SASIMA_MAPPING PK required
+            @i18n:Label (en="Transaction Ref")
+            @i18n:Tooltip (en="Transaction Reference")
+            @t24:i (align=L, inputBehaviour=I, maxLength=30, sysNumber=0.0, core=true, businessType=A, t24Name=ID, mandatory=true)
+        INPUTTER -> byValue SASIMA_Foundation:SASIMA_MAPPING__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=5.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        SASIMA_CODE -> byValue SASIMA_Foundation:SASIMA_MAPPING__SASIMA_CODE *
+            @t24:i (t24Name=SASIMA.CODE)
+    }
+    SASIMA_MAPPING__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=8.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    SASIMA_MAPPING__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=7.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    SASIMA_MAPPING__SASIMA_CODE
+    {
+        SASIMA_CODE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=60, sysNumber=1.0, core=true, t24Name=SASIMA.CODE, mandatory=false)
+        SASIMA_DESC : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=60, sysNumber=2.0, core=true, t24Name=SASIMA.DESC, mandatory=false)
+        T24_CODE -> byValue SASIMA_Foundation:SASIMA_MAPPING__SASIMA_CODE__T24_CODE *
+            @t24:i (t24Name=T24.CODE)
+    }
+    SASIMA_MAPPING__SASIMA_CODE__T24_CODE
+    {
+        T24_CODE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=60, sysNumber=3.0, core=true, t24Name=T24.CODE, mandatory=false)
+        T24_DESC : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=60, sysNumber=4.0, core=true, t24Name=T24.DESC, mandatory=false)
+    }
+    SASIMA_PARAMETER
+        @i18n:Description (en="")
+        @t24:i (t24Name=SASIMA.PARAMETER, level=I, type=H, allowedFunctions="A C D E H I L P Q R S", localRefApplicationSysNo=24.0, localRefAllowed=true)
+    {
+        AGE_MINIMUM : T24BusinessTypes:N required
+            @t24:i (align=R, inputBehaviour=I, maxLength=3, sysNumber=21.0, core=true, t24Name=AGE.MINIMUM, mandatory=true)
+        ALT_ACCT_TYPE -> AC_AccountOpening:ALT_ACCT_PARAMETER required
+            @t24:i (align=L, inputBehaviour=I, maxLength=30, sysNumber=8.0, core=true, businessType=A, t24Name=ALT.ACCT.TYPE, mandatory=true)
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=43.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=44.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=40.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        COLLATERAL_CODE_SALARY -> CO_Config:COLLATERAL_TYPE
+            @t24:i (align=L, inputBehaviour=I, maxLength=16, sysNumber=5.0, core=true, businessType=A, t24Name=COLLATERAL.CODE.SALARY, mandatory=false)
+        COMMERCIAL_CONTACT_HEADER : T24BusinessTypes:N required
+            @t24:i (align=R, inputBehaviour=I, maxLength=3, sysNumber=23.0, core=true, t24Name=COMMERCIAL.CONTACT.HEADER, mandatory=true)
+        COMMERCIAL_SECTOR -> byValue SASIMA_Foundation:SASIMA_PARAMETER__COMMERCIAL_SECTOR *
+            @t24:i (t24Name=COMMERCIAL.SECTOR)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=41.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=37.0, core=true, t24Name=CURR.NO, mandatory=false)
+        DATE_TIME -> byValue SASIMA_Foundation:SASIMA_PARAMETER__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=42.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        EXCEMPTION_CONTRIES -> byValue SASIMA_Foundation:SASIMA_PARAMETER__EXCEMPTION_CONTRIES *
+            @t24:i (t24Name=EXCEMPTION.CONTRIES)
+        EXCEMPTION_LEGAL_DOC_TYPE -> byValue SASIMA_Foundation:SASIMA_PARAMETER__EXCEMPTION_LEGAL_DOC_TYPE *
+            @t24:i (t24Name=EXCEMPTION.LEGAL.DOC.TYPE)
+        ID : SASIMA_Foundation:SASIMA_PARAMETER__ID PK required
+            @i18n:Label (en="Transaction Ref")
+            @i18n:Tooltip (en="Transaction Reference")
+            @t24:i (align=L, inputBehaviour=I, maxLength=6, sysNumber=0.0, core=true, t24Name=ID, mandatory=true)
+        INPUTTER -> byValue SASIMA_Foundation:SASIMA_PARAMETER__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        LANG_CODE_ARABIC -> EB_SystemTables:LANGUAGE required
+            @t24:i (align=R, inputBehaviour=I, maxLength=1, sysNumber=10.0, core=true, t24Name=LANG.CODE.ARABIC, mandatory=true)
+        LANG_CODE_ENGLISH -> EB_SystemTables:LANGUAGE required
+            @t24:i (align=R, inputBehaviour=I, maxLength=1, sysNumber=9.0, core=true, t24Name=LANG.CODE.ENGLISH, mandatory=true)
+        MAXIMUM_ALLOWANCE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=16, sysNumber=17.0, core=true, t24Name=MAXIMUM.ALLOWANCE, mandatory=false)
+        MAX_REPORTING_DAYS_COMMERCIAL : T24BusinessTypes:N required
+            @t24:i (align=R, inputBehaviour=I, maxLength=16, sysNumber=4.0, core=true, t24Name=MAX.REPORTING.DAYS.COMMERCIAL, mandatory=true)
+        MAX_REPORTING_DAYS_REGULAR : T24BusinessTypes:N required
+            @t24:i (align=R, inputBehaviour=I, maxLength=16, sysNumber=3.0, core=true, t24Name=MAX.REPORTING.DAYS.REGULAR, mandatory=true)
+        MEMBER_ID : T24BusinessTypes:A required
+            @t24:i (align=L, inputBehaviour=I, maxLength=16, sysNumber=1.0, core=true, t24Name=MEMBER.ID, mandatory=true)
+        MEMBER_USER : T24BusinessTypes:A required
+            @t24:i (align=L, inputBehaviour=I, maxLength=16, sysNumber=2.0, core=true, t24Name=MEMBER.USER, mandatory=true)
+        MONTHLY_SALARY_MAX : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=16, sysNumber=13.0, core=true, t24Name=MONTHLY.SALARY.MAX, mandatory=false)
+        MONTHLY_SALARY_MIN : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=16, sysNumber=15.0, core=true, t24Name=MONTHLY.SALARY.MIN, mandatory=false)
+        NO_OF_DAYS : T24BusinessTypes:N
+            @i18n:Label (en="No. of Days")
+            @t24:i (align=R, inputBehaviour=I, maxLength=3, sysNumber=18.0, core=true, t24Name=NO.OF.DAYS, mandatory=false)
+        OVERRIDE -> byValue SASIMA_Foundation:SASIMA_PARAMETER__OVERRIDE *
+            @t24:i (t24Name=OVERRIDE)
+        PROFIT_PROPERTY -> AA_ProductFramework:AA_PROPERTY
+            @t24:i (align=L, inputBehaviour=I, maxLength=16, sysNumber=22.0, core=true, businessType=A, t24Name=PROFIT.PROPERTY, mandatory=false)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=36.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        RESERVED_1 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=26.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_10 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=35.0, core=true, t24Name=RESERVED.10, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=27.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=28.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=29.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        RESERVED_5 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=30.0, core=true, t24Name=RESERVED.5, mandatory=false)
+        RESERVED_6 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=31.0, core=true, t24Name=RESERVED.6, mandatory=false)
+        RESERVED_7 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=32.0, core=true, t24Name=RESERVED.7, mandatory=false)
+        RESERVED_8 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=33.0, core=true, t24Name=RESERVED.8, mandatory=false)
+        RESERVED_9 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=34.0, core=true, t24Name=RESERVED.9, mandatory=false)
+        RESPONSE_MSG_TAG : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=11.0, core=true, t24Name=RESPONSE.MSG.TAG, mandatory=false)
+        RESPONSE_RPT_TAG : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=12.0, core=true, t24Name=RESPONSE.RPT.TAG, mandatory=false)
+        RETAIL_SECTOR -> byValue SASIMA_Foundation:SASIMA_PARAMETER__RETAIL_SECTOR *
+            @t24:i (t24Name=RETAIL.SECTOR)
+        TOTAL_MONTHLY_SALARY_MAX : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=16, sysNumber=14.0, core=true, t24Name=TOTAL.MONTHLY.SALARY.MAX, mandatory=false)
+        TOTAL_MONTHLY_SALARY_MIN : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=16, sysNumber=16.0, core=true, t24Name=TOTAL.MONTHLY.SALARY.MIN, mandatory=false)
+    }
+    SASIMA_PARAMETER__COMMERCIAL_SECTOR
+    {
+        COMMERCIAL_SECTOR -> ST_Config:SECTOR required
+            @t24:i (align=R, inputBehaviour=I, maxLength=10, sysNumber=7.0, core=true, t24Name=COMMERCIAL.SECTOR, mandatory=true)
+    }
+    SASIMA_PARAMETER__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=39.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    SASIMA_PARAMETER__EXCEMPTION_CONTRIES
+    {
+        EXCEMPTION_CONTRIES -> ST_Config:COUNTRY
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=19.0, core=true, businessType=A, t24Name=EXCEMPTION.CONTRIES, mandatory=false)
+    }
+    SASIMA_PARAMETER__EXCEMPTION_LEGAL_DOC_TYPE
+    {
+        EXCEMPTION_LEGAL_DOC_TYPE : SASIMA_Foundation:SASIMA_PARAMETER__EXCEMPTION_LEGAL_DOC_TYPE__EXCEMPTION_LEGAL_DOC_TYPE
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=20.0, core=true, t24Name=EXCEMPTION.LEGAL.DOC.TYPE, mandatory=false)
+    }
+    SASIMA_PARAMETER__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=38.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    SASIMA_PARAMETER__OVERRIDE
+    {
+        OVERRIDE : T24BusinessTypes:N
+            @i18n:Label (en=Override)
+            @i18n:Tooltip (en="Overrides generated by this transaction")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=25.0, core=true, t24Name=OVERRIDE, mandatory=false)
+    }
+    SASIMA_PARAMETER__RETAIL_SECTOR
+    {
+        RETAIL_SECTOR -> ST_Config:SECTOR required
+            @t24:i (align=R, inputBehaviour=I, maxLength=10, sysNumber=6.0, core=true, t24Name=RETAIL.SECTOR, mandatory=true)
+    }
+    SASIMA_REQUEST
+        @i18n:Description (en="")
+        @t24:i (t24Name=SASIMA.REQUEST, level=C, type=H, allowedFunctions="A C D E H I L P Q R S", localRefApplicationSysNo=87.0, localRefAllowed=true)
+    {
+        ACCOUNT_TYPE : T24BusinessTypes:A required
+            @i18n:Label (en="Account Type")
+            @t24:i (align=L, inputBehaviour=I, maxLength=5, sysNumber=8.0, core=true, t24Name=ACCOUNT.TYPE, mandatory=true)
+        ACTION : T24BusinessTypes:ANY required
+            @i18n:Label (en=Action)
+            @t24:i (align=L, inputBehaviour=I, maxLength=5, sysNumber=2.0, core=true, t24Name=ACTION, mandatory=true)
+        AMOUNT : T24BusinessTypes:N
+            @i18n:Label (en=Amount)
+            @i18n:Tooltip (en="Indicates the Amount")
+            @t24:i (align=R, inputBehaviour=I, maxLength=16, sysNumber=12.0, core=true, t24Name=AMOUNT, mandatory=false)
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=96.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=97.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=93.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=94.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=90.0, core=true, t24Name=CURR.NO, mandatory=false)
+        CUSTOMER_CODE -> byValue SASIMA_Foundation:SASIMA_REQUEST__CUSTOMER_CODE *
+            @t24:i (t24Name=CUSTOMER.CODE)
+        DATE_TIME -> byValue SASIMA_Foundation:SASIMA_REQUEST__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=95.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        ENQRSN : SASIMA_Foundation:SASIMA_REQUEST__ENQRSN
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=11.0, core=true, t24Name=ENQRSN, mandatory=false)
+        ENQUIRY_REFERENCE : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=10, sysNumber=9.0, core=true, t24Name=ENQUIRY.REFERENCE, mandatory=false)
+        ENQUIRY_TYPE : SASIMA_Foundation:SASIMA_REQUEST__ENQUIRY_TYPE
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=5.0, core=true, t24Name=ENQUIRY.TYPE, mandatory=false)
+        ID -> SASIMA_Foundation:SASIMA_REQUEST PK required
+            @i18n:Label (en="Transaction Ref")
+            @i18n:Tooltip (en="Transaction Reference")
+            @t24:i (align=R, inputBehaviour=I, maxLength=7, sysNumber=0.0, core=true, t24Name=ID, mandatory=true)
+        INPUTTER -> byValue SASIMA_Foundation:SASIMA_REQUEST__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        LANGUAGE : T24BusinessTypes:A required
+            @i18n:Label (en=Language)
+            @i18n:Tooltip (en="Indicates the Language used")
+            @t24:i (align=L, inputBehaviour=I, maxLength=2, sysNumber=4.0, core=true, t24Name=LANGUAGE, mandatory=true)
+        MEMBERID : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=16, sysNumber=75.0, core=true, t24Name=MEMBERID, mandatory=false)
+        NO_OF_APPLICANTS : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=1, sysNumber=7.0, core=true, t24Name=NO.OF.APPLICANTS, mandatory=false)
+        OVERRIDE -> byValue SASIMA_Foundation:SASIMA_REQUEST__OVERRIDE *
+            @t24:i (t24Name=OVERRIDE)
+        PRCDPT : SASIMA_Foundation:SASIMA_REQUEST__PRCDPT
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=10.0, core=true, t24Name=PRCDPT, mandatory=false)
+        PRODUCT_TYPE : SASIMA_Foundation:SASIMA_REQUEST__PRODUCT_TYPE
+            @i18n:Label (en="Product Type")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=6.0, core=true, t24Name=PRODUCT.TYPE, mandatory=false)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=89.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        REQ_XML : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=72.0, core=true, t24Name=REQ.XML, mandatory=false)
+        RESERVED_1 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=77.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_10 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=86.0, core=true, t24Name=RESERVED.10, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=78.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=79.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=80.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        RESERVED_5 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=81.0, core=true, t24Name=RESERVED.5, mandatory=false)
+        RESERVED_6 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=82.0, core=true, t24Name=RESERVED.6, mandatory=false)
+        RESERVED_7 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=83.0, core=true, t24Name=RESERVED.7, mandatory=false)
+        RESERVED_8 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=84.0, core=true, t24Name=RESERVED.8, mandatory=false)
+        RESERVED_9 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=85.0, core=true, t24Name=RESERVED.9, mandatory=false)
+        RESP_XML : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=73.0, core=true, t24Name=RESP.XML, mandatory=false)
+        RUN_NO : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=10, sysNumber=1.0, core=true, t24Name=RUN.NO, mandatory=false)
+        SERVICE : T24BusinessTypes:A
+            @i18n:Label (en=Service)
+            @t24:i (align=L, inputBehaviour=I, maxLength=16, sysNumber=74.0, core=true, t24Name=SERVICE, mandatory=false)
+        USER_ID : T24BusinessTypes:A required
+            @i18n:Label (en="User Id")
+            @t24:i (align=L, inputBehaviour=I, maxLength=16, sysNumber=3.0, core=true, t24Name=USER.ID, mandatory=true)
+        WEB_CONSUME : SASIMA_Foundation:SASIMA_REQUEST__WEB_CONSUME
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=76.0, core=true, t24Name=WEB.CONSUME, mandatory=false)
+        WS_RESULT : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=16, sysNumber=71.0, core=true, t24Name=WS.RESULT, mandatory=false)
+    }
+    SASIMA_REQUEST__CUSTOMER_CODE
+    {
+        CAD1A -> byValue SASIMA_Foundation:SASIMA_REQUEST__CUSTOMER_CODE__CAD1A *
+            @t24:i (t24Name=CAD1A)
+        CAD1E -> byValue SASIMA_Foundation:SASIMA_REQUEST__CUSTOMER_CODE__CAD1E *
+            @t24:i (t24Name=CAD1E)
+        CAD2A -> byValue SASIMA_Foundation:SASIMA_REQUEST__CUSTOMER_CODE__CAD2A *
+            @t24:i (t24Name=CAD2A)
+        CAD2E -> byValue SASIMA_Foundation:SASIMA_REQUEST__CUSTOMER_CODE__CAD2E *
+            @t24:i (t24Name=CAD2E)
+        CAD6 -> byValue SASIMA_Foundation:SASIMA_REQUEST__CUSTOMER_CODE__CAD6 *
+            @t24:i (t24Name=CAD6)
+        CAD7 -> byValue SASIMA_Foundation:SASIMA_REQUEST__CUSTOMER_CODE__CAD7 *
+            @t24:i (t24Name=CAD7)
+        CAD8A -> byValue SASIMA_Foundation:SASIMA_REQUEST__CUSTOMER_CODE__CAD8A *
+            @t24:i (t24Name=CAD8A)
+        CAD8E -> byValue SASIMA_Foundation:SASIMA_REQUEST__CUSTOMER_CODE__CAD8E *
+            @t24:i (t24Name=CAD8E)
+        CAD9 -> byValue SASIMA_Foundation:SASIMA_REQUEST__CUSTOMER_CODE__CAD9 *
+            @t24:i (t24Name=CAD9)
+        CADT -> byValue SASIMA_Foundation:SASIMA_REQUEST__CUSTOMER_CODE__CADT *
+            @t24:i (t24Name=CADT)
+        CAPL -> byValue SASIMA_Foundation:SASIMA_REQUEST__CUSTOMER_CODE__CAPL *
+            @t24:i (t24Name=CAPL)
+        CCN1 -> byValue SASIMA_Foundation:SASIMA_REQUEST__CUSTOMER_CODE__CCN1 *
+            @t24:i (t24Name=CCN1)
+        CCN2 -> byValue SASIMA_Foundation:SASIMA_REQUEST__CUSTOMER_CODE__CCN2 *
+            @t24:i (t24Name=CCN2)
+        CCN3 -> byValue SASIMA_Foundation:SASIMA_REQUEST__CUSTOMER_CODE__CCN3 *
+            @t24:i (t24Name=CCN3)
+        CCN4 -> byValue SASIMA_Foundation:SASIMA_REQUEST__CUSTOMER_CODE__CCN4 *
+            @t24:i (t24Name=CCN4)
+        CCN5 -> byValue SASIMA_Foundation:SASIMA_REQUEST__CUSTOMER_CODE__CCN5 *
+            @t24:i (t24Name=CCN5)
+        CDOB -> byValue SASIMA_Foundation:SASIMA_REQUEST__CUSTOMER_CODE__CDOB *
+            @t24:i (t24Name=CDOB)
+        CEML -> byValue SASIMA_Foundation:SASIMA_REQUEST__CUSTOMER_CODE__CEML *
+            @t24:i (t24Name=CEML)
+        CGND -> byValue SASIMA_Foundation:SASIMA_REQUEST__CUSTOMER_CODE__CGND *
+            @t24:i (t24Name=CGND)
+        CID1 -> byValue SASIMA_Foundation:SASIMA_REQUEST__CUSTOMER_CODE__CID1 *
+            @t24:i (t24Name=CID1)
+        CID2 -> byValue SASIMA_Foundation:SASIMA_REQUEST__CUSTOMER_CODE__CID2 *
+            @t24:i (t24Name=CID2)
+        CID3 -> byValue SASIMA_Foundation:SASIMA_REQUEST__CUSTOMER_CODE__CID3 *
+            @t24:i (t24Name=CID3)
+        CMAR -> byValue SASIMA_Foundation:SASIMA_REQUEST__CUSTOMER_CODE__CMAR *
+            @t24:i (t24Name=CMAR)
+        CNAT -> byValue SASIMA_Foundation:SASIMA_REQUEST__CUSTOMER_CODE__CNAT *
+            @t24:i (t24Name=CNAT)
+        CNM1A -> byValue SASIMA_Foundation:SASIMA_REQUEST__CUSTOMER_CODE__CNM1A *
+            @t24:i (t24Name=CNM1A)
+        CNM1E -> byValue SASIMA_Foundation:SASIMA_REQUEST__CUSTOMER_CODE__CNM1E *
+            @t24:i (t24Name=CNM1E)
+        CNM2A -> byValue SASIMA_Foundation:SASIMA_REQUEST__CUSTOMER_CODE__CNM2A *
+            @t24:i (t24Name=CNM2A)
+        CNM2E -> byValue SASIMA_Foundation:SASIMA_REQUEST__CUSTOMER_CODE__CNM2E *
+            @t24:i (t24Name=CNM2E)
+        CNM3A -> byValue SASIMA_Foundation:SASIMA_REQUEST__CUSTOMER_CODE__CNM3A *
+            @t24:i (t24Name=CNM3A)
+        CNM3E -> byValue SASIMA_Foundation:SASIMA_REQUEST__CUSTOMER_CODE__CNM3E *
+            @t24:i (t24Name=CNM3E)
+        CNMFA -> byValue SASIMA_Foundation:SASIMA_REQUEST__CUSTOMER_CODE__CNMFA *
+            @t24:i (t24Name=CNMFA)
+        CNMFE -> byValue SASIMA_Foundation:SASIMA_REQUEST__CUSTOMER_CODE__CNMFE *
+            @t24:i (t24Name=CNMFE)
+        CUSTOMER_CODE -> ST_Customer:CUSTOMER required
+            @i18n:Label (en=Customer)
+            @t24:i (align=L, inputBehaviour=I, maxLength=16, sysNumber=13.0, core=true, businessType=A, t24Name=CUSTOMER.CODE, mandatory=true)
+        EAD1A -> byValue SASIMA_Foundation:SASIMA_REQUEST__CUSTOMER_CODE__EAD1A *
+            @t24:i (t24Name=EAD1A)
+        EAD1E -> byValue SASIMA_Foundation:SASIMA_REQUEST__CUSTOMER_CODE__EAD1E *
+            @t24:i (t24Name=EAD1E)
+        EAD2A -> byValue SASIMA_Foundation:SASIMA_REQUEST__CUSTOMER_CODE__EAD2A *
+            @t24:i (t24Name=EAD2A)
+        EAD2E -> byValue SASIMA_Foundation:SASIMA_REQUEST__CUSTOMER_CODE__EAD2E *
+            @t24:i (t24Name=EAD2E)
+        EAD6 -> byValue SASIMA_Foundation:SASIMA_REQUEST__CUSTOMER_CODE__EAD6 *
+            @t24:i (t24Name=EAD6)
+        EAD7 -> byValue SASIMA_Foundation:SASIMA_REQUEST__CUSTOMER_CODE__EAD7 *
+            @t24:i (t24Name=EAD7)
+        EAD8A -> byValue SASIMA_Foundation:SASIMA_REQUEST__CUSTOMER_CODE__EAD8A *
+            @t24:i (t24Name=EAD8A)
+        EAD8E -> byValue SASIMA_Foundation:SASIMA_REQUEST__CUSTOMER_CODE__EAD8E *
+            @t24:i (t24Name=EAD8E)
+        EAD9 -> byValue SASIMA_Foundation:SASIMA_REQUEST__CUSTOMER_CODE__EAD9 *
+            @t24:i (t24Name=EAD9)
+        EADT -> byValue SASIMA_Foundation:SASIMA_REQUEST__CUSTOMER_CODE__EADT *
+            @t24:i (t24Name=EADT)
+        EBUS -> byValue SASIMA_Foundation:SASIMA_REQUEST__CUSTOMER_CODE__EBUS *
+            @t24:i (t24Name=EBUS)
+        ECEX -> byValue SASIMA_Foundation:SASIMA_REQUEST__CUSTOMER_CODE__ECEX *
+            @t24:i (t24Name=ECEX)
+        ECRN -> byValue SASIMA_Foundation:SASIMA_REQUEST__CUSTOMER_CODE__ECRN *
+            @t24:i (t24Name=ECRN)
+        EDOE -> byValue SASIMA_Foundation:SASIMA_REQUEST__CUSTOMER_CODE__EDOE *
+            @t24:i (t24Name=EDOE)
+        EECO -> byValue SASIMA_Foundation:SASIMA_REQUEST__CUSTOMER_CODE__EECO *
+            @t24:i (t24Name=EECO)
+        EEML : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=16, sysNumber=70.0, core=true, t24Name=EEML, mandatory=false)
+        ELEN -> byValue SASIMA_Foundation:SASIMA_REQUEST__CUSTOMER_CODE__ELEN *
+            @t24:i (t24Name=ELEN)
+        EMBS -> byValue SASIMA_Foundation:SASIMA_REQUEST__CUSTOMER_CODE__EMBS *
+            @t24:i (t24Name=EMBS)
+        ENMA -> byValue SASIMA_Foundation:SASIMA_REQUEST__CUSTOMER_CODE__ENMA *
+            @t24:i (t24Name=ENMA)
+        ENME -> byValue SASIMA_Foundation:SASIMA_REQUEST__CUSTOMER_CODE__ENME *
+            @t24:i (t24Name=ENME)
+        EOCA -> byValue SASIMA_Foundation:SASIMA_REQUEST__CUSTOMER_CODE__EOCA *
+            @t24:i (t24Name=EOCA)
+        EOCE -> byValue SASIMA_Foundation:SASIMA_REQUEST__CUSTOMER_CODE__EOCE *
+            @t24:i (t24Name=EOCE)
+        ESLF -> byValue SASIMA_Foundation:SASIMA_REQUEST__CUSTOMER_CODE__ESLF *
+            @t24:i (t24Name=ESLF)
+        ETMS -> byValue SASIMA_Foundation:SASIMA_REQUEST__CUSTOMER_CODE__ETMS *
+            @t24:i (t24Name=ETMS)
+        ETYP -> byValue SASIMA_Foundation:SASIMA_REQUEST__CUSTOMER_CODE__ETYP *
+            @t24:i (t24Name=ETYP)
+    }
+    SASIMA_REQUEST__CUSTOMER_CODE__CAD1A
+    {
+        CAD1A : T24BusinessTypes:S
+            @t24:i (align=L, inputBehaviour=I, maxLength=16, sysNumber=32.0, core=true, t24Name=CAD1A, mandatory=false)
+    }
+    SASIMA_REQUEST__CUSTOMER_CODE__CAD1E
+    {
+        CAD1E : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=16, sysNumber=34.0, core=true, t24Name=CAD1E, mandatory=false)
+    }
+    SASIMA_REQUEST__CUSTOMER_CODE__CAD2A
+    {
+        CAD2A : T24BusinessTypes:S
+            @t24:i (align=L, inputBehaviour=I, maxLength=16, sysNumber=33.0, core=true, t24Name=CAD2A, mandatory=false)
+    }
+    SASIMA_REQUEST__CUSTOMER_CODE__CAD2E
+    {
+        CAD2E : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=16, sysNumber=35.0, core=true, t24Name=CAD2E, mandatory=false)
+    }
+    SASIMA_REQUEST__CUSTOMER_CODE__CAD6
+    {
+        CAD6 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=16, sysNumber=36.0, core=true, t24Name=CAD6, mandatory=false)
+    }
+    SASIMA_REQUEST__CUSTOMER_CODE__CAD7
+    {
+        CAD7 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=16, sysNumber=37.0, core=true, t24Name=CAD7, mandatory=false)
+    }
+    SASIMA_REQUEST__CUSTOMER_CODE__CAD8A
+    {
+        CAD8A : T24BusinessTypes:S
+            @t24:i (align=L, inputBehaviour=I, maxLength=16, sysNumber=39.0, core=true, t24Name=CAD8A, mandatory=false)
+    }
+    SASIMA_REQUEST__CUSTOMER_CODE__CAD8E
+    {
+        CAD8E : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=16, sysNumber=38.0, core=true, t24Name=CAD8E, mandatory=false)
+    }
+    SASIMA_REQUEST__CUSTOMER_CODE__CAD9
+    {
+        CAD9 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=16, sysNumber=40.0, core=true, t24Name=CAD9, mandatory=false)
+    }
+    SASIMA_REQUEST__CUSTOMER_CODE__CADT
+    {
+        CADT : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=16, sysNumber=18.0, core=true, t24Name=CADT, mandatory=false)
+    }
+    SASIMA_REQUEST__CUSTOMER_CODE__CAPL
+    {
+        CAPL : SASIMA_Foundation:SASIMA_REQUEST__CUSTOMER_CODE__CAPL__CAPL
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=14.0, core=true, t24Name=CAPL, mandatory=false)
+    }
+    SASIMA_REQUEST__CUSTOMER_CODE__CCN1
+    {
+        CCN1 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=16, sysNumber=41.0, core=true, t24Name=CCN1, mandatory=false)
+    }
+    SASIMA_REQUEST__CUSTOMER_CODE__CCN2
+    {
+        CCN2 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=16, sysNumber=42.0, core=true, t24Name=CCN2, mandatory=false)
+    }
+    SASIMA_REQUEST__CUSTOMER_CODE__CCN3
+    {
+        CCN3 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=16, sysNumber=43.0, core=true, t24Name=CCN3, mandatory=false)
+    }
+    SASIMA_REQUEST__CUSTOMER_CODE__CCN4
+    {
+        CCN4 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=16, sysNumber=44.0, core=true, t24Name=CCN4, mandatory=false)
+    }
+    SASIMA_REQUEST__CUSTOMER_CODE__CCN5
+    {
+        CCN5 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=16, sysNumber=45.0, core=true, t24Name=CCN5, mandatory=false)
+    }
+    SASIMA_REQUEST__CUSTOMER_CODE__CDOB
+    {
+        CDOB : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=16, sysNumber=19.0, core=true, t24Name=CDOB, mandatory=false)
+    }
+    SASIMA_REQUEST__CUSTOMER_CODE__CEML
+    {
+        CEML : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=40, sysNumber=31.0, core=true, t24Name=CEML, mandatory=false)
+    }
+    SASIMA_REQUEST__CUSTOMER_CODE__CGND
+    {
+        CGND : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=16, sysNumber=20.0, core=true, t24Name=CGND, mandatory=false)
+    }
+    SASIMA_REQUEST__CUSTOMER_CODE__CID1
+    {
+        CID1 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=16, sysNumber=15.0, core=true, t24Name=CID1, mandatory=false)
+    }
+    SASIMA_REQUEST__CUSTOMER_CODE__CID2
+    {
+        CID2 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=16, sysNumber=16.0, core=true, t24Name=CID2, mandatory=false)
+    }
+    SASIMA_REQUEST__CUSTOMER_CODE__CID3
+    {
+        CID3 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=16, sysNumber=17.0, core=true, t24Name=CID3, mandatory=false)
+    }
+    SASIMA_REQUEST__CUSTOMER_CODE__CMAR
+    {
+        CMAR : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=16, sysNumber=21.0, core=true, t24Name=CMAR, mandatory=false)
+    }
+    SASIMA_REQUEST__CUSTOMER_CODE__CNAT
+    {
+        CNAT : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=16, sysNumber=22.0, core=true, t24Name=CNAT, mandatory=false)
+    }
+    SASIMA_REQUEST__CUSTOMER_CODE__CNM1A
+    {
+        CNM1A : T24BusinessTypes:S
+            @t24:i (align=L, inputBehaviour=I, maxLength=16, sysNumber=24.0, core=true, t24Name=CNM1A, mandatory=false)
+    }
+    SASIMA_REQUEST__CUSTOMER_CODE__CNM1E
+    {
+        CNM1E : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=16, sysNumber=28.0, core=true, t24Name=CNM1E, mandatory=false)
+    }
+    SASIMA_REQUEST__CUSTOMER_CODE__CNM2A
+    {
+        CNM2A : T24BusinessTypes:S
+            @t24:i (align=L, inputBehaviour=I, maxLength=16, sysNumber=25.0, core=true, t24Name=CNM2A, mandatory=false)
+    }
+    SASIMA_REQUEST__CUSTOMER_CODE__CNM2E
+    {
+        CNM2E : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=16, sysNumber=29.0, core=true, t24Name=CNM2E, mandatory=false)
+    }
+    SASIMA_REQUEST__CUSTOMER_CODE__CNM3A
+    {
+        CNM3A : T24BusinessTypes:S
+            @t24:i (align=L, inputBehaviour=I, maxLength=16, sysNumber=26.0, core=true, t24Name=CNM3A, mandatory=false)
+    }
+    SASIMA_REQUEST__CUSTOMER_CODE__CNM3E
+    {
+        CNM3E : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=16, sysNumber=30.0, core=true, t24Name=CNM3E, mandatory=false)
+    }
+    SASIMA_REQUEST__CUSTOMER_CODE__CNMFA
+    {
+        CNMFA : T24BusinessTypes:S
+            @t24:i (align=L, inputBehaviour=I, maxLength=16, sysNumber=23.0, core=true, t24Name=CNMFA, mandatory=false)
+    }
+    SASIMA_REQUEST__CUSTOMER_CODE__CNMFE
+    {
+        CNMFE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=16, sysNumber=27.0, core=true, t24Name=CNMFE, mandatory=false)
+    }
+    SASIMA_REQUEST__CUSTOMER_CODE__EAD1A
+    {
+        EAD1A : T24BusinessTypes:S
+            @t24:i (align=L, inputBehaviour=I, maxLength=16, sysNumber=61.0, core=true, t24Name=EAD1A, mandatory=false)
+    }
+    SASIMA_REQUEST__CUSTOMER_CODE__EAD1E
+    {
+        EAD1E : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=16, sysNumber=63.0, core=true, t24Name=EAD1E, mandatory=false)
+    }
+    SASIMA_REQUEST__CUSTOMER_CODE__EAD2A
+    {
+        EAD2A : T24BusinessTypes:S
+            @t24:i (align=L, inputBehaviour=I, maxLength=16, sysNumber=62.0, core=true, t24Name=EAD2A, mandatory=false)
+    }
+    SASIMA_REQUEST__CUSTOMER_CODE__EAD2E
+    {
+        EAD2E : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=16, sysNumber=64.0, core=true, t24Name=EAD2E, mandatory=false)
+    }
+    SASIMA_REQUEST__CUSTOMER_CODE__EAD6
+    {
+        EAD6 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=16, sysNumber=65.0, core=true, t24Name=EAD6, mandatory=false)
+    }
+    SASIMA_REQUEST__CUSTOMER_CODE__EAD7
+    {
+        EAD7 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=16, sysNumber=66.0, core=true, t24Name=EAD7, mandatory=false)
+    }
+    SASIMA_REQUEST__CUSTOMER_CODE__EAD8A
+    {
+        EAD8A : T24BusinessTypes:S
+            @t24:i (align=L, inputBehaviour=I, maxLength=16, sysNumber=68.0, core=true, t24Name=EAD8A, mandatory=false)
+    }
+    SASIMA_REQUEST__CUSTOMER_CODE__EAD8E
+    {
+        EAD8E : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=16, sysNumber=67.0, core=true, t24Name=EAD8E, mandatory=false)
+    }
+    SASIMA_REQUEST__CUSTOMER_CODE__EAD9
+    {
+        EAD9 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=16, sysNumber=69.0, core=true, t24Name=EAD9, mandatory=false)
+    }
+    SASIMA_REQUEST__CUSTOMER_CODE__EADT
+    {
+        EADT : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=16, sysNumber=60.0, core=true, t24Name=EADT, mandatory=false)
+    }
+    SASIMA_REQUEST__CUSTOMER_CODE__EBUS
+    {
+        EBUS : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=16, sysNumber=58.0, core=true, t24Name=EBUS, mandatory=false)
+    }
+    SASIMA_REQUEST__CUSTOMER_CODE__ECEX
+    {
+        ECEX : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=16, sysNumber=51.0, core=true, t24Name=ECEX, mandatory=false)
+    }
+    SASIMA_REQUEST__CUSTOMER_CODE__ECRN
+    {
+        ECRN : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=16, sysNumber=59.0, core=true, t24Name=ECRN, mandatory=false)
+    }
+    SASIMA_REQUEST__CUSTOMER_CODE__EDOE
+    {
+        EDOE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=16, sysNumber=49.0, core=true, t24Name=EDOE, mandatory=false)
+    }
+    SASIMA_REQUEST__CUSTOMER_CODE__EECO
+    {
+        EECO : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=16, sysNumber=57.0, core=true, t24Name=EECO, mandatory=false)
+    }
+    SASIMA_REQUEST__CUSTOMER_CODE__ELEN
+    {
+        ELEN : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=16, sysNumber=50.0, core=true, t24Name=ELEN, mandatory=false)
+    }
+    SASIMA_REQUEST__CUSTOMER_CODE__EMBS
+    {
+        EMBS : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=16, sysNumber=52.0, core=true, t24Name=EMBS, mandatory=false)
+    }
+    SASIMA_REQUEST__CUSTOMER_CODE__ENMA
+    {
+        ENMA : T24BusinessTypes:S
+            @t24:i (align=L, inputBehaviour=I, maxLength=16, sysNumber=55.0, core=true, t24Name=ENMA, mandatory=false)
+    }
+    SASIMA_REQUEST__CUSTOMER_CODE__ENME
+    {
+        ENME : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=16, sysNumber=56.0, core=true, t24Name=ENME, mandatory=false)
+    }
+    SASIMA_REQUEST__CUSTOMER_CODE__EOCA
+    {
+        EOCA : T24BusinessTypes:S
+            @t24:i (align=L, inputBehaviour=I, maxLength=16, sysNumber=47.0, core=true, t24Name=EOCA, mandatory=false)
+    }
+    SASIMA_REQUEST__CUSTOMER_CODE__EOCE
+    {
+        EOCE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=16, sysNumber=48.0, core=true, t24Name=EOCE, mandatory=false)
+    }
+    SASIMA_REQUEST__CUSTOMER_CODE__ESLF
+    {
+        ESLF : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=16, sysNumber=54.0, core=true, t24Name=ESLF, mandatory=false)
+    }
+    SASIMA_REQUEST__CUSTOMER_CODE__ETMS
+    {
+        ETMS : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=16, sysNumber=53.0, core=true, t24Name=ETMS, mandatory=false)
+    }
+    SASIMA_REQUEST__CUSTOMER_CODE__ETYP
+    {
+        ETYP : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=16, sysNumber=46.0, core=true, t24Name=ETYP, mandatory=false)
+    }
+    SASIMA_REQUEST__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=92.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    SASIMA_REQUEST__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=91.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    SASIMA_REQUEST__OVERRIDE
+    {
+        OVERRIDE : T24BusinessTypes:N
+            @i18n:Label (en=Override)
+            @i18n:Tooltip (en="Overrides generated by this transaction")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=88.0, core=true, t24Name=OVERRIDE, mandatory=false)
+    }
+    SASIMA_SELECT_CONCAT
+        @i18n:Description (en="")
+        @t24:i (t24Name=SASIMA.SELECT.CONCAT, level=F, type=L, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        ARRANGEMENT_ID -> SASIMA_Foundation:SASIMA_SELECT_CONCAT PK required
+            @i18n:Label (en="Arrangement Id")
+            @t24:i (align=L, inputBehaviour=I, maxLength=15, sysNumber=0.0, core=true, businessType=A, t24Name=ARRANGEMENT.ID, mandatory=true)
+        CURRENT_CYCLE_DATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=0, sysNumber=8.0, core=true, t24Name=CURRENT.CYCLE.DATE, mandatory=false)
+        CUSTOMER -> byValue SASIMA_Foundation:SASIMA_SELECT_CONCAT__CUSTOMER *
+            @t24:i (t24Name=CUSTOMER)
+        DEFAULT_FLAG : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=16, sysNumber=3.0, core=true, t24Name=DEFAULT.FLAG, mandatory=false)
+        OUTSTANDING_BALANCE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=45, sysNumber=6.0, core=true, t24Name=OUTSTANDING.BALANCE, mandatory=false)
+        PROCESS_FLAG : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=16, sysNumber=2.0, core=true, t24Name=PROCESS.FLAG, mandatory=false)
+        REPORT_DATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=0, sysNumber=1.0, core=true, t24Name=REPORT.DATE, mandatory=false)
+        REPORT_REASON : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=16, sysNumber=4.0, core=true, t24Name=REPORT.REASON, mandatory=false)
+        REPORT_TIME : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=6, sysNumber=7.0, core=true, t24Name=REPORT.TIME, mandatory=false)
+    }
+    SASIMA_SELECT_CONCAT__CUSTOMER
+    {
+        CUSTOMER : T24BusinessTypes:A
+            @i18n:Label (en=Customer)
+            @i18n:Tooltip (en="Customer Liability")
+            @t24:i (align=L, inputBehaviour=I, maxLength=16, sysNumber=5.0, core=true, t24Name=CUSTOMER, mandatory=false)
+    }
+}
+Enumerations {
+    SASIMA_PARAMETER__EXCEMPTION_LEGAL_DOC_TYPE__EXCEMPTION_LEGAL_DOC_TYPE : mml:string
+        ART_OF_ORGANIZATION=ART.OF.ORGANIZATION
+        AUS_BUSINESS_NO=AUS.BUSINESS.NO
+        AUS_COMPANY_NO=AUS.COMPANY.NO
+        BIRTH_CERTIFICATE=BIRTH.CERTIFICATE
+        BUSINESS_LICENSE=BUSINESS.LICENSE
+        CDI=CDI
+        COMMERCIAL_REGISTER=COMMERCIAL.REGISTER
+        COMPANY_REG_NO=COMPANY.REG.NO
+        CORPORATE_RESOLUTION=CORPORATE.RESOLUTION
+        COURT_ORDER=COURT.ORDER
+        CREDIT_CARD=CREDIT.CARD
+        CUIL=CUIL
+        CUIT=CUIT
+        CURP=CURP
+        D=D
+        DRIVERS_LICENSE=DRIVERS.LICENSE
+        DRIVING_LICENSE=DRIVING.LICENSE
+        FED_GOVT_ID=FED.GOVT.ID
+        FICTICIOUS_NAME_CERT=FICTICIOUS.NAME.CERT
+        INCORP_CERT=INCORP.CERT
+        INE=INE
+        INSURANCE_CARD=INSURANCE.CARD
+        LETTERS_OF_ADMIN=LETTERS.OF.ADMIN
+        MEET_MIN_BYLAWS=MEET.MIN.BYLAWS
+        MILITARY_ID=MILITARY.ID
+        NATIONAL_ID=NATIONAL.ID
+        NINO=NINO
+        PARTNERSHIP_AGRMNT=PARTNERSHIP.AGRMNT
+        PASSPORT=PASSPORT
+        RESIDENT_ALIEN_CARD=RESIDENT.ALIEN.CARD
+        RFC__CORP=RFC-CORP
+        RFC__IND=RFC-IND
+        SECR_OF_STATE_CERT=SECR.OF.STATE.CERT
+        SOCIAL_SECURITY_NO=SOCIAL.SECURITY.NO
+        SOCIAL_SEC_CARD=SOCIAL.SEC.CARD
+        STUDENT_ID_CARD=STUDENT.ID.CARD
+        T=T
+        TIN_CERTIFICATION=TIN.CERTIFICATION
+        TRUST_AGREEMENT=TRUST.AGREEMENT
+        UTILITY_BILL=UTILITY.BILL
+        VOTER_REG_CARD=VOTER.REG.CARD
+    SASIMA_PARAMETER__ID : mml:string
+        SYSTEM=SYSTEM
+    SASIMA_REQUEST__CUSTOMER_CODE__CAPL__CAPL : mml:string
+        CDISP=CDISP
+        CMENT=CMENT
+        CREQT=CREQT
+        CUSCG=CUSCG
+        EMPLN=EMPLN
+        EMPLY=EMPLY
+        INSAP=INSAP
+        LEGAL=LEGAL
+        OPNAC=OPNAC
+        PREAP=PREAP
+        REALE=REALE
+        SHARE=SHARE
+        STOCK=STOCK
+        TELAP=TELAP
+        UNK=UNK
+        VRENT=VRENT
+    SASIMA_REQUEST__ENQRSN : mml:string
+        CDISP=CDISP
+        CMENT=CMENT
+        CREQT=CREQT
+        CUSCG=CUSCG
+        EMPLN=EMPLN
+        EMPLY=EMPLY
+        INSAP=INSAP
+        LEGAL=LEGAL
+        OPNAC=OPNAC
+        PREAP=PREAP
+        REALE=REALE
+        SHARE=SHARE
+        STOCK=STOCK
+        TELAP=TELAP
+        UNK=UNK
+        VRENT=VRENT
+    SASIMA_REQUEST__ENQUIRY_TYPE : mml:string
+        NA=NA
+        OT=OT
+        PE=PE
+        RV=RV
+    SASIMA_REQUEST__PRCDPT : mml:string
+        CMCRD=CMCRD
+        CNCRD=CNCRD
+        CNOPS=CNOPS
+        HR=HR
+        LEGAL=LEGAL
+        RENTO=RENTO
+        RISK=RISK
+        SASIMA=SASIMA
+        STOCK=STOCK
+        TELCM=TELCM
+        TRADE=TRADE
+        UNK=UNK
+    SASIMA_REQUEST__PRODUCT_TYPE : mml:string
+        CDC=CDC
+        CDL=CDL
+        CHC=CHC
+        COM=COM
+        CRC=CRC
+        EUDF=EUDF
+        INTG=INTG
+        LND=LND
+        MBL=MBL
+        MGLD=MGLD
+        MIS=MIS
+        MSKN=MSKN
+        MTG=MTG
+        PE=PE
+        PLN=PLN
+        POD=POD
+        RERA=RERA
+        RMSKN=RMSKN
+        RMTG=RMTG
+        RPLN=RPLN
+        SFB=SFB
+        SME=SME
+        SMS=SMS
+        STFM=STFM
+        TOD=TOD
+        TPLN=TPLN
+        VCLM=VCLM
+        VIN=VIN
+        VLS=VLS
+        VRA=VRA
+    SASIMA_REQUEST__WEB_CONSUME : mml:string
+        NO=NO
+        YES=YES
+}

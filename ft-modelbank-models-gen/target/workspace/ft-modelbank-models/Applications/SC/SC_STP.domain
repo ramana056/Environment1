@@ -1,0 +1,1875 @@
+# UTF-8
+/* Deliver Definition and Processing for Securities */
+Domain SC_STP
+    @t24:i (module=SC)
+    @java:Package (value=com.temenos.t24.datamodel.sc.sc_stp)
+namespace "http://www.temenos.com/t24/SC_STP"
+metamodelVersion 1.30.6
+Classes {
+/* System will record all the incoming MT578 details to a new table called SC.ALLEGEMENT.INWARD. If some critical
+                details is missing or cannot be identified (Eg: Incoming ISIN is not available in the system for any security), then
+                Status will be recorded as an Error and user can check and reconcile manually. On accepting the allegement, system
+                will automatically create a transfer transaction, which in turn would send out the MT54n message to the custodian. */
+    SC_ALLEGEMENT_INWARD
+        @i18n:Description (en="")
+        @t24:i (t24Name=SC.ALLEGEMENT.INWARD, level=F, type=H, allowedFunctions="A C D E I L P Q S", localRefApplicationSysNo=61.0, localRefAllowed=true)
+    {
+        /* This field holds the account owner details. Mapping is done from Sequence C - FIAC as 95P::ACOW tag */
+        ACC_OWN : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=23.0, core=true, t24Name=ACC.OWN, mandatory=false)
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=70.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=71.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=67.0, core=true, t24Name=AUTHORISER, mandatory=false)
+/* This field holds Broker id.
+System will identify the appropriate broker based on the below logic:
+i)When TRANS.INSTR is DELI, system will compare the SELLER.ACC with SELL.AC in SC.SETT.INSTRUCT and identify the
+                    customer ID of the Broker.
+                    ii)When TRANS.INSTR is RECE, system will compare the BUYER.ACC with BUYR.AC in
+                    SC.SETT.INSTRUCT and identify the
+                    customer ID of the Broker.
+Validation Rules:
+Valid CUSTOMER record */
+        BROKER_NO -> ST_Customer:CUSTOMER
+            @i18n:Label (en="Broker No")
+            @t24:i (align=R, inputBehaviour=I, maxLength=10, sysNumber=45.0, core=true, businessType=CUS, t24Name=BROKER.NO, mandatory=false)
+/* This field holds the Buyer details.
+Mapping is done from Sequence E - SETDET as 95P::BUYR tag */
+        BUYER : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=41.0, core=true, t24Name=BUYER, mandatory=false)
+/* This field holds the safe account of the Buyer.
+Mapping is done from Sequence E - SETDET as 97A::SAFE// (Account number) OR 97B::SAFE// (Data Source
+                    Scheme)/(Account type)/(Account number) tag */
+        BUYER_ACC : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=42.0, core=true, t24Name=BUYER.ACC, mandatory=false)
+/* This field holds the data source scheme mentioned in the message.
+Mapping is done from Sequence C - FIAC as 97B::SAFE// (Data Source Scheme)/(Account type)/(Account number) tag */
+        BUYER_ACC_DSS : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=43.0, core=true, t24Name=BUYER.ACC.DSS, mandatory=false)
+/* This field holds the account type mentioned in the message.
+Mapping is done from Sequence C - FIAC as 97B::SAFE// (Data Source Scheme)/(Account type)/(Account number) tag */
+        BUYER_ACC_TYPE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=44.0, core=true, t24Name=BUYER.ACC.TYPE, mandatory=false)
+/* This field holds the unique reference agreed upon by the two trade counterparties.
+Mapping is done from Sequence A1 - LINK as 20C::COMM tag */
+        COMM_REF : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=9.0, core=true, t24Name=COMM.REF, mandatory=false)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=68.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=64.0, core=true, t24Name=CURR.NO, mandatory=false)
+/* This field holds the safe account of the Customer.
+Mapping is done from Sequence C - FIAC as 97A::SAFE//(Account number) OR 97B::SAFE//(Data Source Scheme)/(Account
+                    type)/Account number) tag */
+        CU_SAFE_ACC : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=24.0, core=true, t24Name=CU.SAFE.ACC, mandatory=false)
+/* This field holds the data source scheme mentioned in the message.
+Mapping is done from Sequence C - FIAC as 97B::SAFE// (Data Source Scheme)/(Account type)/Account number tag */
+        CU_SAFE_ACC_DSS : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=25.0, core=true, t24Name=CU.SAFE.ACC.DSS, mandatory=false)
+/* This field holds the account type mentioned in the message.
+Mapping is done from Sequence C - FIAC as 97B::SAFE// (Data Source Scheme)/(Account type)/Account number tag */
+        CU_SAFE_ACC_TYPE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=26.0, core=true, t24Name=CU.SAFE.ACC.TYPE, mandatory=false)
+        DATE_TIME -> byValue SC_STP:SC_ALLEGEMENT_INWARD__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        /* Currency in which price is associated in message. Mapping is done from Sequence B - TRADDET 90B:DEAL tag */
+        DEAL_CURRENCY -> ST_CurrencyConfig:CURRENCY
+            @i18n:Label (en=Ccy)
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=21.0, core=true, businessType=CCY, t24Name=DEAL.CURRENCY, mandatory=false)
+        /* Price in message. Mapping is done from Sequence B - TRADDET 90B tag */
+        DEAL_PRICE : T24BusinessTypes:R
+            @t24:i (align=R, inputBehaviour=I, maxLength=18, sysNumber=22.0, core=true, t24Name=DEAL.PRICE, typeModifiers="21D", mandatory=false)
+        DELIV_AGENT -> byValue SC_STP:SC_ALLEGEMENT_INWARD__DELIV_AGENT *
+            @t24:i (t24Name=DELIV.AGENT)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=69.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        ERROR_REASON -> byValue SC_STP:SC_ALLEGEMENT_INWARD__ERROR_REASON *
+            @t24:i (t24Name=ERROR.REASON)
+        ID -> SC_STP:SC_ALLEGEMENT_INWARD PK required
+            @i18n:Label (en="Transaction Ref")
+            @i18n:Tooltip (en="Transaction Reference")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=0.0, core=true, businessType=A, t24Name="@ID", mandatory=true)
+        INPUTTER -> byValue SC_STP:SC_ALLEGEMENT_INWARD__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        IN_DELIVERY_REF -> byValue SC_STP:SC_ALLEGEMENT_INWARD__IN_DELIVERY_REF *
+            @t24:i (t24Name=IN.DELIVERY.REF)
+/* ISIN in the incoming message.
+Mapping is done from Sequence B - TRADDET as 35B:ISIN tag */
+        ISIN : T24BusinessTypes:A
+            @i18n:Label (en=ISIN)
+            @t24:i (align=L, inputBehaviour=I, maxLength=12, sysNumber=13.0, core=true, t24Name=ISIN, mandatory=false)
+/* This field holds the Identification of a transaction assigned by a market infrastructure other than a central
+                    securities depository.
+                    
+                    
+                    Mapping is done from Sequence A1 - LINK as 20C::MITI tag */
+        MARKET_INFRA_REF : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=10.0, core=true, t24Name=MARKET.INFRA.REF, mandatory=false)
+        /* Quantity of Security in message. Mapping is done from Sequence C - FIAC 36B:SETT tag */
+        NOMINAL : T24BusinessTypes:NOMAMT
+            @i18n:Label (en=Nominal)
+            @i18n:Tooltip (en="No of Units or Amount")
+            @t24:i (align=R, inputBehaviour=I, maxLength=18, sysNumber=20.0, core=true, t24Name=NOMINAL, mandatory=false)
+        OVERRIDE -> byValue SC_STP:SC_ALLEGEMENT_INWARD__OVERRIDE *
+            @t24:i (t24Name=OVERRIDE)
+/* This field holds the payment indicator, against payment or free of payment.
+Mapping is done from Sequence B - TRADDET as 22H:PAYM tag
+Validation Rules:
+Allowed Values: APMT, FREE */
+        PAY_INSTR : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=4, sysNumber=18.0, core=true, t24Name=PAY.INSTR, mandatory=false)
+/* This field holds the Place of Listing or MIC code in the incoming message.
+Mapping is done from B1 - FIA as 94B::PLIS tag */
+        PLIS : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=14.0, core=true, t24Name=PLIS, mandatory=false)
+/* This field holds Portfolio for which SECURITY.TRANSFER will be created.
+System will identify the appropriate Portfolio based on the below logic:
+i)When the TRANS.INSTR is DELI, system will identify the portfolio by comparing the BUYER.ACC with the
+                    SUB.ACC.EXT.ID in SEC.ACC.MASTER
+                    ii)When the TRANS.INSTR is RECE,System will identify the portfolio by comparing the
+                    SELLER.ACC with the SUB.ACC.EXT.ID in SEC.ACC.MASTER
+Validation Rules:
+Valid SEC.ACC.MASTER record */
+        PORTFOLIO_ID -> SC_ScoPortfolioMaintenance:SEC_ACC_MASTER
+            @i18n:Label (en="Portfolio Id")
+            @t24:i (align=L, inputBehaviour=I, maxLength=20, sysNumber=46.0, core=true, businessType=SAM, t24Name=PORTFOLIO.ID, mandatory=false)
+/* This field holds the date of preparation of the contract.
+Mapping is done from Sequence A - GENL as 98a:PREP tag
+Validation Rules:
+Standard Date Field */
+        PREP_DATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=6.0, core=true, t24Name=PREP.DATE, mandatory=false)
+/* This field holds the time of preparation of the contract.
+Mapping is done from Sequence A - GENL as 98a:PREP tag
+Validation Rules:
+Standard Time Field */
+        PREP_TIME : T24BusinessTypes:TIME
+            @t24:i (align=L, inputBehaviour=I, maxLength=9, sysNumber=7.0, core=true, t24Name=PREP.TIME, mandatory=false)
+/* This field holds the message reference of the linked message which was previously received.
+For MT578, Mapping is done from Sequence A1 - LINK as 20C::RELA tag */
+        PREV_MSG_REF : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=8.0, core=true, t24Name=PREV.MSG.REF, mandatory=false)
+        RECIEVE_AGENT -> byValue SC_STP:SC_ALLEGEMENT_INWARD__RECIEVE_AGENT *
+            @t24:i (t24Name=RECIEVE.AGENT)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=63.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        REJECT_REASON -> byValue SC_STP:SC_ALLEGEMENT_INWARD__REJECT_REASON *
+            @t24:i (t24Name=REJECT.REASON)
+        RESERVED_1 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=60.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_10 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=51.0, core=true, t24Name=RESERVED.10, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=59.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=58.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=57.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        RESERVED_5 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=56.0, core=true, t24Name=RESERVED.5, mandatory=false)
+        RESERVED_6 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=55.0, core=true, t24Name=RESERVED.6, mandatory=false)
+        RESERVED_7 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=54.0, core=true, t24Name=RESERVED.7, mandatory=false)
+        RESERVED_8 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=53.0, core=true, t24Name=RESERVED.8, mandatory=false)
+        RESERVED_9 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=52.0, core=true, t24Name=RESERVED.9, mandatory=false)
+/* This field holds the security master ID.
+System would populate this field based on the ISIN. When ALT.INDEX.CHECK is set in SM.PARAMETER where multiple
+                    SECURITY.MASTER record can have same ISIN, system will identify the most appropriate SECURITY.MASTER based on the
+                    CURRENCY and/OR STOCK.EXCHANGE combination.
+Validation Rules:
+Valid SECURITY.MASTER record */
+        SECURITY_NUMBER -> SC_ScoSecurityMasterMaintenance:SECURITY_MASTER
+            @i18n:Label (en="Security No")
+            @i18n:Tooltip (en="Indicates the security number")
+            @t24:i (align=L, inputBehaviour=I, maxLength=12, sysNumber=17.0, core=true, businessType=SEC, t24Name=SECURITY.NUMBER, mandatory=false)
+/* This field holds the SECURITY.TRANSFER id which has been created through SC.ALLEGATION.INWARD record.
+When the SECURITY.TRANSFER is deleted or reversed, this field will be made NULL allowing the user to
+                   reject or Cancel the Allegement
+When the generated Security Transfer is deleted or reversed, the Status is updated as TRFR.CANCELLED
+Validation Rules:
+Noinput Field. Updated by the System */
+        SECURITY_TRANSFER_REF : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=16, sysNumber=50.0, core=true, t24Name=SECURITY.TRANSFER.REF, mandatory=false)
+        SEC_CURRENCY -> ST_CurrencyConfig:CURRENCY
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=16.0, core=true, businessType=CCY, t24Name=SEC.CURRENCY, mandatory=false)
+/* This field holds the Seller details.
+Mapping is done from Sequence E - SETDET as 95P::SELL tag */
+        SELLER : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=33.0, core=true, t24Name=SELLER, mandatory=false)
+/* This field holds the safe account of the Seller.
+Mapping is done from Sequence E - SETDET as 97A::SAFE// (Account number) OR 97B::SAFE// (Data Source
+                    Scheme)/(Account type)/(Account number) tag */
+        SELLER_ACC : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=34.0, core=true, t24Name=SELLER.ACC, mandatory=false)
+/* This field holds the data source scheme mentioned in the message.
+Mapping is done from Sequence C - FIAC as 97B::SAFE// (Data Source Scheme)/(Account type)/Account number tag */
+        SELLER_ACC_DSS : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=35.0, core=true, t24Name=SELLER.ACC.DSS, mandatory=false)
+/* This field holds the account type mentioned in the message.
+Mapping is done from Sequence C - FIAC as 97B::SAFE// (Data Source Scheme)/(Account type)/Account number tag */
+        SELLER_ACC_TYPE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=36.0, core=true, t24Name=SELLER.ACC.TYPE, mandatory=false)
+/* This field holds the BIC Address of Sender from message.
+Mapped with value from FROM.ADDRESS in DE.I.HEADER */
+        SENDER_BIC : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=1.0, core=true, t24Name=SENDER.BIC, mandatory=false)
+/* T24 Customer reference of Sender from the incoming message.
+This field holds the T24 Customer ID of the Sender of the Message.
+Mapped with value from CUSTOMER.NO in DE.I.HEADER
+Validation Rules:
+Valid CUSTOMER record */
+        SENDER_CUSTOMER -> ST_Customer:CUSTOMER
+            @t24:i (align=R, inputBehaviour=I, maxLength=10, sysNumber=2.0, core=true, businessType=CUS, t24Name=SENDER.CUSTOMER, mandatory=false)
+/* Sender Message Reference from the incoming message.
+For MT578, Mapping is done from Sequence A - GENL as 20C:SEME tag */
+        SENDER_REF : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=3.0, core=true, t24Name=SENDER.REF, mandatory=false)
+/* This field contains the settlement transaction condition indicator, whether partial settlement is allowed or not.
+Mapping is done from Sequence E - SETDET as 22F::STCO tag */
+        SETT_TRANS_COND_INDI : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=28.0, core=true, t24Name=SETT.TRANS.COND.INDI, mandatory=false)
+/* This field contains the settlement transaction indicator, whether it is a internal account transfer or external
+                    account transfer.
+Mapping is done from Sequence E - SETDET as 22F::SETR tag */
+        SETT_TRANS_INDI : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=27.0, core=true, t24Name=SETT.TRANS.INDI, mandatory=false)
+/* The below values are possible in this field:
+1) RECEIVED - When all mandatory fields required to create a transaction in the system are available from the
+                    MT578 Incoming message
+2) CANCELLED - If message with function CANC or REMO is received, status will be marked as CANCELLED provided
+                    SECURITY.TRANSFER record is not available.
+3) ERROR - If any of the mandatory fields are missing or cannot be identified without doubt, the status will be
+                    marked as ERROR. Status will also move to Error if Cancellation inward is received after ACCEPTED
+                    status(SECURITY.TRANSFER record available).
+4) ACCCEPTED - When user changes from RECEIVED to ACCEPTED, the system will create a new SECURITY.TRANSFER
+                    record in INAU and its ID reference will be stored in the field SECURITY.TRANSFER.REF
+5) REJECTED - If the user after investigation, decides to Reject the allegement, the user will have to change
+                    the STATUS as 'REJECTED'. User can also record the Reason for Rejection.
+6) TRFR.CANCELLED - When generated Security Transfer is deleted or reversed, the system will update the Status
+                    as TRFR.CANCELLED
+Validation Rules:
+Allowed values : RECEIVED,ERROR,ACCEPTED,REJECTED,CANCELLED,TRFR.CANCELLED
+When Error reason is present, then Status cannot be changed to RECEIVED, ACCEPTED or TRFR.CANCELLED */
+        STATUS : SC_STP:SC_ALLEGEMENT_INWARD__STATUS
+            @i18n:Label (en=Status)
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=47.0, core=true, t24Name=STATUS, mandatory=false)
+/* This field holds the valid Stock Exchange record retreived from Security master based on the MIC code in PLIS
+                    field */
+        STOCK_EXCHANGE -> SC_Config:STOCK_EXCHANGE
+            @i18n:Label (en="Stock Exchange")
+            @t24:i (align=L, inputBehaviour=I, maxLength=5, sysNumber=15.0, core=true, businessType=S, t24Name=STOCK.EXCHANGE, mandatory=false)
+/* Trade Date in the incoming message.
+Mapping is done from Sequence B - TRADDET with 98A:TRAD tag
+Validation Rules:
+Standard Date Field
+Trade date cannot be greater than today (T24 System Date) */
+        TRADE_DATE : T24BusinessTypes:D
+            @i18n:Label (en="Trade Date")
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=12.0, core=true, t24Name=TRADE.DATE, mandatory=false)
+/* This field holds whether the counterparty's instruction is a receipt or delivery of financial instruments.
+Mapping is done from Sequence B - TRADDET as 22H:REDE tag
+Validation Rules:
+Allowed Values: DELI, RECE */
+        TRANS_INSTR : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=4, sysNumber=19.0, core=true, t24Name=TRANS.INSTR, mandatory=false)
+/* Settlement Date in the incoming message.
+Mapping is done from Sequence B - TRADDET with 98A:SETT tag
+Validation Rules:
+Standard Date Field
+Value Date cannot be less than Trade Date */
+        VALUE_DATE : T24BusinessTypes:D
+            @i18n:Label (en="Value Date")
+            @i18n:Tooltip (en="Indicates the Value date of the Contract")
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=11.0, core=true, t24Name=VALUE.DATE, mandatory=false)
+    }
+    SC_ALLEGEMENT_INWARD__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=66.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    SC_ALLEGEMENT_INWARD__DELIV_AGENT
+    {
+/* This field holds the delivering agent details.
+Mapping is done from Sequence E - SETDET as 95P::DEAG tag */
+        DELIV_AGENT : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=29.0, core=true, t24Name=DELIV.AGENT, mandatory=false)
+/* This field holds the safe account of the delivery agent.
+Mapping is done from Sequence E - SETDET as 97A::SAFE// (Account number) OR 97B::SAFE// (Data Source
+                    Scheme)/(Account type)/(Account number) tag */
+        DELIV_AGENT_ACC : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=30.0, core=true, t24Name=DELIV.AGENT.ACC, mandatory=false)
+/* This field holds the data source scheme mentioned in the message.
+Mapping is done from Sequence C - FIAC as 97B::SAFE// (Data Source Scheme)/(Account type)/Account number tag */
+        DELIV_AGENT_ACC_DSS : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=31.0, core=true, t24Name=DELIV.AGENT.ACC.DSS, mandatory=false)
+/* This field holds the account type mentioned in the message.
+Mapping is done from Sequence C - FIAC as 97B::SAFE// (Data Source Scheme)/(Account type)/Account number tag */
+        DELIV_AGENT_ACC_TYPE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=32.0, core=true, t24Name=DELIV.AGENT.ACC.TYPE, mandatory=false)
+    }
+    SC_ALLEGEMENT_INWARD__ERROR_REASON
+    {
+/* When the Status is Error,the detail of the mandatory values missing is recorded here.
+When user inputs all the missing values mentioned, the error will be cleared
+Validation Rules:
+Multi Value Field. Updated by the System */
+        ERROR_REASON : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=100, sysNumber=48.0, core=true, t24Name=ERROR.REASON, mandatory=false)
+    }
+    SC_ALLEGEMENT_INWARD__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=65.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    SC_ALLEGEMENT_INWARD__IN_DELIVERY_REF
+    {
+/* Function from the incoming message.
+Mapping is done from Sequence A - GENL with 23G tag
+Function can hold any of these values: NEWM, CANC or REMO
+Validation Rules:
+Noinput Field */
+        FUNCTION : T24BusinessTypes:A
+            @i18n:Label (en="Function Allowed")
+            @t24:i (align=L, inputBehaviour=I, maxLength=5, sysNumber=5.0, core=true, t24Name=FUNCTION, mandatory=false)
+/* T24 Delivery reference for message. Mapped with value from ID of DE.I.HEADER
+Validation Rules:
+Noinput Field */
+        IN_DELIVERY_REF : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=4.0, core=true, t24Name=IN.DELIVERY.REF, mandatory=false)
+    }
+    SC_ALLEGEMENT_INWARD__OVERRIDE
+    {
+        OVERRIDE : T24BusinessTypes:N
+            @i18n:Label (en=Override)
+            @i18n:Tooltip (en="Overrides generated by this transaction")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=62.0, core=true, t24Name=OVERRIDE, mandatory=false)
+    }
+    SC_ALLEGEMENT_INWARD__RECIEVE_AGENT
+    {
+/* This field holds the receiving agent details.
+Mapping is done from Sequence E - SETDET as 95P::REAG tag */
+        RECIEVE_AGENT : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=37.0, core=true, t24Name=RECIEVE.AGENT, mandatory=false)
+/* This field holds the safe account of the receiving agent.
+Mapping is done from Sequence E - SETDET as 97A::SAFE// (Account number) OR 97B::SAFE// (Data Source
+                    Scheme)/(Account type)/(Account number) tag */
+        RECIEVE_AGENT_ACC : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=38.0, core=true, t24Name=RECIEVE.AGENT.ACC, mandatory=false)
+/* This field holds the data source scheme mentioned in the message.
+Mapping is done from Sequence C - FIAC as 97B::SAFE// (Data Source Scheme)/(Account type)/Account number tag */
+        RECIEVE_AGENT_ACC_DSS : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=39.0, core=true, t24Name=RECIEVE.AGENT.ACC.DSS, mandatory=false)
+/* This field holds the account type mentioned in the message.
+Mapping is done from Sequence C - FIAC as 97B::SAFE// (Data Source Scheme)/(Account type)/Account number tag */
+        RECIEVE_AGENT_ACC_TYPE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=40.0, core=true, t24Name=RECIEVE.AGENT.ACC.TYPE, mandatory=false)
+    }
+    SC_ALLEGEMENT_INWARD__REJECT_REASON
+    {
+/* If the user after investigation, decides to Reject the allegement, then user will have to change the STATUS as
+                   'REJECTED'.
+User can also record the Reason for Rejection.The field REJECT.REASON will be linked to EB.LOOKUP, where standard
+                   set of reasons can be defined.
+Validation Rules:
+When Status is REJECTED, the input to REJECT.REASON is mandatory */
+        REJECT_REASON : SC_STP:SC_ALLEGEMENT_INWARD__REJECT_REASON__REJECT_REASON
+            @i18n:Label (en="Reject Reason")
+            @i18n:Tooltip (en="Indicates the reason for rejection")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=49.0, core=true, t24Name=REJECT.REASON, mandatory=false)
+    }
+/* Log file will be created to hold details from incoming messages (MT540-MT543)
+Additionally, log is used to record current status of the transaction generated for incoming message along with
+				reason for non-authorisation of contracts that are successfully generated in T24. */
+    SC_CTDY_MSG_LOG
+        @i18n:Description (en="")
+        @t24:i (t24Name=SC.CTDY.MSG.LOG, level=F, type=L, allowedFunctions="L P S", localRefAllowed=false)
+    {
+/* Broker Address in the message.
+Mapped with value from For MT540/MT541 , Sequence E1 - SETPRTY as 95P::SELL
+					For MT542/MT543 , Sequence E1 -
+					SETPRTY as 95P::BUYR */
+        BROKER_DET : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=16.0, core=true, t24Name=BROKER.DET, mandatory=false)
+        /* Broker fee in the message. For MT540-MT543 , mapping is done from AMT - :19A::EXEC */
+        BROKER_FEE : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=18, sysNumber=17.0, core=true, t24Name=BROKER.FEE, mandatory=false)
+/* Cash account ( in IBAN format ) of the customer in message.For MT540-MT543 , Mapping is done from Sequence E2 -
+					CSHPRTY as 97E:CASH */
+        CASH_ACCOUNT_1 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=14.0, core=true, t24Name=CASH.ACCOUNT.1, mandatory=false)
+/* Safekeeping account of the customer in message . For MT540-MT543, mapping is done from Sequence C - FIAC with
+					97A:SAFE tag */
+        CUSTODY_PORT_NO_1 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=13.0, core=true, t24Name=CUSTODY.PORT.NO.1, mandatory=false)
+/* Opposite party in the transaction for Internal Transfer.Mapped with value from For MT542 , Sequence E1 - SETPRTY
+					as 97A::BUYR */
+        CUSTODY_PORT_NO_2 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=15.0, core=true, t24Name=CUSTODY.PORT.NO.2, mandatory=false)
+/* Currency in which price is associated in message. For MT540-MT543, mapping is done from Sequence B - TRADDET 90B
+					tag */
+        DEAL_CURRENCY -> ST_CurrencyConfig:CURRENCY
+            @i18n:Label (en=Ccy)
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=21.0, core=true, businessType=CCY, t24Name=DEAL.CURRENCY, mandatory=false)
+        /* Price in message. For MT540-MT543, mapping is done from Sequence B - TRADDET 90B tag */
+        DEAL_PRICE : T24BusinessTypes:R
+            @t24:i (align=R, inputBehaviour=I, maxLength=18, sysNumber=22.0, core=true, t24Name=DEAL.PRICE, typeModifiers="21D", mandatory=false)
+        HOLD_REASON -> byValue SC_STP:SC_CTDY_MSG_LOG__HOLD_REASON *
+            @t24:i (t24Name=HOLD.REASON)
+        ID -> SC_STP:SC_CTDY_MSG_LOG PK required
+            @i18n:Label (en="Transaction Ref")
+            @i18n:Tooltip (en="Transaction Reference")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=0.0, core=true, businessType=A, t24Name="@ID", mandatory=true)
+        INTEREST_AMT : T24BusinessTypes:AMT
+            @i18n:Label (en="Interest Amount")
+            @t24:i (align=R, inputBehaviour=I, maxLength=18, sysNumber=26.0, core=true, t24Name=INTEREST.AMT, mandatory=false)
+        IN_DELIVERY_REF -> byValue SC_STP:SC_CTDY_MSG_LOG__IN_DELIVERY_REF *
+            @t24:i (t24Name=IN.DELIVERY.REF)
+        /* This field will hold ID of the linked SECURITY.TRANSFER generated for Transferring IN securities , which is part of Internal Transfer. */
+        LINKED_TXN : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=20, sysNumber=9.0, core=true, t24Name=LINKED.TXN, mandatory=false)
+/* Message type from the incoming message. Mapped with value from MESSAGE.TYPE in DE.I.HEADER
+Validation Rules:
+Valid DE.MESSAGE record */
+        MESSAGE_TYPE -> DE_Config:DE_MESSAGE
+            @i18n:Label (en="Message Type")
+            @i18n:Tooltip (en="Delivery message types generated for this record")
+            @t24:i (align=L, inputBehaviour=I, maxLength=10, sysNumber=1.0, core=true, businessType=A, t24Name=MESSAGE.TYPE, mandatory=false)
+        /* Quantity of Security in message. For MT540-MT543, mapping is done from Sequence C - FIAC 36B tag */
+        NOMINAL : T24BusinessTypes:NOMAMT
+            @i18n:Label (en=Nominal)
+            @i18n:Tooltip (en="No of Units or Amount")
+            @t24:i (align=R, inputBehaviour=I, maxLength=18, sysNumber=20.0, core=true, t24Name=NOMINAL, mandatory=false)
+/* Currency in which security number is retrieved. For MT540-MT543, mapping is done from Sequence B1 -
+					FIA 11A tag */
+        SECURITY_CCY -> ST_CurrencyConfig:CURRENCY
+            @i18n:Label (en=Ccy)
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=25.0, core=true, businessType=CCY, t24Name=SECURITY.CCY, mandatory=false)
+        /* ISIN in the incoming message. For MT540-MT543, mapping is done from Sequence B - TRADDET with 35B:ISIN tag. */
+        SECURITY_NO : T24BusinessTypes:A
+            @i18n:Label (en="Security No")
+            @i18n:Tooltip (en="Indicates the security code/number")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=10.0, core=true, t24Name=SECURITY.NO, mandatory=false)
+/* Sender Message Reference from the incoming message.
+For MT540-MT543 , Mapping is done from Sequence A - GENL as 20C:SEME tag */
+        SEME_REFERENCE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=4.0, core=true, t24Name=SEME.REFERENCE, mandatory=false)
+/* T24 Customer reference of Sender from the incoming message.
+This will hold the T24 Customer ID of the Sender of the Message.
+Mapped with value from CUSTOMER.NO in DE.I.HEADER
+Validation Rules:
+Valid CUSTOMER record */
+        SENDER -> ST_Customer:CUSTOMER
+            @i18n:Label (en=Sender)
+            @t24:i (align=R, inputBehaviour=I, maxLength=10, sysNumber=3.0, core=true, businessType=CUS, t24Name=SENDER, mandatory=false)
+        /* BIC Address of Sender from the incoming message. Mapped with value from FROM.ADDRESS in DE.I.HEADER */
+        SENDER_ADDRESS : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=2.0, core=true, t24Name=SENDER.ADDRESS, mandatory=false)
+        SETPRTY_TYPE -> byValue SC_STP:SC_CTDY_MSG_LOG__SETPRTY_TYPE *
+            @t24:i (t24Name=SETPRTY.TYPE)
+        /* Settlement amount in message. For MT540-MT543, mapping is done from Sequence E3 - AMT 19A tag */
+        SETTLEMENT_AMT : T24BusinessTypes:AMT
+            @i18n:Label (en="Settlement Amount")
+            @t24:i (align=R, inputBehaviour=I, maxLength=18, sysNumber=24.0, core=true, t24Name=SETTLEMENT.AMT, typeModifiers="23D", mandatory=false)
+/* Currency in which Settlement amount is associated in message. For MT540-MT543, mapping is done from Sequence E3 -
+					AMT 19A tag */
+        SETTLEMENT_CCY -> ST_CurrencyConfig:CURRENCY
+            @i18n:Label (en="Settle Ccy")
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=23.0, core=true, businessType=CCY, t24Name=SETTLEMENT.CCY, mandatory=false)
+/* Settlement Date in the incoming message.For MT540-MT543, mapping is done from Sequence B - TRADDET with 98A:SETT
+					tag */
+        SETTLEMENT_DATE : T24BusinessTypes:D
+            @i18n:Label (en="Settlement Date")
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=12.0, core=true, t24Name=SETTLEMENT.DATE, mandatory=false)
+/* The below values are possible in this field:
+1. Input: The trade or the transfer transaction is input and not authorized.
+2. Hold: The trade will be created in IHLD
+3. Deleted : The unauthorised trade is deleted
+4. Authorised: The inputted trade is authorized either manually or automatically.
+5. Cancellation Req: Authorised trade is cancelled through MT 540 to MT543 CANC message
+6. Reverse: The authorized trade is manually reversed
+Validation Rules:
+Allowed values : INPUT, HOLD, DELETED, AUTHORISED, REVERSED, CANC.REQUESTED */
+        STATUS : SC_STP:SC_CTDY_MSG_LOG__STATUS
+            @i18n:Label (en=Status)
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=7.0, core=true, t24Name=STATUS, mandatory=false)
+        STP_FAIL_REASON -> byValue SC_STP:SC_CTDY_MSG_LOG__STP_FAIL_REASON *
+            @t24:i (t24Name=STP.FAIL.REASON)
+        /* Trade Date in the incoming message. For MT540-MT543, mapping is done from Sequence B - TRADDET with 98A:TRAD tag */
+        TRADE_DATE : T24BusinessTypes:D
+            @i18n:Label (en="Trade Date")
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=11.0, core=true, t24Name=TRADE.DATE, mandatory=false)
+    }
+    SC_CTDY_MSG_LOG__HOLD_REASON
+    {
+        HOLD_REASON : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=100, sysNumber=27.0, core=true, t24Name=HOLD.REASON, mandatory=false)
+    }
+    SC_CTDY_MSG_LOG__IN_DELIVERY_REF
+    {
+        /* Function from the incoming message. For MT540-MT543, Mapping is done from Sequence A - GENL with 23G tag */
+        FUNCTION : T24BusinessTypes:A
+            @i18n:Label (en="Function Allowed")
+            @t24:i (align=L, inputBehaviour=I, maxLength=5, sysNumber=6.0, core=true, t24Name=FUNCTION, mandatory=false)
+        /* T24 Delivery reference for message. Mapped with value from ID of DE.I.HEADER */
+        IN_DELIVERY_REF : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=5.0, core=true, t24Name=IN.DELIVERY.REF, mandatory=false)
+    }
+    SC_CTDY_MSG_LOG__SETPRTY_TYPE
+    {
+/* Code for Settlement Party in message. For MT540-MT543, mapping is done from Sequence E1 - SETPRTY - 95P tag
+SETPRTY.TYPE and SETPRTY.IDENT.CODE form an associated multi value set */
+        SETPRTY_IDENT_CODE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=19.0, core=true, t24Name=SETPRTY.IDENT.CODE, mandatory=false)
+/* Type of Settlement Party in message. For MT540-MT543, mapping is done from Sequence E1 - SETPRTY 95P tag
+SETPRTY.TYPE and SETPRTY.IDENT.CODE form an associated multi value set */
+        SETPRTY_TYPE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=5, sysNumber=18.0, core=true, t24Name=SETPRTY.TYPE, mandatory=false)
+    }
+    SC_CTDY_MSG_LOG__STP_FAIL_REASON
+    {
+/* Multi value field
+If STP criteria is not met, then reason for failure will be updated in this field */
+        STP_FAIL_REASON : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=100, sysNumber=8.0, core=true, t24Name=STP.FAIL.REASON, mandatory=false)
+    }
+    /* This is a Log to Store Outgoing MT548 Details */
+    SC_CTDY_MT548_INSTRUCT
+        @i18n:Description (en="")
+        @t24:i (t24Name=SC.CTDY.MT548.INSTRUCT, level=F, type=H, allowedFunctions="A C D E I L P Q S", localRefApplicationSysNo=87.0, localRefAllowed=true)
+    {
+/* This Field will be Defaulted from Action Required field in SC.MT548.MATCH.CODE
+Hold 'YES' or 'NO' Value */
+        ACTION_REQUIRED : SC_STP:SC_CTDY_MT548_INSTRUCT__ACTION_REQUIRED
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=5.0, core=true, t24Name=ACTION.REQUIRED, mandatory=false)
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=97.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=98.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=94.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        /* This field will be Defaulted from BIC.CODE of Broker Agent if DEBIT Transaction */
+        BUYR : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=26.0, core=true, t24Name=BUYR, mandatory=false)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=95.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=91.0, core=true, t24Name=CURR.NO, mandatory=false)
+/* Holds the Customer To whom MT548 needs to Sent
+Validation Rules:
+This is NOINPUT Field */
+        CUSTOMER -> ST_Customer:CUSTOMER
+            @i18n:Label (en=Customer)
+            @i18n:Tooltip (en="Customer Liability")
+            @t24:i (align=R, inputBehaviour=N, maxLength=10, sysNumber=1.0, core=true, businessType=CUS, t24Name=CUSTOMER, mandatory=false)
+        /* The field will have Seme Reference of Incoming Message which was used to Create Transactions */
+        CUSTOMER_TRANS_REF : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=10.0, core=true, t24Name=CUSTOMER.TRANS.REF, mandatory=false)
+        DATE_TIME -> byValue SC_STP:SC_CTDY_MT548_INSTRUCT__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        /* This field will be Defaulted from BIC.CODE of Broker Agent if CREDIT Transaction */
+        DEAG : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=27.0, core=true, t24Name=DEAG, mandatory=false)
+        DECU : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=28.0, core=true, t24Name=DECU, mandatory=false)
+/* This field hold Delivery Reference of Incoming Message (540-543) or 548
+This field is Defaulted from Inward Delivery Reference Field in Transactions(SEC.TRADE/SECURITY.TRANSFER) */
+        DELIVERY_INW_REF : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=21.0, core=true, t24Name=DELIVERY.INW.REF, mandatory=false)
+        DELIVERY_OUT_REF -> byValue SC_STP:SC_CTDY_MT548_INSTRUCT__DELIVERY_OUT_REF *
+            @t24:i (t24Name=DELIVERY.OUT.REF)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=96.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+/* This Field has EAM.ID To whom MT548 needs to be sent
+Validation Rules:
+This is NOINPUT Field */
+        EAM_ID -> ST_Customer:CUSTOMER
+            @t24:i (align=R, inputBehaviour=N, maxLength=10, sysNumber=2.0, core=true, businessType=CUS, t24Name=EAM.ID, mandatory=false)
+        /* This field will be mapped to tag 23G:// of MT 548 */
+        FUNCTION : T24BusinessTypes:A required
+            @i18n:Label (en="Function Allowed")
+            @t24:i (align=L, inputBehaviour=I, maxLength=9, sysNumber=14.0, core=true, t24Name=FUNCTION, mandatory=true)
+/* GEN.MT548 should be "Yes" if 548 is Manually Triggered
+GEN.MT548 should be "NO" if 548 is Triggered through Transactions */
+        GEN_MT548 : SC_STP:SC_CTDY_MT548_INSTRUCT__GEN_MT548
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=20.0, core=true, t24Name=GEN.MT548, mandatory=false)
+        HIGH_LVL_STAT : SC_STP:SC_CTDY_MT548_INSTRUCT__HIGH_LVL_STAT
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=4.0, core=true, t24Name=HIGH.LVL.STAT, mandatory=false)
+        INPUTTER -> byValue SC_STP:SC_CTDY_MT548_INSTRUCT__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        LATEST_ACTION_REQ : SC_STP:SC_CTDY_MT548_INSTRUCT__LATEST_ACTION_REQ
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=35.0, core=true, t24Name=LATEST.ACTION.REQ, mandatory=false)
+        LATEST_DELIVERY_INW_REF : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=67.0, core=true, t24Name=LATEST.DELIVERY.INW.REF, mandatory=false)
+        LATEST_HIGH_LVL_STAT : SC_STP:SC_CTDY_MT548_INSTRUCT__LATEST_HIGH_LVL_STAT
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=34.0, core=true, t24Name=LATEST.HIGH.LVL.STAT, mandatory=false)
+        LATEST_STATUS : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=10, sysNumber=33.0, core=true, t24Name=LATEST.STATUS, mandatory=false)
+/* This field indicates whether the financial instrument has to be debited from (DELE) / credited to (RECE) the safekeeping account
+It will be mapped to tag 22H in Outgoing Message
+Validation Rules:
+This should be 'REDE//RECE' if SECURITY is Credited
+This should be 'REDE//DELI' if SECURITY is Debited */
+        MOVEMENT_TYPE : T24BusinessTypes:A required
+            @t24:i (align=L, inputBehaviour=I, maxLength=10, sysNumber=24.0, core=true, t24Name=MOVEMENT.TYPE, mandatory=true)
+        /* This field is updated by the system with the value in the tag 98C while processing MT548 message */
+        MSG_IN_DATE_TIME : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=15.0, core=true, t24Name=MSG.IN.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        /* This field will be updated when the system sends out the MT 548 */
+        MSG_OUT_DATE_TIME : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=16.0, core=true, t24Name=MSG.OUT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        /* This field holds Nominal of Underlying Security in Transaction */
+        NO_NOMINAL : T24BusinessTypes:NOMAMT required
+            @i18n:Label (en=Nominal)
+            @t24:i (align=R, inputBehaviour=I, maxLength=20, sysNumber=17.0, core=true, t24Name=NO.NOMINAL, mandatory=true)
+        OVERRIDE -> byValue SC_STP:SC_CTDY_MT548_INSTRUCT__OVERRIDE *
+            @t24:i (t24Name=OVERRIDE)
+/* This field indicates whether the instruction is free or against payment. The available options are Against Payment (APMT) or FREE
+It will be mapped to tag 22H in Outgoing Message
+Validation Rules:
+This should be 'PAYM//FREE' if SECURITY.TRANSFER
+This should be 'PAYM//APMT' if SEC.TRADE */
+        PAYMENT : T24BusinessTypes:A required
+            @i18n:Label (en=Payment)
+            @t24:i (align=L, inputBehaviour=I, maxLength=10, sysNumber=25.0, core=true, t24Name=PAYMENT, mandatory=true)
+        PREVIOUS_STATUS : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=10, sysNumber=36.0, core=true, t24Name=PREVIOUS.STATUS, mandatory=false)
+        /* This field will be Defaulted from PSET Value of TRANSACTION(SEC.TRADE/SECURITY.TRANSFER) */
+        PSET : T24BusinessTypes:A
+            @i18n:Label (en="Place of Settlement")
+            @t24:i (align=L, inputBehaviour=I, maxLength=15, sysNumber=29.0, core=true, t24Name=PSET, mandatory=false)
+        /* This field will be Defaulted from Broker Agent if DEBIT Transaction */
+        REAG : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=30.0, core=true, t24Name=REAG, mandatory=false)
+/* This Field will have Reason Code of incoming instructions
+This Field will be forwarded in 24B Tag in MT548 */
+        REASON_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Reason code")
+            @t24:i (align=L, inputBehaviour=I, maxLength=10, sysNumber=6.0, core=true, t24Name=REASON.CODE, mandatory=false)
+        REASON_NARRATIVE -> byValue SC_STP:SC_CTDY_MT548_INSTRUCT__REASON_NARRATIVE *
+            @t24:i (t24Name=REASON.NARRATIVE)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=90.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        RECU : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=31.0, core=true, t24Name=RECU, mandatory=false)
+/* This Field will have Seme Reference of Incoming Message(540-543) or 548
+This will be Forwarded in 20C Tag Under Link Block of Outgoing MT548 */
+        RELA : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=16, sysNumber=9.0, core=true, t24Name=RELA, mandatory=false)
+        RESERVED10 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=76.0, core=true, t24Name=RESERVED10, mandatory=false)
+        RESERVED11 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=77.0, core=true, t24Name=RESERVED11, mandatory=false)
+        RESERVED12 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=78.0, core=true, t24Name=RESERVED12, mandatory=false)
+        RESERVED13 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=79.0, core=true, t24Name=RESERVED13, mandatory=false)
+        RESERVED14 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=80.0, core=true, t24Name=RESERVED14, mandatory=false)
+        RESERVED15 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=81.0, core=true, t24Name=RESERVED15, mandatory=false)
+        RESERVED16 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=82.0, core=true, t24Name=RESERVED16, mandatory=false)
+        RESERVED17 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=83.0, core=true, t24Name=RESERVED17, mandatory=false)
+        RESERVED18 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=84.0, core=true, t24Name=RESERVED18, mandatory=false)
+        RESERVED19 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=85.0, core=true, t24Name=RESERVED19, mandatory=false)
+        RESERVED2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=68.0, core=true, t24Name=RESERVED2, mandatory=false)
+        RESERVED20 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=86.0, core=true, t24Name=RESERVED20, mandatory=false)
+        RESERVED3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=69.0, core=true, t24Name=RESERVED3, mandatory=false)
+        RESERVED4 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=70.0, core=true, t24Name=RESERVED4, mandatory=false)
+        RESERVED5 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=71.0, core=true, t24Name=RESERVED5, mandatory=false)
+        RESERVED6 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=72.0, core=true, t24Name=RESERVED6, mandatory=false)
+        RESERVED7 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=73.0, core=true, t24Name=RESERVED7, mandatory=false)
+        RESERVED8 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=74.0, core=true, t24Name=RESERVED8, mandatory=false)
+        RESERVED9 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=75.0, core=true, t24Name=RESERVED9, mandatory=false)
+/* This field will hold the Customer’s Safe keeping account with the bank and will  be updated from the incoming MT 540-3
+This will be sent in 97A Tag in Outgoing MT548 */
+        SAFEKEEP_ACCOUNT : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=12.0, core=true, t24Name=SAFEKEEP.ACCOUNT, mandatory=false)
+        SAVE_STATUS -> byValue SC_STP:SC_CTDY_MT548_INSTRUCT__SAVE_STATUS *
+            @t24:i (t24Name=SAVE.STATUS)
+        SC_CTDY_INSTRUCT -> SC_STP:SC_CTDY_MT548_INSTRUCT PK required
+            @t24:i (align=L, inputBehaviour=I, maxLength=16, sysNumber=0.0, core=true, businessType=S, t24Name=SC.CTDY.INSTRUCT, mandatory=true)
+/* This field will hold the instrument identifier
+This will be mapped to Tag 35B in Outgoing MT548 Message */
+        SECURITY : T24BusinessTypes:A required
+            @i18n:Label (en=Security)
+            @t24:i (align=L, inputBehaviour=I, maxLength=12, sysNumber=13.0, core=true, t24Name=SECURITY, mandatory=true)
+        /* This field will be Defaulted from BIC.CODE of Broker Agent if CREDIT Transaction */
+        SELL : T24BusinessTypes:A
+            @i18n:Label (en="Sell Rate")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=32.0, core=true, t24Name=SELL, mandatory=false)
+/* This field holds SEC.TRADE or SECURITY.TRANSFER id which was created through 540-543
+This will be Sent in 20C Tag of Outgoing MT548 */
+        SEME_REF : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=16, sysNumber=8.0, core=true, t24Name=SEME.REF, mandatory=false)
+        /* Address of Sender who sent 540 -543 Message to create Transaction */
+        SENDER_BIC : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=11.0, core=true, t24Name=SENDER.BIC, mandatory=false)
+/* This field will have Settlement Amount of Transaction
+This will be forwarded in 19A Tag of outgoing MT548 Message */
+        SETTLEMENT_AMT : T24BusinessTypes:AMT
+            @i18n:Label (en="Settlement Amount")
+            @t24:i (align=R, inputBehaviour=I, maxLength=25, sysNumber=23.0, core=true, t24Name=SETTLEMENT.AMT, mandatory=false)
+        /* Value Date of Security Transaction */
+        SETTLEMENT_DATE : T24BusinessTypes:D
+            @i18n:Label (en="Settlement Date")
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=19.0, core=true, t24Name=SETTLEMENT.DATE, mandatory=false)
+        STATUS : T24BusinessTypes:A required
+            @i18n:Label (en=Status)
+            @t24:i (align=L, inputBehaviour=I, maxLength=10, sysNumber=3.0, core=true, t24Name=STATUS, mandatory=true)
+        STMT_NOS -> byValue SC_STP:SC_CTDY_MT548_INSTRUCT__STMT_NOS *
+            @t24:i (t24Name=STMT.NOS)
+        /* Trade Date of Security Transaction */
+        TRADE_DATE : T24BusinessTypes:D required
+            @i18n:Label (en="Trade Date")
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=18.0, core=true, t24Name=TRADE.DATE, mandatory=true)
+    }
+    SC_CTDY_MT548_INSTRUCT__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=93.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    SC_CTDY_MT548_INSTRUCT__DELIVERY_OUT_REF
+    {
+/* This field will hold the reference of the outgoing MT 548
+Where message is sent to customer and EAM, 2 message references will be available for each status. */
+        DELIVERY_OUT_REF : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=22.0, core=true, t24Name=DELIVERY.OUT.REF, mandatory=false)
+    }
+    SC_CTDY_MT548_INSTRUCT__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=92.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    SC_CTDY_MT548_INSTRUCT__OVERRIDE
+    {
+        OVERRIDE : T24BusinessTypes:N
+            @i18n:Label (en=Override)
+            @i18n:Tooltip (en="Overrides generated by this transaction")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=89.0, core=true, t24Name=OVERRIDE, mandatory=false)
+    }
+    SC_CTDY_MT548_INSTRUCT__REASON_NARRATIVE
+    {
+        /* This field will have Status Description of Incoming instructions */
+        REASON_NARRATIVE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=7.0, core=true, t24Name=REASON.NARRATIVE, mandatory=false)
+    }
+    SC_CTDY_MT548_INSTRUCT__SAVE_STATUS
+    {
+        SAVE_ACTION_REQUIRED : SC_STP:SC_CTDY_MT548_INSTRUCT__SAVE_STATUS__SAVE_ACTION_REQUIRED
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=39.0, core=true, t24Name=SAVE.ACTION.REQUIRED, mandatory=false)
+        SAVE_BUYR : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=60.0, core=true, t24Name=SAVE.BUYR, mandatory=false)
+        SAVE_CUSTOMER_TRANS_REF : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=44.0, core=true, t24Name=SAVE.CUSTOMER.TRANS.REF, mandatory=false)
+        SAVE_DEAG : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=61.0, core=true, t24Name=SAVE.DEAG, mandatory=false)
+        SAVE_DECU : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=62.0, core=true, t24Name=SAVE.DECU, mandatory=false)
+        SAVE_DELIVERY_INW_REF : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=55.0, core=true, t24Name=SAVE.DELIVERY.INW.REF, mandatory=false)
+        SAVE_DELIVERY_OUT_REF -> byValue SC_STP:SC_CTDY_MT548_INSTRUCT__SAVE_STATUS__SAVE_DELIVERY_OUT_REF *
+            @t24:i (t24Name=SAVE.DELIVERY.OUT.REF)
+        SAVE_FUNCTION : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=9, sysNumber=48.0, core=true, t24Name=SAVE.FUNCTION, mandatory=false)
+        SAVE_GEN_MT548 : SC_STP:SC_CTDY_MT548_INSTRUCT__SAVE_STATUS__SAVE_GEN_MT548
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=54.0, core=true, t24Name=SAVE.GEN.MT548, mandatory=false)
+        SAVE_HIGH_LVL_STAT : SC_STP:SC_CTDY_MT548_INSTRUCT__SAVE_STATUS__SAVE_HIGH_LVL_STAT
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=38.0, core=true, t24Name=SAVE.HIGH.LVL.STAT, mandatory=false)
+        SAVE_MOVEMENT_TYPE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=10, sysNumber=58.0, core=true, t24Name=SAVE.MOVEMENT.TYPE, mandatory=false)
+        SAVE_MSG_IN_DATE_TIME : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=49.0, core=true, t24Name=SAVE.MSG.IN.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        SAVE_MSG_OUT_DATE_TIME : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=50.0, core=true, t24Name=SAVE.MSG.OUT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        SAVE_NO_NOMINAL : T24BusinessTypes:NOMAMT
+            @t24:i (align=R, inputBehaviour=N, maxLength=20, sysNumber=51.0, core=true, t24Name=SAVE.NO.NOMINAL, mandatory=false)
+        SAVE_PAYMENT : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=10, sysNumber=59.0, core=true, t24Name=SAVE.PAYMENT, mandatory=false)
+        SAVE_PSET : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=63.0, core=true, t24Name=SAVE.PSET, mandatory=false)
+        SAVE_REAG : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=64.0, core=true, t24Name=SAVE.REAG, mandatory=false)
+        SAVE_REASON_CODE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=10, sysNumber=40.0, core=true, t24Name=SAVE.REASON.CODE, mandatory=false)
+        SAVE_REASON_NARRATIVE -> byValue SC_STP:SC_CTDY_MT548_INSTRUCT__SAVE_STATUS__SAVE_REASON_NARRATIVE *
+            @t24:i (t24Name=SAVE.REASON.NARRATIVE)
+        SAVE_RECU : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=65.0, core=true, t24Name=SAVE.RECU, mandatory=false)
+        SAVE_RELA : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=16, sysNumber=43.0, core=true, t24Name=SAVE.RELA, mandatory=false)
+        SAVE_SAFEKEEP_ACCOUNT : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=46.0, core=true, t24Name=SAVE.SAFEKEEP.ACCOUNT, mandatory=false)
+        SAVE_SECURITY : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=12, sysNumber=47.0, core=true, t24Name=SAVE.SECURITY, mandatory=false)
+        SAVE_SELL : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=66.0, core=true, t24Name=SAVE.SELL, mandatory=false)
+        SAVE_SEME_REF : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=16, sysNumber=42.0, core=true, t24Name=SAVE.SEME.REF, mandatory=false)
+        SAVE_SENDER_BIC : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=45.0, core=true, t24Name=SAVE.SENDER.BIC, mandatory=false)
+        SAVE_SETTLEMENT_AMT : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=25, sysNumber=57.0, core=true, t24Name=SAVE.SETTLEMENT.AMT, mandatory=false)
+        SAVE_SETTLEMENT_DATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=N, maxLength=11, sysNumber=53.0, core=true, t24Name=SAVE.SETTLEMENT.DATE, mandatory=false)
+        SAVE_STATUS : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=10, sysNumber=37.0, core=true, t24Name=SAVE.STATUS, mandatory=false)
+        SAVE_TRADE_DATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=N, maxLength=11, sysNumber=52.0, core=true, t24Name=SAVE.TRADE.DATE, mandatory=false)
+    }
+    SC_CTDY_MT548_INSTRUCT__SAVE_STATUS__SAVE_DELIVERY_OUT_REF
+    {
+        SAVE_DELIVERY_OUT_REF : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=56.0, core=true, t24Name=SAVE.DELIVERY.OUT.REF, mandatory=false)
+    }
+    SC_CTDY_MT548_INSTRUCT__SAVE_STATUS__SAVE_REASON_NARRATIVE
+    {
+        SAVE_REASON_NARRATIVE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=41.0, core=true, t24Name=SAVE.REASON.NARRATIVE, mandatory=false)
+    }
+    SC_CTDY_MT548_INSTRUCT__STMT_NOS
+    {
+        STMT_NOS : T24BusinessTypes:N
+            @i18n:Label (en="Stmt Nos")
+            @i18n:Tooltip (en="Stmt Nos")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=88.0, core=true, t24Name=STMT.NOS, mandatory=false)
+    }
+/* Parameter application, SC.CUSTODY.PARAM is introduced to record the global/ company level parameter details for
+				Custody / Account Servicer business.
+Fields are defined to :
+1. To identify the broker for transactions for Custody / Account Servicer
+2. Transaction codes required for creation of trade and transfer, and OFS source and version used for creation of trade and transfer from MT540 to MT543 messages
+3. Product groups for which Custody / Account Servicer operations are applicable. */
+    SC_CUSTODY_PARAM
+        @i18n:Description (en="")
+        @t24:i (t24Name=SC.CUSTODY.PARAM, level=I, type=H, allowedFunctions="A C D E I L P Q R S", localRefApplicationSysNo=41.0, localRefAllowed=true)
+    {
+        ALLOWED_SEC_TYPE -> byValue SC_STP:SC_CUSTODY_PARAM__ALLOWED_SEC_TYPE *
+            @t24:i (t24Name=ALLOWED.SEC.TYPE)
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=50.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=51.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=47.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        COMPANY -> SC_STP:SC_CUSTODY_PARAM PK required
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=I, maxLength=12, sysNumber=0.0, core=true, businessType=COM, t24Name=COMPANY, mask="##-###-####", mandatory=true)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=48.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=44.0, core=true, t24Name=CURR.NO, mandatory=false)
+        DATE_TIME -> byValue SC_STP:SC_CUSTODY_PARAM__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=49.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+/* Credit transaction code for SECURITY.TRANSFER created based on incoming instruction (MT540 , MT542), will be
+					updated from this field.
+Validation Rules:
+Should be a valid Credit Securities Transaction code */
+        EXT_TRF_CR_TXN -> SC_Config:SC_TRANS_NAME
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=4.0, core=true, businessType=A, t24Name=EXT.TRF.CR.TXN, mandatory=false)
+/* Debit transaction code for SECURITY.TRANSFER created based on incoming instruction (MT540 , MT542), will be
+					updated from this field.
+Validation Rules:
+Should be a valid Debit Securities Transaction code */
+        EXT_TRF_DR_TXN -> SC_Config:SC_TRANS_NAME
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=5.0, core=true, businessType=A, t24Name=EXT.TRF.DR.TXN, mandatory=false)
+        INPUTTER -> byValue SC_STP:SC_CUSTODY_PARAM__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+/* For transactions created from incoming MT540 to MT543 messages, the BROKER.NO field in SEC.TRADE and
+					SECURITY.TRANSFER will be defaulted from this field.
+Validation Rules:
+Should be defined as BROKER in CUSTOMER.SECURITY */
+        INTERNAL_BROKER -> SC_Config:CUSTOMER_SECURITY
+            @t24:i (align=R, inputBehaviour=I, maxLength=10, sysNumber=1.0, core=true, businessType=CUS, t24Name=INTERNAL.BROKER, mandatory=false)
+/* Credit transaction code for internal SECURITY.TRANSFER created based on incoming instruction (MT542),
+					will be updated from this field.
+Validation Rules:
+Should be a valid Credit Securities Transaction code */
+        INT_TRF_CR_TXN -> SC_Config:SC_TRANS_NAME
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=6.0, core=true, businessType=A, t24Name=INT.TRF.CR.TXN, mandatory=false)
+/* Debit transaction code for internal SECURITY.TRANSFER created based on incoming instruction (MT542), will
+					be updated from this field.
+Validation Rules:
+Should be a valid Debit Securities Transaction code */
+        INT_TRF_DR_TXN -> SC_Config:SC_TRANS_NAME
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=7.0, core=true, businessType=A, t24Name=INT.TRF.DR.TXN, mandatory=false)
+        OFS_VERSION -> byValue SC_STP:SC_CUSTODY_PARAM__OFS_VERSION *
+            @t24:i (t24Name=OFS.VERSION)
+        OVERRIDE -> byValue SC_STP:SC_CUSTODY_PARAM__OVERRIDE *
+            @t24:i (t24Name=OVERRIDE)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=43.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        RESERVED_1 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=40.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_10 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=31.0, core=true, t24Name=RESERVED.10, mandatory=false)
+        RESERVED_11 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=30.0, core=true, t24Name=RESERVED.11, mandatory=false)
+        RESERVED_12 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=29.0, core=true, t24Name=RESERVED.12, mandatory=false)
+        RESERVED_13 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=28.0, core=true, t24Name=RESERVED.13, mandatory=false)
+        RESERVED_14 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=27.0, core=true, t24Name=RESERVED.14, mandatory=false)
+        RESERVED_15 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=26.0, core=true, t24Name=RESERVED.15, mandatory=false)
+        RESERVED_16 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=25.0, core=true, t24Name=RESERVED.16, mandatory=false)
+        RESERVED_17 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=24.0, core=true, t24Name=RESERVED.17, mandatory=false)
+        RESERVED_18 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=23.0, core=true, t24Name=RESERVED.18, mandatory=false)
+        RESERVED_19 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=22.0, core=true, t24Name=RESERVED.19, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=39.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_20 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=21.0, core=true, t24Name=RESERVED.20, mandatory=false)
+        RESERVED_21 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=20.0, core=true, t24Name=RESERVED.21, mandatory=false)
+        RESERVED_22 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=19.0, core=true, t24Name=RESERVED.22, mandatory=false)
+        RESERVED_23 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=18.0, core=true, t24Name=RESERVED.23, mandatory=false)
+        RESERVED_24 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=17.0, core=true, t24Name=RESERVED.24, mandatory=false)
+        RESERVED_25 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=16.0, core=true, t24Name=RESERVED.25, mandatory=false)
+        RESERVED_26 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=15.0, core=true, t24Name=RESERVED.26, mandatory=false)
+        RESERVED_27 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=14.0, core=true, t24Name=RESERVED.27, mandatory=false)
+        RESERVED_28 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=13.0, core=true, t24Name=RESERVED.28, mandatory=false)
+        RESERVED_29 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=12.0, core=true, t24Name=RESERVED.29, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=38.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_30 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=11.0, core=true, t24Name=RESERVED.30, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=37.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        RESERVED_5 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=36.0, core=true, t24Name=RESERVED.5, mandatory=false)
+        RESERVED_6 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=35.0, core=true, t24Name=RESERVED.6, mandatory=false)
+        RESERVED_7 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=34.0, core=true, t24Name=RESERVED.7, mandatory=false)
+        RESERVED_8 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=33.0, core=true, t24Name=RESERVED.8, mandatory=false)
+        RESERVED_9 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=32.0, core=true, t24Name=RESERVED.9, mandatory=false)
+/* Credit transaction code for SEC.TRADE created based on incoming instruction (MT541 , MT543), will be updated from
+					this field.
+Validation Rules:
+Should be a valid Credit Securities Transaction code */
+        TRD_CR_TXN -> SC_Config:SC_TRANS_NAME
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=2.0, core=true, businessType=A, t24Name=TRD.CR.TXN, mandatory=false)
+/* Debit transaction code for SEC.TRADE created based on incoming instruction (MT541 , MT543), will be updated from
+					this field.
+Validation Rules:
+Should be a valid Debit Securities Transaction code */
+        TRD_DR_TXN -> SC_Config:SC_TRANS_NAME
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=3.0, core=true, businessType=A, t24Name=TRD.DR.TXN, mandatory=false)
+    }
+    SC_CUSTODY_PARAM__ALLOWED_SEC_TYPE
+    {
+/* A multi value field to store applicable product groups for Custody / Account Servicer operations.The security
+					product for which the SEC.TRADE is created should fall in one of the asset/sub asset types defined in ALLOWED.SAT
+					for auto authorisation
+Validation Rules:
+Valid record from SUB.ASSET.TYPE prefixed with S- or ASSET.TYPE prefixed with A- */
+        ALLOWED_SEC_TYPE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=8.0, core=true, t24Name=ALLOWED.SEC.TYPE, mandatory=false)
+    }
+    SC_CUSTODY_PARAM__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=46.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    SC_CUSTODY_PARAM__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=45.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    SC_CUSTODY_PARAM__OFS_VERSION
+    {
+/* OFS Channel defined in the group is used for creating SEC.TRADE or SECURITY.TRANSFER depending on the type of
+					associated OFS.VERSION
+Validation Rules:
+Must be a valid OFS.SOURCE record */
+        OFS_SOURCE -> EB_Interface:OFS_SOURCE
+            @i18n:Label (en="OFS Source")
+            @i18n:Tooltip (en="The OFS Source record ID")
+            @t24:i (align=L, inputBehaviour=I, maxLength=20, sysNumber=10.0, core=true, businessType=A, t24Name=OFS.SOURCE, mandatory=false)
+/* Versions of SEC.TRADE or SECURITY.TRANSFER can be defined in the group , which are to be created from incoming
+					MT540 to MT543
+Validation Rules:
+Must be a valid VERSION record */
+        OFS_VERSION -> EB_Versions:VERSION
+            @i18n:Label (en="Default Version")
+            @t24:i (align=L, inputBehaviour=I, maxLength=54, sysNumber=9.0, core=true, businessType=A, t24Name=OFS.VERSION, mandatory=false)
+    }
+    SC_CUSTODY_PARAM__OVERRIDE
+    {
+        OVERRIDE : T24BusinessTypes:N
+            @i18n:Label (en=Override)
+            @i18n:Tooltip (en="Overrides generated by this transaction")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=42.0, core=true, t24Name=OVERRIDE, mandatory=false)
+    }
+/* This Application holds the various matching codes details processed against inbound SWIFT MT548.
+
+Based on the Matching code the SC.MT548.MATCH.QUEUE is updated.
+
+If MATCH.CODE is missing or incorrect then the SC.MT548.REPAIR.QUEUE is updated. */
+    SC_MT548_MATCH_CODE
+        @i18n:Description (en="")
+        @t24:i (t24Name=SC.MT548.MATCH.CODE, level=F, type=H, allowedFunctions="A C D E H I L P Q R S", localRefApplicationSysNo=7.0, localRefAllowed=true)
+    {
+        /* This field would be updated by bank to state if this status needs further action. If action required is set to YES, this will be shown in ACTION.REQUIRED Field in SC.CTDY.MT548.INSTRUCT table */
+        ACTION_REQUIRED : SC_STP:SC_MT548_MATCH_CODE__ACTION_REQUIRED
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=3.0, core=true, t24Name=ACTION.REQUIRED, mandatory=false)
+/* Specifies the application type of the Matching code.
+
+Validation Rules:
+Allowed Input is S, L or M.
+S – Swift standard
+L – Local
+M - Indicates that match code is MX specific */
+        APPLICATION_TYPE : SC_STP:SC_MT548_MATCH_CODE__APPLICATION_TYPE
+            @i18n:Label (en="Application Type")
+            @i18n:Tooltip (en="How the payment rules apply to an arrangement")
+            @t24:i (align=L, inputBehaviour=I, maxLength=1, sysNumber=2.0, core=true, t24Name=APPLICATION.TYPE, mandatory=false)
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=16.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=17.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=13.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=14.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=10.0, core=true, t24Name=CURR.NO, mandatory=false)
+        DATE_TIME -> byValue SC_STP:SC_MT548_MATCH_CODE__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=15.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        DESCRIPTION -> byValue SC_STP:SC_MT548_MATCH_CODE__DESCRIPTION *
+            @t24:i (t24Name=DESCRIPTION)
+        INPUTTER -> byValue SC_STP:SC_MT548_MATCH_CODE__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+/* Specifies the matching codes which is used in the Inbound MT548 message.
+
+Validation Rules:
+Mandatory input.
+Maximum allowed character is 35 .
+
+Eg :- MTCH/MACH, MTCH/NMAT, SETT/PEND, PrcgSts/AckdAccptd, MtchgSts/Mtchd */
+        MT548_MATCH_KEY -> SC_STP:SC_MT548_MATCH_CODE PK required
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=0.0, core=true, businessType=AA, t24Name=MT548.MATCH.KEY, mandatory=true)
+        OVERRIDE -> byValue SC_STP:SC_MT548_MATCH_CODE__OVERRIDE *
+            @t24:i (t24Name=OVERRIDE)
+/* This field Specifies whether REASON.CODE Field in SC.CTDY.MT548.INSTRUCT Table is Mandatory or Not.
+REASON.CODE in SC.CTDY.MT548.INSTRUCT Table is Mandatory if REASON.MANDATORY is checked Otherwise Not Mandatory */
+        REASON_MANDATORY : SC_STP:SC_MT548_MATCH_CODE__REASON_MANDATORY
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=4.0, core=true, t24Name=REASON.MANDATORY, mandatory=false)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=9.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        RESERVED_1 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=6.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=5.0, core=true, t24Name=RESERVED.2, mandatory=false)
+    }
+    SC_MT548_MATCH_CODE__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=12.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    SC_MT548_MATCH_CODE__DESCRIPTION
+    {
+/* Specifies the description of the matching code.
+
+Validation Rules:
+Multi Language and Multi value field .
+Maximum allowed character is 35.
+
+Eg :- MTCH/MACH  - Matched */
+        DESCRIPTION : T24BusinessTypes:A
+            @i18n:Label (en=Description)
+            @i18n:Tooltip (en=Description)
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, multiLanguage=true, sysNumber=1.0, core=true, t24Name=DESCRIPTION, mandatory=false)
+    }
+    SC_MT548_MATCH_CODE__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=11.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    SC_MT548_MATCH_CODE__OVERRIDE
+    {
+/* Contains details of any overrides applicable to this Application.
+
+Validation Rules:
+Up to 35 type A (alphanumeric) characters. Multivalue field. (Internal field.) */
+        OVERRIDE : T24BusinessTypes:N
+            @i18n:Label (en=Override)
+            @i18n:Tooltip (en="Overrides generated by this transaction")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=8.0, core=true, t24Name=OVERRIDE, mandatory=false)
+    }
+/* The MT548 message is used to advise the status of a settlement instruction previously sent by the account owner and is usually sent by custodians before the settlement confirmations.
+
+A new record is created in this application each time a new SC.SETTLEMENT record gets created, provided the field PROCESS.MT548.IN in SC.PARAMETER should be set to ‘Y’.
+
+The fields in this application are updated automatically by the system upon receipt of MT548 incoming messages. */
+    SC_MT548_MATCH_QUEUE
+        @i18n:Description (en="")
+        @t24:i (t24Name=SC.MT548.MATCH.QUEUE, level=F, type=H, allowedFunctions="A C D E H I L P Q R S", localRefApplicationSysNo=21.0, localRefAllowed=true)
+    {
+/* This field is updated by the system with the value in the tag 19A while processing Mt548 message.
+
+Validation Rules:
+Single value field.
+Maximum allowed character is 1-18 numeric characters. */
+        AMOUNT : T24BusinessTypes:AMT
+            @i18n:Label (en=Amount)
+            @i18n:Tooltip (en="Indicates the Amount")
+            @t24:i (align=R, inputBehaviour=I, maxLength=18, sysNumber=6.0, core=true, t24Name=AMOUNT, mandatory=false)
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=30.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=31.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=27.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=28.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=24.0, core=true, t24Name=CURR.NO, mandatory=false)
+        DATE_TIME -> byValue SC_STP:SC_MT548_MATCH_QUEUE__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DELIVERY_REF -> byValue SC_STP:SC_MT548_MATCH_QUEUE__DELIVERY_REF *
+            @t24:i (t24Name=DELIVERY.REF)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=29.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        INPUTTER -> byValue SC_STP:SC_MT548_MATCH_QUEUE__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+/* This field will hold the Transaction Reference by a market infrastructure Eg:Target2-Securities
+
+Validation Rules:
+Single value field.
+Maximum allowed character is 35. */
+        MARKET_TXN_REF : T24BusinessTypes:A
+            @i18n:Label (en="Market Txn Ref")
+            @i18n:Tooltip (en="Market Txn Ref")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=9.0, core=true, t24Name=MARKET.TXN.REF, mandatory=false)
+        MATCH_CODE -> byValue SC_STP:SC_MT548_MATCH_QUEUE__MATCH_CODE *
+            @t24:i (t24Name=MATCH.CODE)
+/* This field will hold the DE.MESSAGE ID corresponding to the inward message that has updated the record. Eg. SESE024,SESE027
+
+Validation Rules:
+Single value field.
+Maximum allowed character is 10. */
+        MESSAGE_TYPE : T24BusinessTypes:A
+            @i18n:Label (en="Message Type")
+            @i18n:Tooltip (en="Delivery message types generated for this record")
+            @t24:i (align=L, inputBehaviour=I, maxLength=10, sysNumber=16.0, core=true, t24Name=MESSAGE.TYPE, mandatory=false)
+/* This field will specify if the movement on a securities account results from a deliver(DELI) or a receive(RECE) instruction
+
+Validation Rules:
+Single value field.
+Maximum allowed character is 10. */
+        MOVEMENT_TYPE : T24BusinessTypes:A
+            @i18n:Label (en="Movement Type")
+            @i18n:Tooltip (en="Movement Type")
+            @t24:i (align=L, inputBehaviour=I, maxLength=10, sysNumber=12.0, core=true, t24Name=MOVEMENT.TYPE, mandatory=false)
+/* This field is updated by the system with the value in the tag 98C while processing MT548 message.
+
+Validation Rules:
+Single value field.
+Format of this field is Date-Time */
+        MSG_DATE_TIME : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=15, sysNumber=4.0, core=true, t24Name=MSG.DATE.TIME, mandatory=false)
+/* The reference of this application that would holds SEC.TRADE or SECURITY.TRANSFER transaction reference as value whenever a new SC.SETTLEMENT record gets created.
+
+The transaction reference is picked up either from the reference in SEME or RELA based on set-up in the field MT548.IN.TXN.REF (in CUSTOMER.SECURITY record of the counter party). The system picked up the Reference from the Tag 20C in MT548 message.
+
+If the Transaction reference in the 20C tag matches with the MT548.TRANS.KEY then the system starts updating the other fields. Otherwise it will write the Error message in SC.MT548.REPAIR.QUEUE.
+
+Validation Rules:
+Mandatory input.
+Maximum allowed character is 16 and is prefixed with SCTRSC or SECTSC */
+        MT548_TRANS_KEY -> SC_STP:SC_MT548_MATCH_QUEUE PK required
+            @i18n:Label (en="MT548 Ref")
+            @t24:i (align=L, inputBehaviour=I, maxLength=16, sysNumber=0.0, core=true, businessType=S, t24Name=MT548.TRANS.KEY, mandatory=true)
+/* This field is updated by the system with the value in the tag 36B while processing MT548 message.
+
+Validation Rules:
+Single value field.
+Maximum allowed character is 1-18 numeric characters. */
+        NO_NOMINAL : T24BusinessTypes:NOMAMT
+            @i18n:Label (en=Nominal)
+            @t24:i (align=R, inputBehaviour=I, maxLength=18, sysNumber=5.0, core=true, t24Name=NO.NOMINAL, mandatory=false)
+        OVERRIDE -> byValue SC_STP:SC_MT548_MATCH_QUEUE__OVERRIDE *
+            @t24:i (t24Name=OVERRIDE)
+/* This field will specify how the transaction is to be settled(FREE/APYMT)
+
+Validation Rules:
+Single value field.
+Maximum allowed character is 10. */
+        PAYMENT : T24BusinessTypes:A
+            @i18n:Label (en=Payment)
+            @t24:i (align=L, inputBehaviour=I, maxLength=10, sysNumber=13.0, core=true, t24Name=PAYMENT, mandatory=false)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=23.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        RESERVED_1 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=20.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=19.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=18.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=17.0, core=true, t24Name=RESERVED.4, mandatory=false)
+/* This field will hold the account to or from which a securities entry is made
+
+Validation Rules:
+Single value field.
+Maximum allowed character is 35. */
+        SAFEKEEP_ACCOUNT : T24BusinessTypes:A
+            @i18n:Label (en="Safekeeping Account")
+            @i18n:Tooltip (en="Safekeeping Account")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=14.0, core=true, t24Name=SAFEKEEP.ACCOUNT, mandatory=false)
+/* This field will hold the Instrument Identifier.  If ISIN, then ISIN, else any one identifier, else Description.
+
+Validation Rules:
+Single value field.
+Maximum allowed character is 12. */
+        SECURITY : T24BusinessTypes:SEC
+            @i18n:Label (en=Security)
+            @t24:i (align=L, inputBehaviour=I, maxLength=12, sysNumber=15.0, core=true, t24Name=SECURITY, mandatory=false)
+/* This field will hold the Account Servicer’s Transaction Reference
+
+Validation Rules:
+Single value field.
+Maximum allowed character is 35. */
+        SERVICER_TXN_REF : T24BusinessTypes:A
+            @i18n:Label (en="Servicer Txn Ref")
+            @i18n:Tooltip (en="Servicer Txn Ref")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=8.0, core=true, t24Name=SERVICER.TXN.REF, mandatory=false)
+/* This field will hold the Settlement date as in the message
+
+Validation Rules:
+Single value field.
+Standard T24 Date format. */
+        SETTLEMENT_DATE : T24BusinessTypes:D
+            @i18n:Label (en="Settlement Date")
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=11.0, core=true, t24Name=SETTLEMENT.DATE, mandatory=false)
+/* This field will hold the Trade date as in the message
+
+Validation Rules:
+Single value field.
+Standard T24 Date format. */
+        TRADE_DATE : T24BusinessTypes:D
+            @i18n:Label (en="Trade Date")
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=10.0, core=true, t24Name=TRADE.DATE, mandatory=false)
+    }
+    SC_MT548_MATCH_QUEUE__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=26.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    SC_MT548_MATCH_QUEUE__DELIVERY_REF
+    {
+/* The Delivery Reference identifies each separate Delivery advice which has been produced by the Delivery module for MT548 incoming message.
+
+Validation Rules:
+Input allowed. */
+        DELIVERY_REF : T24BusinessTypes:A
+            @i18n:Label (en="Delivery Ref")
+            @i18n:Tooltip (en="System generated Delivery ref key")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=7.0, core=true, t24Name=DELIVERY.REF, mandatory=false)
+    }
+    SC_MT548_MATCH_QUEUE__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=25.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    SC_MT548_MATCH_QUEUE__MATCH_CODE
+    {
+/* This field is updated by the system with the value in the tag 25D while processing MT548 message.
+
+Validation Rules:
+Multi value field.
+Maximum allowed character is 35. */
+        MATCH_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Match Code")
+            @i18n:Tooltip (en="Indicates the Matching code details")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=1.0, core=true, t24Name=MATCH.CODE, mandatory=false)
+        REASON_CODE -> byValue SC_STP:SC_MT548_MATCH_QUEUE__MATCH_CODE__REASON_CODE *
+            @t24:i (t24Name=REASON.CODE)
+    }
+    SC_MT548_MATCH_QUEUE__MATCH_CODE__REASON_CODE
+    {
+/* This field is updated by the system with the value in the tag 24B while processing MT548 message.
+
+Validation Rules:
+Multi value field.
+Maximum allowed character is 35 . */
+        REASON_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Reason code")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=2.0, core=true, t24Name=REASON.CODE, mandatory=false)
+/* This field is updated by the system with the value in the tag 70D while processing MT548 message.
+
+Validation Rules:
+Multi value field.
+Maximum allowed character is 35. */
+        REASON_NARRATIVE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=3.0, core=true, t24Name=REASON.NARRATIVE, mandatory=false)
+    }
+    SC_MT548_MATCH_QUEUE__OVERRIDE
+    {
+/* Contains details of any overrides applicable to this Application.
+
+Validation Rules:
+Up to 35 type A (alphanumeric) characters. Multivalue field. (Internal field.) */
+        OVERRIDE : T24BusinessTypes:N
+            @i18n:Label (en=Override)
+            @i18n:Tooltip (en="Overrides generated by this transaction")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=22.0, core=true, t24Name=OVERRIDE, mandatory=false)
+    }
+    /* On receipt of a MT548 message with invalid reference (or) the matching code is missing or if it is incorrect, SC.MT548.REPAIR.QUEUE is updated with the rejection reason. */
+    SC_MT548_REPAIR_QUEUE
+        @i18n:Description (en="")
+        @t24:i (t24Name=SC.MT548.REPAIR.QUEUE, level=F, type=H, allowedFunctions="A C D E H I L P Q R S", localRefApplicationSysNo=25.0, localRefAllowed=true)
+    {
+/* This field is updated by the system with the value in the tag 19A while processing Mt548 message.
+
+Validation Rules:
+Single value field.
+Maximum allowed character is 1-18 numeric characters. */
+        AMOUNT : T24BusinessTypes:AMT
+            @i18n:Label (en=Amount)
+            @i18n:Tooltip (en="Indicates the Amount")
+            @t24:i (align=R, inputBehaviour=I, maxLength=18, sysNumber=7.0, core=true, t24Name=AMOUNT, mandatory=false)
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=34.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=35.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=31.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=32.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=28.0, core=true, t24Name=CURR.NO, mandatory=false)
+        DATE_TIME -> byValue SC_STP:SC_MT548_REPAIR_QUEUE__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DELIVERY_REF -> byValue SC_STP:SC_MT548_REPAIR_QUEUE__DELIVERY_REF *
+            @t24:i (t24Name=DELIVERY.REF)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=33.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        INPUTTER -> byValue SC_STP:SC_MT548_REPAIR_QUEUE__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+/* This will be a free format text field.  If User is able to manually identify the T24 Transaction, the Transaction ID can be input here.
+
+Validation Rules:
+Single value field.
+Maximum allowed character is 35. */
+        MANUAL_RECON_ID : T24BusinessTypes:A
+            @i18n:Label (en="Manual Recon ID")
+            @i18n:Tooltip (en="Manual Recon ID")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=19.0, core=true, t24Name=MANUAL.RECON.ID, mandatory=false)
+/* This field will hold the Transaction Reference by a market infrastructure Eg:Target2-Securities
+
+Validation Rules:
+Single value field.
+Maximum allowed character is 35. */
+        MARKET_TXN_REF : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=11.0, core=true, t24Name=MARKET.TXN.REF, mandatory=false)
+        MATCH_CODE -> byValue SC_STP:SC_MT548_REPAIR_QUEUE__MATCH_CODE *
+            @t24:i (t24Name=MATCH.CODE)
+/* This field will hold the DE.MESSAGE ID corresponding to the inward message that has updated the record. Eg. SESE024,SESE027
+
+Validation Rules:
+Single value field.
+Maximum allowed character is 10. */
+        MESSAGE_TYPE : T24BusinessTypes:A
+            @i18n:Label (en="Message Type")
+            @i18n:Tooltip (en="Delivery message types generated for this record")
+            @t24:i (align=L, inputBehaviour=I, maxLength=10, sysNumber=20.0, core=true, t24Name=MESSAGE.TYPE, mandatory=false)
+/* This field will specify if the movement on a securities account results from a deliver(DELI) or a receive(RECE) instruction
+
+Validation Rules:
+Single value field.
+Maximum allowed character is 10. */
+        MOVEMENT_TYPE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=10, sysNumber=14.0, core=true, t24Name=MOVEMENT.TYPE, mandatory=false)
+/* This field is updated by the system with the value in the tag 98C while processing MT548 message.
+
+Validation Rules:
+Single value field.
+Format of this field is Date-Time */
+        MSG_DATE_TIME : T24BusinessTypes:A
+            @i18n:Label (en="Message Date Time")
+            @i18n:Tooltip (en="Message Date Time")
+            @t24:i (align=L, inputBehaviour=I, maxLength=15, sysNumber=5.0, core=true, t24Name=MSG.DATE.TIME, mandatory=false)
+/* A unique key is generated by the system using the Time function.
+
+Validation Rules:
+Mandatory input.
+Maximum allowed character is 20. */
+        MT548_REPAIR_KEY -> SC_STP:SC_MT548_REPAIR_QUEUE PK required
+            @i18n:Label (en="Repair Key")
+            @t24:i (align=L, inputBehaviour=I, maxLength=20, sysNumber=0.0, core=true, businessType=A, t24Name=MT548.REPAIR.KEY, mandatory=true)
+/* This field is updated by the system with the value in the tag 36B while processing MT548 message.
+
+Validation Rules:
+Single value field.
+Maximum allowed character is 1-18 numeric characters. */
+        NO_NOMINAL : T24BusinessTypes:NOMAMT
+            @i18n:Label (en=Nominal)
+            @t24:i (align=R, inputBehaviour=I, maxLength=18, sysNumber=6.0, core=true, t24Name=NO.NOMINAL, mandatory=false)
+        OVERRIDE -> byValue SC_STP:SC_MT548_REPAIR_QUEUE__OVERRIDE *
+            @t24:i (t24Name=OVERRIDE)
+/* This field will specify how the transaction is to be settled(FREE/APYMT)
+
+Validation Rules:
+Single value field.
+Maximum allowed character is 10. */
+        PAYMENT : T24BusinessTypes:A
+            @i18n:Label (en=Payment)
+            @t24:i (align=L, inputBehaviour=I, maxLength=10, sysNumber=15.0, core=true, t24Name=PAYMENT, mandatory=false)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=27.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        REJECT_REASON -> byValue SC_STP:SC_MT548_REPAIR_QUEUE__REJECT_REASON *
+            @t24:i (t24Name=REJECT.REASON)
+        RESERVED_1 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=24.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=23.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=22.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=21.0, core=true, t24Name=RESERVED.4, mandatory=false)
+/* This field will hold the account to or from which a securities entry is made
+
+Validation Rules:
+Single value field.
+Maximum allowed character is 35. */
+        SAFEKEEP_ACCOUNT : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=16.0, core=true, t24Name=SAFEKEEP.ACCOUNT, mandatory=false)
+/* This field will hold the Instrument Identifier.  If ISIN, then ISIN, else any one identifier, else Description.
+
+Validation Rules:
+Single value field.
+Maximum allowed character is 12. */
+        SECURITY : T24BusinessTypes:A
+            @i18n:Label (en=Security)
+            @t24:i (align=L, inputBehaviour=I, maxLength=25, sysNumber=17.0, core=true, t24Name=SECURITY, mandatory=false)
+/* This field will hold the Account Servicer’s Transaction Reference
+
+Validation Rules:
+Single value field.
+Maximum allowed character is 35. */
+        SERVICER_TXN_REF : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=10.0, core=true, t24Name=SERVICER.TXN.REF, mandatory=false)
+/* This field will hold the Settlement date as in the message
+
+Validation Rules:
+Single value field.
+Standard T24 Date format. */
+        SETTLEMENT_DATE : T24BusinessTypes:D
+            @i18n:Label (en="Settlement Date")
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=13.0, core=true, t24Name=SETTLEMENT.DATE, mandatory=false)
+/* This field will hold the Trade date as in the message
+
+Validation Rules:
+Single value field.
+Standard T24 Date format. */
+        TRADE_DATE : T24BusinessTypes:D
+            @i18n:Label (en="Trade Date")
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=12.0, core=true, t24Name=TRADE.DATE, mandatory=false)
+/* The TRANS.REF field is updated by the system with the transaction reference specified in the tag 20C while processing MT548 message.
+
+Validation Rules:
+Single value field.
+Maximum allowed character is 16 and is prefixed with SCTRSC or SECTSC */
+        TRANS_REF : T24BusinessTypes:A
+            @i18n:Label (en="Transaction No")
+            @i18n:Tooltip (en="Indicates the transaction reference")
+            @t24:i (align=L, inputBehaviour=I, maxLength=16, sysNumber=1.0, core=true, t24Name=TRANS.REF, mandatory=false)
+        UNMATCH_IN_T24 -> byValue SC_STP:SC_MT548_REPAIR_QUEUE__UNMATCH_IN_T24 *
+            @t24:i (t24Name=UNMATCH.IN.T24)
+    }
+    SC_MT548_REPAIR_QUEUE__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=30.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    SC_MT548_REPAIR_QUEUE__DELIVERY_REF
+    {
+/* The Delivery Reference identifies each separate Delivery advice which has been produced by the Delivery module for MT548 incoming message.
+
+Validation Rules:
+Input allowed */
+        DELIVERY_REF : T24BusinessTypes:A
+            @i18n:Label (en="Delivery Ref")
+            @i18n:Tooltip (en="System generated Delivery ref key")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=9.0, core=true, t24Name=DELIVERY.REF, mandatory=false)
+    }
+    SC_MT548_REPAIR_QUEUE__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=29.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    SC_MT548_REPAIR_QUEUE__MATCH_CODE
+    {
+/* Specifies the Matching code details from the tag 25D in MT548 incoming message
+
+Validation Rules:
+Multi value field.
+Maximum allowed character is 35. */
+        MATCH_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Match Code")
+            @i18n:Tooltip (en="Indicates the Matching code details")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=2.0, core=true, t24Name=MATCH.CODE, mandatory=false)
+        REASON_CODE -> byValue SC_STP:SC_MT548_REPAIR_QUEUE__MATCH_CODE__REASON_CODE *
+            @t24:i (t24Name=REASON.CODE)
+    }
+    SC_MT548_REPAIR_QUEUE__MATCH_CODE__REASON_CODE
+    {
+/* This field is updated by the system with the value in the tag 24B while processing MT548 message.
+
+Validation Rules:
+Multi value field.
+Maximum allowed character is 35 . */
+        REASON_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Reason Code")
+            @i18n:Tooltip (en="Reason Code")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=3.0, core=true, t24Name=REASON.CODE, mandatory=false)
+/* This field is updated by the system with the value in the tag 70D while processing MT548 message.
+
+Validation Rules:
+Multi value field.
+Maximum allowed character is 35 . */
+        REASON_NARRATIVE : T24BusinessTypes:A
+            @i18n:Label (en="Reason Narrative")
+            @i18n:Tooltip (en="Reason Narrative")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=4.0, core=true, t24Name=REASON.NARRATIVE, mandatory=false)
+    }
+    SC_MT548_REPAIR_QUEUE__OVERRIDE
+    {
+/* Contains details of any overrides applicable to this Application.
+
+Validation Rules:
+Up to 35 type A (alphanumeric) characters. Multivalue field. (Internal field.) */
+        OVERRIDE : T24BusinessTypes:N
+            @i18n:Label (en=Override)
+            @i18n:Tooltip (en="Overrides generated by this transaction")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=26.0, core=true, t24Name=OVERRIDE, mandatory=false)
+    }
+    SC_MT548_REPAIR_QUEUE__REJECT_REASON
+    {
+/* This field updated by the system with the rejection reason while processing  MT548 message.
+
+Validation Rules:
+Single value field.
+Maximum allowed character is 80 .
+
+Eg. “Matching code inexistent in matching table” or “Inexistent T24 reference” */
+        REJECT_REASON : T24BusinessTypes:A
+            @i18n:Label (en="Reject Reason")
+            @i18n:Tooltip (en="Indicates the reason for rejection")
+            @t24:i (align=L, inputBehaviour=I, maxLength=80, sysNumber=8.0, core=true, t24Name=REJECT.REASON, mandatory=false)
+    }
+    SC_MT548_REPAIR_QUEUE__UNMATCH_IN_T24
+    {
+/* This will be a multi-value field.
+
+Validation Rules:
+Multi value field.
+Maximum allowed character is 15.
+This field is applicable only for an incoming sese.027.001.05
+Allowed Values: TRANS.KEY, STATUS, SECURITY, NO.NOMINAL, MOVMENT.TYPE, TXN.NOT.CANC
+TRANS.KEY (To indicate that we cannot find a suitable T24 transaction)
+STATUS (To indicate that we cannot find a suitable Status)
+SECURITY (To indicate that Security ID is not the same as in the T24 transaction)
+NO.NOMINAL  (To indicate that Nominal is not the same as in the T24 transaction)
+MOVEMENT.TYPE (To indicate that the delivery/receipt value does not match with what is expected from the T24 transaction)
+TXN.NOT.CANC (To indicate that the T24 transaction is not reversed/cancelled) */
+        UNMATCH_IN_T24 : SC_STP:SC_MT548_REPAIR_QUEUE__UNMATCH_IN_T24__UNMATCH_IN_T24
+            @i18n:Label (en="Unmatch in T24")
+            @i18n:Tooltip (en="Unmatch in T24")
+            @t24:i (align=L, inputBehaviour=I, maxLength=15, sysNumber=18.0, core=true, t24Name=UNMATCH.IN.T24, mandatory=false)
+    }
+    /* This Application holds the various reason code details processed against inbound SWIFT MT548. */
+    SC_SETT_REASON_CODES
+        @i18n:Description (en="")
+        @t24:i (t24Name=SC.SETT.REASON.CODES, level=I, type=H, allowedFunctions="A C D E H I L P Q R S", localRefApplicationSysNo=8.0, localRefAllowed=true)
+    {
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=17.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=18.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=14.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=15.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=11.0, core=true, t24Name=CURR.NO, mandatory=false)
+        DATE_TIME -> byValue SC_STP:SC_SETT_REASON_CODES__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=16.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        DESCRIPTION -> byValue SC_STP:SC_SETT_REASON_CODES__DESCRIPTION *
+            @t24:i (t24Name=DESCRIPTION)
+        INPUTTER -> byValue SC_STP:SC_SETT_REASON_CODES__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        OVERRIDE : T24BusinessTypes:A
+            @i18n:Label (en=Override)
+            @i18n:Tooltip (en="Overrides generated by this transaction")
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=9.0, core=true, t24Name=OVERRIDE, mandatory=false)
+        REASON_CODE -> SC_STP:SC_SETT_REASON_CODES PK required
+            @i18n:Label (en="Reason code")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=0.0, core=true, businessType=A, t24Name=REASON.CODE, mandatory=true)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=10.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        RESERVED1 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=7.0, core=true, t24Name=RESERVED1, mandatory=false)
+        RESERVED2 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=6.0, core=true, t24Name=RESERVED2, mandatory=false)
+        RESERVED3 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=5.0, core=true, t24Name=RESERVED3, mandatory=false)
+        RESERVED4 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=4.0, core=true, t24Name=RESERVED4, mandatory=false)
+        RESERVED5 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=3.0, core=true, t24Name=RESERVED5, mandatory=false)
+/* This field will hold the short name of this code.
+
+Validation Rules:
+Single value field.
+Mandatory field. */
+        SHORT_NAME : T24BusinessTypes:A required
+            @i18n:Label (en="Short name")
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=1.0, core=true, t24Name=SHORT.NAME, mandatory=true)
+    }
+    SC_SETT_REASON_CODES__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=13.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    SC_SETT_REASON_CODES__DESCRIPTION
+    {
+/* Specifies the description of the reason code.
+
+Validation Rules:
+Multi Language and Multi value field .
+Maximum allowed character is 35. */
+        DESCRIPTION : T24BusinessTypes:A
+            @i18n:Label (en=Description)
+            @i18n:Tooltip (en=Description)
+            @t24:i (align=L, inputBehaviour=I, maxLength=200, multiLanguage=true, sysNumber=2.0, core=true, t24Name=DESCRIPTION, isTextarea=true, mandatory=false)
+    }
+    SC_SETT_REASON_CODES__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=12.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+}
+Enumerations {
+    SC_ALLEGEMENT_INWARD__REJECT_REASON__REJECT_REASON : mml:string
+        MV01=MV01
+        MV02=MV02
+        MV03=MV03
+        MV04=MV04
+        MV05=MV05
+        MV06=MV06
+        MV07=MV07
+        MV08=MV08
+        MV09=MV09
+        MV10=MV10
+        MV11=MV11
+        MV12=MV12
+        MV13=MV13
+        MV14=MV14
+    SC_ALLEGEMENT_INWARD__STATUS : mml:string
+        ACCEPTED=ACCEPTED
+        CANCELLED=CANCELLED
+        ERROR=ERROR
+        RECEIVED=RECEIVED
+        REJECTED=REJECTED
+        TRFR_CANCELLED=TRFR.CANCELLED
+    SC_CTDY_MSG_LOG__STATUS : mml:string
+        AUTHORISED=AUTHORISED
+        CANC_REQUESTED=CANC.REQUESTED
+        DELETED=DELETED
+        HOLD=HOLD
+        INPUT=INPUT
+        REVERSED=REVERSED
+    SC_CTDY_MT548_INSTRUCT__ACTION_REQUIRED : mml:string
+        NO=NO
+        YES=YES
+    SC_CTDY_MT548_INSTRUCT__GEN_MT548 : mml:string
+        NO=NO
+        YES=YES
+    SC_CTDY_MT548_INSTRUCT__HIGH_LVL_STAT : mml:string
+        548_UNMATCHED="548 UNMATCHED"
+        FAILED_SETTLEMENT="FAILED SETTLEMENT"
+        NEW=NEW
+        OK=OK
+        PARTIALLY_SETTLED="PARTIALLY SETTLED"
+        SETTLED=SETTLED
+    SC_CTDY_MT548_INSTRUCT__LATEST_ACTION_REQ : mml:string
+        NO=NO
+        YES=YES
+    SC_CTDY_MT548_INSTRUCT__LATEST_HIGH_LVL_STAT : mml:string
+        ACTION_REQUIRED="ACTION REQUIRED"
+        FAILED_SETTLEMENT="FAILED SETTLEMENT"
+        NEW=NEW
+        OK=OK
+        PARTIALLY_SETTLED="PARTIALLY SETTLED"
+        SETTLED=SETTLED
+    SC_CTDY_MT548_INSTRUCT__SAVE_STATUS__SAVE_ACTION_REQUIRED : mml:string
+        NO=NO
+        YES=YES
+    SC_CTDY_MT548_INSTRUCT__SAVE_STATUS__SAVE_GEN_MT548 : mml:string
+        NO=NO
+        YES=YES
+    SC_CTDY_MT548_INSTRUCT__SAVE_STATUS__SAVE_HIGH_LVL_STAT : mml:string
+        ACTION_REQUIRED="ACTION REQUIRED"
+        FAILED_SETTLEMENT="FAILED SETTLEMENT"
+        NEW=NEW
+        OK=OK
+        PARTIALLY_SETTLED="PARTIALLY SETTLED"
+        SETTLED=SETTLED
+    SC_MT548_MATCH_CODE__ACTION_REQUIRED : mml:string
+        NO=NO
+        YES=YES
+    SC_MT548_MATCH_CODE__APPLICATION_TYPE : mml:string
+        L=L
+        M=M
+        S=S
+    SC_MT548_MATCH_CODE__REASON_MANDATORY : mml:string
+        YES=YES
+    SC_MT548_REPAIR_QUEUE__UNMATCH_IN_T24__UNMATCH_IN_T24 : mml:string
+        MOVMENT_TYPE=MOVMENT.TYPE
+        NO_NOMINAL=NO.NOMINAL
+        SECURITY=SECURITY
+        STATUS=STATUS
+        TRANS_KEY=TRANS.KEY
+        TXN_NOT_CANC=TXN.NOT.CANC
+}

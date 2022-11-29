@@ -1,0 +1,1810 @@
+# UTF-8
+/* Configuration for RD */
+Domain RD_Config
+    @t24:i (module=RD)
+    @java:Package (value=com.temenos.t24.datamodel.rd.rd_config)
+namespace "http://www.temenos.com/t24/RD_Config"
+metamodelVersion 1.30.6
+Classes {
+    /* A Utility to load the EXCLUTION LIST file downloaded from SWIFT. */
+    IN_EXCLUSION_LIST_LOAD
+        @i18n:Description (en="")
+        @t24:i (t24Name=IN.EXCLUSION.LIST.LOAD, nonStop=true, level=I, type=W, allowedFunctions="C I L P Q R S V", localRefAllowed=false)
+    {
+/* Field to decide what needs to be done while uploading Swift file.
+When the action is 'OVERWRITE' - We clear all the records.
+When the action is 'UPDATE'    - We dont clear any records. Just update the records. */
+        ACTION : RD_Config:IN_EXCLUSION_LIST_LOAD__ACTION required
+            @i18n:Label (en=Action)
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=5.0, core=true, t24Name=ACTION, mandatory=true)
+/* Will indicate what actions will take the process when a file is missing -
+Stop - if the next file is not found the process will stop
+Skip - if the next file is not found the process will continue with the next available file */
+        ACT_ON_MISS_FILE : RD_Config:IN_EXCLUSION_LIST_LOAD__ACT_ON_MISS_FILE required
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=8.0, core=true, t24Name=ACT.ON.MISS.FILE, mandatory=true)
+/* This field defines the Archive location to where the uploaded file has to be moved post processing.
+If no path is specified, file will be deleted. */
+        ARCHIVE_FILE_LOCATION : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=255, sysNumber=12.0, core=true, t24Name=ARCHIVE.FILE.LOCATION, mandatory=false)
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=22.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=23.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=19.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=20.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=16.0, core=true, t24Name=CURR.NO, mandatory=false)
+        DATE_TIME -> byValue RD_Config:IN_EXCLUSION_LIST_LOAD__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+/* A Mandatory field to indicate the delimiter option available in Swift file.
+Options available are 'Comma' and 'Tab'. */
+        DELIMITER : RD_Config:IN_EXCLUSION_LIST_LOAD__DELIMITER required
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=4.0, core=true, t24Name=DELIMITER, mandatory=true)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=21.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        DESCRIPTION -> byValue RD_Config:IN_EXCLUSION_LIST_LOAD__DESCRIPTION *
+            @t24:i (t24Name=DESCRIPTION)
+/* Holds the file name of EXCLUSION LIST that is downloaded from swift.
+Validation Rules:
+A maximum of 35 characters can be entered. */
+        FILE_NAME : T24BusinessTypes:ANY
+            @i18n:Label (en="File Name")
+            @t24:i (align=L, inputBehaviour=I, maxLength=255, sysNumber=2.0, core=true, t24Name=FILE.NAME, mandatory=false)
+/* This field defines the naming convention of the file(s) that will be uploaded.
+Should be in line with the option in the File Type and match with pattern provided by Swift to identify Publication Date.
+E.g. IBANPLUS_V3_FULL_yyyymmdd.txt */
+        FILE_NAME_FORMAT : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=255, sysNumber=10.0, core=true, t24Name=FILE.NAME.FORMAT, mandatory=false)
+/* Local API to determine which file(s) should be picked for processing.
+This API should contains 4 arguments as below -
+Argument1 :IN - IN.IBAN.PLUS.LOAD/IN.EXCLUSION.LIST.LOAD record ID
+Argument2(1) :OUT - FileName
+Argument2(2) :OUT - FileNameFormat
+Argument3, Argument4 - Reserved for future use */
+        FILE_NAME_FORMAT_API : T24BusinessTypes:HOOK
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=11.0, core=true, t24Name=FILE.NAME.FORMAT.API, mandatory=false)
+/* Specifies the location of EXCLUSION LIST file.
+Validation Rules:
+A maximum of 35 characters can be entered. */
+        FILE_PATH : T24BusinessTypes:A required
+            @t24:i (align=L, inputBehaviour=I, maxLength=255, sysNumber=3.0, core=true, t24Name=FILE.PATH, mandatory=true)
+/* This field will indicate the type of file which is going to be uploaded. It will include three options-
+1) Daily Delta
+2) Monthly Delta
+3) Monthly Full */
+        FILE_TYPE : RD_Config:IN_EXCLUSION_LIST_LOAD__FILE_TYPE
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=7.0, core=true, t24Name=FILE.TYPE, mandatory=false)
+        INPUTTER -> byValue RD_Config:IN_EXCLUSION_LIST_LOAD__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        IN_EX_LI_LOAD_ID -> RD_Config:IN_EXCLUSION_LIST_LOAD PK required
+            @t24:i (align=L, inputBehaviour=I, maxLength=12, sysNumber=0.0, core=true, businessType=A, t24Name=IN.EX.LI.LOAD.ID, mandatory=true)
+/* Date of the last publication file which has been uploaded.
+Only files after this date will be considered for automatic upload.
+For the manual uploads this can be manually updated. */
+        LAST_PUBLICATION_DATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=10, sysNumber=9.0, core=true, t24Name=LAST.PUBLICATION.DATE, mandatory=false)
+/* Local API to indicate the mapping logic to be used to map the details from the uploaded file in the directory.
+This field is used when Bank is using different sources for reference data than the SWIFTRef IBAN Plus.
+This API should contains 4 arguments as below -
+Argument1(1) :IN - IN.IBAN.PLUS record ID
+Argument2 :INOUT = IN.IBAN.PLUS Record as input and output to send modified record
+Argument3, Argument4 - Reserved for future use */
+        LOCAL_MAPPING_API : T24BusinessTypes:HOOK
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=14.0, core=true, t24Name=LOCAL.MAPPING.API, mandatory=false)
+/* This field allow the local API to add additional validation to decide if a record/line in the file should be uploaded in the directory, basically to include additional validation.
+This API should contains 4 arguments as below -
+Argument1(1) :IN - IN.IBAN.PLUS record ID
+Argument2 :IN - IN.IBAN.PLUS Record
+Argument3(1) :OUT = 1/0 . 1 to include the record. 0 to skip the record
+Argument4, Argument5 - Reserved for future use */
+        LOCAL_VALIDATION_API : T24BusinessTypes:HOOK
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=13.0, core=true, t24Name=LOCAL.VALIDATION.API, mandatory=false)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=15.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+/* Indicates if the uploaded file is the one indicated by the user or the process picks the file(s) automatically based on the upload rules.
+If Automated, the system will check the available files and will start to upload them according to the upload rules. Either the File Name Format or File Name Format API is mandatory when this option is chosen.
+If Manual, the system will only upload the file indicated by the user. The File Name is mandatory for this option. */
+        UPLOAD_TYPE : RD_Config:IN_EXCLUSION_LIST_LOAD__UPLOAD_TYPE required
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=6.0, core=true, t24Name=UPLOAD.TYPE, mandatory=true)
+    }
+    IN_EXCLUSION_LIST_LOAD__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=18.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    IN_EXCLUSION_LIST_LOAD__DESCRIPTION
+    {
+/* A multi-valued field and Standard T24 alphanumeric field.
+Validation Rules:
+A maximum of 35 characters can be entered. */
+        DESCRIPTION : T24BusinessTypes:A required
+            @i18n:Label (en=Description)
+            @i18n:Tooltip (en=Description)
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, multiLanguage=true, sysNumber=1.0, core=true, t24Name=DESCRIPTION, mandatory=true)
+    }
+    IN_EXCLUSION_LIST_LOAD__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=17.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    /* A Utility to load the IBANPLUS file downloaded from SWIFT. */
+    IN_IBAN_PLUS_LOAD
+        @i18n:Description (en="")
+        @t24:i (t24Name=IN.IBAN.PLUS.LOAD, nonStop=true, level=I, type=W, allowedFunctions="C I L P Q R S V", localRefAllowed=false)
+    {
+/* Field to decide what needs to be done while uploading Swift file.
+When the action is 'OVERWRITE' - We clear all the records.
+When the action is 'UPDATE'    - We dont clear any records. Just update the records. */
+        ACTION : RD_Config:IN_IBAN_PLUS_LOAD__ACTION required
+            @i18n:Label (en=Action)
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=5.0, core=true, t24Name=ACTION, mandatory=true)
+/* Will indicate what actions will take the process when a file is missing -
+Stop - if the next file is not found the process will stop
+Skip - if the next file is not found the process will continue with the next available file */
+        ACT_ON_MISS_FILE : RD_Config:IN_IBAN_PLUS_LOAD__ACT_ON_MISS_FILE required
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=8.0, core=true, t24Name=ACT.ON.MISS.FILE, mandatory=true)
+/* This field defines the Archive location to where the uploaded file has to be moved post processing.
+If no path is specified, file will be deleted. */
+        ARCHIVE_FILE_LOCATION : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=255, sysNumber=12.0, core=true, t24Name=ARCHIVE.FILE.LOCATION, mandatory=false)
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=22.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=23.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=19.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=20.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=16.0, core=true, t24Name=CURR.NO, mandatory=false)
+        DATE_TIME -> byValue RD_Config:IN_IBAN_PLUS_LOAD__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+/* A Mandatory field to indicate the delimiter option available in Swift file.
+Options available are 'Comma' and 'Tab'. */
+        DELIMITER : RD_Config:IN_IBAN_PLUS_LOAD__DELIMITER required
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=4.0, core=true, t24Name=DELIMITER, mandatory=true)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=21.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        DESCRIPTION -> byValue RD_Config:IN_IBAN_PLUS_LOAD__DESCRIPTION *
+            @t24:i (t24Name=DESCRIPTION)
+/* Holds the file name of IBANPLUS that is downloaded from swift.
+Validation Rules:
+A maximum of 35 characters can be entered. */
+        FILE_NAME : T24BusinessTypes:ANY
+            @i18n:Label (en="File Name")
+            @t24:i (align=L, inputBehaviour=I, maxLength=255, sysNumber=2.0, core=true, t24Name=FILE.NAME, mandatory=false)
+/* This field defines the naming convention of the file(s) that will be uploaded.
+Should be in line with the option in the File Type and match with pattern provided by Swift to identify Publication Date.
+E.g. IBANPLUS_V3_FULL_yyyymmdd.txt */
+        FILE_NAME_FORMAT : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=255, sysNumber=10.0, core=true, t24Name=FILE.NAME.FORMAT, mandatory=false)
+/* Local API to determine which file(s) should be picked for processing.
+This API should contains 4 arguments as below -
+Argument1 :IN - IN.IBAN.PLUS.LOAD/IN.EXCLUSION.LIST.LOAD record ID
+Argument2(1) :OUT - FileName
+Argument2(2) :OUT - FileNameFormat
+Argument3, Argument4 - Reserved for future use */
+        FILE_NAME_FORMAT_API : T24BusinessTypes:HOOK
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=11.0, core=true, t24Name=FILE.NAME.FORMAT.API, mandatory=false)
+/* Specifies the location of IBANPLUS file.
+Validation Rules:
+A maximum of 35 characters can be entered. */
+        FILE_PATH : T24BusinessTypes:A required
+            @t24:i (align=L, inputBehaviour=I, maxLength=255, sysNumber=3.0, core=true, t24Name=FILE.PATH, mandatory=true)
+/* This field will indicate the type of file which is going to be uploaded. It will include three options-
+1) Daily Delta
+2) Monthly Delta
+3) Monthly Full */
+        FILE_TYPE : RD_Config:IN_IBAN_PLUS_LOAD__FILE_TYPE
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=7.0, core=true, t24Name=FILE.TYPE, mandatory=false)
+        INPUTTER -> byValue RD_Config:IN_IBAN_PLUS_LOAD__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        IN_PL_LOAD_ID : RD_Config:IN_IBAN_PLUS_LOAD__IN_PL_LOAD_ID PK required
+            @t24:i (align=L, inputBehaviour=I, maxLength=12, sysNumber=0.0, core=true, t24Name=IN.PL.LOAD.ID, mandatory=true)
+/* Date of the last publication file which has been uploaded.
+Only files after this date will be considered for automatic upload.
+For the manual uploads this can be manually updated. */
+        LAST_PUBLICATION_DATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=10, sysNumber=9.0, core=true, t24Name=LAST.PUBLICATION.DATE, mandatory=false)
+/* Local API to indicate the mapping logic to be used to map the details from the uploaded file in the directory.
+This field is used when Bank is using different sources for reference data than the SWIFTRef IBAN Plus.
+This API should contains 4 arguments as below -
+Argument1(1) :IN - IN.IBAN.PLUS record ID
+Argument2 :INOUT = IN.IBAN.PLUS Record as input and output to send modified record
+Argument3, Argument4 - Reserved for future use */
+        LOCAL_MAPPING_API : T24BusinessTypes:HOOK
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=14.0, core=true, t24Name=LOCAL.MAPPING.API, mandatory=false)
+/* This field allow the local API to add additional validation to decide if a record/line in the file should be uploaded in the directory, basically to include additional validation.
+This API should contains 4 arguments as below -
+Argument1(1) :IN - IN.IBAN.PLUS record ID
+Argument2 :IN - IN.IBAN.PLUS Record
+Argument3(1) :OUT = 1/0 . 1 to include the record. 0 to skip the record
+Argument4, Argument5 - Reserved for future use */
+        LOCAL_VALIDATION_API : T24BusinessTypes:HOOK
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=13.0, core=true, t24Name=LOCAL.VALIDATION.API, mandatory=false)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=15.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+/* Indicates if the uploaded file is the one indicated by the user or the process picks the file(s) automatically based on the upload rules.
+If Automated, the system will check the available files and will start to upload them according to the upload rules. Either the File Name Format or File Name Format API is mandatory when this option is chosen.
+If Manual, the system will only upload the file indicated by the user. The File Name is mandatory for this option. */
+        UPLOAD_TYPE : RD_Config:IN_IBAN_PLUS_LOAD__UPLOAD_TYPE required
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=6.0, core=true, t24Name=UPLOAD.TYPE, mandatory=true)
+    }
+    IN_IBAN_PLUS_LOAD__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=18.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    IN_IBAN_PLUS_LOAD__DESCRIPTION
+    {
+/* A multi-valued field and Standard T24 alphanumeric field.
+Validation Rules:
+A maximum of 35 characters can be entered. */
+        DESCRIPTION : T24BusinessTypes:A required
+            @i18n:Label (en=Description)
+            @i18n:Tooltip (en=Description)
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, multiLanguage=true, sysNumber=1.0, core=true, t24Name=DESCRIPTION, mandatory=true)
+    }
+    IN_IBAN_PLUS_LOAD__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=17.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    /* A Utility to load the IN.IBAN.STRUCTURE file downloaded from SWIFT. */
+    IN_IS_LOAD
+        @i18n:Description (en="")
+        @t24:i (t24Name=IN.IS.LOAD, level=I, type=W, allowedFunctions="C I L P Q R S V", localRefAllowed=false)
+    {
+/* Field to decide what needs to be done while uploading Swift file.
+When the action is 'OVERWRITE' - We clear all the records.
+When the action is 'UPDATE'    - We dont clear any records. Just update the records. */
+        ACTION : RD_Config:IN_IS_LOAD__ACTION required
+            @i18n:Label (en=Action)
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=5.0, core=true, t24Name=ACTION, mandatory=true)
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=17.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=18.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=14.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=15.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=11.0, core=true, t24Name=CURR.NO, mandatory=false)
+        DATE_TIME -> byValue RD_Config:IN_IS_LOAD__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+/* A Mandatory field to indicate the delimiter option available in Swift file.
+Options available are 'Comma' and 'Tab'. */
+        DELIMITER : RD_Config:IN_IS_LOAD__DELIMITER required
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=4.0, core=true, t24Name=DELIMITER, mandatory=true)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=16.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        DESCRIPTION -> byValue RD_Config:IN_IS_LOAD__DESCRIPTION *
+            @t24:i (t24Name=DESCRIPTION)
+/* Holds the file name of IBAN structure that is downloaded from swift.
+Validation Rules:
+A maximum of 35 characters can be entered. */
+        FILE_NAME : T24BusinessTypes:ANY required
+            @i18n:Label (en="File Name")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=2.0, core=true, t24Name=FILE.NAME, mandatory=true)
+/* Specifies the location of IBAN structure file.
+Validation Rules:
+A maximum of 35 characters can be entered. */
+        FILE_PATH : T24BusinessTypes:A required
+            @t24:i (align=L, inputBehaviour=I, maxLength=255, sysNumber=3.0, core=true, t24Name=FILE.PATH, mandatory=true)
+        INPUTTER -> byValue RD_Config:IN_IS_LOAD__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        IN_IS_LOAD_ID -> RD_Config:IN_IS_LOAD PK required
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=0.0, core=true, businessType=A, t24Name=IN.IS.LOAD.ID, mandatory=true)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=10.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        RESERVED_1 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=9.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=8.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=7.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=6.0, core=true, t24Name=RESERVED.4, mandatory=false)
+    }
+    IN_IS_LOAD__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=13.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    IN_IS_LOAD__DESCRIPTION
+    {
+/* A multi-valued field and Standard T24 alphanumeric field.
+Validation Rules:
+A maximum of 35 characters can be entered. */
+        DESCRIPTION : T24BusinessTypes:A required
+            @i18n:Label (en=Description)
+            @i18n:Tooltip (en=Description)
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, multiLanguage=true, sysNumber=1.0, core=true, t24Name=DESCRIPTION, mandatory=true)
+    }
+    IN_IS_LOAD__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=12.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    IN_IS_PARAMETER
+        @i18n:Description (en="")
+        @t24:i (t24Name=IN.IS.PARAMETER, level=I, type=H, allowedFunctions="A C D E H I L P Q R S", localRefApplicationSysNo=5.0, localRefAllowed=true)
+    {
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=14.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=15.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=11.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=12.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=8.0, core=true, t24Name=CURR.NO, mandatory=false)
+        DATE_TIME -> byValue RD_Config:IN_IS_PARAMETER__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=13.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        INPUTTER -> byValue RD_Config:IN_IS_PARAMETER__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        IN_IS_PARAMETER_ID -> RD_Config:IN_IS_PARAMETER PK required
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=0.0, core=true, businessType=A, t24Name=IN.IS.PARAMETER.ID, mandatory=true)
+        /* Holds the last uploaded date of the IN.IBAN.STRUCTURE file. */
+        LAST_UPDATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=N, maxLength=11, sysNumber=1.0, core=true, t24Name=LAST.UPDATE, mandatory=false)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=7.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        RESERVED_1 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=6.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=4.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=3.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        RESERVED_5 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=2.0, core=true, t24Name=RESERVED.5, mandatory=false)
+    }
+    IN_IS_PARAMETER__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=10.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    IN_IS_PARAMETER__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=9.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    /* OVERVIEW */
+    RD_BANK_DIR_UPLD_PARAM
+        @i18n:Description (en="")
+        @t24:i (t24Name=RD.BANK.DIR.UPLD.PARAM, nonStop=true, level=I, type=H, allowedFunctions="A C D E H I L P Q S", localRefApplicationSysNo=19.0, localRefAllowed=true)
+    {
+/* The type of action to be performed on the existing records in the Centralised Bank Directory.
+Validation Rules:
+This is a mandatory field.
+Allowed values are UPDATE/OVERWRITE. */
+        ACTION : RD_Config:RD_BANK_DIR_UPLD_PARAM__ACTION required
+            @i18n:Label (en=Action)
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=2.0, core=true, t24Name=ACTION, mandatory=true)
+/* Will indicate what actions will take the process when a file is missing.
+Validation Rules:
+Allowed values are STOP and SKIP.
+STOP : if the next file is not found the process will stop.
+SKIP : if the next file is not found the process will continue with the next available file. */
+        ACT_ON_MISS_FILE : RD_Config:RD_BANK_DIR_UPLD_PARAM__ACT_ON_MISS_FILE
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=8.0, core=true, t24Name=ACT.ON.MISS.FILE, mandatory=false)
+        /* This field defines the Archive location to where the uploaded file has to be moved post processing. If no path is specified, file will be deleted. */
+        ARCHIVE_FILE_LOCATION : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=255, sysNumber=12.0, core=true, t24Name=ARCHIVE.FILE.LOCATION, mandatory=false)
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=28.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=29.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=25.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=26.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=22.0, core=true, t24Name=CURR.NO, mandatory=false)
+        DATE_TIME -> byValue RD_Config:RD_BANK_DIR_UPLD_PARAM__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+/* SWIFTRef Bank Directory Plus file field delimiter character.
+Validation Rules:
+Allowed values are TAB and COMMA. */
+        DELIMITER : RD_Config:RD_BANK_DIR_UPLD_PARAM__DELIMITER required
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=7.0, core=true, t24Name=DELIMITER, mandatory=true)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=27.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        DESCRIPTION -> byValue RD_Config:RD_BANK_DIR_UPLD_PARAM__DESCRIPTION *
+            @t24:i (t24Name=DESCRIPTION)
+/* The folder from where the files will be picked.
+Validation Rules:
+This is a mandatory field.
+Should be valid location. */
+        FILE_LOCATION : T24BusinessTypes:ANY required
+            @t24:i (align=L, inputBehaviour=I, maxLength=255, sysNumber=5.0, core=true, t24Name=FILE.LOCATION, mandatory=true)
+/* The file name which will be picked.
+Validation Rules:
+This is a mandatory field. when UPLOAD.TYPE is MANUAL. */
+        FILE_NAME : T24BusinessTypes:ANY
+            @i18n:Label (en="File Name")
+            @t24:i (align=L, inputBehaviour=I, maxLength=255, sysNumber=6.0, core=true, t24Name=FILE.NAME, mandatory=false)
+/* Should be in line with the option in the File Type and match with pattern provided by Swift to identify Publication DateNaming convention of the file/file(s) which must be uploaded.
+Example :
+BANKDIRECTORYPLUS_V3_DELTA_<yyyymmdd>.txt
+BANKDIRECTORYPLUS*DELTA_<yyyymmdd>*
+IBANPLUS_V3_FULL_<yyyymmdd>.txt
+Where * represents any character, <yyyymmdd> represents a date. */
+        FILE_NAME_FORMAT : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=255, sysNumber=9.0, core=true, t24Name=FILE.NAME.FORMAT, mandatory=false)
+/* Local API to determine which file should be picked. This API should contains 4 arguments as below
+Argument1 :IN - RD.BANK.DIR.UPLD.PARAM record ID.
+Argument2(1) :OUT - FileName.
+Argument2(2) :OUT - FileNameFormat.
+Argument3, Argument4 - Reserved for future use. */
+        FILE_NAME_FORMAT_API : T24BusinessTypes:HOOK
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=10.0, core=true, t24Name=FILE.NAME.FORMAT.API, mandatory=false)
+/* Indicates the type of file to upload. Applicable for automatic uploads.
+Validation Rules:
+Allowed values are DAILY.DELTA, MONTHLY.DELTA, MONTHLY.FULL. */
+        FILE_TYPE : RD_Config:RD_BANK_DIR_UPLD_PARAM__FILE_TYPE
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=4.0, core=true, t24Name=FILE.TYPE, mandatory=false)
+        INPUTTER -> byValue RD_Config:RD_BANK_DIR_UPLD_PARAM__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+/* Date of the last publication file which has been uploaded. Only files after this date will be considered for automatic upload.
+Validation Rules:
+Input not allowed.Updated by system for automated upload. */
+        LAST_PUBLICATION_DATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=N, maxLength=11, sysNumber=11.0, core=true, t24Name=LAST.PUBLICATION.DATE, mandatory=false)
+/* Local API to indicate the mapping logic to be used to map the details from the uploaded file in the directory.
+This API should contains 4 arguments as below.
+Argument1(1) :IN -RD.CENTRAL.BANK.DIR record ID
+Argument2 :INOUT = RD.CENTRAL.BANK.DIR Record as input and output to send modified record.
+Argument3, Argument4 - Reserved for future use. */
+        LOCAL_MAPPING_API : T24BusinessTypes:HOOK
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=13.0, core=true, t24Name=LOCAL.MAPPING.API, mandatory=false)
+        OVERRIDE -> byValue RD_Config:RD_BANK_DIR_UPLD_PARAM__OVERRIDE *
+            @t24:i (t24Name=OVERRIDE)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=21.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        RESERVED_1 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=18.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=17.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=16.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=15.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        RESERVED_5 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=14.0, core=true, t24Name=RESERVED.5, mandatory=false)
+        UPLD_PARAM_ID : RD_Config:RD_BANK_DIR_UPLD_PARAM__UPLD_PARAM_ID PK required
+            @t24:i (align=L, inputBehaviour=I, maxLength=12, sysNumber=0.0, core=true, t24Name=UPLD.PARAM.ID, mandatory=true)
+/* Indicates if the uploaded file is the one indicated by the user or the process picks the file(s) automatically based on the upload rules.
+Validation Rules:
+This is a mandatory field.
+Allowed values are AUTOMATED/MANUAL.
+AUTOMATED : The system will check the available files and will start to upload them according to the upload rules. Either the FILE.NAME.FORMAT or FILE.NAME.FORMAT.API or FILE.NAME is mandatory when this option is chosen.
+MANUAL: The system will only upload the file indicated by the user. The FILE.NAME is mandatory for this option. */
+        UPLOAD_TYPE : RD_Config:RD_BANK_DIR_UPLD_PARAM__UPLOAD_TYPE required
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=3.0, core=true, t24Name=UPLOAD.TYPE, mandatory=true)
+    }
+    RD_BANK_DIR_UPLD_PARAM__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=24.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    RD_BANK_DIR_UPLD_PARAM__DESCRIPTION
+    {
+/* Description of the record.
+Validation Rules:
+The value for this field can be of alphanumeric with the maximum length of 35. */
+        DESCRIPTION : T24BusinessTypes:A
+            @i18n:Label (en=Description)
+            @i18n:Tooltip (en=Description)
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=1.0, core=true, t24Name=DESCRIPTION, mandatory=false)
+    }
+    RD_BANK_DIR_UPLD_PARAM__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=23.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    RD_BANK_DIR_UPLD_PARAM__OVERRIDE
+    {
+/* This is a multi valued field.
+Contains details of any override applicable to this record.
+Validation Rules:
+A maximum of 35 characters may be entered. This is a NOINPUT field. */
+        OVERRIDE : T24BusinessTypes:N
+            @i18n:Label (en=Override)
+            @i18n:Tooltip (en="Overrides generated by this transaction")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=20.0, core=true, t24Name=OVERRIDE, mandatory=false)
+    }
+    RD_BIC_CONCAT
+        @i18n:Description (en="")
+        @t24:i (t24Name=RD.BIC.CONCAT, level=I, type=L, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        BIC_CONCAT_ID -> RD_Config:RD_BIC_CONCAT PK required
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=0.0, core=true, businessType=A, t24Name=BIC.CONCAT.ID, mandatory=true)
+        CUS_KEY : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=2.0, core=true, t24Name=CUS.KEY, mandatory=false)
+        FUT_KEY : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=3.0, core=true, t24Name=FUT.KEY, mandatory=false)
+        MASTER_KEY : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=1.0, core=true, t24Name=MASTER.KEY, mandatory=false)
+    }
+    RD_CENTRAL_BANK_DIR
+        @i18n:Description (en="")
+        @t24:i (t24Name=RD.CENTRAL.BANK.DIR, nonStop=true, level=I, type=H, allowedFunctions="A C D E H I L P Q R S", localRefApplicationSysNo=47.0, localRefAllowed=true)
+    {
+        ADDRESS -> byValue RD_Config:RD_CENTRAL_BANK_DIR__ADDRESS *
+            @t24:i (t24Name=ADDRESS)
+        ALLOWED_COMPANY -> byValue RD_Config:RD_CENTRAL_BANK_DIR__ALLOWED_COMPANY *
+            @t24:i (t24Name=ALLOWED.COMPANY)
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=56.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=57.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=53.0, core=true, t24Name=AUTHORISER, mandatory=false)
+/* This is the unique BIC related to the institution.If no branch identifier exists, then XXX is used.
+Validation Rules:
+The value for this field can be of alphanumeric with the maximum length of 8. */
+        BIC : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=11, sysNumber=8.0, core=true, t24Name=BIC, mandatory=false)
+/* Holds the Branch information.
+Validation Rules:
+The value for this field can be of alphanumeric with the maximum length of 8. */
+        BIC8 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=8, sysNumber=6.0, core=true, t24Name=BIC8, mandatory=false)
+        BRANCH -> byValue RD_Config:RD_CENTRAL_BANK_DIR__BRANCH *
+            @t24:i (t24Name=BRANCH)
+        BRANCH_CODE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=7.0, core=true, t24Name=BRANCH.CODE, mandatory=false)
+/* SWIFT FIN Service codes: value added services that the financial institution has subscribed to.
+Validation Rules:
+The value for this field can be of alphanumeric with the maximum length of 35. */
+        BR_QUALIFIER : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=17.0, core=true, t24Name=BR.QUALIFIER, mandatory=false)
+        CENTRAL_BANK_ID -> RD_Config:RD_CENTRAL_BANK_DIR PK required
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=0.0, core=true, businessType=A, t24Name=CENTRAL.BANK.ID, mandatory=true)
+/* This is the name of the national code or the name/acronym of the national code provider.
+Validation Rules:
+The value for this field can be of alphanumeric with the maximum length of 6. */
+        CHIPSUID : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=6, sysNumber=14.0, core=true, t24Name=CHIPSUID, mandatory=false)
+/* Holds the name of the instituion.
+Validation Rules:
+The value for this field can be of alphanumeric with the maximum length of 35. */
+        CITY : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=4.0, core=true, t24Name=CITY, mandatory=false)
+        COUNTRY -> byValue RD_Config:RD_CENTRAL_BANK_DIR__COUNTRY *
+            @t24:i (t24Name=COUNTRY)
+/* The record key of the parent entity. This value identifies the set of entities (records) belonging to the group. It groups BICs and National ID records that belong to the same parent (parent BIC).
+Validation Rules:
+The value for this field should be a valid record in COUNTRY application.
+The value for this field can be of alphanumeric with the maximum length of 2. */
+        COUNTRY_CODE -> ST_Config:COUNTRY
+            @i18n:Label (en=Country)
+            @t24:i (align=L, inputBehaviour=I, maxLength=2, sysNumber=11.0, core=true, businessType=A, t24Name=COUNTRY.CODE, mandatory=false)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=54.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+/* This field indicates the licence status of the institution (if any):
+Validation Rules:
+The value for this field can be of alphanumeric with the maximum length of 12. */
+        CO_OPER_GROUP_KEY : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=12, sysNumber=31.0, core=true, t24Name=CO.OPER.GROUP.KEY, mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=50.0, core=true, t24Name=CURR.NO, mandatory=false)
+        DATE_TIME -> byValue RD_Config:RD_CENTRAL_BANK_DIR__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=55.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+/* The key of the record in IBAN Plus which defines the IBAN details for this entity.
+Validation Rules:
+Not allowed for manual input. Possible values are UPLOAD and CUSTOM. */
+        ENTRY_TYPE : RD_Config:RD_CENTRAL_BANK_DIR__ENTRY_TYPE
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=37.0, core=true, t24Name=ENTRY.TYPE, mandatory=false)
+        EXCLUDED_COMPANY -> byValue RD_Config:RD_CENTRAL_BANK_DIR__EXCLUDED_COMPANY *
+            @t24:i (t24Name=EXCLUDED.COMPANY)
+/* Indicates status of record. When status is set as DELETE, record will be reversed.
+Validation Rules:
+A - Addition.
+D - Deletion.
+M - Modification.
+This is an optional field. */
+        FLAG : RD_Config:RD_CENTRAL_BANK_DIR__FLAG
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=1.0, core=true, t24Name=FLAG, mandatory=false)
+/* This field indicates the RECORD KEY of the "L - Legal Entity" in the legal hierarchy.
+Validation Rules:
+The value for this field can be of alphanumeric with the maximum length of 6. */
+        GROUP_TYPE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=6, sysNumber=29.0, core=true, t24Name=GROUP.TYPE, mandatory=false)
+/* This field indicates the RECORD KEY of the closest entity upwards in the entities hierarchy.
+Validation Rules:
+The value for this field can be of alphanumeric with the maximum length of 12. */
+        HEAD_OFFICE_KEY : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=12, sysNumber=26.0, core=true, t24Name=HEAD.OFFICE.KEY, mandatory=false)
+/* The SSI Group the entity belongs to.
+Validation Rules:
+The value for this field can be of alphanumeric with the maximum length of 12. */
+        IBAN_KEY : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=12, sysNumber=36.0, core=true, t24Name=IBAN.KEY, mandatory=false)
+        INPUTTER -> byValue RD_Config:RD_CENTRAL_BANK_DIR__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        INSTITUTION_NAME -> byValue RD_Config:RD_CENTRAL_BANK_DIR__INSTITUTION_NAME *
+            @t24:i (t24Name=INSTITUTION.NAME)
+        INSTITUTION_STATUS : RD_Config:RD_CENTRAL_BANK_DIR__INSTITUTION_STATUS
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=30.0, core=true, t24Name=INSTITUTION.STATUS, mandatory=false)
+/* If the record indicates a cooperative bank which belongs to a cooperative bank grouping, then this field indicates the Record Key of the cooperative central bank for that group. Hierarchy in this case flows downward. In the case of any such cooperative central bank, the value here is its own Record Key. If the cooperative bank concerned does not belong to a cooperative bank grouping, then the field is empty.
+Validation Rules:
+The value for this field can be of alphanumeric with the maximum length of 35. */
+        ISO_LEI_CODE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=32.0, core=true, t24Name=ISO.LEI.CODE, mandatory=false)
+/* This field indicates the status of the entity in the legal hierarchy.
+Validation Rules:
+The value for this field can be of alphanumeric with the maximum length of 12. */
+        LEGAL_PARENT_KEY : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=12, sysNumber=28.0, core=true, t24Name=LEGAL.PARENT.KEY, mandatory=false)
+/* This field indicates the RECORD KEY of the "HO - Head Office" in the entities hierarchy.
+Validation Rules:
+This value will be selected from a list (EB.LOOKUP>LEGAL.TYPE). */
+        LEGAL_TYPE : RD_Config:RD_CENTRAL_BANK_DIR__LEGAL_TYPE
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=27.0, core=true, t24Name=LEGAL.TYPE, mandatory=false)
+        LOCATION -> byValue RD_Config:RD_CENTRAL_BANK_DIR__LOCATION *
+            @t24:i (t24Name=LOCATION)
+/* ISO country code of the financial institution/branch.
+Validation Rules:
+The value for this field can be of alphanumeric with the maximum length of 15. */
+        NATIONAL_ID : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=15, sysNumber=12.0, core=true, t24Name=NATIONAL.ID, mandatory=false)
+/* This is the National identifier of the institution/branch. This field contains the National bank code for the financial institution (for example, BSC codes for UK banks).
+Validation Rules:
+The value for this field can be of alphanumeric with the maximum length of 70. */
+        NAT_ID_TYPE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=70, sysNumber=13.0, core=true, t24Name=NAT.ID.TYPE, mandatory=false)
+/* Time-zone for the entity.
+Validation Rules:
+The value for this field can be of alphanumeric with the maximum length of 4. */
+        NETWORK_CONNECTION : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=4, sysNumber=34.0, core=true, t24Name=NETWORK.CONNECTION, mandatory=false)
+/* The date since the whole record becomes effective due to a change of its attribute.
+Validation Rules:
+This value will be selected from a list (EB.LOOKUP>OFFICE.TYPE). */
+        OFFICE_TYPE : RD_Config:RD_CENTRAL_BANK_DIR__OFFICE_TYPE
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=24.0, core=true, t24Name=OFFICE.TYPE, mandatory=false)
+        OVERRIDE -> byValue RD_Config:RD_CENTRAL_BANK_DIR__OVERRIDE *
+            @t24:i (t24Name=OVERRIDE)
+/* If the BIC indicated in the field BIC is not connected to the SWIFT network this will indicate the connected BIC of the same institution, if available, or of its correspondent through which it connects.
+Validation Rules:
+The value for this field can be of alphanumeric with the maximum length of 12. */
+        PARENT_BK_CODE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=12, sysNumber=10.0, core=true, t24Name=PARENT.BK.CODE, mandatory=false)
+/* This field indicates the status of the entity in the entities hierarchy.
+Validation Rules:
+The value for this field can be of alphanumeric with the maximum length of 12. */
+        PARENT_OFFICE_KEY : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=12, sysNumber=25.0, core=true, t24Name=PARENT.OFFICE.KEY, mandatory=false)
+/* This is the country name that the financial institution resides in.
+Validation Rules:
+The value for this field can be of alphanumeric with the maximum length of 35. */
+        POBNUMBER : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=22.0, core=true, t24Name=POBNUMBER, mandatory=false)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=49.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        RESERVED_1 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=46.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=45.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=44.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=43.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        RESERVED_5 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=42.0, core=true, t24Name=RESERVED.5, mandatory=false)
+/* This is the unique BIC related to the institution. The BIC consists of: party prefix (4 char), country code(2 char), party suffix(2 char) , branch identifier (3 char - XXX for main office).
+Validation Rules:
+The value for this field can be of alphanumeric with the maximum length of 11. */
+        ROUTING_BIC_CODE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=11, sysNumber=9.0, core=true, t24Name=ROUTING.BIC.CODE, mandatory=false)
+        SERVICE_CODES -> byValue RD_Config:RD_CENTRAL_BANK_DIR__SERVICE_CODES *
+            @t24:i (t24Name=SERVICE.CODES)
+        SOURCE_KEY : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=2.0, core=true, t24Name=SOURCE.KEY, mandatory=false)
+/* Will indicate if the entry is manually created or created by an upload.
+Validation Rules:
+This field will not be populated when a manual record and it will be populated as a result of the upload process */
+        SOURCE_NAME : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=255, sysNumber=38.0, core=true, t24Name=SOURCE.NAME, mandatory=false)
+/* Status of an entity's connection to SWIFT.Network connectivity is provided only for records containing a BIC.
+Validation Rules:
+The value for this field can be of alphanumeric with the maximum length of 12. */
+        SSI_GROUP_KEY : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=12, sysNumber=35.0, core=true, t24Name=SSI.GROUP.KEY, mandatory=false)
+/* Will store the id of the companies where this record is allowed to be used. Mutually exclusive with EXCLUDED.COMPANY.
+Validation Rules:
+Allowed values are Blank and DELETE. */
+        STATUS : RD_Config:RD_CENTRAL_BANK_DIR__STATUS
+            @i18n:Label (en=Status)
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=41.0, core=true, t24Name=STATUS, mandatory=false)
+/* This field contains the CHIPS Universal ID for the financial institution.
+Validation Rules:
+This value will be selected from a list (EB.LOOKUP>SUBTYPE.IND). */
+        SUBTYPE_IND : RD_Config:RD_CENTRAL_BANK_DIR__SUBTYPE_IND
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=15.0, core=true, t24Name=SUBTYPE.IND, mandatory=false)
+/* The code of the Legal Entity Identifier.
+Validation Rules:
+The value for this field can be of alphanumeric with the maximum length of 10. */
+        TIMEZONE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=10, sysNumber=33.0, core=true, t24Name=TIMEZONE, mandatory=false)
+/* This is the Post Office Box (POB) number that relates to financial institution.
+Validation Rules:
+Standard date format (YYYYMMDD).
+Allowed only for uploaded records */
+        VALID_FROM : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=23.0, core=true, t24Name=VALID.FROM, mandatory=false)
+/* This is the actual physical address of where the BIC code relates.
+Validation Rules:
+The value for this field can be of alphanumeric with the maximum length of 15. */
+        ZIP : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=15, sysNumber=19.0, core=true, t24Name=ZIP, mandatory=false)
+    }
+    RD_CENTRAL_BANK_DIR__ADDRESS
+    {
+/* BIC branch qualifiers.
+Validation Rules:
+This is a multi-value field.
+The value for this field can be of alphanumeric with the maximum length of 35. */
+        ADDRESS : T24BusinessTypes:A
+            @i18n:Label (en=Address)
+            @i18n:Tooltip (en="Define the address")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=18.0, core=true, t24Name=ADDRESS, mandatory=false)
+    }
+    RD_CENTRAL_BANK_DIR__ALLOWED_COMPANY
+    {
+/* Will store the id of the companies where this record is excluded to be used. Mutually exclusive with ALLOWED.COMPANY.
+Validation Rules:
+This is a multi-value field.
+The value for this field should be a valid record in COMPANY application. */
+        ALLOWED_COMPANY -> ST_CompanyCreation:COMPANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=40.0, core=true, businessType=COM, t24Name=ALLOWED.COMPANY, mandatory=false)
+    }
+    RD_CENTRAL_BANK_DIR__BRANCH
+    {
+/* Holds the City name of the institution/branch. Wherever possible, the field is standardized.  means that main cities are spelled the same way across the file.
+Validation Rules:
+This is a multi-value field.
+The value for this field can be of alphanumeric with the maximum length of 35. */
+        BRANCH : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=5.0, core=true, t24Name=BRANCH, mandatory=false)
+    }
+    RD_CENTRAL_BANK_DIR__COUNTRY
+    {
+/* This is the location of the branch of the financial institution: county, province, state, or other administrative region of the owner institution/branch.
+Validation Rules:
+This is a multi-value field.
+The value for this field can be of alphanumeric with the maximum length of 35. */
+        COUNTRY : T24BusinessTypes:A
+            @i18n:Label (en=Country)
+            @i18n:Tooltip (en="Holds the country code")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=21.0, core=true, t24Name=COUNTRY, mandatory=false)
+    }
+    RD_CENTRAL_BANK_DIR__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=52.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    RD_CENTRAL_BANK_DIR__EXCLUDED_COMPANY
+    {
+/* This will be the name of the upload file through which the record in the directory has been created/amended .  Applicable only for uploaded records.
+Validation Rules:
+This is a multi-value field.
+The value for this field should be a valid record in COMPANY application. */
+        EXCLUDED_COMPANY -> ST_CompanyCreation:COMPANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=39.0, core=true, businessType=COM, t24Name=EXCLUDED.COMPANY, mandatory=false)
+    }
+    RD_CENTRAL_BANK_DIR__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=51.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    RD_CENTRAL_BANK_DIR__INSTITUTION_NAME
+    {
+/* Holds the modification flag provided by SWIFTRef BDP file and will be used by the upload process to handle the record.
+Validation Rules:
+This is a multi-value field.
+The value for this field can be of alphanumeric with the maximum length of 35. */
+        INSTITUTION_NAME : T24BusinessTypes:A
+            @i18n:Label (en=Institution)
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=3.0, core=true, t24Name=INSTITUTION.NAME, mandatory=false)
+    }
+    RD_CENTRAL_BANK_DIR__LOCATION
+    {
+/* Zip code of the institution/branch.
+Validation Rules:
+This is a multi-value field.
+The value for this field can be of alphanumeric with the maximum length of 35. */
+        LOCATION : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=20.0, core=true, t24Name=LOCATION, mandatory=false)
+    }
+    RD_CENTRAL_BANK_DIR__OVERRIDE
+    {
+/* This is a multi valued field.
+Contains details of any override applicable to this record.
+Validation Rules:
+A maximum of 35 characters may be entered. This is a NOINPUT field. */
+        OVERRIDE : T24BusinessTypes:N
+            @i18n:Label (en=Override)
+            @i18n:Tooltip (en="Overrides generated by this transaction")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=48.0, core=true, t24Name=OVERRIDE, mandatory=false)
+    }
+    RD_CENTRAL_BANK_DIR__SERVICE_CODES
+    {
+/* The business type of the entity. Subtype Indicator is provided only for records with a BIC. For example: a bank or a broker.
+Validation Rules:
+This is a multi-value field.
+The value for this field can be of alphanumeric with the maximum length of 35. */
+        SERVICE_CODES : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=16.0, core=true, t24Name=SERVICE.CODES, mandatory=false)
+    }
+    /* OVERVIEW */
+    RD_CTRY_NAT_SYS_IDENTIFIER
+        @i18n:Description (en="")
+        @t24:i (t24Name=RD.CTRY.NAT.SYS.IDENTIFIER, nonStop=true, level=I, type=H, allowedFunctions="A C D E H I L P Q R S", localRefApplicationSysNo=11.0, localRefAllowed=true)
+    {
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=20.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=21.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=17.0, core=true, t24Name=AUTHORISER, mandatory=false)
+/* The National Id Type indicated in Bank Directory Plus
+Validation Rules:
+This value will be selected from a list (EB.LOOKUP>SWIFT.CLR.SYS.ID). */
+        CLR_SYS_ACRYNM : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=4.0, core=true, t24Name=CLR.SYS.ACRYNM, mandatory=false)
+/* The country code to which the national identifier belongs
+Validation Rules:
+The value for this field should be a valid record in COUNTRY application.
+Defaulted from country code component of ID. */
+        COUNTRY_CODE -> ST_Config:COUNTRY
+            @i18n:Label (en=Country)
+            @t24:i (align=L, inputBehaviour=I, maxLength=2, sysNumber=1.0, core=true, businessType=A, t24Name=COUNTRY.CODE, mandatory=false)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=18.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CTRY_NAT_SYS_ID -> RD_Config:RD_CTRY_NAT_SYS_IDENTIFIER PK required
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=0.0, core=true, businessType=A, t24Name=CTRY.NAT.SYS.ID, mandatory=true)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=14.0, core=true, t24Name=CURR.NO, mandatory=false)
+        DATE_TIME -> byValue RD_Config:RD_CTRY_NAT_SYS_IDENTIFIER__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=19.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        INPUTTER -> byValue RD_Config:RD_CTRY_NAT_SYS_IDENTIFIER__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+/* The ISO identifier of the Clearing System Id
+Validation Rules:
+This value will be selected from a list (EB.LOOKUP>ISO.CLEARING.SYS.ID). */
+        ISO_CLEARING_SYS_ID : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=2.0, core=true, t24Name=ISO.CLEARING.SYS.ID, mandatory=false)
+/* The format of national id
+Validation Rules:
+The value for this field can be of free text with the maximum length of 35. */
+        NATIONAL_ID_FORMAT : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=5.0, core=true, t24Name=NATIONAL.ID.FORMAT, mandatory=false)
+        OVERRIDE -> byValue RD_Config:RD_CTRY_NAT_SYS_IDENTIFIER__OVERRIDE *
+            @t24:i (t24Name=OVERRIDE)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=13.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        RESERVED_1 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=10.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=9.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=8.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=7.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        RESERVED_5 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=6.0, core=true, t24Name=RESERVED.5, mandatory=false)
+/* The clearing prefix used in SWIFT message
+Validation Rules:
+This value will be selected from a list (EB.LOOKUP>SWIFT.CLR.SYS.ID). */
+        SWIFT_CLR_SYS_ID : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=3.0, core=true, t24Name=SWIFT.CLR.SYS.ID, mandatory=false)
+    }
+    RD_CTRY_NAT_SYS_IDENTIFIER__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=16.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    RD_CTRY_NAT_SYS_IDENTIFIER__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=15.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    RD_CTRY_NAT_SYS_IDENTIFIER__OVERRIDE
+    {
+/* This is a multi valued field.
+Contains details of any override applicable to this record.
+Validation Rules:
+A maximum of 35 characters may be entered. This is a NOINPUT field. */
+        OVERRIDE : T24BusinessTypes:N
+            @i18n:Label (en=Override)
+            @i18n:Tooltip (en="Overrides generated by this transaction")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=12.0, core=true, t24Name=OVERRIDE, mandatory=false)
+    }
+    RD_FUT_BANK_DIR
+        @i18n:Description (en="")
+        @t24:i (t24Name=RD.FUT.BANK.DIR, level=I, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        FUT_BANK_ID -> RD_Config:RD_FUT_BANK_DIR PK required
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=0.0, core=true, businessType=A, t24Name=FUT.BANK.ID, mandatory=true)
+        FUT_REC_KEY -> byValue RD_Config:RD_FUT_BANK_DIR__FUT_REC_KEY *
+            @t24:i (t24Name=FUT.REC.KEY)
+    }
+    RD_FUT_BANK_DIR__FUT_REC_KEY
+    {
+        FUT_REC_KEY : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=1.0, core=true, t24Name=FUT.REC.KEY, mandatory=false)
+    }
+    RD_GPI_MERGE_FUT_CONCAT
+        @i18n:Description (en="")
+        @t24:i (t24Name=RD.GPI.MERGE.FUT.CONCAT, level=I, type=L, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        FUT_REC_KEY : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=1.0, core=true, t24Name=FUT.REC.KEY, mandatory=false)
+        GPI_MERGE_FUT_ID -> RD_Config:RD_GPI_MERGE_FUT_CONCAT PK required
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=0.0, core=true, businessType=A, t24Name=GPI.MERGE.FUT.ID, mandatory=true)
+    }
+    RD_GPI_RECORD_KEY_CONCAT
+        @i18n:Description (en="")
+        @t24:i (t24Name=RD.GPI.RECORD.KEY.CONCAT, level=I, type=L, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        CUSTOM_RECORD : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=2.0, core=true, t24Name=CUSTOM.RECORD, mandatory=false)
+        FUTURE_RECORD : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=3.0, core=true, t24Name=FUTURE.RECORD, mandatory=false)
+        GPI_RECORD_KEY_ID -> RD_Config:RD_GPI_RECORD_KEY_CONCAT PK required
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=0.0, core=true, businessType=A, t24Name=GPI.RECORD.KEY.ID, mandatory=true)
+        MASTER_RECORD : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=1.0, core=true, t24Name=MASTER.RECORD, mandatory=false)
+    }
+    /* A Utility to load the GPI file downloaded from SWIFT. */
+    RD_GPI_UPLD_PARAM
+        @i18n:Description (en="")
+        @t24:i (t24Name=RD.GPI.UPLD.PARAM, nonStop=true, level=I, type=H, allowedFunctions="A C D E H I L P Q R S", localRefApplicationSysNo=25.0, localRefAllowed=true)
+    {
+/* Field to decide what needs to be done while uploading Swift file.
+When the action is 'OVERWRITE' - We clear all the records.
+When the action is 'UPDATE'    - We dont clear any records. Just update the records. */
+        ACTION : RD_Config:RD_GPI_UPLD_PARAM__ACTION required
+            @i18n:Label (en=Action)
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=2.0, core=true, t24Name=ACTION, mandatory=true)
+/* Will indicate what actions to take when a file is missing -
+Stop - if the current file is not found the process will stop
+Skip - if the current file is not found the process will continue with the next available file */
+        ACT_ON_MISS_FILE : RD_Config:RD_GPI_UPLD_PARAM__ACT_ON_MISS_FILE
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=8.0, core=true, t24Name=ACT.ON.MISS.FILE, mandatory=false)
+/* This field defines the Archive location to where the uploaded file has to be moved post processing.
+If no path is specified, file will be deleted. */
+        ARCHIVE_FILE_LOCATION : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=255, sysNumber=12.0, core=true, t24Name=ARCHIVE.FILE.LOCATION, mandatory=false)
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=34.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=35.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=31.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=32.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=28.0, core=true, t24Name=CURR.NO, mandatory=false)
+        DATE_TIME -> byValue RD_Config:RD_GPI_UPLD_PARAM__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+/* A Mandatory field to indicate the delimiter option available in Swift file.
+Options available are 'Comma' and 'Tab'. */
+        DELIMITER : RD_Config:RD_GPI_UPLD_PARAM__DELIMITER required
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=7.0, core=true, t24Name=DELIMITER, mandatory=true)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=33.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        DESCRIPTION -> byValue RD_Config:RD_GPI_UPLD_PARAM__DESCRIPTION *
+            @t24:i (t24Name=DESCRIPTION)
+/* A Mandatory field to specify the location of GPI file.
+Validation Rules:
+A maximum of 255 characters can be entered. */
+        FILE_LOCATION : T24BusinessTypes:ANY required
+            @t24:i (align=L, inputBehaviour=I, maxLength=255, sysNumber=5.0, core=true, t24Name=FILE.LOCATION, mandatory=true)
+/* Holds the file name of GPI that is downloaded from swift.
+Validation Rules:
+A maximum of 255 characters can be entered. */
+        FILE_NAME : T24BusinessTypes:ANY
+            @i18n:Label (en="File Name")
+            @t24:i (align=L, inputBehaviour=I, maxLength=255, sysNumber=6.0, core=true, t24Name=FILE.NAME, mandatory=false)
+/* This field defines the naming convention of the file(s) that will be uploaded.
+Should be in line with the option in the File Type and match with pattern provided by Swift to identify Publication Date.
+Examples:
+GPI_V1_DAILY_DELTA_<yyyymmdd>.txt
+GPI_V1_MONTHLY_DELTA_<yyyymmdd>.txt
+GPI_V1_MONTHLY_FULL_<yyyymmdd>.txt
+GPI*DELTA_<yyyymmdd>*
+Where * represents any character, yyyymmdd represents a date */
+        FILE_NAME_PATTERN : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=255, sysNumber=9.0, core=true, t24Name=FILE.NAME.PATTERN, mandatory=false)
+/* Local API to determine which file(s) should be picked for processing.
+This API should contains 4 arguments as below -
+Argument1 :IN - RD.SWIFT.GPI.DIR record ID
+Argument2(1) :OUT - FileName
+Argument2(2) :OUT - FileNameFormat
+Argument3, Argument4 - Reserved for future use */
+        FILE_NAME_PTRN_API : T24BusinessTypes:HOOK
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=10.0, core=true, t24Name=FILE.NAME.PTRN.API, mandatory=false)
+/* This field will indicate the type of file which is going to be uploaded. It will include three options
+1) Daily Delta
+2) Monthly Delta
+3) Monthly Full */
+        FILE_TYPE : RD_Config:RD_GPI_UPLD_PARAM__FILE_TYPE
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=4.0, core=true, t24Name=FILE.TYPE, mandatory=false)
+        GPI_UPLD_PARAM_ID : RD_Config:RD_GPI_UPLD_PARAM__GPI_UPLD_PARAM_ID PK required
+            @t24:i (align=L, inputBehaviour=I, maxLength=12, sysNumber=0.0, core=true, t24Name=GPI.UPLD.PARAM.ID, mandatory=true)
+        INPUTTER -> byValue RD_Config:RD_GPI_UPLD_PARAM__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+/* This field allow the local API to add additional validation to decide if a record/line in the file should be uploaded in the directory, basically to include additional validation.
+This API should contain 5 arguments as below -
+Argument1 :IN - RD.SWIFT.GPI.DIR record ID
+Argument2 :IN - RD.SWIFT.GPI.DIR Record
+Argument3 :OUT = 1/0 . 1 to include the record. 0 to skip the record
+Argument4, Argument5 - Reserved for future use */
+        LCL_VALIDATION_API : T24BusinessTypes:HOOK
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=13.0, core=true, t24Name=LCL.VALIDATION.API, mandatory=false)
+/* Date of the last publication file which has been uploaded.
+Only files after this date will be considered for automatic upload. */
+        LST_PUBLICATION_DATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=N, maxLength=11, sysNumber=11.0, core=true, t24Name=LST.PUBLICATION.DATE, mandatory=false)
+/* Local API to indicate the mapping logic to be used to map the details from the uploaded file in the directory.
+This field is used when Bank is using different sources for reference data than the SWIFTRef GPI directory.
+This API should contain 4 arguments as below -
+Argument1 :IN - RD.SWIFT.GPI.DIR record ID
+Argument2 :INOUT = RD.SWIFT.GPI.DIR Record as input and output to send modified record
+Argument3, Argument4 - Reserved for future use */
+        MAPPING_API : T24BusinessTypes:HOOK
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=14.0, core=true, t24Name=MAPPING.API, mandatory=false)
+        OVERRIDE -> byValue RD_Config:RD_GPI_UPLD_PARAM__OVERRIDE *
+            @t24:i (t24Name=OVERRIDE)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=27.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        RESERVED_1 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=24.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_10 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=15.0, core=true, t24Name=RESERVED.10, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=23.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=22.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=21.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        RESERVED_5 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=20.0, core=true, t24Name=RESERVED.5, mandatory=false)
+        RESERVED_6 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=19.0, core=true, t24Name=RESERVED.6, mandatory=false)
+        RESERVED_7 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=18.0, core=true, t24Name=RESERVED.7, mandatory=false)
+        RESERVED_8 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=17.0, core=true, t24Name=RESERVED.8, mandatory=false)
+        RESERVED_9 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=16.0, core=true, t24Name=RESERVED.9, mandatory=false)
+/* Indicates if the uploaded file is the one indicated by the user or the process picks the file(s) automatically based on the upload rules.
+If Automated, the system will check the available files and will start to upload them according to the upload rules. Either the File Name Format or File Name Format API is mandatory when this option is chosen.
+If Manual, the system will only upload the file indicated by the user. The File Name is mandatory for this option. */
+        UPLOAD_TYPE : RD_Config:RD_GPI_UPLD_PARAM__UPLOAD_TYPE required
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=3.0, core=true, t24Name=UPLOAD.TYPE, mandatory=true)
+    }
+    RD_GPI_UPLD_PARAM__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=30.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    RD_GPI_UPLD_PARAM__DESCRIPTION
+    {
+/* A multi-valued field and Standard T24 alphanumeric field.
+Validation Rules:
+A maximum of 35 characters can be entered. */
+        DESCRIPTION : T24BusinessTypes:A
+            @i18n:Label (en=Description)
+            @i18n:Tooltip (en=Description)
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=1.0, core=true, t24Name=DESCRIPTION, mandatory=false)
+    }
+    RD_GPI_UPLD_PARAM__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=29.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    RD_GPI_UPLD_PARAM__OVERRIDE
+    {
+        OVERRIDE : T24BusinessTypes:N
+            @i18n:Label (en=Override)
+            @i18n:Tooltip (en="Overrides generated by this transaction")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=26.0, core=true, t24Name=OVERRIDE, mandatory=false)
+    }
+    RD_NAT_CTRY_CONCAT
+        @i18n:Description (en="")
+        @t24:i (t24Name=RD.NAT.CTRY.CONCAT, level=I, type=L, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        CUSTOM_KEY : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=2.0, core=true, t24Name=CUSTOM.KEY, mandatory=false)
+        FUTURE_KEY -> byValue RD_Config:RD_NAT_CTRY_CONCAT__FUTURE_KEY *
+            @t24:i (t24Name=FUTURE.KEY)
+        MASTER_KEY -> byValue RD_Config:RD_NAT_CTRY_CONCAT__MASTER_KEY *
+            @t24:i (t24Name=MASTER.KEY)
+        NAT_CONCAT_ID -> RD_Config:RD_NAT_CTRY_CONCAT PK required
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=0.0, core=true, businessType=A, t24Name=NAT.CONCAT.ID, mandatory=true)
+    }
+    RD_NAT_CTRY_CONCAT__FUTURE_KEY
+    {
+        FUTURE_KEY : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=3.0, core=true, t24Name=FUTURE.KEY, mandatory=false)
+    }
+    RD_NAT_CTRY_CONCAT__MASTER_KEY
+    {
+        MASTER_KEY : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=1.0, core=true, t24Name=MASTER.KEY, mandatory=false)
+    }
+    /* OVERVIEW */
+    RD_PARAMETER
+        @i18n:Description (en="")
+        @t24:i (t24Name=RD.PARAMETER, level=I, type=H, allowedFunctions="A C D E H I L P Q S", localRefApplicationSysNo=8.0, localRefAllowed=true)
+    {
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=17.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=18.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=14.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=15.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=11.0, core=true, t24Name=CURR.NO, mandatory=false)
+        DATE_TIME -> byValue RD_Config:RD_PARAMETER__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=16.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        INPUTTER -> byValue RD_Config:RD_PARAMETER__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        OVERRIDE -> byValue RD_Config:RD_PARAMETER__OVERRIDE *
+            @t24:i (t24Name=OVERRIDE)
+        PARAM_ID : RD_Config:RD_PARAMETER__PARAM_ID PK required
+            @i18n:Label (en="Parameter Id")
+            @t24:i (align=L, inputBehaviour=I, maxLength=12, sysNumber=0.0, core=true, t24Name=PARAM.ID, mandatory=true)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=10.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+/* Indicates if RD is the main reference data checked by the legacy BIC validation routine.
+Yes – the RD module will be used as the main reference data.
+Validation Rules:
+YES or NO field. Default value is YES. */
+        REFERENCE_DATA : RD_Config:RD_PARAMETER__REFERENCE_DATA
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=2.0, core=true, t24Name=REFERENCE.DATA, mandatory=false)
+        RESERVED_1 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=7.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=6.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=5.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=4.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        RESERVED_5 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=3.0, core=true, t24Name=RESERVED.5, mandatory=false)
+/* The field will indicates if BICs should be validated against the directory or just its format should be validated.
+Yes – validate against the directory.
+No – it wont validate the BIC against the directory.
+Validation Rules:
+YES or NO field. Default value is NO. */
+        VALIDATE_BIC : RD_Config:RD_PARAMETER__VALIDATE_BIC
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=1.0, core=true, t24Name=VALIDATE.BIC, mandatory=false)
+    }
+    RD_PARAMETER__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=13.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    RD_PARAMETER__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=12.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    RD_PARAMETER__OVERRIDE
+    {
+/* This is a multi valued field.
+Contains details of any override applicable to this record.
+Validation Rules:
+A maximum of 35 characters may be entered. This is a NOINPUT field. */
+        OVERRIDE : T24BusinessTypes:N
+            @i18n:Label (en=Override)
+            @i18n:Tooltip (en="Overrides generated by this transaction")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=9.0, core=true, t24Name=OVERRIDE, mandatory=false)
+    }
+    RD_PARTI_CO_CCY_CONCAT
+        @i18n:Description (en="")
+        @t24:i (t24Name=RD.PARTI.CO.CCY.CONCAT, level=I, type=L, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        COMBINED_KEY -> byValue RD_Config:RD_PARTI_CO_CCY_CONCAT__COMBINED_KEY *
+            @t24:i (t24Name=COMBINED.KEY)
+        DEFAULT_CUSTOM_KEY -> byValue RD_Config:RD_PARTI_CO_CCY_CONCAT__DEFAULT_CUSTOM_KEY *
+            @t24:i (t24Name=DEFAULT.CUSTOM.KEY)
+        PARTI_CO_CCY_ID -> RD_Config:RD_PARTI_CO_CCY_CONCAT PK required
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=0.0, core=true, businessType=A, t24Name=PARTI.CO.CCY.ID, mandatory=true)
+    }
+    RD_PARTI_CO_CCY_CONCAT__COMBINED_KEY
+    {
+        COMBINED_KEY : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=1.0, core=true, t24Name=COMBINED.KEY, mandatory=false)
+        CUSTOM_KEY -> byValue RD_Config:RD_PARTI_CO_CCY_CONCAT__COMBINED_KEY__CUSTOM_KEY *
+            @t24:i (t24Name=CUSTOM.KEY)
+        FUTURE_KEY -> byValue RD_Config:RD_PARTI_CO_CCY_CONCAT__COMBINED_KEY__FUTURE_KEY *
+            @t24:i (t24Name=FUTURE.KEY)
+        MASTER_KEY -> byValue RD_Config:RD_PARTI_CO_CCY_CONCAT__COMBINED_KEY__MASTER_KEY *
+            @t24:i (t24Name=MASTER.KEY)
+    }
+    RD_PARTI_CO_CCY_CONCAT__COMBINED_KEY__CUSTOM_KEY
+    {
+        CUSTOM_KEY : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=2.0, core=true, t24Name=CUSTOM.KEY, mandatory=false)
+    }
+    RD_PARTI_CO_CCY_CONCAT__COMBINED_KEY__FUTURE_KEY
+    {
+        FUTURE_KEY : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=4.0, core=true, t24Name=FUTURE.KEY, mandatory=false)
+    }
+    RD_PARTI_CO_CCY_CONCAT__COMBINED_KEY__MASTER_KEY
+    {
+        MASTER_KEY : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=3.0, core=true, t24Name=MASTER.KEY, mandatory=false)
+    }
+    RD_PARTI_CO_CCY_CONCAT__DEFAULT_CUSTOM_KEY
+    {
+        DEFAULT_CUSTOM_KEY : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=5.0, core=true, t24Name=DEFAULT.CUSTOM.KEY, mandatory=false)
+    }
+    RD_RECORD_KEY_CONCAT
+        @i18n:Description (en="")
+        @t24:i (t24Name=RD.RECORD.KEY.CONCAT, level=I, type=L, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        CUSTOM_RECORD : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=2.0, core=true, t24Name=CUSTOM.RECORD, mandatory=false)
+        FUTURE_RECORD : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=3.0, core=true, t24Name=FUTURE.RECORD, mandatory=false)
+        MASTER_RECORD : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=1.0, core=true, t24Name=MASTER.RECORD, mandatory=false)
+        RECORD_KEY_ID -> RD_Config:RD_RECORD_KEY_CONCAT PK required
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=0.0, core=true, businessType=A, t24Name=RECORD.KEY.ID, mandatory=true)
+    }
+    /* SWIFTRef GPI Directory */
+    RD_SWIFT_GPI_DIR
+        @i18n:Description (en="")
+        @t24:i (t24Name=RD.SWIFT.GPI.DIR, nonStop=true, level=I, type=H, allowedFunctions="A C D E H I L P Q R S", localRefApplicationSysNo=47.0, localRefAllowed=true)
+    {
+        /* Not used. */
+        ACTIVATION_DATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=8, sysNumber=28.0, core=true, t24Name=ACTIVATION.DATE, mandatory=false)
+/* "Y" (Yes) or "N" (No) flag specifying whether the participant acts as the gpi Intermediary Agent for gpi payments in a given currency
+and over a given REACHABLE THROUGH channel (in field REACHABLE THROUGH) */
+        ACT_AS_INTERMEDIARY : RD_Config:RD_SWIFT_GPI_DIR__ACT_AS_INTERMEDIARY
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=15.0, core=true, t24Name=ACT.AS.INTERMEDIARY, mandatory=false)
+        ALLOWED_COMPANY -> byValue RD_Config:RD_SWIFT_GPI_DIR__ALLOWED_COMPANY *
+            @t24:i (t24Name=ALLOWED.COMPANY)
+        /* Not used. Reserved for future use. */
+        ATTRIBUTE_15 : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=N, maxLength=255, sysNumber=22.0, core=true, t24Name=ATTRIBUTE.15, mandatory=false)
+        /* Not used. Reserved for future use. */
+        ATTRIBUTE_16 : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=N, maxLength=255, sysNumber=23.0, core=true, t24Name=ATTRIBUTE.16, mandatory=false)
+        /* Not used. Reserved for future use. */
+        ATTRIBUTE_17 : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=N, maxLength=255, sysNumber=24.0, core=true, t24Name=ATTRIBUTE.17, mandatory=false)
+        /* Not used. Reserved for future use. */
+        ATTRIBUTE_18 : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=N, maxLength=255, sysNumber=25.0, core=true, t24Name=ATTRIBUTE.18, mandatory=false)
+        /* Not used. Reserved for future use. */
+        ATTRIBUTE_19 : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=N, maxLength=255, sysNumber=26.0, core=true, t24Name=ATTRIBUTE.19, mandatory=false)
+        /* Not used. Reserved for future use. */
+        ATTRIBUTE_20 : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=N, maxLength=255, sysNumber=27.0, core=true, t24Name=ATTRIBUTE.20, mandatory=false)
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=56.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=57.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=53.0, core=true, t24Name=AUTHORISER, mandatory=false)
+/* The corresponding record key of the participant in the T24 Centralised Bank Directory, containing the participant's details
+Validation Rules:
+A maximum of 12 characters can be entered. */
+        CBD_RECORDKEY : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=12, sysNumber=3.0, core=true, t24Name=CBD.RECORDKEY, mandatory=false)
+/* The type of the REACHABLE THROUGH channel.
+Validation Rules:
+Allowed values are INTERMEDIARY, FIN-PMI, D-C, NON-FIN-PMI */
+        CHANNEL_TYPE : RD_Config:RD_SWIFT_GPI_DIR__CHANNEL_TYPE
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=17.0, core=true, t24Name=CHANNEL.TYPE, mandatory=false)
+/* The 2-character ISO country code of the participant.
+Validation Rules:
+Should be a valid Country from COUNTRY table */
+        COUNTRY_CODE -> ST_Config:COUNTRY
+            @i18n:Label (en=Country)
+            @t24:i (align=L, inputBehaviour=I, maxLength=2, sysNumber=10.0, core=true, businessType=ANY, t24Name=COUNTRY.CODE, mandatory=false)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=54.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+/* The 3-character ISO currency code, accepted in field 32A of incoming gpi MT 103 payment by the Participant ID,
+or by the gpi intermediary (if any) through which the participant can be reached for this currency.
+Validation Rules:
+Should be a valid Country from CURRENCY table */
+        CURRENCY_CODE -> ST_CurrencyConfig:CURRENCY
+            @i18n:Label (en="Ccy Code")
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=11.0, core=true, businessType=CCY, t24Name=CURRENCY.CODE, mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=50.0, core=true, t24Name=CURR.NO, mandatory=false)
+        /* CUT-OFF DAY can be empty (same day cut-off time) or can contain the value "D-n" (where n can be a value between 1 and 9). */
+        CUT_OFF_DAY : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=13.0, core=true, t24Name=CUT.OFF.DAY, mandatory=false)
+/* Participant's public gpi cut-off time for gpi payments in this currency
+Validation Rules:
+A maximum of 11 characters can be entered. */
+        CUT_OFF_TIME : T24BusinessTypes:ANY
+            @i18n:Label (en="Cut off time")
+            @i18n:Tooltip (en="Cut off time")
+            @t24:i (align=L, inputBehaviour=I, maxLength=11, sysNumber=12.0, core=true, t24Name=CUT.OFF.TIME, mandatory=false)
+        DATE_TIME -> byValue RD_Config:RD_SWIFT_GPI_DIR__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+/* The BIC which must take the action of forwarding the payment or updating the tracker on behalf of the participant ID.
+Validation Rules:
+It is a valid BIC of 8 characters. */
+        DELEGATED_TO : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=8, sysNumber=21.0, core=true, t24Name=DELEGATED.TO, mandatory=false)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=55.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+/* Will indicate if the entry is manually created (Custom record) or created by an upload process.
+Validation Rules:
+NOINPUT field. Can have values UPLOAD (if uploaded) or CUSTOM (if manually created). */
+        ENTRY_TYPE : RD_Config:RD_SWIFT_GPI_DIR__ENTRY_TYPE
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=33.0, core=true, t24Name=ENTRY.TYPE, mandatory=false)
+        EXCLUDED_COMPANY -> byValue RD_Config:RD_SWIFT_GPI_DIR__EXCLUDED_COMPANY *
+            @t24:i (t24Name=EXCLUDED.COMPANY)
+        /* Not used. Reserved for future use. */
+        FIELD_A : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=N, maxLength=1, sysNumber=29.0, core=true, t24Name=FIELD.A, mandatory=false)
+        /* Not used. Reserved for future use. */
+        FIELD_B : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=N, maxLength=8, sysNumber=30.0, core=true, t24Name=FIELD.B, mandatory=false)
+        /* Not used. Reserved for future use. */
+        FIELD_C : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=31.0, core=true, t24Name=FIELD.C, mandatory=false)
+/* A flag which indicates whether there is a change in the record, since the last release of the Swift GPI directory.
+Validation Rules:
+A - Addition M - Modification D - Deletion */
+        FLAG : RD_Config:RD_SWIFT_GPI_DIR__FLAG
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=1.0, core=true, t24Name=FLAG, mandatory=false)
+/* Type of the identifier used for the PARTICIPANT ID, such as the BIC or a NATIONAL ID of a non-FIN PMI.
+Validation Rules:
+Allowed values are BIC or NATIONAL ID */
+        ID_TYPE : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=12, sysNumber=8.0, core=true, t24Name=ID.TYPE, mandatory=false)
+        INPUTTER -> byValue RD_Config:RD_SWIFT_GPI_DIR__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        /* Time zone of the participant. */
+        LOCAL_TIME_ZONE : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=128, sysNumber=14.0, core=true, t24Name=LOCAL.TIME.ZONE, mandatory=false)
+        OVERRIDE -> byValue RD_Config:RD_SWIFT_GPI_DIR__OVERRIDE *
+            @t24:i (t24Name=OVERRIDE)
+/* Participant's routing ID, at which it is reachable for receiving gpi payments.
+It can be a BIC8 followed by XXX, a BIC8 followed by a 3-character branch code, or a clearing code (NATIONAL ID) of the non-FIN PMI.
+Validation Rules:
+Mandatory field. A maximum of 50 characters can be entered. */
+        PARTICIPANT_ID : T24BusinessTypes:ANY required
+            @i18n:Label (en="Participant Id")
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=7.0, core=true, t24Name=PARTICIPANT.ID, mandatory=true)
+/* The institution name of the participant.
+Validation Rules:
+A maximum of 105 characters can be entered. */
+        PARTICIPANT_NAME : T24BusinessTypes:ANY
+            @i18n:Label (en="Participant Name")
+            @t24:i (align=L, inputBehaviour=I, maxLength=105, sysNumber=9.0, core=true, t24Name=PARTICIPANT.NAME, mandatory=false)
+/* Indicates the service platform.
+Validation Rules:
+A maximum of 8 characters can be entered. */
+        PLATFORM : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=8, sysNumber=4.0, core=true, t24Name=PLATFORM, mandatory=false)
+        /* The channel through which the participant is reachable for gpi payment instructions for one of its gpi currencies. */
+        REACHABLE_THROUGH : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=32, sysNumber=16.0, core=true, t24Name=REACHABLE.THROUGH, mandatory=false)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=49.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        RESERVED_1 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=46.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_10 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=37.0, core=true, t24Name=RESERVED.10, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=45.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=44.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=43.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        RESERVED_5 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=42.0, core=true, t24Name=RESERVED.5, mandatory=false)
+        RESERVED_6 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=41.0, core=true, t24Name=RESERVED.6, mandatory=false)
+        RESERVED_7 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=40.0, core=true, t24Name=RESERVED.7, mandatory=false)
+        RESERVED_8 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=39.0, core=true, t24Name=RESERVED.8, mandatory=false)
+        RESERVED_9 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=38.0, core=true, t24Name=RESERVED.9, mandatory=false)
+/* Service type identifier. For example, the value of field 111 in block 3 of the gpi MT 103.
+Validation Rules:
+A maximum of 3 characters can be entered. */
+        SERVICE_ID : T24BusinessTypes:ANY
+            @i18n:Label (en=Service)
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=5.0, core=true, t24Name=SERVICE.ID, mandatory=false)
+/* Name of the service.
+Validation Rules:
+A maximum of 7 characters can be entered. */
+        SERVICE_NAME : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=7, sysNumber=6.0, core=true, t24Name=SERVICE.NAME, mandatory=false)
+/* The identifier of the record in the SWIFT gpi Directory
+Validation Rules:
+Mandatory field. */
+        SOURCE_KEY : T24BusinessTypes:A required
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=2.0, core=true, t24Name=SOURCE.KEY, mandatory=true)
+/* This will be the name of the upload file through which the record in the directory has been created/amended
+Will be blank when a custom record is created/amended.
+Validation Rules:
+NOINPUT field */
+        SOURCE_NAME : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=255, sysNumber=32.0, core=true, t24Name=SOURCE.NAME, mandatory=false)
+        /* The record key of the Standing Settlement Instruction (SSI) in SWIFTRef's SSI Plus directory for this participant and currency. */
+        SSI_RECORD_KEY : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=12, sysNumber=20.0, core=true, t24Name=SSI.RECORD.KEY, mandatory=false)
+        /* The future date when the record will become valid (including this day itself, if it is a business day). */
+        START_DATE : T24BusinessTypes:D
+            @i18n:Label (en="Start Date")
+            @i18n:Tooltip (en="Start Date")
+            @t24:i (align=R, inputBehaviour=I, maxLength=8, sysNumber=18.0, core=true, t24Name=START.DATE, mandatory=false)
+/* Captures the status of the record
+Validation Rules:
+Can be either Blank or DELETE.
+Default value is blank. */
+        STATUS : RD_Config:RD_SWIFT_GPI_DIR__STATUS
+            @i18n:Label (en=Status)
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=34.0, core=true, t24Name=STATUS, mandatory=false)
+        /* The future date until the record is valid (including this day itself, if it is a business day). */
+        STOP_DATE : T24BusinessTypes:D
+            @i18n:Label (en="Stop Date")
+            @t24:i (align=R, inputBehaviour=I, maxLength=8, sysNumber=19.0, core=true, t24Name=STOP.DATE, mandatory=false)
+        SWIFT_GPI_ID -> RD_Config:RD_SWIFT_GPI_DIR PK required
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=0.0, core=true, businessType=A, t24Name=SWIFT.GPI.ID, mandatory=true)
+    }
+    RD_SWIFT_GPI_DIR__ALLOWED_COMPANY
+    {
+/* This is a multi valued field.
+Will store the id of the companies where this record is allowed to be used
+Cannot be used in the same time with XX.EXCLUDED.COMPANY */
+        ALLOWED_COMPANY -> ST_CompanyCreation:COMPANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=35.0, core=true, businessType=COM, t24Name=ALLOWED.COMPANY, mandatory=false)
+    }
+    RD_SWIFT_GPI_DIR__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=52.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    RD_SWIFT_GPI_DIR__EXCLUDED_COMPANY
+    {
+/* This is a multi valued field.
+Will store the id of the companies where this record is excluded from usage.
+Cannot be used in the same time with XX.ALLOWED.COMPANY */
+        EXCLUDED_COMPANY -> ST_CompanyCreation:COMPANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=36.0, core=true, businessType=COM, t24Name=EXCLUDED.COMPANY, mandatory=false)
+    }
+    RD_SWIFT_GPI_DIR__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=51.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    RD_SWIFT_GPI_DIR__OVERRIDE
+    {
+        OVERRIDE : T24BusinessTypes:N
+            @i18n:Label (en=Override)
+            @i18n:Tooltip (en="Overrides generated by this transaction")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=48.0, core=true, t24Name=OVERRIDE, mandatory=false)
+    }
+}
+Enumerations {
+    IN_EXCLUSION_LIST_LOAD__ACTION : mml:string
+        OVERWRITE=OVERWRITE
+        UPDATE=UPDATE
+    IN_EXCLUSION_LIST_LOAD__ACT_ON_MISS_FILE : mml:string
+        SKIP=SKIP
+        STOP=STOP
+    IN_EXCLUSION_LIST_LOAD__DELIMITER : mml:string
+        COMMA=COMMA
+        TAB=TAB
+    IN_EXCLUSION_LIST_LOAD__FILE_TYPE : mml:string
+        DAILY_DELTA="DAILY DELTA"
+        MONTHLY_DELTA="MONTHLY DELTA"
+        MONTHLY_FULL="MONTHLY FULL"
+    IN_EXCLUSION_LIST_LOAD__UPLOAD_TYPE : mml:string
+        AUTOMATED=AUTOMATED
+        MANUAL=MANUAL
+    IN_IBAN_PLUS_LOAD__ACTION : mml:string
+        OVERWRITE=OVERWRITE
+        UPDATE=UPDATE
+    IN_IBAN_PLUS_LOAD__ACT_ON_MISS_FILE : mml:string
+        SKIP=SKIP
+        STOP=STOP
+    IN_IBAN_PLUS_LOAD__DELIMITER : mml:string
+        COMMA=COMMA
+        TAB=TAB
+    IN_IBAN_PLUS_LOAD__FILE_TYPE : mml:string
+        DAILY_DELTA="DAILY DELTA"
+        MONTHLY_DELTA="MONTHLY DELTA"
+        MONTHLY_FULL="MONTHLY FULL"
+    IN_IBAN_PLUS_LOAD__IN_PL_LOAD_ID : mml:string
+        SYSTEM=SYSTEM
+    IN_IBAN_PLUS_LOAD__UPLOAD_TYPE : mml:string
+        AUTOMATED=AUTOMATED
+        MANUAL=MANUAL
+    IN_IS_LOAD__ACTION : mml:string
+        OVERWRITE=OVERWRITE
+        UPDATE=UPDATE
+    IN_IS_LOAD__DELIMITER : mml:string
+        COMMA=COMMA
+        TAB=TAB
+    RD_BANK_DIR_UPLD_PARAM__ACTION : mml:string
+        OVERWRITE=OVERWRITE
+        UPDATE=UPDATE
+    RD_BANK_DIR_UPLD_PARAM__ACT_ON_MISS_FILE : mml:string
+        SKIP=SKIP
+        STOP=STOP
+    RD_BANK_DIR_UPLD_PARAM__DELIMITER : mml:string
+        COMMA=COMMA
+        TAB=TAB
+    RD_BANK_DIR_UPLD_PARAM__FILE_TYPE : mml:string
+        DAILY_DELTA="DAILY DELTA"
+        MONTHLY_DELTA="MONTHLY DELTA"
+        MONTHLY_FULL="MONTHLY FULL"
+    RD_BANK_DIR_UPLD_PARAM__UPLD_PARAM_ID : mml:string
+        SYSTEM=SYSTEM
+    RD_BANK_DIR_UPLD_PARAM__UPLOAD_TYPE : mml:string
+        AUTOMATED=AUTOMATED
+        MANUAL=MANUAL
+    RD_CENTRAL_BANK_DIR__ENTRY_TYPE : mml:string
+        CUSTOM=CUSTOM
+        UPLOAD=UPLOAD
+    RD_CENTRAL_BANK_DIR__FLAG : mml:string
+        A=A
+        D=D
+        M=M
+    RD_CENTRAL_BANK_DIR__INSTITUTION_STATUS : mml:string
+        ASSM=ASSM
+        BANK=BANK
+        CBMA=CBMA
+        COOP=COOP
+        CORP=CORP
+        CRUN=CRUN
+        ICSD=ICSD
+        INVM=INVM
+        MONX=MONX
+        NPAA=NPAA
+        OTHR=OTHR
+        PYMI=PYMI
+        SLBH=SLBH
+        SUFI=SUFI
+        XCHG=XCHG
+    RD_CENTRAL_BANK_DIR__LEGAL_TYPE : mml:string
+        B=B
+        L=L
+        U=U
+    RD_CENTRAL_BANK_DIR__OFFICE_TYPE : mml:string
+        DB=DB
+        FB=FB
+        HO=HO
+        SB=SB
+        SF=SF
+        UC=UC
+    RD_CENTRAL_BANK_DIR__STATUS : mml:string
+        DELETE=DELETE
+        NULL=NULL
+    RD_CENTRAL_BANK_DIR__SUBTYPE_IND : mml:string
+        BEID=BEID
+        CORP=CORP
+        MCCO=MCCO
+        MCFI=MCFI
+        NOSU=NOSU
+        NSWB=NSWB
+        PSPA=PSPA
+        SMDP=SMDP
+        SSPA=SSPA
+        SUPE=SUPE
+        SWIFT=SWIFT
+        TRCO=TRCO
+    RD_GPI_UPLD_PARAM__ACTION : mml:string
+        OVERWRITE=OVERWRITE
+        UPDATE=UPDATE
+    RD_GPI_UPLD_PARAM__ACT_ON_MISS_FILE : mml:string
+        SKIP=SKIP
+        STOP=STOP
+    RD_GPI_UPLD_PARAM__DELIMITER : mml:string
+        COMMA=COMMA
+        TAB=TAB
+    RD_GPI_UPLD_PARAM__FILE_TYPE : mml:string
+        DAILY_DELTA="DAILY DELTA"
+        MONTHLY_DELTA="MONTHLY DELTA"
+        MONTHLY_FULL="MONTHLY FULL"
+    RD_GPI_UPLD_PARAM__GPI_UPLD_PARAM_ID : mml:string
+        SYSTEM=SYSTEM
+    RD_GPI_UPLD_PARAM__UPLOAD_TYPE : mml:string
+        AUTOMATED=AUTOMATED
+        MANUAL=MANUAL
+    RD_PARAMETER__PARAM_ID : mml:string
+        SYSTEM=SYSTEM
+    RD_PARAMETER__REFERENCE_DATA : mml:string
+        NO=NO
+        YES=YES
+    RD_PARAMETER__VALIDATE_BIC : mml:string
+        NO=NO
+        YES=YES
+    RD_SWIFT_GPI_DIR__ACT_AS_INTERMEDIARY : mml:string
+        N=N
+        Y=Y
+    RD_SWIFT_GPI_DIR__CHANNEL_TYPE : mml:string
+        D__C=D-C
+        FIN__PMI=FIN-PMI
+        INTERMEDIARY=INTERMEDIARY
+        NON__FIN__PMI=NON-FIN-PMI
+    RD_SWIFT_GPI_DIR__ENTRY_TYPE : mml:string
+        CUSTOM=CUSTOM
+        UPLOAD=UPLOAD
+    RD_SWIFT_GPI_DIR__FLAG : mml:string
+        A=A
+        D=D
+        M=M
+    RD_SWIFT_GPI_DIR__STATUS : mml:string
+        DELETE=DELETE
+        NULL=NULL
+}

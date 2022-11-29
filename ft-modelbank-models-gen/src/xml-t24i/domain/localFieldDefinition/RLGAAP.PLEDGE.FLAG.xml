@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<localref:LocalRef xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:localref="http://www.odcgroup.com/t24/application/localref/model/LocalRef"
+    xmlns:translationDsl="http://www.odcgroup.com/translation/TranslationDsl" localRefID="RLGAAP.PLEDGE.FLAG" maximumChars="10" minimumChars="0"
+    mandatory="false" charType="A" defaultPossible="false" virtualTable="PLEDGE.FLAG"
+    description="Pledge Flag">
+  <shortName xsi:type="translationDsl:LocalTranslations">
+    <translations locale="en" text="PLEDGE.FLAG"/>
+  </shortName>
+  <vettingTable vettingTable="A">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Available to be Sold"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="N">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="No Pool"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="R">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Repurchased"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="Y">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Sold Pool"/>
+    </remarks>
+  </vettingTable>
+</localref:LocalRef>

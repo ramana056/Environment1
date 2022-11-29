@@ -1,0 +1,285 @@
+# UTF-8
+/* NSF processing */
+Domain AC_NSF
+    @t24:i (module=AC)
+    @java:Package (value=com.temenos.t24.datamodel.ac.ac_nsf)
+namespace "http://www.temenos.com/t24/AC_NSF"
+metamodelVersion 1.30.6
+Classes {
+    AC_NSF_ACFA_XREF
+        @i18n:Description (en="")
+        @t24:i (t24Name=AC.NSF.ACFA.XREF, level=F, type=L, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        ACFA_ID -> byValue AC_NSF:AC_NSF_ACFA_XREF__ACFA_ID *
+            @t24:i (t24Name=ACFA.ID)
+        AC_NSF_ACFA_XREF -> AC_NSF:AC_NSF_ACFA_XREF PK required
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=0.0, core=true, businessType=A, t24Name=AC.NSF.ACFA.XREF, mandatory=true)
+        OPTIONAL_COMP_BAL : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=200, sysNumber=2.0, core=true, t24Name=OPTIONAL.COMP.BAL, mandatory=false)
+    }
+    AC_NSF_ACFA_XREF__ACFA_ID
+    {
+        ACFA_ID : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=120, sysNumber=1.0, core=true, t24Name=ACFA.ID, mandatory=false)
+    }
+/* This is a concat file which holds the ACFA.ID which was raised in respect to transaction stop and NSF respectively to identify the one already raised for the same transaction.
+
+ID Validation Rule:
+The ID of this table will be OUR.REFERENCE. */
+    NSF_ACFA_LINK
+        @i18n:Description (en="")
+        @t24:i (t24Name=NSF.ACFA.LINK, level=F, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        ACFA_ID -> byValue AC_NSF:NSF_ACFA_LINK__ACFA_ID *
+            @t24:i (t24Name=ACFA.ID)
+        NSF_ACFA_LINK_ID -> AC_NSF:NSF_ACFA_LINK PK required
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=0.0, core=true, businessType=A, t24Name=NSF.ACFA.LINK.ID, mandatory=true)
+    }
+    NSF_ACFA_LINK__ACFA_ID
+    {
+        /* This field will contain the ACFA id. */
+        ACFA_ID : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=16, sysNumber=1.0, core=true, t24Name=ACFA.ID, mandatory=false)
+    }
+/* Parameter table to define configurations associated to NSF exception processing.
+
+ID Validation Rule:
+The record ID for this table must be a valid lead company ID or 'SYSTEM'. */
+    NSF_PARAMETER
+        @i18n:Description (en="")
+        @t24:i (t24Name=NSF.PARAMETER, level=I, type=H, allowedFunctions="A C D E H I L Q R S", localRefApplicationSysNo=23.0, localRefAllowed=true)
+    {
+        AC_NSF_REFUND_HANDOFF : T24BusinessTypes:HOOK
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=22.0, core=true, t24Name=AC.NSF.REFUND.HANDOFF, mandatory=false)
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=32.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=33.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=29.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=30.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=26.0, core=true, t24Name=CURR.NO, mandatory=false)
+        DATE_TIME -> byValue AC_NSF:NSF_PARAMETER__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=31.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        FLOAT_HOLD_TYPE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=23.2, core=false, t24Name=FLOAT.HOLD.TYPE, mandatory=false)
+        INPUTTER -> byValue AC_NSF:NSF_PARAMETER__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        NSF_FLOAT_COMP : AC_NSF:NSF_PARAMETER__NSF_FLOAT_COMP
+            @t24:i (align=L, inputBehaviour=I, maxLength=10, sysNumber=23.1, core=false, t24Name=NSF.FLOAT.COMP, mandatory=false)
+        NSF_PARAMETER_ID -> AC_NSF:NSF_PARAMETER PK required
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=0.0, core=true, businessType=A, t24Name=NSF.PARAMETER.ID, mandatory=true)
+        NSF_REJ_VERSION -> byValue AC_NSF:NSF_PARAMETER__NSF_REJ_VERSION *
+            @t24:i (t24Name=NSF.REJ.VERSION)
+/* This indicates the order in which the entries for the day would be evalueted during end of day processing
+
+Validation Rule:
+
+This is a optional field
+
+CreditDebit - Default option if not defined by user. Evaluation would take place by posting all credit entries first then followed by bank initiated debits followed by customer initiated debits.
+Time - Evaluation would take place by posting entries in the same order they were raised. */
+        ORDER : AC_NSF:NSF_PARAMETER__ORDER
+            @i18n:Label (en=Order)
+            @i18n:Tooltip (en="Order of profile record be assigned to customer")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=1.0, core=true, t24Name=ORDER, mandatory=false)
+        OVERRIDE -> byValue AC_NSF:NSF_PARAMETER__OVERRIDE *
+            @t24:i (t24Name=OVERRIDE)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=25.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        SETTLE_TYPE -> byValue AC_NSF:NSF_PARAMETER__SETTLE_TYPE *
+            @t24:i (t24Name=SETTLE.TYPE)
+        STOP_EXIST : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=7, sysNumber=23.5, core=false, t24Name=STOP.EXIST, mandatory=false)
+    }
+    NSF_PARAMETER__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=28.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    NSF_PARAMETER__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=27.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    NSF_PARAMETER__NSF_REJ_VERSION
+    {
+        NSF_REJECT_OFS -> EB_Interface:OFS_SOURCE
+            @t24:i (align=L, inputBehaviour=I, maxLength=20, sysNumber=23.4, core=false, businessType=A, t24Name=NSF.REJECT.OFS, mandatory=false)
+        NSF_REJ_VERSION -> EB_Versions:VERSION
+            @t24:i (align=L, inputBehaviour=I, maxLength=54, sysNumber=23.3, core=false, businessType=PV, t24Name=NSF.REJ.VERSION, mandatory=false)
+    }
+    NSF_PARAMETER__OVERRIDE
+    {
+        OVERRIDE : T24BusinessTypes:N
+            @i18n:Label (en=Override)
+            @i18n:Tooltip (en="Overrides generated by this transaction")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=24.0, core=true, t24Name=OVERRIDE, mandatory=false)
+    }
+    NSF_PARAMETER__SETTLE_TYPE
+    {
+/* This field will define whether the charge is Negotiable.
+
+This is an option field with the values 'YES/NO'.
+Based on this set up , the charge amount in AC.FUNDS.AUTHORISATION record can be negotiated.
+
+Validation Rule: */
+        CHRG_NEGOTIABLE : AC_NSF:NSF_PARAMETER__SETTLE_TYPE__CHRG_NEGOTIABLE
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=10.0, core=true, t24Name=CHRG.NEGOTIABLE, mandatory=false)
+/* This field will define the Default Fund Decision.
+
+This is a mandatory field only if the SETTLE.TYPE is defined.
+
+Validation Rule:
+
+Allowed Values Approved or Rejected */
+        DEF_FUND_DECISION : AC_NSF:NSF_PARAMETER__SETTLE_TYPE__DEF_FUND_DECISION required
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=4.0, core=true, t24Name=DEF.FUND.DECISION, mandatory=true)
+/* Number of days post which exception records will be auto actioned by the system
+
+This is a mandatory field only if the SETTLE.TYPE is defined.
+
+Validation Rule:
+
+Numeric Field, Accepts upto three digits example 999 */
+        EXPIRY_DAYS : T24BusinessTypes:N required
+            @i18n:Label (en="Expiry Days")
+            @i18n:Tooltip (en="Shows the expiry date")
+            @t24:i (align=R, inputBehaviour=I, maxLength=3, sysNumber=3.0, core=true, t24Name=EXPIRY.DAYS, mandatory=true)
+/* This field will define the whether the fund decision updated by system or manual.
+
+This is a mandatory field only if the SETTLE.TYPE is defined.
+
+Validation Rule:
+
+This is an option field with the values 'SYSTEM_MANUAL'.
+This will be defaulted in DECISION.REASON field of AC.FUNDS.AUTHORISATION record while running AC.EOD.NSF.EVALUATION job. */
+        FUND_DECISION_UPD : AC_NSF:NSF_PARAMETER__SETTLE_TYPE__FUND_DECISION_UPD required
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=5.0, core=true, t24Name=FUND.DECISION.UPD, mandatory=true)
+/* This field will define the AA activity for Funds Decision Approved.
+
+This is a mandatory field. Maximum length of '80'.
+
+Validation Rule:
+
+Input for this field must be a valid record from the AA.ACTIVITY table.
+Charge activity specified will be triggered when FUNDS.AUTH.STATUS is AUTHORISED and FUNDS.DECISION is APPROVED in AC.FUNDS.AUTHORISATION record. */
+        FUND_DECI_APPROVE_ACT -> AA_ProductFramework:AA_ACTIVITY required
+            @t24:i (align=L, inputBehaviour=I, maxLength=80, sysNumber=6.0, core=true, businessType=A, t24Name=FUND.DECI.APPROVE.ACT, mandatory=true)
+/* This field will define the AA activity for Funds Decision Rejected.
+
+This is a mandatory field. Maximum length of '80'.
+
+Validation Rule:
+
+Input for this field must be a valid record from the AA.ACTIVITY table.
+Charge activity specified will be triggered when FUNDS.AUTH.STATUS is AUTHORISED and FUNDS.DECISION is REJECTED in AC.FUNDS.AUTHORISATION record. */
+        FUND_DECI_REJ_ACT -> AA_ProductFramework:AA_ACTIVITY required
+            @t24:i (align=L, inputBehaviour=I, maxLength=80, sysNumber=7.0, core=true, businessType=A, t24Name=FUND.DECI.REJ.ACT, mandatory=true)
+/* This field will define whether the fund reservation required on fee.
+
+This is an option field with the values 'YES/NO'.
+YES - AC.LOCKED.EVENTS record is created when AC.FUNDS.AUTHORISATION record is created during AC.EOD.NSF.EVALUATION job.
+NO - Only AC.FUNDS.AUTHORISATION record is created during AC.EOD.NSF.EVALUATION job. */
+        FUND_RES_REQ_FEE : AC_NSF:NSF_PARAMETER__SETTLE_TYPE__FUND_RES_REQ_FEE
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=11.0, core=true, t24Name=FUND.RES.REQ.FEE, mandatory=false)
+        RESERVED_1 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=21.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_10 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=12.0, core=true, t24Name=RESERVED.10, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=20.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=19.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=18.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        RESERVED_5 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=17.0, core=true, t24Name=RESERVED.5, mandatory=false)
+        RESERVED_6 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=16.0, core=true, t24Name=RESERVED.6, mandatory=false)
+        RESERVED_7 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=15.0, core=true, t24Name=RESERVED.7, mandatory=false)
+        RESERVED_8 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=14.0, core=true, t24Name=RESERVED.8, mandatory=false)
+        RESERVED_9 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=13.0, core=true, t24Name=RESERVED.9, mandatory=false)
+/* This field will define the AA activity for Reversal of Approved.
+
+This is a mandatory field. Maximum length of '80'.
+
+Validation Rule:
+
+Input for this field must be a valid record from the AA.ACTIVITY table.
+Charge activity specified will be triggered when FUNDS.AUTH.STATUS is CANCELLED and FUNDS.DECISION is APPROVED in AC.FUNDS.AUTHORISATION record. */
+        REV_APPROVE_ACT -> AA_ProductFramework:AA_ACTIVITY required
+            @t24:i (align=L, inputBehaviour=I, maxLength=80, sysNumber=8.0, core=true, businessType=A, t24Name=REV.APPROVE.ACT, mandatory=true)
+/* This field will define the AA activity for Reversal Rejected.
+
+This is a mandatory field. Maximum length of '80'.
+
+Validation Rule:
+
+Input for this field must be a valid record from the AA.ACTIVITY table.
+Charge activity specified will be triggered when FUNDS.AUTH.STATUS is CANCELLED and FUNDS.DECISION is REJECTED in AC.FUNDS.AUTHORISATION record. */
+        REV_REJ_ACT -> AA_ProductFramework:AA_ACTIVITY required
+            @t24:i (align=L, inputBehaviour=I, maxLength=80, sysNumber=9.0, core=true, businessType=A, t24Name=REV.REJ.ACT, mandatory=true)
+/* Defines the type of settlement. The is an option field with values 'PTL/POL/SET'
+
+Validation Rule:
+
+This is a mandatory multivalued field. User must define all three options.
+
+There will be no duplicate values allowed which means user has to define all three options of SETTLE.TYPE.
+PTL - Paid Through Limit - Represent underlying Debit transaction to the account was paid through the limit available at the time of transaction.
+POL - Paid Outside Limit - represent underlying Debit transaction to the account was paid in excess of the limit available at the time of transaction.
+SET - Automatic Settlement - represent underlying Debit transaction to the account was settled irrespective of account or limit balance available at the time of transaction. */
+        SETTLE_TYPE : AC_NSF:NSF_PARAMETER__SETTLE_TYPE__SETTLE_TYPE required
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=2.0, core=true, t24Name=SETTLE.TYPE, mandatory=true)
+    }
+}
+Enumerations {
+    NSF_PARAMETER__NSF_FLOAT_COMP : mml:string
+        BOTH=BOTH
+        FLOAT=FLOAT
+        REGCC_HOLD=REGCC.HOLD
+    NSF_PARAMETER__ORDER : mml:string
+        CREDITDEBIT=CREDITDEBIT
+        NULL=NULL
+        TIME=TIME
+    NSF_PARAMETER__SETTLE_TYPE__CHRG_NEGOTIABLE : mml:string
+        NO=NO
+        NULL=NULL
+        YES=YES
+    NSF_PARAMETER__SETTLE_TYPE__DEF_FUND_DECISION : mml:string
+        APPROVED=APPROVED
+        REJECTED=REJECTED
+    NSF_PARAMETER__SETTLE_TYPE__FUND_DECISION_UPD : mml:string
+        MANUAL=MANUAL
+        SYSTEM=SYSTEM
+    NSF_PARAMETER__SETTLE_TYPE__FUND_RES_REQ_FEE : mml:string
+        NO=NO
+        NULL=NULL
+        YES=YES
+    NSF_PARAMETER__SETTLE_TYPE__SETTLE_TYPE : mml:string
+        POL=POL
+        PTL=PTL
+        SET=SET
+}

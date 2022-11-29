@@ -1,0 +1,486 @@
+# UTF-8
+/* Customer dormancy processing and monitoring */
+Domain ST_DormancyMonitor
+    @t24:i (module=ST)
+    @java:Package (value=com.temenos.t24.datamodel.st.st_dormancymonitor)
+namespace "http://www.temenos.com/t24/ST_DormancyMonitor"
+metamodelVersion 1.30.6
+Classes {
+/* Application to record the external activities information in T24. The data captured here will be pushed to CDM framework.
+
+ID Validation Rule:
+The record ID for this table is also auto generated with prefix EA. */
+    ST_CDM_EXT_ACT_CAPTURE
+        @i18n:Description (en="")
+        @t24:i (t24Name=ST.CDM.EXT.ACT.CAPTURE, level=C, type=H, allowedFunctions="A C D E I L P Q S", localRefApplicationSysNo=9.0, localRefAllowed=true)
+    {
+        /* Addition information if required to be captured within T24. */
+        ADDITIONAL_INFO : T24BusinessTypes:A
+            @i18n:Label (en=Narrative)
+            @t24:i (align=L, inputBehaviour=I, maxLength=100, sysNumber=8.0, core=true, t24Name=ADDITIONAL.INFO, mandatory=false)
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=18.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=19.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=15.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=16.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=12.0, core=true, t24Name=CURR.NO, mandatory=false)
+/* External activity of this customer is to be captured. Only those customers with status as ACTIVE is considered for dormancy processing.
+
+Validation Rule:
+
+Should be a valid T24 Customer. This is a mandatory field. */
+        CUSTOMER_ID -> ST_Customer:CUSTOMER required
+            @i18n:Label (en="Customer Id")
+            @t24:i (align=R, inputBehaviour=I, maxLength=10, sysNumber=1.0, core=true, businessType=CUS, t24Name=CUSTOMER.ID, mandatory=true)
+        /* Date on which this activity is captured in T24. Will be defaulted to current system date if not defined. */
+        DATE_OF_ACTIVITY : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=2.0, core=true, t24Name=DATE.OF.ACTIVITY, mandatory=false)
+        DATE_TIME -> byValue ST_DormancyMonitor:ST_CDM_EXT_ACT_CAPTURE__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=17.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        /* This field captures the key for the activity of an external product. */
+        EXTERNAL_ACTIVITY_REF : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=7.0, core=true, t24Name=EXTERNAL.ACTIVITY.REF, mandatory=false)
+        INPUTTER -> byValue ST_DormancyMonitor:ST_CDM_EXT_ACT_CAPTURE__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        /* Field to capture the system ID of the external product. */
+        ORG_SYSTEM_ID : T24BusinessTypes:A
+            @i18n:Label (en="Org System Id")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=6.0, core=true, t24Name=ORG.SYSTEM.ID, mandatory=false)
+        OVERRIDE -> byValue ST_DormancyMonitor:ST_CDM_EXT_ACT_CAPTURE__OVERRIDE *
+            @t24:i (t24Name=OVERRIDE)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=11.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+/* Option to reset dormancy status for external products. If set , then dormancy status will be reset in ST.CDM.MONITOR, inline .
+
+Validation Rule:
+
+Allowed Values : Yes - Indicates customer is no more dormant. */
+        RESET_DORMANCY : ST_DormancyMonitor:ST_CDM_EXT_ACT_CAPTURE__RESET_DORMANCY
+            @i18n:Label (en="Reset Dormancy")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=4.0, core=true, t24Name=RESET.DORMANCY, mandatory=false)
+        ST_CDM_EXT_ACT_CAPTURE_ID -> ST_DormancyMonitor:ST_CDM_EXT_ACT_CAPTURE PK required
+            @t24:i (align=L, inputBehaviour=I, maxLength=12, sysNumber=0.0, core=true, businessType=A, t24Name=ST.CDM.EXT.ACT.CAPTURE.ID, mandatory=true)
+        /* Time at which this activity is captured in T24. Will be defaulted to current time based on the time zone. */
+        TIME_OF_ACTIVITY : T24BusinessTypes:TIME
+            @i18n:Label (en="Time of Activity")
+            @t24:i (align=L, inputBehaviour=I, maxLength=5, sysNumber=3.0, core=true, t24Name=TIME.OF.ACTIVITY, mandatory=false)
+/* If set, during dormancy reset system will capture the DATE.OF.ACTIVITY in LAST.ACTIVITY.DATE in ST.CDM.MONITOR. Applicable only if RESET.DORMANCY is set.
+
+Validation Rule:
+
+Allowed Values : Yes - Indicates to capture DATE.OF.ACTIVITY in LAST.ACTIVITY.DATE in ST.CDM.MONITOR. */
+        UPDATE_LAST_ACTIVITY_DT : ST_DormancyMonitor:ST_CDM_EXT_ACT_CAPTURE__UPDATE_LAST_ACTIVITY_DT
+            @i18n:Label (en="Update Last Activity Date")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=5.0, core=true, t24Name=UPDATE.LAST.ACTIVITY.DT, mandatory=false)
+    }
+    ST_CDM_EXT_ACT_CAPTURE__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=14.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    ST_CDM_EXT_ACT_CAPTURE__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=13.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    ST_CDM_EXT_ACT_CAPTURE__OVERRIDE
+    {
+        OVERRIDE : T24BusinessTypes:N
+            @i18n:Label (en=Override)
+            @i18n:Tooltip (en="Overrides generated by this transaction")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=10.0, core=true, t24Name=OVERRIDE, mandatory=false)
+    }
+/* Application which holds the customer specific dormancy status. This table also holds the product wise status for those products which are classified as AUTO and UNMONITORED and contains the last activity date of MONITORED and EXTERNAL products. Records will always be created by the system. User can either reset the dormancy or change the current dormancy status.
+
+ID Validation Rule:
+The record ID for this table is a T24 Customer. */
+    ST_CDM_MONITOR
+        @i18n:Description (en="")
+        @t24:i (t24Name=ST.CDM.MONITOR, nonStop=true, level=C, type=H, allowedFunctions="A C D E I L P Q S", localRefApplicationSysNo=20.0, localRefAllowed=true)
+    {
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=29.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=30.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=26.0, core=true, t24Name=AUTHORISER, mandatory=false)
+/* This field holds the system calculated dormancy status for a customer. User input is restricted
+Auto dormancy status is updated by ST.CDM.SERVICE */
+        AUTO_DORM_STATUS : ST_DormancyMonitor:ST_CDM_MONITOR__AUTO_DORM_STATUS
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=1.0, core=true, t24Name=AUTO.DORM.STATUS, mandatory=false)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=27.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+/* Current status of the customer, will be updated based on the presence of AUTO.DORM.STATUS and MANUAL.DORM.STATUS.This field will be defaulted with AUTO.DORM.STATUS if only AUTO.DORM.STATUS is available or will be defaulted with MANUAL.DORM.STATUS if both AUTO.DORM.STATUS and MANUAL.DORM.STATUS exist.
+During dormancy reset this field will be cleared off indicating that the customer is not dormant anymore.User input is restricted. */
+        CURRENT_DORM_STATUS : ST_DormancyMonitor:ST_CDM_MONITOR__CURRENT_DORM_STATUS
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=5.0, core=true, t24Name=CURRENT.DORM.STATUS, mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=23.0, core=true, t24Name=CURR.NO, mandatory=false)
+/* This field holds the date on which AUTO.DORM.STATUS is updated . User input is restricted
+When dormancy is reset manually, this field will be cleared. */
+        DATE_OF_DORMANCY : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=2.0, core=true, t24Name=DATE.OF.DORMANCY, mandatory=false)
+        /* The date on which dormancy reset is triggered is captured here and will be cleared off once the customer becomes dormant. User input is restricted. */
+        DATE_OF_REMOVAL : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=7.0, core=true, t24Name=DATE.OF.REMOVAL, mandatory=false)
+        DATE_TIME -> byValue ST_DormancyMonitor:ST_CDM_MONITOR__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=28.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        /* This field indicates whether the dormancy reset is triggered by system or user. Allowed for user input. If not defined will be updated as "Reset done by User" during manual reset and "Reset done by System" during system initiated reset. Will be cleared off when the customer's status becomes dormant. */
+        DORMANCY_REMOVED_BY : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=9.0, core=true, t24Name=DORMANCY.REMOVED.BY, mandatory=false)
+        INPUTTER -> byValue ST_DormancyMonitor:ST_CDM_MONITOR__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+/* The last activity date recorded in the system for the customer. This field will be updated only if all the products are INACTIVE.
+AUTO - when all the contracts for the customer are closed or marked dormant.Will be passed by the corresponding module.
+UNMONITORED -  will be obtained from CZ.CUSTOMER.ACTIVITY (when all the activity applications are marked complete).
+MONITORED/EXTERNAL - Date when the last activity recorded through ST.CDM.EXT.ACT.CAPTURE. Though the date is passed during each external product capture, will be updated only when all the products are INACTIVE.
+User input is restricted. */
+        LAST_ACTIVITY_DATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=12.0, core=true, t24Name=LAST.ACTIVITY.DATE, mandatory=false)
+        LAST_ACT_GRACE_DATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=13.0, core=true, t24Name=LAST.ACT.GRACE.DATE, mandatory=false)
+/* Dormancy status defined by user. The status defined here will preside over the AUTO.DORM.STATUS.
+When dormancy is reset manually, this field will be cleared.
+
+Validation Rule:
+
+Should match the dormancy status configured in ST.CDM.PARAMETER. */
+        MANUAL_DORM_STATUS : ST_DormancyMonitor:ST_CDM_MONITOR__MANUAL_DORM_STATUS
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=3.0, core=true, t24Name=MANUAL.DORM.STATUS, mandatory=false)
+/* Option to reset the dormancy status manually. If set to yes all dormancy related fields will be cleared and LAST.ACTIVITY.DATE will be captured as current system date, indicating that the customer is not dormant anymore.
+
+Validation Rule:
+
+Allowed options : YES .This indicates the customer is not dormant anymore. */
+        MANUAL_RESET_ACTIVE : ST_DormancyMonitor:ST_CDM_MONITOR__MANUAL_RESET_ACTIVE
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=6.0, core=true, t24Name=MANUAL.RESET.ACTIVE, mandatory=false)
+        /* Date on which MANUAL.DORM.STATUS is defined. This will be defaulted by the system during each amendment of MANUAL.DORM.STATUS. When the MANUAL.DORM.STATUS is removed the value captured here will be removed . */
+        MANUAL_STATUS_DATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=4.0, core=true, t24Name=MANUAL.STATUS.DATE, mandatory=false)
+/* Date on which dormancy check has to be triggered for a customer. Will be derived as LAST.ACT.GRACE.DATE + DORMANCY.PERIOD (against first MV set in ST.CDM.PARAMETER) during first update.
+Once this date is reached and when all the products remain INACTIVE the status form where the period is picked for NEXT.CHECK.DATE calculation will be updated in AUTO.DORM.STATUS and date will be cycled as NEXT.CHECK.DATE + DORMANCY.PERIOD of next status. User input is restricted. */
+        NEXT_CHECK_DATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=14.0, core=true, t24Name=NEXT.CHECK.DATE, mandatory=false)
+        OVERRIDE -> byValue ST_DormancyMonitor:ST_CDM_MONITOR__OVERRIDE *
+            @t24:i (t24Name=OVERRIDE)
+        PRODUCT_ID -> byValue ST_DormancyMonitor:ST_CDM_MONITOR__PRODUCT_ID *
+            @t24:i (t24Name=PRODUCT.ID)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=22.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        RESERVED_01 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=19.0, core=true, t24Name=RESERVED.01, mandatory=false)
+        RESERVED_02 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=18.0, core=true, t24Name=RESERVED.02, mandatory=false)
+        RESERVED_03 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=17.0, core=true, t24Name=RESERVED.03, mandatory=false)
+        RESERVED_04 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=16.0, core=true, t24Name=RESERVED.04, mandatory=false)
+        RESERVED_05 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=15.0, core=true, t24Name=RESERVED.05, mandatory=false)
+        /* The reason for reset is to captured here. Allowed for user input. If not defined will be updated as "Reset done by User" during manual reset and "Reset done by System" during system initiated reset. Will be cleared off when the customer's status becomes dormant. */
+        RESET_COMMENTS : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=100, sysNumber=8.0, core=true, t24Name=RESET.COMMENTS, mandatory=false)
+        ST_CDM_MONITOR_ID -> ST_DormancyMonitor:ST_CDM_MONITOR PK required
+            @t24:i (align=R, inputBehaviour=I, maxLength=10, sysNumber=0.0, core=true, businessType=CUS, t24Name=ST.CDM.MONITOR.ID, mandatory=true)
+    }
+    ST_CDM_MONITOR__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=25.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    ST_CDM_MONITOR__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=24.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    ST_CDM_MONITOR__OVERRIDE
+    {
+        OVERRIDE : T24BusinessTypes:N
+            @i18n:Label (en=Override)
+            @i18n:Tooltip (en="Overrides generated by this transaction")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=21.0, core=true, t24Name=OVERRIDE, mandatory=false)
+    }
+    ST_CDM_MONITOR__PRODUCT_ID
+    {
+/* Current status of the product. User input is restricted.
+
+Validation Rule:
+
+Allowed options are ACITVE and INACTIVE.
+ACTIVE - When live contracts under the respective product exists .
+INACTIVE - When contracts under the respective product are matured . */
+        AUTO_PRODUCT_STATUS : ST_DormancyMonitor:ST_CDM_MONITOR__PRODUCT_ID__AUTO_PRODUCT_STATUS
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=11.0, core=true, t24Name=AUTO.PRODUCT.STATUS, mandatory=false)
+/* Holds products which are eligible for dormancy processing (as defined in ST.CDM.PARAMETER).  User input is restricted.This field is updated when the contracts under the parameterized product is authorized.
+
+Validation Rule:
+Should be a valid ID in EB.PRODUCT . */
+        PRODUCT_ID -> EB_SystemTables:EB_PRODUCT
+            @t24:i (align=L, inputBehaviour=I, maxLength=6, sysNumber=10.0, core=true, businessType=A, t24Name=PRODUCT.ID, mandatory=false)
+    }
+/* Holds the parameter configurations for customer dormancy processing at the lead company level.
+
+ID Validation Rule:
+The record ID for this table is should be a customer level lead company. */
+    ST_CDM_PARAMETER
+        @i18n:Description (en="")
+        @t24:i (t24Name=ST.CDM.PARAMETER, level=I, type=H, allowedFunctions="A C D E I L P Q S", localRefApplicationSysNo=24.0, localRefAllowed=true)
+    {
+/* An options field which decides upon whether the external products recorded through ST.CDM.CONTACT.LOG should be considered for dormancy processing.
+
+Validation Rule:
+
+Allowed Value : Y - If set , ST.CDM.EXT.ACT.CAPTURE records can be created. */
+        ALLOW_EXTERNAL_PRD : ST_DormancyMonitor:ST_CDM_PARAMETER__ALLOW_EXTERNAL_PRD
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=14.0, core=true, t24Name=ALLOW.EXTERNAL.PRD, mandatory=false)
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=33.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=34.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=30.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=31.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=27.0, core=true, t24Name=CURR.NO, mandatory=false)
+/* API to decide upon the customer's eligibility for dormancy processing .
+
+Validation Rule:
+
+Should be a valid ID of EB.API. */
+        CUSTOMER_FILTER_API -> EB_SystemTables:EB_API
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=5.0, core=true, businessType=HOOK, t24Name=CUSTOMER.FILTER.API, mandatory=false)
+/* Rule to decide upon the customer's eligibility for dormancy processing.
+
+Validation Rule:
+
+Should be a valid ID of EB.RULE.GATEWAY. */
+        CUSTOMER_FILTER_RULE -> EB_RulesEngine:EB_RULE_GATEWAY
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=4.0, core=true, businessType=A, t24Name=CUSTOMER.FILTER.RULE, mandatory=false)
+        DATE_TIME -> byValue ST_DormancyMonitor:ST_CDM_PARAMETER__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=32.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        DESCRIPTION : T24BusinessTypes:A required
+            @i18n:Label (en=Description)
+            @i18n:Tooltip (en=Description)
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=1.0, core=true, t24Name=DESCRIPTION, mandatory=true)
+        DORMANCY_STATUS -> byValue ST_DormancyMonitor:ST_CDM_PARAMETER__DORMANCY_STATUS *
+            @t24:i (t24Name=DORMANCY.STATUS)
+        INPUTTER -> byValue ST_DormancyMonitor:ST_CDM_PARAMETER__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        MONITORED_PRD_APPLN -> byValue ST_DormancyMonitor:ST_CDM_PARAMETER__MONITORED_PRD_APPLN *
+            @t24:i (t24Name=MONITORED.PRD.APPLN)
+/* Api to decide upon the monitored contract's/product's reset eligibility for dormancy processing.
+
+Validation Rule:
+
+Should be a valid ID of EB.API. */
+        MONITORED_RESET_API -> EB_SystemTables:EB_API
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=20.0, core=true, businessType=HOOK, t24Name=MONITORED.RESET.API, mandatory=false)
+/* Rule to decide upon the monitored contract's/product's reset eligibility for dormancy processing.
+
+Validation Rule:
+
+Should be a valid ID of EB.RULE.GATEWAY. */
+        MONITORED_RESET_RULE -> EB_RulesEngine:EB_RULE_GATEWAY
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=19.0, core=true, businessType=A, t24Name=MONITORED.RESET.RULE, mandatory=false)
+        OVERRIDE -> byValue ST_DormancyMonitor:ST_CDM_PARAMETER__OVERRIDE *
+            @t24:i (t24Name=OVERRIDE)
+        PRODUCT -> byValue ST_DormancyMonitor:ST_CDM_PARAMETER__PRODUCT *
+            @t24:i (t24Name=PRODUCT)
+/* Api to decide upon the contract's/product's eligibility for dormancy processing.
+
+Validation Rule:
+
+Should be a valid ID of EB.API. */
+        PRODUCT_FILTER_API -> EB_SystemTables:EB_API
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=17.0, core=true, businessType=HOOK, t24Name=PRODUCT.FILTER.API, mandatory=false)
+/* Rule to decide upon the contract's/product's eligibility for dormancy processing.
+
+Validation Rule:
+
+Should be a valid ID of EB.RULE.GATEWAY. */
+        PRODUCT_FILTER_RULE -> EB_RulesEngine:EB_RULE_GATEWAY
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=16.0, core=true, businessType=A, t24Name=PRODUCT.FILTER.RULE, mandatory=false)
+/* Allowed period before marking the customer as dormant. The period defined is applicable only for Monitored and external products, the dormancy check will be triggered once this period is reached.
+
+Validation Rule:
+
+Vaild format - D, M, Y. */
+        PRODUCT_GRACE_PERIOD : T24BusinessTypes:PERIOD
+            @t24:i (align=L, inputBehaviour=I, maxLength=6, sysNumber=15.0, core=true, t24Name=PRODUCT.GRACE.PERIOD, mandatory=false)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=26.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        RESERVED_1 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=23.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=22.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=21.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        ST_CDM_PARAMETER_ID -> ST_DormancyMonitor:ST_CDM_PARAMETER PK required
+            @t24:i (align=L, inputBehaviour=I, maxLength=11, sysNumber=0.0, core=true, businessType=COM, t24Name=ST.CDM.PARAMETER.ID, mask="R##-###-####", mandatory=true)
+/* This field indicates if ST.CDM.TAKEOVER.SERVICE is run.
+
+Validation Rule:
+
+Allowed Values : YES - If set , then Takeover service can not be run again. */
+        TAKEOVER_COMPLETED : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=3, sysNumber=18.0, core=true, t24Name=TAKEOVER.COMPLETED, mandatory=false)
+    }
+    ST_CDM_PARAMETER__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=29.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    ST_CDM_PARAMETER__DORMANCY_STATUS
+    {
+/* Period until which customer would remain in an particular DORMANCY.STATUS. Valid format - D, M, Y. Period once defined cannot be modified.
+
+Validation Rule:
+
+This is a mandatory field. */
+        DORMANCY_PERIOD : T24BusinessTypes:PERIOD
+            @t24:i (align=L, inputBehaviour=I, maxLength=6, sysNumber=3.0, core=true, t24Name=DORMANCY.PERIOD, mandatory=false)
+/* Statuses that specifies the customer's dormancy state based on the period defined in DORMANCY.PERIOD. During dormancy processing the customer's dormancy status would traverse through the statues in the defined order. Status once condigured cannot be removed. The order of statuses once defined cannot be modified.
+
+Validation Rule:
+
+Should be a valid EB.LOOKUP of CDM.DORMANCY.STATUS. */
+        DORMANCY_STATUS : ST_DormancyMonitor:ST_CDM_PARAMETER__DORMANCY_STATUS__DORMANCY_STATUS
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=2.0, core=true, t24Name=DORMANCY.STATUS, mandatory=false)
+    }
+    ST_CDM_PARAMETER__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=28.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    ST_CDM_PARAMETER__MONITORED_PRD_APPLN
+    {
+/* Applications which are to be considered/Monitored to decide upon customer dormancy must be defined. Input of applications that falls under the products AA,SC,LD,MM,SW,BL,SL,MG,MD,LC,FX,SY,DX,FD are restricted as of now. Addition and removal of applications are allowed.
+
+Validation Rule:
+
+Should be a valid ID of PGM.FILE. */
+        MONITORED_PRD_APPLN -> EB_SystemTables:PGM_FILE
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=13.0, core=true, businessType=A, t24Name=MONITORED.PRD.APPLN, mandatory=false)
+    }
+    ST_CDM_PARAMETER__OVERRIDE
+    {
+        OVERRIDE : T24BusinessTypes:N
+            @i18n:Label (en=Override)
+            @i18n:Tooltip (en="Overrides generated by this transaction")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=25.0, core=true, t24Name=OVERRIDE, mandatory=false)
+    }
+    ST_CDM_PARAMETER__PRODUCT
+    {
+        PRD_RESERVED_1 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=12.0, core=true, t24Name=PRD.RESERVED.1, mandatory=false)
+        PRD_RESERVED_2 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=11.0, core=true, t24Name=PRD.RESERVED.2, mandatory=false)
+        PRD_RESERVED_3 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=10.0, core=true, t24Name=PRD.RESERVED.3, mandatory=false)
+        PRD_RESERVED_4 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=9.0, core=true, t24Name=PRD.RESERVED.4, mandatory=false)
+        PRD_RESERVED_5 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=8.0, core=true, t24Name=PRD.RESERVED.5, mandatory=false)
+/* Specifies the products that are to be considered for dormancy processing. Only the products that falls under AUTO and UNMONITERED groups could be defined here.
+This list is built dynamically by retriving applications with MAT.DATE from RE.APPLICATIONS. Products if added to the existing parameter record will be reflected in ST.CDM.MONITOR for existing customers only if takeover service specific to ST.CDM.MONITOR is triggered once. Products once configured cannot be removed.
+
+Validation Rule:
+
+Allowed products are AA,SC,LD,MM,SW,BL,SL,MG,MD,LC,FX,SY,DX,FD as of now.Should be a valid ID of EB.PRODUCT */
+        PRODUCT : T24BusinessTypes:N
+            @i18n:Label (en=Product)
+            @t24:i (align=R, inputBehaviour=I, maxLength=35, sysNumber=6.0, core=true, t24Name=PRODUCT, mandatory=false)
+/* Specifies whether the product defined falls under AUTO or UNMONITORED. User Input is restricted
+
+Validation Rule:
+
+AA and SC will be classified as AUTO and the rest are UNMONITORED. */
+        PRODUCT_CLASS : ST_DormancyMonitor:ST_CDM_PARAMETER__PRODUCT__PRODUCT_CLASS
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=7.0, core=true, t24Name=PRODUCT.CLASS, mandatory=false)
+    }
+}
+Enumerations {
+    ST_CDM_EXT_ACT_CAPTURE__RESET_DORMANCY : mml:string
+        NULL=NULL
+        YES=YES
+    ST_CDM_EXT_ACT_CAPTURE__UPDATE_LAST_ACTIVITY_DT : mml:string
+        NULL=NULL
+        YES=YES
+    ST_CDM_MONITOR__AUTO_DORM_STATUS : mml:string
+        DORMANT=DORMANT
+        WATCHLIST=WATCHLIST
+    ST_CDM_MONITOR__CURRENT_DORM_STATUS : mml:string
+        DORMANT=DORMANT
+        WATCHLIST=WATCHLIST
+    ST_CDM_MONITOR__MANUAL_DORM_STATUS : mml:string
+        DORMANT=DORMANT
+        WATCHLIST=WATCHLIST
+    ST_CDM_MONITOR__MANUAL_RESET_ACTIVE : mml:string
+        NULL=NULL
+        YES=YES
+    ST_CDM_MONITOR__PRODUCT_ID__AUTO_PRODUCT_STATUS : mml:string
+        ACTIVE=ACTIVE
+        INACTIVE=INACTIVE
+    ST_CDM_PARAMETER__ALLOW_EXTERNAL_PRD : mml:string
+        NULL=NULL
+        Y=Y
+    ST_CDM_PARAMETER__DORMANCY_STATUS__DORMANCY_STATUS : mml:string
+        DORMANT=DORMANT
+        WATCHLIST=WATCHLIST
+    ST_CDM_PARAMETER__PRODUCT__PRODUCT_CLASS : mml:string
+        AUTO=AUTO
+        UNMONITORED=UNMONITORED
+}

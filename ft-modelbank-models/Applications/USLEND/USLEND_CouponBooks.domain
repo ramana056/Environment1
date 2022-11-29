@@ -1,0 +1,58 @@
+# UTF-8
+/* Coupon Books US Lending */
+Domain USLEND_CouponBooks
+    @t24:i (module=USLEND)
+    @java:Package (value=com.temenos.t24.datamodel.uslend.uslend_couponbooks)
+namespace "http://www.temenos.com/t24/USLEND_CouponBooks"
+metamodelVersion 1.30.6
+Classes {
+    /* This table is used to store the records of the USLEND.L.COUPON.BOOKS.TEMP for a particular arrangement */
+    USLEND_COUPON_BOOKS
+        @i18n:Description (en="")
+        @t24:i (t24Name=USLEND.COUPON.BOOKS, level=F, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        COUPON_BOOKS_TEMP_ID -> byValue USLEND_CouponBooks:USLEND_COUPON_BOOKS__COUPON_BOOKS_TEMP_ID *
+            @t24:i (t24Name=COUPON.BOOKS.TEMP.ID)
+        ID -> USLEND_CouponBooks:USLEND_COUPON_BOOKS PK required
+            @i18n:Label (en="Transaction Ref")
+            @i18n:Tooltip (en="Transaction Reference")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=0.0, core=true, businessType=A, t24Name="@ID", mandatory=true)
+    }
+    USLEND_COUPON_BOOKS__COUPON_BOOKS_TEMP_ID
+    {
+        /* The @ID of USLEND.L.COUPON.BOOKS.TEMP */
+        COUPON_BOOKS_TEMP_ID : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=45, sysNumber=1.0, core=true, t24Name=COUPON.BOOKS.TEMP.ID, mandatory=false)
+    }
+    USLEND_COUPON_SCHEDULE
+        @i18n:Description (en="")
+        @t24:i (t24Name=USLEND.COUPON.SCHEDULE, level=F, type=L, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        ARRANGEMENT_ID : T24BusinessTypes:A
+            @i18n:Label (en="Arrangement Id")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=1.0, core=true, t24Name=ARRANGEMENT.ID, mandatory=false)
+        COUPON_NUMBER : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=25, sysNumber=7.0, core=true, t24Name=COUPON.NUMBER, mandatory=false)
+        ID -> USLEND_CouponBooks:USLEND_COUPON_SCHEDULE PK required
+            @i18n:Label (en="Transaction Ref")
+            @i18n:Tooltip (en="Transaction Reference")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=0.0, core=true, businessType=A, t24Name="@ID", mandatory=true)
+        LATE_PAY_CHARGE : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=25, sysNumber=5.0, core=true, t24Name=LATE.PAY.CHARGE, mandatory=false)
+        LOAN_ACCOUNT : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=15, sysNumber=2.0, core=true, t24Name=LOAN.ACCOUNT, mandatory=false)
+        PAY_SCHEDULE_DATE -> byValue USLEND_CouponBooks:USLEND_COUPON_SCHEDULE__PAY_SCHEDULE_DATE *
+            @t24:i (t24Name=PAY.SCHEDULE.DATE)
+        PRINT_REQUEST_DATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=8.0, core=true, t24Name=PRINT.REQUEST.DATE, mandatory=false)
+        TOTAL_COUPONS : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=25, sysNumber=6.0, core=true, t24Name=TOTAL.COUPONS, mandatory=false)
+    }
+    USLEND_COUPON_SCHEDULE__PAY_SCHEDULE_DATE
+    {
+        PAY_SCHEDULE_AMT : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=25, sysNumber=4.0, core=true, t24Name=PAY.SCHEDULE.AMT, mandatory=false)
+        PAY_SCHEDULE_DATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=3.0, core=true, t24Name=PAY.SCHEDULE.DATE, mandatory=false)
+    }
+}

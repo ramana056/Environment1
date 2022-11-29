@@ -1,0 +1,42 @@
+# UTF-8
+/* Lebanon Corporate Operations */
+Domain LBCORP_Foundation
+    @t24:i (module=LBCORP)
+    @java:Package (value=com.temenos.t24.datamodel.lbcorp.lbcorp_foundation)
+namespace "http://www.temenos.com/t24/LBCORP_Foundation"
+metamodelVersion 1.30.6
+Classes {
+    /* To capture the current renewal count of the guarantee.ie. number of times the advice expiry date is extended.The @ ID will be the  MD.DEAL ID. */
+    LBCORP_GTEE_RENEW_DETAILS
+        @i18n:Description (en="")
+        @t24:i (t24Name=LBCORP.GTEE.RENEW.DETAILS, level=F, type=L, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        /* Indicates the current renewal count of the guarantee.ie. number of times the advice expiry date is extended */
+        CURRENT_RENEWAL_COUNT : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=1.0, core=true, t24Name=CURRENT.RENEWAL.COUNT, mandatory=false)
+        ID -> LBCORP_Foundation:LBCORP_GTEE_RENEW_DETAILS PK required
+            @i18n:Label (en="Transaction Ref")
+            @i18n:Tooltip (en="Transaction Reference")
+            @t24:i (align=L, inputBehaviour=I, maxLength=17, sysNumber=0.0, core=true, businessType=A, t24Name="@ID", mandatory=true)
+        RESERVED_1 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=2.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_10 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=11.0, core=true, t24Name=RESERVED.10, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=3.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=4.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=5.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        RESERVED_5 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=6.0, core=true, t24Name=RESERVED.5, mandatory=false)
+        RESERVED_6 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=7.0, core=true, t24Name=RESERVED.6, mandatory=false)
+        RESERVED_7 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=8.0, core=true, t24Name=RESERVED.7, mandatory=false)
+        RESERVED_8 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=9.0, core=true, t24Name=RESERVED.8, mandatory=false)
+        RESERVED_9 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=10.0, core=true, t24Name=RESERVED.9, mandatory=false)
+    }
+}

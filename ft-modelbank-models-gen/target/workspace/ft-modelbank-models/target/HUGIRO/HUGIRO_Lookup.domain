@@ -1,0 +1,226 @@
+# UTF-8
+/* Alias Lookup */
+Domain HUGIRO_Lookup
+    @t24:i (module=HUGIRO)
+    @java:Package (value=com.temenos.t24.datamodel.hugiro.hugiro_lookup)
+namespace "http://www.temenos.com/t24/HUGIRO_Lookup"
+metamodelVersion 1.30.6
+Classes {
+    /* This application is introduced for the customer to configure the own value for Alias proxy lifecycle status, so based on these status, the generation of xml request will be triggered and sent to GIRO. */
+    HUGIRO_IP_ALIAS_STATUS
+        @i18n:Description (en="")
+        @t24:i (t24Name=HUGIRO.IP.ALIAS.STATUS, level=I, type=H, allowedFunctions="A C D E H I L P Q R S", localRefApplicationSysNo=4.0, localRefAllowed=true)
+    {
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=18.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=19.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=15.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=16.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=12.0, core=true, t24Name=CURR.NO, mandatory=false)
+        DATE_TIME -> byValue HUGIRO_Lookup:HUGIRO_IP_ALIAS_STATUS__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=17.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        /* Valid lead company ID. */
+        ID -> HUGIRO_Lookup:HUGIRO_IP_ALIAS_STATUS PK required
+            @i18n:Label (en="Transaction Ref")
+            @i18n:Tooltip (en="Transaction Reference")
+            @t24:i (align=L, inputBehaviour=I, maxLength=12, sysNumber=0.0, core=true, businessType=COM, t24Name="@ID", mandatory=true)
+        INPUTTER -> byValue HUGIRO_Lookup:HUGIRO_IP_ALIAS_STATUS__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        OVERRIDE -> byValue HUGIRO_Lookup:HUGIRO_IP_ALIAS_STATUS__OVERRIDE *
+            @t24:i (t24Name=OVERRIDE)
+        /* Dropdown field. Valid values defined in ST.PROXY.STATUS table. */
+        PENDING_DELETE -> ST_AliasManagement:ST_PROXY_STATUS
+            @t24:i (align=L, inputBehaviour=I, maxLength=36, sysNumber=2.0, core=true, businessType=A, t24Name=PENDING.DELETE, mandatory=false)
+        PENDING_DEL_FOR_REGISTRATION -> ST_AliasManagement:ST_PROXY_STATUS
+            @t24:i (align=L, inputBehaviour=I, maxLength=36, sysNumber=3.0, core=true, businessType=A, t24Name=PENDING.DEL.FOR.REGISTRATION, mandatory=false)
+        /* Dropdown field. Valid values defined in ST.PROXY.STATUS table. */
+        PENDING_REGISTRATION -> ST_AliasManagement:ST_PROXY_STATUS
+            @t24:i (align=L, inputBehaviour=I, maxLength=36, sysNumber=1.0, core=true, businessType=A, t24Name=PENDING.REGISTRATION, mandatory=false)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=11.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        RESERVED_1 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=9.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=8.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=7.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=6.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        RESERVED_5 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=5.0, core=true, t24Name=RESERVED.5, mandatory=false)
+    }
+    HUGIRO_IP_ALIAS_STATUS__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=14.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    HUGIRO_IP_ALIAS_STATUS__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=13.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    HUGIRO_IP_ALIAS_STATUS__OVERRIDE
+    {
+        OVERRIDE : T24BusinessTypes:N
+            @i18n:Label (en=Override)
+            @i18n:Tooltip (en="Overrides generated by this transaction")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=10.0, core=true, t24Name=OVERRIDE, mandatory=false)
+    }
+    /* This application is introduced to store the Alias lookup request details and lookup response details from GIRO. */
+    HUGIRO_LOOKUP
+        @i18n:Description (en="")
+        @t24:i (t24Name=HUGIRO.LOOKUP, nonStop=true, level=F, type=H, allowedFunctions="A C D E H I L P Q R S", localRefApplicationSysNo=17.0, localRefAllowed=true)
+    {
+        /* Error information. */
+        ADDITIONAL_INFORMATION : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=2.0, core=true, t24Name=ADDITIONAL.INFORMATION, mandatory=false)
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=31.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=32.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=28.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        /* Alias linked BIC code */
+        BIC : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=11, sysNumber=6.0, core=true, t24Name=BIC, mandatory=false)
+/* Business ID of Registration / Deletion request received from channel.
+. */
+        BUSINESS_ID : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=12.0, core=true, t24Name=BUSINESS.ID, mandatory=false)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=29.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+/* Time and date of when the alias was registered. Refers to the  CreationDateTime of the NASUpdateAliasInformationStatus. 
+Local time format 
+(YYYY-MM-DDThh:mm:ss.sss)
+. */
+        CREATION_DATE_TIME : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=30, sysNumber=10.0, core=true, t24Name=CREATION.DATE.TIME, mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=25.0, core=true, t24Name=CURR.NO, mandatory=false)
+        /* Code to indicate whether the customer is a private person (P) or corporate (C). */
+        CUSTOMER_CATEGORY : HUGIRO_Lookup:HUGIRO_LOOKUP__CUSTOMER_CATEGORY
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=9.0, core=true, t24Name=CUSTOMER.CATEGORY, mandatory=false)
+        /* Customer Identifier */
+        CUSTOMER_ID : T24BusinessTypes:A
+            @i18n:Label (en="Customer Id")
+            @i18n:Tooltip (en="Identifies the Customer for the transaction.")
+            @t24:i (align=L, inputBehaviour=I, maxLength=15, sysNumber=15.0, core=true, t24Name=CUSTOMER.ID, mandatory=false)
+        /* Alias linked Customer Name */
+        CUSTOMER_NAME : T24BusinessTypes:TEXT
+            @i18n:Label (en="Customer Name")
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=7.0, core=true, t24Name=CUSTOMER.NAME, mandatory=false)
+        /* Alias linked Customer Surname. */
+        CUSTOMER_SURNAME : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=8.0, core=true, t24Name=CUSTOMER.SURNAME, mandatory=false)
+        DATE_TIME -> byValue HUGIRO_Lookup:HUGIRO_LOOKUP__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=30.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        /* Alias linked IBAN number. */
+        IBAN : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=34, sysNumber=5.0, core=true, t24Name=IBAN, mandatory=false)
+        /* Unique Id, System generated. */
+        ID -> HUGIRO_Lookup:HUGIRO_LOOKUP PK required
+            @i18n:Label (en="Transaction Ref")
+            @i18n:Tooltip (en="Transaction Reference")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=0.0, core=true, businessType=A, t24Name="@ID", mandatory=true)
+        INPUTTER -> byValue HUGIRO_Lookup:HUGIRO_LOOKUP__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        OVERRIDE -> byValue HUGIRO_Lookup:HUGIRO_LOOKUP__OVERRIDE *
+            @t24:i (t24Name=OVERRIDE)
+        /* Process ID of Registration / Deletion request. */
+        PROCESS_ID : T24BusinessTypes:A required
+            @i18n:Label (en="Process Id")
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=14.0, core=true, t24Name=PROCESS.ID, mandatory=true)
+        /* Alias identifier. */
+        PROXY_IDENTIFIER : T24BusinessTypes:TEXT required
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=4.0, core=true, t24Name=PROXY.IDENTIFIER, mandatory=true)
+        /* Type of Proxy Identifier. */
+        PROXY_TYPE : T24BusinessTypes:ANY required
+            @t24:i (align=L, inputBehaviour=I, maxLength=30, sysNumber=3.0, core=true, t24Name=PROXY.TYPE, mandatory=true)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=24.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+/* Date and time mandate was initiated by the customer. 
+Local time format 
+(YYYY-MM-DDThh:mm) */
+        REGISTRATION_DATE_TIME : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=30, sysNumber=11.0, core=true, t24Name=REGISTRATION.DATE.TIME, mandatory=false)
+        RESERVED_1 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=22.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=21.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=20.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=19.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        RESERVED_5 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=18.0, core=true, t24Name=RESERVED.5, mandatory=false)
+        /* IP of request sending server. */
+        SERVER_NODE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=15, sysNumber=16.0, core=true, t24Name=SERVER.NODE, mandatory=false)
+        /* Source system where the request is generated. */
+        SOURCE : T24BusinessTypes:A
+            @i18n:Label (en=Source)
+            @t24:i (align=L, inputBehaviour=I, maxLength=20, sysNumber=13.0, core=true, t24Name=SOURCE, mandatory=false)
+        /* Shows success/error status of the received message */
+        STATUS : T24BusinessTypes:A
+            @i18n:Label (en=Status)
+            @t24:i (align=L, inputBehaviour=I, maxLength=2, sysNumber=1.0, core=true, t24Name=STATUS, mandatory=false)
+    }
+    HUGIRO_LOOKUP__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=27.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    HUGIRO_LOOKUP__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=26.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    HUGIRO_LOOKUP__OVERRIDE
+    {
+        OVERRIDE : T24BusinessTypes:N
+            @i18n:Label (en=Override)
+            @i18n:Tooltip (en="Overrides generated by this transaction")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=23.0, core=true, t24Name=OVERRIDE, mandatory=false)
+    }
+}
+Enumerations {
+    HUGIRO_LOOKUP__CUSTOMER_CATEGORY : mml:string
+        C=C
+        P=P
+}

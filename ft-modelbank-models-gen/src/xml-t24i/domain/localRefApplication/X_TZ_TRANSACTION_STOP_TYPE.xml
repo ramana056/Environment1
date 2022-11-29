@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<localReferenceApplication:LocalReferenceApplication xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:localReferenceApplication="http://www.odcgroup.com/t24/application/localRefApplication/model/LocalReferenceApplication"
+    xmlns:translationDsl="http://www.odcgroup.com/translation/TranslationDsl" forApplication="name://TZ_Config:TZ_TRANSACTION_STOP_TYPE#">
+  <localField groupName="USRETL_STOP_PAYMENT_PROD" localRefID="USRETL.STOP.PAYMENT.PROD">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="STOP.PAY.PROD"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+  <localField groupName="USRETL_STOP_PAYMENT_PROD" localRefID="USRETL.PRODUCT.EXP.PRD">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="PRODUCT.EXP.PRD"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+</localReferenceApplication:LocalReferenceApplication>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<localref:LocalRef xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:localref="http://www.odcgroup.com/t24/application/localref/model/LocalRef"
+    xmlns:translationDsl="http://www.odcgroup.com/translation/TranslationDsl" localRefID="NACUST.HOLD.GROUP" maximumChars="3" minimumChars="0"
+    mandatory="false" charType="N" defaultPossible="false" virtualTable="HOLD.GROUP"
+    description="CUSTOMER GROUP FOR NACUST">
+  <shortName xsi:type="translationDsl:LocalTranslations">
+    <translations locale="en" text="HOLD.GROUP"/>
+  </shortName>
+  <vettingTable vettingTable="123">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="123"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="222">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="222"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="456">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="456"/>
+    </remarks>
+  </vettingTable>
+</localref:LocalRef>

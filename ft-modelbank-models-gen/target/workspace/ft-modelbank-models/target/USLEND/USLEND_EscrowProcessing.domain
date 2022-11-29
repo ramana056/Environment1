@@ -1,0 +1,760 @@
+# UTF-8
+/* RESPA-Escrow Processing */
+Domain USLEND_EscrowProcessing
+    @t24:i (module=USLEND)
+    @java:Package (value=com.temenos.t24.datamodel.uslend.uslend_escrowprocessing)
+namespace "http://www.temenos.com/t24/USLEND_EscrowProcessing"
+metamodelVersion 1.30.6
+Classes {
+    ESCROW_ACH_FT_CAPTURE
+        @i18n:Description (en="")
+        @t24:i (t24Name=ESCROW.ACH.FT.CAPTURE, level=F, type=L, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        CREDIT_ACCT -> AC_AccountOpening:ACCOUNT
+            @i18n:Label (en="Account From")
+            @t24:i (align=L, inputBehaviour=I, maxLength=36, sysNumber=4.0, core=true, businessType=A, t24Name=CREDIT.ACCT, mandatory=false)
+        DEBIT_ACCT -> AC_AccountOpening:ACCOUNT
+            @i18n:Label (en="Debit Account")
+            @t24:i (align=L, inputBehaviour=I, maxLength=36, sysNumber=3.0, core=true, businessType=A, t24Name=DEBIT.ACCT, mandatory=false)
+        ERROR_MSG : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=40, sysNumber=5.0, core=true, t24Name=ERROR.MSG, mandatory=false)
+        ID -> USLEND_EscrowProcessing:ESCROW_ACH_FT_CAPTURE PK required
+            @i18n:Label (en="Transaction Ref")
+            @i18n:Tooltip (en="Transaction Reference")
+            @t24:i (align=L, inputBehaviour=I, maxLength=19, sysNumber=0.0, core=true, businessType=A, t24Name=ID, mandatory=true)
+        RESERVED_1 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=15.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_10 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=6.0, core=true, t24Name=RESERVED.10, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=14.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=13.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=12.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        RESERVED_5 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=11.0, core=true, t24Name=RESERVED.5, mandatory=false)
+        RESERVED_6 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=10.0, core=true, t24Name=RESERVED.6, mandatory=false)
+        RESERVED_7 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=9.0, core=true, t24Name=RESERVED.7, mandatory=false)
+        RESERVED_8 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=8.0, core=true, t24Name=RESERVED.8, mandatory=false)
+        RESERVED_9 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=7.0, core=true, t24Name=RESERVED.9, mandatory=false)
+        TRANS_DATE : T24BusinessTypes:D
+            @i18n:Label (en="Trans Date")
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=1.0, core=true, t24Name=TRANS.DATE, mandatory=false)
+        TRANS_STATUS : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=15, sysNumber=2.0, core=true, t24Name=TRANS.STATUS, mandatory=false)
+    }
+    NOFILE_ESCROW_ACT_HIST
+        @i18n:Description (en="")
+        @t24:i (t24Name=NOFILE.ESCROW.ACT.HIST, level=I, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        ARRANGEMENT : T24BusinessTypes:N
+            @i18n:Label (en="Arrangement Id")
+            @i18n:Tooltip (en="Unique number for the arrangement contract")
+            @t24:i (align=R, inputBehaviour=N, maxLength=15, core=false, t24Name=ARRANGEMENT, mandatory=true)
+        ENQUIRY_DATA : T24BusinessTypes:N
+            @t24:i (align=L, inputBehaviour=N, maxLength=20, core=false, t24Name=ENQUIRY.DATA, genOperation=USLEND.E.ESCROW.ACT.HIST, mandatory=false)
+    }
+    NOFILE_ESCROW_ANNUAL_ANALYSIS
+        @i18n:Description (en="")
+        @t24:i (t24Name=NOFILE.ESCROW.ANNUAL.ANALYSIS, level=I, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        ARRANGEMENT_ID : T24BusinessTypes:N
+            @i18n:Label (en="Arrangement Id")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, core=false, t24Name=ARRANGEMENT.ID, mandatory=false)
+        FINAL_ARRAY : T24BusinessTypes:N
+            @t24:i (align=L, inputBehaviour=N, maxLength=50, core=false, t24Name=FINAL.ARRAY, genOperation=USLEND.E.ESCROW.ANNUAL.ANALYSIS, mandatory=true)
+    }
+    NOFILE_ESCROW_FUTURE_ANALYSIS
+        @i18n:Description (en="")
+        @t24:i (t24Name=NOFILE.ESCROW.FUTURE.ANALYSIS, level=I, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        ARRANGEMENT_ID : T24BusinessTypes:N
+            @i18n:Label (en="Arrangement Id")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, core=false, t24Name=ARRANGEMENT.ID, mandatory=false)
+        FINAL_ARRAY : T24BusinessTypes:N
+            @t24:i (align=L, inputBehaviour=N, maxLength=50, core=false, t24Name=FINAL.ARRAY, genOperation=USLEND.E.ESCROW.FUTURE.ANALYSIS, mandatory=true)
+    }
+    NOFILE_ESCROW_PAYEE_YTD
+        @i18n:Description (en="")
+        @t24:i (t24Name=NOFILE.ESCROW.PAYEE.YTD, level=I, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        ARRANGEMENT_ID -> AA_Framework:AA_ARRANGEMENT
+            @i18n:Label (en="Arrangement Id")
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, core=false, t24Name=ARRANGEMENT.ID, genOperation=1, mandatory=false)
+        RET_ARRAY : T24BusinessTypes:N
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, core=false, t24Name=RET.ARRAY, genOperation=USLEND.E.ESCROW.DISBURSEMENT.DETS, mandatory=true)
+    }
+    NOFILE_ESCROW_SHORT_YR_ANALYSIS
+        @i18n:Description (en="")
+        @t24:i (t24Name=NOFILE.ESCROW.SHORT.YR.ANALYSIS, level=I, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        ARRANGEMENT_ID : T24BusinessTypes:N
+            @i18n:Label (en="Arrangement Id")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, core=false, t24Name=ARRANGEMENT.ID, mandatory=false)
+        DE_ADDRESS_ID : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=45, core=false, t24Name=DE.ADDRESS.ID, mandatory=false)
+        FINAL_ARRAY : T24BusinessTypes:N
+            @t24:i (align=L, inputBehaviour=N, maxLength=50, core=false, t24Name=FINAL.ARRAY, genOperation=USLEND.E.ESCROW.SHORT.YR.ANALYSIS, mandatory=true)
+    }
+    NOFILE_USLEND_CLIENT_ESCROW_STMT
+        @i18n:Description (en="")
+        @t24:i (t24Name=NOFILE.USLEND.CLIENT.ESCROW.STMT, level=I, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        ARRANGEMENT_ID : T24BusinessTypes:N
+            @i18n:Label (en="Arrangement Id")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, core=false, t24Name=ARRANGEMENT.ID, mandatory=false)
+        DE_ADDRESS_ID : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=45, core=false, t24Name=DE.ADDRESS.ID, mandatory=false)
+        FINAL_ARRAY : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=100, core=false, t24Name=FINAL.ARRAY, genOperation=USLEND.E.CLIENT.ESCROW.STMT, mandatory=true)
+    }
+    NOFILE_USLEND_ESCROW_ANALYSIS
+        @i18n:Description (en="")
+        @t24:i (t24Name=NOFILE.USLEND.ESCROW.ANALYSIS, level=I, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        ARRANGEMENT_ID : T24BusinessTypes:N
+            @i18n:Label (en="Arrangement Id")
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, core=false, t24Name=ARRANGEMENT.ID, mandatory=true)
+        FINAL_ARRAY : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=100, core=false, t24Name=FINAL.ARRAY, genOperation=USLEND.E.ESCROW.ANALYSIS, mandatory=false)
+    }
+    NOFILE_USLEND_ESCROW_ARR_TXNS
+        @i18n:Description (en="")
+        @t24:i (t24Name=NOFILE.USLEND.ESCROW.ARR.TXNS, level=I, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        ARRANGEMENT_ID : T24BusinessTypes:N
+            @i18n:Label (en="Arrangement Id")
+            @t24:i (align=R, inputBehaviour=N, maxLength=25, core=false, t24Name=ARRANGEMENT.ID, mandatory=false)
+        FINAL_ARRAY : T24BusinessTypes:N
+            @t24:i (align=L, inputBehaviour=N, maxLength=50, core=false, t24Name=FINAL.ARRAY, genOperation=USLEND.E.ESCROW.ARR.TXNS, mandatory=true)
+    }
+    NOFILE_USLEND_ESCROW_EXCEPTION_RPT
+        @i18n:Description (en="")
+        @t24:i (t24Name=NOFILE.USLEND.ESCROW.EXCEPTION.RPT, level=I, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        ARR_ID : T24BusinessTypes:N
+            @i18n:Label (en="Arrangement Id")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, core=false, t24Name=ARR.ID, mandatory=false)
+        FINAL_ARRAY : T24BusinessTypes:N
+            @t24:i (align=L, inputBehaviour=N, maxLength=1, core=false, t24Name=FINAL.ARRAY, genOperation=USLEND.E.ESCROW.EXCEPTION.RPT, mandatory=true)
+    }
+    NOFILE_USLEND_ESCROW_LIVE_ANALYSIS
+        @i18n:Description (en="")
+        @t24:i (t24Name=NOFILE.USLEND.ESCROW.LIVE.ANALYSIS, level=I, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        ARRANGEMENT_ID : T24BusinessTypes:N
+            @i18n:Label (en="Arrangement Id")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, core=false, t24Name=ARRANGEMENT.ID, mandatory=false)
+        FINAL_ARRAY : T24BusinessTypes:N
+            @t24:i (align=L, inputBehaviour=N, maxLength=50, core=false, t24Name=FINAL.ARRAY, genOperation=USLEND.E.ESCROW.LIVE.ANALYSIS, mandatory=true)
+    }
+    NOFILE_USLEND_ESCROW_OVERDUE_RPT
+        @i18n:Description (en="")
+        @t24:i (t24Name=NOFILE.USLEND.ESCROW.OVERDUE.RPT, level=I, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        ENQUIRY_DATA : T24BusinessTypes:N
+            @t24:i (align=L, inputBehaviour=N, maxLength=25, core=false, t24Name=ENQUIRY.DATA, genOperation=USLEND.E.ESCROW.OVERDUE.RPT, mandatory=true)
+    }
+    NOFILE_USLEND_ESCROW_TEST_ANALYSIS
+        @i18n:Description (en="")
+        @t24:i (t24Name=NOFILE.USLEND.ESCROW.TEST.ANALYSIS, level=I, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        ARRANGEMENT_ID : T24BusinessTypes:N
+            @i18n:Label (en="Arrangement Id")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, core=false, t24Name=ARRANGEMENT.ID, mandatory=false)
+        FINAL_ARRAY : T24BusinessTypes:N
+            @t24:i (align=L, inputBehaviour=N, maxLength=50, core=false, t24Name=FINAL.ARRAY, genOperation=USLEND.E.ESCROW.TEST.ANALYSIS, mandatory=true)
+    }
+    NOFILE_USLEND_PAYEE_PYMTS
+        @i18n:Description (en="")
+        @t24:i (t24Name=NOFILE.USLEND.PAYEE.PYMTS, level=I, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        ACCOUNT_ID : T24BusinessTypes:N
+            @i18n:Label (en="Account No")
+            @i18n:Tooltip (en="Indicates the Account Number")
+            @t24:i (align=R, inputBehaviour=N, maxLength=20, core=false, t24Name=ACCOUNT.ID, mandatory=false)
+        FINAL_ARRAY : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=100, core=false, t24Name=FINAL.ARRAY, genOperation=USLEND.E.PAYMENTS.TO.PAYEE, mandatory=true)
+    }
+    /* This table is used to store Escrow analysis projections per arrangement. This table is updated by the system either upon triggering LENDING-NEW-ARRANGEMENT or LENDING-CHANGE-ESCROW activity when ANALYSIS field in ESCROW charge property is set to YES or NXT.ANLYSIS.FQU field in PAYMENT.SCHEDULE property class is TODAY. */
+    USLEND_ESCROW_ANALYSIS_DETS
+        @i18n:Description (en="")
+        @t24:i (t24Name=USLEND.ESCROW.ANALYSIS.DETS, level=F, type=L, allowedFunctions="L P S", localRefApplicationSysNo=37.0, localRefAllowed=true)
+    {
+/* Identifies the type of analysis done either INITIAL or ACTUAL
+Validation Rules
+
+INTIAL - Analysis done upon enrolment for Escrow processing, i.e. when customer opts of escrow processing on the arrangement either on a NEW/existing arrangement.
+ACTUAL - Analysis done by the system based on NXT.ANLYSIS.FQU field in PAYMENT.SCHEDULE property class */
+        ANALYSIS_TYPE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=19, sysNumber=1.0, core=true, t24Name=ANALYSIS.TYPE, mandatory=false)
+        ANNUAL_ANALYSIS_DT : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=12, sysNumber=23.0, core=true, t24Name=ANNUAL.ANALYSIS.DT, mandatory=false)
+        /* Stores the date on which the analysis was performed */
+        CALC_DATE : T24BusinessTypes:D
+            @i18n:Label (en="Calc Date")
+            @t24:i (align=R, inputBehaviour=I, maxLength=12, sysNumber=2.0, core=true, t24Name=CALC.DATE, mandatory=false)
+        CUSHION_AMOUNT : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=35, sysNumber=10.0, core=true, t24Name=CUSHION.AMOUNT, mandatory=false)
+        DATE -> byValue USLEND_EscrowProcessing:USLEND_ESCROW_ANALYSIS_DETS__DATE *
+            @t24:i (t24Name=DATE)
+        /* The ID comprises of Arrangement ID - Date */
+        ESCROW_ANALYSIS -> USLEND_EscrowProcessing:USLEND_ESCROW_ANALYSIS_DETS PK required
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=0.0, core=true, businessType=A, t24Name=ESCROW.ANALYSIS, mandatory=true)
+        ESCROW_BALANCE : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=35, sysNumber=9.0, core=true, t24Name=ESCROW.BALANCE, mandatory=false)
+        ESCROW_PAYMENT : T24BusinessTypes:BMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=25, sysNumber=25.0, core=true, t24Name=ESCROW.PAYMENT, mandatory=false)
+/* This field contains the initial amount required from the customer once the analysis is performed. The initial amount is calculated taking into consideration the available balance in ESCROWBAL balance type.
+
+Validation rules
+
+1-16 AMT Standard amount format. */
+        INITIAL_AMOUNT : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=35, sysNumber=7.0, core=true, t24Name=INITIAL.AMOUNT, mandatory=false)
+        INIT_STMT_STATUS : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=10, sysNumber=26.0, core=true, t24Name=INIT.STMT.STATUS, mandatory=false)
+        MINIMUM_BAL : T24BusinessTypes:BMT
+            @i18n:Label (en="Minimum Bal")
+            @i18n:Tooltip (en="Indicates the minimum balance to be maintaintained")
+            @t24:i (align=R, inputBehaviour=I, maxLength=35, sysNumber=18.0, core=true, t24Name=MINIMUM.BAL, mandatory=false)
+        NEW_ESCROW_AMOUNT : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=35, sysNumber=8.0, core=true, t24Name=NEW.ESCROW.AMOUNT, mandatory=false)
+        NEW_ESCROW_AMT_EFF : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=12, sysNumber=15.0, core=true, t24Name=NEW.ESCROW.AMT.EFF, mandatory=false)
+        PREVIOUS_CALC_DATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=12, sysNumber=21.0, core=true, t24Name=PREVIOUS.CALC.DATE, mandatory=false)
+        PREV_ANNUAL_DT : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=12, sysNumber=22.0, core=true, t24Name=PREV.ANNUAL.DT, mandatory=false)
+        PREV_DATE -> byValue USLEND_EscrowProcessing:USLEND_ESCROW_ANALYSIS_DETS__PREV_DATE *
+            @t24:i (t24Name=PREV.DATE)
+        PREV_REQ_ESCROWBAL : T24BusinessTypes:BMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=25, sysNumber=24.0, core=true, t24Name=PREV.REQ.ESCROWBAL, mandatory=false)
+        PROJ_ESCROW_BAL : T24BusinessTypes:BMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=25, sysNumber=16.0, core=true, t24Name=PROJ.ESCROW.BAL, mandatory=false)
+        REQD_ESCROW_BAL : T24BusinessTypes:BMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=25, sysNumber=17.0, core=true, t24Name=REQD.ESCROW.BAL, mandatory=false)
+        /* Reserve Fields */
+        RESERVED_1 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=36.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        /* Reserve Fields */
+        RESERVED_10 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=27.0, core=true, t24Name=RESERVED.10, mandatory=false)
+        /* Reserve Fields */
+        RESERVED_2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=35.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        /* Reserve Fields */
+        RESERVED_3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=34.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        /* Reserve Fields */
+        RESERVED_4 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=33.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        /* Reserve Fields */
+        RESERVED_5 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=32.0, core=true, t24Name=RESERVED.5, mandatory=false)
+        /* Reserve Fields */
+        RESERVED_6 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=31.0, core=true, t24Name=RESERVED.6, mandatory=false)
+        /* Reserve Fields */
+        RESERVED_7 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=30.0, core=true, t24Name=RESERVED.7, mandatory=false)
+        /* Reserve Fields */
+        RESERVED_8 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=29.0, core=true, t24Name=RESERVED.8, mandatory=false)
+        /* Reserve Fields */
+        RESERVED_9 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=28.0, core=true, t24Name=RESERVED.9, mandatory=false)
+        SHORT_OVER_AMT : T24BusinessTypes:BMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=25, sysNumber=19.0, core=true, t24Name=SHORT.OVER.AMT, mandatory=false)
+        SHORT_OVER_OPTION : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=20.0, core=true, t24Name=SHORT.OVER.OPTION, mandatory=false)
+    }
+    USLEND_ESCROW_ANALYSIS_DETS__DATE
+    {
+/* This field contains the disbursement amount(amount prefixed with a hyphen '-') and escrow instalment amount for the corresponding DATE field.
+
+Validation rules
+
+Positive amount signifies escrow instalment amount
+Negative amount signifies escrow disbursement amount */
+        AMOUNT : T24BusinessTypes:BMT
+            @i18n:Label (en=Amount)
+            @i18n:Tooltip (en="Indicates the Amount")
+            @t24:i (align=R, inputBehaviour=I, maxLength=20, sysNumber=5.0, core=true, t24Name=AMOUNT, mandatory=false)
+/* Amount in this field is the summation of INITIAL.AMOUNT + AMOUNT for each given DATE.
+
+Validation rules
+
+1-16 AMT Standard amount format. */
+        BALANCE : T24BusinessTypes:BMT
+            @i18n:Label (en=Balance)
+            @i18n:Tooltip (en="Indicates the current Balance of the Product")
+            @t24:i (align=R, inputBehaviour=I, maxLength=20, sysNumber=6.0, core=true, t24Name=BALANCE, mandatory=false)
+/* Escrow payment schedule dates and Escrow disbursement dates for each payee
+
+Validation rules
+
+Standard T24 DATE format, i.e. YYYYMMDD */
+        DATE : T24BusinessTypes:D
+            @i18n:Label (en=Date)
+            @t24:i (align=R, inputBehaviour=I, maxLength=12, sysNumber=3.0, core=true, t24Name=DATE, mandatory=false)
+        PAYMENT_DESC : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=45, sysNumber=4.0, core=true, t24Name=PAYMENT.DESC, mandatory=false)
+    }
+    USLEND_ESCROW_ANALYSIS_DETS__PREV_DATE
+    {
+        PREV_AMOUNT : T24BusinessTypes:BMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=20, sysNumber=13.0, core=true, t24Name=PREV.AMOUNT, mandatory=false)
+        PREV_BALANCE : T24BusinessTypes:BMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=20, sysNumber=14.0, core=true, t24Name=PREV.BALANCE, mandatory=false)
+        PREV_DATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=12, sysNumber=11.0, core=true, t24Name=PREV.DATE, mandatory=false)
+        PREV_PAYMENT_DESC : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=45, sysNumber=12.0, core=true, t24Name=PREV.PAYMENT.DESC, mandatory=false)
+    }
+    USLEND_ESCROW_DATES
+        @i18n:Description (en="")
+        @t24:i (t24Name=USLEND.ESCROW.DATES, level=F, type=T, allowedFunctions="L P S", localRefApplicationSysNo=4.0, localRefAllowed=true)
+    {
+        ANNUAL_ANALYSIS_DATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=N, maxLength=12, sysNumber=3.0, core=true, t24Name=ANNUAL.ANALYSIS.DATE, mandatory=false)
+        ARRANGEMENT_ID : T24BusinessTypes:A
+            @i18n:Label (en="Arrangement Id")
+            @t24:i (align=L, inputBehaviour=N, maxLength=19, sysNumber=1.0, core=true, t24Name=ARRANGEMENT.ID, mandatory=true)
+        TEST_ANALYSIS_DATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=N, maxLength=12, sysNumber=2.0, core=true, t24Name=TEST.ANALYSIS.DATE, mandatory=false)
+    }
+    USLEND_ESCROW_DISB_DETS
+        @i18n:Description (en="")
+        @t24:i (t24Name=USLEND.ESCROW.DISB.DETS, level=F, type=L, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        DISB_DATE -> byValue USLEND_EscrowProcessing:USLEND_ESCROW_DISB_DETS__DISB_DATE *
+            @t24:i (t24Name=DISB.DATE)
+        ID -> USLEND_EscrowProcessing:USLEND_ESCROW_DISB_DETS PK required
+            @i18n:Label (en="Transaction Ref")
+            @i18n:Tooltip (en="Transaction Reference")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=0.0, core=true, businessType=A, t24Name=ID, mandatory=true)
+    }
+    USLEND_ESCROW_DISB_DETS_HIST
+        @i18n:Description (en="")
+        @t24:i (t24Name=USLEND.ESCROW.DISB.DETS.HIST, level=F, type=L, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        DISB_DATE -> byValue USLEND_EscrowProcessing:USLEND_ESCROW_DISB_DETS_HIST__DISB_DATE *
+            @t24:i (t24Name=DISB.DATE)
+        ID -> USLEND_EscrowProcessing:USLEND_ESCROW_DISB_DETS_HIST PK required
+            @i18n:Label (en="Transaction Ref")
+            @i18n:Tooltip (en="Transaction Reference")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=0.0, core=true, businessType=A, t24Name=ID, mandatory=true)
+    }
+    USLEND_ESCROW_DISB_DETS_HIST__DISB_DATE
+    {
+        AAA_ID : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=25, sysNumber=11.0, core=true, t24Name=AAA.ID, mandatory=false)
+        CUSTOMER_NAME : T24BusinessTypes:A
+            @i18n:Label (en="Customer Name")
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=5.0, core=true, t24Name=CUSTOMER.NAME, mandatory=false)
+        CUSTOMER_NO : T24BusinessTypes:A
+            @i18n:Label (en="Customer No")
+            @i18n:Tooltip (en="Identifies the Customer for the transaction.")
+            @t24:i (align=L, inputBehaviour=I, maxLength=20, sysNumber=4.0, core=true, t24Name=CUSTOMER.NO, mandatory=false)
+        DISB_AMT : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=35, sysNumber=8.0, core=true, t24Name=DISB.AMT, mandatory=false)
+        DISB_DATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=12, sysNumber=1.0, core=true, t24Name=DISB.DATE, mandatory=false)
+        ESCROW_BAL : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=35, sysNumber=9.0, core=true, t24Name=ESCROW.BAL, mandatory=false)
+        ESCROW_PAYEE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=20, sysNumber=6.0, core=true, t24Name=ESCROW.PAYEE, mandatory=false)
+        ESCROW_PAYEE_ACCOUNT : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=20, sysNumber=7.0, core=true, t24Name=ESCROW.PAYEE.ACCOUNT, mandatory=false)
+        INITIATION_TYPE : T24BusinessTypes:A
+            @i18n:Label (en=Initiation)
+            @i18n:Tooltip (en="Valid options are AUTO or MANUAL")
+            @t24:i (align=L, inputBehaviour=I, maxLength=15, sysNumber=3.0, core=true, t24Name=INITIATION.TYPE, mandatory=false)
+        LOAN_NO : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=20, sysNumber=2.0, core=true, t24Name=LOAN.NO, mandatory=false)
+        REASON : T24BusinessTypes:A
+            @i18n:Label (en=Reason)
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=10.0, core=true, t24Name=REASON, mandatory=false)
+    }
+    USLEND_ESCROW_DISB_DETS__DISB_DATE
+    {
+        AAA_ID : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=25, sysNumber=11.0, core=true, t24Name=AAA.ID, mandatory=false)
+        CUSTOMER_NAME : T24BusinessTypes:A
+            @i18n:Label (en="Customer Name")
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=5.0, core=true, t24Name=CUSTOMER.NAME, mandatory=false)
+        CUSTOMER_NO : T24BusinessTypes:A
+            @i18n:Label (en="Customer No")
+            @i18n:Tooltip (en="Identifies the Customer for the transaction.")
+            @t24:i (align=L, inputBehaviour=I, maxLength=20, sysNumber=4.0, core=true, t24Name=CUSTOMER.NO, mandatory=false)
+        DISB_AMT : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=35, sysNumber=8.0, core=true, t24Name=DISB.AMT, mandatory=false)
+        DISB_DATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=12, sysNumber=1.0, core=true, t24Name=DISB.DATE, mandatory=false)
+        ESCROW_BAL : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=35, sysNumber=9.0, core=true, t24Name=ESCROW.BAL, mandatory=false)
+        ESCROW_PAYEE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=20, sysNumber=6.0, core=true, t24Name=ESCROW.PAYEE, mandatory=false)
+        ESCROW_PAYEE_ACCOUNT : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=20, sysNumber=7.0, core=true, t24Name=ESCROW.PAYEE.ACCOUNT, mandatory=false)
+        INITIATION_TYPE : T24BusinessTypes:A
+            @i18n:Label (en=Initiation)
+            @i18n:Tooltip (en="Valid options are AUTO or MANUAL")
+            @t24:i (align=L, inputBehaviour=I, maxLength=15, sysNumber=3.0, core=true, t24Name=INITIATION.TYPE, mandatory=false)
+        LOAN_NO : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=20, sysNumber=2.0, core=true, t24Name=LOAN.NO, mandatory=false)
+        REASON : T24BusinessTypes:A
+            @i18n:Label (en=Reason)
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=10.0, core=true, t24Name=REASON, mandatory=false)
+    }
+    USLEND_ESCROW_OVERAGE_EXCEP
+        @i18n:Description (en="")
+        @t24:i (t24Name=USLEND.ESCROW.OVERAGE.EXCEP, level=F, type=L, allowedFunctions="L P S", localRefApplicationSysNo=14.0, localRefAllowed=true)
+    {
+        ACCOUNT_ID : T24BusinessTypes:N
+            @i18n:Label (en="Account No")
+            @i18n:Tooltip (en="Indicates the Account Number")
+            @t24:i (align=R, inputBehaviour=I, maxLength=19, sysNumber=1.0, core=true, t24Name=ACCOUNT.ID, mandatory=false)
+        OVERAGE_EXCEPTION -> USLEND_EscrowProcessing:USLEND_ESCROW_OVERAGE_EXCEP PK required
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=0.0, core=true, businessType=A, t24Name=OVERAGE.EXCEPTION, mandatory=true)
+        POSTING_RESTRICT : T24BusinessTypes:N
+            @i18n:Label (en="Posting Restriction")
+            @t24:i (align=R, inputBehaviour=I, maxLength=3, sysNumber=2.0, core=true, t24Name=POSTING.RESTRICT, mandatory=false)
+        RESERVED_1 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=13.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_10 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=4.0, core=true, t24Name=RESERVED.10, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=12.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=11.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=10.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        RESERVED_5 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=9.0, core=true, t24Name=RESERVED.5, mandatory=false)
+        RESERVED_6 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=8.0, core=true, t24Name=RESERVED.6, mandatory=false)
+        RESERVED_7 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=7.0, core=true, t24Name=RESERVED.7, mandatory=false)
+        RESERVED_8 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=6.0, core=true, t24Name=RESERVED.8, mandatory=false)
+        RESERVED_9 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=5.0, core=true, t24Name=RESERVED.9, mandatory=false)
+        SURPLUS_AMOUNT : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=20, sysNumber=3.0, core=true, t24Name=SURPLUS.AMOUNT, mandatory=false)
+    }
+    /* This table is used to define the parameter records for US Lending features such as ESCROW processing. */
+    USLEND_PARAMETER
+        @i18n:Description (en="")
+        @t24:i (t24Name=USLEND.PARAMETER, level=I, type=H, allowedFunctions="A C D E H I L P Q R S", localRefApplicationSysNo=32.0, localRefAllowed=true)
+    {
+        ADHOC_ESCROW_PROP -> byValue USLEND_EscrowProcessing:USLEND_PARAMETER__ADHOC_ESCROW_PROP *
+            @t24:i (t24Name=ADHOC.ESCROW.PROP)
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=40.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=41.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=37.0, core=true, t24Name=AUTHORISER, mandatory=false)
+/* Should be a valid T24 company code
+Validation Rules
+
+There should be a record in COMPANY table */
+        COMPANY_CODE -> USLEND_EscrowProcessing:USLEND_PARAMETER PK required
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=0.0, core=true, businessType=A, t24Name=COMPANY.CODE, mandatory=true)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=38.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURRENCY -> byValue USLEND_EscrowProcessing:USLEND_PARAMETER__CURRENCY *
+            @t24:i (t24Name=CURRENCY)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=34.0, core=true, t24Name=CURR.NO, mandatory=false)
+        DATE_TIME -> byValue USLEND_EscrowProcessing:USLEND_PARAMETER__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=39.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        DESCRIPTION -> byValue USLEND_EscrowProcessing:USLEND_PARAMETER__DESCRIPTION *
+            @t24:i (t24Name=DESCRIPTION)
+        DISBURSE_PROPERTIES -> byValue USLEND_EscrowProcessing:USLEND_PARAMETER__DISBURSE_PROPERTIES *
+            @t24:i (t24Name=DISBURSE.PROPERTIES)
+        ESCROW_BILL_TYPE -> byValue USLEND_EscrowProcessing:USLEND_PARAMETER__ESCROW_BILL_TYPE *
+            @t24:i (t24Name=ESCROW.BILL.TYPE)
+        ESCROW_OVER_PROP -> AA_ProductFramework:AA_PROPERTY required
+            @t24:i (align=L, inputBehaviour=I, maxLength=30, sysNumber=16.0, core=true, businessType=A, t24Name=ESCROW.OVER.PROP, mandatory=true)
+        ESCROW_SHORT_PROP -> AA_ProductFramework:AA_PROPERTY required
+            @t24:i (align=L, inputBehaviour=I, maxLength=30, sysNumber=15.0, core=true, businessType=A, t24Name=ESCROW.SHORT.PROP, mandatory=true)
+        INPUTTER -> byValue USLEND_EscrowProcessing:USLEND_PARAMETER__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        OUTPUT_FORMAT : USLEND_EscrowProcessing:USLEND_PARAMETER__OUTPUT_FORMAT required
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=10.0, core=true, t24Name=OUTPUT.FORMAT, mandatory=true)
+        OVERDRAW : USLEND_EscrowProcessing:USLEND_PARAMETER__OVERDRAW required
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=14.0, core=true, t24Name=OVERDRAW, mandatory=true)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=33.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        /* Reserve Fields */
+        RESERVED_10 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=22.0, core=true, t24Name=RESERVED.10, mandatory=false)
+        /* Reserve Fields */
+        RESERVED_11 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=21.0, core=true, t24Name=RESERVED.11, mandatory=false)
+        /* Reserve Fields */
+        RESERVED_12 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=20.0, core=true, t24Name=RESERVED.12, mandatory=false)
+        /* Reserve Fields */
+        RESERVED_13 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=19.0, core=true, t24Name=RESERVED.13, mandatory=false)
+        /* Reserve Fields */
+        RESERVED_14 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=18.0, core=true, t24Name=RESERVED.14, mandatory=false)
+        /* Reserve Fields */
+        RESERVED_15 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=17.0, core=true, t24Name=RESERVED.15, mandatory=false)
+        /* Reserve Fields */
+        RESERVED_2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=30.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        /* Reserve Fields */
+        RESERVED_3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=29.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        /* Reserve Fields */
+        RESERVED_4 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=28.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        /* Reserve Fields */
+        RESERVED_5 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=27.0, core=true, t24Name=RESERVED.5, mandatory=false)
+        /* Reserve Fields */
+        RESERVED_6 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=26.0, core=true, t24Name=RESERVED.6, mandatory=false)
+        /* Reserve Fields */
+        RESERVED_7 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=25.0, core=true, t24Name=RESERVED.7, mandatory=false)
+        /* Reserve Fields */
+        RESERVED_8 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=24.0, core=true, t24Name=RESERVED.8, mandatory=false)
+        /* Reserve Fields */
+        RESERVED_9 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=23.0, core=true, t24Name=RESERVED.9, mandatory=false)
+    }
+    USLEND_PARAMETER__ADHOC_ESCROW_PROP
+    {
+        ADHOC_ESCROW_PROP -> AA_ProductFramework:AA_PROPERTY
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=13.0, core=true, businessType=A, t24Name=ADHOC.ESCROW.PROP, mandatory=false)
+    }
+    USLEND_PARAMETER__CURRENCY
+    {
+/* Currency of the Lending contract according to which escrow processing actions are determined. This field is associated with SURP.THRESHOLD.AMT, SURPLUS.OPTION, SHORTAGE.OPTION and TEST.ANALYSIS.PERIOD
+
+Validation rules
+
+Must be a valid record in CURRENCY */
+        CURRENCY : T24BusinessTypes:CCY
+            @i18n:Label (en=Ccy)
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=1.0, core=true, t24Name=CURRENCY, mandatory=false)
+        PAYMENT_EFF_PERIOD : T24BusinessTypes:BMT required
+            @t24:i (align=R, inputBehaviour=I, maxLength=2, sysNumber=6.0, core=true, t24Name=PAYMENT.EFF.PERIOD, mandatory=true)
+        /* Reserve Fields */
+        RESERVED_23 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=9.0, core=true, t24Name=RESERVED.23, mandatory=false)
+/* Determines the action to be performed by the system when Escrow balance is short of cushion amount requried for disbursement to escrow payee(s). This field is associated with CURRENCY, SURP.THRESHOLD.AMT, SURPLUS.OPTION and TEST.ANALYSIS.PERIOD
+
+Validation rules
+
+Ignore shortage             - Do nothing, ignore the shortage.
+Request payment in 30 days  - The shortage escrow amount will be included as part of the arrangement payment schedule to issue a bill for the customer to make the payment.
+Add to Escrow               - The shortage  escrow amount in ESCROWBAL balance type of the loan contract will be with the upcoming escrow instalments */
+        SHORTAGE_OPTION : USLEND_EscrowProcessing:USLEND_PARAMETER__CURRENCY__SHORTAGE_OPTION required
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=4.0, core=true, t24Name=SHORTAGE.OPTION, mandatory=true)
+        SHORT_BEYOND_THRES : USLEND_EscrowProcessing:USLEND_PARAMETER__CURRENCY__SHORT_BEYOND_THRES required
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=8.0, core=true, t24Name=SHORT.BEYOND.THRES, mandatory=true)
+        SHORT_THRESHOLD_AMT : T24BusinessTypes:AMT required
+            @t24:i (align=R, inputBehaviour=I, maxLength=16, sysNumber=7.0, core=true, t24Name=SHORT.THRESHOLD.AMT, mandatory=true)
+/* Determines the action to be performed by the system when Escrow balance breaches the threshold amount mentioned in SURP.THRESHOLD.AMT and CURRENCY. Input is this field is required only if Escrow processing feature is used. This field is associated with CURRENCY, SURP.THRESHOLD.AMT, SHORTAGE.OPTION and TEST.ANALYSIS.PERIOD
+
+Validation rules
+
+Reduce Escrow payment - The excess escrow balance beyond SURP.THRESHOLD.AMT held in ESCROWBAL balance type of the loan contract will be adjusted along with the future escrow instalments
+Refund to customer    - The excess escrow balance beyond SURP.THRESHOLD.AMT held in ESCROWBAL balance type of the loan contract will be refunded/credited to the customer account defined in SETTLEMENT property class of the arrangement */
+        SURPLUS_OPTION : USLEND_EscrowProcessing:USLEND_PARAMETER__CURRENCY__SURPLUS_OPTION required
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=3.0, core=true, t24Name=SURPLUS.OPTION, mandatory=true)
+/* Escrow threshold amount for an arrangement contract, used to determine the action to be performed by the system when Escrow balance breaches the threshold amount for the given CURRENCY. Input is this field is required only if Escrow processing feature is used. This field is associated with CURRENCY, SURPLUS.OPTION, SHORTAGE.OPTION and TEST.ANALYSIS.PERIOD
+
+Validation rules
+
+1-16 type AMT (standard amount format) characters plus a decimal point. */
+        SURP_THRESHOLD_AMT : T24BusinessTypes:AMT required
+            @t24:i (align=R, inputBehaviour=I, maxLength=16, sysNumber=2.0, core=true, t24Name=SURP.THRESHOLD.AMT, mandatory=true)
+/* Stores the period before the next scheduled analysis is being performed. This field is associated with CURRENCY, SURP.THRESHOLD.AMT, SURPLUS.OPTION and SHORTAGE.OPTION
+
+Validation rules
+
+Should be of a valid PERIOD type. For example, 30D where D - Days or 1M where M - Month etc. */
+        TEST_ANALYSIS_PERIOD : T24BusinessTypes:PERIOD required
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=5.0, core=true, t24Name=TEST.ANALYSIS.PERIOD, mandatory=true)
+    }
+    USLEND_PARAMETER__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=36.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    USLEND_PARAMETER__DESCRIPTION
+    {
+        DESCRIPTION : T24BusinessTypes:A
+            @i18n:Label (en=Description)
+            @i18n:Tooltip (en=Description)
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, multiLanguage=true, sysNumber=31.0, core=true, t24Name=DESCRIPTION, mandatory=false)
+    }
+    USLEND_PARAMETER__DISBURSE_PROPERTIES
+    {
+        DISBURSE_PROPERTIES -> AA_ProductFramework:AA_PROPERTY required
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=11.0, core=true, businessType=A, t24Name=DISBURSE.PROPERTIES, mandatory=true)
+    }
+    USLEND_PARAMETER__ESCROW_BILL_TYPE
+    {
+        ESCROW_BILL_TYPE -> AA_PaymentSchedule:AA_BILL_TYPE
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=12.0, core=true, businessType=A, t24Name=ESCROW.BILL.TYPE, mandatory=false)
+    }
+    USLEND_PARAMETER__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=35.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    USLEND_PRINT_FORMAT
+        @i18n:Description (en="")
+        @t24:i (t24Name=USLEND.PRINT.FORMAT, level=I, type=H, allowedFunctions="A C D E H I L P Q R S", localRefApplicationSysNo=22.0, localRefAllowed=true)
+    {
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=30.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=31.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=27.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=28.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=24.0, core=true, t24Name=CURR.NO, mandatory=false)
+        DATE_TIME -> byValue USLEND_EscrowProcessing:USLEND_PRINT_FORMAT__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=29.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        DESCRIPTION -> byValue USLEND_EscrowProcessing:USLEND_PRINT_FORMAT__DESCRIPTION *
+            @t24:i (t24Name=DESCRIPTION)
+        ID -> USLEND_EscrowProcessing:USLEND_PRINT_FORMAT PK required
+            @i18n:Label (en="Transaction Ref")
+            @i18n:Tooltip (en="Transaction Reference")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=0.0, core=true, businessType=A, t24Name="@ID", mandatory=true)
+        INPUTTER -> byValue USLEND_EscrowProcessing:USLEND_PRINT_FORMAT__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        MESSAGE_TEXT : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=120, sysNumber=2.0, core=true, t24Name=MESSAGE.TEXT, mandatory=false)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=23.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        RESERVED_10 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=13.0, core=true, t24Name=RESERVED.10, mandatory=false)
+        RESERVED_11 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=12.0, core=true, t24Name=RESERVED.11, mandatory=false)
+        RESERVED_12 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=11.0, core=true, t24Name=RESERVED.12, mandatory=false)
+        RESERVED_13 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=10.0, core=true, t24Name=RESERVED.13, mandatory=false)
+        RESERVED_14 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=9.0, core=true, t24Name=RESERVED.14, mandatory=false)
+        RESERVED_15 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=8.0, core=true, t24Name=RESERVED.15, mandatory=false)
+        RESERVED_16 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=7.0, core=true, t24Name=RESERVED.16, mandatory=false)
+        RESERVED_17 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=6.0, core=true, t24Name=RESERVED.17, mandatory=false)
+        RESERVED_18 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=5.0, core=true, t24Name=RESERVED.18, mandatory=false)
+        RESERVED_19 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=4.0, core=true, t24Name=RESERVED.19, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=21.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_20 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=3.0, core=true, t24Name=RESERVED.20, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=20.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=19.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        RESERVED_5 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=18.0, core=true, t24Name=RESERVED.5, mandatory=false)
+        RESERVED_6 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=17.0, core=true, t24Name=RESERVED.6, mandatory=false)
+        RESERVED_7 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=16.0, core=true, t24Name=RESERVED.7, mandatory=false)
+        RESERVED_8 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=15.0, core=true, t24Name=RESERVED.8, mandatory=false)
+        RESERVED_9 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=14.0, core=true, t24Name=RESERVED.9, mandatory=false)
+    }
+    USLEND_PRINT_FORMAT__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=26.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    USLEND_PRINT_FORMAT__DESCRIPTION
+    {
+        DESCRIPTION : T24BusinessTypes:A
+            @i18n:Label (en=Description)
+            @i18n:Tooltip (en=Description)
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, multiLanguage=true, sysNumber=1.0, core=true, t24Name=DESCRIPTION, mandatory=false)
+    }
+    USLEND_PRINT_FORMAT__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=25.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+}
+Enumerations {
+    USLEND_PARAMETER__CURRENCY__SHORTAGE_OPTION : mml:string
+        IGNORE_SHORTAGE=IGNORE.SHORTAGE
+        INCREASE_ESCROW_PAYMENT=INCREASE.ESCROW.PAYMENT
+    USLEND_PARAMETER__CURRENCY__SHORT_BEYOND_THRES : mml:string
+        IGNORE_SHORTAGE=IGNORE.SHORTAGE
+        INCREASE_ESCROW_PAYMENT=INCREASE.ESCROW.PAYMENT
+        REQ_PYMT_IN_30DAYS=REQ.PYMT.IN.30DAYS
+        UNPAID_ADD_TO_ESCROW=UNPAID.ADD.TO.ESCROW
+    USLEND_PARAMETER__CURRENCY__SURPLUS_OPTION : mml:string
+        REDUCE_ESCROW_PYMT=REDUCE.ESCROW.PYMT
+        REFUND_TO_CUSTOMER=REFUND.TO.CUSTOMER
+    USLEND_PARAMETER__OUTPUT_FORMAT : mml:string
+        JRXML=JRXML
+        T24_DELIVERY=T24.DELIVERY
+        XML=XML
+    USLEND_PARAMETER__OVERDRAW : mml:string
+        NO=NO
+        YES=YES
+}

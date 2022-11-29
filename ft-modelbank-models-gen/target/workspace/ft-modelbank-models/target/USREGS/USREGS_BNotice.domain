@@ -1,0 +1,23 @@
+# UTF-8
+/* BNotice US Regulation */
+Domain USREGS_BNotice
+    @t24:i (module=USREGS)
+    @java:Package (value=com.temenos.t24.datamodel.usregs.usregs_bnotice)
+namespace "http://www.temenos.com/t24/USREGS_BNotice"
+metamodelVersion 1.30.6
+Classes {
+    NOFILE_CUS_LIV_BEN_EXPIRATION
+        @i18n:Description (en="")
+        @t24:i (t24Name=NOFILE.CUS.LIV.BEN.EXPIRATION, level=I, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        RET_VAR : T24BusinessTypes:N
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, core=false, t24Name=RET.VAR, genOperation=USREGS.W8.BEN.EXPIRATION, mandatory=true)
+    }
+    NOFILE_CUS_LIV_BEN_EXPIRED
+        @i18n:Description (en="")
+        @t24:i (t24Name=NOFILE.CUS.LIV.BEN.EXPIRED, level=I, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        RET_VAR : T24BusinessTypes:N
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, core=false, t24Name=RET.VAR, genOperation=USREGS.W8.BEN.EXPIRED, mandatory=true)
+    }
+}

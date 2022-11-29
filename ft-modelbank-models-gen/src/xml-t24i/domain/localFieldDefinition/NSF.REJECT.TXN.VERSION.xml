@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<localref:LocalRef xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:localref="http://www.odcgroup.com/t24/application/localref/model/LocalRef"
+    xmlns:translationDsl="http://www.odcgroup.com/translation/TranslationDsl" localRefID="NSF.REJECT.TXN.VERSION" maximumChars="54" minimumChars="0"
+    mandatory="false" defaultPossible="false" applicationEnrich="PRINT.ONLY" applicationVET="name://EB_Versions:VERSION#"
+    description="Version for posting NSF Returns">
+  <shortName xsi:type="translationDsl:LocalTranslations">
+    <translations locale="en" text="NSF.REJ.VERSION"/>
+  </shortName>
+</localref:LocalRef>

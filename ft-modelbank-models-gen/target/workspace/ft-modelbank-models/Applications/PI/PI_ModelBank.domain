@@ -1,0 +1,212 @@
+# UTF-8
+/* Model Config for Payment Order */
+Domain PI_ModelBank
+    @t24:i (module=PI)
+    @java:Package (value=com.temenos.t24.datamodel.pi.pi_modelbank)
+namespace "http://www.temenos.com/t24/PI_ModelBank"
+metamodelVersion 1.30.6
+Classes {
+    NOFILE_PAYMENT_ORDER_XML
+        @i18n:Description (en="")
+        @t24:i (t24Name=NOFILE.PAYMENT.ORDER.XML, level=I, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        DUMMY : T24BusinessTypes:N
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, core=false, t24Name=DUMMY, genOperation=PI.NOFILE.GET.ORIGINAL.MSG.CONTENT, mandatory=true)
+        ORIGINAL_MSG_CONTENT -> byValue PI_ModelBank:NOFILE_PAYMENT_ORDER_XML__ORIGINAL_MSG_CONTENT *
+            @t24:i (t24Name=ORIGINAL.MSG.CONTENT)
+    }
+    NOFILE_PAYMENT_ORDER_XML__ORIGINAL_MSG_CONTENT
+    {
+        ORIGINAL_MSG_CONTENT : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=1024, core=false, t24Name=ORIGINAL.MSG.CONTENT, mandatory=false)
+    }
+    NOFILE_PAY_ORDER_BULK_ADD
+        @i18n:Description (en="")
+        @t24:i (t24Name=NOFILE.PAY.ORDER.BULK.ADD, level=I, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        ACCT_WITH_BANK_BIC : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, core=false, t24Name=ACCT.WITH.BANK.BIC, mandatory=false)
+        ACCT_WITH_BANK_CLEARING_CODE : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, core=false, t24Name=ACCT.WITH.BANK.CLEARING.CODE, mandatory=false)
+        BENEFICIARY_ACCOUNT_NO : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=34, core=false, t24Name=BENEFICIARY.ACCOUNT.NO, mandatory=false)
+        BENEFICIARY_BIC : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, core=false, t24Name=BENEFICIARY.BIC, mandatory=false)
+        BENEFICIARY_IBAN : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, core=false, t24Name=BENEFICIARY.IBAN, mandatory=false)
+        BENEFICIARY_NAME : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=70, core=false, t24Name=BENEFICIARY.NAME, mandatory=false)
+        BULK_REFERENCE : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=125, core=false, t24Name=BULK.REFERENCE, mandatory=false)
+        CHARGE_BEARER : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, core=false, t24Name=CHARGE.BEARER, mandatory=false)
+        CLEARING_CHANNEL : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, core=false, t24Name=CLEARING.CHANNEL, mandatory=false)
+        CREDIT_ACCOUNT : T24BusinessTypes:N
+            @i18n:Label (en="Credit Acct")
+            @t24:i (align=R, inputBehaviour=N, maxLength=19, core=false, t24Name=CREDIT.ACCOUNT, mandatory=false)
+        CREDIT_ACCOUNT_IBAN : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, core=false, t24Name=CREDIT.ACCOUNT.IBAN, mandatory=false)
+        CREDIT_PL : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, core=false, t24Name=CREDIT.PL, mandatory=false)
+        CREDIT_VALUE_DATE : T24BusinessTypes:N
+            @i18n:Label (en="Credit Value Date")
+            @t24:i (align=R, inputBehaviour=N, maxLength=11, core=false, t24Name=CREDIT.VALUE.DATE, mandatory=false)
+        CURRENT_STATE : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=65, core=false, t24Name=CURRENT.STATE, mandatory=false)
+        DEBIT_ACCOUNT : T24BusinessTypes:N
+            @i18n:Label (en="Debit account")
+            @i18n:Tooltip (en="Indicates the account to be debited ")
+            @t24:i (align=R, inputBehaviour=N, maxLength=34, core=false, t24Name=DEBIT.ACCOUNT, mandatory=false)
+        DEBIT_ACCOUNT_IBAN : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, core=false, t24Name=DEBIT.ACCOUNT.IBAN, mandatory=false)
+        DEBIT_PL : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, core=false, t24Name=DEBIT.PL, mandatory=false)
+        DEBIT_VALUE_DATE : T24BusinessTypes:N
+            @i18n:Label (en="Debit Value Date")
+            @t24:i (align=R, inputBehaviour=N, maxLength=11, core=false, t24Name=DEBIT.VALUE.DATE, mandatory=false)
+        END_TO_END_REFERENCE : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, core=false, t24Name=END.TO.END.REFERENCE, mandatory=false)
+        ID : T24BusinessTypes:N
+            @i18n:Label (en="Transaction Ref")
+            @i18n:Tooltip (en="Transaction Reference")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, core=false, t24Name="@ID", mandatory=false)
+        INIT_OTHER_ID : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, core=false, t24Name=INIT.OTHER.ID, mandatory=false)
+        ORDERING_COMPANY : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=11, core=false, t24Name=ORDERING.COMPANY, mandatory=false)
+        ORDERING_CUSTOMER : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, core=false, t24Name=ORDERING.CUSTOMER, mandatory=false)
+        ORDERING_CUST_NAME : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=140, core=false, t24Name=ORDERING.CUST.NAME, mandatory=false)
+        ORDERING_REFERENCE : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=18, core=false, t24Name=ORDERING.REFERENCE, mandatory=false)
+        ORDER_EXECUTION_DATE_TIME : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=65, core=false, t24Name=ORDER.EXECUTION.DATE.TIME, mandatory=false)
+        ORDER_INITIATION_TYPE : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, core=false, t24Name=ORDER.INITIATION.TYPE, mandatory=false)
+        OUT_ARRAY : T24BusinessTypes:N
+            @t24:i (align=L, inputBehaviour=N, maxLength=150, core=false, t24Name=OUT.ARRAY, genOperation=E.NOFILE.PAY.ORDER.BULK.ADD, mandatory=true)
+        PAYMENT_AMOUNT : T24BusinessTypes:N
+            @i18n:Label (en="Outstanding Amt")
+            @t24:i (align=R, inputBehaviour=N, maxLength=19, core=false, t24Name=PAYMENT.AMOUNT, mandatory=false)
+        PAYMENT_CURRENCY : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=3, core=false, t24Name=PAYMENT.CURRENCY, mandatory=false)
+        PAYMENT_ORDER_PRODUCT : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, core=false, t24Name=PAYMENT.ORDER.PRODUCT, mandatory=false)
+        PAYMENT_SYSTEM : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, core=false, t24Name=PAYMENT.SYSTEM, mandatory=false)
+        PAYMENT_SYSTEM_ID : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, core=false, t24Name=PAYMENT.SYSTEM.ID, mandatory=false)
+        STATUS_REASON_CODE : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, core=false, t24Name=STATUS.REASON.CODE, mandatory=false)
+    }
+    NOFILE_PAY_ORDER_BULK_AUTH
+        @i18n:Description (en="")
+        @t24:i (t24Name=NOFILE.PAY.ORDER.BULK.AUTH, level=I, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        ACCT_WITH_BANK_BIC : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, core=false, t24Name=ACCT.WITH.BANK.BIC, mandatory=false)
+        ACCT_WITH_BANK_CLEARING_CODE : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, core=false, t24Name=ACCT.WITH.BANK.CLEARING.CODE, mandatory=false)
+        BENEFICIARY_ACCOUNT_NO : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=34, core=false, t24Name=BENEFICIARY.ACCOUNT.NO, mandatory=false)
+        BENEFICIARY_BIC : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, core=false, t24Name=BENEFICIARY.BIC, mandatory=false)
+        BENEFICIARY_IBAN : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, core=false, t24Name=BENEFICIARY.IBAN, mandatory=false)
+        BENEFICIARY_NAME : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=70, core=false, t24Name=BENEFICIARY.NAME, mandatory=false)
+        BULK_REFERENCE : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=125, core=false, t24Name=BULK.REFERENCE, mandatory=false)
+        CHARGE_BEARER : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, core=false, t24Name=CHARGE.BEARER, mandatory=false)
+        CLEARING_CHANNEL : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, core=false, t24Name=CLEARING.CHANNEL, mandatory=false)
+        CREDIT_ACCOUNT : T24BusinessTypes:N
+            @i18n:Label (en="Credit Acct")
+            @t24:i (align=R, inputBehaviour=N, maxLength=19, core=false, t24Name=CREDIT.ACCOUNT, mandatory=false)
+        CREDIT_ACCOUNT_IBAN : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, core=false, t24Name=CREDIT.ACCOUNT.IBAN, mandatory=false)
+        CREDIT_PL : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, core=false, t24Name=CREDIT.PL, mandatory=false)
+        CREDIT_VALUE_DATE : T24BusinessTypes:N
+            @i18n:Label (en="Credit Value Date")
+            @t24:i (align=R, inputBehaviour=N, maxLength=11, core=false, t24Name=CREDIT.VALUE.DATE, mandatory=false)
+        CURRENT_STATE : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=65, core=false, t24Name=CURRENT.STATE, mandatory=false)
+        DEBIT_ACCOUNT : T24BusinessTypes:N
+            @i18n:Label (en="Debit account")
+            @i18n:Tooltip (en="Indicates the account to be debited ")
+            @t24:i (align=R, inputBehaviour=N, maxLength=34, core=false, t24Name=DEBIT.ACCOUNT, mandatory=false)
+        DEBIT_ACCOUNT_IBAN : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, core=false, t24Name=DEBIT.ACCOUNT.IBAN, mandatory=false)
+        DEBIT_PL : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, core=false, t24Name=DEBIT.PL, mandatory=false)
+        DEBIT_VALUE_DATE : T24BusinessTypes:N
+            @i18n:Label (en="Debit Value Date")
+            @t24:i (align=R, inputBehaviour=N, maxLength=11, core=false, t24Name=DEBIT.VALUE.DATE, mandatory=false)
+        END_TO_END_REFERENCE : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, core=false, t24Name=END.TO.END.REFERENCE, mandatory=false)
+        ID : T24BusinessTypes:N
+            @i18n:Label (en="Transaction Ref")
+            @i18n:Tooltip (en="Transaction Reference")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, core=false, t24Name="@ID", mandatory=false)
+        INIT_OTHER_ID : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, core=false, t24Name=INIT.OTHER.ID, mandatory=false)
+        ORDERING_COMPANY : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=11, core=false, t24Name=ORDERING.COMPANY, mandatory=false)
+        ORDERING_CUSTOMER : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, core=false, t24Name=ORDERING.CUSTOMER, mandatory=false)
+        ORDERING_CUST_NAME : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=140, core=false, t24Name=ORDERING.CUST.NAME, mandatory=false)
+        ORDERING_REFERENCE : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=18, core=false, t24Name=ORDERING.REFERENCE, mandatory=false)
+        ORDER_EXECUTION_DATE_TIME : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=65, core=false, t24Name=ORDER.EXECUTION.DATE.TIME, mandatory=false)
+        ORDER_INITIATION_TYPE : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, core=false, t24Name=ORDER.INITIATION.TYPE, mandatory=false)
+        OUT_ARRAY : T24BusinessTypes:N
+            @t24:i (align=L, inputBehaviour=N, maxLength=150, core=false, t24Name=OUT.ARRAY, genOperation=E.NOFILE.PAY.ORDER.BULK.AUTH, mandatory=true)
+        PAYMENT_AMOUNT : T24BusinessTypes:N
+            @i18n:Label (en="Outstanding Amt")
+            @t24:i (align=R, inputBehaviour=N, maxLength=19, core=false, t24Name=PAYMENT.AMOUNT, mandatory=false)
+        PAYMENT_CURRENCY : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=3, core=false, t24Name=PAYMENT.CURRENCY, mandatory=false)
+        PAYMENT_ORDER_PRODUCT : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, core=false, t24Name=PAYMENT.ORDER.PRODUCT, mandatory=false)
+        PAYMENT_SYSTEM : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, core=false, t24Name=PAYMENT.SYSTEM, mandatory=false)
+        PAYMENT_SYSTEM_ID : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, core=false, t24Name=PAYMENT.SYSTEM.ID, mandatory=false)
+        STATUS_REASON_CODE : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, core=false, t24Name=STATUS.REASON.CODE, mandatory=false)
+    }
+    NOFILE_PI_NOTIFICATION_DETAILS
+        @i18n:Description (en="")
+        @t24:i (t24Name=NOFILE.PI.NOTIFICATION.DETAILS, level=I, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        PAYMENT_ORDER_ID -> PI_Contract:PAYMENT_ORDER
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, core=false, t24Name=PAYMENT.ORDER.ID, mandatory=false)
+        PiNotificationDetails : T24BusinessTypes:N
+            @t24:i (align=L, inputBehaviour=N, maxLength=300, core=false, t24Name=PiNotificationDetails, genOperation=PI.E.NOF.NOTIFICATION.DETAILS, mandatory=true)
+    }
+    NOFILE_PI_PX_INSTALL_CHK
+        @i18n:Description (en="")
+        @t24:i (t24Name=NOFILE.PI.PX.INSTALL.CHK, level=I, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        OutputArray : T24BusinessTypes:N
+            @t24:i (align=L, inputBehaviour=N, maxLength=50, core=false, t24Name=OutputArray, genOperation=PI.E.NOFILE.PX.INSTALL.CHK, mandatory=true)
+        PAYMENT_STATUS : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, core=false, t24Name=PAYMENT.STATUS, mandatory=false)
+        POID : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, core=false, t24Name=POID, mandatory=false)
+        TRANSACTION_AMOUNT : T24BusinessTypes:N
+            @i18n:Label (en="Transaction Amount")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, core=false, t24Name=TRANSACTION.AMOUNT, mandatory=false)
+        TRANSACTION_CURRENCY : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, core=false, t24Name=TRANSACTION.CURRENCY, mandatory=false)
+        TRANSACTION_STATUS : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, core=false, t24Name=TRANSACTION.STATUS, mandatory=false)
+    }
+}

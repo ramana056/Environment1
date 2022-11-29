@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<localref:LocalRef xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:localref="http://www.odcgroup.com/t24/application/localref/model/LocalRef"
+    xmlns:translationDsl="http://www.odcgroup.com/translation/TranslationDsl" localRefID="COMMODITY.DETAILS" maximumChars="20" minimumChars="0"
+    mandatory="false" charType="N" defaultPossible="false" virtualTable="COMMODITY.DETAILS"
+    description="Commodity Details">
+  <shortName xsi:type="translationDsl:LocalTranslations">
+    <translations locale="en" text="COMMODITY.DET"/>
+  </shortName>
+  <vettingTable vettingTable="CO">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Coal"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="DA">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Dairy"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="DR">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Dry"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="EL">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Electricity"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="EM">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Emissions"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="FO">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Forestry"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="GO">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Grains Oilseeds"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="IE">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Inter-energy"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="LI">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Livestock"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="NG">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Natural gas"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="NP">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Non-precious"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="OI">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Oil"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="OT">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="OTHER"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="PR">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Precious"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="SO">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Softs"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="WE">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Weather"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="WT">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Wet"/>
+    </remarks>
+  </vettingTable>
+</localref:LocalRef>

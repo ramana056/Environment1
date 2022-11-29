@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<localref:LocalRef xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:localref="http://www.odcgroup.com/t24/application/localref/model/LocalRef"
+    xmlns:translationDsl="http://www.odcgroup.com/translation/TranslationDsl" localRefID="USLEND.DISBURSE.TYPE" maximumChars="25" minimumChars="0"
+    mandatory="false" charType="A" defaultPossible="false" virtualTable="USLEND.DISBURSE.TYPE"
+    description="Escrow Disbursement Type">
+  <shortName xsi:type="translationDsl:LocalTranslations">
+    <translations locale="en" text="ESC.DISB.TYPE"/>
+  </shortName>
+  <vettingTable vettingTable="BULK-CHECK">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Bulk Check"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="BULK-EXTERNAL.ACCOUNT">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Bulk External Account"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="CHECK">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Individual Check"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="EXTERNAL.ACCOUNT">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Individual External Account"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="MANUAL.DISBURSEMENT">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Manual Disbursement"/>
+    </remarks>
+  </vettingTable>
+</localref:LocalRef>

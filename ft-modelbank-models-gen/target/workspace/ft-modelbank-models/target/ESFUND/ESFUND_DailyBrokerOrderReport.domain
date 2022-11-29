@@ -1,0 +1,195 @@
+# UTF-8
+/* ESFUN Daily Broker Report */
+Domain ESFUND_DailyBrokerOrderReport
+    @t24:i (module=ESFUND)
+    @java:Package (value=com.temenos.t24.datamodel.esfund.esfund_dailybrokerorderreport)
+namespace "http://www.temenos.com/t24/ESFUND_DailyBrokerOrderReport"
+metamodelVersion 1.30.6
+Classes {
+    /* Records created for the bank to define the Banks ID with the broker, relevant instrument types i.e Equities, ETF and warrants needs to be considered for the reporting.@ID is Company ID for which the configuration has to be made. */
+    ESFUND_ORDER_REPORT
+        @i18n:Description (en="")
+        @t24:i (t24Name=ESFUND.ORDER.REPORT, level=C, type=L, allowedFunctions="L P S", localRefApplicationSysNo=20.0, localRefAllowed=true)
+    {
+        ADDRESS : T24BusinessTypes:TEXT
+            @i18n:Label (en=Address)
+            @i18n:Tooltip (en="Define the address")
+            @t24:i (align=L, inputBehaviour=I, maxLength=175, sysNumber=10.0, core=true, t24Name=ADDRESS, mandatory=false)
+        ALT_ORDER_NO : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=10, sysNumber=4.0, core=true, t24Name=ALT.ORDER.NO, mandatory=false)
+        CCV : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=20, sysNumber=17.0, core=true, t24Name=CCV, mandatory=false)
+        DATE_OF_BIRTH : T24BusinessTypes:D
+            @i18n:Label (en="Date of Birth")
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=18.0, core=true, t24Name=DATE.OF.BIRTH, mandatory=false)
+        DOCUMENT : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=20, sysNumber=6.0, core=true, t24Name=DOCUMENT, mandatory=false)
+        DOCUMENT_TYPE : T24BusinessTypes:A
+            @i18n:Label (en="Document Type")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=7.0, core=true, t24Name=DOCUMENT.TYPE, mandatory=false)
+        FISCAL_ADDRESS : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=11.0, core=true, t24Name=FISCAL.ADDRESS, mandatory=false)
+        FULL_NAME : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=70, sysNumber=9.0, core=true, t24Name=FULL.NAME, mandatory=false)
+        HOLDER_ROLE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=20, sysNumber=14.0, core=true, t24Name=HOLDER.ROLE, mandatory=false)
+        ID -> ESFUND_DailyBrokerOrderReport:ESFUND_ORDER_REPORT PK required
+            @i18n:Label (en="Transaction Ref")
+            @i18n:Tooltip (en="Transaction Reference")
+            @t24:i (align=L, inputBehaviour=I, maxLength=15, sysNumber=0.0, core=true, businessType=A, t24Name=ID, mandatory=true)
+        IDENTIFICATION_CODE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=20, sysNumber=2.0, core=true, t24Name=IDENTIFICATION.CODE, mandatory=false)
+        NATIONALITY : T24BusinessTypes:A
+            @i18n:Label (en=Nationality)
+            @i18n:Tooltip (en="Indicates the nationality")
+            @t24:i (align=L, inputBehaviour=I, maxLength=2, sysNumber=13.0, core=true, t24Name=NATIONALITY, mandatory=false)
+        NATIONALITY_TYPE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=10, sysNumber=19.0, core=true, t24Name=NATIONALITY.TYPE, mandatory=false)
+        ORDER_NO : T24BusinessTypes:A
+            @i18n:Label (en="Order No")
+            @i18n:Tooltip (en="Indicates the order number")
+            @t24:i (align=L, inputBehaviour=I, maxLength=16, sysNumber=3.0, core=true, t24Name=ORDER.NO, mandatory=false)
+        OVERRIDE -> byValue ESFUND_DailyBrokerOrderReport:ESFUND_ORDER_REPORT__OVERRIDE *
+            @t24:i (t24Name=OVERRIDE)
+        OWNERSHIP_ORDER_SEQ : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=5.0, core=true, t24Name=OWNERSHIP.ORDER.SEQ, mandatory=false)
+        OWNERSHIP_PERCENT : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=3, sysNumber=15.0, core=true, t24Name=OWNERSHIP.PERCENT, mandatory=false)
+        PERSON_TYPE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=8.0, core=true, t24Name=PERSON.TYPE, mandatory=false)
+        POSTAL_ADDRESS : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=12.0, core=true, t24Name=POSTAL.ADDRESS, mandatory=false)
+        RESERVED_1 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=21.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_10 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=30.0, core=true, t24Name=RESERVED.10, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=22.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=23.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=24.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        RESERVED_5 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=25.0, core=true, t24Name=RESERVED.5, mandatory=false)
+        RESERVED_6 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=26.0, core=true, t24Name=RESERVED.6, mandatory=false)
+        RESERVED_7 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=27.0, core=true, t24Name=RESERVED.7, mandatory=false)
+        RESERVED_8 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=28.0, core=true, t24Name=RESERVED.8, mandatory=false)
+        RESERVED_9 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=29.0, core=true, t24Name=RESERVED.9, mandatory=false)
+        STOCK_EXCHANGE : T24BusinessTypes:A
+            @i18n:Label (en="Stock Exchange")
+            @t24:i (align=L, inputBehaviour=I, maxLength=5, sysNumber=16.0, core=true, t24Name=STOCK.EXCHANGE, mandatory=false)
+        TYPE_OF_REGISTRATION : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=2, sysNumber=1.0, core=true, t24Name=TYPE.OF.REGISTRATION, mandatory=false)
+    }
+    ESFUND_ORDER_REPORT__OVERRIDE
+    {
+        OVERRIDE : T24BusinessTypes:N
+            @i18n:Label (en=Override)
+            @i18n:Tooltip (en="Overrides generated by this transaction")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=31.0, core=true, t24Name=OVERRIDE, mandatory=false)
+    }
+    /* This record will have all the customer details based on the SEC.OPEN.ORDER. */
+    ESFUND_REPORT_PARAMETER
+        @i18n:Description (en="")
+        @t24:i (t24Name=ESFUND.REPORT.PARAMETER, level=C, type=H, allowedFunctions="A C D E H I L P Q R S", localRefApplicationSysNo=4.0, localRefAllowed=true)
+    {
+        ASSET_TYPE -> byValue ESFUND_DailyBrokerOrderReport:ESFUND_REPORT_PARAMETER__ASSET_TYPE *
+            @t24:i (t24Name=ASSET.TYPE)
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=23.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=24.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=20.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=21.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=17.0, core=true, t24Name=CURR.NO, mandatory=false)
+        DATE_TIME -> byValue ESFUND_DailyBrokerOrderReport:ESFUND_REPORT_PARAMETER__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=22.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        ID -> ESFUND_DailyBrokerOrderReport:ESFUND_REPORT_PARAMETER PK required
+            @i18n:Label (en="Transaction Ref")
+            @i18n:Tooltip (en="Transaction Reference")
+            @t24:i (align=L, inputBehaviour=I, maxLength=11, sysNumber=0.0, core=true, businessType=COM, t24Name=ID, mandatory=true)
+        INPUTTER -> byValue ESFUND_DailyBrokerOrderReport:ESFUND_REPORT_PARAMETER__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        OUR_BANK_ID : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=20, sysNumber=1.0, core=true, t24Name=OUR.BANK.ID, mandatory=false)
+        OVERRIDE -> byValue ESFUND_DailyBrokerOrderReport:ESFUND_REPORT_PARAMETER__OVERRIDE *
+            @t24:i (t24Name=OVERRIDE)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=16.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        RESERVED_1 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=5.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_10 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=14.0, core=true, t24Name=RESERVED.10, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=6.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=7.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=8.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        RESERVED_5 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=9.0, core=true, t24Name=RESERVED.5, mandatory=false)
+        RESERVED_6 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=10.0, core=true, t24Name=RESERVED.6, mandatory=false)
+        RESERVED_7 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=11.0, core=true, t24Name=RESERVED.7, mandatory=false)
+        RESERVED_8 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=12.0, core=true, t24Name=RESERVED.8, mandatory=false)
+        RESERVED_9 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=13.0, core=true, t24Name=RESERVED.9, mandatory=false)
+        SUB_ASSET_TYPE -> byValue ESFUND_DailyBrokerOrderReport:ESFUND_REPORT_PARAMETER__SUB_ASSET_TYPE *
+            @t24:i (t24Name=SUB.ASSET.TYPE)
+    }
+    ESFUND_REPORT_PARAMETER__ASSET_TYPE
+    {
+        ASSET_TYPE -> ST_Valuation:ASSET_TYPE
+            @i18n:Label (en="Asset Type")
+            @i18n:Tooltip (en="Indicates the asset type")
+            @t24:i (align=R, inputBehaviour=I, maxLength=3, sysNumber=2.0, core=true, t24Name=ASSET.TYPE, mandatory=false)
+    }
+    ESFUND_REPORT_PARAMETER__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=19.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    ESFUND_REPORT_PARAMETER__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=18.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    ESFUND_REPORT_PARAMETER__OVERRIDE
+    {
+        OVERRIDE : T24BusinessTypes:N
+            @i18n:Label (en=Override)
+            @i18n:Tooltip (en="Overrides generated by this transaction")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=15.0, core=true, t24Name=OVERRIDE, mandatory=false)
+    }
+    ESFUND_REPORT_PARAMETER__SUB_ASSET_TYPE
+    {
+        SUB_ASSET_TYPE -> ST_Valuation:SUB_ASSET_TYPE
+            @i18n:Label (en="Sub Asset Type")
+            @t24:i (align=R, inputBehaviour=I, maxLength=3, sysNumber=3.0, core=true, t24Name=SUB.ASSET.TYPE, mandatory=false)
+    }
+}

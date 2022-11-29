@@ -1,0 +1,1218 @@
+# UTF-8
+/* Foundation Items for SE */
+Domain SE_Foundation
+    @t24:i (module=SE)
+    @java:Package (value=com.temenos.t24.datamodel.se.se_foundation)
+namespace "http://www.temenos.com/t24/SE_Foundation"
+metamodelVersion 1.30.6
+Classes {
+    /* This is a tool(concat file) to record the Select(s) performed across various applications during a particular transaction. The results stored in this tool can be viewed using an enquiry. */
+    DAS_RESULTS
+        @i18n:Description (en="")
+        @t24:i (t24Name=DAS.RESULTS, level=I, type=L, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        /* The ID of DAS.RESULTS is the ID of applications used in T24. As this is a concat file the ID is updated accordingly. */
+        DAS_RESULTS_ID -> SE_Foundation:DAS_RESULTS PK required
+            @t24:i (align=L, inputBehaviour=I, maxLength=55, sysNumber=0.0, core=true, businessType=A, t24Name=DAS.RESULTS.ID, mandatory=true)
+        LIST_SELECTED -> byValue SE_Foundation:DAS_RESULTS__LIST_SELECTED *
+            @t24:i (t24Name=LIST.SELECTED)
+        TABLE_NAME -> byValue SE_Foundation:DAS_RESULTS__TABLE_NAME *
+            @t24:i (t24Name=TABLE.NAME)
+    }
+    DAS_RESULTS__LIST_SELECTED
+    {
+        LIST_SELECTED -> byValue SE_Foundation:DAS_RESULTS__LIST_SELECTED__LIST_SELECTED *
+            @t24:i (t24Name=LIST.SELECTED)
+        RESERVED1 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=0, sysNumber=5.0, core=true, t24Name=RESERVED1, mandatory=false)
+    }
+    DAS_RESULTS__LIST_SELECTED__LIST_SELECTED
+    {
+/* Details of the Select performed, specific to the table is updated in this field.
+For example:If the Select is performed in EB.LOOKUP for EB.SECURE.MESSAGE, this field will contain  - TO.STATUS*READ, FROM.STATUS*SENT
+Validation rules:
+Upto 35 characters is allowed. */
+        LIST_SELECTED : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=35, sysNumber=4.0, core=true, t24Name=LIST.SELECTED, mandatory=false)
+    }
+    DAS_RESULTS__TABLE_NAME
+    {
+/* Number of Select(s) performed is updated in this field.
+Validation Rules::
+Upto 8 Alphanumeric charatcers is allowed. */
+        NO_SELECTED : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=8, sysNumber=2.0, core=true, t24Name=NO.SELECTED, mandatory=false)
+/* Description of the Select Query, specific to the Table is updated in this field.
+Validation Rules::
+Upto 60 characters is allowed. */
+        QUERY_NAME : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=60, sysNumber=3.0, core=true, t24Name=QUERY.NAME, mandatory=false)
+/* Name of the Table in which Select is performed.
+Validation Rules::
+Minimum Characters allowed is 2 and Maximum Characters allowed is 35.
+Alphanumeric characters are allowed. */
+        TABLE_NAME : T24BusinessTypes:A required
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=1.0, core=true, t24Name=TABLE.NAME, mandatory=true)
+    }
+    NOFILE_E_SEAT_SCRIPTS_UNLINKED
+        @i18n:Description (en="")
+        @t24:i (t24Name=NOFILE.E.SEAT.SCRIPTS.UNLINKED, level=I, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        VERTICAL : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=50, core=false, t24Name=VERTICAL, mandatory=false)
+        XID : T24BusinessTypes:N
+            @t24:i (align=L, inputBehaviour=N, maxLength=55, core=false, t24Name=XID, genOperation=E.SEAT.SCRIPTS.UNLINKED, mandatory=true)
+    }
+    NOFILE_GL_DIFF_DETAIL
+        @i18n:Description (en="")
+        @t24:i (t24Name=NOFILE.GL.DIFF.DETAIL, level=I, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        LINE_NO : T24BusinessTypes:N
+            @i18n:Label (en="Line No")
+            @t24:i (align=L, inputBehaviour=N, maxLength=50, core=false, t24Name=LINE.NO, genOperation=E.GL.DIFF.DETAIL, mandatory=true)
+    }
+    NOFILE_GL_DIFF_SUMMARY
+        @i18n:Description (en="")
+        @t24:i (t24Name=NOFILE.GL.DIFF.SUMMARY, level=I, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        REPORT_NAME : T24BusinessTypes:N
+            @i18n:Label (en="Report Name")
+            @t24:i (align=L, inputBehaviour=N, maxLength=21, core=false, t24Name=REPORT.NAME, genOperation=E.GL.DIFF.SUMMARY, mandatory=true)
+    }
+    NOFILE_SEAT_ACTIVITY_COUNT
+        @i18n:Description (en="")
+        @t24:i (t24Name=NOFILE.SEAT.ACTIVITY.COUNT, level=I, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        SEAT_APPLICATION : T24BusinessTypes:N
+            @i18n:Label (en="Seat File")
+            @t24:i (align=R, inputBehaviour=N, maxLength=70, core=false, t24Name=SEAT.APPLICATION, mandatory=false)
+        VERTICAL : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=50, core=false, t24Name=VERTICAL, mandatory=false)
+        XID : T24BusinessTypes:N
+            @t24:i (align=L, inputBehaviour=N, maxLength=55, core=false, t24Name=XID, genOperation=E.SEAT.ACTIVITY.COUNT, mandatory=true)
+    }
+    NOFILE_SEAT_ACTIVITY_LIST
+        @i18n:Description (en="")
+        @t24:i (t24Name=NOFILE.SEAT.ACTIVITY.LIST, level=I, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        FUNCTION_INDEX : T24BusinessTypes:N
+            @i18n:Label (en="Function Index")
+            @t24:i (align=R, inputBehaviour=N, maxLength=70, core=false, t24Name=FUNCTION.INDEX, mandatory=false)
+        SCENARIO_ID : T24BusinessTypes:N
+            @i18n:Label (en="Scenario Id")
+            @t24:i (align=R, inputBehaviour=N, maxLength=70, core=false, t24Name=SCENARIO.ID, mandatory=false)
+        SEAT_APPLICATION : T24BusinessTypes:N
+            @i18n:Label (en="Seat File")
+            @t24:i (align=R, inputBehaviour=N, maxLength=70, core=false, t24Name=SEAT.APPLICATION, mandatory=false)
+        TESTBASE : T24BusinessTypes:N
+            @i18n:Label (en="Test Base")
+            @t24:i (align=R, inputBehaviour=N, maxLength=70, core=false, t24Name=TESTBASE, mandatory=false)
+        VERTICAL : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=50, core=false, t24Name=VERTICAL, mandatory=false)
+        XID : T24BusinessTypes:N
+            @t24:i (align=L, inputBehaviour=N, maxLength=55, core=false, t24Name=XID, genOperation=E.SEAT.ACTIVITY.LIST, mandatory=true)
+    }
+    NOFILE_SEAT_ERROR_TRACE_REPORT
+        @i18n:Description (en="")
+        @t24:i (t24Name=NOFILE.SEAT.ERROR.TRACE.REPORT, level=I, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        SEAT_RELEASE : T24BusinessTypes:N
+            @i18n:Label (en=TestBase)
+            @t24:i (align=R, inputBehaviour=N, maxLength=50, core=false, t24Name=SEAT.RELEASE, mandatory=false)
+        XID : T24BusinessTypes:N
+            @t24:i (align=L, inputBehaviour=N, maxLength=55, core=false, t24Name=XID, genOperation=E.SEAT.ERROR.REPORT, mandatory=true)
+    }
+    NOFILE_SEAT_FIELD_VALUES_UNLINKED
+        @i18n:Description (en="")
+        @t24:i (t24Name=NOFILE.SEAT.FIELD.VALUES.UNLINKED, level=I, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        XID : T24BusinessTypes:N
+            @t24:i (align=L, inputBehaviour=N, maxLength=55, core=false, t24Name=XID, genOperation=E.SEAT.FIELD.VALUES.UNLINKED, mandatory=true)
+    }
+    NOFILE_SEAT_FORMAT_OUTPUT_UNLINKED
+        @i18n:Description (en="")
+        @t24:i (t24Name=NOFILE.SEAT.FORMAT.OUTPUT.UNLINKED, level=I, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        XID : T24BusinessTypes:N
+            @t24:i (align=L, inputBehaviour=N, maxLength=55, core=false, t24Name=XID, genOperation=E.SEAT.FORMAT.OUTPUT.UNLINKED, mandatory=true)
+    }
+    NOFILE_SEAT_LAST_MODIFIED
+        @i18n:Description (en="")
+        @t24:i (t24Name=NOFILE.SEAT.LAST.MODIFIED, level=I, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        VERTICAL : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=50, core=false, t24Name=VERTICAL, mandatory=false)
+        XID : T24BusinessTypes:N
+            @t24:i (align=L, inputBehaviour=N, maxLength=55, core=false, t24Name=XID, genOperation=E.SEAT.LAST.MODIFIED, mandatory=true)
+    }
+    NOFILE_SEAT_RESULTS_UNLINKED
+        @i18n:Description (en="")
+        @t24:i (t24Name=NOFILE.SEAT.RESULTS.UNLINKED, level=I, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        XID : T24BusinessTypes:N
+            @t24:i (align=L, inputBehaviour=N, maxLength=55, core=false, t24Name=XID, genOperation=E.SEAT.RESULTS.UNLINKED, mandatory=true)
+    }
+    NOFILE_SEAT_SCENARIO_COUNT
+        @i18n:Description (en="")
+        @t24:i (t24Name=NOFILE.SEAT.SCENARIO.COUNT, level=I, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        SEAT_APPLICATION : T24BusinessTypes:N
+            @i18n:Label (en="Seat File")
+            @t24:i (align=R, inputBehaviour=N, maxLength=70, core=false, t24Name=SEAT.APPLICATION, mandatory=false)
+        VERTICAL : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=50, core=false, t24Name=VERTICAL, mandatory=false)
+        XID : T24BusinessTypes:N
+            @t24:i (align=L, inputBehaviour=N, maxLength=55, core=false, t24Name=XID, genOperation=E.SEAT.SCENARIO.COUNT, mandatory=true)
+    }
+    NOFILE_SEAT_SCENARIO_INFLOW
+        @i18n:Description (en="")
+        @t24:i (t24Name=NOFILE.SEAT.SCENARIO.INFLOW, level=I, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        DATE_FROM : T24BusinessTypes:D
+            @i18n:Label (en="Date From")
+            @t24:i (align=R, inputBehaviour=N, maxLength=11, core=false, t24Name=DATE.FROM, mandatory=false)
+        DATE_TO : T24BusinessTypes:D
+            @i18n:Label (en="Date To")
+            @t24:i (align=R, inputBehaviour=N, maxLength=11, core=false, t24Name=DATE.TO, mandatory=false)
+        MONTH : T24BusinessTypes:N
+            @i18n:Label (en=Month)
+            @t24:i (align=R, inputBehaviour=N, maxLength=70, core=false, t24Name=MONTH, mandatory=false)
+        PRODUCT_GROUP : T24BusinessTypes:N
+            @i18n:Label (en="Product Group")
+            @t24:i (align=R, inputBehaviour=N, maxLength=50, core=false, t24Name=PRODUCT.GROUP, mandatory=false)
+        SEAT_FILE : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=70, core=false, t24Name=SEAT.FILE, mandatory=false)
+        SEAT_YEAR : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=70, core=false, t24Name=SEAT.YEAR, mandatory=false)
+        XID : T24BusinessTypes:N
+            @t24:i (align=L, inputBehaviour=N, maxLength=55, core=false, t24Name=XID, genOperation=E.SEAT.SCENARIO.INFLOW, mandatory=true)
+    }
+    NOFILE_SEAT_SCENARIO_LIST
+        @i18n:Description (en="")
+        @t24:i (t24Name=NOFILE.SEAT.SCENARIO.LIST, level=I, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        FUNCTION_INDEX : T24BusinessTypes:N
+            @i18n:Label (en="Function Index")
+            @t24:i (align=R, inputBehaviour=N, maxLength=70, core=false, t24Name=FUNCTION.INDEX, mandatory=false)
+        SCENARIO_ID : T24BusinessTypes:N
+            @i18n:Label (en="Scenario Id")
+            @t24:i (align=R, inputBehaviour=N, maxLength=70, core=false, t24Name=SCENARIO.ID, mandatory=false)
+        SEAT_APPLICATION : T24BusinessTypes:N
+            @i18n:Label (en="Seat File")
+            @t24:i (align=R, inputBehaviour=N, maxLength=70, core=false, t24Name=SEAT.APPLICATION, mandatory=false)
+        TESTBASE : T24BusinessTypes:N
+            @i18n:Label (en="Test Base")
+            @t24:i (align=R, inputBehaviour=N, maxLength=70, core=false, t24Name=TESTBASE, mandatory=false)
+        VERTICAL : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=50, core=false, t24Name=VERTICAL, mandatory=false)
+        XID : T24BusinessTypes:N
+            @t24:i (align=L, inputBehaviour=N, maxLength=55, core=false, t24Name=XID, genOperation=E.SEAT.SCENARIO.LIST, mandatory=true)
+    }
+    NOFILE_SEAT_SCRIPT_PROCESS
+        @i18n:Description (en="")
+        @t24:i (t24Name=NOFILE.SEAT.SCRIPT.PROCESS, level=I, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        ID : T24BusinessTypes:N
+            @i18n:Label (en="Transaction Ref")
+            @i18n:Tooltip (en="Transaction Reference")
+            @t24:i (align=L, inputBehaviour=N, maxLength=20, core=false, t24Name="@ID", genOperation=E.SEAT.SCRIPT.PROCESS, mandatory=true)
+    }
+    NOFILE_SEAT_SELECTION_UPLOAD
+        @i18n:Description (en="")
+        @t24:i (t24Name=NOFILE.SEAT.SELECTION.UPLOAD, level=I, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        ID : T24BusinessTypes:N
+            @i18n:Label (en="Transaction Ref")
+            @i18n:Tooltip (en="Transaction Reference")
+            @t24:i (align=L, inputBehaviour=N, maxLength=20, core=false, t24Name="@ID", genOperation=E.SEAT.SELECTION.UPLOAD, mandatory=true)
+    }
+    NOFILE_SEAT_SERVICE_LIST
+        @i18n:Description (en="")
+        @t24:i (t24Name=NOFILE.SEAT.SERVICE.LIST, level=I, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        ID : T24BusinessTypes:R
+            @i18n:Label (en="Transaction Ref")
+            @i18n:Tooltip (en="Transaction Reference")
+            @t24:i (align=L, inputBehaviour=N, maxLength=20, core=false, t24Name="@ID", genOperation=E.SEAT.SERVICE.LIST, mandatory=true)
+    }
+    NOFILE_SEAT_UPLOAD_STATUS
+        @i18n:Description (en="")
+        @t24:i (t24Name=NOFILE.SEAT.UPLOAD.STATUS, level=I, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        ID : T24BusinessTypes:N
+            @i18n:Label (en="Transaction Ref")
+            @i18n:Tooltip (en="Transaction Reference")
+            @t24:i (align=L, inputBehaviour=N, maxLength=20, core=false, t24Name="@ID", genOperation=E.SEAT.UPLOAD.STATUS, mandatory=true)
+    }
+    NOFILE_SEAT_VERTICAL_COUNT
+        @i18n:Description (en="")
+        @t24:i (t24Name=NOFILE.SEAT.VERTICAL.COUNT, level=I, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        SEAT_APPLICATION : T24BusinessTypes:N
+            @i18n:Label (en="Seat File")
+            @t24:i (align=R, inputBehaviour=N, maxLength=70, core=false, t24Name=SEAT.APPLICATION, mandatory=false)
+        VERTICAL : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=50, core=false, t24Name=VERTICAL, mandatory=false)
+        XID : T24BusinessTypes:N
+            @t24:i (align=L, inputBehaviour=N, maxLength=55, core=false, t24Name=XID, genOperation=E.SEAT.VERTICAL.LIST, mandatory=true)
+    }
+    NOFILE_SEAT_VERTICAL_LIST
+        @i18n:Description (en="")
+        @t24:i (t24Name=NOFILE.SEAT.VERTICAL.LIST, level=I, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        FUNCTION_INDEX : T24BusinessTypes:N
+            @i18n:Label (en="Function Index")
+            @t24:i (align=R, inputBehaviour=N, maxLength=70, core=false, t24Name=FUNCTION.INDEX, mandatory=false)
+        SCENARIO_ID : T24BusinessTypes:N
+            @i18n:Label (en="Scenario Id")
+            @t24:i (align=R, inputBehaviour=N, maxLength=70, core=false, t24Name=SCENARIO.ID, mandatory=false)
+        SEAT_APPLICATION : T24BusinessTypes:N
+            @i18n:Label (en="Seat File")
+            @t24:i (align=R, inputBehaviour=N, maxLength=70, core=false, t24Name=SEAT.APPLICATION, mandatory=false)
+        TESTBASE : T24BusinessTypes:N
+            @i18n:Label (en="Test Base")
+            @t24:i (align=R, inputBehaviour=N, maxLength=70, core=false, t24Name=TESTBASE, mandatory=false)
+        VERTICAL : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=50, core=false, t24Name=VERTICAL, mandatory=false)
+        XID : T24BusinessTypes:N
+            @t24:i (align=L, inputBehaviour=N, maxLength=55, core=false, t24Name=XID, genOperation=E.SEAT.VERTICAL.LIST, mandatory=true)
+    }
+    /* This file provides a framework to define independent components or subroutine which can be tested individually. Number of arguments in the routine, each argument's position, its direction can be defined in this application. */
+    SEAT_COMPONENT
+        @i18n:Description (en="")
+        @t24:i (t24Name=SEAT.COMPONENT, level=I, type=H, allowedFunctions="A C D E H I L P Q R S", localRefAllowed=false)
+    {
+        ARGUMENT_NAME -> byValue SE_Foundation:SEAT_COMPONENT__ARGUMENT_NAME *
+            @t24:i (t24Name=ARGUMENT.NAME)
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=27.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=28.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=24.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        /* This field optionally denotes the name of a Common routine for use with the component. If specified, this field should contain an alphanumeric name not exceeding 35 characters in length. */
+        COMMON_ROUTINE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=10.0, core=true, t24Name=COMMON.ROUTINE, mandatory=false)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=25.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=21.0, core=true, t24Name=CURR.NO, mandatory=false)
+        DATE_TIME -> byValue SE_Foundation:SEAT_COMPONENT__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=26.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        DESCRIPTION -> byValue SE_Foundation:SEAT_COMPONENT__DESCRIPTION *
+            @t24:i (t24Name=DESCRIPTION)
+        INPUTTER -> byValue SE_Foundation:SEAT_COMPONENT__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+/* This field specifies the type of program call (Basic routine/Java API)
+If set to YES, then it indicates that the call is to a java program */
+        JAVA_ROUTINE : SE_Foundation:SEAT_COMPONENT__JAVA_ROUTINE
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=11.0, core=true, t24Name=JAVA.ROUTINE, mandatory=false)
+        /* This field denotes the actual name of the subroutine to be tested, whose details are defined in SEAT.COMPONENT record. Should be valid subroutine in T24 */
+        KEY -> SE_Foundation:SEAT_COMPONENT PK required
+            @i18n:Label (en=Key)
+            @i18n:Tooltip (en="Indicates th transaction key")
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=0.0, core=true, businessType=A, t24Name=KEY, mandatory=true)
+/* This field denotes total number of arguments of the component (routine) .
+Mandatory field */
+        NUM_PASS_ARGS : T24BusinessTypes:N required
+            @t24:i (align=R, inputBehaviour=I, maxLength=3, sysNumber=3.0, core=true, t24Name=NUM.PASS.ARGS, mandatory=true)
+/* This field represents the T24 product the component belongs to.
+Should be a valid T24 product */
+        PRODUCT : T24BusinessTypes:A required
+            @i18n:Label (en=Product)
+            @t24:i (align=L, inputBehaviour=I, maxLength=2, sysNumber=2.0, core=true, t24Name=PRODUCT, mandatory=true)
+/* This field denotes whether the component has been published.
+Allowed values are Y or null */
+        PUBLISHED : SE_Foundation:SEAT_COMPONENT__PUBLISHED
+            @i18n:Label (en=Published)
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=9.0, core=true, t24Name=PUBLISHED, mandatory=false)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=20.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        RESERVED_1 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=9, sysNumber=19.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=9, sysNumber=18.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=9, sysNumber=17.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=9, sysNumber=16.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        RESERVED_5 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=9, sysNumber=15.0, core=true, t24Name=RESERVED.5, mandatory=false)
+        RESERVED_6 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=9, sysNumber=14.0, core=true, t24Name=RESERVED.6, mandatory=false)
+        RESERVED_7 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=9, sysNumber=13.0, core=true, t24Name=RESERVED.7, mandatory=false)
+        RESERVED_8 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=9, sysNumber=12.0, core=true, t24Name=RESERVED.8, mandatory=false)
+/* This field represents the name of the wrapper routine.
+If some common variables, which are not part of the argument list needs to be passed to the component , a wrapper routine needs to be defined.
+
+The wrapper routine contains three arguments,
+
+COMPONENT.ID - name of the component
+ARG.LIST - List of arguments passed to the component
+COM.LIST - List of common arguments to be used by the routine */
+        WRAP_ROUTINE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=8.0, core=true, t24Name=WRAP.ROUTINE, mandatory=false)
+    }
+    /* Individual components or routines defined in EB.COMPONENT can be tested using the application SEAT.COMPONENT.TEST. Different records can be entered with different values in the argument for an component. When this record is verfied the component is executed with the given values and returns the result and also indicates whether the test case has passed or failed. */
+    SEAT_COMPONENT_TEST
+        @i18n:Description (en="")
+        @t24:i (t24Name=SEAT.COMPONENT.TEST, level=I, type=W, allowedFunctions="C I L P Q R S V", localRefAllowed=false)
+    {
+        ARG_NAME -> byValue SE_Foundation:SEAT_COMPONENT_TEST__ARG_NAME *
+            @t24:i (t24Name=ARG.NAME)
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=28.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=29.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=25.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        /* This field denotes the name of the component. Should be a valid record id in EB.COMPONENT  record */
+        COMP_NAME -> SE_Foundation:SEAT_COMPONENT required
+            @i18n:Label (en="Composite Name")
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=2.0, core=true, businessType=A, t24Name=COMP.NAME, mandatory=true)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=26.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=22.0, core=true, t24Name=CURR.NO, mandatory=false)
+        /* This field denoetes the date when the record was last run in the system. No input field */
+        DATE_LAST_RUN : T24BusinessTypes:RELTIME
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=10.0, core=true, t24Name=DATE.LAST.RUN, mask="RDD DD  DD ##:##", mandatory=false)
+        DATE_TIME -> byValue SE_Foundation:SEAT_COMPONENT_TEST__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        /* This field denotes whether the expected result needs to be defaulted when the test is rerun. Allowed values are Y or null. */
+        DEF_EXP_RESULT : SE_Foundation:SEAT_COMPONENT_TEST__DEF_EXP_RESULT
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=8.0, core=true, t24Name=DEF.EXP.RESULT, mandatory=false)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=27.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        DESCRIPTION -> byValue SE_Foundation:SEAT_COMPONENT_TEST__DESCRIPTION *
+            @t24:i (t24Name=DESCRIPTION)
+        /* This field represents the id of the SEAT.COMPONENT.TEST record */
+        EB_COMP_TEST_ID -> SE_Foundation:SEAT_COMPONENT_TEST PK required
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=0.0, core=true, businessType=A, t24Name=EB.COMP.TEST.ID, mandatory=true)
+        ERRORS -> byValue SE_Foundation:SEAT_COMPONENT_TEST__ERRORS *
+            @t24:i (t24Name=ERRORS)
+        INPUTTER -> byValue SE_Foundation:SEAT_COMPONENT_TEST__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=21.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        RESERVED_1 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=9, sysNumber=20.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_10 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=9, sysNumber=11.0, core=true, t24Name=RESERVED.10, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=9, sysNumber=19.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=9, sysNumber=18.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=9, sysNumber=17.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        RESERVED_5 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=9, sysNumber=16.0, core=true, t24Name=RESERVED.5, mandatory=false)
+        RESERVED_6 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=9, sysNumber=15.0, core=true, t24Name=RESERVED.6, mandatory=false)
+        RESERVED_7 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=9, sysNumber=14.0, core=true, t24Name=RESERVED.7, mandatory=false)
+        RESERVED_8 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=9, sysNumber=13.0, core=true, t24Name=RESERVED.8, mandatory=false)
+        RESERVED_9 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=9, sysNumber=12.0, core=true, t24Name=RESERVED.9, mandatory=false)
+        /* The result of the compare between expected value and actual value is stored in this field. Allowed values are PASS (if both are same) and FAIL */
+        TEST_RESULT : SE_Foundation:SEAT_COMPONENT_TEST__TEST_RESULT
+            @i18n:Label (en="Pass or Fail")
+            @t24:i (align=L, inputBehaviour=I, maxLength=10, sysNumber=9.0, core=true, t24Name=TEST.RESULT, mandatory=false)
+    }
+    SEAT_COMPONENT_TEST__ARG_NAME
+    {
+/* This field denotes the name of the argument. When the required component is defined in the field COMP.NAME, the argument names defined in the EB.COMPONENT record gets defaulted.
+Noinput field */
+        ARG_NAME : T24BusinessTypes:A
+            @i18n:Label (en=Argument)
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=3.0, core=true, t24Name=ARG.NAME, mandatory=false)
+        EXP_RESULT -> byValue SE_Foundation:SEAT_COMPONENT_TEST__ARG_NAME__EXP_RESULT *
+            @t24:i (t24Name=EXP.RESULT)
+        IN_VALUE -> byValue SE_Foundation:SEAT_COMPONENT_TEST__ARG_NAME__IN_VALUE *
+            @t24:i (t24Name=IN.VALUE)
+        OUT_VALUE -> byValue SE_Foundation:SEAT_COMPONENT_TEST__ARG_NAME__OUT_VALUE *
+            @t24:i (t24Name=OUT.VALUE)
+    }
+    SEAT_COMPONENT_TEST__ARG_NAME__EXP_RESULT
+    {
+        /* Expected result for a defined set of values can be defined in this field.  The expected result for an out argument can be defined here. This would be compared with the actual value returned when the record is verified */
+        EXP_RESULT : T24BusinessTypes:ANY
+            @i18n:Label (en=Expected)
+            @t24:i (align=L, inputBehaviour=I, maxLength=100, sysNumber=6.0, core=true, t24Name=EXP.RESULT, mandatory=false)
+    }
+    SEAT_COMPONENT_TEST__ARG_NAME__IN_VALUE
+    {
+        /* Value for incoming or modified argument can be fed in this field. */
+        IN_VALUE : T24BusinessTypes:ANY
+            @i18n:Label (en="In Value")
+            @t24:i (align=L, inputBehaviour=I, maxLength=100, sysNumber=4.0, core=true, t24Name=IN.VALUE, mandatory=false)
+    }
+    SEAT_COMPONENT_TEST__ARG_NAME__OUT_VALUE
+    {
+        /* The value returned by the routine for the outgoing or modified argument is stored in this field */
+        OUT_VALUE : T24BusinessTypes:ANY
+            @i18n:Label (en="Out Value")
+            @t24:i (align=L, inputBehaviour=N, maxLength=50, sysNumber=5.0, core=true, t24Name=OUT.VALUE, mandatory=false)
+    }
+    SEAT_COMPONENT_TEST__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=24.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    SEAT_COMPONENT_TEST__DESCRIPTION
+    {
+        DESCRIPTION -> byValue SE_Foundation:SEAT_COMPONENT_TEST__DESCRIPTION__DESCRIPTION *
+            @t24:i (t24Name=DESCRIPTION)
+    }
+    SEAT_COMPONENT_TEST__DESCRIPTION__DESCRIPTION
+    {
+/* This field describes the test case in SEAT.COMPONENT.TEST
+This field can be expanded to allow the User to enter the description of the test case in various languages. Each expansion of the field will correspond to a new Language as defined in the LANGUAGE table (Ref: GENERAL TABLES), and will indicate to the User the Language in which the Description must be entered.
+
+Validation Rules:
+Mandatory Field.
+Up to 35 type A (alphanumeric) characters. */
+        DESCRIPTION : T24BusinessTypes:A required
+            @i18n:Label (en=Description)
+            @i18n:Tooltip (en=Description)
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, multiLanguage=true, sysNumber=1.0, core=true, t24Name=DESCRIPTION, mandatory=true)
+    }
+    SEAT_COMPONENT_TEST__ERRORS
+    {
+        /* This field stores errors produced when the SEAT.COMPONENT.TEST is verified. */
+        ERRORS : T24BusinessTypes:A
+            @i18n:Label (en=Errors)
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=7.0, core=true, t24Name=ERRORS, mandatory=false)
+    }
+    SEAT_COMPONENT_TEST__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=23.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    SEAT_COMPONENT__ARGUMENT_NAME
+    {
+/* This field denotes the name of the argument to be passed to the component.
+The fields starting from ARGUMENT.NAME to ARG.DIRECTION form associated multivalue set.
+
+Some common variables which the component needs can be defined  here
+Validation Rules:
+Mandatory Field.
+Up to 35 type A (alphanumeric) characters */
+        ARGUMENT_NAME : T24BusinessTypes:ANY required
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=4.0, core=true, t24Name=ARGUMENT.NAME, mandatory=true)
+/* This field denotes the position of the argument in the component. The argument value is passed at the mentioned position when the component is test. It is mandatory to define the arguments in ascending order. The arguments are shuffled according to the position defined when the routine is called.
+
+Argument number should not be defined for common variables
+
+The fields starting from ARGUMENT.NAME to ARG.DIRECTION form associated multivalue set. */
+        ARGUMENT_NUM : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=3, sysNumber=6.0, core=true, t24Name=ARGUMENT.NUM, mandatory=false)
+        ARGU_DES -> byValue SE_Foundation:SEAT_COMPONENT__ARGUMENT_NAME__ARGU_DES *
+            @t24:i (t24Name=ARGU.DES)
+/* This field denotes the direction of each argument, whether the argument is incoming, outgoing or modifIed.
+
+Allowed values are
+INCOMING - Value of the argument is fed to the routine
+
+OUTGOING - Value of the argument is fed from the routine
+
+MODIFIED - Value of the argument is fed to the routine and the routine alters its value.
+
+The fields starting from ARGUMENT.NAME to ARG.DIRECTION form associated multivalue set.
+Mandatory field */
+        ARG_DIRECTION : SE_Foundation:SEAT_COMPONENT__ARGUMENT_NAME__ARG_DIRECTION required
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=7.0, core=true, t24Name=ARG.DIRECTION, mandatory=true)
+    }
+    SEAT_COMPONENT__ARGUMENT_NAME__ARGU_DES
+    {
+/* This field describes each of the argument. This field can be expanded to allow the User to enter the description of the argument in various languages. Each expansion of the field will correspond to a new Language as defined in the LANGUAGE table (Ref: GENERAL TABLES), and will indicate to the User the Language in which the Description must be entered.
+
+The fields starting from ARGUMENT.NAME to ARG.DIRECTION form associated multivalue set.
+
+Validation Rules::
+Up to 35 type A (alphanumeric) characters. */
+        ARGU_DES : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, multiLanguage=true, sysNumber=5.0, core=true, t24Name=ARGU.DES, mandatory=false)
+    }
+    SEAT_COMPONENT__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=23.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    SEAT_COMPONENT__DESCRIPTION
+    {
+/* This field describes the component and is used for enrichment.
+This field can be expanded to allow the User to enter the description of the component in various languages. Each expansion of the field will correspond to a new Language as defined in the LANGUAGE table (Ref: GENERAL TABLES), and will indicate to the User the Language in which the Description must be entered.
+
+Validation Rules:
+Mandatory Field.
+Up to 35 type A (alphanumeric) characters. */
+        DESCRIPTION : T24BusinessTypes:A required
+            @i18n:Label (en=Description)
+            @i18n:Tooltip (en=Description)
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, multiLanguage=true, sysNumber=1.0, core=true, t24Name=DESCRIPTION, mandatory=true)
+    }
+    SEAT_COMPONENT__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=22.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+/* This application defines the order in which the SEAT.COMPONENT to be tested.
+Component specified in the MASTER SEAT component runs first followed
+by the LINK SEAT component. */
+    SEAT_COMP_SCENARIO
+        @i18n:Description (en="")
+        @t24:i (t24Name=SEAT.COMP.SCENARIO, level=I, type=H, allowedFunctions="A C D E H I L P Q R S", localRefAllowed=false)
+    {
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=21.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=22.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=18.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=19.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=15.0, core=true, t24Name=CURR.NO, mandatory=false)
+        DATE_TIME -> byValue SE_Foundation:SEAT_COMP_SCENARIO__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=20.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        DESCRIPTION -> byValue SE_Foundation:SEAT_COMP_SCENARIO__DESCRIPTION *
+            @t24:i (t24Name=DESCRIPTION)
+        INPUTTER -> byValue SE_Foundation:SEAT_COMP_SCENARIO__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        LINK_RESULT -> byValue SE_Foundation:SEAT_COMP_SCENARIO__LINK_RESULT *
+            @t24:i (t24Name=LINK.RESULT)
+        LINK_SEAT_COMP -> byValue SE_Foundation:SEAT_COMP_SCENARIO__LINK_SEAT_COMP *
+            @t24:i (t24Name=LINK.SEAT.COMP)
+        MAIN_RESULT : T24BusinessTypes:N
+            @t24:i (align=L, inputBehaviour=N, maxLength=10, core=false, t24Name=MAIN.RESULT, genOperation="MASTER.SEAT.COMP>SEAT.COMPONENT.TEST>TEST.RESULT", mandatory=false)
+/* Name of the SEAT.COMPONENT to be tested initially.
+Must be a valid SEAT.COMPONENT. */
+        MASTER_SEAT_COMP -> SE_Foundation:SEAT_COMPONENT_TEST required
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=2.0, core=true, businessType=A, t24Name=MASTER.SEAT.COMP, mandatory=true)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=14.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        RESERVED_1 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=9, sysNumber=13.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_10 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=9, sysNumber=4.0, core=true, t24Name=RESERVED.10, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=9, sysNumber=12.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=9, sysNumber=11.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=9, sysNumber=10.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        RESERVED_5 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=9, sysNumber=9.0, core=true, t24Name=RESERVED.5, mandatory=false)
+        RESERVED_6 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=9, sysNumber=8.0, core=true, t24Name=RESERVED.6, mandatory=false)
+        RESERVED_7 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=9, sysNumber=7.0, core=true, t24Name=RESERVED.7, mandatory=false)
+        RESERVED_8 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=9, sysNumber=6.0, core=true, t24Name=RESERVED.8, mandatory=false)
+        RESERVED_9 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=9, sysNumber=5.0, core=true, t24Name=RESERVED.9, mandatory=false)
+/* Key to SEAT.COMP.SCENARIO.
+Must be alphanumeric.
+Should not exceed 35 characters. */
+        SEAT_SCEN_ID -> SE_Foundation:SEAT_COMP_SCENARIO PK required
+            @i18n:Label (en="SEAT Scenario Id")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=0.0, core=true, businessType=A, t24Name=SEAT.SCEN.ID, mandatory=true)
+    }
+    SEAT_COMP_SCENARIO__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=17.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    SEAT_COMP_SCENARIO__DESCRIPTION
+    {
+/* Description of the SEAT.COMP.SCENARIO.
+Language multi value field. */
+        DESCRIPTION : T24BusinessTypes:A required
+            @i18n:Label (en=Description)
+            @i18n:Tooltip (en=Description)
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, multiLanguage=true, sysNumber=1.0, core=true, t24Name=DESCRIPTION, mandatory=true)
+    }
+    SEAT_COMP_SCENARIO__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=16.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    SEAT_COMP_SCENARIO__LINK_RESULT
+    {
+        LINK_RESULT : T24BusinessTypes:N
+            @t24:i (align=L, inputBehaviour=N, maxLength=10, core=false, t24Name=LINK.RESULT, genOperation="LINK.SEAT.COMP>SEAT.COMPONENT.TEST>TEST.RESULT", mandatory=false)
+    }
+    SEAT_COMP_SCENARIO__LINK_SEAT_COMP
+    {
+/* Name of the SEAT.COMPONENT to be tested followed by the MASTER.SEAT.COMP
+Must be a valid SEAT.COMPONENT.
+Link SEAT.COMPONENT should not be a master seat component. */
+        LINK_SEAT_COMP -> SE_Foundation:SEAT_COMPONENT_TEST required
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=3.0, core=true, businessType=A, t24Name=LINK.SEAT.COMP, mandatory=true)
+    }
+    SE_REGRESSION_PARAM
+        @i18n:Description (en="")
+        @t24:i (t24Name=SE.REGRESSION.PARAM, level=I, type=H, allowedFunctions="A C D E H I L P Q R S", localRefApplicationSysNo=6.0, localRefAllowed=true)
+    {
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=15.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=16.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=12.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=13.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=9.0, core=true, t24Name=CURR.NO, mandatory=false)
+        DATE_TIME -> byValue SE_Foundation:SE_REGRESSION_PARAM__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DAY_RUN : SE_Foundation:SE_REGRESSION_PARAM__DAY_RUN
+            @t24:i (align=R, inputBehaviour=I, maxLength=35, sysNumber=2.0, core=true, t24Name=DAY.RUN, mandatory=false)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=14.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        DESCRIPTION -> byValue SE_Foundation:SE_REGRESSION_PARAM__DESCRIPTION *
+            @t24:i (t24Name=DESCRIPTION)
+        INPUTTER -> byValue SE_Foundation:SE_REGRESSION_PARAM__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        OVERRIDE -> byValue SE_Foundation:SE_REGRESSION_PARAM__OVERRIDE *
+            @t24:i (t24Name=OVERRIDE)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=8.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        RESERVED_1 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=5.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=4.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=3.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        TABLE_ID : SE_Foundation:SE_REGRESSION_PARAM__TABLE_ID PK required
+            @t24:i (align=L, inputBehaviour=I, maxLength=6, sysNumber=0.0, core=true, t24Name=TABLE.ID, mandatory=true)
+    }
+    SE_REGRESSION_PARAM__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=11.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    SE_REGRESSION_PARAM__DESCRIPTION
+    {
+        DESCRIPTION : T24BusinessTypes:A required
+            @i18n:Label (en=Description)
+            @i18n:Tooltip (en=Description)
+            @t24:i (align=L, inputBehaviour=I, maxLength=60, multiLanguage=true, sysNumber=1.0, core=true, t24Name=DESCRIPTION, mandatory=true)
+    }
+    SE_REGRESSION_PARAM__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=10.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    SE_REGRESSION_PARAM__OVERRIDE
+    {
+        OVERRIDE : T24BusinessTypes:N
+            @i18n:Label (en=Override)
+            @i18n:Tooltip (en="Overrides generated by this transaction")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=7.0, core=true, t24Name=OVERRIDE, mandatory=false)
+    }
+    SE_TEMPLATE_CHECK
+        @i18n:Description (en="")
+        @t24:i (t24Name=SE.TEMPLATE.CHECK, level=F, type=H, allowedFunctions="A C D E H I L P Q R S", localRefApplicationSysNo=89.0, localRefAllowed=true)
+    {
+        ACTIVITY_CODE -> byValue SE_Foundation:SE_TEMPLATE_CHECK__ACTIVITY_CODE *
+            @t24:i (t24Name=ACTIVITY.CODE)
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=98.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=99.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=95.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        BANK_ACCT -> byValue SE_Foundation:SE_TEMPLATE_CHECK__BANK_ACCT *
+            @t24:i (t24Name=BANK.ACCT)
+        BENEFICIARY_ACCOUNT_NO : T24BusinessTypes:S
+            @t24:i (align=L, inputBehaviour=I, maxLength=34, sysNumber=17.0, core=true, t24Name=BENEFICIARY.ACCOUNT.NO, mandatory=false)
+        BENEFICIARY_BIC : T24BusinessTypes:SW
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=19.0, core=true, t24Name=BENEFICIARY.BIC, mandatory=false)
+        BENEFICIARY_COUNTRY_CODE -> ST_Config:COUNTRY
+            @t24:i (align=L, inputBehaviour=I, maxLength=2, sysNumber=30.0, core=true, businessType=A, t24Name=BENEFICIARY.COUNTRY.CODE, mandatory=false)
+        BENEFICIARY_CUSTOMER : T24BusinessTypes:CUS
+            @t24:i (align=R, inputBehaviour=I, maxLength=35, sysNumber=20.0, core=true, t24Name=BENEFICIARY.CUSTOMER, mandatory=false)
+        BENEFICIARY_IBAN : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=18.0, core=true, t24Name=BENEFICIARY.IBAN, mandatory=false)
+        BENEFICIARY_ID -> ST_Payments:BENEFICIARY
+            @t24:i (align=L, inputBehaviour=I, maxLength=17, sysNumber=14.0, core=true, businessType=A, t24Name=BENEFICIARY.ID, mandatory=false)
+        BENEFICIARY_NAME : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=70, sysNumber=21.0, core=true, t24Name=BENEFICIARY.NAME, mandatory=false)
+        BENEFICIARY_TYPE : SE_Foundation:SE_TEMPLATE_CHECK__BENEFICIARY_TYPE
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=32.0, core=true, t24Name=BENEFICIARY.TYPE, mandatory=false)
+        BEN_POSTAL_ADDR -> byValue SE_Foundation:SE_TEMPLATE_CHECK__BEN_POSTAL_ADDR *
+            @t24:i (t24Name=BEN.POSTAL.ADDR)
+        BEN_POST_ADDR_LINE -> byValue SE_Foundation:SE_TEMPLATE_CHECK__BEN_POST_ADDR_LINE *
+            @t24:i (t24Name=BEN.POST.ADDR.LINE)
+        CHARGE_ACCOUNT -> AC_AccountOpening:ACCOUNT
+            @i18n:Label (en="Charge Debit Account")
+            @t24:i (align=L, inputBehaviour=F, maxLength=36, sysNumber=76.0, core=true, businessType=S, t24Name=CHARGE.ACCOUNT, mandatory=false)
+        CHARGE_TYPE -> byValue SE_Foundation:SE_TEMPLATE_CHECK__CHARGE_TYPE *
+            @t24:i (t24Name=CHARGE.TYPE)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=96.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CREDIT_ACCOUNT -> AC_AccountOpening:ACCOUNT
+            @i18n:Label (en="Credit Acct")
+            @t24:i (align=L, inputBehaviour=I, maxLength=36, sysNumber=15.0, core=true, businessType=ANT, t24Name=CREDIT.ACCOUNT, mandatory=false)
+        CREDIT_ACCOUNT_IBAN : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=16.0, core=true, t24Name=CREDIT.ACCOUNT.IBAN, mandatory=false)
+        CREDIT_VALUE_DATE : T24BusinessTypes:D
+            @i18n:Label (en="Credit Value Date")
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=83.0, core=true, t24Name=CREDIT.VALUE.DATE, mandatory=false)
+        CURRENT_STATE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=65, sysNumber=66.0, core=true, t24Name=CURRENT.STATE, mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=92.0, core=true, t24Name=CURR.NO, mandatory=false)
+        CUSTOMER -> ST_Customer:CUSTOMER
+            @i18n:Label (en=Customer)
+            @i18n:Tooltip (en="Customer Liability")
+            @t24:i (align=R, inputBehaviour=I, maxLength=35, sysNumber=2.0, core=true, businessType=CUS, t24Name=CUSTOMER, mandatory=false)
+        CUSTOMER_NAME : T24BusinessTypes:A
+            @i18n:Label (en="Customer Name")
+            @t24:i (align=L, inputBehaviour=I, maxLength=140, sysNumber=4.0, core=true, t24Name=CUSTOMER.NAME, mandatory=false)
+        CUT_OFF_TIME : T24BusinessTypes:TIME
+            @i18n:Label (en="Cut off time")
+            @i18n:Tooltip (en="Cut off time")
+            @t24:i (align=L, inputBehaviour=I, maxLength=5, sysNumber=84.0, core=true, t24Name=CUT.OFF.TIME, mandatory=false)
+        DATE_TIME -> byValue SE_Foundation:SE_TEMPLATE_CHECK__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DAY2_NBR_FLD10_PAYMENT_CHECK -> byValue SE_Foundation:SE_TEMPLATE_CHECK__DAY2_NBR_FLD10_PAYMENT_CHECK *
+            @t24:i (t24Name=DAY2.NBR.FLD10.PAYMENT.CHECK)
+        DAY2_NBR_FLD1_CUS -> ST_Customer:CUSTOMER
+            @t24:i (align=R, inputBehaviour=I, maxLength=35, sysNumber=13.0, core=true, businessType=CUS, t24Name=DAY2.NBR.FLD1.CUS, mandatory=false)
+        DAY2_NBR_FLD2_ADDR -> byValue SE_Foundation:SE_TEMPLATE_CHECK__DAY2_NBR_FLD2_ADDR *
+            @t24:i (t24Name=DAY2.NBR.FLD2.ADDR)
+        DAY2_NBR_FLD3_ACCT -> byValue SE_Foundation:SE_TEMPLATE_CHECK__DAY2_NBR_FLD3_ACCT *
+            @t24:i (t24Name=DAY2.NBR.FLD3.ACCT)
+        DAY2_NBR_FLD7_PAYMENT_TYPE : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=60, sysNumber=60.0, core=true, t24Name=DAY2.NBR.FLD7.PAYMENT.TYPE, mandatory=false)
+        DAY2_NBR_FLD8_PAYMENT_DATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=61.0, core=true, t24Name=DAY2.NBR.FLD8.PAYMENT.DATE, mandatory=false)
+        DAY2_NBR_FLD9_PAYMENT_NOTES -> byValue SE_Foundation:SE_TEMPLATE_CHECK__DAY2_NBR_FLD9_PAYMENT_NOTES *
+            @t24:i (t24Name=DAY2.NBR.FLD9.PAYMENT.NOTES)
+        DAY3_NBR_FLD1_MNEMONIC -> byValue SE_Foundation:SE_TEMPLATE_CHECK__DAY3_NBR_FLD1_MNEMONIC *
+            @t24:i (t24Name=DAY3.NBR.FLD1.MNEMONIC)
+        DAY3_NBR_FLD4_BEN_PST_CODE -> byValue SE_Foundation:SE_TEMPLATE_CHECK__DAY3_NBR_FLD4_BEN_PST_CODE *
+            @t24:i (t24Name=DAY3.NBR.FLD4.BEN.PST.CODE)
+        DAY4_NBR_FLD1_EMAIL -> byValue SE_Foundation:SE_TEMPLATE_CHECK__DAY4_NBR_FLD1_EMAIL *
+            @t24:i (t24Name=DAY4.NBR.FLD1.EMAIL)
+        DAY4_NBR_FLD4_BEN_MOBILE -> byValue SE_Foundation:SE_TEMPLATE_CHECK__DAY4_NBR_FLD4_BEN_MOBILE *
+            @t24:i (t24Name=DAY4.NBR.FLD4.BEN.MOBILE)
+        DAY4_NBR_FLD5_BEN_EMAIL -> byValue SE_Foundation:SE_TEMPLATE_CHECK__DAY4_NBR_FLD5_BEN_EMAIL *
+            @t24:i (t24Name=DAY4.NBR.FLD5.BEN.EMAIL)
+        DAY5_NBR_FLD5_ACCT_TITLE -> byValue SE_Foundation:SE_TEMPLATE_CHECK__DAY5_NBR_FLD5_ACCT_TITLE *
+            @t24:i (t24Name=DAY5.NBR.FLD5.ACCT.TITLE)
+        DAY5_NBR_FLD9_OTHER_ADDR : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=28.0, core=true, t24Name=DAY5.NBR.FLD9.OTHER.ADDR, mandatory=false)
+        DAY6_NBR_FLD1_COMMENT -> byValue SE_Foundation:SE_TEMPLATE_CHECK__DAY6_NBR_FLD1_COMMENT *
+            @t24:i (t24Name=DAY6.NBR.FLD1.COMMENT)
+        DEBIT_ACCOUNT -> AC_AccountOpening:ACCOUNT
+            @i18n:Label (en="Debit account")
+            @i18n:Tooltip (en="Indicates the account to be debited ")
+            @t24:i (align=L, inputBehaviour=I, maxLength=36, sysNumber=9.0, core=true, businessType=S, t24Name=DEBIT.ACCOUNT, mandatory=false)
+        DEBIT_ACCOUNT_IBAN : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=11.0, core=true, t24Name=DEBIT.ACCOUNT.IBAN, mandatory=false)
+        DEBIT_CURRENCY -> ST_CurrencyConfig:CURRENCY
+            @i18n:Label (en="Debit Currency")
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=10.0, core=true, businessType=CCY, t24Name=DEBIT.CURRENCY, mandatory=false)
+        DEBIT_VALUE_DATE : T24BusinessTypes:D
+            @i18n:Label (en="Debit Value Date")
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=12.0, core=true, t24Name=DEBIT.VALUE.DATE, mandatory=false)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=97.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        DESCRIPTION -> byValue SE_Foundation:SE_TEMPLATE_CHECK__DESCRIPTION *
+            @t24:i (t24Name=DESCRIPTION)
+        INPUTTER -> byValue SE_Foundation:SE_TEMPLATE_CHECK__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        INTERMED_ADDR -> byValue SE_Foundation:SE_TEMPLATE_CHECK__INTERMED_ADDR *
+            @t24:i (t24Name=INTERMED.ADDR)
+        INTERMED_BANK_ACC -> AC_AccountOpening:ACCOUNT
+            @t24:i (align=L, inputBehaviour=I, maxLength=36, sysNumber=51.0, core=true, businessType=A, t24Name=INTERMED.BANK.ACC, mandatory=false)
+        INTERMED_BANK_COUNTRY -> ST_Config:COUNTRY
+            @t24:i (align=L, inputBehaviour=I, maxLength=2, sysNumber=50.0, core=true, businessType=A, t24Name=INTERMED.BANK.COUNTRY, mandatory=false)
+        INTERMED_BANK_IBAN : T24BusinessTypes:SW
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=47.0, core=true, t24Name=INTERMED.BANK.IBAN, mandatory=false)
+        INTERMED_POSTAL_ADDR_LINE -> byValue SE_Foundation:SE_TEMPLATE_CHECK__INTERMED_POSTAL_ADDR_LINE *
+            @t24:i (t24Name=INTERMED.POSTAL.ADDR.LINE)
+        INTERNAL_STATUS : SE_Foundation:SE_TEMPLATE_CHECK__INTERNAL_STATUS
+            @t24:i (align=L, inputBehaviour=I, maxLength=10, sysNumber=64.0, core=true, t24Name=INTERNAL.STATUS, mandatory=false)
+        MANUAL_COMPLETE : SE_Foundation:SE_TEMPLATE_CHECK__MANUAL_COMPLETE
+            @t24:i (align=L, inputBehaviour=N, maxLength=3, sysNumber=74.0, core=true, t24Name=MANUAL.COMPLETE, mandatory=false)
+        MANUAL_PAY_STATUS_ADD_INFO : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=N, maxLength=65, sysNumber=73.0, core=true, t24Name=MANUAL.PAY.STATUS.ADD.INFO, mandatory=false)
+        MANUAL_STATUS_UPDATE_DATE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=65, sysNumber=75.0, core=true, t24Name=MANUAL.STATUS.UPDATE.DATE, mandatory=false)
+        ORDER_EXECUTION_DATE_TIME : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=65, sysNumber=65.0, core=true, t24Name=ORDER.EXECUTION.DATE.TIME, mandatory=false)
+        ORDER_TYPE : SE_Foundation:SE_TEMPLATE_CHECK__ORDER_TYPE
+            @i18n:Label (en="Order Type")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=68.0, core=true, t24Name=ORDER.TYPE, mandatory=false)
+        OVERRIDE -> byValue SE_Foundation:SE_TEMPLATE_CHECK__OVERRIDE *
+            @t24:i (t24Name=OVERRIDE)
+        PAYMENT_AMOUNT : T24BusinessTypes:AMT
+            @i18n:Label (en="Outstanding Amt")
+            @t24:i (align=R, inputBehaviour=I, maxLength=19, sysNumber=57.0, core=true, t24Name=PAYMENT.AMOUNT, mandatory=false)
+        PAYMENT_COMPLETE : SE_Foundation:SE_TEMPLATE_CHECK__PAYMENT_COMPLETE
+            @t24:i (align=L, inputBehaviour=E, maxLength=3, sysNumber=72.0, core=true, t24Name=PAYMENT.COMPLETE, mandatory=false)
+        PAYMENT_CURRENCY -> ST_CurrencyConfig:CURRENCY
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=56.0, core=true, businessType=CCY, t24Name=PAYMENT.CURRENCY, mandatory=false)
+        PAYMENT_EXECUTION_DATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=58.0, core=true, t24Name=PAYMENT.EXECUTION.DATE, mandatory=false)
+        PAYMENT_MODE : SE_Foundation:SE_TEMPLATE_CHECK__PAYMENT_MODE
+            @i18n:Label (en="Payment Mode")
+            @i18n:Tooltip (en="Mode of payment like account, cash, cheque etc.")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=59.0, core=true, t24Name=PAYMENT.MODE, mandatory=false)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=91.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        RESERVED_1 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=87.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=86.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=85.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=55.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        RESERVED_5 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=54.0, core=true, t24Name=RESERVED.5, mandatory=false)
+        RESERVED_6 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=53.0, core=true, t24Name=RESERVED.6, mandatory=false)
+        STATE_HIST -> byValue SE_Foundation:SE_TEMPLATE_CHECK__STATE_HIST *
+            @t24:i (t24Name=STATE.HIST)
+        TABLE_ID -> SE_Foundation:SE_TEMPLATE_CHECK PK required
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=0.0, core=true, businessType=A, t24Name=TABLE.ID, mandatory=true)
+    }
+    SE_TEMPLATE_CHECK__ACTIVITY_CODE
+    {
+        ACTIVITY_CODE : T24BusinessTypes:N
+            @i18n:Label (en="Activity Code")
+            @i18n:Tooltip (en="Indicates activity code")
+            @t24:i (align=R, inputBehaviour=I, maxLength=8, sysNumber=69.0, core=true, t24Name=ACTIVITY.CODE, mandatory=false)
+        MESSAGE_TYPE -> byValue SE_Foundation:SE_TEMPLATE_CHECK__ACTIVITY_CODE__MESSAGE_TYPE *
+            @t24:i (t24Name=MESSAGE.TYPE)
+    }
+    SE_TEMPLATE_CHECK__ACTIVITY_CODE__MESSAGE_TYPE
+    {
+        DELIVERY_REF : T24BusinessTypes:N
+            @i18n:Label (en="Delivery Ref")
+            @i18n:Tooltip (en="System generated Delivery ref key")
+            @t24:i (align=R, inputBehaviour=I, maxLength=70, sysNumber=71.0, core=true, t24Name=DELIVERY.REF, mandatory=false)
+        MESSAGE_TYPE : T24BusinessTypes:N
+            @i18n:Label (en="Message Type")
+            @i18n:Tooltip (en="Delivery message types generated for this record")
+            @t24:i (align=R, inputBehaviour=I, maxLength=35, sysNumber=70.0, core=true, t24Name=MESSAGE.TYPE, mandatory=false)
+    }
+    SE_TEMPLATE_CHECK__BANK_ACCT
+    {
+        ACCT_TITLE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=45.0, core=true, t24Name=ACCT.TITLE, mandatory=false)
+        BANK_ACCT -> AC_AccountOpening:ACCOUNT
+            @t24:i (align=L, inputBehaviour=I, maxLength=36, sysNumber=44.0, core=true, businessType=ANT, t24Name=BANK.ACCT, mandatory=false)
+        BANK_ADDR : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=46.0, core=true, t24Name=BANK.ADDR, mandatory=false)
+    }
+    SE_TEMPLATE_CHECK__BEN_POSTAL_ADDR
+    {
+        BEN_POSTAL_ADDR : T24BusinessTypes:SW
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=22.0, core=true, t24Name=BEN.POSTAL.ADDR, mandatory=false)
+    }
+    SE_TEMPLATE_CHECK__BEN_POST_ADDR_LINE
+    {
+        BEN_POST_ADDR_LINE : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=70, sysNumber=23.0, core=true, t24Name=BEN.POST.ADDR.LINE, mandatory=false)
+    }
+    SE_TEMPLATE_CHECK__CHARGE_TYPE
+    {
+        CHARGE_AMOUNT : T24BusinessTypes:AMT
+            @i18n:Label (en="Charge Amount")
+            @i18n:Tooltip (en="Indicates charge amount")
+            @t24:i (align=R, inputBehaviour=F, maxLength=19, sysNumber=82.0, core=true, t24Name=CHARGE.AMOUNT, mandatory=false)
+        CHARGE_CURRENCY -> ST_CurrencyConfig:CURRENCY
+            @i18n:Label (en="Charge Currency")
+            @t24:i (align=L, inputBehaviour=F, maxLength=3, sysNumber=79.0, core=true, businessType=CCY, t24Name=CHARGE.CURRENCY, mandatory=false)
+        CHARGE_DESCRIPTION : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=F, maxLength=50, sysNumber=78.0, core=true, t24Name=CHARGE.DESCRIPTION, mandatory=false)
+        CHARGE_TYPE : T24BusinessTypes:A
+            @i18n:Label (en="Charge Type")
+            @i18n:Tooltip (en="Type of Charge")
+            @t24:i (align=L, inputBehaviour=F, maxLength=20, sysNumber=77.0, core=true, t24Name=CHARGE.TYPE, mandatory=false)
+        DAY3_NBR_FLD3_CHRG_CATEG -> ST_Config:CATEGORY
+            @t24:i (align=R, inputBehaviour=F, maxLength=10, sysNumber=80.0, core=true, t24Name=DAY3.NBR.FLD3.CHRG.CATEG, mandatory=false)
+        DAY6_NBR_FLD2_CHRG_RATE : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=F, maxLength=3, sysNumber=81.0, core=true, t24Name=DAY6.NBR.FLD2.CHRG.RATE, mandatory=false)
+    }
+    SE_TEMPLATE_CHECK__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=94.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    SE_TEMPLATE_CHECK__DAY2_NBR_FLD10_PAYMENT_CHECK
+    {
+        DAY2_NBR_FLD10_PAYMENT_CHECK : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=60, sysNumber=63.0, core=true, t24Name=DAY2.NBR.FLD10.PAYMENT.CHECK, mandatory=false)
+    }
+    SE_TEMPLATE_CHECK__DAY2_NBR_FLD2_ADDR
+    {
+        DAY2_NBR_FLD2_ADDR : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=5.0, core=true, t24Name=DAY2.NBR.FLD2.ADDR, mandatory=false)
+        DAY3_NBR_FLD2_POST_CODE : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=35, sysNumber=7.0, core=true, t24Name=DAY3.NBR.FLD2.POST.CODE, mandatory=false)
+        POSTAL_ADDR : T24BusinessTypes:SW
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=6.0, core=true, t24Name=POSTAL.ADDR, mandatory=false)
+        POSTAL_ADDR_LINE : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=70, sysNumber=8.0, core=true, t24Name=POSTAL.ADDR.LINE, mandatory=false)
+    }
+    SE_TEMPLATE_CHECK__DAY2_NBR_FLD3_ACCT
+    {
+        DAY2_NBR_FLD3_ACCT -> AC_AccountOpening:ACCOUNT
+            @t24:i (align=L, inputBehaviour=I, maxLength=36, sysNumber=33.0, core=true, businessType=ANT, t24Name=DAY2.NBR.FLD3.ACCT, mandatory=false)
+        DAY2_NBR_FLD4_TEXT : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=34.0, core=true, t24Name=DAY2.NBR.FLD4.TEXT, mandatory=false)
+        DAY2_NBR_FLD5_CCY : T24BusinessTypes:CCY
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=35.0, core=true, t24Name=DAY2.NBR.FLD5.CCY, mandatory=false)
+        DAY2_NBR_FLD6_AMT : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=19, sysNumber=39.0, core=true, t24Name=DAY2.NBR.FLD6.AMT, mandatory=false)
+        DAY5_NBR_FLD1_CATEGORY -> byValue SE_Foundation:SE_TEMPLATE_CHECK__DAY2_NBR_FLD3_ACCT__DAY5_NBR_FLD1_CATEGORY *
+            @t24:i (t24Name=DAY5.NBR.FLD1.CATEGORY)
+    }
+    SE_TEMPLATE_CHECK__DAY2_NBR_FLD3_ACCT__DAY5_NBR_FLD1_CATEGORY
+    {
+        DAY5_NBR_FLD1_CATEGORY : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=10, sysNumber=36.0, core=true, t24Name=DAY5.NBR.FLD1.CATEGORY, mandatory=false)
+        DAY5_NBR_FLD2_NOTES : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=37.0, core=true, t24Name=DAY5.NBR.FLD2.NOTES, mandatory=false)
+        DAY5_NBR_FLD3_CAT_TYPE : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=10, sysNumber=38.0, core=true, t24Name=DAY5.NBR.FLD3.CAT.TYPE, mandatory=false)
+    }
+    SE_TEMPLATE_CHECK__DAY2_NBR_FLD9_PAYMENT_NOTES
+    {
+        DAY2_NBR_FLD9_PAYMENT_NOTES : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=60, sysNumber=62.0, core=true, t24Name=DAY2.NBR.FLD9.PAYMENT.NOTES, mandatory=false)
+    }
+    SE_TEMPLATE_CHECK__DAY3_NBR_FLD1_MNEMONIC
+    {
+        DAY3_NBR_FLD1_MNEMONIC : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=3.0, core=true, t24Name=DAY3.NBR.FLD1.MNEMONIC, mandatory=false)
+    }
+    SE_TEMPLATE_CHECK__DAY3_NBR_FLD4_BEN_PST_CODE
+    {
+        DAY3_NBR_FLD4_BEN_PST_CODE : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=10, sysNumber=31.0, core=true, t24Name=DAY3.NBR.FLD4.BEN.PST.CODE, mandatory=false)
+    }
+    SE_TEMPLATE_CHECK__DAY4_NBR_FLD1_EMAIL
+    {
+        DAY4_NBR_FLD1_EMAIL : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=40.0, core=true, t24Name=DAY4.NBR.FLD1.EMAIL, mandatory=false)
+        DAY4_NBR_FLD2_MOBILE : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=10, sysNumber=41.0, core=true, t24Name=DAY4.NBR.FLD2.MOBILE, mandatory=false)
+        DAY4_NBR_FLD3_PHONE : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=10, sysNumber=42.0, core=true, t24Name=DAY4.NBR.FLD3.PHONE, mandatory=false)
+        DAY5_NBR_FLD4_ADDR : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=40, sysNumber=43.0, core=true, t24Name=DAY5.NBR.FLD4.ADDR, mandatory=false)
+    }
+    SE_TEMPLATE_CHECK__DAY4_NBR_FLD4_BEN_MOBILE
+    {
+        DAY4_NBR_FLD4_BEN_MOBILE : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=35, sysNumber=24.0, core=true, t24Name=DAY4.NBR.FLD4.BEN.MOBILE, mandatory=false)
+        DAY5_NBR_FLD6_BEN_PHONE -> byValue SE_Foundation:SE_TEMPLATE_CHECK__DAY4_NBR_FLD4_BEN_MOBILE__DAY5_NBR_FLD6_BEN_PHONE *
+            @t24:i (t24Name=DAY5.NBR.FLD6.BEN.PHONE)
+        DAY5_NBR_FLD8_BEN_NOTES : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=27.0, core=true, t24Name=DAY5.NBR.FLD8.BEN.NOTES, mandatory=false)
+    }
+    SE_TEMPLATE_CHECK__DAY4_NBR_FLD4_BEN_MOBILE__DAY5_NBR_FLD6_BEN_PHONE
+    {
+        DAY5_NBR_FLD6_BEN_PHONE : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=35, sysNumber=25.0, core=true, t24Name=DAY5.NBR.FLD6.BEN.PHONE, mandatory=false)
+        DAY5_NBR_FLD7_BEN_ADDR : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=26.0, core=true, t24Name=DAY5.NBR.FLD7.BEN.ADDR, mandatory=false)
+    }
+    SE_TEMPLATE_CHECK__DAY4_NBR_FLD5_BEN_EMAIL
+    {
+        DAY4_NBR_FLD5_BEN_EMAIL : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=29.0, core=true, t24Name=DAY4.NBR.FLD5.BEN.EMAIL, mandatory=false)
+    }
+    SE_TEMPLATE_CHECK__DAY5_NBR_FLD5_ACCT_TITLE
+    {
+        DAY5_NBR_FLD5_ACCT_TITLE : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=60, multiLanguage=true, sysNumber=52.0, core=true, t24Name=DAY5.NBR.FLD5.ACCT.TITLE, mandatory=false)
+    }
+    SE_TEMPLATE_CHECK__DAY6_NBR_FLD1_COMMENT
+    {
+        DAY6_NBR_FLD1_COMMENT : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=40, multiLanguage=true, sysNumber=88.0, core=true, t24Name=DAY6.NBR.FLD1.COMMENT, mandatory=false)
+    }
+    SE_TEMPLATE_CHECK__DESCRIPTION
+    {
+        DESCRIPTION : T24BusinessTypes:A required
+            @i18n:Label (en=Description)
+            @i18n:Tooltip (en=Description)
+            @t24:i (align=L, inputBehaviour=I, maxLength=60, multiLanguage=true, sysNumber=1.0, core=true, t24Name=DESCRIPTION, mandatory=true)
+    }
+    SE_TEMPLATE_CHECK__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=93.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    SE_TEMPLATE_CHECK__INTERMED_ADDR
+    {
+        INTERMED_ADDR : T24BusinessTypes:SW
+            @i18n:Label (en="Intermediary Address")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=48.0, core=true, t24Name=INTERMED.ADDR, mandatory=false)
+    }
+    SE_TEMPLATE_CHECK__INTERMED_POSTAL_ADDR_LINE
+    {
+        INTERMED_POSTAL_ADDR_LINE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=70, sysNumber=49.0, core=true, t24Name=INTERMED.POSTAL.ADDR.LINE, mandatory=false)
+    }
+    SE_TEMPLATE_CHECK__OVERRIDE
+    {
+        OVERRIDE : T24BusinessTypes:N
+            @i18n:Label (en=Override)
+            @i18n:Tooltip (en="Overrides generated by this transaction")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=90.0, core=true, t24Name=OVERRIDE, mandatory=false)
+    }
+    SE_TEMPLATE_CHECK__STATE_HIST
+    {
+        STATE_HIST -> byValue SE_Foundation:SE_TEMPLATE_CHECK__STATE_HIST__STATE_HIST *
+            @t24:i (t24Name=STATE.HIST)
+    }
+    SE_TEMPLATE_CHECK__STATE_HIST__STATE_HIST
+    {
+        STATE_HIST : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=65, sysNumber=67.0, core=true, t24Name=STATE.HIST, mandatory=false)
+    }
+}
+Enumerations {
+    SEAT_COMPONENT_TEST__DEF_EXP_RESULT : mml:string
+        NULL=NULL
+        Y=Y
+    SEAT_COMPONENT_TEST__TEST_RESULT : mml:string
+        FAIL=FAIL
+        NULL=NULL
+        PASS=PASS
+    SEAT_COMPONENT__ARGUMENT_NAME__ARG_DIRECTION : mml:string
+        INCOMING=INCOMING
+        MODIFIED=MODIFIED
+        OUTGOING=OUTGOING
+    SEAT_COMPONENT__JAVA_ROUTINE : mml:string
+        NULL=NULL
+        YES=YES
+    SEAT_COMPONENT__PUBLISHED : mml:string
+        NULL=NULL
+        Y=Y
+    SE_REGRESSION_PARAM__DAY_RUN : mml:string
+        1=1
+        2=2
+        3=3
+        4=4
+        5=5
+        6=6
+        NULL=NULL
+    SE_REGRESSION_PARAM__TABLE_ID : mml:string
+        SYSTEM=SYSTEM
+    SE_TEMPLATE_CHECK__BENEFICIARY_TYPE : mml:string
+        GOVT=GOVT
+        NULL=NULL
+        ORGANISATION=ORGANISATION
+        PRIVATE=PRIVATE
+    SE_TEMPLATE_CHECK__INTERNAL_STATUS : mml:string
+        CANCEL=CANCEL
+        ERROR=ERROR
+        NULL=NULL
+        REJECT=REJECT
+        RETURN=RETURN
+    SE_TEMPLATE_CHECK__MANUAL_COMPLETE : mml:string
+        NULL=NULL
+        YES=YES
+    SE_TEMPLATE_CHECK__ORDER_TYPE : mml:string
+        BANK=BANK
+        CUSTOMER=CUSTOMER
+        NULL=NULL
+    SE_TEMPLATE_CHECK__PAYMENT_COMPLETE : mml:string
+        NULL=NULL
+        YES=YES
+    SE_TEMPLATE_CHECK__PAYMENT_MODE : mml:string
+        CASH=CASH
+        CHEQUE=CHEQUE
+        CREDIT_CARD=CREDIT.CARD
+        DEBIT_CARD=DEBIT.CARD
+        NULL=NULL
+}

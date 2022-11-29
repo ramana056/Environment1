@@ -1,0 +1,56 @@
+# UTF-8
+/* LMS Collections - Foundation */
+Domain LMSCOL_Foundation
+    @t24:i (module=LMSCOL)
+    @java:Package (value=com.temenos.t24.datamodel.lmscol.lmscol_foundation)
+namespace "http://www.temenos.com/t24/LMSCOL_Foundation"
+metamodelVersion 1.30.6
+Classes {
+    /* Loan repayment work file. */
+    CL_LN_PAY_WRK
+        @i18n:Description (en="")
+        @t24:i (t24Name=CL.LN.PAY.WRK, level=F, type=L, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        /* Activity Reference. */
+        AAA_ID : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=2.0, core=true, t24Name=AAA.ID, mandatory=false)
+        /* Account Number. */
+        AC_ID : T24BusinessTypes:A
+            @i18n:Label (en="Account No")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=1.0, core=true, t24Name=AC.ID, mandatory=false)
+        /* Repayment amount. */
+        AMOUNT_LCY : T24BusinessTypes:AMT
+            @i18n:Label (en="Amount Lcy")
+            @t24:i (align=R, inputBehaviour=I, maxLength=19, sysNumber=6.0, core=true, t24Name=AMOUNT.LCY, mandatory=false)
+        /* Charge amount repaid through the transaction. */
+        CHARGE : T24BusinessTypes:AMT
+            @i18n:Label (en=Charge)
+            @i18n:Tooltip (en="Defines the charges")
+            @t24:i (align=R, inputBehaviour=I, maxLength=19, sysNumber=9.0, core=true, t24Name=CHARGE, mandatory=false)
+        ID -> LMSCOL_Foundation:CL_LN_PAY_WRK PK required
+            @i18n:Label (en="Transaction Ref")
+            @i18n:Tooltip (en="Transaction Reference")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=0.0, core=true, businessType=A, t24Name="@ID", mandatory=true)
+        /* Interest amount repaid through the transaction. */
+        INTEREST : T24BusinessTypes:AMT
+            @i18n:Label (en=Interest)
+            @t24:i (align=R, inputBehaviour=I, maxLength=19, sysNumber=8.0, core=true, t24Name=INTEREST, mandatory=false)
+        /* Principal amount repaid through the transaction. */
+        PRINCIPAL : T24BusinessTypes:AMT
+            @i18n:Label (en=Principal)
+            @t24:i (align=R, inputBehaviour=I, maxLength=19, sysNumber=7.0, core=true, t24Name=PRINCIPAL, mandatory=false)
+        /* Transaction Reference. */
+        TRANS_REFERENCE : T24BusinessTypes:A
+            @i18n:Label (en="Transaction Ref")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=3.0, core=true, t24Name=TRANS.REFERENCE, mandatory=false)
+        /* Transaction code for the payment transaction . */
+        TXN_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Transaction Code")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=5.0, core=true, t24Name=TXN.CODE, mandatory=false)
+        /* Value date of the Payment transaction. */
+        VALUE_DATE : T24BusinessTypes:D
+            @i18n:Label (en="Value Date")
+            @i18n:Tooltip (en="Indicates the Value date of the Contract")
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=4.0, core=true, t24Name=VALUE.DATE, mandatory=false)
+    }
+}

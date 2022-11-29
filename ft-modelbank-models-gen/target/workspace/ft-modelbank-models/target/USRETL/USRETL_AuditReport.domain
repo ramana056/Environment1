@@ -1,0 +1,247 @@
+# UTF-8
+/* History Inquiries */
+Domain USRETL_AuditReport
+    @t24:i (module=USRETL)
+    @java:Package (value=com.temenos.t24.datamodel.usretl.usretl_auditreport)
+namespace "http://www.temenos.com/t24/USRETL_AuditReport"
+metamodelVersion 1.30.6
+Classes {
+    NOFILE_APPLN_FIELD_LIST
+        @i18n:Description (en="")
+        @t24:i (t24Name=NOFILE.APPLN.FIELD.LIST, level=I, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        APPLN_FIELD : T24BusinessTypes:N
+            @t24:i (align=L, inputBehaviour=N, maxLength=25, core=false, t24Name=APPLN.FIELD, genOperation=USRETL.E.GET.APPLN.FLDS, mandatory=true)
+        PROPERTY_CLASS -> AA_ProductFramework:AA_PROPERTY_CLASS
+            @i18n:Label (en="Property Class")
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, core=false, t24Name=PROPERTY.CLASS, mandatory=false)
+        TABLE_NAME -> EB_SystemTables:FILE_CONTROL
+            @t24:i (align=R, inputBehaviour=N, maxLength=40, core=false, t24Name=TABLE.NAME, mandatory=false)
+    }
+    NOFILE_HISTORY_AUDIT_LOG
+        @i18n:Description (en="")
+        @t24:i (t24Name=NOFILE.HISTORY.AUDIT.LOG, level=I, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        ACCOUNT -> AC_AccountOpening:ACCOUNT
+            @i18n:Label (en=Account)
+            @i18n:Tooltip (en="Identifies the customer account")
+            @t24:i (align=R, inputBehaviour=N, maxLength=36, core=false, t24Name=ACCOUNT, mandatory=false)
+        AUDIT_LOG_HIS : T24BusinessTypes:N
+            @t24:i (align=L, inputBehaviour=N, maxLength=25, core=false, t24Name=AUDIT.LOG.HIS, genOperation=USRETL.E.HISTORY.AUDIT.LOG, mandatory=true)
+        AUDIT_REPORT_ID -> USRETL_AuditReport:USRETL_AUDIT_REPORT
+            @t24:i (align=R, inputBehaviour=N, maxLength=40, core=false, t24Name=AUDIT.REPORT.ID, mandatory=false)
+        AUTHORIZER -> EB_Security:USER
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, core=false, t24Name=AUTHORIZER, mandatory=false)
+        DATE_FROM : T24BusinessTypes:D
+            @i18n:Label (en="Date From")
+            @t24:i (align=R, inputBehaviour=N, maxLength=11, core=false, t24Name=DATE.FROM, mandatory=false)
+        DATE_TO : T24BusinessTypes:D
+            @i18n:Label (en="Date To")
+            @t24:i (align=R, inputBehaviour=N, maxLength=11, core=false, t24Name=DATE.TO, mandatory=false)
+        INPUTTER -> EB_Security:USER
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, core=false, t24Name=INPUTTER, mandatory=false)
+        RECORD_ID -> AC_AccountOpening:ACCOUNT
+            @i18n:Label (en="Record Id")
+            @t24:i (align=R, inputBehaviour=N, maxLength=36, core=false, t24Name=RECORD.ID, mandatory=false)
+    }
+/* This is an user inputtable table to define audit log inquiry details.
+A record has to be created for each application which needs to be tracked for changes on specific set of fields. */
+    USRETL_AUDIT_REPORT
+        @i18n:Description (en="")
+        @t24:i (t24Name=USRETL.AUDIT.REPORT, level=I, type=H, allowedFunctions="A C D E H I L P Q R S", localRefApplicationSysNo=35.0, localRefAllowed=true)
+    {
+/* This field used to indicate that the report should show audit history of all property class for arrangement account.
+When this field flaged as YES then property class and primary fields will be used only to extract field label and linked values.
+The search will not be based on given property class and changes on primary field. */
+        ALL_PROPERTY_CLASS : USRETL_AuditReport:USRETL_AUDIT_REPORT__ALL_PROPERTY_CLASS
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=21.0, core=true, t24Name=ALL.PROPERTY.CLASS, mandatory=false)
+        /* A valid t24 Application must be entered, and which the inquiry must run against. */
+        APPLICATION -> EB_SystemTables:FILE_CONTROL
+            @i18n:Label (en=Application)
+            @t24:i (align=L, inputBehaviour=I, maxLength=40, sysNumber=3.0, core=true, businessType=ANY, t24Name=APPLICATION, mandatory=false)
+/* User must select YES or NO from a Check box.
+This selection determines if the inquiry is for an arrangement by selecting, or another application. */
+        ARR_ENQUIRY : USRETL_AuditReport:USRETL_AUDIT_REPORT__ARR_ENQUIRY required
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=2.0, core=true, t24Name=ARR.ENQUIRY, mandatory=true)
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=44.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=45.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=41.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=42.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=38.0, core=true, t24Name=CURR.NO, mandatory=false)
+        DATE_TIME -> byValue USRETL_AuditReport:USRETL_AUDIT_REPORT__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=43.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        DESCRIPTION -> byValue USRETL_AuditReport:USRETL_AUDIT_REPORT__DESCRIPTION *
+            @t24:i (t24Name=DESCRIPTION)
+        /* The Record ID is defined by the user for each variation of an inquiry they create. */
+        ID -> USRETL_AuditReport:USRETL_AUDIT_REPORT PK required
+            @i18n:Label (en="Transaction Ref")
+            @i18n:Tooltip (en="Transaction Reference")
+            @t24:i (align=L, inputBehaviour=I, maxLength=40, sysNumber=0.0, core=true, businessType=ANY, t24Name="@ID", mandatory=true)
+        INPUTTER -> byValue USRETL_AuditReport:USRETL_AUDIT_REPORT__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        OVERRIDE -> byValue USRETL_AuditReport:USRETL_AUDIT_REPORT__OVERRIDE *
+            @t24:i (t24Name=OVERRIDE)
+        PRIMARY_FIELD -> byValue USRETL_AuditReport:USRETL_AUDIT_REPORT__PRIMARY_FIELD *
+            @t24:i (t24Name=PRIMARY.FIELD)
+        /* A valid Product Line must be entered and is the sole Product Line that the inquiry must run against. */
+        PRODUCT_LINE -> AA_ProductFramework:AA_PRODUCT_LINE
+            @i18n:Label (en="Product Line")
+            @t24:i (align=L, inputBehaviour=I, maxLength=20, sysNumber=4.0, core=true, businessType=A, t24Name=PRODUCT.LINE, mandatory=false)
+        PROPERTY_CLASS -> byValue USRETL_AuditReport:USRETL_AUDIT_REPORT__PROPERTY_CLASS *
+            @t24:i (t24Name=PROPERTY.CLASS)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=37.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        RESERVED_1 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=34.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_10 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=25.0, core=true, t24Name=RESERVED.10, mandatory=false)
+        RESERVED_11 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=24.0, core=true, t24Name=RESERVED.11, mandatory=false)
+        RESERVED_12 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=23.0, core=true, t24Name=RESERVED.12, mandatory=false)
+        RESERVED_13 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=22.0, core=true, t24Name=RESERVED.13, mandatory=false)
+        RESERVED_15 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=17.0, core=true, t24Name=RESERVED.15, mandatory=false)
+        RESERVED_16 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=16.0, core=true, t24Name=RESERVED.16, mandatory=false)
+        RESERVED_17 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=12.0, core=true, t24Name=RESERVED.17, mandatory=false)
+        RESERVED_18 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=11.0, core=true, t24Name=RESERVED.18, mandatory=false)
+        RESERVED_19 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=10.0, core=true, t24Name=RESERVED.19, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=33.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_20 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=9.0, core=true, t24Name=RESERVED.20, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=32.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=31.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        RESERVED_5 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=30.0, core=true, t24Name=RESERVED.5, mandatory=false)
+        RESERVED_6 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=29.0, core=true, t24Name=RESERVED.6, mandatory=false)
+        RESERVED_7 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=28.0, core=true, t24Name=RESERVED.7, mandatory=false)
+        RESERVED_8 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=27.0, core=true, t24Name=RESERVED.8, mandatory=false)
+        RESERVED_9 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=26.0, core=true, t24Name=RESERVED.9, mandatory=false)
+        SECONDARY_FIELD -> byValue USRETL_AuditReport:USRETL_AUDIT_REPORT__SECONDARY_FIELD *
+            @t24:i (t24Name=SECONDARY.FIELD)
+    }
+    USRETL_AUDIT_REPORT__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=40.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    USRETL_AUDIT_REPORT__DESCRIPTION
+    {
+/* Each Audit Log Definition record must require the user to provide unique description.
+The description must be used as the title or header on the inquiry output/extract. */
+        DESCRIPTION : T24BusinessTypes:A required
+            @i18n:Label (en=Description)
+            @i18n:Tooltip (en=Description)
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, multiLanguage=true, sysNumber=1.0, core=true, t24Name=DESCRIPTION, mandatory=true)
+    }
+    USRETL_AUDIT_REPORT__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=39.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    USRETL_AUDIT_REPORT__OVERRIDE
+    {
+        OVERRIDE : T24BusinessTypes:N
+            @i18n:Label (en=Override)
+            @i18n:Tooltip (en="Overrides generated by this transaction")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=36.0, core=true, t24Name=OVERRIDE, mandatory=false)
+    }
+    USRETL_AUDIT_REPORT__PRIMARY_FIELD
+    {
+        /* The field must contain a valid field name(s) of the Application provided above, and which is used as the primary search criteria for the inquiry. */
+        PRIMARY_FIELD : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=30, sysNumber=13.0, core=true, t24Name=PRIMARY.FIELD, mandatory=false)
+        PRIMFIELD_LABEL : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=15.0, core=true, t24Name=PRIMFIELD.LABEL, mandatory=false)
+/* "An optional field must allow users to further define where the inquiry must locate and retrieve the value (enrichment) to display.
+This may be needed for a field that might be part of a table and the Record @ID of the table is not descriptive enough to the end user.
+If the Linked Description is defined then the inquiry must display the Linked Description as either the Old Value or New Values in the inquiry.
+Example – If SECTOR is selected as the Primary Field or Secondary Field, the return value might be the Sector code 1000.
+Whereas, if in addition to SECTOR, the Linked Description is defined (SECTOR > DESCRIPTION) the return value would be 'Individual' */
+        PRIM_LINK_DESC : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=60, sysNumber=14.0, core=true, t24Name=PRIM.LINK.DESC, mandatory=false)
+    }
+    USRETL_AUDIT_REPORT__PROPERTY_CLASS
+    {
+        AA_PRIMARY_FIELD -> byValue USRETL_AuditReport:USRETL_AUDIT_REPORT__PROPERTY_CLASS__AA_PRIMARY_FIELD *
+            @t24:i (t24Name=AA.PRIMARY.FIELD)
+        /* A valid Property Class of the Property Line must be entered and is the Property Class that the inquiry must run against. */
+        PROPERTY_CLASS -> AA_ProductFramework:AA_PROPERTY_CLASS
+            @i18n:Label (en="Property Class")
+            @t24:i (align=L, inputBehaviour=I, maxLength=20, sysNumber=5.0, core=true, businessType=A, t24Name=PROPERTY.CLASS, mandatory=false)
+    }
+    USRETL_AUDIT_REPORT__PROPERTY_CLASS__AA_PRIMARY_FIELD
+    {
+        /* The field must contain a valid field name(s) of the Property Class provided, and which is used as the primary search criteria for the inquiry. */
+        AA_PRIMARY_FIELD : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=30, sysNumber=6.0, core=true, t24Name=AA.PRIMARY.FIELD, mandatory=false)
+/* The field used to assign the label for corresponding primary field.
+This label will be displayed in the history enquiry to represent the actual field name as primary field header. */
+        AA_PRIM_FLD_LABEL : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=8.0, core=true, t24Name=AA.PRIM.FLD.LABEL, mandatory=false)
+/* An optional field must allow users to further define where the inquiry must locate and retrieve the value (enrichment) to display.
+This may be needed for a field that might be part of a table and the Record @ID of the table is not descriptive enough to the end user.
+If the Linked Description is defined then the inquiry must display the Linked Description as either the Old Value or New Values in the inquiry.
+Example – If SECTOR is selected as the Primary Field or Secondary Field, the return value might be the Sector code 1000.
+Whereas, if in addition to SECTOR, the Linked Description is defined (SECTOR > DESCRIPTION) the return value would be 'Individual' */
+        AA_PRIM_LINK_DESC : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=60, sysNumber=7.0, core=true, t24Name=AA.PRIM.LINK.DESC, mandatory=false)
+    }
+    USRETL_AUDIT_REPORT__SECONDARY_FIELD
+    {
+/* The field must contain a valid field name of the Application provided above.
+The inquiry of the Secondary Fields is predicated on the primary field(s) returning at least one changed value, if not, the secondary fields will not be included in the inquiry search. */
+        SECONDARY_FIELD : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=30, sysNumber=18.0, core=true, t24Name=SECONDARY.FIELD, mandatory=false)
+/* The field used to assign the label for corresponding secondary field.
+This label will be displayed in the history enquiry to represent the actual field name as secondary field header. */
+        SECOND_FIELD_LABEL : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=20.0, core=true, t24Name=SECOND.FIELD.LABEL, mandatory=false)
+        /* An optional field must allow users to further define where the inquiry must locate and retrieve the value (enrichment) to display as same as primary link description. */
+        SECOND_LINK_DESC : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=60, sysNumber=19.0, core=true, t24Name=SECOND.LINK.DESC, mandatory=false)
+    }
+}
+Enumerations {
+    USRETL_AUDIT_REPORT__ALL_PROPERTY_CLASS : mml:string
+        NO=NO
+        YES=YES
+    USRETL_AUDIT_REPORT__ARR_ENQUIRY : mml:string
+        NO=NO
+        YES=YES
+}

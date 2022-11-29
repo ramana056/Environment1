@@ -1,0 +1,650 @@
+# UTF-8
+/* Legal Entitiy Identifier Framework */
+Domain LE_Framework
+    @t24:i (module=LE)
+    @java:Package (value=com.temenos.t24.datamodel.le.le_framework)
+namespace "http://www.temenos.com/t24/LE_Framework"
+metamodelVersion 1.30.6
+Classes {
+    /* The providers of LEI reference data such as Global Legal Entity Identifier Foundation (GLEIF) or SWIFT LEI publishes the updated LEI files daily. These files contain the content of the individual files, published by the Legal Entity Identifier (LEI) issuing organizations, which list all LEIs issued to legal entities and related LEI reference data. The data provides information on a legal entity identifiable with an LEI. The files are available for download  on the provider’s website for e.g., GLEIF website and the LEI data users such as financial firms who seek to obtain frequently updated information on LEIs and related reference data (either a subset or complete set) will be required to download the file. The downloaded information will be referenced during business validations and therefore need to be stored. Within Temenos Core Banking the table LE.DIRECTORY provides the capability to store these LEI related common Data .  The data is uploaded into the table from the external sources through interfaces. */
+    LE_DIRECTORY
+        @i18n:Description (en="")
+        @t24:i (t24Name=LE.DIRECTORY, level=I, type=H, allowedFunctions="A C D E H I L P Q R S", localRefApplicationSysNo=41.0, localRefAllowed=true)
+    {
+/* The date at which the information was first collected by the Managing LOU.
+
+Mandatory Field.
+Validation Rules:
+Date Field. */
+        ASSIGNED_DATE : T24BusinessTypes:D required
+            @i18n:Label (en="Assigned Date")
+            @t24:i (align=R, inputBehaviour=I, maxLength=8, sysNumber=23.0, core=true, t24Name=ASSIGNED.DATE, mandatory=true)
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=49.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=50.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=46.0, core=true, t24Name=AUTHORISER, mandatory=false)
+/* SWIFT BIC code of the entity.
+
+Optional Field.
+Validation Rules:
+Upto 11 Alphanumeric Characters. */
+        BIC_CODE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=11, sysNumber=30.0, core=true, t24Name=BIC.CODE, mandatory=false)
+/* The identifier of the Entity at the indicated registration authority.
+
+Optional Field.
+Validation Rules:
+Upto 150 Alphanumeric Characters. */
+        BSNSS_REG_ENTITY_ID : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=150, sysNumber=29.0, core=true, t24Name=BSNSS.REG.ENTITY.ID, mandatory=false)
+/* The name of the Entity at the indicated registration authority.
+
+Optional Field.
+Validation Rules:
+Upto 150 Alphanumeric Characters. */
+        BSNSS_REG_NAME : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=150, sysNumber=28.0, core=true, t24Name=BSNSS.REG.NAME, mandatory=false)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=47.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=43.0, core=true, t24Name=CURR.NO, mandatory=false)
+        DATE_TIME -> byValue LE_Framework:LE_DIRECTORY__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=48.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        ENTITY_ADDRESS_1 -> byValue LE_Framework:LE_DIRECTORY__ENTITY_ADDRESS_1 *
+            @t24:i (t24Name=ENTITY.ADDRESS.1)
+        ENTITY_ADDRESS_2 -> byValue LE_Framework:LE_DIRECTORY__ENTITY_ADDRESS_2 *
+            @t24:i (t24Name=ENTITY.ADDRESS.2)
+        ENTITY_ADDRESS_3 -> byValue LE_Framework:LE_DIRECTORY__ENTITY_ADDRESS_3 *
+            @t24:i (t24Name=ENTITY.ADDRESS.3)
+/* Indicates (where applicable) the category of Entity identified by this LEI Data Record, as a more specific category within the broad definition given in ISO 17442.
+
+Optional Field
+Validation Rules:
+Options Field with options:
+BRANCH - The Legal Entity is a branch of another Legal Entity
+FUND - The Legal Entity is a fund managed by another Legal Entity
+SOLE.PROPRIETER - The Legal Entity is an individual acting in a business capacity */
+        ENTITY_CATEGORY : LE_Framework:LE_DIRECTORY__ENTITY_CATEGORY
+            @i18n:Label (en="Entity Category")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=19.0, core=true, t24Name=ENTITY.CATEGORY, mandatory=false)
+        ENTITY_CITY -> byValue LE_Framework:LE_DIRECTORY__ENTITY_CITY *
+            @t24:i (t24Name=ENTITY.CITY)
+        ENTITY_COUNTRY -> byValue LE_Framework:LE_DIRECTORY__ENTITY_COUNTRY *
+            @t24:i (t24Name=ENTITY.COUNTRY)
+        ENTITY_NAME -> byValue LE_Framework:LE_DIRECTORY__ENTITY_NAME *
+            @t24:i (t24Name=ENTITY.NAME)
+        ENTITY_POST_CODE -> byValue LE_Framework:LE_DIRECTORY__ENTITY_POST_CODE *
+            @t24:i (t24Name=ENTITY.POST.CODE)
+        ENTITY_REGION -> byValue LE_Framework:LE_DIRECTORY__ENTITY_REGION *
+            @t24:i (t24Name=ENTITY.REGION)
+/* The status of Legal Entity.
+
+Mandatory Field
+Validation Rules:
+Options Field with options:
+ACTIVE - As of the last report or update, the Legal Entity reported that it was legally registered and operating.
+INACTIVE - It has been determined that the Entity that was assigned the LEI is no longer legally registered and/or operating, whether as a result of business closure, acquisition by or merger with another (or new) Entity, or determination of illegitimacy. */
+        ENTITY_STATUS : LE_Framework:LE_DIRECTORY__ENTITY_STATUS required
+            @i18n:Label (en="Entity Status")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=20.0, core=true, t24Name=ENTITY.STATUS, mandatory=true)
+/* The date the Legal Entity ceased operation or was merged. This is associated with the entity expiration reason or otherwise omitted.
+
+Optional Field
+Validation Rules:
+Date field. */
+        EXPIRED_DATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=8, sysNumber=21.0, core=true, t24Name=EXPIRED.DATE, mandatory=false)
+/* The reason that a Legal Entity ceased to operate. This element SHALL be present if EntityExpirationDate is present, and omitted otherwise.
+
+Conditionally mandatory Field. If EXPIRED.DATE is mentioned then this field becomes mandatory
+Validation Rules:
+Upto 20 Alphanumeric Characters. */
+        EXPIRED_REASON : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=20, sysNumber=22.0, core=true, t24Name=EXPIRED.REASON, mandatory=false)
+        HQ_ADDRESS_1 -> byValue LE_Framework:LE_DIRECTORY__HQ_ADDRESS_1 *
+            @t24:i (t24Name=HQ.ADDRESS.1)
+        HQ_ADDRESS_2 -> byValue LE_Framework:LE_DIRECTORY__HQ_ADDRESS_2 *
+            @t24:i (t24Name=HQ.ADDRESS.2)
+        HQ_ADDRESS_3 -> byValue LE_Framework:LE_DIRECTORY__HQ_ADDRESS_3 *
+            @t24:i (t24Name=HQ.ADDRESS.3)
+        HQ_CITY -> byValue LE_Framework:LE_DIRECTORY__HQ_CITY *
+            @t24:i (t24Name=HQ.CITY)
+        HQ_COUNTRY -> byValue LE_Framework:LE_DIRECTORY__HQ_COUNTRY *
+            @t24:i (t24Name=HQ.COUNTRY)
+        HQ_POST_CODE -> byValue LE_Framework:LE_DIRECTORY__HQ_POST_CODE *
+            @t24:i (t24Name=HQ.POST.CODE)
+        HQ_REGION -> byValue LE_Framework:LE_DIRECTORY__HQ_REGION *
+            @t24:i (t24Name=HQ.REGION)
+        INPUTTER -> byValue LE_Framework:LE_DIRECTORY__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+/* The LEI code of the LEI Issuer that is responsible for administering this LEI Record.
+
+Optional Field.
+Validation Rules:
+Upto 20 Alphanumeric Characters. */
+        ISSUER_LEI : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=20, sysNumber=27.0, core=true, t24Name=ISSUER.LEI, mandatory=false)
+/* The date at which the information was most recently updated by the Managing LOU.
+
+Optional Field.
+Validation Rules:
+Date Field.
+Will be updated to TODAY after every update. */
+        LAST_UPD_DATE : T24BusinessTypes:D
+            @i18n:Label (en="Last Update Date")
+            @t24:i (align=R, inputBehaviour=N, maxLength=8, sysNumber=24.0, core=true, t24Name=LAST.UPD.DATE, mandatory=false)
+/* The jurisdiction of legal formation and registration of the Entity (and on which the Legalform data element is also dependent).
+
+Optional Field
+Validation Rules:
+Upto 10 Alphanumeric Characters. */
+        LEGAL_JURISDICTION : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=10, sysNumber=18.0, core=true, t24Name=LEGAL.JURISDICTION, mandatory=false)
+/* The 20 character LEI of the Legal Entity described by this LEI Data Record.
+
+Validation Rules:
+
+Upto 20 Alphanumeric Characters. */
+        LE_DIRECTORY_ID -> LE_Framework:LE_DIRECTORY PK required
+            @i18n:Label (en="Legal Entity Id")
+            @t24:i (align=L, inputBehaviour=I, maxLength=20, sysNumber=0.0, core=true, businessType=A, t24Name=LE.DIRECTORY.ID, mandatory=true)
+/* The next date by which the LEI information must be renewed and re-certified by the Legal Entity.
+
+Mandatory Field.
+Validation Rules:
+Date Field. */
+        NEXT_RENEWAL_DATE : T24BusinessTypes:D required
+            @i18n:Label (en="Next Renewal Date")
+            @t24:i (align=R, inputBehaviour=I, maxLength=8, sysNumber=26.0, core=true, t24Name=NEXT.RENEWAL.DATE, mandatory=true)
+/* An optional list of OtherName elements (providing all types of names other than the Primary Legal Name) for the Entity. Transliterated versions of names are provided in a separate element.
+
+Optional Field
+Validation Rules:
+Up to 320 Alphanumeric Characters. */
+        OTH_ENTITY_NAME : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=320, sysNumber=2.0, core=true, t24Name=OTH.ENTITY.NAME, mandatory=false)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=42.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+/* The status of the Legal Entity's LEI Record registration with the Managing LOU.
+
+Mandatory Field.
+Validation Rules:
+Following are the possible options for the status:
+PENDING.VALIDATION - An application for an LEI that has been submitted and which is being processed and validated
+ISSUED - An LEI Registration that has been validated and issued, and which identifies an Entity that was an operating Legal Entity as of the last update
+LAPSED -  An LEI registration that has not been renewed by the NextRenewalDate and is not known by public sources to have ceased operation
+MERGED - An LEI registration for an Entity that has been merged into another Legal Entity, such that this Legal Entity no longer exists as an operating Entity
+RETIRED - An LEI registration for an Entity that has ceased operation, without having been merged into another Entity
+CANCELLED - An LEI registration that was abandoned prior to issuance of an LEI
+ANNULLED - An LEI registration that was marked as erroneous or invalid after it was issued
+DUPLICATE - An LEI Registration that has been determined to be a duplicate registration of the same Legal Entity as another LEI Registration; the DUPLICATE status is assigned to the non-surviving registration (i.e. the LEI that should no longer be used)
+TRANSFERRED - An LEI registration that has been transferred to a different LOU as the managing LOU
+PENDING.ARCHIVAL - An LEI registration is about to be transferred to a different LOU, after which its registration status will revert to a non-pending status
+PENDING.TRANSFER - An LEI registration that has been requested to be transferred to another LOU. The request is being processed at the sending LOU */
+        REGISTRATION_STATUS : LE_Framework:LE_DIRECTORY__REGISTRATION_STATUS required
+            @i18n:Label (en="Registration Status")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=25.0, core=true, t24Name=REGISTRATION.STATUS, mandatory=true)
+        RESERVED_01 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=40.0, core=true, t24Name=RESERVED.01, mandatory=false)
+        RESERVED_02 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=39.0, core=true, t24Name=RESERVED.02, mandatory=false)
+        RESERVED_03 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=38.0, core=true, t24Name=RESERVED.03, mandatory=false)
+        RESERVED_04 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=37.0, core=true, t24Name=RESERVED.04, mandatory=false)
+        RESERVED_05 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=36.0, core=true, t24Name=RESERVED.05, mandatory=false)
+        RESERVED_06 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=35.0, core=true, t24Name=RESERVED.06, mandatory=false)
+        RESERVED_07 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=34.0, core=true, t24Name=RESERVED.07, mandatory=false)
+        RESERVED_08 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=33.0, core=true, t24Name=RESERVED.08, mandatory=false)
+        RESERVED_09 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=32.0, core=true, t24Name=RESERVED.09, mandatory=false)
+        RESERVED_10 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=31.0, core=true, t24Name=RESERVED.10, mandatory=false)
+/* An optional list of ASCII-transliterated (i.e. Latin or Romanized) representations of names for the Legal Entity.
+
+Optional Field
+Validation Rules:
+Up to 320 Alphanumeric Characters. */
+        TRANSLITERATED_OTH_NAME : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=320, sysNumber=3.0, core=true, t24Name=TRANSLITERATED.OTH.NAME, mandatory=false)
+    }
+    LE_DIRECTORY__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=45.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    LE_DIRECTORY__ENTITY_ADDRESS_1
+    {
+/* The address of the Entity as recorded in the registration of the Entity in its legal jurisdiction.
+
+Data elements include:
+One mandatory FirstAddressLine
+An optional AddressNumber taken from the FirstAddressLine
+An optional AddressNumberWithinBuilding taken from the FirstAddressLine
+An optional MailRouting taken from the FirstAddressLine
+0-3 optional AdditionalAddressLine elements
+City
+Region
+Country
+PostalCode
+
+Validation Rules:
+Multi-language Field
+Upto 200 Alphanumeric Characters. */
+        ENTITY_ADDRESS_1 : T24BusinessTypes:A required
+            @t24:i (align=L, inputBehaviour=I, maxLength=200, multiLanguage=true, sysNumber=4.0, core=true, t24Name=ENTITY.ADDRESS.1, mandatory=true)
+    }
+    LE_DIRECTORY__ENTITY_ADDRESS_2
+    {
+        ENTITY_ADDRESS_2 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=200, multiLanguage=true, sysNumber=5.0, core=true, t24Name=ENTITY.ADDRESS.2, mandatory=false)
+    }
+    LE_DIRECTORY__ENTITY_ADDRESS_3
+    {
+        ENTITY_ADDRESS_3 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=200, multiLanguage=true, sysNumber=6.0, core=true, t24Name=ENTITY.ADDRESS.3, mandatory=false)
+    }
+    LE_DIRECTORY__ENTITY_CITY
+    {
+        ENTITY_CITY : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=70, multiLanguage=true, sysNumber=7.0, core=true, t24Name=ENTITY.CITY, mandatory=false)
+    }
+    LE_DIRECTORY__ENTITY_COUNTRY
+    {
+        ENTITY_COUNTRY : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=2, multiLanguage=true, sysNumber=9.0, core=true, t24Name=ENTITY.COUNTRY, mandatory=false)
+    }
+    LE_DIRECTORY__ENTITY_NAME
+    {
+/* The Legal Name of the Entity. If an Entity is in a jurisdiction with more than one Legal Name (e.g in different languages), this is the Primary Legal Name.
+
+Mandatory Field
+Multi-language Field
+Validation Rules:
+Up to 320 Alphanumeric Characters. */
+        ENTITY_NAME : T24BusinessTypes:A required
+            @i18n:Label (en="Entity Name")
+            @t24:i (align=L, inputBehaviour=I, maxLength=320, multiLanguage=true, sysNumber=1.0, core=true, t24Name=ENTITY.NAME, mandatory=true)
+    }
+    LE_DIRECTORY__ENTITY_POST_CODE
+    {
+        ENTITY_POST_CODE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=70, multiLanguage=true, sysNumber=10.0, core=true, t24Name=ENTITY.POST.CODE, mandatory=false)
+    }
+    LE_DIRECTORY__ENTITY_REGION
+    {
+        ENTITY_REGION : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=70, multiLanguage=true, sysNumber=8.0, core=true, t24Name=ENTITY.REGION, mandatory=false)
+    }
+    LE_DIRECTORY__HQ_ADDRESS_1
+    {
+/* The address of the headquarters of the Entity.
+
+Data elements include:
+One mandatory FirstAddressLine
+An optional AddressNumber taken from the FirstAddressLine
+An optional AddressNumberWithinBuilding taken from the FirstAddressLine
+An optional MailRouting taken from the FirstAddressLine
+0-3 optional AdditionalAddressLine elements
+City
+Region
+Country
+PostalCode
+
+Validation Rules:
+Multi-language Field
+Upto 200 Alphanumeric Characters. */
+        HQ_ADDRESS_1 : T24BusinessTypes:A required
+            @t24:i (align=L, inputBehaviour=I, maxLength=200, multiLanguage=true, sysNumber=11.0, core=true, t24Name=HQ.ADDRESS.1, mandatory=true)
+    }
+    LE_DIRECTORY__HQ_ADDRESS_2
+    {
+        HQ_ADDRESS_2 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=200, multiLanguage=true, sysNumber=12.0, core=true, t24Name=HQ.ADDRESS.2, mandatory=false)
+    }
+    LE_DIRECTORY__HQ_ADDRESS_3
+    {
+        HQ_ADDRESS_3 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=200, multiLanguage=true, sysNumber=13.0, core=true, t24Name=HQ.ADDRESS.3, mandatory=false)
+    }
+    LE_DIRECTORY__HQ_CITY
+    {
+        HQ_CITY : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=70, multiLanguage=true, sysNumber=14.0, core=true, t24Name=HQ.CITY, mandatory=false)
+    }
+    LE_DIRECTORY__HQ_COUNTRY
+    {
+        HQ_COUNTRY : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=2, multiLanguage=true, sysNumber=16.0, core=true, t24Name=HQ.COUNTRY, mandatory=false)
+    }
+    LE_DIRECTORY__HQ_POST_CODE
+    {
+        HQ_POST_CODE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=70, multiLanguage=true, sysNumber=17.0, core=true, t24Name=HQ.POST.CODE, mandatory=false)
+    }
+    LE_DIRECTORY__HQ_REGION
+    {
+        HQ_REGION : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=70, multiLanguage=true, sysNumber=15.0, core=true, t24Name=HQ.REGION, mandatory=false)
+    }
+    LE_DIRECTORY__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=44.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    /* This parameter table allows applications in T24 to define set of rules to identify eligible transactions for LEI validations. This also provides option to configure rules to determine the eligibility of the parties involved in the transaction. The rules should be either defined through T24 Rule Engine option or through an API. Absence of a record in the LE.ELIGIBILITY.PARAM for an application means the application is not eligible for the LEI validations. */
+    LE_ELIGIBILITY_PARAM
+        @i18n:Description (en="")
+        @t24:i (t24Name=LE.ELIGIBILITY.PARAM, level=I, type=H, allowedFunctions="A C D E H I L P Q R S", localRefApplicationSysNo=15.0, localRefAllowed=true)
+    {
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=33.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=34.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=30.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=31.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=27.0, core=true, t24Name=CURR.NO, mandatory=false)
+        DATE_TIME -> byValue LE_Framework:LE_ELIGIBILITY_PARAM__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=32.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+/* This field will be introduced to mark a specific type of transaction whether it is classified as DERIVATIVE from the MIFID II perspective.
+Y indicates derivative and Null or N is considered a non-derivative */
+        DERIVATIVE : LE_Framework:LE_ELIGIBILITY_PARAM__DERIVATIVE
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=12.0, core=true, t24Name=DERIVATIVE, mandatory=false)
+/* API to identify whether a customer is eligible for LEI Validations
+The input arguments to this API are application Id, application record and the output arguments are the eligbility flag –YES or NO and errorMessages if any. All these are followed by a reserved argument at the end.
+
+Optional Field
+Validation Rules:
+Valid EB.API record
+If both this field and ELG.RULE field do not hold any value then all the transactions under this application are assumed eligible for LEI/NCI check */
+        ELG_API -> EB_SystemTables:EB_API
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=3.0, core=true, businessType=HOOK, t24Name=ELG.API, mandatory=false)
+/* RULE to identify whether a customer is eligible for LEI Validations
+
+Optional Field
+Validation Rules:
+Valid EB.RULE.GATEWAY
+Usage of ELG.RULE and ELG.API are mutually exclusive if defined */
+        ELG_RULE -> EB_RulesEngine:EB_RULE_GATEWAY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=2.0, core=true, businessType=A, t24Name=ELG.RULE, mandatory=false)
+        EXCLUDE_COMP -> byValue LE_Framework:LE_ELIGIBILITY_PARAM__EXCLUDE_COMP *
+            @t24:i (t24Name=EXCLUDE.COMP)
+        INPUTTER -> byValue LE_Framework:LE_ELIGIBILITY_PARAM__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+/* Holds the ID of LE.ELIGIBILITY.PARAM.
+
+Validation Rules:
+
+Valid Application or Valid Application*Valid T24 Company.
+Valid Application*Valid T24 Company is allowed only when valid application parameter record already exists. */
+        LE_ELIGIBILITY_PARAM_ID -> LE_Framework:LE_ELIGIBILITY_PARAM PK required
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=0.0, core=true, businessType=A, t24Name=LE.ELIGIBILITY.PARAM.ID, mandatory=true)
+/* Indicates whether Error should be thrown by the application or an override when LEI check fails
+
+Mandatory Field
+Validation Rules:
+Default will be set to OVERRIDE */
+        OVERRIDE_ERROR : LE_Framework:LE_ELIGIBILITY_PARAM__OVERRIDE_ERROR required
+            @i18n:Label (en="Override Error")
+            @i18n:Tooltip (en="Determines which type of error to display")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=13.0, core=true, t24Name=OVERRIDE.ERROR, mandatory=true)
+        PARTY_FIELD -> byValue LE_Framework:LE_ELIGIBILITY_PARAM__PARTY_FIELD *
+            @t24:i (t24Name=PARTY.FIELD)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=26.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        RESERVED_01 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=25.0, core=true, t24Name=RESERVED.01, mandatory=false)
+        RESERVED_02 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=24.0, core=true, t24Name=RESERVED.02, mandatory=false)
+        RESERVED_03 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=23.0, core=true, t24Name=RESERVED.03, mandatory=false)
+        RESERVED_04 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=22.0, core=true, t24Name=RESERVED.04, mandatory=false)
+        RESERVED_05 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=21.0, core=true, t24Name=RESERVED.05, mandatory=false)
+        RESERVED_06 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=20.0, core=true, t24Name=RESERVED.06, mandatory=false)
+        RESERVED_07 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=19.0, core=true, t24Name=RESERVED.07, mandatory=false)
+        RESERVED_08 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=18.0, core=true, t24Name=RESERVED.08, mandatory=false)
+        RESERVED_09 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=17.0, core=true, t24Name=RESERVED.09, mandatory=false)
+        RESERVED_10 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=16.0, core=true, t24Name=RESERVED.10, mandatory=false)
+        TXN_DATE_FLD : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=14.0, core=true, t24Name=TXN.DATE.FLD, mandatory=false)
+    }
+    LE_ELIGIBILITY_PARAM__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=29.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    LE_ELIGIBILITY_PARAM__EXCLUDE_COMP
+    {
+/* Company to be excluded for LEI Validations
+
+Optional Field
+Validation Rules:
+Valid T24 company
+Input allowed only for APPLICATION record and not with the company suffixed record.
+If a company is specified in this field in the main APPLICATION record, input of an ID with that company code is restricted. */
+        EXCLUDE_COMP -> ST_CompanyCreation:COMPANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=10, sysNumber=1.0, core=true, businessType=COM, t24Name=EXCLUDE.COMP, mandatory=false)
+    }
+    LE_ELIGIBILITY_PARAM__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=28.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    LE_ELIGIBILITY_PARAM__PARTY_FIELD
+    {
+/* API to identify whether a customer is eligible for LEI Validations
+The input arguments to this API are customer Id, Customer record and the output arguments are the eligbility flag –YES or NO and errorMessages if any. All these are followed by a reserved argument at the end.
+
+Optional Field
+Validation Rules:
+Valid EB.API record
+If both this field and ELG.RULE field do not hold any value then all the transactions under this application are assumed eligible for LEI/NCI check */
+        PARTY_ELG_API -> EB_SystemTables:EB_API
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=6.0, core=true, businessType=HOOK, t24Name=PARTY.ELG.API, mandatory=false)
+/* RULE to identify whether a customer is eligible for LEI Validations
+
+Optional Field
+Validation Rules:
+Valid EB.RULE.GATEWAY
+Usage of ELG.RULE and ELG.API are mutually exclusive if defined */
+        PARTY_ELG_RULE -> EB_RulesEngine:EB_RULE_GATEWAY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=5.0, core=true, businessType=A, t24Name=PARTY.ELG.RULE, mandatory=false)
+/* Mandatory fields from the respective application (both core and local reference fields if any) which represent the parties to the transactions and for whom the LEI/NCI validations to be applied
+
+Optional Field
+Validation Rules:
+The fields defined here must always contain the ID of a valid record in CUSTOMER application from T24
+The values of the fields defined here is always a valid record in CUSTOMER application from T24. */
+        PARTY_FIELD : T24BusinessTypes:A required
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=4.0, core=true, t24Name=PARTY.FIELD, mandatory=true)
+        PARTY_RESERVED_1 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=11.0, core=true, t24Name=PARTY.RESERVED.1, mandatory=false)
+        PARTY_RESERVED_2 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=10.0, core=true, t24Name=PARTY.RESERVED.2, mandatory=false)
+        PARTY_RESERVED_3 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=9.0, core=true, t24Name=PARTY.RESERVED.3, mandatory=false)
+        PARTY_RESERVED_4 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=8.0, core=true, t24Name=PARTY.RESERVED.4, mandatory=false)
+        PARTY_RESERVED_5 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=7.0, core=true, t24Name=PARTY.RESERVED.5, mandatory=false)
+    }
+    /* This parameter table allows configuring rules to identify the type of customers for validating the identifiers. The rules should be either defined through T24 Rule Engine option or through an API. */
+    LE_PARAMETER
+        @i18n:Description (en="")
+        @t24:i (t24Name=LE.PARAMETER, level=I, type=H, allowedFunctions="A C D E H I L P Q R S", localRefApplicationSysNo=14.0, localRefAllowed=true)
+    {
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=22.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=23.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=19.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=20.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=16.0, core=true, t24Name=CURR.NO, mandatory=false)
+        DATE_TIME -> byValue LE_Framework:LE_PARAMETER__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=21.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+/* API to identify whether a customer is an individual customer or an entity or a sub-fund customer. This should return a value of NCI or LEI or SUB.FUND respectively. The input arguments to this API are Customer ID, Customer Record and the output arguments are EntityType and Error followed by an argument reserved for future use.
+
+Optional Field
+Validation Rules:
+Should be a valid EB.API id
+Upto 65 Alphanumeric Characters.
+Either ENTITY.API or ENTITY.RULE is mandatory */
+        ENTITY_API -> EB_SystemTables:EB_API
+            @i18n:Label (en="Entity Api")
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=2.0, core=true, businessType=A, t24Name=ENTITY.API, mandatory=false)
+/* RULE to identify whether a customer is an individual customer or an entity or a sub-fund customer. This should return a value of NCI or LEI or SUB.FUND respectively.
+
+Optional Field
+Validation Rules:
+Should be a valid EB.RULE.GATEWAY id
+Upto 65 Alphanumeric Characters.
+Either ENTITY.API or ENTITY.RULE is mandatory */
+        ENTITY_RULE -> EB_RulesEngine:EB_RULE_GATEWAY
+            @i18n:Label (en="Entity Rule")
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=1.0, core=true, businessType=A, t24Name=ENTITY.RULE, mandatory=false)
+        INPUTTER -> byValue LE_Framework:LE_PARAMETER__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+/* Holds the ID of LE.PARAMETER.
+
+Validation Rules:
+
+Valid T24 Company.
+Should be the Customer Company. */
+        LE_PARAMETER_ID -> LE_Framework:LE_PARAMETER PK required
+            @t24:i (align=L, inputBehaviour=I, maxLength=10, sysNumber=0.0, core=true, businessType=COM, t24Name=LE.PARAMETER.ID, mandatory=true)
+/* Field that defines the number of days, which will be used to process an override message during LEI transaction control. The override is to notify the end user that an LEI is due for renewal in XXX days.
+
+Optional Field
+Validation Rules:
+Numbers between 1 and 999 are allowed. */
+        NOTIFY_EXP_DAYS : T24BusinessTypes:N
+            @i18n:Label (en="Notify Expiry Days")
+            @t24:i (align=R, inputBehaviour=I, maxLength=3, sysNumber=3.0, core=true, t24Name=NOTIFY.EXP.DAYS, mandatory=false)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=15.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        RESERVED_01 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=13.0, core=true, t24Name=RESERVED.01, mandatory=false)
+        RESERVED_02 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=12.0, core=true, t24Name=RESERVED.02, mandatory=false)
+        RESERVED_03 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=11.0, core=true, t24Name=RESERVED.03, mandatory=false)
+        RESERVED_04 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=10.0, core=true, t24Name=RESERVED.04, mandatory=false)
+        RESERVED_05 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=9.0, core=true, t24Name=RESERVED.05, mandatory=false)
+        RESERVED_06 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=8.0, core=true, t24Name=RESERVED.06, mandatory=false)
+        RESERVED_07 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=7.0, core=true, t24Name=RESERVED.07, mandatory=false)
+        RESERVED_08 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=6.0, core=true, t24Name=RESERVED.08, mandatory=false)
+        RESERVED_09 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=5.0, core=true, t24Name=RESERVED.09, mandatory=false)
+        RESERVED_10 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=4.0, core=true, t24Name=RESERVED.10, mandatory=false)
+    }
+    LE_PARAMETER__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=18.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    LE_PARAMETER__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=17.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+}
+Enumerations {
+    LE_DIRECTORY__ENTITY_CATEGORY : mml:string
+        BRANCH=BRANCH
+        FUND=FUND
+        SOLE_PROPRIETOR=SOLE.PROPRIETOR
+    LE_DIRECTORY__ENTITY_STATUS : mml:string
+        ACTIVE=ACTIVE
+        INACTIVE=INACTIVE
+    LE_DIRECTORY__REGISTRATION_STATUS : mml:string
+        ANNULLED=ANNULLED
+        CANCELLED=CANCELLED
+        DUPLICATE=DUPLICATE
+        ISSUED=ISSUED
+        LAPSED=LAPSED
+        MERGED=MERGED
+        PENDING_ARCHIVAL=PENDING.ARCHIVAL
+        PENDING_TRANSFER=PENDING.TRANSFER
+        PENDING_VALIDATION=PENDING.VALIDATION
+        RETIRED=RETIRED
+        TRANSFERRED=TRANSFERRED
+    LE_ELIGIBILITY_PARAM__DERIVATIVE : mml:string
+        NO=NO
+        YES=YES
+    LE_ELIGIBILITY_PARAM__OVERRIDE_ERROR : mml:string
+        ERROR=ERROR
+        OVERRIDE=OVERRIDE
+}

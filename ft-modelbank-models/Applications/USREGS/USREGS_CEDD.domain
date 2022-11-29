@@ -1,0 +1,434 @@
+# UTF-8
+/* Enhanced KYC */
+Domain USREGS_CEDD
+    @t24:i (module=USREGS)
+    @java:Package (value=com.temenos.t24.datamodel.usregs.usregs_cedd)
+namespace "http://www.temenos.com/t24/USREGS_CEDD"
+metamodelVersion 1.30.6
+Classes {
+    /* This Application contains Enhanced due diligence and Political information about any "Customer" which the bank has dealings with. */
+    CEDD_CUSTOMER
+        @i18n:Description (en="")
+        @t24:i (t24Name=CEDD.CUSTOMER, nonStop=true, level=C, type=H, allowedFunctions="A C D E H I L P Q R S", localRefAllowed=false)
+    {
+        ACCOUNT_TYPES -> byValue USREGS_CEDD:CEDD_CUSTOMER__ACCOUNT_TYPES *
+            @t24:i (t24Name=ACCOUNT.TYPES)
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=72.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=73.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=69.0, core=true, t24Name=AUTHORISER, mandatory=false)
+/* It shows whether the customer expects to do cash or marketable securities collateralized loans.
+Validation Rule: Optional Field.
+Dropdown Field.
+Dropdown Button values are 'Yes' and 'No'. */
+        CASH_COLL_LOANS : USREGS_CEDD:CEDD_CUSTOMER__CASH_COLL_LOANS
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=50.0, core=true, t24Name=CASH.COLL.LOANS, mandatory=false)
+/* It shows whether the customer expects to perform cash transactions.
+Validation Rule: Optional Field.
+Dropdown Field
+Dropdown Button values are 'Yes' and 'No' */
+        CASH_TRANS : USREGS_CEDD:CEDD_CUSTOMER__CASH_TRANS
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=40.0, core=true, t24Name=CASH.TRANS, mandatory=false)
+/* Anticipated amount per cash transaction
+Validation Rule: Text Field
+Standard T24 AMOUNT field.
+Mandatory field if the field CASH.TRANS = 'Yes'.
+No input field if the field CASH.TRANS = 'No'. */
+        CASH_TRANS_AMT : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=25, sysNumber=42.0, core=true, t24Name=CASH.TRANS.AMT, mandatory=false)
+/* Anticipated number of cash transactions per month
+Validation Rule:  Text Field. Max 4 numeric characters
+Mandatory field if the field CASH.TRANS = 'Yes'.
+No input field if the field CASH.TRANS = 'No'. */
+        CASH_TRANS_PER_MTH : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=4, sysNumber=41.0, core=true, t24Name=CASH.TRANS.PER.MTH, mandatory=false)
+/* It shows any additional comments to be added. Optional Field.
+Validation Rule: Text Field. Maximum 35 Alphanumeric Character */
+        COMMENTS : T24BusinessTypes:A
+            @i18n:Label (en=Comments)
+            @i18n:Tooltip (en="Comments if any")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=31.0, core=true, t24Name=COMMENTS, mandatory=false)
+/* Shows the country name of the government owned corporation. This field is mandatory field if the field SR.EXECUTIVE = 'Yes' or else this is no input field.
+Validation Rule: Dropdown Field. Dropdown will show values from COUNTRY table. */
+        CORP_CNTY -> ST_Config:COUNTRY
+            @t24:i (align=L, inputBehaviour=I, maxLength=4, sysNumber=11.0, core=true, businessType=AAA, t24Name=CORP.CNTY, mandatory=false)
+/* It shows the name of the government owned corporation, where the customer is a senior executive. This field is mandatory if the field SR.EXECUTIVE = 'Yes' or else this is no input field
+Validation Rule: Text Field. Maximum 35 Alphanumeric Character */
+        CORP_NAME : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=10.0, core=true, t24Name=CORP.NAME, mandatory=false)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=70.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=66.0, core=true, t24Name=CURR.NO, mandatory=false)
+        DATE_TIME -> byValue USREGS_CEDD:CEDD_CUSTOMER__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=71.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+/* This field is used to indicate the date when customer exemption was reviewed last time.
+Validation Rule: Mandatory field if the field KYC.EXEMPT = 'Yes'. Date Field. Standard T24 Date Field. */
+        EXMPT_REV_DATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=53.0, core=true, t24Name=EXMPT.REV.DATE, mandatory=false)
+/* Shows the foreign country where the politically exposed person owns a corporation (fully or partially). This field is mandatory if field FCY.CORP= ‘Yes’, otherwise it is no input field.
+Validation Rule: Dropdown Field. Dropdown will show values from COUNTRY table */
+        FCY_CNTY -> ST_Config:COUNTRY
+            @t24:i (align=L, inputBehaviour=I, maxLength=4, sysNumber=24.0, core=true, businessType=AAA, t24Name=FCY.CNTY, mandatory=false)
+/* This field is used to indicate whether the politically exposed person owns corporation (fully or partially) or not
+Validation Rule: It is a Standard T24 Dropdown Button field with values ‘Yes’ and ‘No’, Optional Field. */
+        FCY_CORP : USREGS_CEDD:CEDD_CUSTOMER__FCY_CORP
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=23.0, core=true, t24Name=FCY.CORP, mandatory=false)
+/* Shows the name of department of the foreign ministry. This field is mandatory field if the field FCY.CORP = 'Yes' or else no input field.
+Validation Rule: Text Field. */
+        FCY_DEPT : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=26.0, core=true, t24Name=FCY.DEPT, mandatory=false)
+/* Shows the name of the particular ministry. This field is mandatory field if the field FCY.CORP = 'Yes' or else no input field.
+Validation Rule: Text Field, Maximum 20 Alphanumeric Character */
+        FCY_MINISTRY : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=20, sysNumber=25.0, core=true, t24Name=FCY.MINISTRY, mandatory=false)
+        ID -> USREGS_CEDD:CEDD_CUSTOMER PK required
+            @i18n:Label (en="Transaction Ref")
+            @i18n:Tooltip (en="Transaction Reference")
+            @t24:i (align=R, inputBehaviour=I, maxLength=16, sysNumber=0.0, core=true, businessType=CUS, t24Name="@ID", mandatory=true)
+        INPUTTER -> byValue USREGS_CEDD:CEDD_CUSTOMER__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+/* Shows whether the customer expects to conduct transactions in monetary instruments.
+Validation Rule: Optional Field.
+Dropdown Field.
+Dropdown Button values are 'Yes' and 'No'. */
+        INSTRUMENTS : USREGS_CEDD:CEDD_CUSTOMER__INSTRUMENTS
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=46.0, core=true, t24Name=INSTRUMENTS, mandatory=false)
+/* Transaction amount on monetary instrument
+Validation Rule:
+Standard T24 AMOUNT field.
+Mandatory if the field INSTRUMENTS = 'Yes' or else no input field. */
+        INSTRUMENTS_AMT : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=25, sysNumber=48.0, core=true, t24Name=INSTRUMENTS.AMT, mandatory=false)
+/* Number of transactions per month for Monetary Instruments.
+Validation Rule: Text Field. Max 4 numeric characters.
+Mandatory if the field INSTRUMENTS = 'Yes' or else no input field. */
+        INSTRUMENTS_NO : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=4, sysNumber=47.0, core=true, t24Name=INSTRUMENTS.NO, mandatory=false)
+/* It shows whether customer anticipates conducting international ACH transactions.
+Validation Rule: Optional Field.
+Dropdown Field.
+Dropdown Button values are 'Yes' and 'No'. */
+        INT_ACH_TRANS : USREGS_CEDD:CEDD_CUSTOMER__INT_ACH_TRANS
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=43.0, core=true, t24Name=INT.ACH.TRANS, mandatory=false)
+/* Amount of transactions per month for International ACH transactions.
+Validation Rule: Text Field.
+Standard T24 AMOUNT field.
+Mandatory if the field INT.ACH.TRANS = 'Yes' or else no input field. */
+        INT_ACH_TRANS_AMT : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=25, sysNumber=45.0, core=true, t24Name=INT.ACH.TRANS.AMT, mandatory=false)
+/* Number of transactions per month for International ACH transactions.
+Validation Rule: Text Field. Max 4 numeric characters
+Mandatory if the field INT.ACH.TRANS = 'Yes' or else no input field. */
+        INT_ACH_TRANS_NO : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=4, sysNumber=44.0, core=true, t24Name=INT.ACH.TRANS.NO, mandatory=false)
+        IN_CRS_BRDR_NO -> byValue USREGS_CEDD:CEDD_CUSTOMER__IN_CRS_BRDR_NO *
+            @t24:i (t24Name=IN.CRS.BRDR.NO)
+/* Shows whether the customer expects to be involved in any cross border transfers.
+Validation Rule: Optional Field. Dropdown Field. Dropdown Button values are 'Yes' and 'No'. */
+        IN_CRS_BRD_WIRE : USREGS_CEDD:CEDD_CUSTOMER__IN_CRS_BRD_WIRE
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=32.0, core=true, t24Name=IN.CRS.BRD.WIRE, mandatory=false)
+/* This field is used to indicate whether the customer is exempt from KYC process or not. Mandatory Field.
+Validation Rule: Dropdown Field. Dropdown values are 'Yes' and 'No'. */
+        KYC_EXEMPT : USREGS_CEDD:CEDD_CUSTOMER__KYC_EXEMPT
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=51.0, core=true, t24Name=KYC.EXEMPT, mandatory=false)
+/* This field is used to indicate the reason for customer being exempt from KYC process.
+Validation Rule:	Mandatory if the field KYC.EXEMPT = 'Yes'. Dropdown Field. The dropdown values are from EB.LOOKUP
+1 customer was acquired through a business combination (merger or acquisition).
+2 customer's only account with the institution was opened for the purpose of participating in an employee benefit plan established under ERISA.
+3 customer is a financial institution.
+4 customer is a government agency.
+5 customer is a publicly-held company. */
+        KYC_EXEMPT_REASON : USREGS_CEDD:CEDD_CUSTOMER__KYC_EXEMPT_REASON
+            @t24:i (align=R, inputBehaviour=I, maxLength=35, sysNumber=52.0, core=true, t24Name=KYC.EXEMPT.REASON, mandatory=false)
+        OUT_CRS_BRD_NO -> byValue USREGS_CEDD:CEDD_CUSTOMER__OUT_CRS_BRD_NO *
+            @t24:i (t24Name=OUT.CRS.BRD.NO)
+/* It shows whether the customer expects to do Outgoing cross border activities.
+Validation Rule: Optional Field.
+Dropdown Field.
+Dropdown Button values are 'Yes' and 'No'. */
+        OUT_CRS_BRD_WIRE : USREGS_CEDD:CEDD_CUSTOMER__OUT_CRS_BRD_WIRE
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=36.0, core=true, t24Name=OUT.CRS.BRD.WIRE, mandatory=false)
+        OVERRIDE -> byValue USREGS_CEDD:CEDD_CUSTOMER__OVERRIDE *
+            @t24:i (t24Name=OVERRIDE)
+/* Shows the political person’s percentage of ownership in the associated corporation or business. This is mandatory if the field POLITIC.CORP = 'Yes' or else no input field.
+Validation Rule:Text Field, Max 3 numeric characters, should be equal to or less than 100. */
+        OWNERSHIP_PERCENT : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=3, sysNumber=22.0, core=true, t24Name=OWNERSHIP.PERCENT, mandatory=false)
+/* Shows the country name of the political party. This field is mandatory field if the field SR.POLITICAL = 'Yes' or else no input field.
+Validation Rule: Dropdown Field: Dropdown will show values COUNTRY table. */
+        PARTY_CNTY -> ST_Config:COUNTRY
+            @t24:i (align=L, inputBehaviour=I, maxLength=4, sysNumber=8.0, core=true, businessType=A, t24Name=PARTY.CNTY, mandatory=false)
+/* Shows the Name of the political party which customer is a senior official at. This is mandatory if the field SR.POLITICAL = 'Yes' or else no input field.
+Validation Rule: Text Field. Maximum 35 Alphanumeric Character */
+        PARTY_NAME : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=7.0, core=true, t24Name=PARTY.NAME, mandatory=false)
+        POLITICAL : USREGS_CEDD:CEDD_CUSTOMER__POLITICAL
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=3.0, core=true, t24Name=POLITICAL, mandatory=false)
+/* This field is used to indicate whether the senior political person with whom customer has a close association or not
+Validation Rule: It is a Standard T24 Dropdown Button field with values ‘Yes’ and ‘No’, Optional Field. */
+        POLITIC_ASSOCIATE : USREGS_CEDD:CEDD_CUSTOMER__POLITIC_ASSOCIATE
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=15.0, core=true, t24Name=POLITIC.ASSOCIATE, mandatory=false)
+/* Shows the country to which the senior political person is associated with. This is mandatory if the field POLITIC.ASSOCIATE = 'Yes' or else no input field.
+Validation Rule: Dropdown Field. Dropdown will show values COUNTRY table. */
+        POLITIC_ASSOC_CNTY -> ST_Config:COUNTRY
+            @t24:i (align=L, inputBehaviour=I, maxLength=4, sysNumber=17.0, core=true, businessType=AAA, t24Name=POLITIC.ASSOC.CNTY, mandatory=false)
+/* Shows the name of the senior political Person  with whom the customer has a close association. This is mandatory if the field POLITIC.ASSOCIATE = 'Yes' or else no input field.
+Validation Rule: Text Field. Maximum 35 Alphanumeric Character */
+        POLITIC_ASSOC_NAME : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=16.0, core=true, t24Name=POLITIC.ASSOC.NAME, mandatory=false)
+/* Describes the relationship of the customer with the senior political person. This is mandatory if the field POLITIC.ASSOCIATE = Yes or else no input.
+Validation Rule: Text Field. Maximum 15 Alphanumeric Character. */
+        POLITIC_ASSOC_REL : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=15, sysNumber=18.0, core=true, t24Name=POLITIC.ASSOC.REL, mandatory=false)
+/* Shows the political country of the customer. This field is mandatory field if the field is POLITICAL = 'Yes' or else no input field.
+Validation Rule: Dropdown Field. Dropdown will show values COUNTRY table. */
+        POLITIC_CNTY -> ST_Config:COUNTRY
+            @t24:i (align=L, inputBehaviour=I, maxLength=4, sysNumber=5.0, core=true, businessType=A, t24Name=POLITIC.CNTY, mandatory=false)
+/* This field is used to indicate whether the politically exposed person who is associated with business/ corporation or not
+Validation Rule: It is a Standard T24 Dropdown Button field with values ‘Yes’ and ‘No’, Optional Field. */
+        POLITIC_CORP : USREGS_CEDD:CEDD_CUSTOMER__POLITIC_CORP
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=19.0, core=true, t24Name=POLITIC.CORP, mandatory=false)
+/* This field is used to indicate whether the customer is a politically Exposed person or not.
+Validation Rule: It is a Standard T24 Dropdown Button field, Optional Field and Text Field. */
+        POLITIC_EXPOSED : USREGS_CEDD:CEDD_CUSTOMER__POLITIC_EXPOSED
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=1.0, core=true, t24Name=POLITIC.EXPOSED, mandatory=false)
+/* Country of politically exposed person  who is associated with business/corporation. This is mandatory if the field POLITIC.CORP = 'Yes' or else no input field.
+Validation Rule: Dropdown Field. Dropdown will show values COUNTRY table. */
+        POLITIC_PERSN_CNTY -> ST_Config:COUNTRY
+            @t24:i (align=L, inputBehaviour=I, maxLength=4, sysNumber=21.0, core=true, businessType=AAA, t24Name=POLITIC.PERSN.CNTY, mandatory=false)
+/* Name of politically exposed person  who is associated with business/ corporation, This is mandatory if the field POLITIC.CORP = 'Yes' or else No input field.
+Validation Rule: Text Field, Maximum 35 Alphanumeric Character. */
+        POLITIC_PERSN_NAME : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=20.0, core=true, t24Name=POLITIC.PERSN.NAME, mandatory=false)
+/* This field shows political position of politically exposed person.
+Validation Rule: Text Field, This field is mandatory if the field POLITIC.EXPOSED Person is Yes. Maximum 35 Alphanumeric Character. */
+        POLITIC_POSITION : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=2.0, core=true, t24Name=POLITIC.POSITION, mandatory=false)
+/* This field is used to indicate whether the senior politically exposed person whom customer is related to or not
+Validation Rule: It is a Standard T24 Dropdown Button field with values ‘Yes’ and ‘No’, Optional Field. */
+        POLITIC_RELATIVE : USREGS_CEDD:CEDD_CUSTOMER__POLITIC_RELATIVE
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=12.0, core=true, t24Name=POLITIC.RELATIVE, mandatory=false)
+/* Shows the country name of the senior political person to whom the customer is related. This is mandatory if the field POLITIC.RELATIVE = 'Yes' or else no input field
+Validation Rule: Dropdown Field Dropdown will show values COUNTRY table. */
+        POLITIC_REL_CNTY -> ST_Config:COUNTRY
+            @t24:i (align=L, inputBehaviour=I, maxLength=4, sysNumber=14.0, core=true, businessType=AAA, t24Name=POLITIC.REL.CNTY, mandatory=false)
+/* Shows name of the senior politically exposed person whom customer is related to. This is mandatory if the field POLITIC.RELATIVE = 'Yes' or else no input field.
+Validation Rule: Text Field. Maximum 35 Alphanumeric Character */
+        POLITIC_REL_NAME : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=13.0, core=true, t24Name=POLITIC.REL.NAME, mandatory=false)
+/* Shows the political position of the customer. This is mandatory if the field POLITICAL = 'Yes' or else no input field.
+Validation Rule: Text Field. Maximum 35 Alphanumeric Character */
+        POLITIC_TITLE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=4.0, core=true, t24Name=POLITIC.TITLE, mandatory=false)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=65.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        RESERVED_1 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=63.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_10 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=54.0, core=true, t24Name=RESERVED.10, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=62.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=61.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=60.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        RESERVED_5 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=59.0, core=true, t24Name=RESERVED.5, mandatory=false)
+        RESERVED_6 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=58.0, core=true, t24Name=RESERVED.6, mandatory=false)
+        RESERVED_7 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=57.0, core=true, t24Name=RESERVED.7, mandatory=false)
+        RESERVED_8 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=56.0, core=true, t24Name=RESERVED.8, mandatory=false)
+        RESERVED_9 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=55.0, core=true, t24Name=RESERVED.9, mandatory=false)
+/* This field is used to indicate whether the customer is a senior executive  of the government owned corporation or not
+Validation Rule: It is a Standard T24 Dropdown Button field with values ‘Yes’ and ‘No’, Optional Field. */
+        SR_EXECUTIVE : USREGS_CEDD:CEDD_CUSTOMER__SR_EXECUTIVE
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=9.0, core=true, t24Name=SR.EXECUTIVE, mandatory=false)
+/* This field is used to indicate whether the customer is a senior political official or not
+Validation Rule: It is a Standard T24 Dropdown Button field with values ‘Yes’ and ‘No’, Optional Field. */
+        SR_POLITICAL : USREGS_CEDD:CEDD_CUSTOMER__SR_POLITICAL
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=6.0, core=true, t24Name=SR.POLITICAL, mandatory=false)
+/* It shows whether customer expects any trade finance activity.
+Validation Rule: Optional Field.
+Dropdown Field.
+Dropdown Button values are 'Yes' and 'No'. */
+        TRADE_FINANCE : USREGS_CEDD:CEDD_CUSTOMER__TRADE_FINANCE
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=49.0, core=true, t24Name=TRADE.FINANCE, mandatory=false)
+    }
+    CEDD_CUSTOMER__ACCOUNT_TYPES
+    {
+/* This field shows name of other account type . Mandatory field if the field ACCOUNT.TYPE is Other, Or else No input field
+Validation Rule: Maximum 35 Alphanumeric Character. */
+        ACCOUNT_OTHER : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=28.0, core=true, t24Name=ACCOUNT.OTHER, mandatory=false)
+/* It shows the anticipated customer account activity amount. Mandatory Field.
+Validation Rule: Dropdown Field. Dropdown will show below values from EB.LOOKUP.
+- Up to $100,000,
+- More than $100,000 and less than $500,000,
+- $500,000 or more. */
+        ACCOUNT_SIZE : USREGS_CEDD:CEDD_CUSTOMER__ACCOUNT_TYPES__ACCOUNT_SIZE
+            @t24:i (align=R, inputBehaviour=I, maxLength=35, sysNumber=29.0, core=true, t24Name=ACCOUNT.SIZE, mandatory=false)
+/* It shows the types of accounts of the customer. Mandatory Field
+Validation Rule: Dropdown Field. Multivalued field. Dropdown will show below values from EB.LOOKUP.
+Checking
+Savings
+Time Deposits
+Credit Facilities
+Investments
+Other */
+        ACCOUNT_TYPES : USREGS_CEDD:CEDD_CUSTOMER__ACCOUNT_TYPES__ACCOUNT_TYPES
+            @t24:i (align=R, inputBehaviour=I, maxLength=35, sysNumber=27.0, core=true, t24Name=ACCOUNT.TYPES, mandatory=false)
+/* It shows anticipated number of transactions per month for a customer.
+Validation Rule: Mandatory Field. Text Field. Dropdown will show below values from EB.LOOKUP.
+- Up to 5
+- More than 5 and less than 15
+- 15 or more */
+        TRANS_PER_MTH : USREGS_CEDD:CEDD_CUSTOMER__ACCOUNT_TYPES__TRANS_PER_MTH
+            @t24:i (align=R, inputBehaviour=I, maxLength=35, sysNumber=30.0, core=true, t24Name=TRANS.PER.MTH, mandatory=false)
+    }
+    CEDD_CUSTOMER__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=68.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    CEDD_CUSTOMER__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=67.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    CEDD_CUSTOMER__IN_CRS_BRDR_NO
+    {
+/* Amount per incoming cross border transaction.
+Validation Rule: Text Field. Standard T24 AMOUNT field Mandatory field if the field IN.CRS.BORDER.WIRES = 'Yes' or else no input field. */
+        IN_CRS_BRDR_AMT : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=25, sysNumber=34.0, core=true, t24Name=IN.CRS.BRDR.AMT, mandatory=false)
+/* Country of Incoming Cross Border Wires transaction.
+Validation Rule: Text Field.
+Standard T24 COUNTRY field.
+Mandatory if the field IN.CRS.BORDER.WIRE = 'Yes' or else no input field. */
+        IN_CRS_BRDR_CNTY -> ST_Config:COUNTRY
+            @t24:i (align=L, inputBehaviour=I, maxLength=4, sysNumber=35.0, core=true, businessType=AAA, t24Name=IN.CRS.BRDR.CNTY, mandatory=false)
+/* Number of transactions per month for Incoming Cross Border Wires.
+Validation Rule: Text Field. Maximum 3 numeric Characters. Mandatory if the field IN.CRS.BORDER.WIRE = 'Yes' or else no input field. */
+        IN_CRS_BRDR_NO : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=3, sysNumber=33.0, core=true, t24Name=IN.CRS.BRDR.NO, mandatory=false)
+    }
+    CEDD_CUSTOMER__OUT_CRS_BRD_NO
+    {
+/* Amount of outgoing cross border transaction.
+Validation Rule: Text Field.
+Standard T24 AMOUNT field.
+Mandatory if the field OUT.CRS.BORDER.WIRE = 'Yes' or else no input field. */
+        OUT_CRS_BRD_AMT : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=25, sysNumber=38.0, core=true, t24Name=OUT.CRS.BRD.AMT, mandatory=false)
+/* Country of Outgoing Cross Border Wires transaction, Dropdown Field.
+Validation Rule: Standard T24 COUNTRY field.
+Mandatory if the field OUT.CRS.BORDER.WIRE = 'Yes' or else no input field. */
+        OUT_CRS_BRD_CNTY -> ST_Config:COUNTRY
+            @t24:i (align=L, inputBehaviour=I, maxLength=4, sysNumber=39.0, core=true, businessType=AAA, t24Name=OUT.CRS.BRD.CNTY, mandatory=false)
+/* Number of transactions per month for Outgoing Cross Border Wires.
+Validation Rule: Text Field. Maximum 3 numeric Characters
+Mandatory if the field OUT.CRS.BORDER.WIRE = 'Yes' or no input field. */
+        OUT_CRS_BRD_NO : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=3, sysNumber=37.0, core=true, t24Name=OUT.CRS.BRD.NO, mandatory=false)
+    }
+    CEDD_CUSTOMER__OVERRIDE
+    {
+        OVERRIDE : T24BusinessTypes:A
+            @i18n:Label (en=Override)
+            @i18n:Tooltip (en="Overrides generated by this transaction")
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=64.0, core=true, t24Name=OVERRIDE, mandatory=false)
+    }
+}
+Enumerations {
+    CEDD_CUSTOMER__ACCOUNT_TYPES__ACCOUNT_SIZE : mml:string
+        1=1
+        2=2
+        3=3
+    CEDD_CUSTOMER__ACCOUNT_TYPES__ACCOUNT_TYPES : mml:string
+        1=1
+        2=2
+        3=3
+        4=4
+        5=5
+        6=6
+    CEDD_CUSTOMER__ACCOUNT_TYPES__TRANS_PER_MTH : mml:string
+        1=1
+        2=2
+        3=3
+    CEDD_CUSTOMER__CASH_COLL_LOANS : mml:string
+        NO=NO
+        YES=YES
+    CEDD_CUSTOMER__CASH_TRANS : mml:string
+        NO=NO
+        YES=YES
+    CEDD_CUSTOMER__FCY_CORP : mml:string
+        NO=NO
+        YES=YES
+    CEDD_CUSTOMER__INSTRUMENTS : mml:string
+        NO=NO
+        YES=YES
+    CEDD_CUSTOMER__INT_ACH_TRANS : mml:string
+        NO=NO
+        YES=YES
+    CEDD_CUSTOMER__IN_CRS_BRD_WIRE : mml:string
+        NO=NO
+        YES=YES
+    CEDD_CUSTOMER__KYC_EXEMPT : mml:string
+        NO=NO
+        YES=YES
+    CEDD_CUSTOMER__KYC_EXEMPT_REASON : mml:string
+        1=1
+        2=2
+        3=3
+        4=4
+        5=5
+    CEDD_CUSTOMER__OUT_CRS_BRD_WIRE : mml:string
+        NO=NO
+        YES=YES
+    CEDD_CUSTOMER__POLITICAL : mml:string
+        NO=NO
+        YES=YES
+    CEDD_CUSTOMER__POLITIC_ASSOCIATE : mml:string
+        NO=NO
+        YES=YES
+    CEDD_CUSTOMER__POLITIC_CORP : mml:string
+        NO=NO
+        YES=YES
+    CEDD_CUSTOMER__POLITIC_EXPOSED : mml:string
+        NO=NO
+        YES=YES
+    CEDD_CUSTOMER__POLITIC_RELATIVE : mml:string
+        NO=NO
+        YES=YES
+    CEDD_CUSTOMER__SR_EXECUTIVE : mml:string
+        NO=NO
+        YES=YES
+    CEDD_CUSTOMER__SR_POLITICAL : mml:string
+        NO=NO
+        YES=YES
+    CEDD_CUSTOMER__TRADE_FINANCE : mml:string
+        NO=NO
+        YES=YES
+}

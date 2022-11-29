@@ -1,0 +1,20 @@
+# UTF-8
+/* Model Configuration for Image Management */
+Domain IM_ModelBank
+    @t24:i (module=IM)
+    @java:Package (value=com.temenos.t24.datamodel.im.im_modelbank)
+namespace "http://www.temenos.com/t24/IM_ModelBank"
+metamodelVersion 1.30.6
+Classes {
+    NOFILE_IM_IMG_TYPE_DETAILS
+        @i18n:Description (en="")
+        @t24:i (t24Name=NOFILE.IM.IMG.TYPE.DETAILS, level=I, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        ID : T24BusinessTypes:N
+            @i18n:Label (en="Transaction Ref")
+            @i18n:Tooltip (en="Transaction Reference")
+            @t24:i (align=L, inputBehaviour=N, maxLength=50, core=false, t24Name=ID, genOperation=E.GET.IM.IMG.TYPE.DETAILS, mandatory=true)
+        IM_REFERENCE : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=20, core=false, t24Name=IM.REFERENCE, mandatory=false)
+    }
+}

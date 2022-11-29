@@ -1,0 +1,345 @@
+# UTF-8
+/* Inflow Catalog */
+Domain IF_InflowCatalog
+    @t24:i (module=IF)
+    @java:Package (value=com.temenos.t24.datamodel.if_.if_inflowcatalog)
+namespace "http://www.temenos.com/t24/IF_InflowCatalog"
+metamodelVersion 1.30.6
+Classes {
+    IF_INFLOW_CATALOG
+        @i18n:Description (en="")
+        @t24:i (t24Name=IF.INFLOW.CATALOG, level=I, type=H, allowedFunctions="A C D E H I L P Q R S", localRefAllowed=false)
+    {
+        ACTIVITY_REFERENCE -> byValue IF_InflowCatalog:IF_INFLOW_CATALOG__ACTIVITY_REFERENCE *
+            @t24:i (t24Name=ACTIVITY.REFERENCE)
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=50.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=51.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=47.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        CATALOG_ID -> IF_InflowCatalog:IF_INFLOW_CATALOG PK required
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=0.0, core=true, businessType=A, t24Name=CATALOG.ID, mandatory=true)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=48.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=44.0, core=true, t24Name=CURR.NO, mandatory=false)
+        DATE_TIME -> byValue IF_InflowCatalog:IF_INFLOW_CATALOG__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=49.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        IMPORTED_NAME -> byValue IF_InflowCatalog:IF_INFLOW_CATALOG__IMPORTED_NAME *
+            @t24:i (t24Name=IMPORTED.NAME)
+        IMPORTED_RESPONSE_NAME -> byValue IF_InflowCatalog:IF_INFLOW_CATALOG__IMPORTED_RESPONSE_NAME *
+            @t24:i (t24Name=IMPORTED.RESPONSE.NAME)
+        INFLOW_ATTRIBUTES -> byValue IF_InflowCatalog:IF_INFLOW_CATALOG__INFLOW_ATTRIBUTES *
+            @t24:i (t24Name=INFLOW.ATTRIBUTES)
+/* Overview
+This field holds the name of the flow that would be executed by the inflow.
+Validation Rules
+This is a no-input field. */
+        INFLOW_NAME : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=1.0, core=true, t24Name=INFLOW.NAME, mandatory=false)
+        INFLOW_RESPONSE_SCHEMA : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=33.0, core=true, t24Name=INFLOW.RESPONSE.SCHEMA, mandatory=false)
+/* Overview
+This field holds the inflow schema.
+Validation Rules
+This is a no-input field. */
+        INFLOW_SCHEMA : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=30.0, core=true, t24Name=INFLOW.SCHEMA, mandatory=false)
+        INPUTTER -> byValue IF_InflowCatalog:IF_INFLOW_CATALOG__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=43.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+/* Overview
+This field is reserved for future purpose.
+Validation Rules
+This is a no-input field. */
+        RESERVED_1 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=3.0, core=true, t24Name=RESERVED.1, mandatory=false)
+/* Overview
+This field is reserved for future purpose.
+Validation Rules
+This is a no-input field. */
+        RESERVED_2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=4.0, core=true, t24Name=RESERVED.2, mandatory=false)
+/* Overview
+This field is reserved for future purpose.
+Validation Rules
+This is a no-input field. */
+        RESERVED_3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=5.0, core=true, t24Name=RESERVED.3, mandatory=false)
+/* Overview
+This field is reserved for future purpose.
+Validation Rules
+This is a no-input field. */
+        RESERVED_33 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=36.0, core=true, t24Name=RESERVED.33, mandatory=false)
+/* Overview
+This field is reserved for future purpose.
+Validation Rules
+This is a no-input field. */
+        RESERVED_34 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=37.0, core=true, t24Name=RESERVED.34, mandatory=false)
+/* Overview
+This field is reserved for future purpose.
+Validation Rules
+This is a no-input field. */
+        RESERVED_35 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=38.0, core=true, t24Name=RESERVED.35, mandatory=false)
+/* Overview
+This field is reserved for future purpose.
+Validation Rules
+This is a no-input field. */
+        RESERVED_36 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=39.0, core=true, t24Name=RESERVED.36, mandatory=false)
+/* Overview
+This field is reserved for future purpose.
+Validation Rules
+This is a no-input field. */
+        RESERVED_37 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=40.0, core=true, t24Name=RESERVED.37, mandatory=false)
+/* Overview
+This field is reserved for future purpose.
+Validation Rules
+This is a no-input field. */
+        RESERVED_38 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=41.0, core=true, t24Name=RESERVED.38, mandatory=false)
+/* Overview
+This field is reserved for future purpose.
+Validation Rules
+This is a no-input field. */
+        RESERVED_39 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=42.0, core=true, t24Name=RESERVED.39, mandatory=false)
+/* Overview
+This field is reserved for future purpose.
+Validation Rules
+This is a no-input field. */
+        RESERVED_4 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=6.0, core=true, t24Name=RESERVED.4, mandatory=false)
+/* Overview
+This field is reserved for future purpose.
+Validation Rules
+This is a no-input field. */
+        RESERVED_5 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=7.0, core=true, t24Name=RESERVED.5, mandatory=false)
+        T24_FIELD_NAME -> byValue IF_InflowCatalog:IF_INFLOW_CATALOG__T24_FIELD_NAME *
+            @t24:i (t24Name=T24.FIELD.NAME)
+    }
+    IF_INFLOW_CATALOG__ACTIVITY_REFERENCE
+    {
+/* Overview
+This is an associated multi-value field that refers to the PW Activity that needs to be executed.
+Validation Rules
+This is a multi-value field.
+This is a no-input field. */
+        ACTIVITY_REFERENCE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=8.0, core=true, t24Name=ACTIVITY.REFERENCE, mandatory=false)
+/* Overview
+This is an associated multi-value field that holds the XML name of the PW Activity.
+Validation Rules
+This is a multi-value field.
+This is a no-input field. */
+        ACT_XML_NAME : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=9.0, core=true, t24Name=ACT.XML.NAME, mandatory=false)
+/* Overview
+This is an associated sub-value field reserved for future purpose.
+Validation Rules
+This is a multi-value field.
+This is a no-input field. */
+        RESERVED_11 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=13.0, core=true, t24Name=RESERVED.11, mandatory=false)
+/* Overview
+This is an associated sub-value field reserved for future purpose.
+Validation Rules
+This is a multi-value field.
+This is a no-input field. */
+        RESERVED_12 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=14.0, core=true, t24Name=RESERVED.12, mandatory=false)
+/* Overview
+This is an associated sub-value field reserved for future purpose.
+Validation Rules
+This is a multi-value field.
+This is a no-input field. */
+        RESERVED_13 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=15.0, core=true, t24Name=RESERVED.13, mandatory=false)
+/* Overview
+This is an associated sub-value field reserved for future purpose.
+Validation Rules
+This is a multi-value field.
+This is a no-input field. */
+        RESERVED_14 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=16.0, core=true, t24Name=RESERVED.14, mandatory=false)
+/* Overview
+This is an associated sub-value field reserved for future purpose.
+Validation Rules
+This is a multi-value field.
+This is a no-input field. */
+        RESERVED_15 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=17.0, core=true, t24Name=RESERVED.15, mandatory=false)
+/* Overview
+This is an associated multi-value field that holds the T24 Function. The supported functions are I, A, S, D, R, H.
+Validation Rules
+This is a multi-value field.
+This is a no-input field. */
+        T24_FUNCTION : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=12.0, core=true, t24Name=T24.FUNCTION, mandatory=false)
+/* Overview
+This is an associated multi-value field that holds the application or version name to which the subvalued field belongs.
+Validation Rules
+This is a multi-value field.
+This is a no-input field. */
+        T24_OBJECT : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=10.0, core=true, t24Name=T24.OBJECT, mandatory=false)
+/* Overview
+This is an associated multi-value field that holds the type of t24 object. This could be application, version, L1/L3 API or component service.
+Validation Rules
+This is a multi-value field.
+This is a no-input field. */
+        T24_OBJECT_TYPE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=11.0, core=true, t24Name=T24.OBJECT.TYPE, mandatory=false)
+    }
+    IF_INFLOW_CATALOG__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=46.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    IF_INFLOW_CATALOG__IMPORTED_NAME
+    {
+/* Overview
+This is an associated multi-value field that holds the imported schema names.
+Validation Rules
+This is a multi-value field.
+This is a no-input field. */
+        IMPORTED_NAME : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=31.0, core=true, t24Name=IMPORTED.NAME, mandatory=false)
+/* Overview
+This is an associated multi-value field that holds the imported schema.
+Validation Rules
+This is a multi-value field.
+This is a no-input field. */
+        IMPORTED_SCHEMA : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=32.0, core=true, t24Name=IMPORTED.SCHEMA, mandatory=false)
+    }
+    IF_INFLOW_CATALOG__IMPORTED_RESPONSE_NAME
+    {
+        IMPORTED_RESPONSE_NAME : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=34.0, core=true, t24Name=IMPORTED.RESPONSE.NAME, mandatory=false)
+        IMPORTED_RESPONSE_SCHEMA : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=35.0, core=true, t24Name=IMPORTED.RESPONSE.SCHEMA, mandatory=false)
+    }
+    IF_INFLOW_CATALOG__INFLOW_ATTRIBUTES
+    {
+/* Overview
+This field holds additional information required when designing the inflow schema and information for PW to execute the inflow. Currently there is no such attributes, but this field is added for future purpose.
+Validation Rules
+This is a multi-value field.
+This is a no-input field. */
+        INFLOW_ATTRIBUTES : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=2.0, core=true, t24Name=INFLOW.ATTRIBUTES, mandatory=false)
+    }
+    IF_INFLOW_CATALOG__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=45.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    IF_INFLOW_CATALOG__T24_FIELD_NAME
+    {
+/* Overview
+This is an associated sub-value field that is used to mark whether a field in XML is mandatory or not. This field does not have any relevance with mandatory field in T24.
+Validation Rules
+This is a multi-value field.
+This is a no-input field. */
+        IS_MANDATORY : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=22.0, core=true, t24Name=IS.MANDATORY, mandatory=false)
+        IS_RESPONSE_FIELD : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=25.0, core=true, t24Name=IS.RESPONSE.FIELD, mandatory=false)
+/* Overview
+This is an associated multi-value field that denotes whether the field value is populated by T24 based on the mapping defined. This field can take either Yes or NO as value. When constructing the payload for PW process, these fields will be marked by the place holder.
+When set to YES, the MAPPING.DEFINITION should have value.If set to NO, then XML.FIELD.NAME, XML.FIELD.TYPE and IS.MANDATORY should have value.
+ 
+Validation Rules
+This is a multi-value field.
+This is a no-input field. */
+        MAPPER_ONLY_FIELD : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=23.0, core=true, t24Name=MAPPER.ONLY.FIELD, mandatory=false)
+/* Overview
+This is an associated multi-value field which will have value if the MAPPER.ONLY.FIELD is set to YES. This field describes how the value for the associated T24 field need to be mapped when forming the OFS Request.
+Validation Rules
+This is a multi-value field.
+This is a no-input field. */
+        MAPPING_DEFINITION : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=24.0, core=true, t24Name=MAPPING.DEFINITION, mandatory=false)
+/* Overview
+This is an associated multi-value field reserved for future purpose.
+Validation Rules
+This is a multi-value field.
+This is a no-input field. */
+        RESERVED_22 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=26.0, core=true, t24Name=RESERVED.22, mandatory=false)
+/* Overview
+This is an associated multi-value field reserved for future purpose.
+Validation Rules
+This is a multi-value field.
+This is a no-input field. */
+        RESERVED_23 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=27.0, core=true, t24Name=RESERVED.23, mandatory=false)
+/* Overview
+This is an associated multi-value field reserved for future purpose.
+Validation Rules
+This is a multi-value field.
+This is a no-input field. */
+        RESERVED_24 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=28.0, core=true, t24Name=RESERVED.24, mandatory=false)
+/* Overview
+This is an associated multi-value field reserved for future purpose.
+Validation Rules
+This is a multi-value field.
+This is a no-input field. */
+        RESERVED_25 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=29.0, core=true, t24Name=RESERVED.25, mandatory=false)
+/* Overview
+This is an associated sub-value field that holds the T24 field name.
+Validation Rules
+This is a multi-value field.
+This is a no-input field. */
+        T24_FIELD_NAME : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=18.0, core=true, t24Name=T24.FIELD.NAME, mandatory=false)
+/* Overview
+This is an associated sub-value field that holds the T24 field type like SINGLE, MULTI, ETC.,
+Validation Rules
+This is a multi-value field.
+This is a no-input field. */
+        T24_FIELD_TYPE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=19.0, core=true, t24Name=T24.FIELD.TYPE, mandatory=false)
+/* Overview
+This is an associated sub-value field that holds the XML element name for the T24 field.
+Validation Rules
+This is a multi-value field.
+This is a no-input field. */
+        XML_FIELD_NAME : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=21.0, core=true, t24Name=XML.FIELD.NAME, mandatory=false)
+/* Overview
+This is an associated sub-value field that holds the XML field type. The values could be string, numeric or date.
+Validation Rules
+This is a multi-value field.
+This is a no-input field. */
+        XML_FIELD_TYPE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=20.0, core=true, t24Name=XML.FIELD.TYPE, mandatory=false)
+    }
+}

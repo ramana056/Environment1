@@ -1,0 +1,43 @@
+# UTF-8
+/* SNCE05 Mandate Account Forward */
+Domain ESCLNG_MandateAccountForward
+    @t24:i (module=ESCLNG)
+    @java:Package (value=com.temenos.t24.datamodel.esclng.esclng_mandateaccountforward)
+namespace "http://www.temenos.com/t24/ESCLNG_MandateAccountForward"
+metamodelVersion 1.30.6
+Classes {
+    /* This application defines the list of modified records using the version DD.DDI,STANDALONE.ES. */
+    ESCLNG_MANDATE_OUTGOING
+        @i18n:Description (en="")
+        @t24:i (t24Name=ESCLNG.MANDATE.OUTGOING, level=F, type=L, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        ID -> ESCLNG_MandateAccountForward:ESCLNG_MANDATE_OUTGOING PK required
+            @i18n:Label (en="Transaction Ref")
+            @i18n:Tooltip (en="Transaction Reference")
+            @t24:i (align=L, inputBehaviour=I, maxLength=34, sysNumber=0.0, core=true, businessType=A, t24Name="@ID", mandatory=true)
+/* Specifies the date on which day the record has been modified
+Validation Rules: */
+        REQUEST_DATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=10, sysNumber=1.0, core=true, t24Name=REQUEST.DATE, mandatory=false)
+        RESERVED_1 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=2.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_10 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=11.0, core=true, t24Name=RESERVED.10, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=3.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=4.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=5.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        RESERVED_5 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=6.0, core=true, t24Name=RESERVED.5, mandatory=false)
+        RESERVED_6 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=7.0, core=true, t24Name=RESERVED.6, mandatory=false)
+        RESERVED_7 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=8.0, core=true, t24Name=RESERVED.7, mandatory=false)
+        RESERVED_8 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=9.0, core=true, t24Name=RESERVED.8, mandatory=false)
+        RESERVED_9 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=10.0, core=true, t24Name=RESERVED.9, mandatory=false)
+    }
+}

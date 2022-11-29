@@ -1,0 +1,68 @@
+# UTF-8
+/* US Retail Ebanking */
+Domain USRETL_Ebanking
+    @t24:i (module=USRETL)
+    @java:Package (value=com.temenos.t24.datamodel.usretl.usretl_ebanking)
+namespace "http://www.temenos.com/t24/USRETL_Ebanking"
+metamodelVersion 1.30.6
+Classes {
+    NOFILE_GET_CUSTOMER_ACCOUNT_BALANCE
+        @i18n:Description (en="")
+        @t24:i (t24Name=NOFILE.GET.CUSTOMER.ACCOUNT.BALANCE, level=I, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        ACCOUNT_NUMBER : T24BusinessTypes:N
+            @i18n:Label (en="Account Number")
+            @t24:i (align=R, inputBehaviour=N, maxLength=10, core=false, t24Name=ACCOUNT.NUMBER, mandatory=false)
+        ACCOUNT_TYPE : T24BusinessTypes:N
+            @i18n:Label (en="Account Type")
+            @t24:i (align=R, inputBehaviour=N, maxLength=10, core=false, t24Name=ACCOUNT.TYPE, mandatory=false)
+        FINAL_ARRAY : T24BusinessTypes:N
+            @t24:i (align=L, inputBehaviour=N, maxLength=10, core=false, t24Name=FINAL.ARRAY, genOperation=GET.CUSTOMER.ACCOUNT.BALANCE, mandatory=true)
+        TAX_ID : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=10, core=false, t24Name=TAX.ID, mandatory=false)
+    }
+    NOFILE_GET_DEPOSIT_HISTORY
+        @i18n:Description (en="")
+        @t24:i (t24Name=NOFILE.GET.DEPOSIT.HISTORY, level=I, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        ACCOUNT_NUMBER : T24BusinessTypes:N
+            @i18n:Label (en="Account Number")
+            @t24:i (align=R, inputBehaviour=N, maxLength=10, core=false, t24Name=ACCOUNT.NUMBER, mandatory=false)
+        END_DATE : T24BusinessTypes:N
+            @i18n:Label (en="End Date")
+            @i18n:Tooltip (en="End Date")
+            @t24:i (align=R, inputBehaviour=N, maxLength=10, core=false, t24Name=END.DATE, mandatory=false)
+        FINAL_ARRAY : T24BusinessTypes:N
+            @t24:i (align=L, inputBehaviour=N, maxLength=10, core=false, t24Name=FINAL.ARRAY, genOperation=GET.DEPOSIT.HISTORY, mandatory=true)
+        LEGACY_TYPE : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, core=false, t24Name=LEGACY.TYPE, mandatory=false)
+        START_DATE : T24BusinessTypes:N
+            @i18n:Label (en="Start Date")
+            @i18n:Tooltip (en="Start Date")
+            @t24:i (align=R, inputBehaviour=N, maxLength=10, core=false, t24Name=START.DATE, mandatory=false)
+    }
+    NOFILE_GET_DEPOSIT_HISTORY_PERIODS
+        @i18n:Description (en="")
+        @t24:i (t24Name=NOFILE.GET.DEPOSIT.HISTORY.PERIODS, level=I, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        ACCOUNT_NUMBER : T24BusinessTypes:N
+            @i18n:Label (en="Account Number")
+            @t24:i (align=R, inputBehaviour=N, maxLength=10, core=false, t24Name=ACCOUNT.NUMBER, mandatory=false)
+        FINAL_ARRAY : T24BusinessTypes:N
+            @t24:i (align=L, inputBehaviour=N, maxLength=10, core=false, t24Name=FINAL.ARRAY, genOperation=GET.DEPOSIT.HISTORY, mandatory=true)
+        LEGACY_TYPE : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, core=false, t24Name=LEGACY.TYPE, mandatory=false)
+    }
+    NOFILE_LOAN_HISTORY
+        @i18n:Description (en="")
+        @t24:i (t24Name=NOFILE.LOAN.HISTORY, level=I, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        ARRANGEMENT_ID : T24BusinessTypes:N
+            @i18n:Label (en="Arrangement Id")
+            @t24:i (align=R, inputBehaviour=N, maxLength=10, core=false, t24Name=ARRANGEMENT.ID, mandatory=false)
+        FINAL_ARRAY : T24BusinessTypes:N
+            @t24:i (align=L, inputBehaviour=N, maxLength=10, core=false, t24Name=FINAL.ARRAY, genOperation=GET.LOAN.HISTORY, mandatory=true)
+        LEGACY_TYPE : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, core=false, t24Name=LEGACY.TYPE, mandatory=false)
+    }
+}

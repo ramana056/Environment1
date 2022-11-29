@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<localref:LocalRef xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:localref="http://www.odcgroup.com/t24/application/localref/model/LocalRef"
+    xmlns:translationDsl="http://www.odcgroup.com/translation/TranslationDsl" localRefID="TAP.ORDER.NATURE" maximumChars="4" minimumChars="0"
+    mandatory="false" charType="A" defaultPossible="false" description="Triple A Order Nature">
+  <shortName xsi:type="translationDsl:LocalTranslations">
+    <translations locale="en" text="TAP.ORD.NATURE"/>
+  </shortName>
+  <vettingTable vettingTable="DMA">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Direct Market Orders"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="NDMA">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Non-direct market orders"/>
+    </remarks>
+  </vettingTable>
+</localref:LocalRef>

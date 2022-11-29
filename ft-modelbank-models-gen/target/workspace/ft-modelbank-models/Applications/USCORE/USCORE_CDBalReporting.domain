@@ -1,0 +1,167 @@
+# UTF-8
+/* CD Balances Reporting */
+Domain USCORE_CDBalReporting
+    @t24:i (module=USCORE)
+    @java:Package (value=com.temenos.t24.datamodel.uscore.uscore_cdbalreporting)
+namespace "http://www.temenos.com/t24/USCORE_CDBalReporting"
+metamodelVersion 1.30.6
+Classes {
+/* Configuration table which allows to define multiple balance thresholds tiers based upon a range of category codes for reporting purposes.
+The Id of the record in the table is SYSTEM. */
+    USCORE_BALANCE_THRESHOLDS
+        @i18n:Description (en="")
+        @t24:i (t24Name=USCORE.BALANCE.THRESHOLDS, level=I, type=H, allowedFunctions="A C D E H I L P Q R S", localRefApplicationSysNo=16.0, localRefAllowed=true)
+    {
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=34.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=35.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=31.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=32.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=28.0, core=true, t24Name=CURR.NO, mandatory=false)
+        DATE_TIME -> byValue USCORE_CDBalReporting:USCORE_BALANCE_THRESHOLDS__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=33.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        DESCRIPTION -> byValue USCORE_CDBalReporting:USCORE_BALANCE_THRESHOLDS__DESCRIPTION *
+            @t24:i (t24Name=DESCRIPTION)
+        INPUTTER -> byValue USCORE_CDBalReporting:USCORE_BALANCE_THRESHOLDS__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        PARAM_ID : USCORE_CDBalReporting:USCORE_BALANCE_THRESHOLDS__PARAM_ID PK required
+            @i18n:Label (en="Parameter Id")
+            @t24:i (align=L, inputBehaviour=I, maxLength=6, sysNumber=0.0, core=true, t24Name=PARAM.ID, mandatory=true)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=27.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        RESERVED_1 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=26.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_10 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=17.0, core=true, t24Name=RESERVED.10, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=25.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=24.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=23.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        RESERVED_5 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=22.0, core=true, t24Name=RESERVED.5, mandatory=false)
+        RESERVED_6 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=21.0, core=true, t24Name=RESERVED.6, mandatory=false)
+        RESERVED_7 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=20.0, core=true, t24Name=RESERVED.7, mandatory=false)
+        RESERVED_8 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=19.0, core=true, t24Name=RESERVED.8, mandatory=false)
+        RESERVED_9 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=18.0, core=true, t24Name=RESERVED.9, mandatory=false)
+    }
+    USCORE_BALANCE_THRESHOLDS__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=30.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    USCORE_BALANCE_THRESHOLDS__DESCRIPTION
+    {
+        ALLOWED_CATEGORY -> byValue USCORE_CDBalReporting:USCORE_BALANCE_THRESHOLDS__DESCRIPTION__ALLOWED_CATEGORY *
+            @t24:i (t24Name=ALLOWED.CATEGORY)
+        /* Describes the Balance Threshold Tier group. */
+        DESCRIPTION : T24BusinessTypes:ANY required
+            @i18n:Label (en=Description)
+            @i18n:Tooltip (en=Description)
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=1.0, core=true, t24Name=DESCRIPTION, mandatory=true)
+        EXCLUDED_CATEGORY -> byValue USCORE_CDBalReporting:USCORE_BALANCE_THRESHOLDS__DESCRIPTION__EXCLUDED_CATEGORY *
+            @t24:i (t24Name=EXCLUDED.CATEGORY)
+        RESERVED_16 -> byValue USCORE_CDBalReporting:USCORE_BALANCE_THRESHOLDS__DESCRIPTION__RESERVED_16 *
+            @t24:i (t24Name=RESERVED.16)
+        RESERVED_17 -> byValue USCORE_CDBalReporting:USCORE_BALANCE_THRESHOLDS__DESCRIPTION__RESERVED_17 *
+            @t24:i (t24Name=RESERVED.17)
+        RESERVED_18 -> byValue USCORE_CDBalReporting:USCORE_BALANCE_THRESHOLDS__DESCRIPTION__RESERVED_18 *
+            @t24:i (t24Name=RESERVED.18)
+        RESERVED_19 -> byValue USCORE_CDBalReporting:USCORE_BALANCE_THRESHOLDS__DESCRIPTION__RESERVED_19 *
+            @t24:i (t24Name=RESERVED.19)
+        RESERVED_20 -> byValue USCORE_CDBalReporting:USCORE_BALANCE_THRESHOLDS__DESCRIPTION__RESERVED_20 *
+            @t24:i (t24Name=RESERVED.20)
+        TIER_CODE -> byValue USCORE_CDBalReporting:USCORE_BALANCE_THRESHOLDS__DESCRIPTION__TIER_CODE *
+            @t24:i (t24Name=TIER.CODE)
+    }
+    USCORE_BALANCE_THRESHOLDS__DESCRIPTION__ALLOWED_CATEGORY
+    {
+        /* Category Code or Range of Category Codes allowed for the  Threshold Tier group. */
+        ALLOWED_CATEGORY : T24BusinessTypes:A required
+            @t24:i (align=L, inputBehaviour=I, maxLength=13, sysNumber=2.0, core=true, t24Name=ALLOWED.CATEGORY, mandatory=true)
+    }
+    USCORE_BALANCE_THRESHOLDS__DESCRIPTION__EXCLUDED_CATEGORY
+    {
+        /* Category codes to be excluded from the Allowed Category. */
+        EXCLUDED_CATEGORY -> ST_Config:CATEGORY
+            @t24:i (align=R, inputBehaviour=I, maxLength=6, sysNumber=3.0, core=true, t24Name=EXCLUDED.CATEGORY, mandatory=false)
+    }
+    USCORE_BALANCE_THRESHOLDS__DESCRIPTION__RESERVED_16
+    {
+        RESERVED_16 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=8.0, core=true, t24Name=RESERVED.16, mandatory=false)
+    }
+    USCORE_BALANCE_THRESHOLDS__DESCRIPTION__RESERVED_17
+    {
+        RESERVED_17 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=7.0, core=true, t24Name=RESERVED.17, mandatory=false)
+    }
+    USCORE_BALANCE_THRESHOLDS__DESCRIPTION__RESERVED_18
+    {
+        RESERVED_18 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=6.0, core=true, t24Name=RESERVED.18, mandatory=false)
+    }
+    USCORE_BALANCE_THRESHOLDS__DESCRIPTION__RESERVED_19
+    {
+        RESERVED_19 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=5.0, core=true, t24Name=RESERVED.19, mandatory=false)
+    }
+    USCORE_BALANCE_THRESHOLDS__DESCRIPTION__RESERVED_20
+    {
+        RESERVED_20 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=4.0, core=true, t24Name=RESERVED.20, mandatory=false)
+    }
+    USCORE_BALANCE_THRESHOLDS__DESCRIPTION__TIER_CODE
+    {
+        RESERVED_11 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=14.0, core=true, t24Name=RESERVED.11, mandatory=false)
+        RESERVED_12 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=13.0, core=true, t24Name=RESERVED.12, mandatory=false)
+        RESERVED_13 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=12.0, core=true, t24Name=RESERVED.13, mandatory=false)
+        RESERVED_14 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=11.0, core=true, t24Name=RESERVED.14, mandatory=false)
+        RESERVED_15 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=10.0, core=true, t24Name=RESERVED.15, mandatory=false)
+        /* Tier code.8 Positions, Alphanumeric. */
+        TIER_CODE : T24BusinessTypes:A required
+            @t24:i (align=L, inputBehaviour=I, maxLength=8, sysNumber=9.0, core=true, t24Name=TIER.CODE, mandatory=true)
+        /* Describe the upper limits amount of each Tier. */
+        UPPER_LIMIT_AMOUNT : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=18, sysNumber=15.0, core=true, t24Name=UPPER.LIMIT.AMOUNT, mandatory=false)
+    }
+    USCORE_BALANCE_THRESHOLDS__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=29.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+}
+Enumerations {
+    USCORE_BALANCE_THRESHOLDS__PARAM_ID : mml:string
+        SYSTEM=SYSTEM
+}

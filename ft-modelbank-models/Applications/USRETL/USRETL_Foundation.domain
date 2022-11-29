@@ -1,0 +1,396 @@
+# UTF-8
+/* US Retail Component */
+Domain USRETL_Foundation
+    @t24:i (module=USRETL)
+    @java:Package (value=com.temenos.t24.datamodel.usretl.usretl_foundation)
+namespace "http://www.temenos.com/t24/USRETL_Foundation"
+metamodelVersion 1.30.6
+Classes {
+    NOFILE_USRETL_SDB_AUTHORISATION
+        @i18n:Description (en="")
+        @t24:i (t24Name=NOFILE.USRETL.SDB.AUTHORISATION, level=I, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        ARRANGEMENT_ID : T24BusinessTypes:N
+            @i18n:Label (en="Arrangement Id")
+            @t24:i (align=R, inputBehaviour=N, maxLength=15, core=false, t24Name=ARRANGEMENT.ID, mandatory=false)
+        BOX_NUMBER : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=33, core=false, t24Name=BOX.NUMBER, mandatory=false)
+        BRANCH : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=16, core=false, t24Name=BRANCH, mandatory=false)
+        LOCATION : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, core=false, t24Name=LOCATION, mandatory=false)
+        RECORD : T24BusinessTypes:N
+            @t24:i (align=L, inputBehaviour=N, maxLength=200, core=false, t24Name=RECORD, genOperation=NOFILE.USRETL.SDB.AUTHORISATION, mandatory=true)
+        STATUS : T24BusinessTypes:N
+            @i18n:Label (en=Status)
+            @t24:i (align=R, inputBehaviour=N, maxLength=15, core=false, t24Name=STATUS, mandatory=false)
+    }
+/* This table holds the Routines to fetch the different components of Account to calculate the Available balance depands upon the incoming Channel.
+@ID - The ID is a text field to fill meaningful Id */
+    USRETL_AVAILABLE_BAL_DETAILS
+        @i18n:Description (en="")
+        @t24:i (t24Name=USRETL.AVAILABLE.BAL.DETAILS, level=I, type=H, allowedFunctions="A C D E H I L P Q R S", localRefAllowed=false)
+    {
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=19.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=20.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=16.0, core=true, t24Name=AUTHORISER, mandatory=false)
+/* This field should hold the valid Routine to return the amount for the account supplied in it.
+This field should only have a Valid EB.API Record.
+Rule: Field length - 35. */
+        CALC_ROUTINE -> EB_SystemTables:EB_API
+            @i18n:Label (en="Calculation Routine")
+            @i18n:Tooltip (en="Calculation routine developed locally, if any")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=2.0, core=true, businessType=A, t24Name=CALC.ROUTINE, mandatory=false)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=17.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=13.0, core=true, t24Name=CURR.NO, mandatory=false)
+        DATE_TIME -> byValue USRETL_Foundation:USRETL_AVAILABLE_BAL_DETAILS__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=18.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        DESCRIPTION -> byValue USRETL_Foundation:USRETL_AVAILABLE_BAL_DETAILS__DESCRIPTION *
+            @t24:i (t24Name=DESCRIPTION)
+        ID -> USRETL_Foundation:USRETL_AVAILABLE_BAL_DETAILS PK required
+            @i18n:Label (en="Transaction Ref")
+            @i18n:Tooltip (en="Transaction Reference")
+            @t24:i (align=L, inputBehaviour=I, maxLength=15, sysNumber=0.0, core=true, businessType=A, t24Name="@ID", mandatory=true)
+        INPUTTER -> byValue USRETL_Foundation:USRETL_AVAILABLE_BAL_DETAILS__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=12.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        RESERVED_1 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=11.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=10.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=9.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=8.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        RESERVED_5 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=7.0, core=true, t24Name=RESERVED.5, mandatory=false)
+        RESERVED_6 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=6.0, core=true, t24Name=RESERVED.6, mandatory=false)
+        RESERVED_7 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=5.0, core=true, t24Name=RESERVED.7, mandatory=false)
+        RESERVED_8 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=4.0, core=true, t24Name=RESERVED.8, mandatory=false)
+        RESERVED_9 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=3.0, core=true, t24Name=RESERVED.9, mandatory=false)
+    }
+    USRETL_AVAILABLE_BAL_DETAILS__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=15.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    USRETL_AVAILABLE_BAL_DETAILS__DESCRIPTION
+    {
+/* This field is used to describe the purpose of the record.
+Rule: Field length - 35. */
+        DESCRIPTION : T24BusinessTypes:A
+            @i18n:Label (en=Description)
+            @i18n:Tooltip (en=Description)
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, multiLanguage=true, sysNumber=1.0, core=true, t24Name=DESCRIPTION, mandatory=false)
+    }
+    USRETL_AVAILABLE_BAL_DETAILS__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=14.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+/* This table holds the different components of the Account to calculate the Available balance depands upon the incoming Channel.
+@ID - The ID should be a vaild EB.CHANNEL record Id */
+    USRETL_AVAILABLE_BAL_PARAM
+        @i18n:Description (en="")
+        @t24:i (t24Name=USRETL.AVAILABLE.BAL.PARAM, level=F, type=H, allowedFunctions="A C D E H I L P Q R S", localRefAllowed=false)
+    {
+        ADD_COMPONENT -> byValue USRETL_Foundation:USRETL_AVAILABLE_BAL_PARAM__ADD_COMPONENT *
+            @t24:i (t24Name=ADD.COMPONENT)
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=21.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=22.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=18.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=19.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=15.0, core=true, t24Name=CURR.NO, mandatory=false)
+        DATE_TIME -> byValue USRETL_Foundation:USRETL_AVAILABLE_BAL_PARAM__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=20.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        DESCRIPTION -> byValue USRETL_Foundation:USRETL_AVAILABLE_BAL_PARAM__DESCRIPTION *
+            @t24:i (t24Name=DESCRIPTION)
+        ID -> USRETL_Foundation:USRETL_AVAILABLE_BAL_PARAM PK required
+            @i18n:Label (en="Transaction Ref")
+            @i18n:Tooltip (en="Transaction Reference")
+            @t24:i (align=L, inputBehaviour=I, maxLength=20, sysNumber=0.0, core=true, businessType=A, t24Name="@ID", mandatory=true)
+        INPUTTER -> byValue USRETL_Foundation:USRETL_AVAILABLE_BAL_PARAM__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=14.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        RESERVED_1 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=13.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_10 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=4.0, core=true, t24Name=RESERVED.10, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=12.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=11.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=10.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        RESERVED_5 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=9.0, core=true, t24Name=RESERVED.5, mandatory=false)
+        RESERVED_6 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=8.0, core=true, t24Name=RESERVED.6, mandatory=false)
+        RESERVED_7 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=7.0, core=true, t24Name=RESERVED.7, mandatory=false)
+        RESERVED_8 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=6.0, core=true, t24Name=RESERVED.8, mandatory=false)
+        RESERVED_9 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=5.0, core=true, t24Name=RESERVED.9, mandatory=false)
+        SUB_COMPONENT -> byValue USRETL_Foundation:USRETL_AVAILABLE_BAL_PARAM__SUB_COMPONENT *
+            @t24:i (t24Name=SUB.COMPONENT)
+    }
+    USRETL_AVAILABLE_BAL_PARAM__ADD_COMPONENT
+    {
+/* This field should hold the valid record id of USRETL.AVAILABLE.BAL.DETAILS to return the amount for the account supplied in it.
+This field should only contains the component which should consider as Asset for the Account.
+Rule: Field length - 35. */
+        ADD_COMPONENT -> USRETL_Foundation:USRETL_AVAILABLE_BAL_DETAILS
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=2.0, core=true, businessType=A, t24Name=ADD.COMPONENT, mandatory=false)
+    }
+    USRETL_AVAILABLE_BAL_PARAM__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=17.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    USRETL_AVAILABLE_BAL_PARAM__DESCRIPTION
+    {
+/* This field is used to describe the purpose of the record.
+Rule: Field length - 35. */
+        DESCRIPTION : T24BusinessTypes:A
+            @i18n:Label (en=Description)
+            @i18n:Tooltip (en=Description)
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, multiLanguage=true, sysNumber=1.0, core=true, t24Name=DESCRIPTION, mandatory=false)
+    }
+    USRETL_AVAILABLE_BAL_PARAM__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=16.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    USRETL_AVAILABLE_BAL_PARAM__SUB_COMPONENT
+    {
+/* This field should hold the valid record id of USRETL.AVAILABLE.BAL.DETAILS to return the amount for the account supplied in it.
+This field should only contains the component which should consider as Liablity for the Account.
+Rule: Field length - 35. */
+        SUB_COMPONENT -> USRETL_Foundation:USRETL_AVAILABLE_BAL_DETAILS
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=3.0, core=true, businessType=A, t24Name=SUB.COMPONENT, mandatory=false)
+    }
+/* This table holds the handling method configuration and T24 Application and Version names to amend , authorise and delete the exception records.
+@ID - The ID must be a valid Lead Company Id */
+    USRETL_PARAMETER
+        @i18n:Description (en="")
+        @t24:i (t24Name=USRETL.PARAMETER, level=I, type=H, allowedFunctions="A C D E H I L P Q R S", localRefAllowed=false)
+    {
+        ACC_INTTAX_PROP -> byValue USRETL_Foundation:USRETL_PARAMETER__ACC_INTTAX_PROP *
+            @t24:i (t24Name=ACC.INTTAX.PROP)
+        ACC_INT_PROP -> byValue USRETL_Foundation:USRETL_PARAMETER__ACC_INT_PROP *
+            @t24:i (t24Name=ACC.INT.PROP)
+        ACC_PERDIEM_PROP -> byValue USRETL_Foundation:USRETL_PARAMETER__ACC_PERDIEM_PROP *
+            @t24:i (t24Name=ACC.PERDIEM.PROP)
+        /* Status that the Customer of the account will have at the end of the Auto-Closure process. */
+        AC_CLOSE_CUS_STATUS -> ST_Customer:CUSTOMER_STATUS
+            @t24:i (align=R, inputBehaviour=I, maxLength=4, sysNumber=21.0, core=true, t24Name=AC.CLOSE.CUS.STATUS, mandatory=false)
+        /* Maximum number of attempts allowed for Auto-Close Process. */
+        AC_CLOSE_MAX_ATTEMPTS : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=3, sysNumber=25.0, core=true, t24Name=AC.CLOSE.MAX.ATTEMPTS, mandatory=false)
+        /* Restriction to be used on account during the pre-closure account process. */
+        AC_CLOSE_POST_REST -> AC_Config:POSTING_RESTRICT
+            @t24:i (align=L, inputBehaviour=I, maxLength=4, sysNumber=19.0, core=true, businessType=POST, t24Name=AC.CLOSE.POST.REST, mandatory=false)
+        /* Final status of the account after the Auto-Close Process. */
+        AC_CLOSE_STATUS : USRETL_Foundation:USRETL_PARAMETER__AC_CLOSE_STATUS
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=24.0, core=true, t24Name=AC.CLOSE.STATUS, mandatory=false)
+        /* Balance to control the threshold for ChexSystems reporting / RMS extract during the Auto closure process. */
+        AC_CLOSE_THRESHOLD_BAL : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=21, sysNumber=20.0, core=true, t24Name=AC.CLOSE.THRESHOLD.BAL, mandatory=false)
+        AC_THRESHOLD_OFFSET_ACCT -> AC_Config:ACCOUNT_CLASS
+            @t24:i (align=L, inputBehaviour=I, maxLength=20, sysNumber=16.0, core=true, businessType=A, t24Name=AC.THRESHOLD.OFFSET.ACCT, mandatory=false)
+        ATTRIBUTES -> byValue USRETL_Foundation:USRETL_PARAMETER__ATTRIBUTES *
+            @t24:i (t24Name=ATTRIBUTES)
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=34.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=35.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=31.0, core=true, t24Name=AUTHORISER, mandatory=false)
+/* Account Class to place the Charge Off amount Calculated during the Auto Closure process.
+The account class must contain only one category; if more than one category available then system will consider first category. */
+        CHGOFF_OFFSET_ACCT -> AC_Config:ACCOUNT_CLASS
+            @t24:i (align=L, inputBehaviour=I, maxLength=20, sysNumber=23.0, core=true, businessType=A, t24Name=CHGOFF.OFFSET.ACCT, mandatory=false)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=32.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=28.0, core=true, t24Name=CURR.NO, mandatory=false)
+        DATE_TIME -> byValue USRETL_Foundation:USRETL_PARAMETER__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=33.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        /* To parametrize suspense account used for pay by check option provided in deposit settlement instructions. This suspense account will be used as a PAY.OUT account if user chooses PAY.BY.CHECK option. */
+        DEP_CHECK_ACCOUNT -> AC_AccountOpening:ACCOUNT
+            @t24:i (align=L, inputBehaviour=I, maxLength=36, sysNumber=11.0, core=true, businessType=ANT, t24Name=DEP.CHECK.ACCOUNT, mandatory=false)
+        DEP_INTTAX_PROP -> byValue USRETL_Foundation:USRETL_PARAMETER__DEP_INTTAX_PROP *
+            @t24:i (t24Name=DEP.INTTAX.PROP)
+        DEP_INT_PROP -> byValue USRETL_Foundation:USRETL_PARAMETER__DEP_INT_PROP *
+            @t24:i (t24Name=DEP.INT.PROP)
+        DEP_PAYOUT_ACTIVITY -> AA_ProductFramework:AA_ACTIVITY
+            @t24:i (align=L, inputBehaviour=I, maxLength=80, sysNumber=26.0, core=true, businessType=A, t24Name=DEP.PAYOUT.ACTIVITY, mandatory=false)
+        DEP_PERDIEM_PROP -> byValue USRETL_Foundation:USRETL_PARAMETER__DEP_PERDIEM_PROP *
+            @t24:i (t24Name=DEP.PERDIEM.PROP)
+        DORMANT_PATH : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=13.0, core=true, t24Name=DORMANT.PATH, mandatory=false)
+        ESCHEAT_PATH : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=12.0, core=true, t24Name=ESCHEAT.PATH, mandatory=false)
+/* This field is used to define the positive pay handling ways whether it is a Direct handling or Third party handling.
+Positive Pay handling method can have values DIRECT or INDIRECT
+Rule: Field length - 8 Character type AAA. */
+        HANDLING_METHOD : USRETL_Foundation:USRETL_PARAMETER__HANDLING_METHOD
+            @t24:i (align=L, inputBehaviour=I, maxLength=8, sysNumber=1.0, core=true, t24Name=HANDLING.METHOD, mandatory=false)
+        ID -> USRETL_Foundation:USRETL_PARAMETER PK required
+            @i18n:Label (en="Transaction Ref")
+            @i18n:Tooltip (en="Transaction Reference")
+            @t24:i (align=L, inputBehaviour=I, maxLength=45, sysNumber=0.0, core=true, businessType=A, t24Name=ID, mandatory=true)
+        INPUTTER -> byValue USRETL_Foundation:USRETL_PARAMETER__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        LOAN_CHECK_ACCOUNT -> AC_AccountOpening:ACCOUNT
+            @t24:i (align=L, inputBehaviour=I, maxLength=36, sysNumber=14.0, core=true, businessType=INT, t24Name=LOAN.CHECK.ACCOUNT, mandatory=false)
+/* Account Class to place the NSF/OD fees waived during the Auto closure process.
+The account class must contain only one category; if more than one category available then system will consider first category. */
+        NSF_OFFSET_ACCT -> AC_Config:ACCOUNT_CLASS
+            @t24:i (align=L, inputBehaviour=I, maxLength=20, sysNumber=22.0, core=true, businessType=A, t24Name=NSF.OFFSET.ACCT, mandatory=false)
+        POSPAY_CUTOFF : USRETL_Foundation:USRETL_PARAMETER__POSPAY_CUTOFF
+            @t24:i (align=L, inputBehaviour=I, maxLength=5, sysNumber=2.0, core=true, t24Name=POSPAY.CUTOFF, mandatory=false)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=27.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        RESERVED_1 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=18.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=17.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=20, sysNumber=3.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        /* This field holds the path where combined statements are generated. */
+        STATEMENT_PATH : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=4.0, core=true, t24Name=STATEMENT.PATH, mandatory=false)
+    }
+    USRETL_PARAMETER__ACC_INTTAX_PROP
+    {
+        /* This field is used to store the interest tax property records from AA.PROPERTY related to Accounts */
+        ACC_INTTAX_PROP -> AA_ProductFramework:AA_PROPERTY
+            @t24:i (align=L, inputBehaviour=I, maxLength=30, sysNumber=6.0, core=true, businessType=A, t24Name=ACC.INTTAX.PROP, mandatory=false)
+    }
+    USRETL_PARAMETER__ACC_INT_PROP
+    {
+        /* This field is used to store the interest property records from AA.PROPERTY related to Accounts. */
+        ACC_INT_PROP -> AA_ProductFramework:AA_PROPERTY
+            @t24:i (align=L, inputBehaviour=I, maxLength=30, sysNumber=5.0, core=true, businessType=A, t24Name=ACC.INT.PROP, mandatory=false)
+    }
+    USRETL_PARAMETER__ACC_PERDIEM_PROP
+    {
+        /* This is the field used to store the property to be considered for calculation of Perdiem for Accounts product condition. */
+        ACC_PERDIEM_PROP -> AA_ProductFramework:AA_PROPERTY
+            @t24:i (align=L, inputBehaviour=I, maxLength=30, sysNumber=9.0, core=true, businessType=A, t24Name=ACC.PERDIEM.PROP, mandatory=false)
+    }
+    USRETL_PARAMETER__ATTRIBUTES
+    {
+        ATTRIBUTES : USRETL_Foundation:USRETL_PARAMETER__ATTRIBUTES__ATTRIBUTES
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=15.0, core=true, t24Name=ATTRIBUTES, mandatory=false)
+    }
+    USRETL_PARAMETER__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=30.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    USRETL_PARAMETER__DEP_INTTAX_PROP
+    {
+        /* This field is used to store the interest tax property records from AA.PROPERTY related to deposits. */
+        DEP_INTTAX_PROP -> AA_ProductFramework:AA_PROPERTY
+            @t24:i (align=L, inputBehaviour=I, maxLength=30, sysNumber=8.0, core=true, businessType=A, t24Name=DEP.INTTAX.PROP, mandatory=false)
+    }
+    USRETL_PARAMETER__DEP_INT_PROP
+    {
+        /* This field is used to store the interest property records from AA.PROPERTY related to deposits. */
+        DEP_INT_PROP -> AA_ProductFramework:AA_PROPERTY
+            @t24:i (align=L, inputBehaviour=I, maxLength=30, sysNumber=7.0, core=true, businessType=A, t24Name=DEP.INT.PROP, mandatory=false)
+    }
+    USRETL_PARAMETER__DEP_PERDIEM_PROP
+    {
+        /* This is the field used to store the property to be considered for calculation of Perdiem for Deposit product condition. */
+        DEP_PERDIEM_PROP -> AA_ProductFramework:AA_PROPERTY
+            @t24:i (align=L, inputBehaviour=I, maxLength=30, sysNumber=10.0, core=true, businessType=A, t24Name=DEP.PERDIEM.PROP, mandatory=false)
+    }
+    USRETL_PARAMETER__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=29.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+}
+Enumerations {
+    USRETL_PARAMETER__AC_CLOSE_STATUS : mml:string
+        CHARGEDOFF=CHARGEDOFF
+        DONOTOPEN=DONOTOPEN
+    USRETL_PARAMETER__ATTRIBUTES__ATTRIBUTES : mml:string
+        INCLUDE_IMAGE=INCLUDE.IMAGE
+        PREFIX_DOLLAR=PREFIX.DOLLAR
+    USRETL_PARAMETER__HANDLING_METHOD : mml:string
+        DIRECT=DIRECT
+        INDIRECT=INDIRECT
+    USRETL_PARAMETER__POSPAY_CUTOFF : mml:string
+        0W=0W
+        1W=1W
+        2W=2W
+}

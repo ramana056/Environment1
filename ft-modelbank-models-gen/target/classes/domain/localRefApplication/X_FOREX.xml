@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<localReferenceApplication:LocalReferenceApplication xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:localReferenceApplication="http://www.odcgroup.com/t24/application/localRefApplication/model/LocalReferenceApplication"
+    xmlns:translationDsl="http://www.odcgroup.com/translation/TranslationDsl" forApplication="name://FX_Contract:FOREX#">
+  <localField groupName="No" localRefID="SY.ID">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="SY.ID"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+  <localField groupName="No" localRefID="SY.UNIT">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="SY.UNIT"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+  <localField groupName="No" localRefID="SYEXVAL">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="SYEXVAL"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+  <localField groupName="No" localRefID="TAP.REF.ID">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="TAP.REF.ID"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+  <localField groupName="No" localRefID="TAP.EVENT.ID">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="TAP.EVENT.ID"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+  <localField groupName="No" localRefID="TAP.OPER.NATURE">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="TAP.OPER.NATURE"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+  <localField groupName="No" localRefID="TAP.FX.RATE.DIR">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="TAP.FX.RATE.DIR"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+  <localField groupName="No" localRefID="INGAAP.LEVEL">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="LEVEL"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+</localReferenceApplication:LocalReferenceApplication>

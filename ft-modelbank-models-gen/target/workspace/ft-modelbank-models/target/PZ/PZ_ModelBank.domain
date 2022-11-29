@@ -1,0 +1,178 @@
+# UTF-8
+/* Model Configuration for PZ PSD2 Account Information */
+Domain PZ_ModelBank
+    @t24:i (module=PZ)
+    @java:Package (value=com.temenos.t24.datamodel.pz.pz_modelbank)
+namespace "http://www.temenos.com/t24/PZ_ModelBank"
+metamodelVersion 1.30.6
+Classes {
+    NOFILE_ACCESSIBLE_ACCOUNTS
+        @i18n:Description (en="")
+        @t24:i (t24Name=NOFILE.ACCESSIBLE.ACCOUNTS, level=I, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        CONSENT_ID : T24BusinessTypes:N
+            @t24:i (align=L, inputBehaviour=N, maxLength=70, core=false, t24Name=CONSENT.ID, genOperation=E.PZ.GET.ACCESSIBLE.ACCOUNTS, mandatory=true)
+        WITH_BALANCE : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=10, core=false, t24Name=WITH.BALANCE, mandatory=false)
+    }
+    NOFILE_ACCOUNT_BALANCES
+        @i18n:Description (en="")
+        @t24:i (t24Name=NOFILE.ACCOUNT.BALANCES, level=I, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        ACCOUNTREFERENCE : T24BusinessTypes:ACC
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, core=false, t24Name=ACCOUNTREFERENCE, mandatory=false)
+        ACC_DATA : T24BusinessTypes:N
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, core=false, t24Name=ACC.DATA, genOperation=E.PZ.GET.ACCOUNT.BALANCES, mandatory=true)
+        DATEREFERENCE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=N, maxLength=8, core=false, t24Name=DATEREFERENCE, mandatory=false)
+    }
+    NOFILE_ACCOUNT_DETAILS
+        @i18n:Description (en="")
+        @t24:i (t24Name=NOFILE.ACCOUNT.DETAILS, level=I, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        ACCOUNTREFERENCE : T24BusinessTypes:ACC
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, core=false, t24Name=ACCOUNTREFERENCE, mandatory=false)
+        ACC_DATA : T24BusinessTypes:N
+            @t24:i (align=L, inputBehaviour=N, maxLength=10, core=false, t24Name=ACC.DATA, genOperation=E.PZ.GET.ACCOUNT.DETAILS, mandatory=true)
+        WITH_BALANCE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=4, core=false, t24Name=WITH.BALANCE, mandatory=false)
+    }
+    NOFILE_ACCOUNT_OVERVIEW
+        @i18n:Description (en="")
+        @t24:i (t24Name=NOFILE.ACCOUNT.OVERVIEW, level=I, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        ACCOUNTREFERENCE : T24BusinessTypes:ACC
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, core=false, t24Name=ACCOUNTREFERENCE, mandatory=false)
+        ACC_DATA : T24BusinessTypes:N
+            @t24:i (align=L, inputBehaviour=N, maxLength=10, core=false, t24Name=ACC.DATA, genOperation=E.PZ.ACCOUNT.OVERVIEW, mandatory=true)
+    }
+    NOFILE_ACCOUNT_VERIFY
+        @i18n:Description (en="")
+        @t24:i (t24Name=NOFILE.ACCOUNT.VERIFY, level=I, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        ACCOUNTREFERENCE : T24BusinessTypes:ACC
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, core=false, t24Name=ACCOUNTREFERENCE, mandatory=false)
+        ACC_DATA : T24BusinessTypes:N
+            @t24:i (align=L, inputBehaviour=N, maxLength=10, core=false, t24Name=ACC.DATA, genOperation=E.PZ.ACCOUNT.VERIFY, mandatory=true)
+    }
+    NOFILE_BERLIN_CHECK_FUNDS
+        @i18n:Description (en="")
+        @t24:i (t24Name=NOFILE.BERLIN.CHECK.FUNDS, level=I, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        ACCOUNT : T24BusinessTypes:ACC
+            @i18n:Label (en=Account)
+            @i18n:Tooltip (en="Identifies the customer account")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, core=false, t24Name=ACCOUNT, mandatory=false)
+        ACC_DATA : T24BusinessTypes:N
+            @t24:i (align=L, inputBehaviour=N, maxLength=10, core=false, t24Name=ACC.DATA, genOperation=E.PZ.BERLIN.CHECK.FUNDS, mandatory=true)
+        BANK : T24BusinessTypes:ACC
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, core=false, t24Name=BANK, mandatory=false)
+        CARD_NUMBER : T24BusinessTypes:N
+            @i18n:Label (en="Card Number")
+            @t24:i (align=R, inputBehaviour=N, maxLength=20, core=false, t24Name=CARD.NUMBER, mandatory=false)
+        CURRENCY : T24BusinessTypes:N
+            @i18n:Label (en=Ccy)
+            @t24:i (align=R, inputBehaviour=N, maxLength=19, core=false, t24Name=CURRENCY, mandatory=false)
+        DR_CR_IND : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=19, core=false, t24Name=DR.CR.IND, mandatory=false)
+        INSTRUCTED_AMT : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=19, core=false, t24Name=INSTRUCTED.AMT, mandatory=false)
+        PAYEE : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=70, core=false, t24Name=PAYEE, mandatory=false)
+        PAYMENT_REQUEST_ID : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=100, core=false, t24Name=PAYMENT.REQUEST.ID, mandatory=false)
+        TXN_CODE : T24BusinessTypes:N
+            @i18n:Label (en="Transaction Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=19, core=false, t24Name=TXN.CODE, mandatory=false)
+    }
+    NOFILE_CHECK_FUNDS
+        @i18n:Description (en="")
+        @t24:i (t24Name=NOFILE.CHECK.FUNDS, level=I, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        ACCOUNTREFERENCE : T24BusinessTypes:ACC
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, core=false, t24Name=ACCOUNTREFERENCE, mandatory=false)
+        ACC_DATA : T24BusinessTypes:N
+            @t24:i (align=L, inputBehaviour=N, maxLength=10, core=false, t24Name=ACC.DATA, genOperation=E.PZ.CHECK.FUNDS, mandatory=true)
+        AMOUNT : T24BusinessTypes:N
+            @i18n:Label (en=Amount)
+            @i18n:Tooltip (en="Indicates the Amount")
+            @t24:i (align=R, inputBehaviour=N, maxLength=16, core=false, t24Name=AMOUNT, mandatory=false)
+        CURRENCY : T24BusinessTypes:N
+            @i18n:Label (en=Ccy)
+            @t24:i (align=R, inputBehaviour=N, maxLength=3, core=false, t24Name=CURRENCY, mandatory=false)
+        DR_CR_IND : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, core=false, t24Name=DR.CR.IND, mandatory=false)
+        TXN_CODE : T24BusinessTypes:N
+            @i18n:Label (en="Transaction Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=10, core=false, t24Name=TXN.CODE, mandatory=false)
+    }
+    NOFILE_GET_ACC_SINGLE_TXN
+        @i18n:Description (en="")
+        @t24:i (t24Name=NOFILE.GET.ACC.SINGLE.TXN, level=I, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        ACCOUNT_ID : T24BusinessTypes:N
+            @i18n:Label (en="Account No")
+            @i18n:Tooltip (en="Indicates the Account Number")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, core=false, t24Name=ACCOUNT.ID, mandatory=false)
+        ACC_DATA : T24BusinessTypes:N
+            @t24:i (align=L, inputBehaviour=N, maxLength=10, core=false, t24Name=ACC.DATA, genOperation=E.PZ.GET.ACC.SINGLE.TXN, mandatory=true)
+        TRANSACTION_ID : T24BusinessTypes:N
+            @i18n:Label (en="Transaction ID")
+            @t24:i (align=R, inputBehaviour=N, maxLength=20, core=false, t24Name=TRANSACTION.ID, mandatory=false)
+    }
+    NOFILE_GET_BALANCE
+        @i18n:Description (en="")
+        @t24:i (t24Name=NOFILE.GET.BALANCE, level=I, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        ACCOUNTREFERENCE : T24BusinessTypes:ACC
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, core=false, t24Name=ACCOUNTREFERENCE, mandatory=false)
+        ACC_DATA : T24BusinessTypes:N
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, core=false, t24Name=ACC.DATA, genOperation=E.PZ.GET.BALANCE, mandatory=true)
+    }
+    NOFILE_GET_CONSENT_RECORD
+        @i18n:Description (en="")
+        @t24:i (t24Name=NOFILE.GET.CONSENT.RECORD, level=I, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        CONSENT_ID : T24BusinessTypes:N
+            @t24:i (align=L, inputBehaviour=N, maxLength=70, core=false, t24Name=CONSENT.ID, genOperation=E.PZ.GET.CONSENT, mandatory=true)
+    }
+    NOFILE_GET_CONSENT_STATUS
+        @i18n:Description (en="")
+        @t24:i (t24Name=NOFILE.GET.CONSENT.STATUS, level=I, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        CONSENT_ID : T24BusinessTypes:N
+            @t24:i (align=L, inputBehaviour=N, maxLength=70, core=false, t24Name=CONSENT.ID, genOperation=E.PZ.GET.CONSENT.STATUS, mandatory=true)
+    }
+    NOFILE_PZ_API_GET_CONSENT_INFO
+        @i18n:Description (en="")
+        @t24:i (t24Name=NOFILE.PZ.API.GET.CONSENT.INFO, level=I, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        CONSENT_ID : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, core=false, t24Name=CONSENT.ID, mandatory=false)
+        CONSENT_STATUS : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, core=false, t24Name=CONSENT.STATUS, mandatory=false)
+        CUSTOMER_ID : T24BusinessTypes:N
+            @i18n:Label (en="Customer Id")
+            @i18n:Tooltip (en="Identifies the Customer for the transaction.")
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, core=false, t24Name=CUSTOMER.ID, genOperation=E.PZ.API.GET.CONSENT.INFO, mandatory=true)
+    }
+    NOFILE_PZ_API_VALIDATE_REQUEST
+        @i18n:Description (en="")
+        @t24:i (t24Name=NOFILE.PZ.API.VALIDATE.REQUEST, level=I, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        ACCOUNT_ID : T24BusinessTypes:N
+            @i18n:Label (en="Account No")
+            @i18n:Tooltip (en="Indicates the Account Number")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, core=false, t24Name=ACCOUNT.ID, mandatory=false)
+        CONSENT_ID : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, core=false, t24Name=CONSENT.ID, mandatory=false)
+        CONSENT_TYPE : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, core=false, t24Name=CONSENT.TYPE, mandatory=false)
+        PSU_ID : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, core=false, t24Name=PSU.ID, mandatory=false)
+        TPP_ID : T24BusinessTypes:N
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, core=false, t24Name=TPP.ID, genOperation=E.PZ.API.VALIDATE.REQUEST, mandatory=true)
+        TPP_ROLE : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, core=false, t24Name=TPP.ROLE, mandatory=false)
+    }
+}

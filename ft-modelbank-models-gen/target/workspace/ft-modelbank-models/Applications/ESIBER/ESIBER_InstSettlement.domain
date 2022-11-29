@@ -1,0 +1,66 @@
+# UTF-8
+/* Settlement for Iberpay ASI4 */
+Domain ESIBER_InstSettlement
+    @t24:i (module=ESIBER)
+    @java:Package (value=com.temenos.t24.datamodel.esiber.esiber_instsettlement)
+namespace "http://www.temenos.com/t24/ESIBER_InstSettlement"
+metamodelVersion 1.30.6
+Classes {
+    /* This is a concat table which will record all the EB.LOOKUP records created for storing settlement shift details */
+    ESIBER_SETTLEMENT_CUTOFF
+        @i18n:Description (en="")
+        @t24:i (t24Name=ESIBER.SETTLEMENT.CUTOFF, level=F, type=L, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        /* ID of the EB.LOOKUP */
+        EB_LOOKUP_ID : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=1.0, core=true, t24Name=EB.LOOKUP.ID, mandatory=false)
+        /* Shift time for the cycle */
+        ID -> ESIBER_InstSettlement:ESIBER_SETTLEMENT_CUTOFF PK required
+            @i18n:Label (en="Transaction Ref")
+            @i18n:Tooltip (en="Transaction Reference")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=0.0, core=true, businessType=A, t24Name="@ID", mandatory=true)
+        SHIFT_TIME -> byValue ESIBER_InstSettlement:ESIBER_SETTLEMENT_CUTOFF__SHIFT_TIME *
+            @t24:i (t24Name=SHIFT.TIME)
+    }
+    ESIBER_SETTLEMENT_CUTOFF__SHIFT_TIME
+    {
+        SHIFT_TIME : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=2.0, core=true, t24Name=SHIFT.TIME, mandatory=false)
+    }
+    /* This concat  table will record the details of the ASI4 transactions that requires settlement to be done */
+    ESIBER_SETTLEMENT_TRANSACTIONS
+        @i18n:Description (en="")
+        @t24:i (t24Name=ESIBER.SETTLEMENT.TRANSACTIONS, level=F, type=L, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        /* Contains the batch time when the transaction should be picked up for settlement */
+        BATCH_TIME : T24BusinessTypes:TIME
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=2.0, core=true, t24Name=BATCH.TIME, mandatory=false)
+        /* Contains the Clearing ID of the transaction */
+        CLEARING_ID : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=7.0, core=true, t24Name=CLEARING.ID, mandatory=false)
+        /* Contains the direction of the transaction */
+        DIRECTION : T24BusinessTypes:A
+            @i18n:Label (en=Direction)
+            @i18n:Tooltip (en="In or Out")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=5.0, core=true, t24Name=DIRECTION, mandatory=false)
+        /* FTNumber of the transaction */
+        ID -> ESIBER_InstSettlement:ESIBER_SETTLEMENT_TRANSACTIONS PK required
+            @i18n:Label (en="Transaction Ref")
+            @i18n:Tooltip (en="Transaction Reference")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=0.0, core=true, businessType=A, t24Name="@ID", mandatory=true)
+        /* Contains the message type of the transaction */
+        MSG_TYPE : T24BusinessTypes:A
+            @i18n:Label (en="Message Type")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=4.0, core=true, t24Name=MSG.TYPE, mandatory=false)
+        /* Contains the date when the settlement is to be done */
+        SETTL_DATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=35, sysNumber=3.0, core=true, t24Name=SETTL.DATE, mandatory=false)
+        /* Contains the transaction amount in EUR */
+        TXN_AMOUNT : T24BusinessTypes:AMT
+            @i18n:Label (en="Transaction Amount")
+            @t24:i (align=R, inputBehaviour=I, maxLength=35, sysNumber=6.0, core=true, t24Name=TXN.AMOUNT, mandatory=false)
+        /* Contains the transaction date(i.e., credit value date) */
+        TXN_DATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=35, sysNumber=1.0, core=true, t24Name=TXN.DATE, mandatory=false)
+    }
+}

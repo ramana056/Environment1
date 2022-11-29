@@ -1,0 +1,37 @@
+# UTF-8
+/* PEL artifacts */
+Domain FRPLCL_ManagePel
+    @t24:i (module=FRPLCL)
+    @java:Package (value=com.temenos.t24.datamodel.frplcl.frplcl_managepel)
+namespace "http://www.temenos.com/t24/FRPLCL_ManagePel"
+metamodelVersion 1.30.6
+Classes {
+    NOFILE_FRPLCL_PEL_BONUS_RECOVERED
+        @i18n:Description (en="")
+        @t24:i (t24Name=NOFILE.FRPLCL.PEL.BONUS.RECOVERED, level=I, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        RESULT_DATA : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=11, core=false, t24Name=RESULT.DATA, genOperation=FRPLCL.PEL.BONUS.RECOVERED, mandatory=true)
+    }
+    NOFILE_FRPLCL_PEL_INSUFF_PAYMENT
+        @i18n:Description (en="")
+        @t24:i (t24Name=NOFILE.FRPLCL.PEL.INSUFF.PAYMENT, level=I, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        RESULT_DATA : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=11, core=false, t24Name=RESULT.DATA, genOperation=FRPLCL.PEL.INSUFF.PAYMENT, mandatory=true)
+    }
+    NOFILE_FRPLCL_PEL_MATURE_30DAYS
+        @i18n:Description (en="")
+        @t24:i (t24Name=NOFILE.FRPLCL.PEL.MATURE.30DAYS, level=I, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        RESULT_DATA : T24BusinessTypes:N
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, core=false, t24Name=RESULT.DATA, genOperation=FRPLCL.PEL.DUE.IN.30DAYS, mandatory=true)
+    }
+    NOFILE_FRPLCL_PEL_MATURE_IN_21DAYS
+        @i18n:Description (en="")
+        @t24:i (t24Name=NOFILE.FRPLCL.PEL.MATURE.IN.21DAYS, level=I, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        RESULT_DATA : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=11, core=false, t24Name=RESULT.DATA, genOperation=FRPLCL.PEL.MATURE.21DAYS, mandatory=true)
+    }
+}

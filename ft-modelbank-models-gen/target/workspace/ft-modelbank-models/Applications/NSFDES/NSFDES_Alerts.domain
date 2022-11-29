@@ -1,0 +1,90 @@
+# UTF-8
+/* NSF Alerts */
+Domain NSFDES_Alerts
+    @t24:i (module=NSFDES)
+    @java:Package (value=com.temenos.t24.datamodel.nsfdes.nsfdes_alerts)
+namespace "http://www.temenos.com/t24/NSFDES_Alerts"
+metamodelVersion 1.30.6
+Classes {
+    NSF_ACFA_BY_DESK
+        @i18n:Description (en="")
+        @t24:i (t24Name=NSF.ACFA.BY.DESK, level=I, type=L, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        ALERT_LEVEL : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=1, sysNumber=1.0, core=true, t24Name=ALERT.LEVEL, mandatory=false)
+        BRANCH -> byValue NSFDES_Alerts:NSF_ACFA_BY_DESK__BRANCH *
+            @t24:i (t24Name=BRANCH)
+        ID -> NSFDES_Alerts:NSF_ACFA_BY_DESK PK required
+            @i18n:Label (en="Transaction Ref")
+            @i18n:Tooltip (en="Transaction Reference")
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=0.0, core=true, businessType=A, t24Name="@ID", mandatory=true)
+    }
+    NSF_ACFA_BY_DESK__BRANCH
+    {
+        BRANCH : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=20, sysNumber=2.0, core=true, t24Name=BRANCH, mandatory=false)
+        INFO_ONLY_AMT : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=20, sysNumber=6.0, core=true, t24Name=INFO.ONLY.AMT, mandatory=false)
+        INFO_ONLY_COUNT : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=20, sysNumber=5.0, core=true, t24Name=INFO.ONLY.COUNT, mandatory=false)
+        NSF_PENDING : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=20, sysNumber=3.0, core=true, t24Name=NSF.PENDING, mandatory=false)
+        NSF_PENDING_AMT : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=20, sysNumber=4.0, core=true, t24Name=NSF.PENDING.AMT, mandatory=false)
+        RESERVED_1 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=10.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=9.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=8.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=7.0, core=true, t24Name=RESERVED.4, mandatory=false)
+    }
+    /* This live table will hold all ACFA NSF records by User. This information will be cleared and written by job NSF.ALERT.PROCESS during every alert level. */
+    NSF_ACFA_BY_USER
+        @i18n:Description (en="")
+        @t24:i (t24Name=NSF.ACFA.BY.USER, level=I, type=L, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        /* This can be between 1 to 9. This is decided based on Alert Parameter and the time the select had happened. */
+        ALERT_LEVEL : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=1, sysNumber=1.0, core=true, t24Name=ALERT.LEVEL, mandatory=false)
+        BRANCH -> byValue NSFDES_Alerts:NSF_ACFA_BY_USER__BRANCH *
+            @t24:i (t24Name=BRANCH)
+        /* Id for this table is a record from USER table. */
+        ID -> NSFDES_Alerts:NSF_ACFA_BY_USER PK required
+            @i18n:Label (en="Transaction Ref")
+            @i18n:Tooltip (en="Transaction Reference")
+            @t24:i (align=L, inputBehaviour=I, maxLength=20, sysNumber=0.0, core=true, businessType=A, t24Name="@ID", mandatory=true)
+    }
+    NSF_ACFA_BY_USER__BRANCH
+    {
+        /* This field can be a record from COMPANY or ST.BRANCH of Arrangement the ACFA is created for */
+        BRANCH : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=20, sysNumber=2.0, core=true, t24Name=BRANCH, mandatory=false)
+        BRANCH_DESK : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=8.0, core=true, t24Name=BRANCH.DESK, mandatory=false)
+        /* Total amount of ACFAs in INFO.ONLY.COUNT items */
+        INFO_ONLY_AMT : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=20, sysNumber=7.0, core=true, t24Name=INFO.ONLY.AMT, mandatory=false)
+        /* Count of ACFA records which are classified as NSF items but manual changes is not possible */
+        INFO_ONLY_COUNT : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=20, sysNumber=6.0, core=true, t24Name=INFO.ONLY.COUNT, mandatory=false)
+        /* This field can hold the record id from table NSF.DESK.DEFINITION. */
+        NSF_DESK : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=20, sysNumber=3.0, core=true, t24Name=NSF.DESK, mandatory=false)
+        /* Count of ACFA records which are classified as NSF items but manual decision has not taken */
+        NSF_PENDING : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=20, sysNumber=4.0, core=true, t24Name=NSF.PENDING, mandatory=false)
+        /* Total amount of ACFAs in NSF.PENDING items */
+        NSF_PENDING_AMT : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=20, sysNumber=5.0, core=true, t24Name=NSF.PENDING.AMT, mandatory=false)
+        RESERVED_1 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=12.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=11.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=10.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=9.0, core=true, t24Name=RESERVED.4, mandatory=false)
+    }
+}

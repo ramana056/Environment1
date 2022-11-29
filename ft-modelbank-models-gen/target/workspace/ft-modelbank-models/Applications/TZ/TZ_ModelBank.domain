@@ -1,0 +1,21 @@
+# UTF-8
+/* TZ Model Data */
+Domain TZ_ModelBank
+    @t24:i (module=TZ)
+    @java:Package (value=com.temenos.t24.datamodel.tz.tz_modelbank)
+namespace "http://www.temenos.com/t24/TZ_ModelBank"
+metamodelVersion 1.30.6
+Classes {
+    NOFILE_STOPCONDITION_OPERAND
+        @i18n:Description (en="")
+        @t24:i (t24Name=NOFILE.STOPCONDITION.OPERAND, level=I, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        ATTRIBUTE : T24BusinessTypes:N
+            @i18n:Label (en=Attribute)
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, core=false, t24Name=ATTRIBUTE, mandatory=false)
+        OPERAND : T24BusinessTypes:N
+            @i18n:Label (en=Operand)
+            @i18n:Tooltip (en="The Operand to use eg EQ,GT,LT etc")
+            @t24:i (align=L, inputBehaviour=N, maxLength=10, core=false, t24Name=OPERAND, genOperation=E.TZ.OPERAND.ALLOWED, mandatory=true)
+    }
+}

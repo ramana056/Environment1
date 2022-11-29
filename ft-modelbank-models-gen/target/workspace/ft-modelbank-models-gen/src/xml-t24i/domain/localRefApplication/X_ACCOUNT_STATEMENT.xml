@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<localReferenceApplication:LocalReferenceApplication xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:localReferenceApplication="http://www.odcgroup.com/t24/application/localRefApplication/model/LocalReferenceApplication"
+    xmlns:translationDsl="http://www.odcgroup.com/translation/TranslationDsl" forApplication="name://AC_AccountStatement:ACCOUNT_STATEMENT#">
+  <localField groupName="No" localRefID="USRETL.PRINTING">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="PRINTING"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+  <localField groupName="No" localRefID="USRETL.IMAGE.OPTIONS">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="IMAGE.OPTIONS"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+</localReferenceApplication:LocalReferenceApplication>

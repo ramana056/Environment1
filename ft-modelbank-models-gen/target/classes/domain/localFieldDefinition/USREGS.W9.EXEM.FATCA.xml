@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<localref:LocalRef xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:localref="http://www.odcgroup.com/t24/application/localref/model/LocalRef"
+    xmlns:translationDsl="http://www.odcgroup.com/translation/TranslationDsl" localRefID="USREGS.W9.EXEM.FATCA" maximumChars="3" minimumChars="0"
+    mandatory="false" charType="N" defaultPossible="false" virtualTable="W9.EXEM.FATCA"
+    description="W9 Exempt from FATCA Reporting">
+  <shortName xsi:type="translationDsl:LocalTranslations">
+    <translations locale="en" text="W9.EXEM.FATCA"/>
+  </shortName>
+  <vettingTable vettingTable="A">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="A-An organization exempt from tax"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="B">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="B-The United States or any of its"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="C">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="C-A state, the District of Columbia"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="D">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="D-A corporation"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="E">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="E-A corporation"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="F">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="F-A dealer in securities"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="G">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="G-A real estate investment trust"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="H">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="H-A regulated investment company"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="I">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="I-A common trust fund"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="J">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="J-A bank as defined in section 581"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="K">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="K-A broker"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="L">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="L-A trust exempt from tax"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="M">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="M-A tax exempt trust"/>
+    </remarks>
+  </vettingTable>
+</localref:LocalRef>

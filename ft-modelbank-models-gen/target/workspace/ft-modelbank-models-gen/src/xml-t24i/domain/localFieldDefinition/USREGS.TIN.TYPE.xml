@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<localref:LocalRef xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:localref="http://www.odcgroup.com/t24/application/localref/model/LocalRef"
+    xmlns:translationDsl="http://www.odcgroup.com/translation/TranslationDsl" localRefID="USREGS.TIN.TYPE" maximumChars="2" minimumChars="0"
+    mandatory="false" charType="A" defaultPossible="false" virtualTable="TIN.TYPE"
+    description="TIN TYPE">
+  <shortName xsi:type="translationDsl:LocalTranslations">
+    <translations locale="en" text="TIN.TYPE"/>
+  </shortName>
+  <vettingTable vettingTable="AT">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="ATIN"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="E">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Employer Identification Number"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="EI">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="EIN"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="I">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="ITIN-Individual Taxpayer Id number"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="IT">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="ITIN"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="NP">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="NP"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="NR">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="NR"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="QI">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="QI-EIN"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="S">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="SSN - Social Security Number"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="SS">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="SSN"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="WP">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="WP-EIN"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="WT">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="WT-EIN"/>
+    </remarks>
+  </vettingTable>
+</localref:LocalRef>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<localReferenceApplication:LocalReferenceApplication xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:localReferenceApplication="http://www.odcgroup.com/t24/application/localRefApplication/model/LocalReferenceApplication"
+    xmlns:translationDsl="http://www.odcgroup.com/translation/TranslationDsl" forApplication="name://ST_Payments:BENEFICIARY#">
+  <localField groupName="No" localRefID="BEN.ALT.KEY">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="BEN.ALT.KEY"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+  <localField groupName="SIGNATORY" localRefID="SIGNATORY">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="SIGNATORY"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+  <localField groupName="No" localRefID="ILBNKB.BANK.CODE">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="BANK.CODE"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+  <localField groupName="No" localRefID="ILBNKB.BRANCH.CODE">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="BRANCH.CODE"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+  <localField groupName="No" localRefID="USCORE.ZIP4">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="ZIP4"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+  <localField groupName="No" localRefID="USRETL.EXIST.CUST">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="CUST.EXIST"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+  <localField groupName="No" localRefID="USRETL.ROUTE.NO">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="ROUTE.NO"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+  <localField groupName="No" localRefID="USRETL.ACCT.TYPE">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="ACCT.TYPE"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+  <localField groupName="No" localRefID="USREGS.US.STATE">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="US.STATE"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+</localReferenceApplication:LocalReferenceApplication>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<localReferenceApplication:LocalReferenceApplication xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:localReferenceApplication="http://www.odcgroup.com/t24/application/localRefApplication/model/LocalReferenceApplication"
+    xmlns:translationDsl="http://www.odcgroup.com/translation/TranslationDsl" forApplication="name://AC_AccountOpening:AC_FUNDS_AUTHORISATION#">
+  <localField groupName="No" localRefID="NSF.DESK">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="NSF.DESK"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+  <localField groupName="No" localRefID="TXN.RETURN.CODE">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="TXN.RETURN.CODE"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+  <localField groupName="No" localRefID="NSF.CLEARING.CHANNEL">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="CLRNG.CHANNEL"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+  <localField groupName="No" localRefID="NSF.UNCOLLECT.FUNDS">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="UNCOLLECT.FUNDS"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+  <localField groupName="No" localRefID="MANUAL.REVIEW">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="MANUAL.REVIEW"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+</localReferenceApplication:LocalReferenceApplication>

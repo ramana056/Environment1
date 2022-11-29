@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<localref:LocalRef xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:localref="http://www.odcgroup.com/t24/application/localref/model/LocalRef"
+    xmlns:translationDsl="http://www.odcgroup.com/translation/TranslationDsl" localRefID="USREGS.COMM.DEVICE" maximumChars="12" minimumChars="0"
+    mandatory="false" charType="A" defaultPossible="false" description="Communication Device">
+  <shortName xsi:type="translationDsl:LocalTranslations">
+    <translations locale="en" text="COMM.DEVICE"/>
+  </shortName>
+  <vettingTable vettingTable="HOME PHONE">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Home Phone"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="WORK PHONE">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Work Phone"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="MOBILE PHONE">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Mobile Phone"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="EMAIL">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="E-Mail"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="FAX">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Fax"/>
+    </remarks>
+  </vettingTable>
+</localref:LocalRef>

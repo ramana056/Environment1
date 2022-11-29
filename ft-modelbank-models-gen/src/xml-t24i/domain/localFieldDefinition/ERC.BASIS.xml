@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<localref:LocalRef xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:localref="http://www.odcgroup.com/t24/application/localref/model/LocalRef"
+    xmlns:translationDsl="http://www.odcgroup.com/translation/TranslationDsl" localRefID="ERC.BASIS" maximumChars="30" minimumChars="0" mandatory="false"
+    charType="A" defaultPossible="false" virtualTable="MSO.ERC.BASIS" description="How the ERC will be calculated?">
+  <shortName xsi:type="translationDsl:LocalTranslations">
+    <translations locale="en" text="ERC.BASIS"/>
+  </shortName>
+  <vettingTable vettingTable="FIXEDAMOUNT">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="FixedAmount"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="FIXEDAMOUNTPLUSMONTHSINTEREST">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="FixedAmountPlusMonthsInterest"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="FIXEDAMOUNTPLUSMONTHSINTERESTATBASERATE">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="FixedAmountPlusMonthsInterestAtBase"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="FIXEDAMOUNTPLUSMONTHSINTERESTATSPECIFIEDRATE">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="FixedAmountPlusMonthsInterestAtSpec"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="FIXEDAMOUNTPLUSPERCENTAGEOFAMOUNTREPAID">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="FixedAmountPlusPercentageOfAmountRe"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="FIXEDAMOUNTPLUSPERCENTAGEOFBALANCE">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="FixedAmountPlusPercentageOfBalance"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="HIGHEROFINTERESTATRATEORBASERATE">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="HigherOfInterestAtRateOrBaseRate"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="MONTHSINTEREST">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="MonthsInterest"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="MONTHSINTERESTATBASERATE">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="MonthsInterestAtBaseRate"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="MONTHSINTERESTATSPECIFIEDRATE">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="MonthsInterestAtSpecifiedRate"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="PERCENTAGEOFAMOUNTREPAID">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="PercentageOfAmountRepaid"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="PERCENTAGEOFBALANCE">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="PercentageOfBalance"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="PERCENTAGEOFBALANCEAMORTISED">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="PercentageOfBalanceAmortised"/>
+    </remarks>
+  </vettingTable>
+</localref:LocalRef>

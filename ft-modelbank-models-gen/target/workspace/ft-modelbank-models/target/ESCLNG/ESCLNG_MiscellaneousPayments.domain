@@ -1,0 +1,254 @@
+# UTF-8
+/* SNCE08 - Miscellaneous Payments */
+Domain ESCLNG_MiscellaneousPayments
+    @t24:i (module=ESCLNG)
+    @java:Package (value=com.temenos.t24.datamodel.esclng.esclng_miscellaneouspayments)
+namespace "http://www.temenos.com/t24/ESCLNG_MiscellaneousPayments"
+metamodelVersion 1.30.6
+Classes {
+    /* This table will record the details for specific type of payment to process a transaction and generate SNCE08 format */
+    ESCLNG_SNCE_DATA_MODEL
+        @i18n:Description (en="")
+        @t24:i (t24Name=ESCLNG.SNCE.DATA.MODEL, level=F, type=H, allowedFunctions="A C D E H I L P Q R S", localRefApplicationSysNo=42.0, localRefAllowed=true)
+    {
+        /* This field  captures Amount when transaction is expressed in Pesetas */
+        AMOUNT_IN_PESETAS : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=13.0, core=true, t24Name=AMOUNT.IN.PESETAS, mandatory=false)
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=66.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=67.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=63.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        /* This field  captures Authorization Key value */
+        AUTHORIZATION_KEY : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=18, sysNumber=12.0, core=true, t24Name=AUTHORIZATION.KEY, mandatory=false)
+        /* This field  captures Complementary Concept value */
+        COMPLEMENTARY_CONCEPT : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=39.0, core=true, t24Name=COMPLEMENTARY.CONCEPT, mandatory=false)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=64.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        /* This field  captures BIC of the creditor's entity */
+        CREDITOR_BIC : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=11, sysNumber=24.0, core=true, t24Name=CREDITOR.BIC, mandatory=false)
+        /* This field  captures Creditor ID */
+        CREDITOR_ID : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=27.0, core=true, t24Name=CREDITOR.ID, mandatory=false)
+        /* This field  captures Creditor's Name */
+        CREDITOR_NAME : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=30.0, core=true, t24Name=CREDITOR.NAME, mandatory=false)
+        /* This field  captures Credit Entity Reference */
+        CREDIT_REFERENCE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=33.0, core=true, t24Name=CREDIT.REFERENCE, mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=60.0, core=true, t24Name=CURR.NO, mandatory=false)
+        DATE_TIME -> byValue ESCLNG_MiscellaneousPayments:ESCLNG_SNCE_DATA_MODEL__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        /* This field  captures Reference of the debit given by creditor client */
+        DEBIT_REFERENCE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=20.0, core=true, t24Name=DEBIT.REFERENCE, mandatory=false)
+        /* This field  captures Debtor Entity's BIC code */
+        DEBTOR_BIC : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=11, sysNumber=29.0, core=true, t24Name=DEBTOR.BIC, mandatory=false)
+        /* This field  captures Name of the debtor's entity */
+        DEBTOR_ENTITY_NAME : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=35.0, core=true, t24Name=DEBTOR.ENTITY.NAME, mandatory=false)
+        /* This field  captures IBAN of the debtor */
+        DEBTOR_IBAN : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=34, sysNumber=25.0, core=true, t24Name=DEBTOR.IBAN, mandatory=false)
+        /* This field  captures Name of the debtor */
+        DEBTOR_NAME : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=28.0, core=true, t24Name=DEBTOR.NAME, mandatory=false)
+        /* This field  captures Response Delivery date */
+        DELIVERY_DATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=8, sysNumber=37.0, core=true, t24Name=DELIVERY.DATE, mandatory=false)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=65.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        /* This field  captures Direct Debit Oder Type */
+        DIRECT_DEBIT_ORDER_TYPE : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=1, sysNumber=32.0, core=true, t24Name=DIRECT.DEBIT.ORDER.TYPE, mandatory=false)
+        /* This field  captures IBAN value */
+        IBAN : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=34, sysNumber=7.0, core=true, t24Name=IBAN, mandatory=false)
+        /* ID of ESCLNG.SNCE.DATA.MODEL is an unique Id with prefix SNC */
+        ID -> ESCLNG_MiscellaneousPayments:ESCLNG_SNCE_DATA_MODEL PK required
+            @i18n:Label (en="Transaction Ref")
+            @i18n:Tooltip (en="Transaction Reference")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=0.0, core=true, businessType=A, t24Name="@ID", mandatory=true)
+        INPUTTER -> byValue ESCLNG_MiscellaneousPayments:ESCLNG_SNCE_DATA_MODEL__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        /* This field  captures Interbank Rate Amount */
+        INTERBANK_RATE_AMOUNT : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=6, sysNumber=11.0, core=true, t24Name=INTERBANK.RATE.AMOUNT, typeModifiers="-USD", mandatory=false)
+        /* This field  captures Interbank Rate Key */
+        INTERBANK_RATE_KEY : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=2, sysNumber=10.0, core=true, t24Name=INTERBANK.RATE.KEY, mandatory=false)
+        /* This field  captures Nature of the Interbank Rate 1-assigned 2-impacted */
+        INTERBANK_RATE_NATURE : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=1, sysNumber=9.0, core=true, t24Name=INTERBANK.RATE.NATURE, mandatory=false)
+        /* This field  provides the Amount of transaction that has been done */
+        MAIN_TRANSACTION_AMOUNT : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=8.0, core=true, t24Name=MAIN.TRANSACTION.AMOUNT, typeModifiers="-USD", mandatory=false)
+        OVERRIDE -> byValue ESCLNG_MiscellaneousPayments:ESCLNG_SNCE_DATA_MODEL__OVERRIDE *
+            @t24:i (t24Name=OVERRIDE)
+        /* This field  captures IBAN of the Payee */
+        PAYEE_IBAN : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=34, sysNumber=26.0, core=true, t24Name=PAYEE.IBAN, mandatory=false)
+        /* This field  provides the Processed date */
+        PROCESS_DATE : T24BusinessTypes:D
+            @i18n:Label (en="Process Date")
+            @t24:i (align=R, inputBehaviour=I, maxLength=8, sysNumber=40.0, core=true, t24Name=PROCESS.DATE, mandatory=false)
+        /* This field  captures Date of the Receipt of the debtor's request */
+        RECEIPT_DATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=8, sysNumber=36.0, core=true, t24Name=RECEIPT.DATE, mandatory=false)
+        /* This field  captures Record Code */
+        RECORD_CODE : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=2, sysNumber=1.0, core=true, t24Name=RECORD.CODE, mandatory=false)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=59.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        /* This field  captures Date of Recovery from the Debtor */
+        RECOVERY_DATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=8, sysNumber=31.0, core=true, t24Name=RECOVERY.DATE, mandatory=false)
+        /* This field  captures Unauthorized Reimbursement Amount */
+        REIMBURSEMENT_AMOUNT : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=19.0, core=true, t24Name=REIMBURSEMENT.AMOUNT, typeModifiers="-USD", mandatory=false)
+        /* This field  captures Reasons for  Reimbursement Request */
+        REIMBURSEMENT_REQUEST : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=1, sysNumber=17.0, core=true, t24Name=REIMBURSEMENT.REQUEST, mandatory=false)
+        /* This field  captures Reimbursement Request Date */
+        REIMBURSEMENT_REQUEST_DATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=8, sysNumber=23.0, core=true, t24Name=REIMBURSEMENT.REQUEST.DATE, mandatory=false)
+        /* This field  captures Request Reference */
+        REQUEST_REFERENCE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=34.0, core=true, t24Name=REQUEST.REFERENCE, mandatory=false)
+        /* Reserved for future use */
+        RESERVED_1 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=43.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        /* Reserved for future use */
+        RESERVED_10 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=52.0, core=true, t24Name=RESERVED.10, mandatory=false)
+        /* Reserved for future use */
+        RESERVED_11 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=53.0, core=true, t24Name=RESERVED.11, mandatory=false)
+        /* Reserved for future use */
+        RESERVED_12 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=54.0, core=true, t24Name=RESERVED.12, mandatory=false)
+        /* Reserved for future use */
+        RESERVED_13 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=55.0, core=true, t24Name=RESERVED.13, mandatory=false)
+        /* Reserved for future use */
+        RESERVED_14 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=56.0, core=true, t24Name=RESERVED.14, mandatory=false)
+        /* Reserved for future use */
+        RESERVED_15 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=57.0, core=true, t24Name=RESERVED.15, mandatory=false)
+        /* Reserved for future use */
+        RESERVED_2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=44.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        /* Reserved for future use */
+        RESERVED_3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=45.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        /* Reserved for future use */
+        RESERVED_4 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=46.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        /* Reserved for future use */
+        RESERVED_5 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=47.0, core=true, t24Name=RESERVED.5, mandatory=false)
+        /* Reserved for future use */
+        RESERVED_6 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=48.0, core=true, t24Name=RESERVED.6, mandatory=false)
+        /* Reserved for future use */
+        RESERVED_7 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=49.0, core=true, t24Name=RESERVED.7, mandatory=false)
+        /* Reserved for future use */
+        RESERVED_8 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=50.0, core=true, t24Name=RESERVED.8, mandatory=false)
+        /* Reserved for future use */
+        RESERVED_9 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=51.0, core=true, t24Name=RESERVED.9, mandatory=false)
+        /* This field  captures Response Reference */
+        RESPONSE_REFERENCE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=38.0, core=true, t24Name=RESPONSE.REFERENCE, mandatory=false)
+        /* This field  captures Reasons for Response to Reimbursement Request */
+        RESPONSE_REQUEST : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=1, sysNumber=18.0, core=true, t24Name=RESPONSE.REQUEST, mandatory=false)
+        /* This field  captures Scheme Type */
+        SCHEME_TYPE : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=1, sysNumber=15.0, core=true, t24Name=SCHEME.TYPE, mandatory=false)
+        /* This field  captures Settlement Date */
+        SETTLEMENT_DATE : T24BusinessTypes:D
+            @i18n:Label (en="Settlement Date")
+            @t24:i (align=R, inputBehaviour=I, maxLength=8, sysNumber=22.0, core=true, t24Name=SETTLEMENT.DATE, mandatory=false)
+        /* This field  captures Source Office Entity */
+        SOURCE_ENTITY : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=8, sysNumber=6.0, core=true, t24Name=SOURCE.ENTITY, mandatory=false)
+        /* This field  provides the Status of the Payment */
+        STATUS_CODE : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=3, sysNumber=41.0, core=true, t24Name=STATUS.CODE, mandatory=false)
+        /* This field provides  Subsystem Indicator value */
+        SUBSYSTEM_INDICATOR : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=3, sysNumber=14.0, core=true, t24Name=SUBSYSTEM.INDICATOR, mandatory=false)
+        /* This field  captures Transaction Code */
+        TRANSACTION_CODE : T24BusinessTypes:N
+            @i18n:Label (en="Transaction Code")
+            @i18n:Tooltip (en="Indicates the Transaction Type")
+            @t24:i (align=R, inputBehaviour=I, maxLength=2, sysNumber=2.0, core=true, t24Name=TRANSACTION.CODE, mandatory=false)
+        /* This field  captures Nature of Transaction 1-collections 2-Payments */
+        TRANSACTION_NATURE : ESCLNG_MiscellaneousPayments:ESCLNG_SNCE_DATA_MODEL__TRANSACTION_NATURE
+            @t24:i (align=R, inputBehaviour=I, maxLength=35, sysNumber=3.0, core=true, t24Name=TRANSACTION.NATURE, mandatory=false)
+        /* This field provides the Payment Transaction Reference */
+        TRANSACTION_REFERENCE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=16, sysNumber=5.0, core=true, t24Name=TRANSACTION.REFERENCE, mandatory=false)
+        /* This field  captures Transaction Type range from 01 to 15 */
+        TRANSACTION_TYPE : ESCLNG_MiscellaneousPayments:ESCLNG_SNCE_DATA_MODEL__TRANSACTION_TYPE
+            @i18n:Label (en="Transaction Type")
+            @i18n:Tooltip (en="Indicates the Transaction Type")
+            @t24:i (align=R, inputBehaviour=I, maxLength=35, sysNumber=4.0, core=true, t24Name=TRANSACTION.TYPE, mandatory=false)
+        /* This field  captures Transaction Type Indicator value */
+        TRANSACTION_TYPE_INDICATOR : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=1, sysNumber=16.0, core=true, t24Name=TRANSACTION.TYPE.INDICATOR, mandatory=false)
+        /* This field  captures Unique Order Reference */
+        UNIQUE_ORDER_REFERENCE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=21.0, core=true, t24Name=UNIQUE.ORDER.REFERENCE, mandatory=false)
+    }
+    ESCLNG_SNCE_DATA_MODEL__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=62.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    ESCLNG_SNCE_DATA_MODEL__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=61.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    ESCLNG_SNCE_DATA_MODEL__OVERRIDE
+    {
+        /* Override field */
+        OVERRIDE : T24BusinessTypes:N
+            @i18n:Label (en=Override)
+            @i18n:Tooltip (en="Overrides generated by this transaction")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=58.0, core=true, t24Name=OVERRIDE, mandatory=false)
+    }
+}
+Enumerations {
+    ESCLNG_SNCE_DATA_MODEL__TRANSACTION_NATURE : mml:string
+        1=1
+        2=2
+    ESCLNG_SNCE_DATA_MODEL__TRANSACTION_TYPE : mml:string
+        10=10
+        14=14
+}

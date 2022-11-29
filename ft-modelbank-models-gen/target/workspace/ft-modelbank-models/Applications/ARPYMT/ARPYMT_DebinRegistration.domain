@@ -1,0 +1,45 @@
+# UTF-8
+/* Argentina Payment DebinRegistration */
+Domain ARPYMT_DebinRegistration
+    @t24:i (module=ARPYMT)
+    @java:Package (value=com.temenos.t24.datamodel.arpymt.arpymt_debinregistration)
+namespace "http://www.temenos.com/t24/ARPYMT_DebinRegistration"
+metamodelVersion 1.30.6
+Classes {
+    NOFILE_DISP_CONSUMPTIONS_BY_SELLER
+        @i18n:Description (en="")
+        @t24:i (t24Name=NOFILE.DISP.CONSUMPTIONS.BY.SELLER, level=I, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        CUIT : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, core=false, t24Name=CUIT, mandatory=true)
+        RET_STR : T24BusinessTypes:N
+            @t24:i (align=L, inputBehaviour=N, maxLength=30, core=false, t24Name=RET.STR, genOperation=ARPYMT.GET.DETAILS.FROM.COELSA, mandatory=false)
+    }
+    NOFILE_VIEW_BUYER_DETAILS
+        @i18n:Description (en="")
+        @t24:i (t24Name=NOFILE.VIEW.BUYER.DETAILS, level=I, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        CUIT : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, core=false, t24Name=CUIT, mandatory=true)
+        RET_STR : T24BusinessTypes:N
+            @t24:i (align=L, inputBehaviour=N, maxLength=30, core=false, t24Name=RET.STR, genOperation=ARPYMT.GET.DETAILS.FROM.COELSA, mandatory=false)
+    }
+    NOFILE_VIEW_SELLER_DETAILS
+        @i18n:Description (en="")
+        @t24:i (t24Name=NOFILE.VIEW.SELLER.DETAILS, level=I, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        CUIT : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, core=false, t24Name=CUIT, mandatory=true)
+        RET_STR : T24BusinessTypes:N
+            @t24:i (align=L, inputBehaviour=N, maxLength=30, core=false, t24Name=RET.STR, genOperation=ARPYMT.GET.DETAILS.FROM.COELSA, mandatory=false)
+    }
+    NOFILE_VIEW_SELLER_LIMITS
+        @i18n:Description (en="")
+        @t24:i (t24Name=NOFILE.VIEW.SELLER.LIMITS, level=I, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        CUIT : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, core=false, t24Name=CUIT, mandatory=true)
+        RET_STR : T24BusinessTypes:N
+            @t24:i (align=L, inputBehaviour=N, maxLength=30, core=false, t24Name=RET.STR, genOperation=ARPYMT.GET.DETAILS.FROM.COELSA, mandatory=false)
+    }
+}

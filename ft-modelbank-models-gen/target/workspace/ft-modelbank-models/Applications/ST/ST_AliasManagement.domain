@@ -1,0 +1,462 @@
+# UTF-8
+/* Proxy creation and maintenance */
+Domain ST_AliasManagement
+    @t24:i (module=ST)
+    @java:Package (value=com.temenos.t24.datamodel.st.st_aliasmanagement)
+namespace "http://www.temenos.com/t24/ST_AliasManagement"
+metamodelVersion 1.30.6
+Classes {
+    /* A new table to store the alias identifiers/proxies which are linked to the bank own accounts. */
+    ST_PROXY_DIRECTORY
+        @i18n:Description (en="")
+        @t24:i (t24Name=ST.PROXY.DIRECTORY, nonStop=true, level=F, type=H, allowedFunctions="A C D E I L P Q R S", localRefApplicationSysNo=32.0, localRefAllowed=true)
+    {
+        /* A valid account in T24 derived based on the registered account number provided. Mandatory input. */
+        ACCOUNT_NO : T24BusinessTypes:A
+            @i18n:Label (en=Account)
+            @i18n:Tooltip (en="Indicates Customer Account Number")
+            @t24:i (align=L, inputBehaviour=F, maxLength=19, sysNumber=2.0, core=true, t24Name=ACCOUNT.NO, mandatory=false)
+        /* Indicates when the status is changed to active. */
+        ACTIVATION_DATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=N, maxLength=11, sysNumber=14.0, core=true, t24Name=ACTIVATION.DATE, mandatory=false)
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=41.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=42.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=38.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        /* contains the date and time stamp populated by the external system. */
+        BUSINESS_ID : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=32.1, core=false, t24Name=BUSINESS.ID, mandatory=false)
+        /* Contains the date when the proxy's validity has been confirmed. First confirmation date will be the activation date and later will be updated with the latest re-confirmed date. */
+        CONFIRMATION_DATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=16.0, core=true, t24Name=CONFIRMATION.DATE, mandatory=false)
+        /* Captures details of another existing Proxy Link which prevented current Proxy Link from registration. */
+        CONFLICTING_LINK : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=21.0, core=true, t24Name=CONFLICTING.LINK, mandatory=false)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=39.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=35.0, core=true, t24Name=CURR.NO, mandatory=false)
+        /* Name of the customer. Mandatory input. */
+        CUSTOMER_NAME : T24BusinessTypes:A
+            @i18n:Label (en="Customer Name")
+            @t24:i (align=L, inputBehaviour=I, maxLength=100, sysNumber=8.0, core=true, t24Name=CUSTOMER.NAME, mandatory=false)
+        /* Surname of the customer. */
+        CUSTOMER_SURNAME : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=100, sysNumber=9.0, core=true, t24Name=CUSTOMER.SURNAME, mandatory=false)
+        /* Type of customer - Private individual, corporate etc. */
+        CUSTOMER_TYPE : T24BusinessTypes:A
+            @i18n:Label (en="Customer Type")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=7.0, core=true, t24Name=CUSTOMER.TYPE, mandatory=false)
+        DATE_TIME -> byValue ST_AliasManagement:ST_PROXY_DIRECTORY__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=40.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+/* Concatenation of proxy type and proxy link ID to ensure the uniqueness of the proxy links created. Will be populated if the current status of the proxy record is same as that of the status defined in the EXPOSED.PROXY.STATUS field in proxy parameter table
+
+Will be cleared off when the status is not same as EXPOSED.PROXY.STATUS anymore. */
+        EXPOSED_PROXY : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=150, sysNumber=5.0, core=true, t24Name=EXPOSED.PROXY, mandatory=false)
+        /* contains the date and time stamp populated by the external system. */
+        EXT_ACTIVATION_TIMESTAMP : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=70, sysNumber=15.0, core=true, t24Name=EXT.ACTIVATION.TIMESTAMP, mandatory=false)
+        /* To indicate that the proxy has been created by force though the presence of another proxy with same details exist. */
+        FORCED_REQUEST : ST_AliasManagement:ST_PROXY_DIRECTORY__FORCED_REQUEST
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=20.0, core=true, t24Name=FORCED.REQUEST, mandatory=false)
+        /* Indicator which points to the next status. If value defined here is available in proxy status table then the next status available in the proxy status table will be populated in the status field. */
+        INDICATOR : T24BusinessTypes:A
+            @i18n:Label (en=Indicator)
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=13.0, core=true, t24Name=INDICATOR, mandatory=false)
+        INPUTTER -> byValue ST_AliasManagement:ST_PROXY_DIRECTORY__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        /* Contains the next date when the proxy has to be reconfirmed. Those proxies that are not reconfirmed within the date defined here will be marked as expired and moved to history. */
+        NEXT_CONFIRMATION_DATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=17.0, core=true, t24Name=NEXT.CONFIRMATION.DATE, mandatory=false)
+        /* Field to capture notes. */
+        NOTES : T24BusinessTypes:A
+            @i18n:Label (en=Notes)
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=12.0, core=true, t24Name=NOTES, isTextarea=true, mandatory=false)
+        OVERRIDE -> byValue ST_AliasManagement:ST_PROXY_DIRECTORY__OVERRIDE *
+            @t24:i (t24Name=OVERRIDE)
+        /* Contains the date when the notification regarding the proxy reconfirmation has to be sent out. */
+        PRE_NOTICE_CONFIRM_DATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=18.0, core=true, t24Name=PRE.NOTICE.CONFIRM.DATE, mandatory=false)
+        PRIOR_STATUS -> byValue ST_AliasManagement:ST_PROXY_DIRECTORY__PRIOR_STATUS *
+            @t24:i (t24Name=PRIOR.STATUS)
+        PROCESS_ID : T24BusinessTypes:A
+            @i18n:Label (en="Process Id")
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=32.3, core=false, t24Name=PROCESS.ID, mandatory=false)
+        /* A proxy identifier to be linked to an account based on the proxy type provided eg. Mobile number, email id and tax id. Mandatory input. */
+        PROXY_IDENTIFIER : T24BusinessTypes:A required
+            @t24:i (align=L, inputBehaviour=I, maxLength=100, sysNumber=4.0, core=true, t24Name=PROXY.IDENTIFIER, mandatory=true)
+/* Type of proxy created for account.
+Currently supported types are mobile number, email ID and tax id. Mandatory input. */
+        PROXY_TYPE : ST_AliasManagement:ST_PROXY_DIRECTORY__PROXY_TYPE
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=3.0, core=true, t24Name=PROXY.TYPE, mandatory=false)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=34.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        /* To capture an account number or alternate account number for which proxy is created. Mandatory input. */
+        REGISTERED_ACCT_NO : T24BusinessTypes:A required
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=1.0, core=true, t24Name=REGISTERED.ACCT.NO, mandatory=true)
+        /* Customer to whom the registered account belongs to. Must be a valid record in customer table. */
+        REGISTERED_CUSTOMER_ID : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=6.0, core=true, t24Name=REGISTERED.CUSTOMER.ID, mandatory=false)
+        REG_DATE_TIME : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=30, sysNumber=32.2, core=false, t24Name=REG.DATE.TIME, mandatory=false)
+        /* Captures the source of the request eg. Channel, officer etc. */
+        REQUEST_SOURCE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=15, sysNumber=19.0, core=true, t24Name=REQUEST.SOURCE, mandatory=false)
+        RESERVED01 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=31.0, core=true, t24Name=RESERVED01, mandatory=false)
+        RESERVED02 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=30.0, core=true, t24Name=RESERVED02, mandatory=false)
+        RESERVED03 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=29.0, core=true, t24Name=RESERVED03, mandatory=false)
+        RESERVED04 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=28.0, core=true, t24Name=RESERVED04, mandatory=false)
+        RESERVED05 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=27.0, core=true, t24Name=RESERVED05, mandatory=false)
+        RESERVED06 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=26.0, core=true, t24Name=RESERVED06, mandatory=false)
+        RESERVED07 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=25.0, core=true, t24Name=RESERVED07, mandatory=false)
+        RESERVED08 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=24.0, core=true, t24Name=RESERVED08, mandatory=false)
+        RESERVED09 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=23.0, core=true, t24Name=RESERVED09, mandatory=false)
+        RESERVED10 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=22.0, core=true, t24Name=RESERVED10, mandatory=false)
+        /* IP of request sending server. */
+        SERVER_NODE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=15, sysNumber=32.4, core=false, t24Name=SERVER.NODE, mandatory=false)
+        /* Current status of the proxy directory. Mandatory input. */
+        STATUS -> ST_AliasManagement:ST_PROXY_STATUS required
+            @i18n:Label (en=Status)
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=10.0, core=true, businessType=A, t24Name=STATUS, mandatory=true)
+        ST_PROXY_DIRECTORY_ID -> ST_AliasManagement:ST_PROXY_DIRECTORY PK required
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=0.0, core=true, businessType=A, t24Name=ST.PROXY.DIRECTORY.ID, mandatory=true)
+    }
+    ST_PROXY_DIRECTORY__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=37.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    ST_PROXY_DIRECTORY__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=36.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    ST_PROXY_DIRECTORY__OVERRIDE
+    {
+/* This is a multi valued field. Standard T24 alphanumeric field.
+
+Validation Rules:
+
+A maximum of 35 characters may be entered.
+
+This is a NOINPUT field. */
+        OVERRIDE : T24BusinessTypes:N
+            @i18n:Label (en=Override)
+            @i18n:Tooltip (en="Overrides generated by this transaction")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=33.0, core=true, t24Name=OVERRIDE, mandatory=false)
+    }
+    ST_PROXY_DIRECTORY__PRIOR_STATUS
+    {
+        /* statuses through which the proxy directory has traversed through. */
+        PRIOR_STATUS -> ST_AliasManagement:ST_PROXY_STATUS
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=11.0, core=true, businessType=A, t24Name=PRIOR.STATUS, mandatory=false)
+    }
+    /* A new table, which holds the details of proxies (type, identifier) and the proxy directory Id which holds this combination and its corresponding status, specific to an account. */
+    ST_PROXY_LINK
+        @i18n:Description (en="")
+        @t24:i (t24Name=ST.PROXY.LINK, level=F, type=L, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        PROXY_TYPE -> byValue ST_AliasManagement:ST_PROXY_LINK__PROXY_TYPE *
+            @t24:i (t24Name=PROXY.TYPE)
+        ST_PROXY_LINK_ID -> ST_AliasManagement:ST_PROXY_LINK PK required
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=0.0, core=true, businessType=A, t24Name=ST.PROXY.LINK.ID, mandatory=true)
+    }
+    ST_PROXY_LINK__PROXY_TYPE
+    {
+        /* A proxy identifier linked to an account. */
+        PROXY_IDENTIFIER : T24BusinessTypes:A required
+            @t24:i (align=L, inputBehaviour=I, maxLength=100, sysNumber=2.0, core=true, t24Name=PROXY.IDENTIFIER, mandatory=true)
+        /* ID of the proxy directory record where this combination is specified. */
+        PROXY_LINK_ID -> ST_AliasManagement:ST_PROXY_DIRECTORY
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=3.0, core=true, businessType=A, t24Name=PROXY.LINK.ID, mandatory=false)
+        /* Proxy type defined for the account. */
+        PROXY_TYPE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=1.0, core=true, t24Name=PROXY.TYPE, mandatory=false)
+        /* Current status of the proxy directory. */
+        STATUS -> ST_AliasManagement:ST_PROXY_STATUS
+            @i18n:Label (en=Status)
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=4.0, core=true, businessType=A, t24Name=STATUS, mandatory=false)
+    }
+    /* A new configuration table to parameterise the creation of proxy link. */
+    ST_PROXY_PARAMETER
+        @i18n:Description (en="")
+        @t24:i (t24Name=ST.PROXY.PARAMETER, level=I, type=H, allowedFunctions="A C D E H I L P Q R S", localRefApplicationSysNo=19.0, localRefAllowed=true)
+    {
+        /* Proxies with this status must be re-confirmed periodically, if the Confirmation Frequency is defined. If the proxy directories reaches this status then the date on which the directory reaches this status must be updated in the ACTIVATION.DATE field. */
+        ACTIVE_STATUS -> ST_AliasManagement:ST_PROXY_STATUS
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=5.0, core=true, businessType=A, t24Name=ACTIVE.STATUS, mandatory=false)
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=28.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=29.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=25.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        /* Indicates the starting point to calculate Next Confirm Deadline in that record. Mandatory if Confirmation frequency is defined. */
+        CONFIRMATION_BASE_DATE : ST_AliasManagement:ST_PROXY_PARAMETER__CONFIRMATION_BASE_DATE
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=6.0, core=true, t24Name=CONFIRMATION.BASE.DATE, mandatory=false)
+/* Frequency when the proxy must be reconfirmed of its ownership.
+Amendment will not be effected for the existing proxy directories and will be applicable for the proxy directories created henceforth. */
+        CONFIRMATION_FREQUENCY : T24BusinessTypes:FQU
+            @t24:i (align=L, inputBehaviour=I, maxLength=30, sysNumber=7.0, core=true, t24Name=CONFIRMATION.FREQUENCY, typeModifiers=EXTENDED, mandatory=false)
+        /* Period when the customer needs to re-confirm the proxy, in advance of the next confirmation deadline. */
+        CONFIRMATION_PERIOD : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=4, sysNumber=8.0, core=true, t24Name=CONFIRMATION.PERIOD, mandatory=false)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=26.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=22.0, core=true, t24Name=CURR.NO, mandatory=false)
+        DATE_TIME -> byValue ST_AliasManagement:ST_PROXY_PARAMETER__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+/* Optional field to indicate that the account used as proxy could be either a valid T24 account or an external account
+Valid value - EXTERNAL
+EXTERNAL - The account fields in ST.PROXY.DIRECTORY will accept an external reference and there will not be any validation against core table
+NULL - The account fields in ST.PROXY.DIRECTORY will accept a valid account or an alternate reference
+The value of this field can be changed from External to blank, e.g. when the bank has migrated all their accounts in the Temenos Core Banking
+In this case system would raise validation error during of the amendment of proxy links created for an external account since with the option being blank, system expects the account to be valid in T24 */
+        DDA_TYPE : ST_AliasManagement:ST_PROXY_PARAMETER__DDA_TYPE
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=9.0, core=true, t24Name=DDA.TYPE, mandatory=false)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=27.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        EXPOSED_PROXY_STATUS -> byValue ST_AliasManagement:ST_PROXY_PARAMETER__EXPOSED_PROXY_STATUS *
+            @t24:i (t24Name=EXPOSED.PROXY.STATUS)
+        FINAL_STATUS -> byValue ST_AliasManagement:ST_PROXY_PARAMETER__FINAL_STATUS *
+            @t24:i (t24Name=FINAL.STATUS)
+        /* Initial status which will be populated when a new record is created. Mandatory Input. */
+        INITIAL_STATUS -> ST_AliasManagement:ST_PROXY_STATUS required
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=2.0, core=true, businessType=A, t24Name=INITIAL.STATUS, mandatory=true)
+        INPUTTER -> byValue ST_AliasManagement:ST_PROXY_PARAMETER__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        /* Status to be used in proxy record when the indicator field does not point to a next status field, indicating that the proxy record required manual intervention. Mandatory Input. */
+        MANUAL_DECISION_STATUS -> ST_AliasManagement:ST_PROXY_STATUS required
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=3.0, core=true, businessType=A, t24Name=MANUAL.DECISION.STATUS, mandatory=true)
+        OVERRIDE -> byValue ST_AliasManagement:ST_PROXY_PARAMETER__OVERRIDE *
+            @t24:i (t24Name=OVERRIDE)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=21.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        RESERVED01 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=18.0, core=true, t24Name=RESERVED01, mandatory=false)
+        RESERVED02 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=17.0, core=true, t24Name=RESERVED02, mandatory=false)
+        RESERVED03 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=16.0, core=true, t24Name=RESERVED03, mandatory=false)
+        RESERVED04 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=15.0, core=true, t24Name=RESERVED04, mandatory=false)
+        RESERVED05 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=14.0, core=true, t24Name=RESERVED05, mandatory=false)
+        RESERVED06 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=13.0, core=true, t24Name=RESERVED06, mandatory=false)
+        RESERVED07 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=12.0, core=true, t24Name=RESERVED07, mandatory=false)
+        RESERVED08 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=11.0, core=true, t24Name=RESERVED08, mandatory=false)
+        RESERVED09 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=10.0, core=true, t24Name=RESERVED09, mandatory=false)
+        ST_PROXY_PARAMETER_ID -> ST_AliasManagement:ST_PROXY_PARAMETER PK required
+            @t24:i (align=L, inputBehaviour=I, maxLength=11, sysNumber=0.0, core=true, businessType=COM, t24Name=ST.PROXY.PARAMETER.ID, mask="R##-###-####", mandatory=true)
+    }
+    ST_PROXY_PARAMETER__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=24.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    ST_PROXY_PARAMETER__EXPOSED_PROXY_STATUS
+    {
+/* The list of statuses which will be considered for unicity check.
+Amendment will not be effected for the existing proxy directories and will be applicable for the proxy directories created henceforth. */
+        EXPOSED_PROXY_STATUS -> ST_AliasManagement:ST_PROXY_STATUS
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=4.0, core=true, businessType=A, t24Name=EXPOSED.PROXY.STATUS, mandatory=false)
+    }
+    ST_PROXY_PARAMETER__FINAL_STATUS
+    {
+/* List of statuses in the Proxy Status table which are considered final.
+The proxy records which reached this status will be moved to history by an online service / COB job.
+Mandatory Input.
+Amendment will not be effected for the existing proxy directories and will be applicable for the proxy directories created henceforth. */
+        FINAL_STATUS -> ST_AliasManagement:ST_PROXY_STATUS required
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=1.0, core=true, businessType=A, t24Name=FINAL.STATUS, mandatory=true)
+    }
+    ST_PROXY_PARAMETER__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=23.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    ST_PROXY_PARAMETER__OVERRIDE
+    {
+/* This is a multi valued field. Standard T24 alphanumeric field.
+
+Validation Rules:
+
+A maximum of 35 characters may be entered.
+
+This is a NOINPUT field. */
+        OVERRIDE : T24BusinessTypes:N
+            @i18n:Label (en=Override)
+            @i18n:Tooltip (en="Overrides generated by this transaction")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=20.0, core=true, t24Name=OVERRIDE, mandatory=false)
+    }
+    /* A new table will define the main statuses during the lifecycle of a proxy. */
+    ST_PROXY_STATUS
+        @i18n:Description (en="")
+        @t24:i (t24Name=ST.PROXY.STATUS, nonStop=true, level=F, type=H, allowedFunctions="A C D E H I L P Q S", localRefApplicationSysNo=10.0, localRefAllowed=true)
+    {
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=19.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=20.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=16.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=17.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=13.0, core=true, t24Name=CURR.NO, mandatory=false)
+        DATE_TIME -> byValue ST_AliasManagement:ST_PROXY_STATUS__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=18.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        DESCRIPTION -> byValue ST_AliasManagement:ST_PROXY_STATUS__DESCRIPTION *
+            @t24:i (t24Name=DESCRIPTION)
+        INDICATOR -> byValue ST_AliasManagement:ST_PROXY_STATUS__INDICATOR *
+            @t24:i (t24Name=INDICATOR)
+        INPUTTER -> byValue ST_AliasManagement:ST_PROXY_STATUS__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        OVERRIDE -> byValue ST_AliasManagement:ST_PROXY_STATUS__OVERRIDE *
+            @t24:i (t24Name=OVERRIDE)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=12.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        RESERVED01 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=9.0, core=true, t24Name=RESERVED01, mandatory=false)
+        RESERVED02 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=8.0, core=true, t24Name=RESERVED02, mandatory=false)
+        RESERVED03 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=7.0, core=true, t24Name=RESERVED03, mandatory=false)
+        RESERVED04 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=6.0, core=true, t24Name=RESERVED04, mandatory=false)
+        RESERVED05 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=5.0, core=true, t24Name=RESERVED05, mandatory=false)
+        ST_PROXY_STATUS_ID -> ST_AliasManagement:ST_PROXY_STATUS PK required
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=0.0, core=true, businessType=A, t24Name=ST.PROXY.STATUS.ID, mandatory=true)
+    }
+    ST_PROXY_STATUS__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=15.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    ST_PROXY_STATUS__DESCRIPTION
+    {
+        /* Describes the proxy status. */
+        DESCRIPTION : T24BusinessTypes:A required
+            @i18n:Label (en=Description)
+            @i18n:Tooltip (en=Description)
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, multiLanguage=true, sysNumber=1.0, core=true, t24Name=DESCRIPTION, mandatory=true)
+    }
+    ST_PROXY_STATUS__INDICATOR
+    {
+        /* An indicator to point to the next valid status. */
+        INDICATOR : T24BusinessTypes:A
+            @i18n:Label (en=Indicator)
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=2.0, core=true, t24Name=INDICATOR, mandatory=false)
+/* The next status to which the proxy record has to be moved to i.e. If a proxy record has the current status equal with the id of this record and the Indicator field has the value with the INDICATOR to which this Next Status is associated then the current status of the proxy record will be updated with that status.
+
+Must be a valid record in PROXY.STATUS table. */
+        NEXT_STATUS -> ST_AliasManagement:ST_PROXY_STATUS
+            @i18n:Label (en="Next Status")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=3.0, core=true, businessType=A, t24Name=NEXT.STATUS, mandatory=false)
+/* Options to indicate a local routine which can implement additional logic if more details other than the INDICATOR needs to be considered ( e.g. if the response from Clearing is that the proxy is already registered the local logic can check the forced flag in the request to determine if the next status is rejected or is pending a delete before registration)
+
+Must be a valid record in EB.API. */
+        NEXT_STATUS_API -> EB_SystemTables:EB_API
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=4.0, core=true, businessType=HOOK, t24Name=NEXT.STATUS.API, mandatory=false)
+    }
+    ST_PROXY_STATUS__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=14.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    ST_PROXY_STATUS__OVERRIDE
+    {
+/* This is a multi valued field. Standard T24 alphanumeric field.
+
+Validation Rules:
+
+A maximum of 35 characters may be entered.
+
+This is a NOINPUT field. */
+        OVERRIDE : T24BusinessTypes:N
+            @i18n:Label (en=Override)
+            @i18n:Tooltip (en="Overrides generated by this transaction")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=11.0, core=true, t24Name=OVERRIDE, mandatory=false)
+    }
+}
+Enumerations {
+    ST_PROXY_DIRECTORY__FORCED_REQUEST : mml:string
+        NULL=NULL
+        YES=YES
+    ST_PROXY_DIRECTORY__PROXY_TYPE : mml:string
+        EMAIL=EMAIL
+        MOBILE=MOBILE
+        TAXID=TAXID
+    ST_PROXY_PARAMETER__CONFIRMATION_BASE_DATE : mml:string
+        ACTIVATION_DATE="ACTIVATION DATE"
+        CONFIRMATION_DATE="CONFIRMATION DATE"
+    ST_PROXY_PARAMETER__DDA_TYPE : mml:string
+        EXTERNAL=EXTERNAL
+        NULL=NULL
+}

@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<localref:LocalRef xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:localref="http://www.odcgroup.com/t24/application/localref/model/LocalRef"
+    xmlns:translationDsl="http://www.odcgroup.com/translation/TranslationDsl" localRefID="USREGS.ENT.TYPE.CODE" maximumChars="3" minimumChars="0"
+    mandatory="false" charType="N" defaultPossible="false" virtualTable="TX.ENT.TYPE.CODE"
+    description="Entity Type Code (Chapter 3)">
+  <shortName xsi:type="translationDsl:LocalTranslations">
+    <translations locale="en" text="ENT.TYPE.CODE"/>
+  </shortName>
+  <vettingTable vettingTable="01">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="01 - U.S. Withholding Agent-FI"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="02">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="02 - U.S. Withholding Agent-Other"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="03">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="03 - Territory FI-treated as U.S"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="04">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="04 - Territory FI-not treated as US"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="05">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="05 - U.S. branch-treated as US"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="06">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="06 - U.S. branch-not treated as US"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="07">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="07 - U.S. branch-ECI presumption"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="08">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="08 - other than Withholding Foreign"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="09">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="09 - Withholding Foreign Partner"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="10">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="10 - Trust other than Withholding"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="11">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="11 - Withholding Foreign Trust"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="12">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="12 - Qualified Intermediary"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="13">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="13 - Qualified Securities Lender"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="14">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="14 - Qualified Securities - Other"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="15">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="15 - Corporation"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="16">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="16 - Individual"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="17">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="17 - Estate"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="18">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="18 - Private Foundation"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="19">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="19 - Govmt or International Org"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="20">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="20 - Tax Exempt Organization"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="21">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="21 - Unknown Recipient"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="22">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="22 - Artist or Athlete"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="23">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="23 - Pension"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="24">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="24 - Foreign Central Bank of Issue"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="25">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="25 - Nonqualified Intermediary"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="26">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="26 - Hybrid entity making Treaty"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="34">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="34 - U.S. Withholding Agent"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="35">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="35 - Qualified Derivatives Dealer"/>
+    </remarks>
+  </vettingTable>
+</localref:LocalRef>

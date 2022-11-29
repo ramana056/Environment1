@@ -1,0 +1,1285 @@
+# UTF-8
+/* MortgageSalesAndOrigination */
+Domain UKMSOI_MortgageApplicationData
+    @t24:i (module=UKMSOI)
+    @java:Package (value=com.temenos.t24.datamodel.ukmsoi.ukmsoi_mortgageapplicationdata)
+namespace "http://www.temenos.com/t24/UKMSOI_MortgageApplicationData"
+metamodelVersion 1.30.6
+Classes {
+    /* This local table is used to capture the additional details of collateral record. */
+    UKMSOI_COLLATERAL_DETAILS
+        @i18n:Description (en="")
+        @t24:i (t24Name=UKMSOI.COLLATERAL.DETAILS, level=F, type=H, allowedFunctions="A C D E H I L P Q R S", localRefApplicationSysNo=26.0, localRefAllowed=true)
+    {
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=45.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=46.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=42.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        /* This field defines the level of confidence that the valuation provider has in their valuation . */
+        CONFIDENCE_LEVEL : T24BusinessTypes:R
+            @t24:i (align=R, inputBehaviour=I, maxLength=15, sysNumber=6.0, core=true, t24Name=CONFIDENCE.LEVEL, mandatory=false)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=43.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=39.0, core=true, t24Name=CURR.NO, mandatory=false)
+        DATE_TIME -> byValue UKMSOI_MortgageApplicationData:UKMSOI_COLLATERAL_DETAILS__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=44.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        /* This field defines Full, market sale price of the property to be used as security or an example property if one has yet to be identified. Limited to £3 million. Range (R5035 - MinimumFullMarketValue to R5420 - MaximumFullMarketValue */
+        FULL_MARKET_VALUE : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=15, sysNumber=16.0, core=true, t24Name=FULL.MARKET.VALUE, typeModifiers="-USD", mandatory=false)
+        /* Indicates if the property being used as security against the loan has a garage or parking space. */
+        GARAGE_PARKINGSPACE : UKMSOI_MortgageApplicationData:UKMSOI_COLLATERAL_DETAILS__GARAGE_PARKINGSPACE
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=21.0, core=true, t24Name=GARAGE.PARKINGSPACE, mandatory=false)
+        /* Indicates if the property being used as security against the loan is to be rented out by at least 3 people who are not from a single household and are to share facilities such as the bathroom and kitchen. */
+        HOUSE_INMULTIPLE_OCCUPATION : UKMSOI_MortgageApplicationData:UKMSOI_COLLATERAL_DETAILS__HOUSE_INMULTIPLE_OCCUPATION
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=23.0, core=true, t24Name=HOUSE.INMULTIPLE.OCCUPATION, mandatory=false)
+        ID -> UKMSOI_MortgageApplicationData:UKMSOI_COLLATERAL_DETAILS PK required
+            @i18n:Label (en="Transaction Ref")
+            @i18n:Tooltip (en="Transaction Reference")
+            @t24:i (align=L, inputBehaviour=I, maxLength=12, sysNumber=0.0, core=true, businessType=A, t24Name="@ID", mandatory=true)
+        INPUTTER -> byValue UKMSOI_MortgageApplicationData:UKMSOI_COLLATERAL_DETAILS__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        /* This field defines the date of valuation inspection which took place. */
+        INSPECTION_DATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=11.0, core=true, t24Name=INSPECTION.DATE, mandatory=false)
+        /* This field Indicates the number of years remaining on the lease of the property being used as security against the loan . */
+        LEASE_REMAINING_YEARS : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=5, sysNumber=3.0, core=true, t24Name=LEASE.REMAINING.YEARS, mandatory=false)
+        /* Indicates if the property being used as security against the loan is on the Statutory List of Buildings of Special Architectural or Historic Interest as set out in Planning (Listed Buildings and Conservation Areas) Act 1990 (1). */
+        LISTED_BUILDING : UKMSOI_MortgageApplicationData:UKMSOI_COLLATERAL_DETAILS__LISTED_BUILDING
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=20.0, core=true, t24Name=LISTED.BUILDING, mandatory=false)
+        /* Indicates if the property being used as security against the loan is a new build, is newly converted or has recently been refurbished. */
+        NEWBUILD_INDICATOR : UKMSOI_MortgageApplicationData:UKMSOI_COLLATERAL_DETAILS__NEWBUILD_INDICATOR
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=22.0, core=true, t24Name=NEWBUILD.INDICATOR, mandatory=false)
+        /* This field Indicates the number of years remaining on the lease following the mortgage term being applied for. */
+        NEW_LEASE_YEARS : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=5, sysNumber=2.0, core=true, t24Name=NEW.LEASE.YEARS, mandatory=false)
+        /* This field defines Months since original purchase date . */
+        ORIGINAL_DATEOFPURCHASE_MONTHS : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=5, sysNumber=17.0, core=true, t24Name=ORIGINAL.DATEOFPURCHASE.MONTHS, mandatory=false)
+        OVERRIDE -> byValue UKMSOI_MortgageApplicationData:UKMSOI_COLLATERAL_DETAILS__OVERRIDE *
+            @t24:i (t24Name=OVERRIDE)
+        /* Defines the number of bedrooms in the property being used as security against the loan Range (1 - P6014 - pMaxNumberOfBedrooms) */
+        PROPERTY_BEDROOMS : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=5, sysNumber=24.0, core=true, t24Name=PROPERTY.BEDROOMS, mandatory=false)
+        /* Defines the number of reception rooms in the property being used as security against the loan. */
+        PROPERTY_RECEPTIONS : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=5, sysNumber=25.0, core=true, t24Name=PROPERTY.RECEPTIONS, mandatory=false)
+        /* Administrative region of the security address */
+        PROPERTY_REGION : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=14.0, core=true, t24Name=PROPERTY.REGION, mandatory=false)
+        /* The field defines the Tenure of Property. */
+        PROPERTY_TENURE : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=1.0, core=true, t24Name=PROPERTY.TENURE, mandatory=false)
+        /* Defines the type of property identified as security for the mortgage application. */
+        PROPERTY_TYPE : T24BusinessTypes:TEXT
+            @i18n:Label (en=Type)
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=18.0, core=true, t24Name=PROPERTY.TYPE, mandatory=false)
+        /* Describes a) the advertised or agreed sale price of the property the applicant has identified as security for the loan or b) an example price for potential properties if the applicant has yet to identify a particular one.Range (R5389 - MinPurchasePrice to R5391 - MaxPurchasePrice. */
+        PURCHASE_PRICE : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=15, sysNumber=15.0, core=true, t24Name=PURCHASE.PRICE, typeModifiers="-USD", mandatory=false)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=38.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        /* This field is reserved for future use. */
+        RESERVED_1 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=27.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        /* This field is reserved for future use. */
+        RESERVED_10 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=36.0, core=true, t24Name=RESERVED.10, mandatory=false)
+        /* This field is reserved for future use. */
+        RESERVED_2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=28.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        /* This field is reserved for future use. */
+        RESERVED_3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=29.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        /* This field is reserved for future use. */
+        RESERVED_4 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=30.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        /* This field is reserved for future use. */
+        RESERVED_5 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=31.0, core=true, t24Name=RESERVED.5, mandatory=false)
+        /* This field is reserved for future use. */
+        RESERVED_6 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=32.0, core=true, t24Name=RESERVED.6, mandatory=false)
+        /* This field is reserved for future use. */
+        RESERVED_7 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=33.0, core=true, t24Name=RESERVED.7, mandatory=false)
+        /* This field is reserved for future use. */
+        RESERVED_8 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=34.0, core=true, t24Name=RESERVED.8, mandatory=false)
+        /* This field is reserved for future use. */
+        RESERVED_9 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=35.0, core=true, t24Name=RESERVED.9, mandatory=false)
+        /* This field defines the property title deeds number as registered with the land registry. */
+        TITLE_NUMBER : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=100, sysNumber=4.0, core=true, t24Name=TITLE.NUMBER, mandatory=false)
+        /* This field defines certificate of title. This is the gross advance amount. . */
+        TOTAL_ADVANCE_AMOUNT : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=15, sysNumber=5.0, core=true, t24Name=TOTAL.ADVANCE.AMOUNT, typeModifiers="-USD", mandatory=false)
+        /* This field defines the valuation of the property in it's present condition. */
+        VALUATIONIN_PRESENT : T24BusinessTypes:R
+            @t24:i (align=R, inputBehaviour=I, maxLength=15, sysNumber=7.0, core=true, t24Name=VALUATIONIN.PRESENT, mandatory=false)
+        /* This field defines Percentage of the property to be owned by applicant(s) post completion . */
+        VALUATION_OWNERSHIP_PERCENTAGE : T24BusinessTypes:R
+            @t24:i (align=R, inputBehaviour=I, maxLength=15, sysNumber=9.0, core=true, t24Name=VALUATION.OWNERSHIP.PERCENTAGE, mandatory=false)
+        /* This Field defines the valuation post completion of outstanding work. */
+        VALUATION_POST_WORK : T24BusinessTypes:R
+            @t24:i (align=R, inputBehaviour=I, maxLength=15, sysNumber=10.0, core=true, t24Name=VALUATION.POST.WORK, mandatory=false)
+        /* This field defines Valuation of applicants share in the property. */
+        VALUATION_SHARED_OWNERSHIP : T24BusinessTypes:R
+            @t24:i (align=R, inputBehaviour=I, maxLength=15, sysNumber=8.0, core=true, t24Name=VALUATION.SHARED.OWNERSHIP, mandatory=false)
+        /* This field defines the type of valuation (including Transcription). */
+        VALUATION_TYPE : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=12.0, core=true, t24Name=VALUATION.TYPE, mandatory=false)
+        /* This field defines the name of the valuation firm (including TranscriptionSurveyorName). */
+        VALUER_FIRM_NAME : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=13.0, core=true, t24Name=VALUER.FIRM.NAME, mandatory=false)
+        /* Indicates the year in which the property being used as security against the loan was built Example Data - 1969. */
+        YEAR_PROPERTYBUILT : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=5, sysNumber=19.0, core=true, t24Name=YEAR.PROPERTYBUILT, mandatory=false)
+    }
+    UKMSOI_COLLATERAL_DETAILS__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=41.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    UKMSOI_COLLATERAL_DETAILS__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=40.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    UKMSOI_COLLATERAL_DETAILS__OVERRIDE
+    {
+        OVERRIDE : T24BusinessTypes:N
+            @i18n:Label (en=Override)
+            @i18n:Tooltip (en="Overrides generated by this transaction")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=37.0, core=true, t24Name=OVERRIDE, mandatory=false)
+    }
+    /* Staging Table to hold the MSO Data coming from the IRESS server system. */
+    UKMSOI_MORTGAGE_APPLICATION_DATA
+        @i18n:Description (en="")
+        @t24:i (t24Name=UKMSOI.MORTGAGE.APPLICATION.DATA, level=F, type=H, allowedFunctions="A C D E H I L P Q R S", localRefApplicationSysNo=318.0, localRefAllowed=true)
+    {
+        /* The id allocated by the lender. So that it can be uniquely identified on the lender customer */
+        ACCOUNTHOLDER_LENDERCUSTOMERID : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=36, sysNumber=20.0, core=true, t24Name=ACCOUNTHOLDER.LENDERCUSTOMERID, mandatory=false)
+        /* Defines the type of Address. Possible values are: UKAddress, BFPOAddress, OverseasAddress */
+        ACCOUNTPROPERTY_ADDRESSTYPE : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=44.0, core=true, t24Name=ACCOUNTPROPERTY.ADDRESSTYPE, mandatory=false)
+        /* A subset of BFPOAddress type. */
+        ACCOUNTPROPERTY_BFPONUMBER : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=8, sysNumber=58.0, core=true, t24Name=ACCOUNTPROPERTY.BFPONUMBER, mandatory=false)
+        /* A subset of UKAddress type. */
+        ACCOUNTPROPERTY_BUILDINGNAME : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=45.0, core=true, t24Name=ACCOUNTPROPERTY.BUILDINGNAME, mandatory=false)
+        /* A subset of UKAddress type. */
+        ACCOUNTPROPERTY_BUILDINGNO : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=5, sysNumber=46.0, core=true, t24Name=ACCOUNTPROPERTY.BUILDINGNO, mandatory=false)
+        /* A subset of BFPOAddress type. */
+        ACCOUNTPROPERTY_CAREOFSURNAME : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=16, sysNumber=55.0, core=true, t24Name=ACCOUNTPROPERTY.CAREOFSURNAME, mandatory=false)
+        /* A subset of UKAddress type. */
+        ACCOUNTPROPERTY_COUNTY : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=51.0, core=true, t24Name=ACCOUNTPROPERTY.COUNTY, mandatory=false)
+        /* A subset of UKAddress type. */
+        ACCOUNTPROPERTY_DISTRICT : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=49.0, core=true, t24Name=ACCOUNTPROPERTY.DISTRICT, mandatory=false)
+        /* A subset of UKAddress type. */
+        ACCOUNTPROPERTY_FLAT : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=47.0, core=true, t24Name=ACCOUNTPROPERTY.FLAT, mandatory=false)
+        /* A subset of OverseasAddress type. */
+        ACCOUNTPROPERTY_LINE1 : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=59.0, core=true, t24Name=ACCOUNTPROPERTY.LINE1, mandatory=false)
+        /* A subset of OverseasAddress type. */
+        ACCOUNTPROPERTY_LINE2 : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=60.0, core=true, t24Name=ACCOUNTPROPERTY.LINE2, mandatory=false)
+        /* A subset of OverseasAddress type. */
+        ACCOUNTPROPERTY_LINE3 : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=61.0, core=true, t24Name=ACCOUNTPROPERTY.LINE3, mandatory=false)
+        /* A subset of OverseasAddress type. */
+        ACCOUNTPROPERTY_LINE4 : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=62.0, core=true, t24Name=ACCOUNTPROPERTY.LINE4, mandatory=false)
+        /* A subset of OverseasAddress type. */
+        ACCOUNTPROPERTY_LINE5 : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=63.0, core=true, t24Name=ACCOUNTPROPERTY.LINE5, mandatory=false)
+        /* A subset of OverseasAddress type. */
+        ACCOUNTPROPERTY_LINE6 : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=64.0, core=true, t24Name=ACCOUNTPROPERTY.LINE6, mandatory=false)
+        /* A subset of BFPOAddress type. */
+        ACCOUNTPROPERTY_OPERATIONNAME : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=30, sysNumber=57.0, core=true, t24Name=ACCOUNTPROPERTY.OPERATIONNAME, mandatory=false)
+        /* A subset of BFPOAddress type. */
+        ACCOUNTPROPERTY_POSTCODE : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=52.0, core=true, t24Name=ACCOUNTPROPERTY.POSTCODE, mandatory=false)
+        /* A subset of BFPOAddress type. */
+        ACCOUNTPROPERTY_RANK : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=16, sysNumber=54.0, core=true, t24Name=ACCOUNTPROPERTY.RANK, mandatory=false)
+        /* A subset of BFPOAddress type. */
+        ACCOUNTPROPERTY_SERVICENUMBER : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=53.0, core=true, t24Name=ACCOUNTPROPERTY.SERVICENUMBER, mandatory=false)
+        /* A subset of UKAddress type. */
+        ACCOUNTPROPERTY_STREET : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=48.0, core=true, t24Name=ACCOUNTPROPERTY.STREET, mandatory=false)
+        /* Tenure of property */
+        ACCOUNTPROPERTY_TENURE : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=65.0, core=true, t24Name=ACCOUNTPROPERTY.TENURE, mandatory=false)
+        /* A subset of UKAddress type. */
+        ACCOUNTPROPERTY_TOWN : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=50.0, core=true, t24Name=ACCOUNTPROPERTY.TOWN, mandatory=false)
+        /* A subset of BFPOAddress type. */
+        ACCOUNTPROPERTY_UNIT : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=56.0, core=true, t24Name=ACCOUNTPROPERTY.UNIT, mandatory=false)
+/* Unique identification number for the arrangement contract ; AA.ARRANGEMENT.ACTIVITY>ARRANGEMENT
+(In MSO, the value of this field is stored in the Property 'mortgageAccountNumber' that refers to the the account number allocated by the lender) */
+        ACCOUNT_ID : T24BusinessTypes:ANY
+            @i18n:Label (en="Account No")
+            @i18n:Tooltip (en="Indicates the Account Number")
+            @t24:i (align=L, inputBehaviour=I, maxLength=12, sysNumber=4.0, core=true, t24Name=ACCOUNT.ID, mandatory=false)
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=337.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=338.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=334.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        /* The name of the owner of the account declared by the payee as being that to be used for remitting the mortgage advance amount */
+        BAD_ACCOUNTHOLDER : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=116.0, core=true, t24Name=BAD.ACCOUNTHOLDER, mandatory=false)
+        /* The account number given by the holding bank to the account declared by the payee as being that to be used for remitting the mortgage advance amount Example Data - 515351545 */
+        BAD_ACCOUNTNUMBER : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=8, sysNumber=92.0, core=true, t24Name=BAD.ACCOUNTNUMBER, mandatory=false)
+        BAD_BANKADDRESSTYPE : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=95.0, core=true, t24Name=BAD.BANKADDRESSTYPE, mandatory=false)
+        /* The name of the bank holding the account declared by the payee as being that to be used for remitting the mortgage advance amount */
+        BAD_BANKNAME : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=94.0, core=true, t24Name=BAD.BANKNAME, mandatory=false)
+        /* A subset of BFPOAddress type. */
+        BAD_BFPONUMBER : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=8, sysNumber=109.0, core=true, t24Name=BAD.BFPONUMBER, mandatory=false)
+        /* A subset of UKAddress type. */
+        BAD_BUILDINGNAME : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=96.0, core=true, t24Name=BAD.BUILDINGNAME, mandatory=false)
+        /* A subset of UKAddress type. */
+        BAD_BUILDINGNO : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=5, sysNumber=97.0, core=true, t24Name=BAD.BUILDINGNO, mandatory=false)
+        /* A subset of BFPOAddress type. */
+        BAD_CAREOFSURNAME : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=106.0, core=true, t24Name=BAD.CAREOFSURNAME, mandatory=false)
+        /* A subset of UKAddress type. */
+        BAD_COUNTY : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=102.0, core=true, t24Name=BAD.COUNTY, mandatory=false)
+        /* A subset of UKAddress type. */
+        BAD_DISTRICT : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=100.0, core=true, t24Name=BAD.DISTRICT, mandatory=false)
+        /* A subset of UKAddress type. */
+        BAD_FLAT : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=98.0, core=true, t24Name=BAD.FLAT, mandatory=false)
+        /* A subset of OverseasAddress type. */
+        BAD_LINE1 : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=110.0, core=true, t24Name=BAD.LINE1, mandatory=false)
+        /* A subset of OverseasAddress type. */
+        BAD_LINE2 : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=111.0, core=true, t24Name=BAD.LINE2, mandatory=false)
+        /* A subset of OverseasAddress type. */
+        BAD_LINE3 : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=112.0, core=true, t24Name=BAD.LINE3, mandatory=false)
+        /* A subset of OverseasAddress type. */
+        BAD_LINE4 : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=113.0, core=true, t24Name=BAD.LINE4, mandatory=false)
+        /* A subset of OverseasAddress type. */
+        BAD_LINE5 : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=114.0, core=true, t24Name=BAD.LINE5, mandatory=false)
+        /* A subset of OverseasAddress type. */
+        BAD_LINE6 : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=115.0, core=true, t24Name=BAD.LINE6, mandatory=false)
+        /* A subset of BFPOAddress type. */
+        BAD_OPERATIONNAME : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=30, sysNumber=108.0, core=true, t24Name=BAD.OPERATIONNAME, mandatory=false)
+        /* A subset of BFPOAddress type. */
+        BAD_POSTCODE : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=10, sysNumber=103.0, core=true, t24Name=BAD.POSTCODE, mandatory=false)
+        /* A subset of BFPOAddress type. */
+        BAD_RANK : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=105.0, core=true, t24Name=BAD.RANK, mandatory=false)
+        /* A subset of BFPOAddress type. */
+        BAD_SERVICENUMBER : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=104.0, core=true, t24Name=BAD.SERVICENUMBER, mandatory=false)
+        BAD_SORTCODE : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=15, sysNumber=93.0, core=true, t24Name=BAD.SORTCODE, mandatory=false)
+        /* A subset of UKAddress type. */
+        BAD_STREET : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=99.0, core=true, t24Name=BAD.STREET, mandatory=false)
+        /* A subset of UKAddress type. */
+        BAD_TOWN : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=101.0, core=true, t24Name=BAD.TOWN, mandatory=false)
+        /* A subset of BFPOAddress type. */
+        BAD_UNIT : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=107.0, core=true, t24Name=BAD.UNIT, mandatory=false)
+        /* The account number given by the holding bank to the account declared by the applicant as being that to be used as source of the mortgage loan repayments Example Data - 515351545 */
+        BD_ACCOUNTNUMBER : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=8, sysNumber=129.0, core=true, t24Name=BD.ACCOUNTNUMBER, mandatory=false)
+        /* The name of the owner of the account declared by the applicant as being that to be used as source of the mortgage loan repayments */
+        BD_ACOCUNTHOLDER : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=130.0, core=true, t24Name=BD.ACOCUNTHOLDER, mandatory=false)
+        BD_BANKADDRESSTYPE : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=133.0, core=true, t24Name=BD.BANKADDRESSTYPE, mandatory=false)
+        /* The name of the bank holding the account declared by the applicant as being that to be used as source of the mortgage loan repayments */
+        BD_BANKNAME : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=132.0, core=true, t24Name=BD.BANKNAME, mandatory=false)
+        /* A subset of BFPOAddress type. */
+        BD_BFPONUMBER : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=8, sysNumber=147.0, core=true, t24Name=BD.BFPONUMBER, mandatory=false)
+        /* A subset of UKAddress type. */
+        BD_BUILDINGNAME : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=134.0, core=true, t24Name=BD.BUILDINGNAME, mandatory=false)
+        /* A subset of UKAddress type. */
+        BD_BUILDINGNO : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=5, sysNumber=135.0, core=true, t24Name=BD.BUILDINGNO, mandatory=false)
+        /* A subset of BFPOAddress type. */
+        BD_CAREOFSURNAME : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=144.0, core=true, t24Name=BD.CAREOFSURNAME, mandatory=false)
+        /* A subset of UKAddress type. */
+        BD_COUNTY : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=140.0, core=true, t24Name=BD.COUNTY, mandatory=false)
+        /* A subset of UKAddress type. */
+        BD_DISTRICT : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=138.0, core=true, t24Name=BD.DISTRICT, mandatory=false)
+        /* A subset of UKAddress type. */
+        BD_FLAT : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=136.0, core=true, t24Name=BD.FLAT, mandatory=false)
+        /* A subset of OverseasAddress type. */
+        BD_LINE1 : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=148.0, core=true, t24Name=BD.LINE1, mandatory=false)
+        /* A subset of OverseasAddress type. */
+        BD_LINE2 : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=149.0, core=true, t24Name=BD.LINE2, mandatory=false)
+        /* A subset of OverseasAddress type. */
+        BD_LINE3 : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=150.0, core=true, t24Name=BD.LINE3, mandatory=false)
+        /* A subset of OverseasAddress type. */
+        BD_LINE4 : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=151.0, core=true, t24Name=BD.LINE4, mandatory=false)
+        /* A subset of OverseasAddress type. */
+        BD_LINE5 : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=152.0, core=true, t24Name=BD.LINE5, mandatory=false)
+        /* A subset of OverseasAddress type. */
+        BD_LINE6 : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=153.0, core=true, t24Name=BD.LINE6, mandatory=false)
+        /* A subset of BFPOAddress type. */
+        BD_OPERATIONNAME : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=30, sysNumber=146.0, core=true, t24Name=BD.OPERATIONNAME, mandatory=false)
+        /* A subset of BFPOAddress type. */
+        BD_POSTCODE : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=10, sysNumber=141.0, core=true, t24Name=BD.POSTCODE, mandatory=false)
+        /* The monthly date on which the applicant would prefer the mortgage loan repayments to be taken from the named account */
+        BD_PREFERREDPAYMENTDATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=154.0, core=true, t24Name=BD.PREFERREDPAYMENTDATE, mandatory=false)
+        /* A subset of BFPOAddress type. */
+        BD_RANK : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=143.0, core=true, t24Name=BD.RANK, mandatory=false)
+        /* A subset of BFPOAddress type. */
+        BD_SERVICENUMBER : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=142.0, core=true, t24Name=BD.SERVICENUMBER, mandatory=false)
+        /* The sort code identifying both the bank and branch where the mortgage loan repayment account resides. Example Data - 102030 */
+        BD_SORTCODE : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=6, sysNumber=131.0, core=true, t24Name=BD.SORTCODE, mandatory=false)
+        /* A subset of UKAddress type. */
+        BD_STREET : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=137.0, core=true, t24Name=BD.STREET, mandatory=false)
+        /* A subset of UKAddress type. */
+        BD_TOWN : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=139.0, core=true, t24Name=BD.TOWN, mandatory=false)
+        /* A subset of BFPOAddress type. */
+        BD_UNIT : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=145.0, core=true, t24Name=BD.UNIT, mandatory=false)
+/* Default value of this field is NULL.
+Record ID of BENEFICIARY application */
+        BENEFICIARY_ID : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=13, sysNumber=10.0, core=true, t24Name=BENEFICIARY.ID, mandatory=false)
+        /* The internal MSO case identifier */
+        CASE_ID : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=36, sysNumber=1.0, core=true, t24Name=CASE.ID, mandatory=false)
+/* Default value of this field is NULL.
+Record ID of COLLATERAL application */
+        COLLATERAL_ID : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=12, sysNumber=8.0, core=true, t24Name=COLLATERAL.ID, mandatory=false)
+/* Default value of this field is NULL.
+Record ID of COLLATERAL.ORIGINATION application */
+        COLLATERAL_ORIGINATION_ID : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=12, sysNumber=9.0, core=true, t24Name=COLLATERAL.ORIGINATION.ID, mandatory=false)
+/* Default value of this field is NULL.
+Record ID of COLLATERAL.RIGHT application. */
+        COLLATERAL_RIGHT_ID : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=12, sysNumber=7.0, core=true, t24Name=COLLATERAL.RIGHT.ID, mandatory=false)
+        /* Defines the date on which the applicant(s) want to exchange the contract and expect the funds to be transferred by the lender. It is the date when the mortgage goes live. */
+        COT_COMPLETIONDATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=43.0, core=true, t24Name=COT.COMPLETIONDATE, mandatory=false)
+        /* Defines the property title deeds number as registered with the land registry. */
+        COT_TITLENUMBER : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=68.0, core=true, t24Name=COT.TITLENUMBER, mandatory=false)
+        /* The total advance as stated on the certificate of title. This is the gross advance amount. */
+        COT_TOTALADVANCEAMOUNT : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=15, sysNumber=69.0, core=true, t24Name=COT.TOTALADVANCEAMOUNT, typeModifiers="-USD", mandatory=false)
+        /* Purchase price as stated on the certificate of title */
+        COT_TRANSFERPRICE : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=15, sysNumber=40.0, core=true, t24Name=COT.TRANSFERPRICE, typeModifiers="-USD", mandatory=false)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=335.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=331.0, core=true, t24Name=CURR.NO, mandatory=false)
+        CV_LEASEREMAININGYEARS : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=5, sysNumber=67.0, core=true, t24Name=CV.LEASEREMAININGYEARS, mandatory=false)
+        /* The valuation amount */
+        CV_VALUATIONAMOUNT : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=15, sysNumber=42.0, core=true, t24Name=CV.VALUATIONAMOUNT, typeModifiers="-USD", mandatory=false)
+        DATE_TIME -> byValue UKMSOI_MortgageApplicationData:UKMSOI_MORTGAGE_APPLICATION_DATA__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+/* Default value of this field is NULL.
+Record ID of DD.DDI application */
+        DD_DDI_ID : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=10, sysNumber=13.0, core=true, t24Name=DD.DDI.ID, mandatory=false)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=336.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+/* Default value of this field is NULL.
+If the procees fails in any of the stages, corresponding Error Message/s will be picked up and stored. */
+        ERROR_MESSAGE : T24BusinessTypes:TEXT
+            @i18n:Label (en="Error Message")
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=6.0, core=true, t24Name=ERROR.MESSAGE, mandatory=false)
+/* Default value of this field is NULL.
+Record ID of FUNDS.TRANSFER application. Disbursement amount is credited to an GP-Internal account for subsequent creation of Payment Order */
+        FEEDUE_DISBURSEMENT_ID : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=16, sysNumber=14.0, core=true, t24Name=FEEDUE.DISBURSEMENT.ID, mandatory=false)
+/* Default value of this field is NULL.
+Record ID of FUNDS.TRANSFER application. Disbursement amount is credited to an GP-Internal account for subsequent creation of Payment Order */
+        FEEREPAY_DISBURESMENT_ID : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=16, sysNumber=15.0, core=true, t24Name=FEEREPAY.DISBURESMENT.ID, mandatory=false)
+        FEE_FEECODE -> byValue UKMSOI_MortgageApplicationData:UKMSOI_MORTGAGE_APPLICATION_DATA__FEE_FEECODE *
+            @t24:i (t24Name=FEE.FEECODE)
+        ID -> UKMSOI_MortgageApplicationData:UKMSOI_MORTGAGE_APPLICATION_DATA PK required
+            @i18n:Label (en="Transaction Ref")
+            @i18n:Tooltip (en="Transaction Reference")
+            @t24:i (align=L, inputBehaviour=I, maxLength=36, sysNumber=0.0, core=true, businessType=A, t24Name="@ID", mandatory=true)
+        /* Defines the type of Address. Possible values are: UKAddress, BFPOAddress, OverseasAddress */
+        IDIFA_ADDRESSTYPE : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=184.0, core=true, t24Name=IDIFA.ADDRESSTYPE, mandatory=false)
+        /* A subset of BFPOAddress type. */
+        IDIFA_BFPONUMBER : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=8, sysNumber=198.0, core=true, t24Name=IDIFA.BFPONUMBER, mandatory=false)
+        /* A subset of UKAddress type. */
+        IDIFA_BUILDINGNAME : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=186.0, core=true, t24Name=IDIFA.BUILDINGNAME, mandatory=false)
+        /* A subset of UKAddress type. */
+        IDIFA_BUILDINGNO : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=5, sysNumber=185.0, core=true, t24Name=IDIFA.BUILDINGNO, mandatory=false)
+        /* A subset of BFPOAddress type. */
+        IDIFA_CAREOFSURNAME : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=195.0, core=true, t24Name=IDIFA.CAREOFSURNAME, mandatory=false)
+        /* A subset of UKAddress type. */
+        IDIFA_COUNTY : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=191.0, core=true, t24Name=IDIFA.COUNTY, mandatory=false)
+        /* A subset of UKAddress type. */
+        IDIFA_DISTRICT : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=189.0, core=true, t24Name=IDIFA.DISTRICT, mandatory=false)
+        /* A subset of UKAddress type. */
+        IDIFA_FLAT : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=187.0, core=true, t24Name=IDIFA.FLAT, mandatory=false)
+        /* A subset of OverseasAddress type. */
+        IDIFA_LINE1 : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=199.0, core=true, t24Name=IDIFA.LINE1, mandatory=false)
+        /* A subset of OverseasAddress type. */
+        IDIFA_LINE2 : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=200.0, core=true, t24Name=IDIFA.LINE2, mandatory=false)
+        /* A subset of OverseasAddress type. */
+        IDIFA_LINE3 : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=201.0, core=true, t24Name=IDIFA.LINE3, mandatory=false)
+        /* A subset of OverseasAddress type. */
+        IDIFA_LINE4 : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=202.0, core=true, t24Name=IDIFA.LINE4, mandatory=false)
+        /* A subset of OverseasAddress type. */
+        IDIFA_LINE5 : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=203.0, core=true, t24Name=IDIFA.LINE5, mandatory=false)
+        /* A subset of OverseasAddress type. */
+        IDIFA_LINE6 : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=204.0, core=true, t24Name=IDIFA.LINE6, mandatory=false)
+        /* A subset of BFPOAddress type. */
+        IDIFA_OPERATIONNAME : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=30, sysNumber=197.0, core=true, t24Name=IDIFA.OPERATIONNAME, mandatory=false)
+        /* A subset of BFPOAddress type. */
+        IDIFA_POSTCODE : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=192.0, core=true, t24Name=IDIFA.POSTCODE, mandatory=false)
+        /* A subset of BFPOAddress type. */
+        IDIFA_RANK : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=194.0, core=true, t24Name=IDIFA.RANK, mandatory=false)
+        /* A subset of BFPOAddress type. */
+        IDIFA_SERVICENUMBER : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=193.0, core=true, t24Name=IDIFA.SERVICENUMBER, mandatory=false)
+        /* A subset of UKAddress type. */
+        IDIFA_STREET : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=188.0, core=true, t24Name=IDIFA.STREET, mandatory=false)
+        /* A subset of UKAddress type. */
+        IDIFA_TOWN : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=190.0, core=true, t24Name=IDIFA.TOWN, mandatory=false)
+        /* A subset of BFPOAddress type. */
+        IDIFA_UNIT : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=196.0, core=true, t24Name=IDIFA.UNIT, mandatory=false)
+        /* Defines the type of Address. Possible values are: UKAddress, BFPOAddress, OverseasAddress */
+        IDIFIBDA_ADDRESSTYPE : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=210.0, core=true, t24Name=IDIFIBDA.ADDRESSTYPE, mandatory=false)
+        /* A subset of BFPOAddress type. */
+        IDIFIBDA_BFPONUMBER : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=8, sysNumber=224.0, core=true, t24Name=IDIFIBDA.BFPONUMBER, mandatory=false)
+        /* A subset of UKAddress type. */
+        IDIFIBDA_BUILDINGNAME : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=212.0, core=true, t24Name=IDIFIBDA.BUILDINGNAME, mandatory=false)
+        /* A subset of UKAddress type. */
+        IDIFIBDA_BUILDINGNO : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=5, sysNumber=211.0, core=true, t24Name=IDIFIBDA.BUILDINGNO, mandatory=false)
+        /* A subset of BFPOAddress type. */
+        IDIFIBDA_CAREOFSURNAME : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=221.0, core=true, t24Name=IDIFIBDA.CAREOFSURNAME, mandatory=false)
+        /* A subset of UKAddress type. */
+        IDIFIBDA_COUNTY : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=217.0, core=true, t24Name=IDIFIBDA.COUNTY, mandatory=false)
+        /* A subset of UKAddress type. */
+        IDIFIBDA_DISTRICT : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=215.0, core=true, t24Name=IDIFIBDA.DISTRICT, mandatory=false)
+        /* A subset of UKAddress type. */
+        IDIFIBDA_FLAT : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=213.0, core=true, t24Name=IDIFIBDA.FLAT, mandatory=false)
+        /* A subset of OverseasAddress type. */
+        IDIFIBDA_LINE1 : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=225.0, core=true, t24Name=IDIFIBDA.LINE1, mandatory=false)
+        /* A subset of OverseasAddress type. */
+        IDIFIBDA_LINE2 : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=226.0, core=true, t24Name=IDIFIBDA.LINE2, mandatory=false)
+        /* A subset of OverseasAddress type. */
+        IDIFIBDA_LINE3 : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=227.0, core=true, t24Name=IDIFIBDA.LINE3, mandatory=false)
+        /* A subset of OverseasAddress type. */
+        IDIFIBDA_LINE4 : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=228.0, core=true, t24Name=IDIFIBDA.LINE4, mandatory=false)
+        /* A subset of OverseasAddress type. */
+        IDIFIBDA_LINE5 : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=229.0, core=true, t24Name=IDIFIBDA.LINE5, mandatory=false)
+        /* A subset of OverseasAddress type. */
+        IDIFIBDA_LINE6 : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=230.0, core=true, t24Name=IDIFIBDA.LINE6, mandatory=false)
+        /* A subset of BFPOAddress type. */
+        IDIFIBDA_OPERATIONNAME : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=30, sysNumber=223.0, core=true, t24Name=IDIFIBDA.OPERATIONNAME, mandatory=false)
+        /* A subset of BFPOAddress type. */
+        IDIFIBDA_POSTCODE : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=10, sysNumber=218.0, core=true, t24Name=IDIFIBDA.POSTCODE, mandatory=false)
+        /* A subset of BFPOAddress type. */
+        IDIFIBDA_RANK : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=220.0, core=true, t24Name=IDIFIBDA.RANK, mandatory=false)
+        /* A subset of BFPOAddress type. */
+        IDIFIBDA_SERVICENUMBER : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=219.0, core=true, t24Name=IDIFIBDA.SERVICENUMBER, mandatory=false)
+        /* A subset of UKAddress type. */
+        IDIFIBDA_STREET : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=214.0, core=true, t24Name=IDIFIBDA.STREET, mandatory=false)
+        /* A subset of UKAddress type. */
+        IDIFIBDA_TOWN : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=216.0, core=true, t24Name=IDIFIBDA.TOWN, mandatory=false)
+        /* A subset of BFPOAddress type. */
+        IDIFIBDA_UNIT : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=222.0, core=true, t24Name=IDIFIBDA.UNIT, mandatory=false)
+        /* The name of the owner of the account given by the intermediary facilitating the mortgage application as their payment account */
+        IDIFIBD_ACCOUNTHOLDER : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=208.0, core=true, t24Name=IDIFIBD.ACCOUNTHOLDER, mandatory=false)
+        /* Bank account number for the account given by the intermediary facilitating the mortgage application as their payment account Example Data - 515351545 */
+        IDIFIBD_ACCOUNTNUMBER : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=8, sysNumber=206.0, core=true, t24Name=IDIFIBD.ACCOUNTNUMBER, mandatory=false)
+        /* The name of the bank holding the account given by the intermediary facilitating the mortgage application as their payment account */
+        IDIFIBD_BANKNAME : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=209.0, core=true, t24Name=IDIFIBD.BANKNAME, mandatory=false)
+        /* Sort Code for the account given by the intermediary facilitating the mortgage application as their payment account Example Data - 102030 */
+        IDIFIBD_SORTCODE : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=8, sysNumber=207.0, core=true, t24Name=IDIFIBD.SORTCODE, mandatory=false)
+        /* Unique number given to the company being represented by the intermediary facilitating the mortgage application by the Financial Conduct Authority Example Data - 1323455 */
+        IDIF_FCANUMBER : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=6, sysNumber=183.0, core=true, t24Name=IDIF.FCANUMBER, mandatory=false)
+        /* Defines the lender specific identifier pertinent to a given firm and used in procuration fee payment */
+        IDIF_FIRMAGENCYCODE : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=205.0, core=true, t24Name=IDIF.FIRMAGENCYCODE, mandatory=false)
+        /* Name of the company being represented by the intermediary facilitating the mortgage application Example Data - Smiths Financial Advice */
+        IDIF_NAME : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=182.0, core=true, t24Name=IDIF.NAME, mandatory=false)
+        /* Defines the type of Address. Possible values are: UKAddress, BFPOAddress, OverseasAddress */
+        IDPRA_ADDRESSTYPE : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=20, sysNumber=234.0, core=true, t24Name=IDPRA.ADDRESSTYPE, mandatory=false)
+        /* A subset of BFPOAddress type. */
+        IDPRA_BFPONUMBER : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=8, sysNumber=248.0, core=true, t24Name=IDPRA.BFPONUMBER, mandatory=false)
+        /* A subset of UKAddress type. */
+        IDPRA_BUILDINGNAME : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=236.0, core=true, t24Name=IDPRA.BUILDINGNAME, mandatory=false)
+        /* A subset of UKAddress type. */
+        IDPRA_BUILDINGNO : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=5, sysNumber=235.0, core=true, t24Name=IDPRA.BUILDINGNO, mandatory=false)
+        /* A subset of BFPOAddress type. */
+        IDPRA_CAREOFSURNAME : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=245.0, core=true, t24Name=IDPRA.CAREOFSURNAME, mandatory=false)
+        /* A subset of UKAddress type. */
+        IDPRA_COUNTY : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=241.0, core=true, t24Name=IDPRA.COUNTY, mandatory=false)
+        /* A subset of UKAddress type. */
+        IDPRA_DISTRICT : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=239.0, core=true, t24Name=IDPRA.DISTRICT, mandatory=false)
+        /* A subset of UKAddress type. */
+        IDPRA_FLAT : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=237.0, core=true, t24Name=IDPRA.FLAT, mandatory=false)
+        /* A subset of OverseasAddress type. */
+        IDPRA_LINE1 : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=249.0, core=true, t24Name=IDPRA.LINE1, mandatory=false)
+        /* A subset of OverseasAddress type. */
+        IDPRA_LINE2 : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=250.0, core=true, t24Name=IDPRA.LINE2, mandatory=false)
+        /* A subset of OverseasAddress type. */
+        IDPRA_LINE3 : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=251.0, core=true, t24Name=IDPRA.LINE3, mandatory=false)
+        /* A subset of OverseasAddress type. */
+        IDPRA_LINE4 : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=252.0, core=true, t24Name=IDPRA.LINE4, mandatory=false)
+        /* A subset of OverseasAddress type. */
+        IDPRA_LINE5 : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=253.0, core=true, t24Name=IDPRA.LINE5, mandatory=false)
+        /* A subset of OverseasAddress type. */
+        IDPRA_LINE6 : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=254.0, core=true, t24Name=IDPRA.LINE6, mandatory=false)
+        /* A subset of BFPOAddress type. */
+        IDPRA_OPERATIONNAME : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=30, sysNumber=247.0, core=true, t24Name=IDPRA.OPERATIONNAME, mandatory=false)
+        /* A subset of BFPOAddress type. */
+        IDPRA_POSTCODE : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=242.0, core=true, t24Name=IDPRA.POSTCODE, mandatory=false)
+        /* A subset of BFPOAddress type. */
+        IDPRA_RANK : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=10, sysNumber=244.0, core=true, t24Name=IDPRA.RANK, mandatory=false)
+        /* A subset of BFPOAddress type. */
+        IDPRA_SERVICENUMBER : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=243.0, core=true, t24Name=IDPRA.SERVICENUMBER, mandatory=false)
+        /* A subset of UKAddress type. */
+        IDPRA_STREET : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=238.0, core=true, t24Name=IDPRA.STREET, mandatory=false)
+        /* A subset of UKAddress type. */
+        IDPRA_TOWN : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=240.0, core=true, t24Name=IDPRA.TOWN, mandatory=false)
+        /* A subset of BFPOAddress type. */
+        IDPRA_UNIT : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=246.0, core=true, t24Name=IDPRA.UNIT, mandatory=false)
+        /* Defines the type of Address. Possible values are: UKAddress, BFPOAddress, OverseasAddress */
+        IDPRIBDA_ADDRESSTYPE : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=20, sysNumber=261.0, core=true, t24Name=IDPRIBDA.ADDRESSTYPE, mandatory=false)
+        /* A subset of BFPOAddress type. */
+        IDPRIBDA_BFPONUMBER : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=8, sysNumber=275.0, core=true, t24Name=IDPRIBDA.BFPONUMBER, mandatory=false)
+        /* A subset of UKAddress type. */
+        IDPRIBDA_BUILDINGNAME : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=263.0, core=true, t24Name=IDPRIBDA.BUILDINGNAME, mandatory=false)
+        /* A subset of UKAddress type. */
+        IDPRIBDA_BUILDINGNO : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=5, sysNumber=262.0, core=true, t24Name=IDPRIBDA.BUILDINGNO, mandatory=false)
+        /* A subset of BFPOAddress type. */
+        IDPRIBDA_CAREOFSURNAME : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=272.0, core=true, t24Name=IDPRIBDA.CAREOFSURNAME, mandatory=false)
+        /* A subset of UKAddress type. */
+        IDPRIBDA_COUNTY : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=268.0, core=true, t24Name=IDPRIBDA.COUNTY, mandatory=false)
+        /* A subset of UKAddress type. */
+        IDPRIBDA_DISTRICT : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=266.0, core=true, t24Name=IDPRIBDA.DISTRICT, mandatory=false)
+        /* A subset of UKAddress type. */
+        IDPRIBDA_FLAT : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=264.0, core=true, t24Name=IDPRIBDA.FLAT, mandatory=false)
+        /* A subset of OverseasAddress type. */
+        IDPRIBDA_LINE1 : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=276.0, core=true, t24Name=IDPRIBDA.LINE1, mandatory=false)
+        /* A subset of OverseasAddress type. */
+        IDPRIBDA_LINE2 : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=277.0, core=true, t24Name=IDPRIBDA.LINE2, mandatory=false)
+        /* A subset of OverseasAddress type. */
+        IDPRIBDA_LINE3 : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=278.0, core=true, t24Name=IDPRIBDA.LINE3, mandatory=false)
+        /* A subset of OverseasAddress type. */
+        IDPRIBDA_LINE4 : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=279.0, core=true, t24Name=IDPRIBDA.LINE4, mandatory=false)
+        /* A subset of OverseasAddress type. */
+        IDPRIBDA_LINE5 : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=280.0, core=true, t24Name=IDPRIBDA.LINE5, mandatory=false)
+        /* A subset of OverseasAddress type. */
+        IDPRIBDA_LINE6 : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=281.0, core=true, t24Name=IDPRIBDA.LINE6, mandatory=false)
+        /* A subset of BFPOAddress type. */
+        IDPRIBDA_OPERATIONNAME : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=30, sysNumber=274.0, core=true, t24Name=IDPRIBDA.OPERATIONNAME, mandatory=false)
+        /* A subset of BFPOAddress type. */
+        IDPRIBDA_POSTCODE : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=10, sysNumber=269.0, core=true, t24Name=IDPRIBDA.POSTCODE, mandatory=false)
+        /* A subset of BFPOAddress type. */
+        IDPRIBDA_RANK : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=271.0, core=true, t24Name=IDPRIBDA.RANK, mandatory=false)
+        /* A subset of BFPOAddress type. */
+        IDPRIBDA_SERVICENUMBER : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=270.0, core=true, t24Name=IDPRIBDA.SERVICENUMBER, mandatory=false)
+        /* A subset of UKAddress type. */
+        IDPRIBDA_STREET : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=265.0, core=true, t24Name=IDPRIBDA.STREET, mandatory=false)
+        /* A subset of UKAddress type. */
+        IDPRIBDA_TOWN : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=267.0, core=true, t24Name=IDPRIBDA.TOWN, mandatory=false)
+        /* A subset of BFPOAddress type. */
+        IDPRIBDA_UNIT : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=273.0, core=true, t24Name=IDPRIBDA.UNIT, mandatory=false)
+        /* The name of the owner of the account given by the intermediary facilitating the mortgage application as their payment account */
+        IDPRIBD_ACCOUNTHOLDER : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=259.0, core=true, t24Name=IDPRIBD.ACCOUNTHOLDER, mandatory=false)
+        /* Bank account number for the account given by the intermediary facilitating the mortgage application as their payment account Example Data - 515351545 */
+        IDPRIBD_ACCOUNTNUMBER : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=8, sysNumber=257.0, core=true, t24Name=IDPRIBD.ACCOUNTNUMBER, mandatory=false)
+        /* The name of the bank holding the account given by the intermediary facilitating the mortgage application as their payment account */
+        IDPRIBD_BANKNAME : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=260.0, core=true, t24Name=IDPRIBD.BANKNAME, mandatory=false)
+        /* Sort Code for the account given by the intermediary facilitating the mortgage application as their payment account Example Data - 102030 */
+        IDPRIBD_SORTCODE : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=6, sysNumber=258.0, core=true, t24Name=IDPRIBD.SORTCODE, mandatory=false)
+        /* The name of the owner of the account given by the intermediary facilitating the mortgage application as their payment account */
+        IDPRPPR_ACCOUNTHOLDER : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=311.0, core=true, t24Name=IDPRPPR.ACCOUNTHOLDER, mandatory=false)
+        /* Bank account number for the account given by the intermediary facilitating the mortgage application as their payment account Example Data - 515351545 */
+        IDPRPPR_ACCOUNTNUMBER : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=8, sysNumber=309.0, core=true, t24Name=IDPRPPR.ACCOUNTNUMBER, mandatory=false)
+        /* Defines the type of Address. Possible values are: UKAddress, BFPOAddress, OverseasAddress */
+        IDPRPPR_ADDRESSTYPE : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=20, sysNumber=286.0, core=true, t24Name=IDPRPPR.ADDRESSTYPE, mandatory=false)
+        /* Defines the lender specific identifier pertinent to a given Payment Route.Parent.Payment Route and used in procuration fee payment. */
+        IDPRPPR_AGENCYNUMBER : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=308.0, core=true, t24Name=IDPRPPR.AGENCYNUMBER, mandatory=false)
+        /* The name of the bank holding the account given by the intermediary facilitating the mortgage application as their payment account */
+        IDPRPPR_BANKNAME : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=312.0, core=true, t24Name=IDPRPPR.BANKNAME, mandatory=false)
+        /* A subset of BFPOAddress type. */
+        IDPRPPR_BFPONUMBER : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=8, sysNumber=300.0, core=true, t24Name=IDPRPPR.BFPONUMBER, mandatory=false)
+        /* A subset of UKAddress type. */
+        IDPRPPR_BUILDINGNAME : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=288.0, core=true, t24Name=IDPRPPR.BUILDINGNAME, mandatory=false)
+        /* A subset of UKAddress type. */
+        IDPRPPR_BUILDINGNO : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=5, sysNumber=287.0, core=true, t24Name=IDPRPPR.BUILDINGNO, mandatory=false)
+        /* A subset of BFPOAddress type. */
+        IDPRPPR_CAREOFSURNAME : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=297.0, core=true, t24Name=IDPRPPR.CAREOFSURNAME, mandatory=false)
+        /* A subset of UKAddress type. */
+        IDPRPPR_COUNTY : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=293.0, core=true, t24Name=IDPRPPR.COUNTY, mandatory=false)
+        /* A subset of UKAddress type. */
+        IDPRPPR_DISTRICT : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=291.0, core=true, t24Name=IDPRPPR.DISTRICT, mandatory=false)
+        /* A subset of UKAddress type. */
+        IDPRPPR_FLAT : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=289.0, core=true, t24Name=IDPRPPR.FLAT, mandatory=false)
+        /* Indicates whether the Payment Route.Parent.Payment Route is active */
+        IDPRPPR_ISACTIVE : UKMSOI_MortgageApplicationData:UKMSOI_MORTGAGE_APPLICATION_DATA__IDPRPPR_ISACTIVE
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=307.0, core=true, t24Name=IDPRPPR.ISACTIVE, mandatory=false)
+        /* A subset of OverseasAddress type. */
+        IDPRPPR_LINE1 : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=301.0, core=true, t24Name=IDPRPPR.LINE1, mandatory=false)
+        /* A subset of OverseasAddress type. */
+        IDPRPPR_LINE2 : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=302.0, core=true, t24Name=IDPRPPR.LINE2, mandatory=false)
+        /* A subset of OverseasAddress type. */
+        IDPRPPR_LINE3 : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=303.0, core=true, t24Name=IDPRPPR.LINE3, mandatory=false)
+        /* A subset of OverseasAddress type. */
+        IDPRPPR_LINE4 : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=304.0, core=true, t24Name=IDPRPPR.LINE4, mandatory=false)
+        /* A subset of OverseasAddress type. */
+        IDPRPPR_LINE5 : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=305.0, core=true, t24Name=IDPRPPR.LINE5, mandatory=false)
+        /* A subset of OverseasAddress type. */
+        IDPRPPR_LINE6 : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=306.0, core=true, t24Name=IDPRPPR.LINE6, mandatory=false)
+        /* Name of the Payment Route.Parent.Payment Route which the intermediary facilitating the mortgage application belongs to Example Data - London And Country */
+        IDPRPPR_NAME : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=283.0, core=true, t24Name=IDPRPPR.NAME, mandatory=false)
+        /* A subset of BFPOAddress type. */
+        IDPRPPR_OPERATIONNAME : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=30, sysNumber=299.0, core=true, t24Name=IDPRPPR.OPERATIONNAME, mandatory=false)
+        /* Defines the type of Payment Route.Parent.Payment Route */
+        IDPRPPR_PAYMENTROUTETYPE : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=284.0, core=true, t24Name=IDPRPPR.PAYMENTROUTETYPE, mandatory=false)
+        /* A subset of BFPOAddress type. */
+        IDPRPPR_POSTCODE : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=294.0, core=true, t24Name=IDPRPPR.POSTCODE, mandatory=false)
+        /* A subset of BFPOAddress type. */
+        IDPRPPR_RANK : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=296.0, core=true, t24Name=IDPRPPR.RANK, mandatory=false)
+        /* Defines the number allocated to the Payment Route.Parent.Payment Route by the Financial Conduct Authority */
+        IDPRPPR_REGISTRATIONNUMBER : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=15, sysNumber=285.0, core=true, t24Name=IDPRPPR.REGISTRATIONNUMBER, mandatory=false)
+        /* A subset of BFPOAddress type. */
+        IDPRPPR_SERVICENUMBER : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=295.0, core=true, t24Name=IDPRPPR.SERVICENUMBER, mandatory=false)
+        /* Sort Code for the account given by the intermediary facilitating the mortgage application as their payment account Example Data - 102030 */
+        IDPRPPR_SORTCODE : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=6, sysNumber=310.0, core=true, t24Name=IDPRPPR.SORTCODE, mandatory=false)
+        /* A subset of UKAddress type. */
+        IDPRPPR_STREET : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=290.0, core=true, t24Name=IDPRPPR.STREET, mandatory=false)
+        /* A subset of UKAddress type. */
+        IDPRPPR_TOWN : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=292.0, core=true, t24Name=IDPRPPR.TOWN, mandatory=false)
+        /* A subset of BFPOAddress type. */
+        IDPRPPR_UNIT : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=298.0, core=true, t24Name=IDPRPPR.UNIT, mandatory=false)
+        /* Defines the lender specific identifier pertinent to a given payment route and used in procuration fee payment. */
+        IDPR_AGENCYNUMBER : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=256.0, core=true, t24Name=IDPR.AGENCYNUMBER, mandatory=false)
+        /* Indicates whether the payment route is active */
+        IDPR_ISACTIVE : UKMSOI_MortgageApplicationData:UKMSOI_MORTGAGE_APPLICATION_DATA__IDPR_ISACTIVE
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=255.0, core=true, t24Name=IDPR.ISACTIVE, mandatory=false)
+        /* Indicates if this is the payment route that should be paid the fee */
+        IDPR_ISPAIDPROCFEE : UKMSOI_MortgageApplicationData:UKMSOI_MORTGAGE_APPLICATION_DATA__IDPR_ISPAIDPROCFEE
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=282.0, core=true, t24Name=IDPR.ISPAIDPROCFEE, mandatory=false)
+        /* Name of the payment route which the intermediary facilitating the mortgage application belongs to Example Data - London And Country */
+        IDPR_NAME : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=231.0, core=true, t24Name=IDPR.NAME, mandatory=false)
+        /* Defines the type of payment route */
+        IDPR_PAYMENTROUTETYPE : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=232.0, core=true, t24Name=IDPR.PAYMENTROUTETYPE, mandatory=false)
+        /* Defines the number allocated to the payment route by the Financial Conduct Authority */
+        IDPR_REGISTRATIONNUMBER : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=15, sysNumber=233.0, core=true, t24Name=IDPR.REGISTRATIONNUMBER, mandatory=false)
+        /* Defines the type of Address. Possible values are: UKAddress, BFPOAddress, OverseasAddress */
+        ID_ADDRESS_ADDRESSTYPE : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=161.0, core=true, t24Name=ID.ADDRESS.ADDRESSTYPE, mandatory=false)
+        /* A subset of BFPOAddress type. */
+        ID_ADDRESS_BFPONUMBER : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=8, sysNumber=175.0, core=true, t24Name=ID.ADDRESS.BFPONUMBER, mandatory=false)
+        /* A subset of UKAddress type. */
+        ID_ADDRESS_BUILDINGNAME : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=163.0, core=true, t24Name=ID.ADDRESS.BUILDINGNAME, mandatory=false)
+        /* A subset of UKAddress type. */
+        ID_ADDRESS_BUILDINGNO : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=5, sysNumber=162.0, core=true, t24Name=ID.ADDRESS.BUILDINGNO, mandatory=false)
+        /* A subset of BFPOAddress type. */
+        ID_ADDRESS_CAREOFSURNAME : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=172.0, core=true, t24Name=ID.ADDRESS.CAREOFSURNAME, mandatory=false)
+        /* A subset of UKAddress type. */
+        ID_ADDRESS_COUNTY : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=168.0, core=true, t24Name=ID.ADDRESS.COUNTY, mandatory=false)
+        /* A subset of UKAddress type. */
+        ID_ADDRESS_DISTRICT : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=166.0, core=true, t24Name=ID.ADDRESS.DISTRICT, mandatory=false)
+        /* A subset of UKAddress type. */
+        ID_ADDRESS_FLAT : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=164.0, core=true, t24Name=ID.ADDRESS.FLAT, mandatory=false)
+        /* A subset of OverseasAddress type. */
+        ID_ADDRESS_LINE1 : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=176.0, core=true, t24Name=ID.ADDRESS.LINE1, mandatory=false)
+        /* A subset of OverseasAddress type. */
+        ID_ADDRESS_LINE2 : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=177.0, core=true, t24Name=ID.ADDRESS.LINE2, mandatory=false)
+        /* A subset of OverseasAddress type. */
+        ID_ADDRESS_LINE3 : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=178.0, core=true, t24Name=ID.ADDRESS.LINE3, mandatory=false)
+        /* A subset of OverseasAddress type. */
+        ID_ADDRESS_LINE4 : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=179.0, core=true, t24Name=ID.ADDRESS.LINE4, mandatory=false)
+        /* A subset of OverseasAddress type. */
+        ID_ADDRESS_LINE5 : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=180.0, core=true, t24Name=ID.ADDRESS.LINE5, mandatory=false)
+        /* A subset of OverseasAddress type. */
+        ID_ADDRESS_LINE6 : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=181.0, core=true, t24Name=ID.ADDRESS.LINE6, mandatory=false)
+        /* A subset of BFPOAddress type. */
+        ID_ADDRESS_OPERATIONNAME : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=30, sysNumber=174.0, core=true, t24Name=ID.ADDRESS.OPERATIONNAME, mandatory=false)
+        /* A subset of BFPOAddress type. */
+        ID_ADDRESS_POSTCODE : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=10, sysNumber=169.0, core=true, t24Name=ID.ADDRESS.POSTCODE, mandatory=false)
+        /* A subset of BFPOAddress type. */
+        ID_ADDRESS_RANK : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=171.0, core=true, t24Name=ID.ADDRESS.RANK, mandatory=false)
+        /* A subset of BFPOAddress type. */
+        ID_ADDRESS_SERVICENUMBER : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=170.0, core=true, t24Name=ID.ADDRESS.SERVICENUMBER, mandatory=false)
+        /* A subset of UKAddress type. */
+        ID_ADDRESS_STREET : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=165.0, core=true, t24Name=ID.ADDRESS.STREET, mandatory=false)
+        /* A subset of UKAddress type. */
+        ID_ADDRESS_TOWN : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=167.0, core=true, t24Name=ID.ADDRESS.TOWN, mandatory=false)
+        /* A subset of BFPOAddress type. */
+        ID_ADDRESS_UNIT : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=173.0, core=true, t24Name=ID.ADDRESS.UNIT, mandatory=false)
+        /* Birthdate of the intermediary facilitating the mortgage application Example Data - 17/07/1973 */
+        ID_DATEOFBIRTH : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=158.0, core=true, t24Name=ID.DATEOFBIRTH, mandatory=false)
+        /* Direct email address of the intermediary facilitating the mortgage application Example Data - Jsmith@SFA.co.uk */
+        ID_EMAILADDRESS : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=256, sysNumber=159.0, core=true, t24Name=ID.EMAILADDRESS, mandatory=false)
+        /* First given name of the intermediary facilitating the mortgage application Example Data - James */
+        ID_FORENAME : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=30, sysNumber=156.0, core=true, t24Name=ID.FORENAME, mandatory=false)
+        /* The lending centre used by the intermediary facilitating the mortgage application. */
+        ID_INTERMEDIARYLENDINGCENTRE : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=314.0, core=true, t24Name=ID.INTERMEDIARYLENDINGCENTRE, mandatory=false)
+        /* Internal telephone extension number of the intermediary facilitating the mortgage application Example Data - 4321 */
+        ID_INTTELDIALCODE : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=6, sysNumber=315.0, core=true, t24Name=ID.INTTELDIALCODE, mandatory=false)
+        /* Telephone number of the intermediary facilitating the mortgage application Example Data - 01242321333 */
+        ID_INTTELNO : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=20, sysNumber=316.0, core=true, t24Name=ID.INTTELNO, mandatory=false)
+        /* Mobile telephone number of the intermediary facilitating the mortgage application Example Data - 447933654566 */
+        ID_MOBILENUMBER : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=20, sysNumber=160.0, core=true, t24Name=ID.MOBILENUMBER, mandatory=false)
+        /* The Procuration fee amount */
+        ID_PROCURATIONFEEAMOUNT : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=15, sysNumber=313.0, core=true, t24Name=ID.PROCURATIONFEEAMOUNT, typeModifiers="-USD", mandatory=false)
+        /* Reference number of the intermediary facilitating the mortgage application Example Data - I1000001 */
+        ID_REFERENCENUMBER : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=30, sysNumber=317.0, core=true, t24Name=ID.REFERENCENUMBER, mandatory=false)
+        /* Family name of the intermediary facilitating the mortgage application Example Data - Smith */
+        ID_SURNAME : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=30, sysNumber=157.0, core=true, t24Name=ID.SURNAME, mandatory=false)
+        /* The intermediary's honorific/title */
+        ID_TITLE : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=10, sysNumber=155.0, core=true, t24Name=ID.TITLE, mandatory=false)
+        INPUTTER -> byValue UKMSOI_MortgageApplicationData:UKMSOI_MORTGAGE_APPLICATION_DATA__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        /* Record ID. Autogenerated by the routine that uploads data into this staging table */
+        INSTANCE_ID : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=36, sysNumber=2.0, core=true, t24Name=INSTANCE.ID, mandatory=false)
+        /* Identifies the T24 application id linked to the Arrangement contract */
+        LINKED_APPL_ID : T24BusinessTypes:ANY
+            @i18n:Label (en="Linked Application Id")
+            @t24:i (align=L, inputBehaviour=I, maxLength=12, sysNumber=3.0, core=true, t24Name=LINKED.APPL.ID, mandatory=false)
+        /* Description of the equity loan scheme being entered into when purchasing the security. */
+        LR_EQUITYSHARESCHEME : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=60, sysNumber=37.0, core=true, t24Name=LR.EQUITYSHARESCHEME, mandatory=false)
+        /* Term (in months) over which the equity loan associated with the security will exist */
+        LR_EQUITYSHARETERMMONTHS : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=15, sysNumber=38.0, core=true, t24Name=LR.EQUITYSHARETERMMONTHS, mandatory=false)
+        /* Full, market sale price of the property to be used as security or an example property if one has yet to be identified. Limited to £3 million. Range (R5035 - MinimumFullMarketValue to R5420 - MaximumFullMarketValue) */
+        LR_FULLMARKETVALUE : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=15, sysNumber=80.0, core=true, t24Name=LR.FULLMARKETVALUE, typeModifiers="-USD", mandatory=false)
+        /* Description of the mortgage guarantee scheme being entered into when purchasing the security */
+        LR_GUARANTEESHARESCHEME : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=39.0, core=true, t24Name=LR.GUARANTEESHARESCHEME, mandatory=false)
+        /* Description of how the Buy To Let security will be let */
+        LR_LETTINGTYPE : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=60, sysNumber=32.0, core=true, t24Name=LR.LETTINGTYPE, mandatory=false)
+        /* The loan to value percentage */
+        LR_LOANTOVALUE : T24BusinessTypes:R
+            @t24:i (align=R, inputBehaviour=I, maxLength=15, sysNumber=36.0, core=true, t24Name=LR.LOANTOVALUE, mandatory=false)
+        /* Months since original purchase date */
+        LR_ORIGINALDATEOFPURCHASEMON : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=5, sysNumber=81.0, core=true, t24Name=LR.ORIGINALDATEOFPURCHASEMON, mandatory=false)
+        /* The overall category the applicant belongs to based on their prior/existing experience as a borrower */
+        LR_OVERALLAPPLICANTTYPE : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=30.0, core=true, t24Name=LR.OVERALLAPPLICANTTYPE, mandatory=false)
+        /* Geographical location of the security address (if known) or geographical area of properties being viewed if the security address is unknown. */
+        LR_PROPERTYLOCATION : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=35.0, core=true, t24Name=LR.PROPERTYLOCATION, mandatory=false)
+        LR_PROPERTYOWNERSHIP : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=33.0, core=true, t24Name=LR.PROPERTYOWNERSHIP, mandatory=false)
+        /* Describes the applicant's usage of the security once it is purchased */
+        LR_PROPERTYPURPOSE : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=31.0, core=true, t24Name=LR.PROPERTYPURPOSE, mandatory=false)
+        /* Administrative region of the security address */
+        LR_PROPERTYREGION : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=78.0, core=true, t24Name=LR.PROPERTYREGION, mandatory=false)
+        /* Defines the type of property identified as security for the mortgage application */
+        LR_PROPERTYTYPE : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=34.0, core=true, t24Name=LR.PROPERTYTYPE, mandatory=false)
+        /* Describes a) the advertised or agreed sale price of the property the applicant has identified as security for the loan or b) an example price for potential properties if the applicant has yet to identify a particular one.Range (R5389 - MinPurchasePrice to R5391 - MaxPurchasePrice) */
+        LR_PURCHASEPRICE : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=15, sysNumber=79.0, core=true, t24Name=LR.PURCHASEPRICE, typeModifiers="-USD", mandatory=false)
+        /* Default value is 'Y'. It should be allowed to edit the value to 'N' */
+        MAIN_LOAN : UKMSOI_MortgageApplicationData:UKMSOI_MORTGAGE_APPLICATION_DATA__MAIN_LOAN
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=17.0, core=true, t24Name=MAIN.LOAN, mandatory=false)
+        /* Represents the application channel used to process the case to submission */
+        METADATA_CHANNEL : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=25, sysNumber=28.0, core=true, t24Name=METADATA.CHANNEL, mandatory=false)
+        /* The MSO case friendly identifier. This is the unique mortgage case identifier which is published on all documentation and used when contacting the lender. */
+        METADATA_FRIENDLYID : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=10, sysNumber=27.0, core=true, t24Name=METADATA.FRIENDLYID, mandatory=false)
+/* Default value of this field is NULL.
+Net loan amount to be disbursed to the beneficiary */
+        NET_DISBURSEMENT : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=16, sysNumber=11.0, core=true, t24Name=NET.DISBURSEMENT, mandatory=false)
+        OVERRIDE -> byValue UKMSOI_MortgageApplicationData:UKMSOI_MORTGAGE_APPLICATION_DATA__OVERRIDE *
+            @t24:i (t24Name=OVERRIDE)
+        /* The name of the payee */
+        PAYEEDETAILS_NAME : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=90.0, core=true, t24Name=PAYEEDETAILS.NAME, mandatory=false)
+        /* The type of payee */
+        PAYEEDETAILS_PAYEETYPE : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=91.0, core=true, t24Name=PAYEEDETAILS.PAYEETYPE, mandatory=false)
+/* Default value of this field is NULL.
+Record ID of PAYMENT.ORDER application */
+        PAYMENT_ORDER_ID : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=16, sysNumber=12.0, core=true, t24Name=PAYMENT.ORDER.ID, mandatory=false)
+        /* Indicates if the property being used as security against the loan has a garage or parking space */
+        PD_GARAGEPARKINGSPACE : UKMSOI_MortgageApplicationData:UKMSOI_MORTGAGE_APPLICATION_DATA__PD_GARAGEPARKINGSPACE
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=85.0, core=true, t24Name=PD.GARAGEPARKINGSPACE, mandatory=false)
+        /* Indicates if the property being used as security against the loan is to be rented out by at least 3 people who are not from a single household and are to share facilities such as the bathroom and kitchen */
+        PD_HOUSEINMULTIPLEOCCUPATION : UKMSOI_MortgageApplicationData:UKMSOI_MORTGAGE_APPLICATION_DATA__PD_HOUSEINMULTIPLEOCCUPATION
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=87.0, core=true, t24Name=PD.HOUSEINMULTIPLEOCCUPATION, mandatory=false)
+        /* Indicates if the property being used as security against the loan is on the Statutory List of Buildings of Special Architectural or Historic Interest as set out in Planning (Listed Buildings and Conservation Areas) Act 1990 (1) */
+        PD_LISTEDBUILDING : UKMSOI_MortgageApplicationData:UKMSOI_MORTGAGE_APPLICATION_DATA__PD_LISTEDBUILDING
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=84.0, core=true, t24Name=PD.LISTEDBUILDING, mandatory=false)
+        /* Indicates if the property being used as security against the loan is a new build, is newly converted or has recently been refurbished */
+        PD_NEWBUILDINDICATOR : UKMSOI_MortgageApplicationData:UKMSOI_MORTGAGE_APPLICATION_DATA__PD_NEWBUILDINDICATOR
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=86.0, core=true, t24Name=PD.NEWBUILDINDICATOR, mandatory=false)
+        /* Defines the number of bedrooms in the property being used as security against the loan Range (1 - P6014 - pMaxNumberOfBedrooms) */
+        PD_PROPERTYBEDROOMS : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=5, sysNumber=88.0, core=true, t24Name=PD.PROPERTYBEDROOMS, mandatory=false)
+        /* Defines the number of reception rooms in the property being used as security against the loan Example Data - 1 */
+        PD_PROPERTYRECEPTIONS : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=5, sysNumber=89.0, core=true, t24Name=PD.PROPERTYRECEPTIONS, mandatory=false)
+        /* Defines the type of property identified as security for the mortgage application */
+        PD_PROPERTYTYPE : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=82.0, core=true, t24Name=PD.PROPERTYTYPE, mandatory=false)
+        /* Indicates the year in which the property being used as security against the loan was built Example Data - 1969 */
+        PD_YEARPROPERTYBUILT : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=4, sysNumber=83.0, core=true, t24Name=PD.YEARPROPERTYBUILT, mandatory=false)
+        /* Default value is 'N'. It should be allowed to edit the value to 'Y' */
+        PORTFOLIO_BTL : UKMSOI_MortgageApplicationData:UKMSOI_MORTGAGE_APPLICATION_DATA__PORTFOLIO_BTL
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=18.0, core=true, t24Name=PORTFOLIO.BTL, mandatory=false)
+        /* Indicates the number of years remaining on the lease following the mortgage term being applied for */
+        PROPERTY_NEWLEASEYEARS : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=5, sysNumber=66.0, core=true, t24Name=PROPERTY.NEWLEASEYEARS, mandatory=false)
+        /* The MSO case application type */
+        PR_APPLICATIONTYPE : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=29.0, core=true, t24Name=PR.APPLICATIONTYPE, mandatory=false)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=330.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        RESERVED_1 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=319.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_10 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=328.0, core=true, t24Name=RESERVED.10, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=320.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=321.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=322.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        RESERVED_5 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=323.0, core=true, t24Name=RESERVED.5, mandatory=false)
+        RESERVED_6 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=324.0, core=true, t24Name=RESERVED.6, mandatory=false)
+        RESERVED_7 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=325.0, core=true, t24Name=RESERVED.7, mandatory=false)
+        RESERVED_8 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=326.0, core=true, t24Name=RESERVED.8, mandatory=false)
+        RESERVED_9 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=327.0, core=true, t24Name=RESERVED.9, mandatory=false)
+        /* Default value is 'N'. It should be allowed to edit the value to 'Y' */
+        RETURN_CONTROL_FLAG : UKMSOI_MortgageApplicationData:UKMSOI_MORTGAGE_APPLICATION_DATA__RETURN_CONTROL_FLAG
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=19.0, core=true, t24Name=RETURN.CONTROL.FLAG, mandatory=false)
+        /* A unique code that identifies the product in the lender system */
+        SP_CODE : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=21.0, core=true, t24Name=SP.CODE, mandatory=false)
+        /* The total amount of the interest only portion of the loan. */
+        SP_INTERESTONLYAMOUNT : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=15, sysNumber=23.0, core=true, t24Name=SP.INTERESTONLYAMOUNT, typeModifiers="-USD", mandatory=false)
+        /* Unique identifier for this loan part */
+        SP_LOANPARTID : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=36, sysNumber=26.0, core=true, t24Name=SP.LOANPARTID, mandatory=false)
+        /* Indicates the type of loan part. */
+        SP_LOANPARTTYPE : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=25.0, core=true, t24Name=SP.LOANPARTTYPE, mandatory=false)
+        /* The repayment amount being applied for. */
+        SP_REPAYMENTAMOUNT : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=15, sysNumber=22.0, core=true, t24Name=SP.REPAYMENTAMOUNT, typeModifiers="-USD", mandatory=false)
+        /* The term in months */
+        SP_TERMINMONTHS : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=15, sysNumber=24.0, core=true, t24Name=SP.TERMINMONTHS, mandatory=false)
+        /* Default value is 'N'. When all the stages are successfully completed, this indicator is updated as Y. */
+        SUCCESS_IND : UKMSOI_MortgageApplicationData:UKMSOI_MORTGAGE_APPLICATION_DATA__SUCCESS_IND
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=5.0, core=true, t24Name=SUCCESS.IND, mandatory=false)
+/* Default value of this field is NULL.
+Net loan amount to be disbursed to the beneficiary */
+        TOTFEE_DISBURSEMENT : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=15, sysNumber=16.0, core=true, t24Name=TOTFEE.DISBURSEMENT, typeModifiers="-USD", mandatory=false)
+        /* The name of the valuation firm (including TranscriptionSurveyorName) */
+        VALUERFIRM_NAME : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=77.0, core=true, t24Name=VALUERFIRM.NAME, mandatory=false)
+        /* The level of confidence that the valuation provider has in their valuation */
+        VD_AVMCONFIDENCELEVEL : T24BusinessTypes:R
+            @t24:i (align=R, inputBehaviour=I, maxLength=15, sysNumber=70.0, core=true, t24Name=VD.AVMCONFIDENCELEVEL, mandatory=false)
+        /* The date the valuation inspection took place */
+        VD_INSPECTIONDATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=75.0, core=true, t24Name=VD.INSPECTIONDATE, mandatory=false)
+        /* The purchase price or estimated value of the property */
+        VD_PROPERTYPRICE : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=15, sysNumber=41.0, core=true, t24Name=VD.PROPERTYPRICE, typeModifiers="-USD", mandatory=false)
+        /* The type of valuation (including Transcription) */
+        VD_TYPEOFVALUATION : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=76.0, core=true, t24Name=VD.TYPEOFVALUATION, mandatory=false)
+        /* Valuation of applicants share in the property */
+        VD_VALUATIONOFSHAREDOWNERSHIP : T24BusinessTypes:R
+            @t24:i (align=R, inputBehaviour=I, maxLength=15, sysNumber=72.0, core=true, t24Name=VD.VALUATIONOFSHAREDOWNERSHIP, mandatory=false)
+        /* The valuation post completion of outstanding work */
+        VD_VALUATIONPOSTWORK : T24BusinessTypes:R
+            @t24:i (align=R, inputBehaviour=I, maxLength=15, sysNumber=74.0, core=true, t24Name=VD.VALUATIONPOSTWORK, mandatory=false)
+        /* The valuation of the property in it's present condition */
+        VD_VAL_INPRESENTCONDITION : T24BusinessTypes:R
+            @t24:i (align=R, inputBehaviour=I, maxLength=15, sysNumber=71.0, core=true, t24Name=VD.VAL.INPRESENTCONDITION, mandatory=false)
+        /* Percentage of the property to be owned by applicant(s) post completion */
+        VD_VAL_OWNERSHIPPERCENTAGE : T24BusinessTypes:R
+            @t24:i (align=R, inputBehaviour=I, maxLength=15, sysNumber=73.0, core=true, t24Name=VD.VAL.OWNERSHIPPERCENTAGE, mandatory=false)
+    }
+    UKMSOI_MORTGAGE_APPLICATION_DATA__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=333.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    UKMSOI_MORTGAGE_APPLICATION_DATA__FEE_FEECODE
+    {
+/* The total of all the adjustments on the fee. 
+Associated multivalue for FEE.FEECODE */
+        FEE_ADJUSTMENTTOTAL : T24BusinessTypes:R
+            @t24:i (align=R, inputBehaviour=I, maxLength=15, sysNumber=125.0, core=true, t24Name=FEE.ADJUSTMENTTOTAL, mandatory=false)
+/* The current amount of the fee taking into account adjustments. 
+Associated multivalue for FEE.FEECODE */
+        FEE_CURRENTAMOUNT : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=15, sysNumber=119.0, core=true, t24Name=FEE.CURRENTAMOUNT, typeModifiers="-USD", mandatory=false)
+/* Details the type of fee being represented
+Associated multivalue for FEE.FEECODE */
+        FEE_DESCRIPTION : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=127.0, core=true, t24Name=FEE.DESCRIPTION, mandatory=false)
+/* Indicates whether the fee is estimated
+Associated multivalue for FEE.FEECODE */
+        FEE_ESTIMATED : UKMSOI_MortgageApplicationData:UKMSOI_MORTGAGE_APPLICATION_DATA__FEE_FEECODE__FEE_ESTIMATED
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=124.0, core=true, t24Name=FEE.ESTIMATED, mandatory=false)
+        /* Fee code (local field) created in T24 and expected from MSO against every Fee item. */
+        FEE_FEECODE : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=117.0, core=true, t24Name=FEE.FEECODE, mandatory=false)
+/* Identifies the product loan part that is associated with this fee. Will map to the Loan Part Id held in the selected product.
+Associated multivalue for FEE.FEECODE */
+        FEE_FEECORRELATIONID : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=36, sysNumber=128.0, core=true, t24Name=FEE.FEECORRELATIONID, mandatory=false)
+/* The current fee status. Possible values: Cancelled , Estimated , Paid , RefundDue , Refunded , Unpaid , Waived
+Associated multivalue for FEE.FEECODE */
+        FEE_FEESTATUS : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=30, sysNumber=126.0, core=true, t24Name=FEE.FEESTATUS, mandatory=false)
+/* The total fee amount before any adjustments were applied
+Associated multivalue for FEE.FEECODE */
+        FEE_ORIGINALAMOUNT : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=15, sysNumber=123.0, core=true, t24Name=FEE.ORIGINALAMOUNT, typeModifiers="-USD", mandatory=false)
+/* Description of party fee should be paid to.
+Associated multivalue for FEE.FEECODE */
+        FEE_PAYABLETO : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=15, sysNumber=121.0, core=true, t24Name=FEE.PAYABLETO, mandatory=false)
+/* Description of when fee is due. Possbile values OnCancellationOrDecline , Redemption , BeforeLoanStarts , PriorToOffer , OnApplication , Completion , AtInterview 
+Associated multivalue for FEE.FEECODE */
+        FEE_PAYABLEWHEN : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=30, sysNumber=122.0, core=true, t24Name=FEE.PAYABLEWHEN, mandatory=false)
+/* Description of how fee was/is to be paid
+Associated multivalue for FEE.FEECODE */
+        FEE_SELECTEDPAYMENTMETHOD : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=120.0, core=true, t24Name=FEE.SELECTEDPAYMENTMETHOD, mandatory=false)
+/* Defines the type of fee. Possible values: Avm , BtlValuation , BuildingSurvey , Completion , FinalRepayment , HomebuyerSurvey , Intermediary , LandRegistry , MortgageValuation , PostOfferReinspection , PreOfferReinspection , Product , Solicitor , Transcription , Withdrawal , Application , Procuration , UpgradeToBuildingSurvey , UpgradeToHomebuyersSurvey , ProductSwitch , AdditionalBorrowing , TransferOfEquity , RateSwitchFee
+Associated multivalue for FEE.FEECODE */
+        FEE_TYPE : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=30, sysNumber=118.0, core=true, t24Name=FEE.TYPE, mandatory=false)
+    }
+    UKMSOI_MORTGAGE_APPLICATION_DATA__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=332.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    UKMSOI_MORTGAGE_APPLICATION_DATA__OVERRIDE
+    {
+        OVERRIDE : T24BusinessTypes:N
+            @i18n:Label (en=Override)
+            @i18n:Tooltip (en="Overrides generated by this transaction")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=329.0, core=true, t24Name=OVERRIDE, mandatory=false)
+    }
+}
+Enumerations {
+    UKMSOI_COLLATERAL_DETAILS__GARAGE_PARKINGSPACE : mml:string
+        False=False
+        True=True
+    UKMSOI_COLLATERAL_DETAILS__HOUSE_INMULTIPLE_OCCUPATION : mml:string
+        False=False
+        True=True
+    UKMSOI_COLLATERAL_DETAILS__LISTED_BUILDING : mml:string
+        False=False
+        True=True
+    UKMSOI_COLLATERAL_DETAILS__NEWBUILD_INDICATOR : mml:string
+        False=False
+        True=True
+    UKMSOI_MORTGAGE_APPLICATION_DATA__FEE_FEECODE__FEE_ESTIMATED : mml:string
+        False=False
+        True=True
+    UKMSOI_MORTGAGE_APPLICATION_DATA__IDPRPPR_ISACTIVE : mml:string
+        False=False
+        True=True
+    UKMSOI_MORTGAGE_APPLICATION_DATA__IDPR_ISACTIVE : mml:string
+        False=False
+        True=True
+    UKMSOI_MORTGAGE_APPLICATION_DATA__IDPR_ISPAIDPROCFEE : mml:string
+        False=False
+        True=True
+    UKMSOI_MORTGAGE_APPLICATION_DATA__MAIN_LOAN : mml:string
+        False=False
+        True=True
+    UKMSOI_MORTGAGE_APPLICATION_DATA__PD_GARAGEPARKINGSPACE : mml:string
+        False=False
+        True=True
+    UKMSOI_MORTGAGE_APPLICATION_DATA__PD_HOUSEINMULTIPLEOCCUPATION : mml:string
+        False=False
+        True=True
+    UKMSOI_MORTGAGE_APPLICATION_DATA__PD_LISTEDBUILDING : mml:string
+        False=False
+        True=True
+    UKMSOI_MORTGAGE_APPLICATION_DATA__PD_NEWBUILDINDICATOR : mml:string
+        False=False
+        True=True
+    UKMSOI_MORTGAGE_APPLICATION_DATA__PORTFOLIO_BTL : mml:string
+        False=False
+        True=True
+    UKMSOI_MORTGAGE_APPLICATION_DATA__RETURN_CONTROL_FLAG : mml:string
+        False=False
+        True=True
+    UKMSOI_MORTGAGE_APPLICATION_DATA__SUCCESS_IND : mml:string
+        False=False
+        True=True
+}

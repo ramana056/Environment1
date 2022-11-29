@@ -1,0 +1,1480 @@
+# UTF-8
+/* Private Equity Funds */
+Domain SC_ScPeFunds
+    @t24:i (module=SC)
+    @java:Package (value=com.temenos.t24.datamodel.sc.sc_scpefunds)
+namespace "http://www.temenos.com/t24/SC_ScPeFunds"
+metamodelVersion 1.30.6
+Classes {
+/* Overview of PE.CUSTOMER.TXN
+The PE.CUSTOMER.TXN record will be created for the first time by the T24 user, records the subscription (initial commitment) of the customer towards PE Fund
+Subsequently when PE life Lifecycle events are recorded in the PE.PRODUCT.EVENTS application, the lifecycle event is then applied for each customer and PE.CUSTOMER.TXN is updated (by the system) to reflect the event.The system update will place the record in INAU status, pending user review
+Each PE fund is represented by 4 SECURITY.MASTER (SM) instruments. Each SM represents a particular component of a PE fund. These components are enumerated below
+SM1 - Represents the Initial Commitment Committed by a subscriber. LAST.PRICE is 0
+SM2 - Represents the Undrawn Commitment (Drawdown) of a subscriber. LAST.PRICE is 0
+SM3 - Represents the Capital Contributed by the subscriber, pending unit allotment. LAST.PRICE is 1. i.e. Capital Call
+SM4 - Represents the fund units issued by the PE fund. LAST.PRICE is the NAV as supplied by the PE fund
+On Authorization of the PE.CUSTOMER.TXN record, Security movements will be created automatically in back ground and the delviery advice for the corresponding event will be generated. The security movements differ, depending on the event, please refer to the User Guide for more information */
+    PE_CUSTOMER_TXN
+        @i18n:Description (en="")
+        @t24:i (t24Name=PE.CUSTOMER.TXN, level=F, type=H, allowedFunctions="A C D E I L P Q S", localRefApplicationSysNo=64.0, localRefAllowed=true)
+    {
+/* This field holds the account of the Customer and this will be used for all payments made for PE fund
+
+Validation Rules:
+Standard T24 Account field
+Mandatory input and Nochange field
+Currency of this account should match with SECURITY.CURRENCY of the PE fund */
+        ACCOUNT -> AC_AccountOpening:ACCOUNT required
+            @i18n:Label (en=Account)
+            @i18n:Tooltip (en="Identifies the customer account")
+            @t24:i (align=R, inputBehaviour=I, maxLength=36, sysNumber=3.0, core=true, businessType=ACC, t24Name=ACCOUNT, mandatory=true)
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=74.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=75.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=71.0, core=true, t24Name=AUTHORISER, mandatory=false)
+/* This field holds the Commission code (FT.COMMISSION.TYPE) used to calculate the commission.The calculated commission is updated to the COMMISSION.AMOUTN field
+Value of this field will be passed as COMM.CODE to SEC.TRADE
+Validation Rules:
+Input should be a valid record in FT.COMMISSION.TYPE
+Optional field */
+        CHARGE_TYPE -> ST_ChargeConfig:FT_COMMISSION_TYPE
+            @i18n:Label (en="Charge Type")
+            @i18n:Tooltip (en="Type of Charge")
+            @t24:i (align=L, inputBehaviour=I, maxLength=15, sysNumber=10.0, core=true, businessType=A, t24Name=CHARGE.TYPE, mandatory=false)
+/* Identifies the Commission amount calcualted by COMMISSION.PERCENTAGE or CHARGE.TYPE
+This field can be directly inputted by user as a flat commission
+Value of this field will be passed as CU.COMMISSION during creation of SEC.TRADE
+
+
+
+Validation Rules:
+Optional Input.
+Standard T24 Amount field */
+        COMMISSION_AMOUNT : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=18, sysNumber=12.0, core=true, t24Name=COMMISSION.AMOUNT, mandatory=false)
+/* This field holds the percentage of commission
+System calculates the COMMISSION.AMOUNT using this percentage when the commission amount is not inputted by user and this amount will be passed as CU Commission to SEC.TRADE
+System checks if the COMMISSION.AMOUNT is inputted, if so, the amount inputted is passed as Cu Commission
+If the COMMISSION.AMOUNT is blank, then system calculates Commission using this percentage if percentage is inputted
+If percentage is not inputted, then system calculates commission amount using charge type defined
+Validation Rules:
+Optional Field */
+        COMMISSION_PERCENTAGE : T24BusinessTypes:R
+            @t24:i (align=R, inputBehaviour=I, maxLength=16, sysNumber=11.0, core=true, t24Name=COMMISSION.PERCENTAGE, mandatory=false)
+/* This field holds the commitment amount specified in SECURITY.CURRENCY of the fund , for the customer for the specific fund
+
+
+
+Validation Rules:
+Standard T24 Amount field
+Mandatory field */
+        COMMITMENT_AMOUNT : T24BusinessTypes:AMT required
+            @t24:i (align=R, inputBehaviour=I, maxLength=18, sysNumber=9.0, core=true, t24Name=COMMITMENT.AMOUNT, mandatory=true)
+/* This field holds a date on which commitment from the customer is made
+
+
+
+Validation Rules:
+Standard T24 Date field
+Mandatory field */
+        COMMITMENT_DATE : T24BusinessTypes:D required
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=8.0, core=true, t24Name=COMMITMENT.DATE, mandatory=true)
+/* Identifies subscription status of a customer for a PE Fund. When the initial subscription is first recorded, typically the status is set to PROVISIONAL, at this point security movements do not take place. The status would be set to FINAL, after all the legal formalities (Such as the formal Signing of the contract) are completed. At this point, security movements take place in the background to reflect the initial commitment and the outstanding commitment
+
+
+Validation Rules:
+Values allowed are PROVISIONAL , FINAL
+User inputtable field
+Defaulted to PROVISIONAL during initial creation of PE.CUSTOMER.TXN record */
+        COMMITMENT_STATUS : SC_ScPeFunds:PE_CUSTOMER_TXN__COMMITMENT_STATUS
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=31.0, core=true, t24Name=COMMITMENT.STATUS, mandatory=false)
+/* This field is an option field which can hold either YES or NO
+Value YES indicates the delivery advice for initial commitment will be generated
+
+
+
+Validation Rules:
+Option field
+Allowed values are YES , NO */
+        COMMIT_ADVICE : SC_ScPeFunds:PE_CUSTOMER_TXN__COMMIT_ADVICE
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=15.0, core=true, t24Name=COMMIT.ADVICE, mandatory=false)
+/* This field holds the delivery reference which was generated during subscription when COMMIT.ADVICE is set to YES
+
+
+
+Validation Rules:
+Automatically updated by system when COMMIT.ADVICE is YES */
+        COMMIT_DELIVERY_REF : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=16.0, core=true, t24Name=COMMIT.DELIVERY.REF, mandatory=false)
+/* Identifies the Issuer of the PE fund
+
+
+
+Validation Rules:
+Mandatory field
+Accepts valid id from CUSTOMER table */
+        COUNTERPARTY -> ST_Customer:CUSTOMER
+            @i18n:Label (en=Counterparty)
+            @i18n:Tooltip (en="Counterparty with whom the deal is made")
+            @t24:i (align=R, inputBehaviour=I, maxLength=10, sysNumber=6.0, core=true, businessType=CUS, t24Name=COUNTERPARTY, mandatory=false)
+/* This field holds the account of COUNTERPARTY which will be used for all accounting entries pertains to issuer of the fund
+Value of this field will be mapped to BR.ACC.NO of SECURITY.TRANSFER or SEC.TRADE records
+
+
+
+Validation Rules:
+Standard T24 Account field */
+        COUNTERPARTY_ACCOUNT -> AC_AccountOpening:ACCOUNT
+            @i18n:Label (en="Counterparty Account")
+            @i18n:Tooltip (en="Counterparty Account")
+            @t24:i (align=R, inputBehaviour=I, maxLength=36, sysNumber=7.0, core=true, businessType=ACC, t24Name=COUNTERPARTY.ACCOUNT, mandatory=false)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=72.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+/* Identifies the Currency of the PE fund
+Value will be defaulted from SECURITY.CURRENCY field of PE fund for which the customer is trying to subscirbe
+Field will be made as NOINPUT after default
+Validation Rules:
+Standard T24 Currency field
+System updated field */
+        CURRENCY : T24BusinessTypes:CCY
+            @i18n:Label (en=Ccy)
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=32.0, core=true, t24Name=CURRENCY, mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=68.0, core=true, t24Name=CURR.NO, mandatory=false)
+/* This field holds the customer id for whom the subscription is recorded in PE.CUSTOMER.TXN record
+Validation Rules:
+Value to this field will be defaulted from the SAM id given in the id of the record
+Value of this field will be mapped to the CUSTOMER.NO field of SECURITY.TRANSFER or SEC.TRADE which will be created automatically
+This is a Mandatory and Nochange field
+This accepts valid CUSTOMER id */
+        CUSTOMER -> ST_Customer:CUSTOMER required
+            @i18n:Label (en=Customer)
+            @i18n:Tooltip (en="Customer Liability")
+            @t24:i (align=R, inputBehaviour=F, maxLength=10, sysNumber=1.0, core=true, businessType=CUS, t24Name=CUSTOMER, mandatory=true)
+        DATE_TIME -> byValue SC_ScPeFunds:PE_CUSTOMER_TXN__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+/* Identifies the Depository which will be mapped to Depository field of Security Transfer or SEC.TRADE
+Value of this field will be defauled from SAM for the fund
+
+
+
+
+Validation Rules:Mandatory field, Validation Error 'Depository Missing' will thrown against this field if the field is blankInput to this field should be a valid DEPOSITORY in CUSTOMER.SECURITY table */
+        DEPOSITORY -> SC_Config:CUSTOMER_SECURITY
+            @i18n:Label (en=Depository)
+            @i18n:Tooltip (en="Depository the Security to be delivered from/to")
+            @t24:i (align=R, inputBehaviour=I, maxLength=10, sysNumber=5.0, core=true, businessType=CUS, t24Name=DEPOSITORY, mandatory=false)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=73.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        EVENT -> byValue SC_ScPeFunds:PE_CUSTOMER_TXN__EVENT *
+            @t24:i (t24Name=EVENT)
+        INPUTTER -> byValue SC_ScPeFunds:PE_CUSTOMER_TXN__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+/* This field is an option field which can hold either YES or NO
+Value YES indicates the delivery advice for Maturity will be generated
+
+
+
+Validation Rules:
+Option field
+Allowed values are YES , NO */
+        MATURITY_ADVICE : SC_ScPeFunds:PE_CUSTOMER_TXN__MATURITY_ADVICE
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=29.0, core=true, t24Name=MATURITY.ADVICE, mandatory=false)
+/* This field holds the amount for maturity event calculated as MATURITY.NOMINAL * MATURITY.PRICE during maturity
+Validation Rules:
+
+Standard T24 Amount field
+Automatically updated by system */
+        MATURITY_AMOUNT : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=18, sysNumber=28.0, core=true, t24Name=MATURITY.AMOUNT, mandatory=false)
+/* This field holds the delivery reference which was generated during maturity of a PE Fund when MATURITY.ADVICE is set to YES
+
+
+
+Validation Rules:
+Automatically updated by system when MATURITY.ADVICE is YES */
+        MATURITY_DELIVERY_REF : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=30.0, core=true, t24Name=MATURITY.DELIVERY.REF, mandatory=false)
+/* This field holds the Maturity Price which was inputted in MATURITY.PRICE field of PE.PRODUCT.EVENTS application
+Validation Rules:
+Price Field
+Automatically updated by system */
+        MATURITY_NAV : T24BusinessTypes:PRICE
+            @t24:i (align=L, inputBehaviour=I, maxLength=16, sysNumber=27.0, core=true, t24Name=MATURITY.NAV, mandatory=false)
+/* This field holds the closing balance of Actual PE Security i.e: SM4
+This field will be automatically updated by the system when Maturity event is triggered in PE.PRODUCT.EVENTS by inputting MATURITY.PRICE and MATURITY.DATE fields
+Validation Rules:
+Automatically updated by system for maturity event */
+        MATURITY_NOMINAL : T24BusinessTypes:NOMAMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=18, sysNumber=26.0, core=true, t24Name=MATURITY.NOMINAL, mandatory=false)
+        OVERRIDE -> byValue SC_ScPeFunds:PE_CUSTOMER_TXN__OVERRIDE *
+            @t24:i (t24Name=OVERRIDE)
+        PE_CUSTOMER_TXN -> SC_ScPeFunds:PE_CUSTOMER_TXN PK required
+            @t24:i (align=L, inputBehaviour=I, maxLength=30, sysNumber=0.0, core=true, businessType=S, t24Name=PE.CUSTOMER.TXN, mandatory=true)
+/* This field holds PE Fund(SECURITY.MASTER) value
+Value to this field will be defaulted from the SM given in id if the fund is PE fund.
+Validation Rules:
+accepts valid SECURITY.MASTER id
+Mandatory input and Nochange field */
+        PE_FUND -> SC_ScoSecurityMasterMaintenance:SECURITY_MASTER required
+            @t24:i (align=L, inputBehaviour=F, maxLength=12, sysNumber=4.0, core=true, businessType=SEC, t24Name=PE.FUND, mandatory=true)
+/* This field holds the SAM id inputted in the id
+Value to this field will be defaulted from SAM value from id of this record
+Validation Rules:
+Mandatory input and Nochange field
+This accepts valid SEC.ACC.MASTER id */
+        PORTFOLIO -> SC_ScoPortfolioMaintenance:SEC_ACC_MASTER required
+            @i18n:Label (en=Portfolio)
+            @t24:i (align=L, inputBehaviour=F, maxLength=20, sysNumber=2.0, core=true, businessType=SAM, t24Name=PORTFOLIO, mandatory=true)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=67.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        RESERVED1 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=44.0, core=true, t24Name=RESERVED1, mandatory=false)
+        RESERVED10 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=53.0, core=true, t24Name=RESERVED10, mandatory=false)
+        RESERVED11 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=54.0, core=true, t24Name=RESERVED11, mandatory=false)
+        RESERVED12 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=55.0, core=true, t24Name=RESERVED12, mandatory=false)
+        RESERVED13 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=56.0, core=true, t24Name=RESERVED13, mandatory=false)
+        RESERVED14 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=57.0, core=true, t24Name=RESERVED14, mandatory=false)
+        RESERVED15 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=58.0, core=true, t24Name=RESERVED15, mandatory=false)
+        RESERVED16 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=59.0, core=true, t24Name=RESERVED16, mandatory=false)
+        RESERVED17 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=60.0, core=true, t24Name=RESERVED17, mandatory=false)
+        RESERVED18 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=61.0, core=true, t24Name=RESERVED18, mandatory=false)
+        RESERVED19 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=62.0, core=true, t24Name=RESERVED19, mandatory=false)
+        RESERVED2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=45.0, core=true, t24Name=RESERVED2, mandatory=false)
+        RESERVED20 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=63.0, core=true, t24Name=RESERVED20, mandatory=false)
+        RESERVED3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=46.0, core=true, t24Name=RESERVED3, mandatory=false)
+        RESERVED4 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=47.0, core=true, t24Name=RESERVED4, mandatory=false)
+        RESERVED5 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=48.0, core=true, t24Name=RESERVED5, mandatory=false)
+        RESERVED6 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=49.0, core=true, t24Name=RESERVED6, mandatory=false)
+        RESERVED7 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=50.0, core=true, t24Name=RESERVED7, mandatory=false)
+        RESERVED8 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=51.0, core=true, t24Name=RESERVED8, mandatory=false)
+        RESERVED9 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=52.0, core=true, t24Name=RESERVED9, mandatory=false)
+        SAVE_EVENT -> byValue SC_ScPeFunds:PE_CUSTOMER_TXN__SAVE_EVENT *
+            @t24:i (t24Name=SAVE.EVENT)
+        STMT_NOS -> byValue SC_ScPeFunds:PE_CUSTOMER_TXN__STMT_NOS *
+            @t24:i (t24Name=STMT.NOS)
+/* Identifies the TAP Event id
+
+
+
+
+Validation Rules:
+Alpha Numeric field of length 50 characters */
+        TAP_EVENT_ID : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=34.0, core=true, t24Name=TAP.EVENT.ID, mandatory=false)
+/* Identifies the TAP reference id
+
+
+
+
+Validation Rules:
+Alpha Numeric field of length 50 characters */
+        TAP_REF_ID : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=33.0, core=true, t24Name=TAP.REF.ID, mandatory=false)
+/* This field holds the valid id either from TAX table or TAX.TYPE.CONDITION table
+The value to this field will be defaulted from PE.PARAMETER when it is blank
+Tax amount will be calcualated using this field value and passed as COM.TAX.CODE to SEC.TRADE */
+        TAX_KEY : T24BusinessTypes:TAX
+            @i18n:Label (en="Tax Key")
+            @i18n:Tooltip (en="Indicates the tax key ")
+            @t24:i (align=L, inputBehaviour=I, maxLength=16, sysNumber=13.0, core=true, t24Name=TAX.KEY, mandatory=false)
+/* Identifies the Tax calcualated on commission amount using TAX.KEY
+This value will be passed as CU.COMM.TAX to SEC.TRADE
+
+
+
+Validation Rules:
+Standard T24 Amount field
+Optional field. */
+        TAX_ON_COMMISSION : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=18, sysNumber=14.0, core=true, t24Name=TAX.ON.COMMISSION, mandatory=false)
+    }
+    PE_CUSTOMER_TXN__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=70.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    PE_CUSTOMER_TXN__EVENT
+    {
+/* This field holds the delivery reference which was generated during Capital call, Capital return, Commitment Reduction event when EVENT.ADVICE is set to YES
+
+
+
+Validation Rules:
+Automatically updated by system when EVENT.ADVICE is YES
+Part of Multi-value set from EVENT to this field */
+        DELIVERY_REF : T24BusinessTypes:A
+            @i18n:Label (en="Delivery Ref")
+            @i18n:Tooltip (en="System generated Delivery ref key")
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=25.0, core=true, t24Name=DELIVERY.REF, mandatory=false)
+/* Identifies the event in the lifecycle of the PE fund
+Automatically updated by the system whenever an event is initiated in PE.PRODUCT.EVENTS
+Value of this field can be CAPITAL CALL or RETURN OF CAPITAL or COMMITMENT REDUCTION based on the event
+
+
+
+
+Validation Rules:
+System updated field
+Part of Multi-value set from EVENT to DELIVERY.REF */
+        EVENT : SC_ScPeFunds:PE_CUSTOMER_TXN__EVENT__EVENT
+            @i18n:Label (en=Event)
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=17.0, core=true, t24Name=EVENT, mandatory=false)
+/* This field is an option field which can hold either YES or NO
+Value YES indicates the delivery advice for Capital call, Capital return, Commitment Reduction events will be generated
+
+
+
+
+Validation Rules:
+Option field
+Allowed values are YES , NO
+Part of Multi-value set from EVENT to DELIVERY.REF */
+        EVENT_ADVICE : SC_ScPeFunds:PE_CUSTOMER_TXN__EVENT__EVENT_ADVICE
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=24.0, core=true, t24Name=EVENT.ADVICE, mandatory=false)
+/* This field holds the amount calculated for particular event using the percentage defined in PE.PRODUCT.EVENTS
+The event amount is calculated as below for each event
+EVENT AMOUNT for Capital Call = CAPITAL.CALL.PERCENTAGE from PE.PRODUCT.EVENTS * COMMITMENT.AMOUNT
+EVENT AMOUNT for Capital Return = RETUR.OF.CAPITAL.PERC from PE.PRODUCT.EVENTS * Contribution Amount i.e. Contribution Amount here represents either last capital call amount or Commitment Amount, depending on the PERCENTAGE.BASIS in PE.PRODUCT.EVENTS
+
+
+
+
+Validation Rules:
+Standard T24 Amount field
+System Updated field
+Part of Multi-value set from EVENT to DELIVERY.REF */
+        EVENT_AMOUNT : T24BusinessTypes:AMT
+            @i18n:Label (en="Event Amount")
+            @i18n:Tooltip (en="Event Amount")
+            @t24:i (align=R, inputBehaviour=I, maxLength=18, sysNumber=22.0, core=true, t24Name=EVENT.AMOUNT, mandatory=false)
+/* This field holds the date of particular event
+This field will be updated by the service PE.UPDATE.CUSTOMER.TXN from CAPITAL.CALL.DATE for Capital call Event, RETURN.DATE of Capital Return event, COMMIT.REDN.DATE of Commitment reduction event
+
+
+
+
+Validation Rules:
+Standard T24 Date field
+Part of Multi-value set from EVENT to DELIVERY.REF */
+        EVENT_DATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=20.0, core=true, t24Name=EVENT.DATE, mandatory=false)
+/* Indentifies the status of the event of PE fund triggered in PE.PRODUCT.EVENTS
+Automatically updated by the system as COMPLETED during the process of an event by the service PE.UPDATE.CUSTOMER.TXN
+
+
+
+
+Validation Rules:
+System updated field
+Part of Multi-value set from EVENT to DELIVERY.REF */
+        EVENT_STATUS : SC_ScPeFunds:PE_CUSTOMER_TXN__EVENT__EVENT_STATUS
+            @i18n:Label (en="Event Status")
+            @i18n:Tooltip (en="Identifies the status of the event")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=18.0, core=true, t24Name=EVENT.STATUS, mandatory=false)
+/* This field holds the interest amount calculated for Capital Return event using INTEREST.PERC.ROC defined in PE.PRODUCT.EVENTS. It is calculated as INTEREST.PERC.ROC * EVENT.AMOUNT
+
+
+
+Validation Rules:
+Standard T24 Amount field
+System Updated field
+Part of Multi-value set from EVENT to DELIVERY.REF */
+        INTEREST_AMOUNT : T24BusinessTypes:AMT
+            @i18n:Label (en="Interest Amt")
+            @t24:i (align=R, inputBehaviour=I, maxLength=18, sysNumber=23.0, core=true, t24Name=INTEREST.AMOUNT, mandatory=false)
+/* This field holds any Reference related to the events
+The Capital Call Reference will be stored here for reference purpose during capital call event
+
+
+
+
+Validation Rules:
+Standard Alpha Numeric field of 50 characters
+Part of Multi-value set from EVENT to DELIVERY.REF */
+        REFERENCE : T24BusinessTypes:A
+            @i18n:Label (en="Search by Referece")
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=19.0, core=true, t24Name=REFERENCE, mandatory=false)
+/* This field holds the value date of particular event
+This field will be updated by the service PE.UPDATE.CUSTOMER.TXN from PAYMENT.DATE of Capital call Event, RETURN.DATE of Capital Return event, COMMIT.REDN.DATE of Commitment reduction event
+
+
+
+
+Validation Rules:
+Standard T24 Date field
+Part of Multi-value set from EVENT to DELIVERY.REF */
+        VALUE_DATE : T24BusinessTypes:D
+            @i18n:Label (en="Value Date")
+            @i18n:Tooltip (en="Indicates the Value date of the Contract")
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=21.0, core=true, t24Name=VALUE.DATE, mandatory=false)
+    }
+    PE_CUSTOMER_TXN__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=69.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    PE_CUSTOMER_TXN__OVERRIDE
+    {
+/* This field holds overrides raised.This is a multi valued field. Standard T24 alphanumeric field.
+Validation Rules:
+A maximum of 35 characters may be entered.
+This is a NOINPUT field. */
+        OVERRIDE : T24BusinessTypes:N
+            @i18n:Label (en=Override)
+            @i18n:Tooltip (en="Overrides generated by this transaction")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=66.0, core=true, t24Name=OVERRIDE, mandatory=false)
+    }
+    PE_CUSTOMER_TXN__SAVE_EVENT
+    {
+/* This field holds saved the delivery references for events from the field DELIVERY.REF
+
+
+
+Validation Rules:
+Automatically updated by system
+Part of Multi- value set from SAVE.EVENT to this field */
+        SAVE_DELIVERY_REF : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=43.0, core=true, t24Name=SAVE.DELIVERY.REF, mandatory=false)
+/* Many events occur in the lifecycle of a PE fund. Events such as Capital Call occur many times over the term of an PE investment. As each event is updated in the EVENT field, the earlier events are moved to this field. Thus the history of all the events that has occurred in the lifecycle of a PE fund is maintained
+Indentifies the previous values of event of PE fund
+Automatically updated by the system whenever PE.CUSTOMER.TXN record is authorised with an event in EVENT multi value set
+Fields from EVENT to DELIVERY.REF are saved to SAVE.EVENT to SAVE.DELIVERY.REF during each authorisation
+
+
+
+
+Validation Rules:
+System updated field
+Part of Multi- value set from SAVE.EVENT to SAVE.DELIVERY.REF */
+        SAVE_EVENT : SC_ScPeFunds:PE_CUSTOMER_TXN__SAVE_EVENT__SAVE_EVENT
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=35.0, core=true, t24Name=SAVE.EVENT, mandatory=false)
+/* This field holds the saved values of EVENT.ADVICE field
+
+
+
+
+Validation Rules:
+Option field, Noinput field
+System updated field
+Part of Multi-value set from SAVE.EVENT to SAAVE.DELIVERY.REF */
+        SAVE_EVENT_ADVICE : SC_ScPeFunds:PE_CUSTOMER_TXN__SAVE_EVENT__SAVE_EVENT_ADVICE
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=42.0, core=true, t24Name=SAVE.EVENT.ADVICE, mandatory=false)
+/* This field holds the saved values of EVENT.AMOUNT during each authorisation of PE.CUSTOMER.TXN
+
+
+
+
+Validation Rules:
+Standard T24 Amount field
+System Updated field
+Part of Multi- value set from SAVE.EVENT to SAVE.DELIVERY.REF */
+        SAVE_EVENT_AMOUNT : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=N, maxLength=18, sysNumber=40.0, core=true, t24Name=SAVE.EVENT.AMOUNT, mandatory=false)
+/* This field holds saved values of EVENT.DATE field
+
+
+
+
+Validation Rules:
+Standard T24 Date field
+Part of Multi- value set from SAVE.EVENT to SAVE.DELIVERY.REF */
+        SAVE_EVENT_DATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=N, maxLength=11, sysNumber=38.0, core=true, t24Name=SAVE.EVENT.DATE, mandatory=false)
+/* Indentifies the saved values of EVENT.STATUS field of PE fund
+Fields from EVENT to DELIVERY.REF are saved to SAVE.EVENT to SAVE.DELIVERY.REF during each authorisation
+
+
+
+
+Validation Rules:
+System updated field
+Part of Multi- value set from SAVE.EVENT to SAVE.DELIVERY.REF */
+        SAVE_EVENT_STATUS : SC_ScPeFunds:PE_CUSTOMER_TXN__SAVE_EVENT__SAVE_EVENT_STATUS
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=36.0, core=true, t24Name=SAVE.EVENT.STATUS, mandatory=false)
+/* This field holds the saved value of INTEREST.AMOUNT field whenever a capital Return event is authorised
+
+
+
+
+Validation Rules:
+Standard T24 Amount field
+System Updated field
+Part of Multi-value set from SAVE.EVENT to SAVE.DELIVERY.REF */
+        SAVE_INTEREST_AMOUNT : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=N, maxLength=18, sysNumber=41.0, core=true, t24Name=SAVE.INTEREST.AMOUNT, mandatory=false)
+/* This field holds saved values of REFERENCE field in EVENT multi-value set
+
+
+
+Validation Rules:
+Standard Alpha Numeric field of 50 characters
+Part of Multi-value set from SAVE.EVENT to SAVE.DELIVERY.REF */
+        SAVE_REFERENCE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=50, sysNumber=37.0, core=true, t24Name=SAVE.REFERENCE, mandatory=false)
+/* This field holds the saved values of VALUE.DATE field
+
+
+
+
+Validation Rules:
+Standard T24 Date field
+Part of Multi- value set from SAVE.EVENT to SAVE.DELIVERY.REF */
+        SAVE_VALUE_DATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=N, maxLength=11, sysNumber=39.0, core=true, t24Name=SAVE.VALUE.DATE, mandatory=false)
+    }
+    PE_CUSTOMER_TXN__STMT_NOS
+    {
+        STMT_NOS : T24BusinessTypes:N
+            @i18n:Label (en="Stmt Nos")
+            @i18n:Tooltip (en="Stmt Nos")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=65.0, core=true, t24Name=STMT.NOS, mandatory=false)
+    }
+    /* Typically PE funds charges a periodical management fees on the customer commitment . This fee record application calculates the Management fees for each period. The fees are also posted from this application. For each PE fund, there will be a fee record for each investor and there would be a separate record for the issuer */
+    PE_MANAGEMENT_FEES
+        @i18n:Description (en="")
+        @t24:i (t24Name=PE.MANAGEMENT.FEES, level=F, type=H, allowedFunctions="A C D E I L P Q S", localRefApplicationSysNo=32.0, localRefAllowed=true)
+    {
+/* This field holds the customer's account who subscribed for the PE fund
+This account is used to debit the management fees amount
+Validation Rules:
+Standard T24 Account field */
+        ACCOUNT : T24BusinessTypes:ACC
+            @i18n:Label (en=Account)
+            @i18n:Tooltip (en="Identifies the customer account")
+            @t24:i (align=R, inputBehaviour=I, maxLength=16, sysNumber=4.0, core=true, t24Name=ACCOUNT, mandatory=false)
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=42.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=43.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=39.0, core=true, t24Name=AUTHORISER, mandatory=false)
+/* This field holds the Committed capital of this customer towards the PE fund
+Validation Rules:
+Standard T24 Amount field */
+        COMMITMENT_AMT : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=N, maxLength=18, sysNumber=2.0, core=true, t24Name=COMMITMENT.AMT, mandatory=false)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=40.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+/* This Field holds the currency of the PE fund
+This field value is mapped from CURRENCY field of PE.CUSTOMER.TXN
+Validation Rules:
+Standard T24 Currency Field
+Input not allowed, system updated field */
+        CURRENCY : T24BusinessTypes:CCY
+            @i18n:Label (en=Ccy)
+            @t24:i (align=L, inputBehaviour=N, maxLength=3, sysNumber=10.0, core=true, t24Name=CURRENCY, mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=36.0, core=true, t24Name=CURR.NO, mandatory=false)
+/* This field holds the value of SEC.ACC.MASTER id i.e: Customer Portfolio who has subscribed for PE fund
+This field will be blank for the PE Management Fees record that corresponds to the issuer of the fund
+Validation Rules:
+Value this field will be a valid record in SEC.ACC.MASTER */
+        CUST_PORT : T24BusinessTypes:SAM
+            @t24:i (align=L, inputBehaviour=N, maxLength=20, sysNumber=1.0, core=true, t24Name=CUST.PORT, mandatory=false)
+        DATE_TIME -> byValue SC_ScPeFunds:PE_MANAGEMENT_FEES__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+/* This Field is to hold the delivery Reference of the fee advice generated and sent to the customer when PE.MANAGEMENT.FEES record is authorised
+Validation Rules:
+System updated field */
+        DELIVERY_REF : T24BusinessTypes:A
+            @i18n:Label (en="Delivery Ref")
+            @i18n:Tooltip (en="System generated Delivery ref key")
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=5.0, core=true, t24Name=DELIVERY.REF, mandatory=false)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=41.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+/* This Field holds the management fees that is to be paid to the issuer
+Validation Rules:
+Standard T24 Amount Field
+Noinput, System updated Field */
+        FEES_TO_ISSUER : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=N, maxLength=18, sysNumber=8.0, core=true, t24Name=FEES.TO.ISSUER, mandatory=false)
+/* This Field identifies the date on which the management fees is processed and created
+This field will be defaulted from the date part of id
+Validation Rules:
+Noinput , system updated field */
+        FEE_DATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=N, maxLength=11, sysNumber=14.0, core=true, t24Name=FEE.DATE, mandatory=false)
+        INPUTTER -> byValue SC_ScPeFunds:PE_MANAGEMENT_FEES__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+/* This Field holds the Fund issuer's id
+This field will be defaulted from the Issuer of the fund from PE.PRODUCT.EVENTS when the record is amended
+Validation Rules:
+Standard T24 Customer Field
+Noinput Field */
+        ISSUER -> ST_Customer:CUSTOMER
+            @i18n:Label (en=Issuer)
+            @i18n:Tooltip (en="Indicates the issuer of the security")
+            @t24:i (align=R, inputBehaviour=N, maxLength=10, sysNumber=12.0, core=true, businessType=CUS, t24Name=ISSUER, mandatory=false)
+/* This Field holds the Fund issuer's account which will be mapped in the accounting entries for Management fees
+This field will be blank for the PE Management Fees record that corresponds to the issuer of the fund
+This field will be defaulted from the ISSUER.ACCOUNT field of PE.CUSTOMER.TXN
+Validation Rules:
+Standard T24 Account Field */
+        ISSUER_ACCOUNT : T24BusinessTypes:ACC
+            @t24:i (align=R, inputBehaviour=N, maxLength=16, sysNumber=11.0, core=true, t24Name=ISSUER.ACCOUNT, mandatory=false)
+        MANAGEMENT_FEES_ID -> SC_ScPeFunds:PE_MANAGEMENT_FEES PK required
+            @t24:i (align=L, inputBehaviour=I, maxLength=40, sysNumber=0.0, core=true, businessType=A, t24Name=MANAGEMENT.FEES.ID, mandatory=true)
+/* This field holds the management Fees amount for the customer who subscribed for the PE Fund
+This fees is calculated based on the commitment amount and the management fee code defined in PE.PRODUCT.EVENTS for the fund and this can be amended by the user
+Validation Rules:
+Standard T24 Amount field */
+        MGMT_FEES : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=18, sysNumber=3.0, core=true, t24Name=MGMT.FEES, mandatory=false)
+        OVERRIDE -> byValue SC_ScPeFunds:PE_MANAGEMENT_FEES__OVERRIDE *
+            @t24:i (t24Name=OVERRIDE)
+/* This Field identifies the PE fund for which the management fees is created
+This field will be defaulted from the SECURITY.MASTER id for which the Management fees was set up
+Validation Rules:
+Noinput Field */
+        PE_FUND -> SC_ScoSecurityMasterMaintenance:SECURITY_MASTER
+            @t24:i (align=L, inputBehaviour=N, maxLength=12, sysNumber=13.0, core=true, businessType=SEC, t24Name=PE.FUND, mandatory=false)
+/* This Field holds the status of the Management fees record automatically created
+The accounting entries for the management fees will be generated when this field is set to COMPLETED, thus the user can review the calculated fees and set it to complete for the accounting entries to be posted.The user needs to update the status in the issuer record
+Validation Rules:
+Option field, allowed value is COMPLETED
+A new service PE.UPDATE.MGMT.FEES will automatically mark the status field as COMPLETED of each customer record */
+        POSTING_STATUS : SC_ScPeFunds:PE_MANAGEMENT_FEES__POSTING_STATUS
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=9.0, core=true, t24Name=POSTING.STATUS, mandatory=false)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=35.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        RESERVED10 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=21.0, core=true, t24Name=RESERVED10, mandatory=false)
+        RESERVED11 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=22.0, core=true, t24Name=RESERVED11, mandatory=false)
+        RESERVED12 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=23.0, core=true, t24Name=RESERVED12, mandatory=false)
+        RESERVED13 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=24.0, core=true, t24Name=RESERVED13, mandatory=false)
+        RESERVED14 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=25.0, core=true, t24Name=RESERVED14, mandatory=false)
+        RESERVED15 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=26.0, core=true, t24Name=RESERVED15, mandatory=false)
+        RESERVED16 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=27.0, core=true, t24Name=RESERVED16, mandatory=false)
+        RESERVED17 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=28.0, core=true, t24Name=RESERVED17, mandatory=false)
+        RESERVED18 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=29.0, core=true, t24Name=RESERVED18, mandatory=false)
+        RESERVED19 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=30.0, core=true, t24Name=RESERVED19, mandatory=false)
+        RESERVED20 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=31.0, core=true, t24Name=RESERVED20, mandatory=false)
+        RESERVED4 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=15.0, core=true, t24Name=RESERVED4, mandatory=false)
+        RESERVED5 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=16.0, core=true, t24Name=RESERVED5, mandatory=false)
+        RESERVED6 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=17.0, core=true, t24Name=RESERVED6, mandatory=false)
+        RESERVED7 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=18.0, core=true, t24Name=RESERVED7, mandatory=false)
+        RESERVED8 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=19.0, core=true, t24Name=RESERVED8, mandatory=false)
+        RESERVED9 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=20.0, core=true, t24Name=RESERVED9, mandatory=false)
+        STMT_NOS -> byValue SC_ScPeFunds:PE_MANAGEMENT_FEES__STMT_NOS *
+            @t24:i (t24Name=STMT.NOS)
+/* This Field holds the fees amount for each customer. For the issuer record, this would be sum of all the management fees of the investors
+Validation Rules:
+Standard T24 Amount Field
+Noinput, System updated Field */
+        TOTAL_CUST_FEES : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=N, maxLength=18, sysNumber=7.0, core=true, t24Name=TOTAL.CUST.FEES, mandatory=false)
+/* This Field holds the value date of accounting entries generated for PE Management Fees
+Value of this field will be calculated based on MGMT.FEE.OFFSET in PE.PRODUCT.EVENTS for the management fees
+Validation Rules:
+Standard T24 Date Field */
+        VALUE_DATE : T24BusinessTypes:D
+            @i18n:Label (en="Value Date")
+            @i18n:Tooltip (en="Indicates the Value date of the Contract")
+            @t24:i (align=R, inputBehaviour=N, maxLength=11, sysNumber=6.0, core=true, t24Name=VALUE.DATE, mandatory=false)
+    }
+    PE_MANAGEMENT_FEES__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=38.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    PE_MANAGEMENT_FEES__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=37.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    PE_MANAGEMENT_FEES__OVERRIDE
+    {
+/* Standard multivalued override field.
+Validation Rules:
+35 characters per line. */
+        OVERRIDE : T24BusinessTypes:N
+            @i18n:Label (en=Override)
+            @i18n:Tooltip (en="Overrides generated by this transaction")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=34.0, core=true, t24Name=OVERRIDE, mandatory=false)
+    }
+    PE_MANAGEMENT_FEES__STMT_NOS
+    {
+        STMT_NOS : T24BusinessTypes:N
+            @i18n:Label (en="Stmt Nos")
+            @i18n:Tooltip (en="Stmt Nos")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=33.0, core=true, t24Name=STMT.NOS, mandatory=false)
+    }
+    PE_PARAMETER
+        @i18n:Description (en="")
+        @t24:i (t24Name=PE.PARAMETER, level=I, type=H, allowedFunctions="A C D E I L P Q S", localRefApplicationSysNo=40.0, localRefAllowed=true)
+    {
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=49.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=50.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=46.0, core=true, t24Name=AUTHORISER, mandatory=false)
+/* The commission code to be charged for a Private Equity Investments can be updated in this field
+Optional field */
+        CHARGE_TYPE -> ST_ChargeConfig:FT_COMMISSION_TYPE
+            @i18n:Label (en="Charge Type")
+            @i18n:Tooltip (en="Type of Charge")
+            @t24:i (align=L, inputBehaviour=I, maxLength=15, sysNumber=5.0, core=true, businessType=A, t24Name=CHARGE.TYPE, mandatory=false)
+        COMPANY -> SC_ScPeFunds:PE_PARAMETER PK required
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=I, maxLength=12, sysNumber=0.0, core=true, businessType=COM, t24Name=COMPANY, mask="##-###-####", mandatory=true)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=47.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+/* This fields holds valid transaction code from TRANSACTION
+Input should be defined as a valid Credit code in TRANSACTION
+This transaction code will be used for generation of commission accounting entries for PE investment
+Optional field, but mandatory when CHARGE.TYPE is inputted */
+        CR_TRANS_CODE -> ST_Config:TRANSACTION
+            @t24:i (align=R, inputBehaviour=I, maxLength=4, sysNumber=8.0, core=true, t24Name=CR.TRANS.CODE, mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=43.0, core=true, t24Name=CURR.NO, mandatory=false)
+/* PE.CUSTOMER.TXN will be amended automatically and will be put in INAU after the process of events defined in PE.PRODUCT.EVENTS using OFS
+This field accepts a valid OFS.SOURCE record and this field value is used for automatic processing of PE.CUSTOMER.TXN through the new service PE.UPDATE.CUSTOMER.TXN
+Mandatory input */
+        CUS_OFS_SOURCE -> EB_Interface:OFS_SOURCE required
+            @t24:i (align=L, inputBehaviour=I, maxLength=20, sysNumber=21.0, core=true, businessType=A, t24Name=CUS.OFS.SOURCE, mandatory=true)
+/* PE.CUSTOMER.TXN transaction will be amended automatically and will be put in INAU after the process of events defined in PE.PRODUCT.EVENTS using OFS
+This field accepts a valid VERSION record for PE.CUSTOMER.TXN application and this field value is used for automatic processing of PE.CUSTOMER.TXN
+Mandatory input */
+        CUS_OFS_VERSION -> EB_Versions:VERSION required
+            @t24:i (align=L, inputBehaviour=I, maxLength=54, sysNumber=20.0, core=true, businessType=A, t24Name=CUS.OFS.VERSION, mandatory=true)
+        DATE_TIME -> byValue SC_ScPeFunds:PE_PARAMETER__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+/* This fields holds valid transaction code from TRANSACTION
+Input should be defined as a valid Debit code in TRANSACTION
+This transaction code will be used for generation of commission accounting entries for PE investment
+Optional field, but mandatory when CHARGE.TYPE is inputted */
+        DB_TRANS_CODE -> ST_Config:TRANSACTION
+            @t24:i (align=R, inputBehaviour=I, maxLength=4, sysNumber=7.0, core=true, t24Name=DB.TRANS.CODE, mandatory=false)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=48.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+/* This field holds the DIARY.TYPE used to process income distributions from the fund
+The DIARY.TYPE defined in this field should be defined with below values
+CASH - Y, SECURITY.UPDATE - No, NEW.SECURITIES - No, OPTIONS - No, REINVEST - No, RIGHTS - No, FREE.SECURITIES - No, RETAIN.ORIGINAL - Y
+This DIARY.TYPE can be used to process the Income Distributions from the PE fund */
+        DIARY_TYPE -> SC_SccEventCapture:DIARY_TYPE required
+            @t24:i (align=L, inputBehaviour=I, maxLength=15, sysNumber=12.0, core=true, businessType=A, t24Name=DIARY.TYPE, mandatory=true)
+        EVENT -> byValue SC_ScPeFunds:PE_PARAMETER__EVENT *
+            @t24:i (t24Name=EVENT)
+/* PE.MANAGEMENT.FEES records will be created automatically during COB on frequency date and these records will be automatically marked as COMPLETED during the service PE.UPDATE.MGMT.FEES
+This field accepts a valid OFS.SOURCE record this field value is used for automatic processing of PE.MANAGEMENT.FEES records
+Mandatory input */
+        FEES_OFS_SOURCE -> EB_Interface:OFS_SOURCE required
+            @t24:i (align=L, inputBehaviour=I, maxLength=20, sysNumber=27.0, core=true, businessType=A, t24Name=FEES.OFS.SOURCE, mandatory=true)
+/* PE.MANAGEMENT.FEES records will be created automatically during COB on frequency date and these records will be automatically marked as COMPLETED during the service PE.UPDATE.MGMT.FEES
+This field accepts a valid VERSION record for PE.MANAGEMENT.FEES application and this field value is used for automatic processing of PE.MANAGEMENT.FEES records
+Mandatory input */
+        FEES_OFS_VERSION -> EB_Versions:VERSION required
+            @t24:i (align=L, inputBehaviour=I, maxLength=54, sysNumber=26.0, core=true, businessType=A, t24Name=FEES.OFS.VERSION, mandatory=true)
+/* FT transaction for the PE Management Fees will be created automatically using this OFS version when PE.MANAGEMENT.FEES is authorised
+This field accepts a valid OFS.SOURCE record and this field value is used for automatic creation of FUNDS.TRNASFER for PE Management fees
+Mandatory input */
+        FT_OFS_SOURCE -> EB_Interface:OFS_SOURCE required
+            @t24:i (align=L, inputBehaviour=I, maxLength=20, sysNumber=19.0, core=true, businessType=A, t24Name=FT.OFS.SOURCE, mandatory=true)
+/* FT transaction for the PE Management Fees will be created automatically using OFS when PE.MANAGEMENT.FEES is authorised
+This field accepts a valid VERSION record for FUNDS.TRANSFER application and this field value is used for automatic creation of FT
+Mandatory input */
+        FT_OFS_VERSION -> EB_Versions:VERSION required
+            @t24:i (align=L, inputBehaviour=I, maxLength=54, sysNumber=18.0, core=true, businessType=A, t24Name=FT.OFS.VERSION, mandatory=true)
+/* This field accepts a valid record id from FT.TXN.TYPE.CONDITION table
+The management fees collected from the PE fund investors are posted to the issuer  through an Funds transfer transaction. This field holds the FT.TXN.TYPE.CONDITION to be used for the FT
+
+Mandatory input */
+        FT_TXN_TYPE -> FT_Config:FT_TXN_TYPE_CONDITION required
+            @i18n:Label (en="Transaction Type")
+            @t24:i (align=L, inputBehaviour=I, maxLength=4, sysNumber=17.0, core=true, businessType=A, t24Name=FT.TXN.TYPE, mandatory=true)
+        INPUTTER -> byValue SC_ScPeFunds:PE_PARAMETER__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+/* This fields holds valid transaction code from TRANSACTION
+Input should be defined as a valid Credit code in TRANSACTION
+This transaction will be used for generation of accounting entries for the interest amount credited to the customer during Capital return event
+Mandatory Input */
+        INT_CR_TR_CODE -> ST_Config:TRANSACTION
+            @t24:i (align=R, inputBehaviour=I, maxLength=4, sysNumber=25.0, core=true, t24Name=INT.CR.TR.CODE, mandatory=false)
+        INT_DR_TR_CODE -> ST_Config:TRANSACTION
+            @t24:i (align=R, inputBehaviour=I, maxLength=4, sysNumber=24.0, core=true, t24Name=INT.DR.TR.CODE, mandatory=false)
+        OVERRIDE -> byValue SC_ScPeFunds:PE_PARAMETER__OVERRIDE *
+            @t24:i (t24Name=OVERRIDE)
+/* This field holds the transaction Code used for Security Purchase transaction created automatically during authorisation of PE.CUSTOMER.TXN for a particular event
+Validation Rules:
+Input should be a valid record in SC.TRANS.NAME, and this should be defined as a valid credit code in SC.TRANS.TYPE
+Mandatory input */
+        PE_BUY_TRADE_CODE -> SC_Config:SC_TRANS_NAME required
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=3.0, core=true, businessType=S, t24Name=PE.BUY.TRADE.CODE, mandatory=true)
+/* This field holds the transaction Code used for Security Sell transaction created automatically during authorisation of PE.CUSTOMER.TXN for a particular event
+Validation Rules:
+Input should be a valid record in SC.TRANS.NAME, and this should be defined as a valid debit code in SC.TRANS.TYPE
+Mandatory input */
+        PE_SELL_TRADE_CODE -> SC_Config:SC_TRANS_NAME required
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=4.0, core=true, businessType=S, t24Name=PE.SELL.TRADE.CODE, mandatory=true)
+/* This field holds the transaction Code used for Free of Payment (FOP) Security transfer (Transfer In) transaction
+Validation Rules:
+Input should be a valid record in SC.TRANS.NAME, and this should be defined as a valid Credit code in SC.TRANS.TYPE
+Mandatory input */
+        PE_TRANSFER_IN_CODE -> SC_Config:SC_TRANS_NAME required
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=1.0, core=true, businessType=S, t24Name=PE.TRANSFER.IN.CODE, mandatory=true)
+/* This field holds the transaction Code used for Free of Payment (FOP) Security transfer (Transfer Out)transaction
+Validation Rules:
+Input should be a valid record in SC.TRANS.NAME, and this should be defined as a valid Debit code in SC.TRANS.TYPE
+Mandatory input */
+        PE_TRANSFER_OUT_CODE -> SC_Config:SC_TRANS_NAME required
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=2.0, core=true, businessType=S, t24Name=PE.TRANSFER.OUT.CODE, mandatory=true)
+/* This fields holds valid category code
+The commission charged for a PE investment would be posted to this PL Category
+Optional field, but mandatory when CHARGE.TYPE is inputted */
+        PL_CATEGORY -> ST_Config:CATEGORY
+            @i18n:Label (en="PL Category")
+            @t24:i (align=L, inputBehaviour=I, maxLength=6, sysNumber=6.0, core=true, businessType=A, t24Name=PL.CATEGORY, mandatory=false)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=42.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        RESERVED10 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=29.0, core=true, t24Name=RESERVED10, mandatory=false)
+        RESERVED11 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=30.0, core=true, t24Name=RESERVED11, mandatory=false)
+        RESERVED12 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=31.0, core=true, t24Name=RESERVED12, mandatory=false)
+        RESERVED13 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=32.0, core=true, t24Name=RESERVED13, mandatory=false)
+        RESERVED14 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=33.0, core=true, t24Name=RESERVED14, mandatory=false)
+        RESERVED15 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=34.0, core=true, t24Name=RESERVED15, mandatory=false)
+        RESERVED16 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=35.0, core=true, t24Name=RESERVED16, mandatory=false)
+        RESERVED17 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=36.0, core=true, t24Name=RESERVED17, mandatory=false)
+        RESERVED18 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=37.0, core=true, t24Name=RESERVED18, mandatory=false)
+        RESERVED19 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=38.0, core=true, t24Name=RESERVED19, mandatory=false)
+        RESERVED20 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=39.0, core=true, t24Name=RESERVED20, mandatory=false)
+        RESERVED9 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=28.0, core=true, t24Name=RESERVED9, mandatory=false)
+/* SECURITY.MASTER records for SM2(Draw down), SM3(Capital Call), SM4(Maturity) will be created automatically through OFS when SM1(Initial Commitment) is authorised
+This field accepts a valid OFS.SOURCE record and this field value is used for automatic creation of SM records
+Mandatory input */
+        SM_OFS_SOURCE -> EB_Interface:OFS_SOURCE required
+            @t24:i (align=L, inputBehaviour=I, maxLength=20, sysNumber=23.0, core=true, businessType=A, t24Name=SM.OFS.SOURCE, mandatory=true)
+/* SECURITY.MASTER records for SM2(Draw down), SM3(Capital Call), SM4(Maturity) will be created automatically through OFS when SM1(Initial Commitment) is authorised
+This field accepts a valid VERSION record for SECURITY.MASTER application and this will be used for automatic creation of SM records
+Mandatory input */
+        SM_OFS_VERSION -> EB_Versions:VERSION required
+            @t24:i (align=L, inputBehaviour=I, maxLength=54, sysNumber=22.0, core=true, businessType=A, t24Name=SM.OFS.VERSION, mandatory=true)
+/* This field is used to define the tax code that will be applied on the commission. This would cater to scenarios where there is tax that applied on the commission (such as GST)
+Value in this field will be defaulted to TAX.KEY field of PE.CUSTOMER.TXN
+Optional field, but mandatory when CHARGE.TYPE is inputted */
+        TAX_TYPE : T24BusinessTypes:TAX
+            @i18n:Label (en="Tax Type")
+            @i18n:Tooltip (en="Defines the tax type")
+            @t24:i (align=L, inputBehaviour=I, maxLength=16, sysNumber=9.0, core=true, t24Name=TAX.TYPE, mandatory=false)
+/* SEC.TRADE transaction for the PE events are created automatically using OFS when PE.CUSTOMER.TXN is authorised
+This field accepts a valid OFS.SOURCE record and this field value is used for automatic creation of SEC.TRADE
+Mandatory input */
+        TRADE_OFS_SOURCE -> EB_Interface:OFS_SOURCE required
+            @t24:i (align=L, inputBehaviour=I, maxLength=20, sysNumber=14.0, core=true, businessType=A, t24Name=TRADE.OFS.SOURCE, mandatory=true)
+/* SEC.TRADE transaction for the PE events are created automatically using OFS Version when PE.CUSTOMER.TXN is authorised
+This field accepts a valid VERSION record for SEC.TRADE application and this field value is used for automatic creation of SEC.TRADE
+Mandatory input */
+        TRADE_OFS_VERSION -> EB_Versions:VERSION required
+            @t24:i (align=L, inputBehaviour=I, maxLength=54, sysNumber=13.0, core=true, businessType=A, t24Name=TRADE.OFS.VERSION, mandatory=true)
+/* SECURITY.TRANSFER(FOP) transaction for the PE events are created automatically using OFS when PE.CUSTOMER.TXN is authorised
+This field accepts a valid OFS.SOURCE record and this field value is used for automatic creation of SECURITY.TRNASFER
+Mandatory input */
+        TRANSFER_OFS_SOURCE -> EB_Interface:OFS_SOURCE required
+            @t24:i (align=L, inputBehaviour=I, maxLength=20, sysNumber=16.0, core=true, businessType=A, t24Name=TRANSFER.OFS.SOURCE, mandatory=true)
+/* SECURITY.TRANSFER(FOP)transaction for the PE events are created automatically using OFS when PE.CUSTOMER.TXN is authorised
+This field accepts a valid VERSION record for SECURITY.TRANSFER application and this field value is used for automatic creation of SECURITY.TRANSFER
+Mandatory input */
+        TRANSFER_OFS_VERSION -> EB_Versions:VERSION required
+            @t24:i (align=L, inputBehaviour=I, maxLength=54, sysNumber=15.0, core=true, businessType=A, t24Name=TRANSFER.OFS.VERSION, mandatory=true)
+    }
+    PE_PARAMETER__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=45.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    PE_PARAMETER__EVENT
+    {
+        EB_ACTIVITY : T24BusinessTypes:A
+            @i18n:Label (en="Eb Activity")
+            @i18n:Tooltip (en="Eb Activity")
+            @t24:i (align=L, inputBehaviour=I, maxLength=7, sysNumber=11.0, core=true, t24Name=EB.ACTIVITY, mandatory=false)
+/* This field along with the EVENT.ACTIVIY field is used to set up the delivery advices for each event in the lifecycle of the PE investment
+This field is a drop down which can accept values SUBSCRIPTION, CAPITAL CALL ,CAPITAL RETURN,COMMITMENT REDUCTION, MATURITY, MANAGEMENT FEES
+Optional field,and is a multi-value field associated with EVENT.ACTIVITY field
+Validation error will be generated when EVENT.ACTIVITY is given and if the corresponding EVENT is not defined */
+        EVENT : SC_ScPeFunds:PE_PARAMETER__EVENT__EVENT
+            @i18n:Label (en=Event)
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=10.0, core=true, t24Name=EVENT, mandatory=false)
+    }
+    PE_PARAMETER__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=44.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    PE_PARAMETER__OVERRIDE
+    {
+        OVERRIDE : T24BusinessTypes:N
+            @i18n:Label (en=Override)
+            @i18n:Tooltip (en="Overrides generated by this transaction")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=41.0, core=true, t24Name=OVERRIDE, mandatory=false)
+    }
+/* Private equity firms, known in industry parlance as General Partners (GPs), typically raise money from institutional investors and accredited investors. This money is put into a fund structured as a limited partnership and which is managed by the GP and the capital is used to invest in unquoted companies, either for a minority or majority equity stake
+Private equity funds typically have a fixed life-span of 10 years and by the end of the 10 years they will have had to return the investors’ original money, plus any additional returns made. This generally requires the investments to be sold, or to be in the form of quoted shares, before the end of the fund. The attraction for investors is the potential for substantial long term gains
+In the private equity world, money that is committed by limited partners to a private equity fund, also called committed capital, is usually not invested immediately. It is "drawn down" and invested over time as investments are identified
+Drawdowns, or capital calls, are issued to limited partners when the general partner has identified a new investment and a portion of the limited partner's committed capital is required to pay for that investment.
+There are many events that could occur in  the lifecycle of a PE investment. These are listed below:
+Capital Call - PE funds issue Capital Calls, when they have identified investments, and they require funds from the subscribers to fund these investments. Capital Calls are typically issued as a percentage of the committed capital
+Commitment Reduction- PE funds at times, return a portion of the capital contributed by the subscribers. This could be because the PE firm could not find a suitable investment opportunity to deploy all the capital collected from the subscribers
+Capital Return - PE funds at times, return a portion of the capital contributed by the subscribers. This could be because the PE firm could not find a suitable investment opportunity to deploy all the capital collected from the subscribers
+Maturity- When the PE fund winds down, all holdings are liquidated and customer is credited with the maturity proceeds
+This application is used to record the events in the life cycle of a PE fund. When an event is recorded in this application, the service PE.UPDATE.CUSTOMER.TXN will process the event for each customer, based on their commitment, and update the record in PE.CUSTOMER.TXN application
+Each PE fund is represented by 4 SECURITY.MASTER (SM) instruments. Each SM represents a particular component of a PE fund. These components are enumerated below
+SM1 - Represents the Initial Commitment Committed by a subscriber. LAST.PRICE is 0
+SM2 - Represents the Undrawn Commitment (Drawdown) of a subscriber. LAST.PRICE is 0
+SM3 - Represents the Capital Contributed by the subscriber, pending unit allotment. LAST.PRICE is 1. i.e. Capital Call
+SM4 - Represents the fund units issued by the PE fund. LAST.PRICE is the NAV as supplied by the PE fund */
+    PE_PRODUCT_EVENTS
+        @i18n:Description (en="")
+        @t24:i (t24Name=PE.PRODUCT.EVENTS, level=F, type=H, allowedFunctions="A C D E I L P Q S", localRefApplicationSysNo=67.0, localRefAllowed=true)
+    {
+/* This field identifies the price to be used when UNITS.ISSUED is set to YES. i.e. Units are issued at this NAV
+Defaulted to 1 if left blank
+This price will be passed to PRICE field of SECURITY.TRANSFER during Capital call and to PRICE field of SEC.TRADE for Capital Return event when UNITS.ISSUED is YES
+Validation Rules:
+
+
+Standard T24 Price field */
+        ACTUAL_PE_PRICE : T24BusinessTypes:PRICE
+            @t24:i (align=L, inputBehaviour=I, maxLength=16, sysNumber=7.0, core=true, t24Name=ACTUAL.PE.PRICE, mandatory=false)
+/* This field holds the id of PE fund with PE.TYPE as ACTUAL PE SECURITY.
+Value will be defaulted from ACTUAL PE SECURITY fund which is related to id of the record which is INITIAL COMMITMENT PE fund
+Validation Rules:
+
+
+Value should be id of SECURITY.MASTER record whose PE.TYPE is ACTUAL PE SECURITY
+Validation error "Missing Undrawn Security SetUp" will be triggered when the PE.FUND of this field value is not a ACTUAL PE SECURITY */
+        ACTUAL_PE_SECURITY : T24BusinessTypes:SEC
+            @t24:i (align=L, inputBehaviour=F, maxLength=12, sysNumber=23.0, core=true, t24Name=ACTUAL.PE.SECURITY, mandatory=false)
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=77.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=78.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=74.0, core=true, t24Name=AUTHORISER, mandatory=false)
+/* This field holds the date on which Capital Call for the PE fund is issued
+System throws validation error "Input missing,check values for Capital Call" if CAPITAL.CALL.DATE field is inputted and if CAPITAL.CALL.REF, PAYMENT.DATE, CAPITAL.CALL.PERCENTAGE are missing
+System also checks if CAPITAL.CALL.REF, PAYMENT.DATE, CAPITAL.CALL.PERCENTAGE are inputted, and if CAPITAL.CALL.DATE is missing
+Validation Rules:
+
+
+Standard T24 Date field
+Mandatory field for Capital call event */
+        CAPITAL_CALL_DATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=4.0, core=true, t24Name=CAPITAL.CALL.DATE, mandatory=false)
+/* Capital Calls are issued in  tranches. This field holds the percentage of the commitment that is being drawn down.This percentage is applied on the commitment of each customer to determine the amount due from each of them
+System throws validation error "Input missing,check values for Capital Call" if CAPITAL.CALL.PERCENTAGE field is inputted and if any of CAPITAL.CALL.REF, PAYMENT.DATE, CAPITAL.CALL.PERCENTAGE are missing
+System also checks if CAPITAL.CALL.REFERENCE, PAYMENT.DATE, CAPITAL.CALL.PERCENTAGE are inputted, and if CAPITAL.CALL.DATE is missing
+Validation Rules:
+
+
+Standard T24 Date field
+Mandatory field for Capital call event */
+        CAPITAL_CALL_PERCENTAGE : T24BusinessTypes:R
+            @t24:i (align=R, inputBehaviour=I, maxLength=16, sysNumber=6.0, core=true, t24Name=CAPITAL.CALL.PERCENTAGE, mandatory=false)
+/* d
+System throws validation error "Input missing,check values for Capital Call" if CAPITAL.CALL.REF field is inputted and if CAPITAL.CALL.DATE, PAYMENT.DATE, CAPITAL.CALL.PERCENTAGE are missing
+System also checks if CAPITAL.CALL.DATE, PAYMENT.DATE, CAPITAL.CALL.PERCENTAGE are inputted, and if CAPITAL.CALL.REF is missing
+Validation Rules:
+
+
+Input allowed is Alpha Numeric characters of length 10
+Mandatory field for Capital call event */
+        CAPITAL_CALL_REF : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=10, sysNumber=3.0, core=true, t24Name=CAPITAL.CALL.REF, mandatory=false)
+/* This field holds the id of PE fund with PE.TYPE as CAPITAL CALL.
+Value will be defaulted from CAPITAL CALL PE fund which is related to id of the record which is INITIAL COMMITMENT PE fund
+Validation Rules:
+
+
+Value should be id of SECURITY.MASTER record whose PE.TYPE is CAPITAL CALL
+Validation error "Missing Undrawn Security SetUp" will be triggered when the PE.FUND of this field value is not a CAPITAL CALL */
+        CAPITAL_SECURITY : T24BusinessTypes:SEC
+            @t24:i (align=L, inputBehaviour=F, maxLength=12, sysNumber=22.0, core=true, t24Name=CAPITAL.SECURITY, mandatory=false)
+/* This field identifies the date on which commitment reduction event happens
+Validation Rules:
+
+
+Standard T24 Date field
+Mandatory for Commitment Reduction event
+Validation error "Input Missing for event" will be thrown when COMMIT.REDN.DATE is inputted without COMMIT.REDN.RATE */
+        COMMIT_REDN_DATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=15.0, core=true, t24Name=COMMIT.REDN.DATE, mandatory=false)
+/* This field identifies the percentage of commitment amount to be reduced form Initial commitment amount
+Validation Rules:
+
+
+Standard T24 Rate field
+Mandatory for Commitment Reduction event
+Validation error "Input Missing for event" will be thrown when COMMIT.REDN.PERC is inputted without COMMIT.REDN.DATE */
+        COMMIT_REDN_PERC : T24BusinessTypes:R
+            @t24:i (align=R, inputBehaviour=I, maxLength=16, sysNumber=14.0, core=true, t24Name=COMMIT.REDN.PERC, mandatory=false)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=75.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=71.0, core=true, t24Name=CURR.NO, mandatory=false)
+        DATE_TIME -> byValue SC_ScPeFunds:PE_PRODUCT_EVENTS__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=76.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        INPUTTER -> byValue SC_ScPeFunds:PE_PRODUCT_EVENTS__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+/* This field identifies interest rate to be used for calcualtion of interst amount that the customer is to receive after capital Return event
+Validation Rules:
+
+
+Standard T24 Rate field
+Mandatory for Capital Return event
+Validation error "Input missing, check values for Capital Return" will be thrown when INTEREST.PERC.ROC is inputted and if any one of RETURN.OF.CAPITAL.PERC, PERCENTAGE.BASIS, RETURN.DATE are missing
+System also checks if RETURN.OF.CAPITAL.PERC, PERCENTAGE.BASIS, RETURN.DATE are inputted, and if value of this field is missing */
+        INTEREST_PERC_ROC : T24BusinessTypes:R
+            @t24:i (align=R, inputBehaviour=I, maxLength=16, sysNumber=12.0, core=true, t24Name=INTEREST.PERC.ROC, mandatory=false)
+/* Identifies the issuer of the Fund
+Validation Rules:
+
+
+Input should be a valid id from CUSTOMER table
+Mandatory field
+Nochange field */
+        ISSUER -> ST_Customer:CUSTOMER required
+            @i18n:Label (en=Issuer)
+            @i18n:Tooltip (en="Indicates the issuer of the security")
+            @t24:i (align=R, inputBehaviour=F, maxLength=10, sysNumber=1.0, core=true, businessType=CUS, t24Name=ISSUER, mandatory=true)
+/* Identifies the account of fund issuer. All issuer entries would be posted to this account
+Nostro Account of the Security Currency will be defaulted to this field if left blank
+Validation error will be triggered if nostro account is not found and if left blank
+Validation Rules:
+
+
+Input should be a valid id from ACCOUNT table
+Nochange field */
+        ISSUER_ACC -> AC_AccountOpening:ACCOUNT
+            @t24:i (align=R, inputBehaviour=I, maxLength=36, sysNumber=2.0, core=true, businessType=ACC, t24Name=ISSUER.ACC, mandatory=false)
+/* This field identifies the date on which Maturity of PE Fund happens
+Validation Rules:
+
+
+Standard T24 Date field
+Mandatory for Maturity event
+Validation error "Input Missing for event" will be thrown when MATURITY.DATE is inputted without MATURITY.PRICE */
+        MATURITY_DATE : T24BusinessTypes:D
+            @i18n:Label (en="Maturity Date")
+            @i18n:Tooltip (en="Indicates the Maturity Date of the Transaction")
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=17.0, core=true, t24Name=MATURITY.DATE, mandatory=false)
+/* This field identifies the final price or NAV at which the PE fund is redeemed
+Validation Rules:
+
+
+Standard T24 Price field
+Mandatory for Maturity event
+Validation error "Cant Initiate Event, capital call not done" will be thrown when maturity event is triggered before Capital Call event
+Validation error "Input Missing for event" will be triggered when MATURITY.PRICE is given without MATURITY.DATE */
+        MATURITY_PRICE : T24BusinessTypes:PRICE
+            @i18n:Label (en="Maturity Price")
+            @t24:i (align=L, inputBehaviour=I, maxLength=16, sysNumber=16.0, core=true, t24Name=MATURITY.PRICE, mandatory=false)
+/* The management fee(FT.COMMISSION.TYPE) is defined in this field. The fee would be calculated based on this field on frequency as specified in the field MGMT.FEE.FREQ and PE.MANAGEMENT.FEES records would be created for the user review
+Validation Rules:
+
+
+Input should be a valid FT.COMMISSION.TYPE id
+Optional field
+The debit Account number of FT record created for Management fees will be mapped from either PL category or an iternal Account of FT.COMMISSION.TYPE record of this value
+The management fees amount will be calcualted by record of this value from FT.COMMISSION.TYPE */
+        MGMT_FEE_CODE -> ST_ChargeConfig:FT_COMMISSION_TYPE
+            @t24:i (align=L, inputBehaviour=I, maxLength=16, sysNumber=19.0, core=true, businessType=A, t24Name=MGMT.FEE.CODE, mandatory=false)
+/* This field holds the frequency of Management Fees
+PE.MANAGEMENT.FEES records for customers who subscribed for PE fund will be automatically created by system on this frequency date
+Validation Rules:
+
+
+Standard T24 Freqency field
+Optional field */
+        MGMT_FEE_FREQ : T24BusinessTypes:FQU
+            @t24:i (align=L, inputBehaviour=I, maxLength=15, sysNumber=18.0, core=true, t24Name=MGMT.FEE.FREQ, mandatory=false)
+/* This field holds the offset between the fee calculation date and fee value date, and is specified interms of Working days
+Validation Rules:
+
+
+Input should be a Numeric value of length 3
+Optional field
+VALUE.DATE of the accounting entries generated for PE Management fees will be calculated by this field */
+        MGMT_FEE_OFFSET : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=3, sysNumber=20.0, core=true, t24Name=MGMT.FEE.OFFSET, mandatory=false)
+/* This field holds the nextS frequency date on which the Management fees will be calculated and records will be created
+Value will be automatically calculated by system and used for Management fees
+Validation Rules:
+
+
+Noinput, System updated field
+Standard T24 Date field */
+        NEXT_FREQ_DATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=N, maxLength=11, sysNumber=24.0, core=true, t24Name=NEXT.FREQ.DATE, mandatory=false)
+        OVERRIDE -> byValue SC_ScPeFunds:PE_PRODUCT_EVENTS__OVERRIDE *
+            @t24:i (t24Name=OVERRIDE)
+/* This field holds the date on which the customer has to make payment for the PE fund
+System throws validation error "Input missing,check values for Capital Call" if PAYMENT.DATE field is inputted and if any of CAPITAL.CALL.REF, CAPITAL.CALL.DATE,CAPITAL.CALL.PERCENTAGE are missing
+System also checks if CAPITAL.CALL.REF, CAPITAL.CALL.PERCENTAGE , CAPITAL.CALL.DATE are inputted, and if CAPITAL.CALL.PERCENTAGE is missing
+Validation Rules:
+
+
+Standard T24 Rate field
+Mandatory field for Capital call event */
+        PAYMENT_DATE : T24BusinessTypes:D
+            @i18n:Label (en="Payment Date")
+            @i18n:Tooltip (en="It Indicates the payment date of the bill")
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=5.0, core=true, t24Name=PAYMENT.DATE, mandatory=false)
+/* This field identifies on which amount, the return of capital call amount is to be calculated
+Validation Rules:
+
+
+Options allowed are INITIAL COMMITMENT ,  LAST CONTRIBUTION
+Mandatory for Capital Return event
+If the value of this field is INITIAL.COMMITMENT, then the return amount will be calcualted as below
+Return Amount =  RETURN.OF.CAPITAL.PERC * Commitment Amount / 100
+if the value is LAST CONTRIBUTION, then the return amount will be calcualted as below
+Return Amount =  RETURN.OF.CAPITAL.PERC * Amount of latest capital call/ 100
+Validation error "Input missing, check values for Capital Return" will be thrown when PERCENTAGE.BASIS is inputted and if any one of RETURN.OF.CAPITAL.PERC, INTEREST.PERC.ROC, RETURN.DATE are missing
+System also checks if RETURN.OF.CAPITAL.PERC, INTEREST.PERC.ROC, RETURN.DATE are inputted, and if value of this field is missing */
+        PERCENTAGE_BASIS : SC_ScPeFunds:PE_PRODUCT_EVENTS__PERCENTAGE_BASIS
+            @t24:i (align=L, inputBehaviour=I, maxLength=18, sysNumber=11.0, core=true, t24Name=PERCENTAGE.BASIS, mandatory=false)
+        PE_FUND -> SC_ScPeFunds:PE_PRODUCT_EVENTS PK required
+            @t24:i (align=L, inputBehaviour=I, maxLength=12, sysNumber=0.0, core=true, businessType=SEC, t24Name=PE.FUND, mandatory=true)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=70.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        RESERVED1 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=39.0, core=true, t24Name=RESERVED1, mandatory=false)
+        RESERVED10 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=48.0, core=true, t24Name=RESERVED10, mandatory=false)
+        RESERVED11 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=49.0, core=true, t24Name=RESERVED11, mandatory=false)
+        RESERVED12 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=50.0, core=true, t24Name=RESERVED12, mandatory=false)
+        RESERVED13 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=51.0, core=true, t24Name=RESERVED13, mandatory=false)
+        RESERVED14 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=52.0, core=true, t24Name=RESERVED14, mandatory=false)
+        RESERVED15 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=53.0, core=true, t24Name=RESERVED15, mandatory=false)
+        RESERVED16 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=54.0, core=true, t24Name=RESERVED16, mandatory=false)
+        RESERVED17 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=55.0, core=true, t24Name=RESERVED17, mandatory=false)
+        RESERVED18 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=56.0, core=true, t24Name=RESERVED18, mandatory=false)
+        RESERVED19 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=57.0, core=true, t24Name=RESERVED19, mandatory=false)
+        RESERVED2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=40.0, core=true, t24Name=RESERVED2, mandatory=false)
+        RESERVED20 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=58.0, core=true, t24Name=RESERVED20, mandatory=false)
+        RESERVED21 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=59.0, core=true, t24Name=RESERVED21, mandatory=false)
+        RESERVED22 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=60.0, core=true, t24Name=RESERVED22, mandatory=false)
+        RESERVED23 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=61.0, core=true, t24Name=RESERVED23, mandatory=false)
+        RESERVED24 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=62.0, core=true, t24Name=RESERVED24, mandatory=false)
+        RESERVED25 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=63.0, core=true, t24Name=RESERVED25, mandatory=false)
+        RESERVED26 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=64.0, core=true, t24Name=RESERVED26, mandatory=false)
+        RESERVED27 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=65.0, core=true, t24Name=RESERVED27, mandatory=false)
+        RESERVED28 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=66.0, core=true, t24Name=RESERVED28, mandatory=false)
+        RESERVED3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=41.0, core=true, t24Name=RESERVED3, mandatory=false)
+        RESERVED4 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=42.0, core=true, t24Name=RESERVED4, mandatory=false)
+        RESERVED5 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=43.0, core=true, t24Name=RESERVED5, mandatory=false)
+        RESERVED6 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=44.0, core=true, t24Name=RESERVED6, mandatory=false)
+        RESERVED7 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=45.0, core=true, t24Name=RESERVED7, mandatory=false)
+        RESERVED8 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=46.0, core=true, t24Name=RESERVED8, mandatory=false)
+        RESERVED9 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=47.0, core=true, t24Name=RESERVED9, mandatory=false)
+/* This field identifies the date on which the capital return is being done
+Validation Rules:
+
+
+Standard T24 Date field
+Mandatory for Capital Return event
+Validation error "Input missing, check values for Capital Return" will be thrown when RETURN.DATE is inputted and if any one of RETURN.OF.CAPITAL.PERC, PERCENTAGE.BASIS, INTEREST.PERC.ROC are missing
+System also checks if RETURN.OF.CAPITAL.PERC, PERCENTAGE.BASIS,INTEREST.PERC.ROC are inputted, and if value of this field is missing */
+        RETURN_DATE : T24BusinessTypes:D
+            @i18n:Label (en="Return Date")
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=13.0, core=true, t24Name=RETURN.DATE, mandatory=false)
+/* This field holds the percentage of capital amount being returned
+Validation Rules:
+
+
+Standard T24 Rate field
+Mandatory for Capital Return event
+Validation error "Input missing, check values for Capital Return" will be thrown when RETURN.OF.CAPITAL.PERC is inputted and if any one of PERCENTAGE.BASIS, INTEREST.PERC.ROC, RETURN.DATE are missing
+System also checks if PERCENTAGE.BASIS, INTEREST.PERC.ROC, RETURN.DATE are inputted, and if value of this field is missing */
+        RETURN_OF_CAPITAL_PERC : T24BusinessTypes:R
+            @t24:i (align=R, inputBehaviour=I, maxLength=16, sysNumber=10.0, core=true, t24Name=RETURN.OF.CAPITAL.PERC, mandatory=false)
+        SAVE_CAP_CALL_REF -> byValue SC_ScPeFunds:PE_PRODUCT_EVENTS__SAVE_CAP_CALL_REF *
+            @t24:i (t24Name=SAVE.CAP.CALL.REF)
+        SAVE_COMMIT_REDN_PERC -> byValue SC_ScPeFunds:PE_PRODUCT_EVENTS__SAVE_COMMIT_REDN_PERC *
+            @t24:i (t24Name=SAVE.COMMIT.REDN.PERC)
+        SAVE_MATURITY_PRICE -> byValue SC_ScPeFunds:PE_PRODUCT_EVENTS__SAVE_MATURITY_PRICE *
+            @t24:i (t24Name=SAVE.MATURITY.PRICE)
+        SAVE_RETURN_OF_CAP_PERC -> byValue SC_ScPeFunds:PE_PRODUCT_EVENTS__SAVE_RETURN_OF_CAP_PERC *
+            @t24:i (t24Name=SAVE.RETURN.OF.CAP.PERC)
+        STMT_NOS -> byValue SC_ScPeFunds:PE_PRODUCT_EVENTS__STMT_NOS *
+            @t24:i (t24Name=STMT.NOS)
+/* This field holds the id of PE fund with PE.TYPE as DRAWDOWN.
+Value will be defaulted from DRAWDOWN PE fund which is related to id of the record which is INITIAL COMMITMENT PE fund
+Validation Rules:
+
+
+Value should be id of SECURITY.MASTER record whose PE.TYPE is DRAWDOWN
+Validation error "Missing Undrawn Security SetUp" will be triggered when the PE.FUND of this field value is not a DRAWDOWN */
+        UNDRAWN_SECURITY : T24BusinessTypes:SEC
+            @t24:i (align=L, inputBehaviour=F, maxLength=12, sysNumber=21.0, core=true, t24Name=UNDRAWN.SECURITY, mandatory=false)
+/* This field indicates that the PE fund has received the contribution from the subscribers and then allots/issues units to the fund subscribers
+This field should be set to NO for a fresh capital call, and can be amended from NO to YES when the allotment of Units happens subsequently
+Validation Rules:
+
+
+Values accepted are YES , NO */
+        UNITS_ISSUED : SC_ScPeFunds:PE_PRODUCT_EVENTS__UNITS_ISSUED
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=8.0, core=true, t24Name=UNITS.ISSUED, mandatory=false)
+/* This field indicates that the date on which the units are alloted to the subscribers of PE fund
+Validation Rules:
+
+
+Standard T24 Date field
+Mandatory when UNITS.ISSUED is set to YES */
+        UNITS_ISSUE_DATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=9.0, core=true, t24Name=UNITS.ISSUE.DATE, mandatory=false)
+    }
+    PE_PRODUCT_EVENTS__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=73.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    PE_PRODUCT_EVENTS__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=72.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    PE_PRODUCT_EVENTS__OVERRIDE
+    {
+        OVERRIDE : T24BusinessTypes:N
+            @i18n:Label (en=Override)
+            @i18n:Tooltip (en="Overrides generated by this transaction")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=69.0, core=true, t24Name=OVERRIDE, mandatory=false)
+    }
+    PE_PRODUCT_EVENTS__SAVE_CAP_CALL_REF
+    {
+        SAVE_CAP_CALL_DATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=N, maxLength=11, sysNumber=26.0, core=true, t24Name=SAVE.CAP.CALL.DATE, mandatory=false)
+        SAVE_CAP_CALL_PERC : T24BusinessTypes:R
+            @t24:i (align=R, inputBehaviour=N, maxLength=16, sysNumber=28.0, core=true, t24Name=SAVE.CAP.CALL.PERC, mandatory=false)
+        SAVE_CAP_CALL_REF : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=10, sysNumber=25.0, core=true, t24Name=SAVE.CAP.CALL.REF, mandatory=false)
+        SAVE_PAYMENT_DATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=N, maxLength=11, sysNumber=27.0, core=true, t24Name=SAVE.PAYMENT.DATE, mandatory=false)
+        SAVE_UNITS_ISSUED : SC_ScPeFunds:PE_PRODUCT_EVENTS__SAVE_CAP_CALL_REF__SAVE_UNITS_ISSUED
+            @t24:i (align=L, inputBehaviour=N, maxLength=3, sysNumber=29.0, core=true, t24Name=SAVE.UNITS.ISSUED, mandatory=false)
+        SAVE_UNITS_ISSUE_DATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=N, maxLength=11, sysNumber=30.0, core=true, t24Name=SAVE.UNITS.ISSUE.DATE, mandatory=false)
+    }
+    PE_PRODUCT_EVENTS__SAVE_COMMIT_REDN_PERC
+    {
+        SAVE_COMMIT_REDN_DATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=N, maxLength=11, sysNumber=36.0, core=true, t24Name=SAVE.COMMIT.REDN.DATE, mandatory=false)
+        SAVE_COMMIT_REDN_PERC : T24BusinessTypes:R
+            @t24:i (align=R, inputBehaviour=N, maxLength=16, sysNumber=35.0, core=true, t24Name=SAVE.COMMIT.REDN.PERC, mandatory=false)
+    }
+    PE_PRODUCT_EVENTS__SAVE_MATURITY_PRICE
+    {
+        SAVE_MATURITY_DATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=N, maxLength=11, sysNumber=38.0, core=true, t24Name=SAVE.MATURITY.DATE, mandatory=false)
+        SAVE_MATURITY_PRICE : T24BusinessTypes:PRICE
+            @t24:i (align=L, inputBehaviour=N, maxLength=16, sysNumber=37.0, core=true, t24Name=SAVE.MATURITY.PRICE, mandatory=false)
+    }
+    PE_PRODUCT_EVENTS__SAVE_RETURN_OF_CAP_PERC
+    {
+        SAVE_INT_PERC_ROC : T24BusinessTypes:R
+            @t24:i (align=R, inputBehaviour=N, maxLength=16, sysNumber=33.0, core=true, t24Name=SAVE.INT.PERC.ROC, mandatory=false)
+        SAVE_PERCENTAGE_BASIS : SC_ScPeFunds:PE_PRODUCT_EVENTS__SAVE_RETURN_OF_CAP_PERC__SAVE_PERCENTAGE_BASIS
+            @t24:i (align=L, inputBehaviour=N, maxLength=18, sysNumber=32.0, core=true, t24Name=SAVE.PERCENTAGE.BASIS, mandatory=false)
+        SAVE_RETURN_DATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=N, maxLength=11, sysNumber=34.0, core=true, t24Name=SAVE.RETURN.DATE, mandatory=false)
+        SAVE_RETURN_OF_CAP_PERC : T24BusinessTypes:R
+            @t24:i (align=R, inputBehaviour=N, maxLength=16, sysNumber=31.0, core=true, t24Name=SAVE.RETURN.OF.CAP.PERC, mandatory=false)
+    }
+    PE_PRODUCT_EVENTS__STMT_NOS
+    {
+        STMT_NOS : T24BusinessTypes:N
+            @i18n:Label (en="Stmt Nos")
+            @i18n:Tooltip (en="Stmt Nos")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=68.0, core=true, t24Name=STMT.NOS, mandatory=false)
+    }
+}
+Enumerations {
+    PE_CUSTOMER_TXN__COMMITMENT_STATUS : mml:string
+        FINAL=FINAL
+        PROVISIONAL=PROVISIONAL
+    PE_CUSTOMER_TXN__COMMIT_ADVICE : mml:string
+        NO=NO
+        YES=YES
+    PE_CUSTOMER_TXN__EVENT__EVENT : mml:string
+        CAPITAL_CALL="CAPITAL CALL"
+        COMMITMENT_REDUCTION="COMMITMENT REDUCTION"
+        RETURN_OF_CAPITAL="RETURN OF CAPITAL"
+    PE_CUSTOMER_TXN__EVENT__EVENT_ADVICE : mml:string
+        NO=NO
+        YES=YES
+    PE_CUSTOMER_TXN__EVENT__EVENT_STATUS : mml:string
+        COMPLETE=COMPLETE
+        NULL=NULL
+    PE_CUSTOMER_TXN__MATURITY_ADVICE : mml:string
+        NO=NO
+        YES=YES
+    PE_CUSTOMER_TXN__SAVE_EVENT__SAVE_EVENT : mml:string
+        CAPITAL_CALL="CAPITAL CALL"
+        COMMITMENT_REDUCTION="COMMITMENT REDUCTION"
+        RETURN_OF_CAPITAL="RETURN OF CAPITAL"
+    PE_CUSTOMER_TXN__SAVE_EVENT__SAVE_EVENT_ADVICE : mml:string
+        NO=NO
+        YES=YES
+    PE_CUSTOMER_TXN__SAVE_EVENT__SAVE_EVENT_STATUS : mml:string
+        COMPLETE=COMPLETE
+        NULL=NULL
+    PE_MANAGEMENT_FEES__POSTING_STATUS : mml:string
+        CALCULATED=CALCULATED
+        COMPLETE=COMPLETE
+    PE_PARAMETER__EVENT__EVENT : mml:string
+        CAPITAL_CALL="CAPITAL CALL"
+        CAPITAL_RETURN="CAPITAL RETURN"
+        COMMITMENT_REDUCTION="COMMITMENT REDUCTION"
+        MANAGEMENT_FEES="MANAGEMENT FEES"
+        MATURITY=MATURITY
+        SUBSCRIPTION=SUBSCRIPTION
+    PE_PRODUCT_EVENTS__PERCENTAGE_BASIS : mml:string
+        INITIAL_COMMITMENT="INITIAL COMMITMENT"
+        LAST_CONTRIBUTION="LAST CONTRIBUTION"
+    PE_PRODUCT_EVENTS__SAVE_CAP_CALL_REF__SAVE_UNITS_ISSUED : mml:string
+        NO=NO
+        YES=YES
+    PE_PRODUCT_EVENTS__SAVE_RETURN_OF_CAP_PERC__SAVE_PERCENTAGE_BASIS : mml:string
+        INITIAL_COMMITMENT="INITIAL COMMITMENT"
+        LAST_CONTRIBUTION="LAST CONTRIBUTION"
+    PE_PRODUCT_EVENTS__UNITS_ISSUED : mml:string
+        NO=NO
+        YES=YES
+}

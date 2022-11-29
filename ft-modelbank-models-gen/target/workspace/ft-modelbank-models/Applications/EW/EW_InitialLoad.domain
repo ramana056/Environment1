@@ -1,0 +1,66 @@
+# UTF-8
+/* Initial Load */
+Domain EW_InitialLoad
+    @t24:i (module=EW)
+    @java:Package (value=com.temenos.t24.datamodel.ew.ew_initialload)
+namespace "http://www.temenos.com/t24/EW_InitialLoad"
+metamodelVersion 1.30.6
+Classes {
+    EW_ACC_TRD_BAL
+        @i18n:Description (en="")
+        @t24:i (t24Name=EW.ACC.TRD.BAL, level=F, type=L, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        ACCOUNT_OFFICER -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Account Officer")
+            @i18n:Tooltip (en="Indicates Account Officer responsible")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=9.0, core=true, businessType=DAO, t24Name=ACCOUNT.OFFICER, mandatory=false)
+        CATEGORY -> ST_Config:CATEGORY
+            @i18n:Label (en=Category)
+            @i18n:Tooltip (en="Specifies the Category")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=2.0, core=true, businessType=CAT, t24Name=CATEGORY, mask="R##-###", mandatory=false)
+        COMP_TD_BALANCE : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=18, sysNumber=11.0, core=true, t24Name=COMP.TD.BALANCE, mandatory=false)
+        CURRENCY -> ST_CurrencyConfig:CURRENCY
+            @i18n:Label (en=Ccy)
+            @t24:i (align=L, inputBehaviour=N, maxLength=3, sysNumber=6.0, core=true, businessType=CCY, t24Name=CURRENCY, mandatory=false)
+        CURRENCY_MARKET -> ST_CurrencyConfig:CURRENCY_MARKET
+            @i18n:Label (en=Market)
+            @t24:i (align=R, inputBehaviour=N, maxLength=1, sysNumber=7.0, core=true, t24Name=CURRENCY.MARKET, mandatory=false)
+        CUSTOMER -> ST_Customer:CUSTOMER
+            @i18n:Label (en=Customer)
+            @i18n:Tooltip (en="Customer Liability")
+            @t24:i (align=R, inputBehaviour=N, maxLength=10, sysNumber=1.0, core=true, businessType=CUS, t24Name=CUSTOMER, mandatory=false)
+        EW_ACC_TRD_BAL -> EW_InitialLoad:EW_ACC_TRD_BAL PK required
+            @t24:i (align=L, inputBehaviour=I, maxLength=19, sysNumber=0.0, core=true, businessType=POSANT, t24Name=EW.ACC.TRD.BAL, mandatory=true)
+        LIMIT_REF : T24BusinessTypes:N
+            @i18n:Label (en="Limit Ref")
+            @i18n:Tooltip (en="Limit Reference")
+            @t24:i (align=R, inputBehaviour=N, maxLength=10, sysNumber=8.0, core=true, t24Name=LIMIT.REF, mandatory=false)
+        MNEMONIC : T24BusinessTypes:MNE
+            @i18n:Label (en=Mnemonic)
+            @i18n:Tooltip (en="The alternate short way of calling the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=10, sysNumber=4.0, core=true, t24Name=MNEMONIC, mandatory=false)
+        OTHER_OFFICER -> byValue EW_InitialLoad:EW_ACC_TRD_BAL__OTHER_OFFICER *
+            @t24:i (t24Name=OTHER.OFFICER)
+        POSITION_TYPE -> RE_Config:FX_POS_TYPE
+            @i18n:Label (en="Position Type")
+            @i18n:Tooltip (en="Position Type")
+            @t24:i (align=L, inputBehaviour=N, maxLength=2, sysNumber=5.0, core=true, businessType=SSS, t24Name=POSITION.TYPE, mandatory=false)
+        SHORT_TITLE -> byValue EW_InitialLoad:EW_ACC_TRD_BAL__SHORT_TITLE *
+            @t24:i (t24Name=SHORT.TITLE)
+    }
+    EW_ACC_TRD_BAL__OTHER_OFFICER
+    {
+        OTHER_OFFICER -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Other Officer")
+            @i18n:Tooltip (en="Other Ac officer who may have some involvement")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=10.0, core=true, businessType=DAO, t24Name=OTHER.OFFICER, mandatory=false)
+    }
+    EW_ACC_TRD_BAL__SHORT_TITLE
+    {
+        SHORT_TITLE : T24BusinessTypes:N
+            @i18n:Label (en="Account Name")
+            @i18n:Tooltip (en="Indicates the abbreviated title of the account")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, multiLanguage=true, sysNumber=3.0, core=true, t24Name=SHORT.TITLE, mandatory=false)
+    }
+}

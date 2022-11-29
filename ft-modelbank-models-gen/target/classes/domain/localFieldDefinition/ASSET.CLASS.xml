@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<localref:LocalRef xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:localref="http://www.odcgroup.com/t24/application/localref/model/LocalRef"
+    xmlns:translationDsl="http://www.odcgroup.com/translation/TranslationDsl" localRefID="ASSET.CLASS" maximumChars="20" minimumChars="0" mandatory="false"
+    charType="N" defaultPossible="false" virtualTable="ASSET.CLASS" description="To identify Asset Class for DXtrade">
+  <shortName xsi:type="translationDsl:LocalTranslations">
+    <translations locale="en" text="ASSET.CLASS"/>
+  </shortName>
+  <vettingTable vettingTable="CO">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Commodity/energy"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="CR">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Credit"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="CU">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Currency"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="EQ">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Equity"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="IR">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Interest rate/debt"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="OT">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Other"/>
+    </remarks>
+  </vettingTable>
+</localref:LocalRef>

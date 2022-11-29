@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<localref:LocalRef xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:localref="http://www.odcgroup.com/t24/application/localref/model/LocalRef"
+    xmlns:translationDsl="http://www.odcgroup.com/translation/TranslationDsl" localRefID="TAX.JURISDICTION" maximumChars="2" minimumChars="0"
+    mandatory="false" charType="A" defaultPossible="false" virtualTable="PROVINCE"
+    description="Customer Jurisdiction">
+  <shortName xsi:type="translationDsl:LocalTranslations">
+    <translations locale="en" text="JURISDICTION"/>
+  </shortName>
+  <vettingTable vettingTable="BA">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Buenos Aires"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="CA">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Catamarca"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="CC">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Chaco"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="CD">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Cordoba"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="CF">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="CABA"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="CH">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Chubut"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="CR">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Corrientes"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="ER">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Entre Rios"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="FO">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Formosa"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="JY">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Jujuy"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="LP">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="La Pampa"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="LR">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="La Rioja"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="MA">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Multilateral"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="MN">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Misiones"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="MZ">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Mendoza"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="NQ">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Neuquen"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="RN">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Rio Negro"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="SA">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Salta"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="SC">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Santa Cruz"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="SE">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Santiago del Estero"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="SF">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Santa Fe"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="SJ">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="San Juan"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="SL">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="San Luis"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="TF">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Tierra del Fuego"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="TM">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Tucuman"/>
+    </remarks>
+  </vettingTable>
+</localref:LocalRef>

@@ -1,0 +1,267 @@
+# UTF-8
+/* Swiss Securities Reporting */
+Domain CHSCRP_SecuritiesJournal
+    @t24:i (module=CHSCRP)
+    @java:Package (value=com.temenos.t24.datamodel.chscrp.chscrp_securitiesjournal)
+namespace "http://www.temenos.com/t24/CHSCRP_SecuritiesJournal"
+metamodelVersion 1.30.6
+Classes {
+    /* This table will hold the order and trade details of SC and DX which will be reported for swiss securities journal. */
+    CHSCRP_JOURNAL_DATA
+        @i18n:Description (en="")
+        @t24:i (t24Name=CHSCRP.JOURNAL.DATA, level=F, type=L, allowedFunctions="L P S", localRefApplicationSysNo=21.0, localRefAllowed=true)
+    {
+        BUY_SELL : T24BusinessTypes:S
+            @i18n:Label (en=Buy/Sell)
+            @i18n:Tooltip (en="Buy or Sell?")
+            @t24:i (align=L, inputBehaviour=I, maxLength=17, sysNumber=4.0, core=true, t24Name=BUY.SELL, mandatory=false)
+        DATE_TIME_EXE -> byValue CHSCRP_SecuritiesJournal:CHSCRP_JOURNAL_DATA__DATE_TIME_EXE *
+            @t24:i (t24Name=DATE.TIME.EXE)
+        /* ID will be the combination of Portfolio Id.Security master Id.Order Id. Portfolio Id will be security account number. Security master id will be from SECURTY.MASTER application. Order Id defines the order/Trade which is carried out. */
+        ID -> CHSCRP_SecuritiesJournal:CHSCRP_JOURNAL_DATA PK required
+            @i18n:Label (en="Transaction Ref")
+            @i18n:Tooltip (en="Transaction Reference")
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=0.0, core=true, businessType=A, t24Name="@ID", mandatory=true)
+        IN_TIME_ORDER : T24BusinessTypes:TIME
+            @t24:i (align=L, inputBehaviour=I, maxLength=8, sysNumber=3.0, core=true, t24Name=IN.TIME.ORDER, mandatory=false)
+        ORDER_NO : T24BusinessTypes:S
+            @i18n:Label (en="Order No")
+            @i18n:Tooltip (en="Indicates the order number")
+            @t24:i (align=L, inputBehaviour=I, maxLength=17, sysNumber=7.0, core=true, t24Name=ORDER.NO, mandatory=false)
+        ORDER_SIZE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=18, sysNumber=8.0, core=true, t24Name=ORDER.SIZE, mandatory=false)
+        ORDER_TYPE : T24BusinessTypes:A
+            @i18n:Label (en="Order Type")
+            @t24:i (align=L, inputBehaviour=I, maxLength=13, sysNumber=5.0, core=true, t24Name=ORDER.TYPE, mandatory=false)
+        RESERVED_1 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=22.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=23.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=24.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=25.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        RESERVED_5 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=26.0, core=true, t24Name=RESERVED.5, mandatory=false)
+        SEC_NAME : T24BusinessTypes:S
+            @i18n:Label (en="Security Name")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=2.0, core=true, t24Name=SEC.NAME, mandatory=false)
+        SEC_NO : T24BusinessTypes:A
+            @i18n:Label (en="Security Number")
+            @i18n:Tooltip (en="Indicates a vailid Security")
+            @t24:i (align=L, inputBehaviour=I, maxLength=12, sysNumber=1.0, core=true, t24Name=SEC.NO, mandatory=false)
+        VALID_UNTIL : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=6.0, core=true, t24Name=VALID.UNTIL, mandatory=false)
+    }
+    CHSCRP_JOURNAL_DATA__DATE_TIME_EXE
+    {
+        CLIENT -> ST_Customer:CUSTOMER
+            @i18n:Label (en=Counterparty)
+            @t24:i (align=R, inputBehaviour=I, maxLength=21, sysNumber=13.0, core=true, businessType=CUS, t24Name=CLIENT, mandatory=false)
+        CP_TRADE_ID : T24BusinessTypes:S
+            @t24:i (align=L, inputBehaviour=I, maxLength=16, sysNumber=14.0, core=true, t24Name=CP.TRADE.ID, mandatory=false)
+        DATE_TIME_EXE : T24BusinessTypes:S
+            @t24:i (align=L, inputBehaviour=I, maxLength=11, sysNumber=9.0, core=true, t24Name=DATE.TIME.EXE, mandatory=false)
+        EXEC_PLACE : T24BusinessTypes:S
+            @t24:i (align=L, inputBehaviour=I, maxLength=5, sysNumber=12.0, core=true, t24Name=EXEC.PLACE, mandatory=false)
+        RESERVED_10 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=20.0, core=true, t24Name=RESERVED.10, mandatory=false)
+        RESERVED_6 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=16.0, core=true, t24Name=RESERVED.6, mandatory=false)
+        RESERVED_7 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=17.0, core=true, t24Name=RESERVED.7, mandatory=false)
+        RESERVED_8 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=18.0, core=true, t24Name=RESERVED.8, mandatory=false)
+        RESERVED_9 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=19.0, core=true, t24Name=RESERVED.9, mandatory=false)
+        TRADE_SIZE -> byValue CHSCRP_SecuritiesJournal:CHSCRP_JOURNAL_DATA__DATE_TIME_EXE__TRADE_SIZE *
+            @t24:i (t24Name=TRADE.SIZE)
+        VALUE_DATE -> byValue CHSCRP_SecuritiesJournal:CHSCRP_JOURNAL_DATA__DATE_TIME_EXE__VALUE_DATE *
+            @t24:i (t24Name=VALUE.DATE)
+    }
+    CHSCRP_JOURNAL_DATA__DATE_TIME_EXE__TRADE_SIZE
+    {
+        ALLOC_PRICE : T24BusinessTypes:PRICE
+            @t24:i (align=L, inputBehaviour=I, maxLength=25, sysNumber=11.0, core=true, t24Name=ALLOC.PRICE, mandatory=false)
+        TRADE_SIZE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=18, sysNumber=10.0, core=true, t24Name=TRADE.SIZE, mandatory=false)
+    }
+    CHSCRP_JOURNAL_DATA__DATE_TIME_EXE__VALUE_DATE
+    {
+        VALUE_DATE : T24BusinessTypes:A
+            @i18n:Label (en="Value Date")
+            @i18n:Tooltip (en="Indicates the Value date of the Contract")
+            @t24:i (align=L, inputBehaviour=I, maxLength=11, sysNumber=15.0, core=true, t24Name=VALUE.DATE, mandatory=false)
+    }
+    /* The table is to parameterize the list of sub asset types for those the Swiss securities journal report is required. */
+    CHSCRP_SEC_JOURNAL
+        @i18n:Description (en="")
+        @t24:i (t24Name=CHSCRP.SEC.JOURNAL, level=I, type=H, allowedFunctions="A C D E H I L P Q R S", localRefApplicationSysNo=4.0, localRefAllowed=true)
+    {
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=18.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=19.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=15.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=16.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=12.0, core=true, t24Name=CURR.NO, mandatory=false)
+        DATE_TIME -> byValue CHSCRP_SecuritiesJournal:CHSCRP_SEC_JOURNAL__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=17.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        FILE_PATH : T24BusinessTypes:BCON_FILEPATH
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=2.0, core=true, t24Name=FILE.PATH, mandatory=false)
+        /* ID will be the lead company Id */
+        ID -> CHSCRP_SecuritiesJournal:CHSCRP_SEC_JOURNAL PK required
+            @i18n:Label (en="Transaction Ref")
+            @i18n:Tooltip (en="Transaction Reference")
+            @t24:i (align=L, inputBehaviour=I, maxLength=9, sysNumber=0.0, core=true, businessType=COM, t24Name="@ID", mandatory=true)
+        INPUTTER -> byValue CHSCRP_SecuritiesJournal:CHSCRP_SEC_JOURNAL__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        OVERRIDE -> byValue CHSCRP_SecuritiesJournal:CHSCRP_SEC_JOURNAL__OVERRIDE *
+            @t24:i (t24Name=OVERRIDE)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=11.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        RESERVED_1 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=5.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=6.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=7.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=8.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        RESERVED_5 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=9.0, core=true, t24Name=RESERVED.5, mandatory=false)
+        RETENTION_PERIOD : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=6, sysNumber=3.0, core=true, t24Name=RETENTION.PERIOD, mandatory=false)
+        SUB_ASSET_TYPE -> byValue CHSCRP_SecuritiesJournal:CHSCRP_SEC_JOURNAL__SUB_ASSET_TYPE *
+            @t24:i (t24Name=SUB.ASSET.TYPE)
+    }
+    /* The table is to make the request for the securities journal report. */
+    CHSCRP_SEC_JOURNAL_REQUEST
+        @i18n:Description (en="")
+        @t24:i (t24Name=CHSCRP.SEC.JOURNAL.REQUEST, level=I, type=H, allowedFunctions="A C D E H I L P Q R S", localRefApplicationSysNo=4.0, localRefAllowed=true)
+    {
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=18.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=19.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=15.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=16.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=12.0, core=true, t24Name=CURR.NO, mandatory=false)
+        DATE_TIME -> byValue CHSCRP_SecuritiesJournal:CHSCRP_SEC_JOURNAL_REQUEST__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=17.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        END_DATE : T24BusinessTypes:D required
+            @i18n:Label (en="End Date")
+            @i18n:Tooltip (en="End Date")
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=2.0, core=true, t24Name=END.DATE, mandatory=true)
+        /* ID will be today's date */
+        ID -> CHSCRP_SecuritiesJournal:CHSCRP_SEC_JOURNAL_REQUEST PK required
+            @i18n:Label (en="Transaction Ref")
+            @i18n:Tooltip (en="Transaction Reference")
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=0.0, core=true, businessType=D, t24Name="@ID", mandatory=true)
+        INPUTTER -> byValue CHSCRP_SecuritiesJournal:CHSCRP_SEC_JOURNAL_REQUEST__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        OVERRIDE -> byValue CHSCRP_SecuritiesJournal:CHSCRP_SEC_JOURNAL_REQUEST__OVERRIDE *
+            @t24:i (t24Name=OVERRIDE)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=11.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        RESERVED_1 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=5.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=6.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=7.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=8.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        RESERVED_5 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=9.0, core=true, t24Name=RESERVED.5, mandatory=false)
+        START_DATE : T24BusinessTypes:D required
+            @i18n:Label (en="Start Date")
+            @i18n:Tooltip (en="Start Date")
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=1.0, core=true, t24Name=START.DATE, mandatory=true)
+        START_SERVICE : CHSCRP_SecuritiesJournal:CHSCRP_SEC_JOURNAL_REQUEST__START_SERVICE
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=3.0, core=true, t24Name=START.SERVICE, mandatory=false)
+    }
+    CHSCRP_SEC_JOURNAL_REQUEST__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=14.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    CHSCRP_SEC_JOURNAL_REQUEST__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=13.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    CHSCRP_SEC_JOURNAL_REQUEST__OVERRIDE
+    {
+        OVERRIDE : T24BusinessTypes:N
+            @i18n:Label (en=Override)
+            @i18n:Tooltip (en="Overrides generated by this transaction")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=10.0, core=true, t24Name=OVERRIDE, mandatory=false)
+    }
+    CHSCRP_SEC_JOURNAL__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=14.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    CHSCRP_SEC_JOURNAL__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=13.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    CHSCRP_SEC_JOURNAL__OVERRIDE
+    {
+        OVERRIDE : T24BusinessTypes:N
+            @i18n:Label (en=Override)
+            @i18n:Tooltip (en="Overrides generated by this transaction")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=10.0, core=true, t24Name=OVERRIDE, mandatory=false)
+    }
+    CHSCRP_SEC_JOURNAL__SUB_ASSET_TYPE
+    {
+        SUB_ASSET_TYPE -> ST_Valuation:SUB_ASSET_TYPE
+            @i18n:Label (en="Sub Asset Type")
+            @t24:i (align=L, inputBehaviour=I, maxLength=5, sysNumber=1.0, core=true, businessType=A, t24Name=SUB.ASSET.TYPE, mandatory=false)
+    }
+}
+Enumerations {
+    CHSCRP_SEC_JOURNAL_REQUEST__START_SERVICE : mml:string
+        NULL=NULL
+        YES=YES
+}

@@ -1,0 +1,1536 @@
+# UTF-8
+/* Configuration for CDP */
+Domain CZ_Framework
+    @t24:i (module=CZ)
+    @java:Package (value=com.temenos.t24.datamodel.cz.cz_framework)
+namespace "http://www.temenos.com/t24/CZ_Framework"
+metamodelVersion 1.30.6
+Classes {
+    /* This table defines the metadata and holds all the fields and tables that contain personal data definition.The table will have a set of System fields that will hold the definition as defined from the underlying application for fields flagged as PDD. These will be automatically populated through a service that will take the data definition from the application (STANDARD.SELECTION) and will create/update the record for each table. If the Bank wants to assign a different definition from what has been assigned by the application, these will have to be defined under the non-system fields (e.g. Field.Name, Field.Attributes, Purpose etc.) */
+    CZ_CDP_DATA_DEFINITION
+        @i18n:Description (en="")
+        @t24:i (t24Name=CZ.CDP.DATA.DEFINITION, level=I, type=H, allowedFunctions="A C D E H I L P Q R S", localRefApplicationSysNo=60.0, localRefAllowed=true)
+    {
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=69.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=70.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=66.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=67.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=63.0, core=true, t24Name=CURR.NO, mandatory=false)
+/* This will indicate how the table will be accessed using the Customer Id
+Validations:
+If Access Type is ID: Input not allowed
+ACTIVITY: Input not allowed
+FIELD: the field from that table that contains the customer id
+CONCAT: should have the Table Name
+API: should a valid EB.API
+PARTIAL.ID: Input not allowed
+RELATED.CONTRACT: Table Name that contains the link to Customer Id and should be a valid STANDARD.MAPPING record id. */
+        CUST_ACCESS_LINK : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=37.0, core=true, t24Name=CUST.ACCESS.LINK, mandatory=false)
+/* This will provide the value to be used based on the Access.Type:
+Allowed values are ID,CONCAT,FIELD,API,PARTIAL.ID,RELATED.CONTRACT,ACTIVITY */
+        CUST_ACCESS_TYPE : CZ_Framework:CZ_CDP_DATA_DEFINITION__CUST_ACCESS_TYPE
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=36.0, core=true, t24Name=CUST.ACCESS.TYPE, mandatory=false)
+        CZ_CDP_DATA_DEFINITION_ID -> CZ_Framework:CZ_CDP_DATA_DEFINITION PK required
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=0.0, core=true, businessType=A, t24Name=CZ.CDP.DATA.DEFINITION.ID, mandatory=true)
+        DATE_TIME -> byValue CZ_Framework:CZ_CDP_DATA_DEFINITION__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=68.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        FEA_FIELD_NAME -> byValue CZ_Framework:CZ_CDP_DATA_DEFINITION__FEA_FIELD_NAME *
+            @t24:i (t24Name=FEA.FIELD.NAME)
+/* Allowed values are INT, CUS, CST, FIN, FTD, FTF, CCY, NOS
+NOINPUT field
+Classification to which the given Application "i.e ID" belongs to. Retrived from FILE.CONTROL of that application */
+        FILE_TYPE : CZ_Framework:CZ_CDP_DATA_DEFINITION__FILE_TYPE
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=2.0, core=true, t24Name=FILE.TYPE, mandatory=false)
+        INPUTTER -> byValue CZ_Framework:CZ_CDP_DATA_DEFINITION__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+/* The field denotes whether the application is a master application or a sub-table.
+                For contract wise erasure, the system erases contracts along with sub-tables if configured.
+                If a master application is mentioned in this field, then when a contract erasure request 
+                is made for the master application,the sub-table also gets erased.
+Validation rules:
+
+The field is not allowed input for ECB applications as all the ECB applications are considered as master applications by themselves.
+The field is allowed input only if ALLOW.CONTRACT.ERASURE is set as YES in CZ.CDP.PARAMETER.
+Allowed value is a valid T24 application. */
+        MASTER_APPLICATION : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=52.0, core=true, t24Name=MASTER.APPLICATION, mandatory=false)
+/* The field contains the method through which the sub-table is linked to the master application.
+Validation rules:
+
+Input is mandatory if MASTER.LINK.TYPE is mentioned as CONCAT or FIELD or API.
+CONCAT - A valid T24 table name
+FIELD  - A valid field from the sub-table application
+API    - A valid EB.API record */
+        MASTER_LINK_METHOD : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=54.0, core=true, t24Name=MASTER.LINK.METHOD, mandatory=false)
+/* The field denotes the link between the sub-table and the master application. With this link when the master application contract is erased, 
+                the sub-table contracts are also selected for erasure.
+Validation rules:
+
+The field is mandatory if a master application is mentioned.
+Allowed values are ID_CONCAT_FIELD_API.
+ID     - If the master application ID and the sub-table ID are the same.
+CONCAT - If the sub-table records are availble in a CONCAT file keyed in by the master application record ID. 
+                Concat table name to be mentioned in MASTER.LINK.METHOD
+FIELD  - If there is a field in the sub table that has the master application record ID. Field to be mentioned in MASTER.LINK.METHOD
+API    - For any other cases. The API name to be mentioned in MASTER.LINK.METHOD and needs to be a valid EB.API record. */
+        MASTER_LINK_TYPE : CZ_Framework:CZ_CDP_DATA_DEFINITION__MASTER_LINK_TYPE
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=53.0, core=true, t24Name=MASTER.LINK.TYPE, mandatory=false)
+        OVERRIDE -> byValue CZ_Framework:CZ_CDP_DATA_DEFINITION__OVERRIDE *
+            @t24:i (t24Name=OVERRIDE)
+/* This will indicate how the table will be accessed using the Party Application's Id
+Validations:
+If Access Type is ID: Input not allowed
+FIELD: the field from that table that contains the customer id
+API: should a valid EB.API */
+        PARTY_ACCESS_LINK : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=40.0, core=true, t24Name=PARTY.ACCESS.LINK, mandatory=false)
+/* This will provide the value to be used based on the Access.Type:
+Allowed values are ID,FIELD,API */
+        PARTY_ACCESS_TYPE : CZ_Framework:CZ_CDP_DATA_DEFINITION__PARTY_ACCESS_TYPE
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=39.0, core=true, t24Name=PARTY.ACCESS.TYPE, mandatory=false)
+/* Allowed values are CUSTOMER,PERSON.ENTITY,USER,EB.EXTERNAL.USER,IB.USER
+Defaulted to CUSTOMER
+NOINPUT field */
+        PARTY_APPLICATION : CZ_Framework:CZ_CDP_DATA_DEFINITION__PARTY_APPLICATION
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=38.0, core=true, t24Name=PARTY.APPLICATION, mandatory=false)
+/* Valid PRODUCT Id
+NOINPUT field
+Product to which the given Application"i.e.ID" belongs to */
+        PRODUCT -> EB_SystemTables:EB_PRODUCT
+            @i18n:Label (en=Product)
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=1.0, core=true, businessType=A, t24Name=PRODUCT, mandatory=false)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=62.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        RESERVED_02 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=59.0, core=true, t24Name=RESERVED.02, mandatory=false)
+        RESERVED_03 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=58.0, core=true, t24Name=RESERVED.03, mandatory=false)
+        RESERVED_04 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=57.0, core=true, t24Name=RESERVED.04, mandatory=false)
+        RESERVED_05 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=56.0, core=true, t24Name=RESERVED.05, mandatory=false)
+        RESERVED_06 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=55.0, core=true, t24Name=RESERVED.06, mandatory=false)
+        SYS_FIELD_NAME -> byValue CZ_Framework:CZ_CDP_DATA_DEFINITION__SYS_FIELD_NAME *
+            @t24:i (t24Name=SYS.FIELD.NAME)
+/* This is a flag to indicate if table is used to determine customer activity or only linked to show a relationship between the customer and the Bank.
+Allowed values are ACTIVITY,LINK,BLANK. */
+        USE_IN_ACTIVITY : CZ_Framework:CZ_CDP_DATA_DEFINITION__USE_IN_ACTIVITY
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=35.0, core=true, t24Name=USE.IN.ACTIVITY, mandatory=false)
+        USR_FIELD_NAME -> byValue CZ_Framework:CZ_CDP_DATA_DEFINITION__USR_FIELD_NAME *
+            @t24:i (t24Name=USR.FIELD.NAME)
+    }
+    CZ_CDP_DATA_DEFINITION__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=65.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    CZ_CDP_DATA_DEFINITION__FEA_FIELD_NAME
+    {
+        FEA_ACCESSIBILITY -> byValue CZ_Framework:CZ_CDP_DATA_DEFINITION__FEA_FIELD_NAME__FEA_ACCESSIBILITY *
+            @t24:i (t24Name=FEA.ACCESSIBILITY)
+/* The field denote the erase action that can be carried out on the field identified.
+Validation Rule:
+A valid CZ.CDP.ERASE.OPTION record is to be included. Only one value can be given.
+Currently the system supports the following erase options
+The DataType which is mentioned in the ERASE.OPTION record should match the DataType of the field mentioned in FEA.FIELD.NAME
+1. NULLIFY - Clear the field contents. For those which are only Non-Mandatory
+2. DEFAULT - Replace the field value with a default value
+3. OBFUSCATE - Replace the field contents with a unique value
+4. NO ACTION - Do not delete
+NOINPUT field for the User */
+        FEA_ERASE_OPTION -> CZ_Framework:CZ_CDP_ERASE_OPTION
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=45.0, core=true, businessType=A, t24Name=FEA.ERASE.OPTION, mandatory=false)
+        FEA_FIELD_ATTRIBUTES -> byValue CZ_Framework:CZ_CDP_DATA_DEFINITION__FEA_FIELD_NAME__FEA_FIELD_ATTRIBUTES *
+            @t24:i (t24Name=FEA.FIELD.ATTRIBUTES)
+/* Valid field name of the application i.e ID
+Contain the fields which are marked as Personal Data by Temenos
+Validation Rules:This Field should contain the Valid field name of the Application
+NOINPUT field for the User */
+        FEA_FIELD_NAME : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=41.0, core=true, t24Name=FEA.FIELD.NAME, mandatory=false)
+/* This field will hold the Product ID that this field belongs to.
+For example USCORE. (This field could be used for filtering and displaying the relevant products on site.) */
+        FEA_PRODUCT -> EB_SystemTables:EB_PRODUCT
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=42.0, core=true, businessType=A, t24Name=FEA.PRODUCT, mandatory=false)
+        FEA_PURPOSE -> byValue CZ_Framework:CZ_CDP_DATA_DEFINITION__FEA_FIELD_NAME__FEA_PURPOSE *
+            @t24:i (t24Name=FEA.PURPOSE)
+        /* Reserved fields for FEA fields. */
+        FEA_RESERVED_01 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=51.0, core=true, t24Name=FEA.RESERVED.01, mandatory=false)
+        /* Reserved fields for FEA fields. */
+        FEA_RESERVED_02 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=50.0, core=true, t24Name=FEA.RESERVED.02, mandatory=false)
+        /* Reserved fields for FEA fields. */
+        FEA_RESERVED_03 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=49.0, core=true, t24Name=FEA.RESERVED.03, mandatory=false)
+        /* Reserved fields for FEA fields. */
+        FEA_RESERVED_04 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=48.0, core=true, t24Name=FEA.RESERVED.04, mandatory=false)
+        /* Reserved fields for FEA fields. */
+        FEA_RESERVED_05 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=47.0, core=true, t24Name=FEA.RESERVED.05, mandatory=false)
+    }
+    CZ_CDP_DATA_DEFINITION__FEA_FIELD_NAME__FEA_ACCESSIBILITY
+    {
+/* The field contains Accessibility options for a particular field
+Validation Rule:
+Allowed values are ACCESS,PORTABLE,NONE
+NOINPUT field for the User */
+        FEA_ACCESSIBILITY : CZ_Framework:CZ_CDP_DATA_DEFINITION__FEA_FIELD_NAME__FEA_ACCESSIBILITY__FEA_ACCESSIBILITY
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=46.0, core=true, t24Name=FEA.ACCESSIBILITY, mandatory=false)
+    }
+    CZ_CDP_DATA_DEFINITION__FEA_FIELD_NAME__FEA_FIELD_ATTRIBUTES
+    {
+/* This field defines the attribute of the field.
+Allowed values are DIRECT, INDIRECT, MARKETING, SENSITIVE
+New attributes can be included further by adding EB.LOOKUP table with ID as CDP.ATTRIBUTES*OTHER.
+NOINPUT field for the User */
+        FEA_FIELD_ATTRIBUTES : CZ_Framework:CZ_CDP_DATA_DEFINITION__FEA_FIELD_NAME__FEA_FIELD_ATTRIBUTES__FEA_FIELD_ATTRIBUTES
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=43.0, core=true, t24Name=FEA.FIELD.ATTRIBUTES, mandatory=false)
+    }
+    CZ_CDP_DATA_DEFINITION__FEA_FIELD_NAME__FEA_PURPOSE
+    {
+/* This field defines the purpose of the field.
+Validation Rules:
+This field allows a valid CZ.CDP.PURPOSE record
+However the system provided fields does not validate against the mandatory presence of a valid purpose record as long as the fields are redefined at the user level or excluded for Erasure processing
+More than one purpose can be defined for a field.Additional purposes can be added by including EB.LOOKUP table with ID like CDP.PURPOSE*OTHER
+NOINPUT field for the User */
+        FEA_PURPOSE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=44.0, core=true, t24Name=FEA.PURPOSE, mandatory=false)
+    }
+    CZ_CDP_DATA_DEFINITION__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=64.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    CZ_CDP_DATA_DEFINITION__OVERRIDE
+    {
+        OVERRIDE : T24BusinessTypes:N
+            @i18n:Label (en=Override)
+            @i18n:Tooltip (en="Overrides generated by this transaction")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=61.0, core=true, t24Name=OVERRIDE, mandatory=false)
+    }
+    CZ_CDP_DATA_DEFINITION__SYS_FIELD_NAME
+    {
+        SYS_ACCESSIBILITY -> byValue CZ_Framework:CZ_CDP_DATA_DEFINITION__SYS_FIELD_NAME__SYS_ACCESSIBILITY *
+            @t24:i (t24Name=SYS.ACCESSIBILITY)
+        SYS_ERASE_OPTION -> CZ_Framework:CZ_CDP_ERASE_OPTION
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=6.0, core=true, businessType=A, t24Name=SYS.ERASE.OPTION, mandatory=false)
+/* Flag to indicate if this field is no longer classified as personal data and is to be excluded
+Allowed values are YES/BLANK */
+        SYS_EXCLUDE : CZ_Framework:CZ_CDP_DATA_DEFINITION__SYS_FIELD_NAME__SYS_EXCLUDE
+            @t24:i (align=L, inputBehaviour=N, maxLength=3, sysNumber=8.0, core=true, t24Name=SYS.EXCLUDE, mandatory=false)
+        SYS_FIELD_ATTRIBUTES -> byValue CZ_Framework:CZ_CDP_DATA_DEFINITION__SYS_FIELD_NAME__SYS_FIELD_ATTRIBUTES *
+            @t24:i (t24Name=SYS.FIELD.ATTRIBUTES)
+/* Valid field name of the application i.e ID
+Contain the fields which are marked as Personal Data by Temenos
+Validation Rules:This Field should contain the Valid field name of the Application
+NOINPUT field for the User */
+        SYS_FIELD_NAME : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=3.0, core=true, t24Name=SYS.FIELD.NAME, mandatory=false)
+        SYS_PURPOSE -> byValue CZ_Framework:CZ_CDP_DATA_DEFINITION__SYS_FIELD_NAME__SYS_PURPOSE *
+            @t24:i (t24Name=SYS.PURPOSE)
+        SYS_RESERVED_01 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=18.0, core=true, t24Name=SYS.RESERVED.01, mandatory=false)
+        SYS_RESERVED_02 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=17.0, core=true, t24Name=SYS.RESERVED.02, mandatory=false)
+        SYS_RESERVED_03 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=16.0, core=true, t24Name=SYS.RESERVED.03, mandatory=false)
+        SYS_RESERVED_04 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=15.0, core=true, t24Name=SYS.RESERVED.04, mandatory=false)
+        SYS_RESERVED_05 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=14.0, core=true, t24Name=SYS.RESERVED.05, mandatory=false)
+        SYS_RESERVED_06 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=13.0, core=true, t24Name=SYS.RESERVED.06, mandatory=false)
+        SYS_RESERVED_07 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=12.0, core=true, t24Name=SYS.RESERVED.07, mandatory=false)
+        SYS_RESERVED_08 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=11.0, core=true, t24Name=SYS.RESERVED.08, mandatory=false)
+        SYS_RESERVED_09 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=10.0, core=true, t24Name=SYS.RESERVED.09, mandatory=false)
+        /* Reserved fields for SYS fields. */
+        SYS_RESERVED_10 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=9.0, core=true, t24Name=SYS.RESERVED.10, mandatory=false)
+    }
+    CZ_CDP_DATA_DEFINITION__SYS_FIELD_NAME__SYS_ACCESSIBILITY
+    {
+/* The field contains Accessibility options for a particular field
+Validation Rule:
+Allowed values are ACCESS,PORTABLE,NONE
+NOINPUT field for the User */
+        SYS_ACCESSIBILITY : CZ_Framework:CZ_CDP_DATA_DEFINITION__SYS_FIELD_NAME__SYS_ACCESSIBILITY__SYS_ACCESSIBILITY
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=7.0, core=true, t24Name=SYS.ACCESSIBILITY, mandatory=false)
+    }
+    CZ_CDP_DATA_DEFINITION__SYS_FIELD_NAME__SYS_FIELD_ATTRIBUTES
+    {
+/* This field defines the attribute of the field.
+Allowed values are DIRECT, INDIRECT, MARKETING, SENSITIVE
+New attributes can be included further by adding EB.LOOKUP table with ID as CDP.ATTRIBUTES*OTHER.
+NOINPUT field for the User */
+        SYS_FIELD_ATTRIBUTES : CZ_Framework:CZ_CDP_DATA_DEFINITION__SYS_FIELD_NAME__SYS_FIELD_ATTRIBUTES__SYS_FIELD_ATTRIBUTES
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=4.0, core=true, t24Name=SYS.FIELD.ATTRIBUTES, mandatory=false)
+    }
+    CZ_CDP_DATA_DEFINITION__SYS_FIELD_NAME__SYS_PURPOSE
+    {
+/* This field defines the purpose of the field.
+Validation Rules:
+This field allows a valid CZ.CDP.PURPOSE record
+However the system provided fields does not validate against the mandatory presence of a valid purpose record as long as the fields are redefined at the user level or excluded for Erasure processing
+More than one purpose can be defined for a field.Additional purposes can be added by including EB.LOOKUP table with ID like CDP.PURPOSE*OTHER
+NOINPUT field for the User */
+        SYS_PURPOSE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=5.0, core=true, t24Name=SYS.PURPOSE, mandatory=false)
+    }
+    CZ_CDP_DATA_DEFINITION__USR_FIELD_NAME
+    {
+        USR_ACCESSIBILITY -> byValue CZ_Framework:CZ_CDP_DATA_DEFINITION__USR_FIELD_NAME__USR_ACCESSIBILITY *
+            @t24:i (t24Name=USR.ACCESSIBILITY)
+        USR_ERASE_OPTION -> CZ_Framework:CZ_CDP_ERASE_OPTION
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=22.0, core=true, businessType=A, t24Name=USR.ERASE.OPTION, mandatory=false)
+/* Flag to indicate if this field is no longer classified as personal data and is to be excluded
+Allowed values are YES/BLANK */
+        USR_EXCLUDE : CZ_Framework:CZ_CDP_DATA_DEFINITION__USR_FIELD_NAME__USR_EXCLUDE
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=24.0, core=true, t24Name=USR.EXCLUDE, mandatory=false)
+        USR_FIELD_ATTRIBUTES -> byValue CZ_Framework:CZ_CDP_DATA_DEFINITION__USR_FIELD_NAME__USR_FIELD_ATTRIBUTES *
+            @t24:i (t24Name=USR.FIELD.ATTRIBUTES)
+/* Valid field name of the application i.e ID
+Contain the fields which are marked as Personal Data by the User
+Validation Rules:This Field should contain the Valid field name of the Application */
+        USR_FIELD_NAME : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=19.0, core=true, t24Name=USR.FIELD.NAME, mandatory=false)
+        USR_PURPOSE -> byValue CZ_Framework:CZ_CDP_DATA_DEFINITION__USR_FIELD_NAME__USR_PURPOSE *
+            @t24:i (t24Name=USR.PURPOSE)
+        USR_RESERVED_01 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=34.0, core=true, t24Name=USR.RESERVED.01, mandatory=false)
+        USR_RESERVED_02 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=33.0, core=true, t24Name=USR.RESERVED.02, mandatory=false)
+        USR_RESERVED_03 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=32.0, core=true, t24Name=USR.RESERVED.03, mandatory=false)
+        USR_RESERVED_04 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=31.0, core=true, t24Name=USR.RESERVED.04, mandatory=false)
+        USR_RESERVED_05 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=30.0, core=true, t24Name=USR.RESERVED.05, mandatory=false)
+        USR_RESERVED_06 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=29.0, core=true, t24Name=USR.RESERVED.06, mandatory=false)
+        USR_RESERVED_07 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=28.0, core=true, t24Name=USR.RESERVED.07, mandatory=false)
+        USR_RESERVED_08 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=27.0, core=true, t24Name=USR.RESERVED.08, mandatory=false)
+        USR_RESERVED_09 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=26.0, core=true, t24Name=USR.RESERVED.09, mandatory=false)
+        /* Reserved fields for USR fields. */
+        USR_RESERVED_10 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=25.0, core=true, t24Name=USR.RESERVED.10, mandatory=false)
+    }
+    CZ_CDP_DATA_DEFINITION__USR_FIELD_NAME__USR_ACCESSIBILITY
+    {
+/* The field contains Accessibility options for a particular field
+Validation Rule:
+Allowed values are ACCESS,PORTABLE,NONE */
+        USR_ACCESSIBILITY : CZ_Framework:CZ_CDP_DATA_DEFINITION__USR_FIELD_NAME__USR_ACCESSIBILITY__USR_ACCESSIBILITY
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=23.0, core=true, t24Name=USR.ACCESSIBILITY, mandatory=false)
+    }
+    CZ_CDP_DATA_DEFINITION__USR_FIELD_NAME__USR_FIELD_ATTRIBUTES
+    {
+/* This field defines the attribute of the field.
+Allowed values are DIRECT, INDIRECT, MARKETING, SENSITIVE
+New attributes can be included further by adding EB.LOOKUP table with ID as CDP.ATTRIBUTES*OTHER. */
+        USR_FIELD_ATTRIBUTES : CZ_Framework:CZ_CDP_DATA_DEFINITION__USR_FIELD_NAME__USR_FIELD_ATTRIBUTES__USR_FIELD_ATTRIBUTES
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=20.0, core=true, t24Name=USR.FIELD.ATTRIBUTES, mandatory=false)
+    }
+    CZ_CDP_DATA_DEFINITION__USR_FIELD_NAME__USR_PURPOSE
+    {
+/* This field defines the purpose of the field.
+Validation Rules:
+Possible values currently allowed are LEGAL, LEGITIMATE, CONSENT, CONTRACT. More than one purpose can be defined for a field.Additional purposes can be added by including EB.LOOKUP table with ID like CDP.PURPOSE*OTHER */
+        USR_PURPOSE -> CZ_Framework:CZ_CDP_PURPOSE
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=21.0, core=true, businessType=A, t24Name=USR.PURPOSE, mandatory=false)
+    }
+    /* This table will contain the list of erase options that can be applied to each field based on the data type */
+    CZ_CDP_ERASE_OPTION
+        @i18n:Description (en="")
+        @t24:i (t24Name=CZ.CDP.ERASE.OPTION, level=I, type=H, allowedFunctions="A C D E H I L P Q R S", localRefApplicationSysNo=27.0, localRefAllowed=true)
+    {
+        /* Only allowed and Required If ERASE.ACTION is OBFUSCATE */
+        ACTION_RTN : T24BusinessTypes:HOOK
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=6.0, core=true, t24Name=ACTION.RTN, mandatory=false)
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=35.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=36.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=32.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        CDP_ERASE_OPTION_ID -> CZ_Framework:CZ_CDP_ERASE_OPTION PK required
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=0.0, core=true, businessType=A, t24Name=CDP.ERASE.OPTION.ID, mandatory=true)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=33.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=29.0, core=true, t24Name=CURR.NO, mandatory=false)
+/* Used to define data type
+Allowed values are DATE,NUMBER,ALPHA */
+        DATA_TYPE : CZ_Framework:CZ_CDP_ERASE_OPTION__DATA_TYPE
+            @i18n:Label (en="Data Type")
+            @i18n:Tooltip (en="Indicates the data type ")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=1.0, core=true, t24Name=DATA.TYPE, mandatory=false)
+        DATE_TIME -> byValue CZ_Framework:CZ_CDP_ERASE_OPTION__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=34.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+/* This field denotes erasure action applied to the data field identifield as personal data(PD).
+Allowed values are DEFAULT,NULLIFY,NO.ACTION,OBFUSCATE
+DEFAULT: will set the value in the PD field to a defualt value.
+NULLIFY: will clear the content of the PD field if not mandatory; or apply default value if PD field is mandatory
+NO.ACTION: value in the PD field is not cleared/erased.
+OBFUSCATE: value in the PD will be masked to hide the original contents.  A logic will be applied to mask. */
+        ERASE_ACTION : CZ_Framework:CZ_CDP_ERASE_OPTION__ERASE_ACTION required
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=2.0, core=true, t24Name=ERASE.ACTION, mandatory=true)
+/* Required and Only allowed if DATA.TYPE is Number or Alpha and ERASE.ACTION is DEFAULT and NULLIFY
+If DATA.TYPE is Number it has to be Numeric
+If DATA.TYPE is Alpha it has to be alphanumeric */
+        ERASE_CHAR_VALUE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=1, sysNumber=4.0, core=true, t24Name=ERASE.CHAR.VALUE, mandatory=false)
+/* Required and Only allowed if DATA.TYPE is Date and ERASE.ACTION is DEFAULT and NULLIFY
+DATE field */
+        ERASE_DATA_VALUE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=3.0, core=true, t24Name=ERASE.DATA.VALUE, mandatory=false)
+        INPUTTER -> byValue CZ_Framework:CZ_CDP_ERASE_OPTION__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+/* Allowed values are MIN,MAX,NONE
+Becomes mandatory field if ERASE.CHAR.VALUE is mentioned */
+        MIN_MAX_CHAR : CZ_Framework:CZ_CDP_ERASE_OPTION__MIN_MAX_CHAR
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=5.0, core=true, t24Name=MIN.MAX.CHAR, mandatory=false)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=28.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        RESERVED_01 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=26.0, core=true, t24Name=RESERVED.01, mandatory=false)
+        RESERVED_02 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=25.0, core=true, t24Name=RESERVED.02, mandatory=false)
+        RESERVED_03 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=24.0, core=true, t24Name=RESERVED.03, mandatory=false)
+        RESERVED_04 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=23.0, core=true, t24Name=RESERVED.04, mandatory=false)
+        RESERVED_05 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=22.0, core=true, t24Name=RESERVED.05, mandatory=false)
+        RESERVED_06 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=21.0, core=true, t24Name=RESERVED.06, mandatory=false)
+        RESERVED_07 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=20.0, core=true, t24Name=RESERVED.07, mandatory=false)
+        RESERVED_08 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=19.0, core=true, t24Name=RESERVED.08, mandatory=false)
+        RESERVED_09 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=18.0, core=true, t24Name=RESERVED.09, mandatory=false)
+        RESERVED_10 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=17.0, core=true, t24Name=RESERVED.10, mandatory=false)
+        RESERVED_11 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=16.0, core=true, t24Name=RESERVED.11, mandatory=false)
+        RESERVED_12 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=15.0, core=true, t24Name=RESERVED.12, mandatory=false)
+        RESERVED_13 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=14.0, core=true, t24Name=RESERVED.13, mandatory=false)
+        RESERVED_14 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=13.0, core=true, t24Name=RESERVED.14, mandatory=false)
+        RESERVED_15 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=12.0, core=true, t24Name=RESERVED.15, mandatory=false)
+        RESERVED_16 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=11.0, core=true, t24Name=RESERVED.16, mandatory=false)
+        RESERVED_17 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=10.0, core=true, t24Name=RESERVED.17, mandatory=false)
+        RESERVED_18 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=9.0, core=true, t24Name=RESERVED.18, mandatory=false)
+        RESERVED_19 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=8.0, core=true, t24Name=RESERVED.19, mandatory=false)
+        RESERVED_20 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=7.0, core=true, t24Name=RESERVED.20, mandatory=false)
+    }
+    CZ_CDP_ERASE_OPTION__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=31.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    CZ_CDP_ERASE_OPTION__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=30.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    CZ_CDP_PARAMETER
+        @i18n:Description (en="")
+        @t24:i (t24Name=CZ.CDP.PARAMETER, level=I, type=H, allowedFunctions="A C D E H I L P Q R S", localRefApplicationSysNo=15.0, localRefAllowed=true)
+    {
+        ACTIVITY_MOVED : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=6.0, core=true, t24Name=ACTIVITY.MOVED, mandatory=false)
+        ALLOW_ACTIVE_ERASURE : CZ_Framework:CZ_CDP_PARAMETER__ALLOW_ACTIVE_ERASURE
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=7.0, core=true, t24Name=ALLOW.ACTIVE.ERASURE, mandatory=false)
+        ALLOW_CONTRACT_ERASURE : CZ_Framework:CZ_CDP_PARAMETER__ALLOW_CONTRACT_ERASURE
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=8.0, core=true, t24Name=ALLOW.CONTRACT.ERASURE, mandatory=false)
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=23.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=24.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=20.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        BUILD_ERASURE_LOG : CZ_Framework:CZ_CDP_PARAMETER__BUILD_ERASURE_LOG
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=5.0, core=true, t24Name=BUILD.ERASURE.LOG, mandatory=false)
+        CDP_API : T24BusinessTypes:HOOK
+            @i18n:Label (en="CDP Api")
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=2.0, core=true, t24Name=CDP.API, mandatory=false)
+        CDP_RULE -> EB_RulesEngine:EB_RULE_GATEWAY
+            @i18n:Label (en="CDP Rule")
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=1.0, core=true, businessType=A, t24Name=CDP.RULE, mandatory=false)
+        CONT_ERASURE_APPLN -> byValue CZ_Framework:CZ_CDP_PARAMETER__CONT_ERASURE_APPLN *
+            @t24:i (t24Name=CONT.ERASURE.APPLN)
+        CONT_ERASURE_PURPOSES -> byValue CZ_Framework:CZ_CDP_PARAMETER__CONT_ERASURE_PURPOSES *
+            @t24:i (t24Name=CONT.ERASURE.PURPOSES)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=21.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=17.0, core=true, t24Name=CURR.NO, mandatory=false)
+        DATE_TIME -> byValue CZ_Framework:CZ_CDP_PARAMETER__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=22.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        ERASURE_TRIGGER : CZ_Framework:CZ_CDP_PARAMETER__ERASURE_TRIGGER required
+            @i18n:Label (en="Erasure Trigger")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=3.0, core=true, t24Name=ERASURE.TRIGGER, mandatory=true)
+        ID -> CZ_Framework:CZ_CDP_PARAMETER PK required
+            @i18n:Label (en="Transaction Ref")
+            @i18n:Tooltip (en="Transaction Reference")
+            @t24:i (align=L, inputBehaviour=I, maxLength=10, sysNumber=0.0, core=true, businessType=COM, t24Name=ID, mandatory=true)
+        INPUTTER -> byValue CZ_Framework:CZ_CDP_PARAMETER__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        OVERRIDE_ERROR : CZ_Framework:CZ_CDP_PARAMETER__OVERRIDE_ERROR
+            @i18n:Label (en="Override Error")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=4.0, core=true, t24Name=OVERRIDE.ERROR, mandatory=false)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=16.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        RESERVED_01 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=14.0, core=true, t24Name=RESERVED.01, mandatory=false)
+    }
+    CZ_CDP_PARAMETER__CONT_ERASURE_APPLN
+    {
+        APP_RETENTION_PERIOD : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=4, sysNumber=11.0, core=true, t24Name=APP.RETENTION.PERIOD, mandatory=false)
+        APP_RET_PERIOD_API -> EB_SystemTables:EB_API
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=12.0, core=true, businessType=A, t24Name=APP.RET.PERIOD.API, mandatory=false)
+        APP_RET_PERIOD_RULE -> EB_RulesEngine:EB_RULE_GATEWAY
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=13.0, core=true, businessType=A, t24Name=APP.RET.PERIOD.RULE, mandatory=false)
+        CONT_ERASURE_APPLN -> CZ_Framework:CZ_CDP_DATA_DEFINITION
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=10.0, core=true, businessType=A, t24Name=CONT.ERASURE.APPLN, mandatory=false)
+    }
+    CZ_CDP_PARAMETER__CONT_ERASURE_PURPOSES
+    {
+        CONT_ERASURE_PURPOSES -> CZ_Framework:CZ_CDP_PURPOSE
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=9.0, core=true, businessType=A, t24Name=CONT.ERASURE.PURPOSES, mandatory=false)
+    }
+    CZ_CDP_PARAMETER__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=19.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    CZ_CDP_PARAMETER__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=18.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    CZ_CDP_PDD_BUILD_REQUEST
+        @i18n:Description (en="")
+        @t24:i (t24Name=CZ.CDP.PDD.BUILD.REQUEST, level=I, type=W, allowedFunctions="C I L P R S V", localRefAllowed=false)
+    {
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=19.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=20.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=16.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        CLEAR_EXISTING_PDD : CZ_Framework:CZ_CDP_PDD_BUILD_REQUEST__CLEAR_EXISTING_PDD required
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=5.0, core=true, t24Name=CLEAR.EXISTING.PDD, mandatory=true)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=17.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=13.0, core=true, t24Name=CURR.NO, mandatory=false)
+        CZ_CDP_PDD_BUILD_REQUEST_ID -> CZ_Framework:CZ_CDP_PDD_BUILD_REQUEST PK required
+            @t24:i (align=L, inputBehaviour=I, maxLength=15, sysNumber=0.0, core=true, businessType=A, t24Name=CZ.CDP.PDD.BUILD.REQUEST.ID, mandatory=true)
+        DATE_PROCESSED : CZ_Framework:CZ_CDP_PDD_BUILD_REQUEST__DATE_PROCESSED
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=6.0, core=true, t24Name=DATE.PROCESSED, mandatory=false)
+        DATE_TIME -> byValue CZ_Framework:CZ_CDP_PDD_BUILD_REQUEST__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=18.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        DESCRIPTION -> byValue CZ_Framework:CZ_CDP_PDD_BUILD_REQUEST__DESCRIPTION *
+            @t24:i (t24Name=DESCRIPTION)
+        INPUTTER -> byValue CZ_Framework:CZ_CDP_PDD_BUILD_REQUEST__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        REBUILD_ALL_PRDTS : CZ_Framework:CZ_CDP_PDD_BUILD_REQUEST__REBUILD_ALL_PRDTS
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=2.0, core=true, t24Name=REBUILD.ALL.PRDTS, mandatory=false)
+        REBUILD_APPLICATION -> byValue CZ_Framework:CZ_CDP_PDD_BUILD_REQUEST__REBUILD_APPLICATION *
+            @t24:i (t24Name=REBUILD.APPLICATION)
+        REBUILD_PRODUCT -> byValue CZ_Framework:CZ_CDP_PDD_BUILD_REQUEST__REBUILD_PRODUCT *
+            @t24:i (t24Name=REBUILD.PRODUCT)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=12.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        RESERVED_01 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=11.0, core=true, t24Name=RESERVED.01, mandatory=false)
+        RESERVED_02 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=10.0, core=true, t24Name=RESERVED.02, mandatory=false)
+        RESERVED_03 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=9.0, core=true, t24Name=RESERVED.03, mandatory=false)
+        RESERVED_04 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=8.0, core=true, t24Name=RESERVED.04, mandatory=false)
+        RESERVED_05 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=7.0, core=true, t24Name=RESERVED.05, mandatory=false)
+    }
+    CZ_CDP_PDD_BUILD_REQUEST__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=15.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    CZ_CDP_PDD_BUILD_REQUEST__DESCRIPTION
+    {
+        DESCRIPTION : T24BusinessTypes:A required
+            @i18n:Label (en=Description)
+            @i18n:Tooltip (en=Description)
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, multiLanguage=true, sysNumber=1.0, core=true, t24Name=DESCRIPTION, mandatory=true)
+    }
+    CZ_CDP_PDD_BUILD_REQUEST__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=14.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    CZ_CDP_PDD_BUILD_REQUEST__REBUILD_APPLICATION
+    {
+        REBUILD_APPLICATION -> EB_SystemTables:STANDARD_SELECTION
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=4.0, core=true, businessType=A, t24Name=REBUILD.APPLICATION, mandatory=false)
+    }
+    CZ_CDP_PDD_BUILD_REQUEST__REBUILD_PRODUCT
+    {
+        REBUILD_PRODUCT -> EB_SystemTables:EB_PRODUCT
+            @t24:i (align=L, inputBehaviour=I, maxLength=5, sysNumber=3.0, core=true, businessType=A, t24Name=REBUILD.PRODUCT, mandatory=false)
+    }
+    CZ_CDP_PDD_SEARCH_REQUEST
+        @i18n:Description (en="")
+        @t24:i (t24Name=CZ.CDP.PDD.SEARCH.REQUEST, level=I, type=W, allowedFunctions="C I L P R S V", localRefApplicationSysNo=33.0, localRefAllowed=true)
+    {
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=41.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=42.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=38.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        CLEAR_PREVIOUS_RESULTS : CZ_Framework:CZ_CDP_PDD_SEARCH_REQUEST__CLEAR_PREVIOUS_RESULTS
+            @i18n:Label (en="Clear Previous Results")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=1.0, core=true, t24Name=CLEAR.PREVIOUS.RESULTS, mandatory=false)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=39.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=35.0, core=true, t24Name=CURR.NO, mandatory=false)
+        CZ_CDP_PDD_SEARCH_REQUEST_ID -> CZ_Framework:CZ_CDP_PDD_SEARCH_REQUEST PK required
+            @i18n:Label (en="Request ID")
+            @t24:i (align=L, inputBehaviour=I, maxLength=15, sysNumber=0.0, core=true, businessType=A, t24Name=CZ.CDP.PDD.SEARCH.REQUEST.ID, mandatory=true)
+        DATA_LOOKUP -> byValue CZ_Framework:CZ_CDP_PDD_SEARCH_REQUEST__DATA_LOOKUP *
+            @t24:i (t24Name=DATA.LOOKUP)
+        DATA_TYPE -> byValue CZ_Framework:CZ_CDP_PDD_SEARCH_REQUEST__DATA_TYPE *
+            @t24:i (t24Name=DATA.TYPE)
+        DATE_TIME -> byValue CZ_Framework:CZ_CDP_PDD_SEARCH_REQUEST__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=40.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        FIELD_LENGTH -> byValue CZ_Framework:CZ_CDP_PDD_SEARCH_REQUEST__FIELD_LENGTH *
+            @t24:i (t24Name=FIELD.LENGTH)
+        FIELD_NAME -> byValue CZ_Framework:CZ_CDP_PDD_SEARCH_REQUEST__FIELD_NAME *
+            @t24:i (t24Name=FIELD.NAME)
+        FIELD_TYPE -> byValue CZ_Framework:CZ_CDP_PDD_SEARCH_REQUEST__FIELD_TYPE *
+            @t24:i (t24Name=FIELD.TYPE)
+        ID_LOOKUP -> byValue CZ_Framework:CZ_CDP_PDD_SEARCH_REQUEST__ID_LOOKUP *
+            @t24:i (t24Name=ID.LOOKUP)
+        INPUTTER -> byValue CZ_Framework:CZ_CDP_PDD_SEARCH_REQUEST__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        PDD_ITEM : CZ_Framework:CZ_CDP_PDD_SEARCH_REQUEST__PDD_ITEM
+            @i18n:Label (en="PDD Item")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=12.0, core=true, t24Name=PDD.ITEM, mandatory=false)
+        PRODUCT_ID -> byValue CZ_Framework:CZ_CDP_PDD_SEARCH_REQUEST__PRODUCT_ID *
+            @t24:i (t24Name=PRODUCT.ID)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=34.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        RESERVED_01 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=32.0, core=true, t24Name=RESERVED.01, mandatory=false)
+        RESERVED_02 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=31.0, core=true, t24Name=RESERVED.02, mandatory=false)
+        RESERVED_03 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=30.0, core=true, t24Name=RESERVED.03, mandatory=false)
+        RESERVED_04 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=29.0, core=true, t24Name=RESERVED.04, mandatory=false)
+        RESERVED_05 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=28.0, core=true, t24Name=RESERVED.05, mandatory=false)
+        RESERVED_06 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=27.0, core=true, t24Name=RESERVED.06, mandatory=false)
+        RESERVED_07 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=26.0, core=true, t24Name=RESERVED.07, mandatory=false)
+        RESERVED_08 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=25.0, core=true, t24Name=RESERVED.08, mandatory=false)
+        RESERVED_09 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=24.0, core=true, t24Name=RESERVED.09, mandatory=false)
+        RESERVED_10 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=23.0, core=true, t24Name=RESERVED.10, mandatory=false)
+        RESERVED_11 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=22.0, core=true, t24Name=RESERVED.11, mandatory=false)
+        RESERVED_12 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=21.0, core=true, t24Name=RESERVED.12, mandatory=false)
+        RESERVED_13 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=20.0, core=true, t24Name=RESERVED.13, mandatory=false)
+        RESERVED_14 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=19.0, core=true, t24Name=RESERVED.14, mandatory=false)
+        RESERVED_15 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=18.0, core=true, t24Name=RESERVED.15, mandatory=false)
+        RESERVED_16 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=17.0, core=true, t24Name=RESERVED.16, mandatory=false)
+        RESERVED_17 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=16.0, core=true, t24Name=RESERVED.17, mandatory=false)
+        RESERVED_18 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=15.0, core=true, t24Name=RESERVED.18, mandatory=false)
+        RESERVED_19 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=14.0, core=true, t24Name=RESERVED.19, mandatory=false)
+        RESERVED_20 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=13.0, core=true, t24Name=RESERVED.20, mandatory=false)
+        TABLE_NAME -> byValue CZ_Framework:CZ_CDP_PDD_SEARCH_REQUEST__TABLE_NAME *
+            @t24:i (t24Name=TABLE.NAME)
+    }
+    CZ_CDP_PDD_SEARCH_REQUEST__DATA_LOOKUP
+    {
+        ALL_DATA_FIELDS : CZ_Framework:CZ_CDP_PDD_SEARCH_REQUEST__DATA_LOOKUP__ALL_DATA_FIELDS
+            @i18n:Label (en="All Data Fields")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=8.0, core=true, t24Name=ALL.DATA.FIELDS, mandatory=false)
+        DATA_LOOKUP -> EB_SystemTables:STANDARD_SELECTION
+            @i18n:Label (en="Data Lookup")
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=7.0, core=true, businessType=A, t24Name=DATA.LOOKUP, mandatory=false)
+    }
+    CZ_CDP_PDD_SEARCH_REQUEST__DATA_TYPE
+    {
+        DATA_TYPE : T24BusinessTypes:A
+            @i18n:Label (en="Data Type")
+            @t24:i (align=L, inputBehaviour=I, maxLength=15, sysNumber=10.0, core=true, t24Name=DATA.TYPE, mandatory=false)
+    }
+    CZ_CDP_PDD_SEARCH_REQUEST__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=37.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    CZ_CDP_PDD_SEARCH_REQUEST__FIELD_LENGTH
+    {
+        FIELD_LENGTH : T24BusinessTypes:N
+            @i18n:Label (en="Field Length")
+            @t24:i (align=R, inputBehaviour=I, maxLength=3, sysNumber=11.0, core=true, t24Name=FIELD.LENGTH, mandatory=false)
+    }
+    CZ_CDP_PDD_SEARCH_REQUEST__FIELD_NAME
+    {
+        FIELD_NAME : T24BusinessTypes:A
+            @i18n:Label (en="Field Name")
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=9.0, core=true, t24Name=FIELD.NAME, mandatory=false)
+    }
+    CZ_CDP_PDD_SEARCH_REQUEST__FIELD_TYPE
+    {
+        FIELD_TYPE : CZ_Framework:CZ_CDP_PDD_SEARCH_REQUEST__FIELD_TYPE__FIELD_TYPE
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=2.0, core=true, t24Name=FIELD.TYPE, mandatory=false)
+    }
+    CZ_CDP_PDD_SEARCH_REQUEST__ID_LOOKUP
+    {
+        ALL_ID_FIELDS : CZ_Framework:CZ_CDP_PDD_SEARCH_REQUEST__ID_LOOKUP__ALL_ID_FIELDS
+            @i18n:Label (en="All Lookup ID Fields")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=6.0, core=true, t24Name=ALL.ID.FIELDS, mandatory=false)
+        ID_LOOKUP -> EB_SystemTables:STANDARD_SELECTION
+            @i18n:Label (en="Lookup ID")
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=5.0, core=true, businessType=A, t24Name=ID.LOOKUP, mandatory=false)
+    }
+    CZ_CDP_PDD_SEARCH_REQUEST__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=36.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    CZ_CDP_PDD_SEARCH_REQUEST__PRODUCT_ID
+    {
+        PRODUCT_ID -> EB_SystemTables:EB_PRODUCT
+            @i18n:Label (en="T24 Product")
+            @t24:i (align=L, inputBehaviour=I, maxLength=5, sysNumber=3.0, core=true, businessType=A, t24Name=PRODUCT.ID, mandatory=false)
+    }
+    CZ_CDP_PDD_SEARCH_REQUEST__TABLE_NAME
+    {
+        TABLE_NAME -> EB_SystemTables:STANDARD_SELECTION
+            @i18n:Label (en="Table Name")
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=4.0, core=true, businessType=A, t24Name=TABLE.NAME, mandatory=false)
+    }
+    CZ_CDP_PDD_SEARCH_RESULTS
+        @i18n:Description (en="")
+        @t24:i (t24Name=CZ.CDP.PDD.SEARCH.RESULTS, level=I, type=H, allowedFunctions="A D E H I L P Q R S", localRefApplicationSysNo=31.0, localRefAllowed=true)
+    {
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=39.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=40.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=36.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=37.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=33.0, core=true, t24Name=CURR.NO, mandatory=false)
+        CZ_CDP_PDD_SEARCH_RESULTS_ID -> CZ_Framework:CZ_CDP_PDD_SEARCH_RESULTS PK required
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=0.0, core=true, businessType=A, t24Name=CZ.CDP.PDD.SEARCH.RESULTS.ID, mandatory=true)
+        DATE_TIME -> byValue CZ_Framework:CZ_CDP_PDD_SEARCH_RESULTS__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=38.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        FIELD_NAME -> byValue CZ_Framework:CZ_CDP_PDD_SEARCH_RESULTS__FIELD_NAME *
+            @t24:i (t24Name=FIELD.NAME)
+        INPUTTER -> byValue CZ_Framework:CZ_CDP_PDD_SEARCH_RESULTS__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        PRODUCT_ID -> EB_SystemTables:EB_PRODUCT
+            @i18n:Label (en="T24 Product")
+            @t24:i (align=L, inputBehaviour=N, maxLength=5, sysNumber=1.0, core=true, businessType=A, t24Name=PRODUCT.ID, mandatory=false)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=32.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        REQUEST_ID -> byValue CZ_Framework:CZ_CDP_PDD_SEARCH_RESULTS__REQUEST_ID *
+            @t24:i (t24Name=REQUEST.ID)
+        RESERVED_01 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=30.0, core=true, t24Name=RESERVED.01, mandatory=false)
+        RESERVED_02 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=29.0, core=true, t24Name=RESERVED.02, mandatory=false)
+        RESERVED_03 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=28.0, core=true, t24Name=RESERVED.03, mandatory=false)
+        RESERVED_04 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=27.0, core=true, t24Name=RESERVED.04, mandatory=false)
+        RESERVED_05 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=26.0, core=true, t24Name=RESERVED.05, mandatory=false)
+        RESERVED_06 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=25.0, core=true, t24Name=RESERVED.06, mandatory=false)
+        RESERVED_07 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=24.0, core=true, t24Name=RESERVED.07, mandatory=false)
+        RESERVED_08 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=23.0, core=true, t24Name=RESERVED.08, mandatory=false)
+        RESERVED_09 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=22.0, core=true, t24Name=RESERVED.09, mandatory=false)
+        RESERVED_10 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=21.0, core=true, t24Name=RESERVED.10, mandatory=false)
+        RESERVED_11 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=20.0, core=true, t24Name=RESERVED.11, mandatory=false)
+        RESERVED_12 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=19.0, core=true, t24Name=RESERVED.12, mandatory=false)
+        RESERVED_13 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=18.0, core=true, t24Name=RESERVED.13, mandatory=false)
+        RESERVED_14 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=17.0, core=true, t24Name=RESERVED.14, mandatory=false)
+        RESERVED_15 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=16.0, core=true, t24Name=RESERVED.15, mandatory=false)
+        RESERVED_16 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=15.0, core=true, t24Name=RESERVED.16, mandatory=false)
+        RESERVED_17 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=14.0, core=true, t24Name=RESERVED.17, mandatory=false)
+        RESERVED_18 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=13.0, core=true, t24Name=RESERVED.18, mandatory=false)
+        RESERVED_19 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=12.0, core=true, t24Name=RESERVED.19, mandatory=false)
+        RESERVED_20 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=11.0, core=true, t24Name=RESERVED.20, mandatory=false)
+    }
+    CZ_CDP_PDD_SEARCH_RESULTS__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=35.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    CZ_CDP_PDD_SEARCH_RESULTS__FIELD_NAME
+    {
+        ACCESSIBILITY -> byValue CZ_Framework:CZ_CDP_PDD_SEARCH_RESULTS__FIELD_NAME__ACCESSIBILITY *
+            @t24:i (t24Name=ACCESSIBILITY)
+        CONFIRM_AS_PDD : CZ_Framework:CZ_CDP_PDD_SEARCH_RESULTS__FIELD_NAME__CONFIRM_AS_PDD
+            @i18n:Label (en="Confirm as PDD")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=6.0, core=true, t24Name=CONFIRM.AS.PDD, mandatory=false)
+        ERASE_OPTIONS -> CZ_Framework:CZ_CDP_ERASE_OPTION
+            @i18n:Label (en="Erase Options")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=10.0, core=true, businessType=A, t24Name=ERASE.OPTIONS, mandatory=false)
+        EXISTING_PDD_ITEM : CZ_Framework:CZ_CDP_PDD_SEARCH_RESULTS__FIELD_NAME__EXISTING_PDD_ITEM
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=5.0, core=true, t24Name=EXISTING.PDD.ITEM, mandatory=false)
+        FIELD_ATTRIBUTES -> byValue CZ_Framework:CZ_CDP_PDD_SEARCH_RESULTS__FIELD_NAME__FIELD_ATTRIBUTES *
+            @t24:i (t24Name=FIELD.ATTRIBUTES)
+        FIELD_NAME : T24BusinessTypes:A
+            @i18n:Label (en="Field Name")
+            @t24:i (align=L, inputBehaviour=N, maxLength=65, sysNumber=4.0, core=true, t24Name=FIELD.NAME, mvSvExpansionAccess=NOMODIFY, mandatory=false)
+        PURPOSE -> byValue CZ_Framework:CZ_CDP_PDD_SEARCH_RESULTS__FIELD_NAME__PURPOSE *
+            @t24:i (t24Name=PURPOSE)
+    }
+    CZ_CDP_PDD_SEARCH_RESULTS__FIELD_NAME__ACCESSIBILITY
+    {
+        ACCESSIBILITY : CZ_Framework:CZ_CDP_PDD_SEARCH_RESULTS__FIELD_NAME__ACCESSIBILITY__ACCESSIBILITY
+            @i18n:Label (en=Accessibility)
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=9.0, core=true, t24Name=ACCESSIBILITY, mandatory=false)
+    }
+    CZ_CDP_PDD_SEARCH_RESULTS__FIELD_NAME__FIELD_ATTRIBUTES
+    {
+        FIELD_ATTRIBUTES : CZ_Framework:CZ_CDP_PDD_SEARCH_RESULTS__FIELD_NAME__FIELD_ATTRIBUTES__FIELD_ATTRIBUTES
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=7.0, core=true, t24Name=FIELD.ATTRIBUTES, mandatory=false)
+    }
+    CZ_CDP_PDD_SEARCH_RESULTS__FIELD_NAME__PURPOSE
+    {
+        PURPOSE -> CZ_Framework:CZ_CDP_PURPOSE
+            @i18n:Label (en=Purpose)
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=8.0, core=true, businessType=A, t24Name=PURPOSE, mandatory=false)
+    }
+    CZ_CDP_PDD_SEARCH_RESULTS__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=34.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    CZ_CDP_PDD_SEARCH_RESULTS__REQUEST_ID
+    {
+        DATE_TIME_OF_SEARCH : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date/Time of Search")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=3.0, core=true, t24Name=DATE.TIME.OF.SEARCH, typeModifiers=A, mandatory=false)
+        REQUEST_ID -> CZ_Framework:CZ_CDP_PDD_SEARCH_REQUEST
+            @i18n:Label (en="Request ID")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=2.0, core=true, businessType=A, t24Name=REQUEST.ID, mandatory=false)
+    }
+    /* This table will hold the list of Purposes for which personal data is held. The Id may be anything but the actual purpose can be under ‘Legal’, Legitimate, Contractual and Consent. Each purpose will have a defined retention period, which can be defined as a value, or using a set of rules defined through the Rules engine that will return the retention period, or using a local API to return a retention period based on a logic defined by the Bank. */
+    CZ_CDP_PURPOSE
+        @i18n:Description (en="")
+        @t24:i (t24Name=CZ.CDP.PURPOSE, level=I, type=H, allowedFunctions="A C D E H I L P Q R S", localRefApplicationSysNo=27.0, localRefAllowed=true)
+    {
+/* The field defines whether the purpose is allowed for erasure when the customer is still active.
+Validation Rules:
+
+Valid options are YES or NO. Default is NO.
+The field is enabled only when the field ALLOW.ACTIVE.ERASURE is set to YES in CZ.CDP.PARAMETER. */
+        ALLOW_ACTIVE_ERASURE : CZ_Framework:CZ_CDP_PURPOSE__ALLOW_ACTIVE_ERASURE
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=7.0, core=true, t24Name=ALLOW.ACTIVE.ERASURE, mandatory=false)
+/* NOINPUT field
+Allowed values are YES/BLANK */
+        ALLOW_IF_CUS_ERASED : CZ_Framework:CZ_CDP_PURPOSE__ALLOW_IF_CUS_ERASED
+            @t24:i (align=L, inputBehaviour=N, maxLength=3, sysNumber=2.0, core=true, t24Name=ALLOW.IF.CUS.ERASED, mandatory=false)
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=35.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=36.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=32.0, core=true, t24Name=AUTHORISER, mandatory=false)
+/* NOINPUT field
+This field is not used currently */
+        COMP_RET_PERIOD : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=6.0, core=true, t24Name=COMP.RET.PERIOD, mandatory=false)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=33.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=29.0, core=true, t24Name=CURR.NO, mandatory=false)
+        CZ_CDP_PURPOSE_ID -> CZ_Framework:CZ_CDP_PURPOSE PK required
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=0.0, core=true, businessType=A, t24Name=CZ.CDP.PURPOSE.ID, mandatory=true)
+        DATE_TIME -> byValue CZ_Framework:CZ_CDP_PURPOSE__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=34.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        INPUTTER -> byValue CZ_Framework:CZ_CDP_PURPOSE__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+/* This field defines the purpose
+Allowed values initially are CONSENT,CONTRACTUAL,LEGAL,LEGITIMATE
+Additional values may be added using EB.LOOKUP e.g. Public Interest, Vital Interest */
+        PURPOSE : CZ_Framework:CZ_CDP_PURPOSE__PURPOSE required
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=1.0, core=true, t24Name=PURPOSE, mandatory=true)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=28.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        RESERVED_01 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=26.0, core=true, t24Name=RESERVED.01, mandatory=false)
+        RESERVED_02 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=25.0, core=true, t24Name=RESERVED.02, mandatory=false)
+        RESERVED_03 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=24.0, core=true, t24Name=RESERVED.03, mandatory=false)
+        RESERVED_04 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=23.0, core=true, t24Name=RESERVED.04, mandatory=false)
+        RESERVED_05 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=22.0, core=true, t24Name=RESERVED.05, mandatory=false)
+        RESERVED_06 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=21.0, core=true, t24Name=RESERVED.06, mandatory=false)
+        RESERVED_07 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=20.0, core=true, t24Name=RESERVED.07, mandatory=false)
+        RESERVED_08 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=19.0, core=true, t24Name=RESERVED.08, mandatory=false)
+        RESERVED_09 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=18.0, core=true, t24Name=RESERVED.09, mandatory=false)
+        RESERVED_10 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=17.0, core=true, t24Name=RESERVED.10, mandatory=false)
+        RESERVED_11 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=16.0, core=true, t24Name=RESERVED.11, mandatory=false)
+        RESERVED_12 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=15.0, core=true, t24Name=RESERVED.12, mandatory=false)
+        RESERVED_13 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=14.0, core=true, t24Name=RESERVED.13, mandatory=false)
+        RESERVED_14 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=13.0, core=true, t24Name=RESERVED.14, mandatory=false)
+        RESERVED_15 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=12.0, core=true, t24Name=RESERVED.15, mandatory=false)
+        RESERVED_16 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=11.0, core=true, t24Name=RESERVED.16, mandatory=false)
+        RESERVED_17 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=10.0, core=true, t24Name=RESERVED.17, mandatory=false)
+        RESERVED_18 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=9.0, core=true, t24Name=RESERVED.18, mandatory=false)
+        RESERVED_19 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=8.0, core=true, t24Name=RESERVED.19, mandatory=false)
+/* This field contains the period of retention assigned to each purpose
+Validations:
+Peiods in day, month, or year e.g. 29D, 01M or 05Y. Should be in this format
+Either RETENTION.PERIOD or RET.PERIOD.RULE or RET.PERIOD.API is allowed */
+        RETENTION_PERIOD : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=4, sysNumber=3.0, core=true, t24Name=RETENTION.PERIOD, mandatory=false)
+/* An API to apply a logic and return a Retention period, it will be a valid record in EB.API
+Validations:
+Only allowed if RET.PERIOD.RULE and RETENTION.PERIOD not input */
+        RET_PERIOD_API -> EB_SystemTables:EB_API
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=5.0, core=true, businessType=A, t24Name=RET.PERIOD.API, mandatory=false)
+/* This will be a link to EB.RULE.GATEWAY where there will a rule define in the Rules Engine that will apply a rule and a retention period.
+Validations:
+Only allowed if RET.PERIOD.API and RETENTION.PERIOD not input */
+        RET_PERIOD_RULE -> EB_RulesEngine:EB_RULE_GATEWAY
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=4.0, core=true, businessType=A, t24Name=RET.PERIOD.RULE, mandatory=false)
+    }
+    CZ_CDP_PURPOSE__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=31.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    CZ_CDP_PURPOSE__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=30.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    CZ_CDP_REQUEST_CAPTURE
+        @i18n:Description (en="")
+        @t24:i (t24Name=CZ.CDP.REQUEST.CAPTURE, nonStop=true, level=C, type=H, allowedFunctions="A C D E H I L P Q R S", localRefApplicationSysNo=40.0, localRefAllowed=true)
+    {
+        ACTION_DATE -> byValue CZ_Framework:CZ_CDP_REQUEST_CAPTURE__ACTION_DATE *
+            @t24:i (t24Name=ACTION.DATE)
+        APPROVE_REQUEST : CZ_Framework:CZ_CDP_REQUEST_CAPTURE__APPROVE_REQUEST
+            @t24:i (align=L, inputBehaviour=I, maxLength=10, sysNumber=24.0, core=true, t24Name=APPROVE.REQUEST, mandatory=false)
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=49.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=50.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=46.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        AUTO_ID -> CZ_Framework:CZ_CDP_REQUEST_CAPTURE PK required
+            @t24:i (align=L, inputBehaviour=I, maxLength=16, sysNumber=0.0, core=true, businessType=A, t24Name=AUTO.ID, mandatory=true)
+        CAPTURE_METHOD : CZ_Framework:CZ_CDP_REQUEST_CAPTURE__CAPTURE_METHOD
+            @t24:i (align=L, inputBehaviour=N, maxLength=10, sysNumber=4.0, core=true, t24Name=CAPTURE.METHOD, mandatory=false)
+        CHANNEL -> EB_ARC:EB_CHANNEL
+            @i18n:Label (en=Channel)
+            @t24:i (align=L, inputBehaviour=I, maxLength=20, sysNumber=10.0, core=true, businessType=A, t24Name=CHANNEL, mandatory=false)
+        CONTRACT_APPLICATION : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=F, maxLength=35, sysNumber=30.0, core=true, t24Name=CONTRACT.APPLICATION, mandatory=false)
+        CONTRACT_ID : T24BusinessTypes:A
+            @i18n:Label (en="Contract Id")
+            @t24:i (align=L, inputBehaviour=F, maxLength=35, sysNumber=31.0, core=true, t24Name=CONTRACT.ID, mandatory=false)
+        CONTRACT_LEAD_COMPANY -> ST_CompanyCreation:COMPANY
+            @t24:i (align=L, inputBehaviour=F, maxLength=9, sysNumber=32.0, core=true, businessType=COM, t24Name=CONTRACT.LEAD.COMPANY, mandatory=false)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=47.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_EXP_DATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=N, maxLength=11, sysNumber=8.0, core=true, t24Name=CURR.EXP.DATE, mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=43.0, core=true, t24Name=CURR.NO, mandatory=false)
+        DATE_COMPLETED : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=0, sysNumber=25.0, core=true, t24Name=DATE.COMPLETED, mandatory=false)
+        DATE_LAST_UPDATED : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=0, sysNumber=26.0, core=true, t24Name=DATE.LAST.UPDATED, mandatory=false)
+        DATE_LOGGED : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=N, maxLength=0, sysNumber=5.0, core=true, t24Name=DATE.LOGGED, mandatory=false)
+        DATE_TIME -> byValue CZ_Framework:CZ_CDP_REQUEST_CAPTURE__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=48.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        INPUTTER -> byValue CZ_Framework:CZ_CDP_REQUEST_CAPTURE__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        INTERNAL_ACTION : CZ_Framework:CZ_CDP_REQUEST_CAPTURE__INTERNAL_ACTION
+            @t24:i (align=L, inputBehaviour=I, maxLength=20, sysNumber=28.0, core=true, t24Name=INTERNAL.ACTION, mandatory=false)
+        NEW_ACTION : CZ_Framework:CZ_CDP_REQUEST_CAPTURE__NEW_ACTION
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=12.0, core=true, t24Name=NEW.ACTION, mandatory=false)
+        NEW_ACTION_NOTES -> byValue CZ_Framework:CZ_CDP_REQUEST_CAPTURE__NEW_ACTION_NOTES *
+            @t24:i (t24Name=NEW.ACTION.NOTES)
+        NEW_EXP_DATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=7.0, core=true, t24Name=NEW.EXP.DATE, mandatory=false)
+        NEW_OFFICER -> ST_Config:DEPT_ACCT_OFFICER
+            @t24:i (align=R, inputBehaviour=I, maxLength=6, sysNumber=11.0, core=true, t24Name=NEW.OFFICER, mandatory=false)
+        ORG_EXP_DATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=N, maxLength=11, sysNumber=6.0, core=true, t24Name=ORG.EXP.DATE, mandatory=false)
+        OVERRIDE -> byValue CZ_Framework:CZ_CDP_REQUEST_CAPTURE__OVERRIDE *
+            @t24:i (t24Name=OVERRIDE)
+        PARTY_APPLICATION : CZ_Framework:CZ_CDP_REQUEST_CAPTURE__PARTY_APPLICATION
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=2.0, core=true, t24Name=PARTY.APPLICATION, mandatory=false)
+        PARTY_ID : T24BusinessTypes:A required
+            @t24:i (align=L, inputBehaviour=F, maxLength=20, sysNumber=1.0, core=true, t24Name=PARTY.ID, mandatory=true)
+        PURPOSE -> byValue CZ_Framework:CZ_CDP_REQUEST_CAPTURE__PURPOSE *
+            @t24:i (t24Name=PURPOSE)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=42.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        REQUEST_COMPLETED : CZ_Framework:CZ_CDP_REQUEST_CAPTURE__REQUEST_COMPLETED
+            @t24:i (align=L, inputBehaviour=I, maxLength=10, sysNumber=23.0, core=true, t24Name=REQUEST.COMPLETED, mandatory=false)
+        REQUEST_STATUS : CZ_Framework:CZ_CDP_REQUEST_CAPTURE__REQUEST_STATUS
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=9.0, core=true, t24Name=REQUEST.STATUS, mandatory=false)
+        REQUEST_TYPE -> CZ_Framework:CZ_CDP_REQUEST_TYPE required
+            @i18n:Label (en="Request Type")
+            @t24:i (align=L, inputBehaviour=F, maxLength=20, sysNumber=3.0, core=true, businessType=A, t24Name=REQUEST.TYPE, mandatory=true)
+        RESERVED_01 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=39.0, core=true, t24Name=RESERVED.01, mandatory=false)
+        RESERVED_02 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=38.0, core=true, t24Name=RESERVED.02, mandatory=false)
+        RESERVED_03 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=37.0, core=true, t24Name=RESERVED.03, mandatory=false)
+        RESERVED_04 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=36.0, core=true, t24Name=RESERVED.04, mandatory=false)
+        RESERVED_05 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=35.0, core=true, t24Name=RESERVED.05, mandatory=false)
+        RESERVED_06 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=34.0, core=true, t24Name=RESERVED.06, mandatory=false)
+        RESERVED_07 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=33.0, core=true, t24Name=RESERVED.07, mandatory=false)
+        SYSTEM_STATUS : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=20, sysNumber=27.0, core=true, t24Name=SYSTEM.STATUS, mandatory=false)
+    }
+    CZ_CDP_REQUEST_CAPTURE__ACTION_DATE
+    {
+        ACTION : T24BusinessTypes:N
+            @i18n:Label (en=Action)
+            @t24:i (align=R, inputBehaviour=N, maxLength=0, sysNumber=16.0, core=true, t24Name=ACTION, mandatory=false)
+        ACTION_DATE : T24BusinessTypes:D
+            @i18n:Label (en="Blocking Date")
+            @t24:i (align=R, inputBehaviour=N, maxLength=11, sysNumber=14.0, core=true, t24Name=ACTION.DATE, mandatory=false)
+        ACTION_NOTES -> byValue CZ_Framework:CZ_CDP_REQUEST_CAPTURE__ACTION_DATE__ACTION_NOTES *
+            @t24:i (t24Name=ACTION.NOTES)
+        ACTION_OFFICER : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=0, sysNumber=15.0, core=true, t24Name=ACTION.OFFICER, mandatory=false)
+        ACTION_RESERVED_01 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=22.0, core=true, t24Name=ACTION.RESERVED.01, mandatory=false)
+        ACTION_RESERVED_02 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=21.0, core=true, t24Name=ACTION.RESERVED.02, mandatory=false)
+        ACTION_RESERVED_03 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=20.0, core=true, t24Name=ACTION.RESERVED.03, mandatory=false)
+        ACTION_RESERVED_04 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=19.0, core=true, t24Name=ACTION.RESERVED.04, mandatory=false)
+        ACTION_RESERVED_05 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=18.0, core=true, t24Name=ACTION.RESERVED.05, mandatory=false)
+    }
+    CZ_CDP_REQUEST_CAPTURE__ACTION_DATE__ACTION_NOTES
+    {
+        ACTION_NOTES : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=N, maxLength=65, sysNumber=17.0, core=true, t24Name=ACTION.NOTES, mandatory=false)
+    }
+    CZ_CDP_REQUEST_CAPTURE__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=45.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    CZ_CDP_REQUEST_CAPTURE__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=44.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    CZ_CDP_REQUEST_CAPTURE__NEW_ACTION_NOTES
+    {
+        NEW_ACTION_NOTES : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=13.0, core=true, t24Name=NEW.ACTION.NOTES, mandatory=false)
+    }
+    CZ_CDP_REQUEST_CAPTURE__OVERRIDE
+    {
+        OVERRIDE : T24BusinessTypes:N
+            @i18n:Label (en=Override)
+            @i18n:Tooltip (en="Overrides generated by this transaction")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=41.0, core=true, t24Name=OVERRIDE, mandatory=false)
+    }
+    CZ_CDP_REQUEST_CAPTURE__PURPOSE
+    {
+        PURPOSE -> CZ_Framework:CZ_CDP_PURPOSE
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=29.0, core=true, businessType=A, t24Name=PURPOSE, mandatory=false)
+    }
+    CZ_CDP_REQUEST_TYPE
+        @i18n:Description (en="")
+        @t24:i (t24Name=CZ.CDP.REQUEST.TYPE, level=C, type=H, allowedFunctions="A C D E H I L P Q R S", localRefAllowed=false)
+    {
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=22.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=23.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=19.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=20.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=16.0, core=true, t24Name=CURR.NO, mandatory=false)
+        DATE_TIME -> byValue CZ_Framework:CZ_CDP_REQUEST_TYPE__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DELINK_PTY_RLN_API -> EB_SystemTables:EB_API
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=5.0, core=true, businessType=HOOK, t24Name=DELINK.PTY.RLN.API, mandatory=false)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=21.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        DESCRIPTION -> byValue CZ_Framework:CZ_CDP_REQUEST_TYPE__DESCRIPTION *
+            @t24:i (t24Name=DESCRIPTION)
+        EXPIRY_DAYS : T24BusinessTypes:N
+            @i18n:Label (en="Expiry Days")
+            @t24:i (align=R, inputBehaviour=I, maxLength=3, sysNumber=3.0, core=true, t24Name=EXPIRY.DAYS, mandatory=false)
+        INCLUDE_HISTORY : CZ_Framework:CZ_CDP_REQUEST_TYPE__INCLUDE_HISTORY
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=4.0, core=true, t24Name=INCLUDE.HISTORY, mandatory=false)
+        INPUTTER -> byValue CZ_Framework:CZ_CDP_REQUEST_TYPE__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=15.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        REQUEST_ID -> CZ_Framework:CZ_CDP_REQUEST_TYPE PK required
+            @i18n:Label (en="Sweep Request")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=0.0, core=true, businessType=A, t24Name=REQUEST.ID, mandatory=true)
+        REQUEST_TYPE : CZ_Framework:CZ_CDP_REQUEST_TYPE__REQUEST_TYPE required
+            @i18n:Label (en="Request Type")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=2.0, core=true, t24Name=REQUEST.TYPE, mandatory=true)
+        RESERVED_01 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=14.0, core=true, t24Name=RESERVED.01, mandatory=false)
+        RESERVED_02 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=13.0, core=true, t24Name=RESERVED.02, mandatory=false)
+        RESERVED_03 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=12.0, core=true, t24Name=RESERVED.03, mandatory=false)
+        RESERVED_04 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=11.0, core=true, t24Name=RESERVED.04, mandatory=false)
+        RESERVED_05 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=10.0, core=true, t24Name=RESERVED.05, mandatory=false)
+        RESERVED_06 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=9.0, core=true, t24Name=RESERVED.06, mandatory=false)
+        RESERVED_07 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=8.0, core=true, t24Name=RESERVED.07, mandatory=false)
+        RESERVED_08 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=7.0, core=true, t24Name=RESERVED.08, mandatory=false)
+        RESERVED_09 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=6.0, core=true, t24Name=RESERVED.09, mandatory=false)
+    }
+    CZ_CDP_REQUEST_TYPE__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=18.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    CZ_CDP_REQUEST_TYPE__DESCRIPTION
+    {
+        DESCRIPTION : T24BusinessTypes:A required
+            @i18n:Label (en=Description)
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, multiLanguage=true, sysNumber=1.0, core=true, t24Name=DESCRIPTION, mandatory=true)
+    }
+    CZ_CDP_REQUEST_TYPE__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=17.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+}
+Enumerations {
+    CZ_CDP_DATA_DEFINITION__CUST_ACCESS_TYPE : mml:string
+        ACTIVITY=ACTIVITY
+        API=API
+        CONCAT=CONCAT
+        FIELD=FIELD
+        ID=ID
+        PARTIAL_ID=PARTIAL.ID
+        RELATED_CONTRACT=RELATED.CONTRACT
+    CZ_CDP_DATA_DEFINITION__FEA_FIELD_NAME__FEA_ACCESSIBILITY__FEA_ACCESSIBILITY : mml:string
+        ACCESS=ACCESS
+        NONE=NONE
+        PORTABLE=PORTABLE
+    CZ_CDP_DATA_DEFINITION__FEA_FIELD_NAME__FEA_FIELD_ATTRIBUTES__FEA_FIELD_ATTRIBUTES : mml:string
+        DIRECT=DIRECT
+        INDIRECT=INDIRECT
+        MARKETING=MARKETING
+        SENSITIVE=SENSITIVE
+    CZ_CDP_DATA_DEFINITION__FILE_TYPE : mml:string
+        CCY=CCY
+        CST=CST
+        CUS=CUS
+        FIN=FIN
+        FTD=FTD
+        FTF=FTF
+        INT=INT
+        NOS=NOS
+    CZ_CDP_DATA_DEFINITION__MASTER_LINK_TYPE : mml:string
+        API=API
+        CONCAT=CONCAT
+        FIELD=FIELD
+        ID=ID
+    CZ_CDP_DATA_DEFINITION__PARTY_ACCESS_TYPE : mml:string
+        API=API
+        FIELD=FIELD
+        ID=ID
+    CZ_CDP_DATA_DEFINITION__PARTY_APPLICATION : mml:string
+        CUSTOMER=CUSTOMER
+        PERSON_ENTITY=PERSON.ENTITY
+    CZ_CDP_DATA_DEFINITION__SYS_FIELD_NAME__SYS_ACCESSIBILITY__SYS_ACCESSIBILITY : mml:string
+        ACCESS=ACCESS
+        NONE=NONE
+        PORTABLE=PORTABLE
+    CZ_CDP_DATA_DEFINITION__SYS_FIELD_NAME__SYS_EXCLUDE : mml:string
+        NULL=NULL
+        YES=YES
+    CZ_CDP_DATA_DEFINITION__SYS_FIELD_NAME__SYS_FIELD_ATTRIBUTES__SYS_FIELD_ATTRIBUTES : mml:string
+        DIRECT=DIRECT
+        INDIRECT=INDIRECT
+        MARKETING=MARKETING
+        SENSITIVE=SENSITIVE
+    CZ_CDP_DATA_DEFINITION__USE_IN_ACTIVITY : mml:string
+        ACTIVITY=ACTIVITY
+        LINK=LINK
+    CZ_CDP_DATA_DEFINITION__USR_FIELD_NAME__USR_ACCESSIBILITY__USR_ACCESSIBILITY : mml:string
+        ACCESS=ACCESS
+        NONE=NONE
+        PORTABLE=PORTABLE
+    CZ_CDP_DATA_DEFINITION__USR_FIELD_NAME__USR_EXCLUDE : mml:string
+        NULL=NULL
+        YES=YES
+    CZ_CDP_DATA_DEFINITION__USR_FIELD_NAME__USR_FIELD_ATTRIBUTES__USR_FIELD_ATTRIBUTES : mml:string
+        DIRECT=DIRECT
+        INDIRECT=INDIRECT
+        MARKETING=MARKETING
+        SENSITIVE=SENSITIVE
+    CZ_CDP_ERASE_OPTION__DATA_TYPE : mml:string
+        ALPHA=ALPHA
+        DATE=DATE
+        NUMBER=NUMBER
+    CZ_CDP_ERASE_OPTION__ERASE_ACTION : mml:string
+        DEFAULT=DEFAULT
+        NO_ACTION=NO.ACTION
+        NULLIFY=NULLIFY
+        OBFUSCATE=OBFUSCATE
+    CZ_CDP_ERASE_OPTION__MIN_MAX_CHAR : mml:string
+        MAX=MAX
+        MIN=MIN
+    CZ_CDP_PARAMETER__ALLOW_ACTIVE_ERASURE : mml:string
+        NO=NO
+        YES=YES
+    CZ_CDP_PARAMETER__ALLOW_CONTRACT_ERASURE : mml:string
+        NO=NO
+        YES=YES
+    CZ_CDP_PARAMETER__BUILD_ERASURE_LOG : mml:string
+        NULL=NULL
+        Y=Y
+    CZ_CDP_PARAMETER__ERASURE_TRIGGER : mml:string
+        AUTO=AUTO
+        MANUAL=MANUAL
+        NONE=NONE
+    CZ_CDP_PARAMETER__OVERRIDE_ERROR : mml:string
+        ERROR=ERROR
+        NULL=NULL
+        OVERRIDE=OVERRIDE
+    CZ_CDP_PDD_BUILD_REQUEST__CLEAR_EXISTING_PDD : mml:string
+        NO=NO
+        YES=YES
+    CZ_CDP_PDD_BUILD_REQUEST__DATE_PROCESSED : mml:string
+        A=A
+    CZ_CDP_PDD_BUILD_REQUEST__REBUILD_ALL_PRDTS : mml:string
+        NO=NO
+        YES=YES
+    CZ_CDP_PDD_SEARCH_REQUEST__CLEAR_PREVIOUS_RESULTS : mml:string
+        NO=NO
+        YES=YES
+    CZ_CDP_PDD_SEARCH_REQUEST__DATA_LOOKUP__ALL_DATA_FIELDS : mml:string
+        NO=NO
+        YES=YES
+    CZ_CDP_PDD_SEARCH_REQUEST__FIELD_TYPE__FIELD_TYPE : mml:string
+        SYSTEM=SYSTEM
+        USER=USER
+    CZ_CDP_PDD_SEARCH_REQUEST__ID_LOOKUP__ALL_ID_FIELDS : mml:string
+        NO=NO
+        YES=YES
+    CZ_CDP_PDD_SEARCH_REQUEST__PDD_ITEM : mml:string
+        NO=NO
+        YES=YES
+    CZ_CDP_PDD_SEARCH_RESULTS__FIELD_NAME__ACCESSIBILITY__ACCESSIBILITY : mml:string
+        ACCESS=ACCESS
+        NULL=NULL
+        PORTABLE=PORTABLE
+    CZ_CDP_PDD_SEARCH_RESULTS__FIELD_NAME__CONFIRM_AS_PDD : mml:string
+        NON_PDD=NON.PDD
+        PDD=PDD
+        PDD_AS_EXCLUDE=PDD.AS.EXCLUDE
+    CZ_CDP_PDD_SEARCH_RESULTS__FIELD_NAME__EXISTING_PDD_ITEM : mml:string
+        N=N
+        Y=Y
+    CZ_CDP_PDD_SEARCH_RESULTS__FIELD_NAME__FIELD_ATTRIBUTES__FIELD_ATTRIBUTES : mml:string
+        DIRECT=DIRECT
+        INDIRECT=INDIRECT
+        MARKETING=MARKETING
+        SENSITIVE=SENSITIVE
+    CZ_CDP_PURPOSE__ALLOW_ACTIVE_ERASURE : mml:string
+        NO=NO
+        YES=YES
+    CZ_CDP_PURPOSE__ALLOW_IF_CUS_ERASED : mml:string
+        NULL=NULL
+        YES=YES
+    CZ_CDP_PURPOSE__PURPOSE : mml:string
+        CONSENT=CONSENT
+        CONTRACT=CONTRACT
+        LEGAL=LEGAL
+        LEGITIMATE=LEGITIMATE
+    CZ_CDP_REQUEST_CAPTURE__APPROVE_REQUEST : mml:string
+        NO=NO
+        YES=YES
+    CZ_CDP_REQUEST_CAPTURE__CAPTURE_METHOD : mml:string
+        AUTO=AUTO
+        MANUAL=MANUAL
+    CZ_CDP_REQUEST_CAPTURE__INTERNAL_ACTION : mml:string
+        CANCEL=CANCEL
+        RESUBMIT=RESUBMIT
+    CZ_CDP_REQUEST_CAPTURE__NEW_ACTION : mml:string
+        COMPLETE=COMPLETE
+        EXTEND=EXTEND
+        IN_PROGRESS=IN.PROGRESS
+        NEW=NEW
+        REJECT=REJECT
+    CZ_CDP_REQUEST_CAPTURE__PARTY_APPLICATION : mml:string
+        CUSTOMER=CUSTOMER
+        PERSON_ENTITY=PERSON.ENTITY
+    CZ_CDP_REQUEST_CAPTURE__REQUEST_COMPLETED : mml:string
+        NULL=NULL
+        YES=YES
+    CZ_CDP_REQUEST_CAPTURE__REQUEST_STATUS : mml:string
+        COMPLETED=COMPLETED
+        EXTENDED=EXTENDED
+        INITIATED=INITIATED
+        INPROGRESS=INPROGRESS
+        REJECTED=REJECTED
+    CZ_CDP_REQUEST_TYPE__INCLUDE_HISTORY : mml:string
+        NO=NO
+        YES=YES
+    CZ_CDP_REQUEST_TYPE__REQUEST_TYPE : mml:string
+        ERASURE=ERASURE
+        OBJECT=OBJECT
+        PORTABILITY=PORTABILITY
+        RECTIFICATION=RECTIFICATION
+        RESTRICTION=RESTRICTION
+        SAR=SAR
+}

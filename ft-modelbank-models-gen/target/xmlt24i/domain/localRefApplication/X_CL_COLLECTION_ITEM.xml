@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<localReferenceApplication:LocalReferenceApplication xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:localReferenceApplication="http://www.odcgroup.com/t24/application/localRefApplication/model/LocalReferenceApplication"
+    xmlns:translationDsl="http://www.odcgroup.com/translation/TranslationDsl" forApplication="name://CL_Contract:CL_COLLECTION_ITEM#">
+  <localField groupName="No" localRefID="LBRPTS.AGENCY.ID">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="AGENCY.ID"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+  <localField groupName="No" localRefID="LBRPTS.LEGAL.FEES">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="LEGAL.FEES"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+  <localField groupName="No" localRefID="LBRPTS.RECOVERY.FEES">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="RECOVERY.FEES"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+</localReferenceApplication:LocalReferenceApplication>

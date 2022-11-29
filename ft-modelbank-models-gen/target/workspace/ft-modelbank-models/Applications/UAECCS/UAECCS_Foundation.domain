@@ -1,0 +1,367 @@
+# UTF-8
+/* Image Cheque Clearing */
+Domain UAECCS_Foundation
+    @t24:i (module=UAECCS)
+    @java:Package (value=com.temenos.t24.datamodel.uaeccs.uaeccs_foundation)
+namespace "http://www.temenos.com/t24/UAECCS_Foundation"
+metamodelVersion 1.30.6
+Classes {
+    /* This Table to make a record of FUNDS.TRANSFER which represents Outward Clearing. */
+    ICCS_DEPOSIT_CHEQS
+        @i18n:Description (en="")
+        @t24:i (t24Name=ICCS.DEPOSIT.CHEQS, level=F, type=H, allowedFunctions="A C D E H I L P Q R S", localRefApplicationSysNo=5.0, localRefAllowed=true)
+    {
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=29.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=30.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=26.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        /* This is the Credit Amount field from Funds Transfer. */
+        CHEQUE_AMT : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=18, sysNumber=3.0, core=true, t24Name=CHEQUE.AMT, typeModifiers="-USD", mandatory=false)
+        /* This is the Cheque Number field from Funds Transfer. */
+        CHEQUE_NO : T24BusinessTypes:A
+            @i18n:Label (en="Cheque No")
+            @i18n:Tooltip (en="Cheque no, if payment is through cheque.")
+            @t24:i (align=L, inputBehaviour=I, maxLength=6, sysNumber=2.0, core=true, t24Name=CHEQUE.NO, mandatory=false)
+        /* This is the Credit value Date field from Funds Transfer. */
+        CHEQUE_TXNDATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=4.0, core=true, t24Name=CHEQUE.TXNDATE, mandatory=false)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=27.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=23.0, core=true, t24Name=CURR.NO, mandatory=false)
+        /* This is the Credit Account Number field from actual Funds Transfer. */
+        CUST_ACCT_NO -> AC_AccountOpening:ACCOUNT
+            @t24:i (align=R, inputBehaviour=I, maxLength=36, sysNumber=1.0, core=true, businessType=ACC, t24Name=CUST.ACCT.NO, mandatory=false)
+        DATE_TIME -> byValue UAECCS_Foundation:ICCS_DEPOSIT_CHEQS__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=28.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        INPUTTER -> byValue UAECCS_Foundation:ICCS_DEPOSIT_CHEQS__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        OVERRIDE -> byValue UAECCS_Foundation:ICCS_DEPOSIT_CHEQS__OVERRIDE *
+            @t24:i (t24Name=OVERRIDE)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=22.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        REFERENCE_ID -> UAECCS_Foundation:ICCS_DEPOSIT_CHEQS PK required
+            @t24:i (align=L, inputBehaviour=I, maxLength=16, sysNumber=0.0, core=true, businessType=A, t24Name=REFERENCE.ID, mandatory=true)
+        RESERVED_1 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=20.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_10 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=11.0, core=true, t24Name=RESERVED.10, mandatory=false)
+        RESERVED_11 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=10.0, core=true, t24Name=RESERVED.11, mandatory=false)
+        RESERVED_12 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=9.0, core=true, t24Name=RESERVED.12, mandatory=false)
+        RESERVED_13 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=8.0, core=true, t24Name=RESERVED.13, mandatory=false)
+        RESERVED_14 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=7.0, core=true, t24Name=RESERVED.14, mandatory=false)
+        RESERVED_15 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=6.0, core=true, t24Name=RESERVED.15, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=19.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=18.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=17.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        RESERVED_5 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=16.0, core=true, t24Name=RESERVED.5, mandatory=false)
+        RESERVED_6 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=15.0, core=true, t24Name=RESERVED.6, mandatory=false)
+        RESERVED_7 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=14.0, core=true, t24Name=RESERVED.7, mandatory=false)
+        RESERVED_8 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=13.0, core=true, t24Name=RESERVED.8, mandatory=false)
+        RESERVED_9 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=12.0, core=true, t24Name=RESERVED.9, mandatory=false)
+    }
+    ICCS_DEPOSIT_CHEQS__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=25.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    ICCS_DEPOSIT_CHEQS__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=24.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    ICCS_DEPOSIT_CHEQS__OVERRIDE
+    {
+        OVERRIDE : T24BusinessTypes:N
+            @i18n:Label (en=Override)
+            @i18n:Tooltip (en="Overrides generated by this transaction")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=21.0, core=true, t24Name=OVERRIDE, mandatory=false)
+    }
+    /* Table to generate the FUNDS.TRANSFER / AC.LOCKED.EVENTS based on the PGM.VERSION */
+    ICCS_ISF_RETURNS
+        @i18n:Description (en="")
+        @t24:i (t24Name=ICCS.ISF.RETURNS, level=F, type=L, allowedFunctions="L P S", localRefApplicationSysNo=8.0, localRefAllowed=true)
+    {
+        /* It represents the  credit account number from Funds Transfer. */
+        ACCOUNT_NUMBER -> AC_AccountOpening:ACCOUNT
+            @i18n:Label (en="Account Number")
+            @t24:i (align=L, inputBehaviour=I, maxLength=36, sysNumber=4.0, core=true, businessType=A, t24Name=ACCOUNT.NUMBER, mandatory=false)
+        /* It represents the short tittle of credit account from Funds Transfer. */
+        ACCT_TITLE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=3.0, core=true, t24Name=ACCT.TITLE, mandatory=false)
+        /* It represents the  Cheque Number from Funds Transfer. */
+        CHEQUE_NUMBER : T24BusinessTypes:A
+            @i18n:Label (en="Cheque No")
+            @t24:i (align=L, inputBehaviour=I, maxLength=10, sysNumber=6.0, core=true, t24Name=CHEQUE.NUMBER, mandatory=false)
+        /* It represents the Debit Amount from Funds Transfer. */
+        CHQ_AMOUNT : T24BusinessTypes:AMT
+            @i18n:Label (en="Cheque Amt")
+            @t24:i (align=R, inputBehaviour=I, maxLength=18, sysNumber=2.0, core=true, t24Name=CHQ.AMOUNT, typeModifiers="-USD", mandatory=false)
+        /* It represents the  Credit Value Date from Funds Transfer. */
+        CHQ_VALUE_DATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=5.0, core=true, t24Name=CHQ.VALUE.DATE, mandatory=false)
+        /* It represents the Customer of the credit account. */
+        CUST_ID -> ST_Customer:CUSTOMER
+            @i18n:Label (en=Customer)
+            @t24:i (align=L, inputBehaviour=I, maxLength=10, sysNumber=1.0, core=true, businessType=A, t24Name=CUST.ID, mandatory=false)
+        /* It represents the   Funds Transfer @ID Which is performing collection of Charges. */
+        FT_REF : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=16, sysNumber=7.0, core=true, t24Name=FT.REF, mandatory=false)
+        REFERENCE_ID -> UAECCS_Foundation:ICCS_ISF_RETURNS PK required
+            @t24:i (align=L, inputBehaviour=I, maxLength=36, sysNumber=0.0, core=true, businessType=A, t24Name=REFERENCE.ID, mandatory=true)
+        RESERVED_1 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=23.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_10 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=14.0, core=true, t24Name=RESERVED.10, mandatory=false)
+        RESERVED_11 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=13.0, core=true, t24Name=RESERVED.11, mandatory=false)
+        RESERVED_12 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=12.0, core=true, t24Name=RESERVED.12, mandatory=false)
+        RESERVED_13 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=11.0, core=true, t24Name=RESERVED.13, mandatory=false)
+        RESERVED_14 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=10.0, core=true, t24Name=RESERVED.14, mandatory=false)
+        RESERVED_15 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=9.0, core=true, t24Name=RESERVED.15, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=22.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=21.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=20.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        RESERVED_5 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=19.0, core=true, t24Name=RESERVED.5, mandatory=false)
+        RESERVED_6 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=18.0, core=true, t24Name=RESERVED.6, mandatory=false)
+        RESERVED_7 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=17.0, core=true, t24Name=RESERVED.7, mandatory=false)
+        RESERVED_8 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=16.0, core=true, t24Name=RESERVED.8, mandatory=false)
+        RESERVED_9 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=15.0, core=true, t24Name=RESERVED.9, mandatory=false)
+    }
+    /* This Table holds the parameter values for internal accounts and customer id type */
+    ICCS_PARAMETER
+        @i18n:Description (en="")
+        @t24:i (t24Name=ICCS.PARAMETER, level=F, type=H, allowedFunctions="A C D E H I L P Q R S", localRefApplicationSysNo=14.0, localRefAllowed=true)
+    {
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=38.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=39.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=35.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        CHEQUE_TYPE -> byValue UAECCS_Foundation:ICCS_PARAMETER__CHEQUE_TYPE *
+            @t24:i (t24Name=CHEQUE.TYPE)
+        CLEARING_TYPE -> byValue UAECCS_Foundation:ICCS_PARAMETER__CLEARING_TYPE *
+            @t24:i (t24Name=CLEARING.TYPE)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=36.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=32.0, core=true, t24Name=CURR.NO, mandatory=false)
+        /* holds the description "CUSTOMER DECEASED". */
+        CUSTOMER_DECEASED : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=9.0, core=true, t24Name=CUSTOMER.DECEASED, mandatory=false)
+        CUSTOMER_TYPE -> byValue UAECCS_Foundation:ICCS_PARAMETER__CUSTOMER_TYPE *
+            @t24:i (t24Name=CUSTOMER.TYPE)
+        DATE_TIME -> byValue UAECCS_Foundation:ICCS_PARAMETER__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=37.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        INPUTTER -> byValue UAECCS_Foundation:ICCS_PARAMETER__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        /* indicates version name for inward clearing for returned cheques. */
+        INWARD_CLRG_RET_VERSION : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=16.0, core=true, t24Name=INWARD.CLRG.RET.VERSION, mandatory=false)
+        /* indicates version name for inward clearing. */
+        INWARD_CLRG_VERSION : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=15.0, core=true, t24Name=INWARD.CLRG.VERSION, mandatory=false)
+        INW_SETT_CATEGORY -> ST_Config:CATEGORY
+            @t24:i (align=L, inputBehaviour=I, maxLength=5, sysNumber=2.0, core=true, businessType=CAT, t24Name=INW.SETT.CATEGORY, mandatory=false)
+        /* indicates version name for cpntra entry to outward clearing. */
+        OUTWARD_CLRG_RET_VERSION : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=18.0, core=true, t24Name=OUTWARD.CLRG.RET.VERSION, mandatory=false)
+        /* indicates version name for outward clearing. */
+        OUTWARD_CLRG_VERSION : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=17.0, core=true, t24Name=OUTWARD.CLRG.VERSION, mandatory=false)
+        OUT_SETT_CATEGORY -> ST_Config:CATEGORY
+            @t24:i (align=L, inputBehaviour=I, maxLength=5, sysNumber=1.0, core=true, businessType=CAT, t24Name=OUT.SETT.CATEGORY, mandatory=false)
+        OVERRIDE -> byValue UAECCS_Foundation:ICCS_PARAMETER__OVERRIDE *
+            @t24:i (t24Name=OVERRIDE)
+/* A free format field, it represents PL Account which is nothing but internal account. When ever some Charges needs to be collected from Customer
+				   this field will act as a credit account. */
+        PL_ACCOUNT : T24BusinessTypes:PLANT
+            @t24:i (align=L, inputBehaviour=I, maxLength=16, sysNumber=3.0, core=true, t24Name=PL.ACCOUNT, mandatory=false)
+        /* holds the posting restrict id for which description should be customer deceased. */
+        POSTING_RESTRICT_ID -> AC_Config:POSTING_RESTRICT
+            @t24:i (align=L, inputBehaviour=I, maxLength=4, sysNumber=8.0, core=true, businessType=POST, t24Name=POSTING.RESTRICT.ID, mandatory=false)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=31.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        REFERENCE_ID -> UAECCS_Foundation:ICCS_PARAMETER PK required
+            @t24:i (align=L, inputBehaviour=I, maxLength=6, sysNumber=0.0, core=true, businessType=A, t24Name=REFERENCE.ID, typeModifiers=SYSTEM, mandatory=true)
+        REJ_CODE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=2, sysNumber=4.0, core=true, t24Name=REJ.CODE, mandatory=false)
+        RESERVED_1 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=29.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_10 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=20.0, core=true, t24Name=RESERVED.10, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=28.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=27.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=26.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        RESERVED_5 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=25.0, core=true, t24Name=RESERVED.5, mandatory=false)
+        RESERVED_6 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=24.0, core=true, t24Name=RESERVED.6, mandatory=false)
+        RESERVED_7 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=23.0, core=true, t24Name=RESERVED.7, mandatory=false)
+        RESERVED_8 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=22.0, core=true, t24Name=RESERVED.8, mandatory=false)
+        RESERVED_9 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=21.0, core=true, t24Name=RESERVED.9, mandatory=false)
+    }
+    ICCS_PARAMETER__CHEQUE_TYPE
+    {
+        CHEQUE_TYPE : T24BusinessTypes:ANY
+            @i18n:Label (en="Cheque Type")
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=19.0, core=true, t24Name=CHEQUE.TYPE, mandatory=false)
+    }
+    ICCS_PARAMETER__CLEARING_TYPE
+    {
+        /* defines the two sets of clearing types as outward and inward. */
+        CLEARING_TYPE : UAECCS_Foundation:ICCS_PARAMETER__CLEARING_TYPE__CLEARING_TYPE
+            @t24:i (align=L, inputBehaviour=I, maxLength=20, sysNumber=10.0, core=true, t24Name=CLEARING.TYPE, mandatory=false)
+        /* defines the common description for multiple psoting restrictions under each clearing type. */
+        DESCRIPTION : T24BusinessTypes:A
+            @i18n:Label (en=Description)
+            @i18n:Tooltip (en=Description)
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=11.0, core=true, t24Name=DESCRIPTION, mandatory=false)
+        POSTING_RESTRICT -> byValue UAECCS_Foundation:ICCS_PARAMETER__CLEARING_TYPE__POSTING_RESTRICT *
+            @t24:i (t24Name=POSTING.RESTRICT)
+        RESERVED_16 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=0, sysNumber=13.0, core=true, t24Name=RESERVED.16, mandatory=false)
+    }
+    ICCS_PARAMETER__CLEARING_TYPE__POSTING_RESTRICT
+    {
+        /* defines the common description for multiple psoting restrictions under each clearing type. */
+        POSTING_RESTRICT -> AC_Config:POSTING_RESTRICT
+            @i18n:Label (en="Posting Restriction")
+            @t24:i (align=L, inputBehaviour=I, maxLength=4, sysNumber=12.0, core=true, businessType=POST, t24Name=POSTING.RESTRICT, mandatory=false)
+    }
+    ICCS_PARAMETER__CUSTOMER_TYPE
+    {
+        /* Defienes the customer type saying RETAIL OR CORPORATE. */
+        CUSTOMER_TYPE : UAECCS_Foundation:ICCS_PARAMETER__CUSTOMER_TYPE__CUSTOMER_TYPE
+            @i18n:Label (en="Customer Type")
+            @t24:i (align=L, inputBehaviour=I, maxLength=20, sysNumber=5.0, core=true, t24Name=CUSTOMER.TYPE, mandatory=false)
+        LEGAL_DOC_NAME -> byValue UAECCS_Foundation:ICCS_PARAMETER__CUSTOMER_TYPE__LEGAL_DOC_NAME *
+            @t24:i (t24Name=LEGAL.DOC.NAME)
+    }
+    ICCS_PARAMETER__CUSTOMER_TYPE__LEGAL_DOC_NAME
+    {
+        /* defines the legal doc name for customere as either NID OR PP OR TL OR AD. */
+        LEGAL_DOC_NAME : T24BusinessTypes:A
+            @i18n:Label (en="Document Name")
+            @i18n:Tooltip (en="Indicates the Legal document name")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=6.0, core=true, t24Name=LEGAL.DOC.NAME, mandatory=false)
+        /* defines the priority for each legal doc name. */
+        PRIORITY : UAECCS_Foundation:ICCS_PARAMETER__CUSTOMER_TYPE__LEGAL_DOC_NAME__PRIORITY
+            @i18n:Label (en=Priority)
+            @t24:i (align=R, inputBehaviour=I, maxLength=1, sysNumber=7.0, core=true, t24Name=PRIORITY, mandatory=false)
+    }
+    ICCS_PARAMETER__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=34.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    ICCS_PARAMETER__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=33.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    ICCS_PARAMETER__OVERRIDE
+    {
+        OVERRIDE : T24BusinessTypes:N
+            @i18n:Label (en=Override)
+            @i18n:Tooltip (en="Overrides generated by this transaction")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=30.0, core=true, t24Name=OVERRIDE, mandatory=false)
+    }
+    NOFILE_ICCS_INQUIRY_DETAILS
+        @i18n:Description (en="")
+        @t24:i (t24Name=NOFILE.ICCS.INQUIRY.DETAILS, level=I, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        CHANNEL_ID : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=20, core=false, t24Name=CHANNEL.ID, mandatory=false)
+        CHANNEL_REF : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=20, core=false, t24Name=CHANNEL.REF, mandatory=false)
+        CHANNEL_USERID : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=20, core=false, t24Name=CHANNEL.USERID, mandatory=false)
+        CHEQUE_NO : T24BusinessTypes:N
+            @i18n:Label (en="Cheque No")
+            @i18n:Tooltip (en="Cheque no, if payment is through cheque.")
+            @t24:i (align=R, inputBehaviour=N, maxLength=20, core=false, t24Name=CHEQUE.NO, mandatory=false)
+        ID : T24BusinessTypes:N
+            @i18n:Label (en="Transaction Ref")
+            @i18n:Tooltip (en="Transaction Reference")
+            @t24:i (align=L, inputBehaviour=N, maxLength=20, core=false, t24Name="@ID", genOperation=NOFILE.ICCS.INWARD.OUTWARD.INQUIRY, mandatory=true)
+    }
+}
+Enumerations {
+    ICCS_PARAMETER__CLEARING_TYPE__CLEARING_TYPE : mml:string
+        INWARD=INWARD
+        OUTWARD=OUTWARD
+    ICCS_PARAMETER__CUSTOMER_TYPE__CUSTOMER_TYPE : mml:string
+        CORPORATE=CORPORATE
+        RETAIL=RETAIL
+    ICCS_PARAMETER__CUSTOMER_TYPE__LEGAL_DOC_NAME__PRIORITY : mml:string
+        1=1
+        2=2
+}

@@ -1,0 +1,963 @@
+# UTF-8
+/* Configurations for PY */
+Domain PY_Config
+    @t24:i (module=PY)
+    @java:Package (value=com.temenos.t24.datamodel.py.py_config)
+namespace "http://www.temenos.com/t24/PY_Config"
+metamodelVersion 1.30.6
+Classes {
+    /* This table allows us to define the various address output formats. */
+    ADDRESS_OUTPUT_FORMAT
+        @i18n:Description (en="")
+        @t24:i (t24Name=ADDRESS.OUTPUT.FORMAT, level=I, type=H, allowedFunctions="A D E I L Q S", localRefApplicationSysNo=21.0, localRefAllowed=true)
+    {
+        ADDR_OUT_FORMAT_ID -> PY_Config:ADDRESS_OUTPUT_FORMAT PK required
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=0.0, core=true, businessType=A, t24Name=ADDR.OUT.FORMAT.ID, mandatory=true)
+/* Identifies the routine to be called by the system.
+It allows Country and local layer to attach a routine to implement more complex output format rules.
+If the routine attached, the output address from API will take precedence over whatever the output format is defined.
+This is an optional field.
+IN/OUT arguments for the API:
+InArg1  - InRequestValidateAO
+InArg1(ApplId)   - The requesting appplication id
+InArg1(Appl)   	- The requesting application
+InArg1(ApplRec)  - The requesting application record
+InArg1(FormattedAddress) - Customer level lead company to determine COUNTRY.PARAMETER, If not 'SYSTEM'
+InArg1(Conversion) - Conversion name
+InArg2  - Reserved1
+InArg3  - Reserved2
+OutArg1 - OutResponseValidateAO
+OutArg1(returnDeliveryAdd) - Address rule applied delivery address
+OutArg1(Error) - Error if any
+OutArg2 - Reserved3
+Validation Rules:
+The routine inputted in this field must have an entry in EB.API. */
+        API_OUTPUT_FORMAT : T24BusinessTypes:HOOK
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=10.0, core=true, t24Name=API.OUTPUT.FORMAT, mandatory=false)
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=30.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=31.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=27.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=28.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=24.0, core=true, t24Name=CURR.NO, mandatory=false)
+        DATE_TIME -> byValue PY_Config:ADDRESS_OUTPUT_FORMAT__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=29.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+/* Represents the description of address output format.
+This is a mandatory field.
+Validation Rules:
+The value for this field can be of free-text with the maximum length of 70. */
+        DESCRIPTION : T24BusinessTypes:A required
+            @i18n:Label (en=Description)
+            @i18n:Tooltip (en=Description)
+            @t24:i (align=L, inputBehaviour=I, maxLength=70, sysNumber=1.0, core=true, t24Name=DESCRIPTION, mandatory=true)
+        INPUTTER -> byValue PY_Config:ADDRESS_OUTPUT_FORMAT__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+/* Indicates the maximum lines to be inputted for the respective address output.
+If the system determines the output has more lines than the maximum lines defined here, the system will only consider the first maximum lines, the remaining will be ignored.
+This is an optional field with the maximum length of 2. */
+        MAXIMUM_LINES : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=2, sysNumber=8.0, core=true, t24Name=MAXIMUM.LINES, mandatory=false)
+/* Indicates if the system should include an output item which is evaluated as blank in the address output.
+This is an options field with the options "YES_NO_"
+Validation Rules:
+If marked as YES, the system will not remove the null output items.
+If marked as NO or left empty, the system removes the null, output items.
+The default value is NO. */
+        NULL_LINES_ALLOWED : PY_Config:ADDRESS_OUTPUT_FORMAT__NULL_LINES_ALLOWED
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=9.0, core=true, t24Name=NULL.LINES.ALLOWED, mandatory=false)
+        OUTPUT_ITEM -> byValue PY_Config:ADDRESS_OUTPUT_FORMAT__OUTPUT_ITEM *
+            @t24:i (t24Name=OUTPUT.ITEM)
+        OVERRIDE -> byValue PY_Config:ADDRESS_OUTPUT_FORMAT__OVERRIDE *
+            @t24:i (t24Name=OVERRIDE)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=23.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        RESERVED_1 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=20.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_10 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=11.0, core=true, t24Name=RESERVED.10, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=19.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=18.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=17.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        RESERVED_5 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=16.0, core=true, t24Name=RESERVED.5, mandatory=false)
+        RESERVED_6 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=15.0, core=true, t24Name=RESERVED.6, mandatory=false)
+        RESERVED_7 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=14.0, core=true, t24Name=RESERVED.7, mandatory=false)
+        RESERVED_8 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=13.0, core=true, t24Name=RESERVED.8, mandatory=false)
+        RESERVED_9 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=12.0, core=true, t24Name=RESERVED.9, mandatory=false)
+    }
+    ADDRESS_OUTPUT_FORMAT__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=26.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    ADDRESS_OUTPUT_FORMAT__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=25.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    ADDRESS_OUTPUT_FORMAT__OUTPUT_ITEM
+    {
+        ADDRESS_ATTRIBUTE -> byValue PY_Config:ADDRESS_OUTPUT_FORMAT__OUTPUT_ITEM__ADDRESS_ATTRIBUTE *
+            @t24:i (t24Name=ADDRESS.ATTRIBUTE)
+/* Indicates the maximum number of characters for an output item line.
+The system will evaluate the definition of the output line and will compare the result with the number of characters per line and the number of lines per output items.
+If the length of the result is less than max length than one line will be returned for the output item.
+In case the number of lines per output>1, the system will return the first chars up to max length for the first line and then will continue with the output for the next lines.
+If the max line is exceeded the next chars will be ignored.
+This is a mandatory field with the maximum length of 3. */
+        MAX_LENGTH : T24BusinessTypes:N required
+            @i18n:Label (en="Max Length")
+            @t24:i (align=R, inputBehaviour=I, maxLength=3, sysNumber=6.0, core=true, t24Name=MAX.LENGTH, mandatory=true)
+/* Represents the maximum number of lines to use for an output item.
+The maximum number of lines per output item combined with the maximum number of characters per output item gives an indication of the name or address attributes to be displayed on every line part of the output.
+This is a mandatory field with the maximum length of 2.
+The default value is '1' */
+        NO_LINES_PER_OUTPUTITEM : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=2, sysNumber=7.0, core=true, t24Name=NO.LINES.PER.OUTPUTITEM, mandatory=false)
+/* Identifies the number of an item in the output. An output item can have one or more lines.
+By giving the same name to the Output Item to different output items, the system will evaluates the first output line and if this is null it will continue with the next one.
+Different output item names implies that each output items/ will be included in the address output.
+This is a multi-value mandatory field.
+Validation Rules:
+The value for this field can be of free-text with the maximum length of 35. */
+        OUTPUT_ITEM : T24BusinessTypes:A required
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=2.0, core=true, t24Name=OUTPUT.ITEM, mandatory=true)
+    }
+    ADDRESS_OUTPUT_FORMAT__OUTPUT_ITEM__ADDRESS_ATTRIBUTE
+    {
+/* Identifies a name or address attribute that will be included in the output item. It is part of the output item group.
+Adding multiple address attributes within the same output item, implies that all the address attributes will be combined together within the same output item (it will apply the AND logic) in the order specified by user.
+Attributes that are combined together are separated by a space.
+This is a multi-value mandatory field.
+Validation Rules:
+The value inputted in this field will be validated against the fields from DE.ADDRESS.
+No duplicate allowed per CarrierType. */
+        ADDRESS_ATTRIBUTE : T24BusinessTypes:A required
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=3.0, core=true, t24Name=ADDRESS.ATTRIBUTE, mandatory=true)
+/* Prefix name associated to the address attribute. It identifies the text to precede the address attribute.
+This is an optional field with the maximum length of 35. */
+        PREFIX_TEXT : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=4.0, core=true, t24Name=PREFIX.TEXT, mandatory=false)
+/* Suffix name associated to the address attribute. It identifies the text to follow the address attribute.
+This is an optional field with the maximum length of 35. */
+        SUFFIX_TEXT : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=5.0, core=true, t24Name=SUFFIX.TEXT, mandatory=false)
+    }
+    ADDRESS_OUTPUT_FORMAT__OVERRIDE
+    {
+        OVERRIDE : T24BusinessTypes:N
+            @i18n:Label (en=Override)
+            @i18n:Tooltip (en="Overrides generated by this transaction")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=22.0, core=true, t24Name=OVERRIDE, mandatory=false)
+    }
+    /* This table allows us to define the Address Output Rules that will be used for an address country. */
+    ADDRESS_OUTPUT_RULES
+        @i18n:Description (en="")
+        @t24:i (t24Name=ADDRESS.OUTPUT.RULES, level=I, type=H, allowedFunctions="A D E I L Q S", localRefApplicationSysNo=16.0, localRefAllowed=true)
+    {
+        ADDR_OUT_RULES_ID -> PY_Config:ADDRESS_OUTPUT_RULES PK required
+            @t24:i (align=L, inputBehaviour=I, maxLength=2, sysNumber=0.0, core=true, businessType=A, t24Name=ADDR.OUT.RULES.ID, mandatory=true)
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=25.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=26.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=22.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        CARRIER_TYPE -> byValue PY_Config:ADDRESS_OUTPUT_RULES__CARRIER_TYPE *
+            @t24:i (t24Name=CARRIER.TYPE)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=23.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=19.0, core=true, t24Name=CURR.NO, mandatory=false)
+        DATE_TIME -> byValue PY_Config:ADDRESS_OUTPUT_RULES__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=24.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+/* This will represent the description of the address country output rule for a specific country for various carriers.
+This is a mandatory field.
+Validation Rules:
+The value for this field can be of free-text with the maximum length of 70. */
+        DESCRIPTION : T24BusinessTypes:A required
+            @i18n:Label (en=Description)
+            @i18n:Tooltip (en=Description)
+            @t24:i (align=L, inputBehaviour=I, maxLength=70, sysNumber=1.0, core=true, t24Name=DESCRIPTION, mandatory=true)
+        INPUTTER -> byValue PY_Config:ADDRESS_OUTPUT_RULES__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        OVERRIDE -> byValue PY_Config:ADDRESS_OUTPUT_RULES__OVERRIDE *
+            @t24:i (t24Name=OVERRIDE)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=18.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        RESERVED_1 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=15.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_10 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=6.0, core=true, t24Name=RESERVED.10, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=14.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=13.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=12.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        RESERVED_5 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=11.0, core=true, t24Name=RESERVED.5, mandatory=false)
+        RESERVED_6 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=10.0, core=true, t24Name=RESERVED.6, mandatory=false)
+        RESERVED_7 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=9.0, core=true, t24Name=RESERVED.7, mandatory=false)
+        RESERVED_8 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=8.0, core=true, t24Name=RESERVED.8, mandatory=false)
+        RESERVED_9 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=7.0, core=true, t24Name=RESERVED.9, mandatory=false)
+    }
+    ADDRESS_OUTPUT_RULES__CARRIER_TYPE
+    {
+/* It will represent the name of the carrier for which these rules will be used.
+Must be a defined carrier, the value will be validated against the DE.CARRIER table.
+This is a mandatory multi-value field.
+Validation Rules:
+No duplicates allowed. */
+        CARRIER_TYPE -> DE_Config:DE_CARRIER required
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=2.0, core=true, businessType=A, t24Name=CARRIER.TYPE, mandatory=true)
+        DE_FORMAT_CONVERSION -> byValue PY_Config:ADDRESS_OUTPUT_RULES__CARRIER_TYPE__DE_FORMAT_CONVERSION *
+            @t24:i (t24Name=DE.FORMAT.CONVERSION)
+/* Indicates the name and address output format which will be applied to the address where the output is sent.
+The value will be selected from a list with all the address output format records as defined in ADDRESS.OUTPUT.FORMAT table.
+This is an optional field. */
+        TO_ADDR_OUTPUT_FMT -> PY_Config:ADDRESS_OUTPUT_FORMAT
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=3.0, core=true, businessType=A, t24Name=TO.ADDR.OUTPUT.FMT, mandatory=false)
+    }
+    ADDRESS_OUTPUT_RULES__CARRIER_TYPE__DE_FORMAT_CONVERSION
+    {
+/* This will allow to identify the output format that will be used when a conversion is indicated in the delivery format for the defined carrier.
+In case the value captured in the field is not an existing valid customer conversion, the proposed logic for applying soft address output rules will not be applied.
+This is an optional field.
+Validation Rules:
+No duplicate allowed per CarrierType. */
+        DE_FORMAT_CONVERSION : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=16, sysNumber=4.0, core=true, t24Name=DE.FORMAT.CONVERSION, mandatory=false)
+/* Specifies the name of the address output format which will be used by delivery when this conversion is indicated in a delivery format.
+The value will be selected from a list with all the address output format records as defined in ADDRESS.OUTPUT.FORMAT table.
+Validation Rules:
+The field is optional but becomes mandatory if DE.FORMAT.CONVERSION is populated. */
+        OUTPUT_FORMAT -> PY_Config:ADDRESS_OUTPUT_FORMAT
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=5.0, core=true, businessType=A, t24Name=OUTPUT.FORMAT, mandatory=false)
+    }
+    ADDRESS_OUTPUT_RULES__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=21.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    ADDRESS_OUTPUT_RULES__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=20.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    ADDRESS_OUTPUT_RULES__OVERRIDE
+    {
+        OVERRIDE : T24BusinessTypes:N
+            @i18n:Label (en=Override)
+            @i18n:Tooltip (en="Overrides generated by this transaction")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=17.0, core=true, t24Name=OVERRIDE, mandatory=false)
+    }
+/* DE.ADDRESS File contains the names and address of a bank's customers and also of each company within the banking organisation.
+The basic postal address of each Customer (Delivery Address ID = Company.C-Customer.PRINT.1) is automatically updated when the address is changed through Customer Maintenance.  This record on the Address file cannot be amended (except for the HOLD.OUPUT field), and its CURR.NO will always be 1.
+DE.ADDRESS is used for inputting all addresses except 'PRINT.1', i.e. SWIFT addresses, Telex addresses and special postal addresses.
+In a printed message all Customer names are from the PRINT.1 address except when the field specified is TO.ADDRESS from the Message Header. The Delivery Address record used for TO.ADDRESS is dependent upon the DE.PRODUCT file.
+To input or update Customer addresses (other than PRINT.1) the user must sign on to the Company holding that Customer record.  For example, if Companies 'A' and 'B' share a Customer file located in Company 'A', then Customers Delivery Addresses can only be amended by signing on to Company 'A', even though Company 'B' uses the same Customer file.
+In order to hold printed output for an account/customer the HOLD.OUTPUT field must be set. */
+    DE_ADDRESS
+        @i18n:Description (en="")
+        @t24:i (t24Name=DE.ADDRESS, level=I, type=H, allowedFunctions="A C D E H I L P Q R S", localRefApplicationSysNo=27.0, localRefAllowed=true)
+    {
+        ADDRESS -> byValue PY_Config:DE_ADDRESS__ADDRESS *
+            @t24:i (t24Name=ADDRESS)
+/* This field defines which country is the country of the address being captured.
+This is a no-input field for PRINT.1, EMAIL , SMS, SWIFT, ISOMX and TELEX.
+
+Validation Rule:
+
+Valid record from country to be mentioned. */
+        ADDRESS_COUNTRY -> ST_Config:COUNTRY
+            @t24:i (align=L, inputBehaviour=I, maxLength=2, sysNumber=33.0, core=true, businessType=SSS, t24Name=ADDRESS.COUNTRY, typeModifiers=ADDRPARAM, mandatory=false)
+        ADDRESS_ITEM1 -> byValue PY_Config:DE_ADDRESS__ADDRESS_ITEM1 *
+            @t24:i (t24Name=ADDRESS.ITEM1)
+        ADDRESS_ITEM2 -> byValue PY_Config:DE_ADDRESS__ADDRESS_ITEM2 *
+            @t24:i (t24Name=ADDRESS.ITEM2)
+        /* Represents the special purpose of an address. To be linked to the same EB.LOOKUP as for same field in Customer. */
+        ADDRESS_PURPOSE : PY_Config:DE_ADDRESS__ADDRESS_PURPOSE
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=38.0, core=true, t24Name=ADDRESS.PURPOSE, mandatory=false)
+        ADDRESS_TYP : PY_Config:DE_ADDRESS__ADDRESS_TYP
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=37.0, core=true, t24Name=ADDRESS.TYP, mandatory=false)
+        /* Will identify the nature of the postal address. To be linked to the same EB.LOOKUP as for same field in Customer. */
+        ADDRESS_TYPE : PY_Config:DE_ADDRESS__ADDRESS_TYPE
+            @i18n:Label (en=Type)
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=27.6, core=false, t24Name=ADDRESS.TYPE, mandatory=false)
+/* Represents the party/service which was used to validate the address, to confirm that it is a real address.
+Core will not provide any automation.
+Can be used by country/implementation layer to store the name/identifier of local party/service used to confirm the address. Free text; */
+        ADDRESS_VALIDATED_BY : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=44.0, core=true, t24Name=ADDRESS.VALIDATED.BY, mandatory=false)
+        ADDR_LOCATION : PY_Config:DE_ADDRESS__ADDR_LOCATION
+            @t24:i (align=L, inputBehaviour=I, maxLength=10, sysNumber=22.0, core=true, t24Name=ADDR.LOCATION, mandatory=false)
+/* Specifies a Customer's (or Company's) acknowledgment when called up to receive a TELEX message.
+Validation Rules:
+1-20 type A (alphanumeric) characters.
+Mandatory input for TELEX addresses.
+Not allowed for SWIFT, PRINT or SIC addresses */
+        ANSWERBACK : T24BusinessTypes:A
+            @i18n:Label (en=Answerback)
+            @i18n:Tooltip (en=Answerback)
+            @t24:i (align=L, inputBehaviour=I, maxLength=20, sysNumber=2.0, core=true, t24Name=ANSWERBACK, mandatory=false)
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=54.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=55.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+/* Not used.
+Validation Rules:
+This is a NOINPUT field. */
+        AUTHENTICATION : T24BusinessTypes:A
+            @i18n:Label (en=Authentication)
+            @i18n:Tooltip (en=Authentication)
+            @t24:i (align=L, inputBehaviour=I, maxLength=12, sysNumber=5.0, core=true, t24Name=AUTHENTICATION, mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=51.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        BLACKOUT_START -> byValue PY_Config:DE_ADDRESS__BLACKOUT_START *
+            @t24:i (t24Name=BLACKOUT.START)
+        /* Represents the name of the building, entrance */
+        BUILDING_NAME : T24BusinessTypes:ADDR
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=24.0, core=true, t24Name=BUILDING.NAME, typeModifiers="A", mandatory=false)
+        /* Represents the number that identifies the position of a building on a street */
+        BUILDING_NUMBER : T24BusinessTypes:ADDR
+            @t24:i (align=L, inputBehaviour=I, maxLength=16, sysNumber=23.0, core=true, t24Name=BUILDING.NUMBER, typeModifiers="A", mandatory=false)
+        CITY : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=27.2, core=false, t24Name=CITY, mandatory=false)
+        COUNTRY -> byValue PY_Config:DE_ADDRESS__COUNTRY *
+            @t24:i (t24Name=COUNTRY)
+/* Specifies the code of a country where the delivery address is.  This field is not used at present.
+Validation Rules:
+1-2 type A (alphanumeric) characters. (Optional input) If the INSTALL PARAMETER on the DE.PARM file is 'R' (resident), then the COUNTRY CODE must be an ID on the COUNTRY file. */
+        COUNTRY_CODE -> ST_Config:COUNTRY
+            @i18n:Label (en=Country)
+            @t24:i (align=L, inputBehaviour=I, maxLength=2, sysNumber=4.0, core=true, businessType=A, t24Name=COUNTRY.CODE, mandatory=false)
+/* Represents a subdivision of a country. such as state, region, county. etc.
+This field will be linked to a vetting table or to a virtual table as per the address rules setup. */
+        COUNTRY_SUBDIVISION : T24BusinessTypes:ADDR
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=40.0, core=true, t24Name=COUNTRY.SUBDIVISION, typeModifiers="A", mandatory=false)
+        COUNTY : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=27.4, core=false, t24Name=COUNTY, mandatory=false)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=52.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=48.0, core=true, t24Name=CURR.NO, mandatory=false)
+/* Specifies the Customer number to whom Secure Message is to be sent.
+Validation Rules:
+Valid Customer number
+Optional Input */
+        CUSTOMER_NO -> ST_Customer:CUSTOMER
+            @i18n:Label (en="Customer No")
+            @i18n:Tooltip (en="Identifies the Customer for the transaction.")
+            @t24:i (align=R, inputBehaviour=I, maxLength=10, sysNumber=18.0, core=true, businessType=CUS, t24Name=CUSTOMER.NO, mandatory=false)
+/* Field to indicate if any customer static data was modified upon customer request.
+When the field is set to Yes then the date when the request was made will be considered as customer's last contact date for escheat processing. */
+        CUS_CONTACT : PY_Config:DE_ADDRESS__CUS_CONTACT
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=27.7, core=false, t24Name=CUS.CONTACT, mandatory=false)
+/* Field to indicate the status of customer mailing address.
+Value in this field are defined under the virtual table(EB.LOOKUP) CUSTOMER.MAIL.INDICATOR.
+Example:
+M = Mail (default)
+H = Hold Mail
+O = No Mailings
+F = Foreign
+B = Bad Address; this lookup record will have Data name as BAD.ADDRESS and data value as YES.
+Any other code(lookup id) can be used to indicate bad address through data name and value in lookup record as mentioned for B. */
+        CUS_MAIL_IND : PY_Config:DE_ADDRESS__CUS_MAIL_IND
+            @t24:i (align=L, inputBehaviour=I, maxLength=1, sysNumber=27.8, core=false, t24Name=CUS.MAIL.IND, mandatory=false)
+        DATE_TIME -> byValue PY_Config:DE_ADDRESS__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+/* Specifies either a Customer's SWIFT address, or TELEX number, as appropriate to the record ID.
+The format for a SWIFT address is as follows:            bbbbcclltrrr where:
+bbbb is the bank code (must be alpha).            cc   is the country code.  If the INSTALL PARAMETER                 field on DE.PARM is 'R' (resident), the country                 code must exist on the country file; otherwise it                 must be alpha.            ll   is the location code and must be in the range A-Z                 or 2-9.            t    is the terminal code (only allowed on "to                 addresses", therefore if the address is for a                 company code).  Must be in the range A-Z or 2-9.            rrr  is the branch code and is optional.  If entered it                 must be alphanumeric. If VALIDATE.BIC in DE.BIC.PRAMETER is Yes then, DELIVERY ADDRESS must be a valid entry on DE.BIC file.
+Validation Rules:
+1-18 type numeric characters, for TELEX. (Embedded spaces allowed.) 8 or 11 type S (SWIFT) characters, for SWIFT if the address is for a customer number or 9 or 12 type S (SWIFT) characters for SWIFT if the address is for a company code (Embedded spaces not allowed.) (Mandatory input for SWIFT or TELEX addresses, not allowed for print addresses.) */
+        DELIVERY_ADDRESS : T24BusinessTypes:SS
+            @i18n:Label (en="Swift Address")
+            @i18n:Tooltip (en="Swift Address")
+            @t24:i (align=L, inputBehaviour=I, maxLength=18, sysNumber=1.0, core=true, t24Name=DELIVERY.ADDRESS, mandatory=false)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=53.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+/* This field can contain the first email id of the customer. This client contact data is
+required by CRM. This field has been added in correspondence to the customer
+template.
+
+Validation Rules::
+Maximum of 50 characters allowed */
+        EMAIL_1 : T24BusinessTypes:ANY
+            @i18n:Label (en=Email)
+            @t24:i (align=L, inputBehaviour=I, maxLength=254, sysNumber=17.0, core=true, t24Name=EMAIL.1, mandatory=false)
+        /* The number that identifies apartment and unit that have other dwellings above or below, often with shared access and common areas. */
+        FLAT_NUMBER : T24BusinessTypes:ADDR
+            @t24:i (align=L, inputBehaviour=I, maxLength=16, sysNumber=25.0, core=true, t24Name=FLAT.NUMBER, typeModifiers="A", mandatory=false)
+        /* Defines the Hold Mail End Date if Hold Output is set to Y and Hold Start Date is provided. Optional Input. */
+        HOLD_MAIL_END : T24BusinessTypes:D
+            @i18n:Label (en="HM End")
+            @i18n:Tooltip (en="Specifies the end of Hold Mail period")
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=30.0, core=true, t24Name=HOLD.MAIL.END, mandatory=false)
+/* Defines the Hold Options Available when Hold Output is set to Y.
+Valid Values : HELD, DELETED, CLEAR and SEND
+HELD option is to hold the output delivery message for the carrier address during Hold period. Hold needs to be manually released post the Hold Expiry date
+DELETED option does not generate output delivery message for the carrier address during Hold Period
+CLEAR and SEND are applicable only for PRINT Carrier. Once Hold Expiry is reached for a Carrier Address, CLEAR deletes the Hold Records, created during Hold Period, and SEND automatically pushes Held records to PRINT.CUST.OUTPUT file for processing them using Online Service HOLD.MAIL.ONLINE. */
+        HOLD_MAIL_OPT : PY_Config:DE_ADDRESS__HOLD_MAIL_OPT
+            @i18n:Label (en="Hold Mail Option")
+            @i18n:Tooltip (en="Specifies the option for Hold Mail")
+            @t24:i (align=L, inputBehaviour=I, maxLength=7, sysNumber=31.0, core=true, t24Name=HOLD.MAIL.OPT, mandatory=false)
+        /* Defines the Hold Mail Start Date if Hold Output is set to Y. Optional Input */
+        HOLD_MAIL_START : T24BusinessTypes:D
+            @i18n:Label (en="HM Start")
+            @i18n:Tooltip (en="Specifies the Start of Hold Mail period")
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=29.0, core=true, t24Name=HOLD.MAIL.START, mandatory=false)
+/* Defines whether or not the output delivery message is to be held.
+This field allows INPUT for Carriers for which ALLOW.HOLD is set to YES in DE.CARRIER. If this field is set to 'Y' then all output sent to the address will be held. If the output is classified as customer output for PRINT carrier then it will be held in F.CUSTOMER.HOLD file as opposed to F.DE.O.HOLD.KEY file for other carriers.
+Validation Rules:
+Y or NO.  Optional input. */
+        HOLD_OUTPUT : PY_Config:DE_ADDRESS__HOLD_OUTPUT
+            @i18n:Label (en="Hold Output")
+            @i18n:Tooltip (en="Hold output")
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=28.0, core=true, t24Name=HOLD.OUTPUT, mandatory=false)
+/* Identifies the Company or Customer, carrier and address version number whose address is held in this record.
+When the ID contains a Customer number the appropriate Customer company code is placed before it when building the key of this file.
+Example:
+If the input ID is C-405000.PRINT.3 (The 3rd delivery print address for Customer 405000.) and the Customer company is GB-003-2500, then it will go on file as GB0032500.C-405000.PRINT.3
+If the INSTALL PARAMETER field on DE.PARM is 'R' (Resident) then:
+a) Customer files will be checked to validate Customer numbers. b) Mnemonics can be entered in place of Customer numbers. c) The Company mnemonic can be used in place of the Company Code.
+Validation Rules:
+a)   Code or Mnemonic of the sign-on Company, which defaults for a      Customer address. b)   '.' c)   'C-' then a Customer number. (Required for a Customer address.) d)   '.' e)   The carrier, e.g. PRINT, SWIFT, TELEX (Mandatory input.) f)   '.' g)   2 numeric digits. (Mandatory input.)
+The carrier must be an address carrier, i.e. the carrier must reference a carrier on the DE.CARRIER file in which the carrier address is the same as the id.  e.g. You may want to send two types of Telex messages, one using SWIFT format and one using free format messages.  However, you would not want to set up two sets of telex addresses.  Therefore, one type of Telex message would be defined on the carrier file as Telex, with a carrier address of Telex, formatting module of SWIFT and carrier module of Telex.  The free format messages would be defined on the carrier file as a carrier of Telexp, carrier address of Telex (so that they use Telex addresses on DE.ADDRESS), formatting module of Telexp and carrier module of Telex. */
+        ID -> PY_Config:DE_ADDRESS PK required
+            @i18n:Label (en="Transaction Ref")
+            @i18n:Tooltip (en="Transaction Reference")
+            @t24:i (align=L, inputBehaviour=I, maxLength=39, sysNumber=0.0, core=true, businessType=A, t24Name=ID, mandatory=true)
+/* Represents an international call prefix or dial out code.
+A new context enquiry IDD PREFIX will be attached to it.
+Will be validated against the IDD.PREFIX.PHONE field from Country table for the Address Country specified. */
+        IDD_PREFIX_PHONE -> ST_Config:COUNTRY_IDD_PREFIX
+            @t24:i (align=L, inputBehaviour=I, maxLength=16, sysNumber=43.0, core=true, businessType=A, t24Name=IDD.PREFIX.PHONE, mandatory=false)
+        INPUTTER -> byValue PY_Config:DE_ADDRESS__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+/* Specifies the type of institution.
+Not used at present.
+Validation Rules:
+1-8 type A (alphanumeric) characters. (Optional input.) */
+        INSTITUTION_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Institution code")
+            @i18n:Tooltip (en="Institution code")
+            @t24:i (align=L, inputBehaviour=I, maxLength=8, sysNumber=3.0, core=true, t24Name=INSTITUTION.CODE, mandatory=false)
+/* Not yet implemented.  The ID of a special instructions record.
+Validation Rules:
+1-6 numeric characters. (Optional input) */
+        INSTRUCTIONS : T24BusinessTypes:A
+            @i18n:Label (en=Instructions)
+            @i18n:Tooltip (en=Instructions)
+            @t24:i (align=L, inputBehaviour=I, maxLength=6, sysNumber=13.0, core=true, t24Name=INSTRUCTIONS, mandatory=false)
+/* Bank identifier in the front end software.
+This field is used with STACHEM front-end software.
+Validation Rules:
+0 - 35 alphanumeric characters. (Optional Input) */
+        INTERFACE_ID : T24BusinessTypes:AAA
+            @i18n:Label (en="Interface id")
+            @i18n:Tooltip (en="Interface id")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=14.0, core=true, t24Name=INTERFACE.ID, mandatory=false)
+        NAME_1 -> byValue PY_Config:DE_ADDRESS__NAME_1 *
+            @t24:i (t24Name=NAME.1)
+        NAME_2 -> byValue PY_Config:DE_ADDRESS__NAME_2 *
+            @t24:i (t24Name=NAME.2)
+        NAME_ALIAS -> byValue PY_Config:DE_ADDRESS__NAME_ALIAS *
+            @t24:i (t24Name=NAME.ALIAS)
+/* Field to indicate if the customer resides in the mentioned physical address.
+If the customer doesn't reside in the specified address this field gets updated with the value 'Y'. */
+        NPAI_FLAG : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=1, sysNumber=27.1, core=false, t24Name=NPAI.FLAG, mandatory=false)
+        OVERRIDE -> byValue PY_Config:DE_ADDRESS__OVERRIDE *
+            @t24:i (t24Name=OVERRIDE)
+/* This field can contain the first phone number of the customer. This client contact data is
+required by CRM. This field has been added in correspondence to the customer
+template.
+
+Validation Rules::
+
+Maximum of 16 characters allowed */
+        PHONE_1 : T24BusinessTypes:ADDR
+            @i18n:Label (en="Phone No")
+            @t24:i (align=L, inputBehaviour=I, maxLength=17, sysNumber=15.0, core=true, t24Name=PHONE.1, typeModifiers="ANY", mandatory=false)
+        POST_CODE -> byValue PY_Config:DE_ADDRESS__POST_CODE *
+            @t24:i (t24Name=POST.CODE)
+        /* Identifies the postal office (PO) box number. */
+        PO_BOX_NUMBER : T24BusinessTypes:ADDR
+            @t24:i (align=L, inputBehaviour=I, maxLength=16, sysNumber=39.0, core=true, t24Name=PO.BOX.NUMBER, typeModifiers="A", mandatory=false)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=47.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        REPLY_TO_ADR -> byValue PY_Config:DE_ADDRESS__REPLY_TO_ADR *
+            @t24:i (t24Name=REPLY.TO.ADR)
+        /* Represents the greeting used for communication with the client */
+        SALUTATION : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=70, sysNumber=42.0, core=true, t24Name=SALUTATION, mandatory=false)
+        SHORT_NAME -> byValue PY_Config:DE_ADDRESS__SHORT_NAME *
+            @t24:i (t24Name=SHORT.NAME)
+/* This field can contain the first SMS(text) number of the customer. This client contact data is
+required by CRM. This field has been added in correspondence to the customer
+template.
+
+Validation Rules::
+
+Maximum of 16 characters allowed */
+        SMS_1 : T24BusinessTypes:ANY
+            @i18n:Label (en="Mobile No")
+            @t24:i (align=L, inputBehaviour=I, maxLength=17, sysNumber=16.0, core=true, t24Name=SMS.1, mandatory=false)
+        SMS_IDD_PREFIX_PHONE -> ST_Config:COUNTRY_IDD_PREFIX
+            @t24:i (align=L, inputBehaviour=I, maxLength=16, sysNumber=45.0, core=true, businessType=A, t24Name=SMS.IDD.PREFIX.PHONE, mandatory=false)
+        STREET_ADDR -> byValue PY_Config:DE_ADDRESS__STREET_ADDR *
+            @t24:i (t24Name=STREET.ADDR)
+/* Defines whether or not the BIC.CODE to be included in the tag 25P for MT900 ,MT910, MT940,MT941,MT942 swift messages. .
+If this field is set to 'Y' then BIC.CODE will be included under tag 25P along with the account number, Otherwise it will not be included only Account number exist under tag 25.
+Validation Rules:
+Y or NO.  Optional input. */
+        TAG25_IND : PY_Config:DE_ADDRESS__TAG25_IND
+            @i18n:Label (en="Map TAG25")
+            @i18n:Tooltip (en="Map TAG25")
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=26.0, core=true, t24Name=TAG25.IND, mandatory=false)
+/* Holds the title for the customer name as the part of improved client information.
+Use same EB.LOOKUP as for same field in CUSTOMER. */
+        TITLE : PY_Config:DE_ADDRESS__TITLE
+            @i18n:Label (en=Description)
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=41.0, core=true, t24Name=TITLE, mandatory=false)
+        TOWN_COUNTRY -> byValue PY_Config:DE_ADDRESS__TOWN_COUNTRY *
+            @t24:i (t24Name=TOWN.COUNTRY)
+        US_STATE -> NACUST_Foundation:US_STATE
+            @t24:i (align=L, inputBehaviour=I, maxLength=2, sysNumber=27.5, core=false, businessType=A, t24Name=US.STATE, mandatory=false)
+        ZIP4 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=4, sysNumber=27.3, core=false, t24Name=ZIP4, mandatory=false)
+    }
+    DE_ADDRESS_FAX
+        @i18n:Description (en="")
+        @t24:i (t24Name=DE.ADDRESS.FAX, level=I, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        ADDRESS_MNEMONIC : T24BusinessTypes:A PK required
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=0.0, core=true, t24Name=ADDRESS.MNEMONIC, mandatory=true)
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=N, maxLength=16, sysNumber=11.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:N
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=R, inputBehaviour=N, maxLength=15, sysNumber=12.0, core=true, t24Name=AUDIT.DATE.TIME, mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=20, sysNumber=8.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        CO_CODE : T24BusinessTypes:A
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=9.0, core=true, t24Name=CO.CODE, mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=4, sysNumber=5.0, core=true, t24Name=CURR.NO, mandatory=false)
+        DATE_TIME : T24BusinessTypes:N
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=R, inputBehaviour=N, maxLength=15, sysNumber=7.0, core=true, t24Name=DATE.TIME, mandatory=false)
+        DEPT_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=L, inputBehaviour=N, maxLength=4, sysNumber=10.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        FAX_NO : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=30, sysNumber=3.0, core=true, t24Name=FAX.NO, mandatory=false)
+        INPUTTER -> byValue PY_Config:DE_ADDRESS_FAX__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        LINK_TO_CUSTOMER -> ST_Customer:CUSTOMER
+            @t24:i (align=R, inputBehaviour=N, maxLength=10, sysNumber=2.0, core=true, businessType=CUS, t24Name=LINK.TO.CUSTOMER, mandatory=false)
+        RECORD_STATUS : T24BusinessTypes:A
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=4, sysNumber=4.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        SHORT_NAME : T24BusinessTypes:A
+            @i18n:Label (en="Short name")
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=1.0, core=true, t24Name=SHORT.NAME, mandatory=false)
+    }
+    DE_ADDRESS_FAX__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=20, sysNumber=6.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    DE_ADDRESS__ADDRESS
+    {
+        ADDRESS -> byValue PY_Config:DE_ADDRESS__ADDRESS__ADDRESS *
+            @t24:i (t24Name=ADDRESS)
+    }
+    DE_ADDRESS__ADDRESS_ITEM1
+    {
+/* Address Field to capture additional address details. Mapped to DE.ADDRESS
+This is a no-input field for PRINT.1, EMAIL , SMS, SWIFT, ISOMX and TELEX.
+
+Validation Rule:
+
+This is a multi-language field with the maximum length of '35'. The value for this field must follow SWIFT standard. */
+        ADDRESS_ITEM1 : T24BusinessTypes:ADDR
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, multiLanguage=true, sysNumber=34.0, core=true, t24Name=ADDRESS.ITEM1, typeModifiers=SWI, mandatory=false)
+    }
+    DE_ADDRESS__ADDRESS_ITEM2
+    {
+/* Address Field to capture additional address details. Mapped to DE.ADDRESS
+This is a no-input field for PRINT.1, EMAIL , SMS, SWIFT, ISOMX and TELEX.
+
+Validation Rule:
+
+This is a multi-language field with the maximum length of '35'. The value for this field must follow SWIFT standard. */
+        ADDRESS_ITEM2 : T24BusinessTypes:ADDR
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, multiLanguage=true, sysNumber=35.0, core=true, t24Name=ADDRESS.ITEM2, typeModifiers=SWI, mandatory=false)
+    }
+    DE_ADDRESS__ADDRESS__ADDRESS
+    {
+/* This is a Multi-Valued and Multi-Lingual field that stores address of the customer. This client information is required by CRM.
+This field is a NOINPUT field for Carriers PRINT, SMS, and EMAIL and is auto-populated from CUSTOMER application for PRINT carrier address.
+Validation Rules:
+1-35 type A (alphanumeric) characters. Optional input. No default value. */
+        ADDRESS : T24BusinessTypes:ADDR
+            @i18n:Label (en=Address)
+            @i18n:Tooltip (en="Define the address")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, multiLanguage=true, sysNumber=36.0, core=true, t24Name=ADDRESS, typeModifiers=SWI, mandatory=false)
+    }
+    DE_ADDRESS__BLACKOUT_START
+    {
+/* Specifies the End time of blackout period represented in terms of Server time.
+As an example,
+Let us say, Customer in Central America is not interested in receiving SMS messages during lunch time between 1:00 p.m and 2:00 p.m.
+So, in DE.CUSTOMER.PREFERENCES, following details will be provided.
+BLACKOUT.START  13:00
+BLACKOUT.END  14:00
+OFFSET        -06:00
+
+Let us say, he is a customer of a bank in Paris and T24 delivery services are run here.
+So, in DE.PARM, OFFSET detail will be provided as  +01:00
+Now, in DE.ADDRESS, when representing the blackout start time with respect to the Server time,
+Start time will be  20:00 and
+End time will be 21:00, a total of 7 hrs gap between server time and customer time.
+Validation Rules:
+1)Time should be entered in HH:MM format (24 hour format).
+HH - denoting hours and MM -  denoting minutes
+2) Applicable to SMS carrier only.Valid only for SMS carrier */
+        BLACKOUT_END : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=5, sysNumber=20.0, core=true, t24Name=BLACKOUT.END, mandatory=false)
+/* Specifies the start time of blackout period represented in terms of Server time.
+As an example,
+Let us say, Customer in Central America is not interested in receiving SMS messages during lunch time between 1:00 p.m and 2:00 p.m.
+So, in DE.CUSTOMER.PREFERENCES, following details will be provided.
+BLACKOUT.START  13:00
+BLACKOUT.END  14:00
+OFFSET        -06:00
+
+Let us say, he is a customer of a bank in Paris and T24 delivery services are run here.
+So, in DE.PARM, OFFSET detail will be provided as  +01:00
+Now, in DE.ADDRESS, when representing the blackout start time with respect to the Server time,
+Start time will be  20:00 and
+End time will be 21:00, a total of 7 hrs gap between server time and customer time.
+Validation Rules:
+1)Time should be entered in HH:MM format (24 hour format).
+HH - denoting hours and MM -  denoting minutes
+2) Applicable to SMS carrier only.Valid only for SMS carrier */
+        BLACKOUT_START : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=5, sysNumber=19.0, core=true, t24Name=BLACKOUT.START, mandatory=false)
+    }
+    DE_ADDRESS__COUNTRY
+    {
+/* Specifies the country of a Customer's or Company's address.
+Validation Rules:
+1-35 type S (SWIFT) characters.  Optional input for print addresses.  Not allowed for TELEX or SWIFT addresses. */
+        COUNTRY : T24BusinessTypes:ADDR
+            @i18n:Label (en=Country)
+            @i18n:Tooltip (en="Holds the country code")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, multiLanguage=true, sysNumber=12.0, core=true, t24Name=COUNTRY, typeModifiers="S", mandatory=false)
+    }
+    DE_ADDRESS__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=50.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    DE_ADDRESS__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=49.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    DE_ADDRESS__NAME_1
+    {
+/* Specifies the first line of a Customer's or Company's full name.
+Multilanguage field. Where SWIFT is used the first language must only allow standard SWIFT character validation. If SWIFT is not used the languages can be configured via ASCII.VALUES and ASCII.VAL.TABLES to allow the required range of characters.
+Validation Rules:
+1-35 type S (SWIFT) characters. (Mandatory input for print addresses. Not allowed for TELEX or SWIFT addresses.) */
+        NAME_1 : T24BusinessTypes:SWI
+            @i18n:Label (en=Name)
+            @i18n:Tooltip (en="Indicates the first line of a customer\'s or company\'s full name")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, multiLanguage=true, sysNumber=7.0, core=true, t24Name=NAME.1, mandatory=false)
+    }
+    DE_ADDRESS__NAME_2
+    {
+/* Specifies the second line of a Customer's or Company's name.
+Multilanguage field. Where SWIFT is used the first language must only allow standard SWIFT character validation. If SWIFT is not used the languages can be configured via ASCII.VALUES and ASCII.VAL.TABLES to allow the required range of characters.
+Validation Rules:
+1-35 type S (SWIFT) characters. (Optional input for print addresses. Not allowed for TELEX or SWIFT addresses.) */
+        NAME_2 : T24BusinessTypes:SWI
+            @i18n:Label (en="Name 2")
+            @i18n:Tooltip (en="Indicates the second line of a customer\'s or company\'s full name")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, multiLanguage=true, sysNumber=8.0, core=true, t24Name=NAME.2, mandatory=false)
+    }
+    DE_ADDRESS__NAME_ALIAS
+    {
+/* This field may contain additional surname.
+This is a no-input field for PRINT.1, EMAIL , SMS, SWIFT, ISOMX and TELEX.
+
+Validation Rule:
+
+This is a multi-language field with the maximum length of '35'. The value for this field must follow SWIFT standard. */
+        NAME_ALIAS : T24BusinessTypes:SWI
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, multiLanguage=true, sysNumber=32.0, core=true, t24Name=NAME.ALIAS, mandatory=false)
+    }
+    DE_ADDRESS__OVERRIDE
+    {
+/* This is a multi valued field. Standard T24 numeric field.
+Validation Rules:
+This is a NOINPUT field. */
+        OVERRIDE : T24BusinessTypes:N
+            @i18n:Label (en=Override)
+            @i18n:Tooltip (en="Overrides generated by this transaction")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=46.0, core=true, t24Name=OVERRIDE, mandatory=false)
+    }
+    DE_ADDRESS__POST_CODE
+    {
+/* Specifies a Customer's or Company's postal address code.
+Multilanguage field. Where SWIFT is used the first language must only allow standard SWIFT character validation. If SWIFT is not used the first language can be configured via ASCII.VALUES and ASCII.VAL.TABLES to allow the required range of characters, and multiple language definitions will not be required.
+Validation Rules:
+1-35 type A (alphanumeric) characters. (Optional input for print addresses. Not allowed for TELEX or SWIFT addresses.) */
+        POST_CODE : T24BusinessTypes:ADDR
+            @i18n:Label (en="Post Code")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, multiLanguage=true, sysNumber=11.0, core=true, t24Name=POST.CODE, typeModifiers="S", mandatory=false)
+    }
+    DE_ADDRESS__REPLY_TO_ADR
+    {
+/* Specifies the mail address which the customer can use to communicate to the bank incase there is a problem.
+Validation Rules:
+Maximum of 50 characters allowed
+Should contain a valid email address format. */
+        REPLY_TO_ADR : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=21.0, core=true, t24Name=REPLY.TO.ADR, mandatory=false)
+    }
+    DE_ADDRESS__SHORT_NAME
+    {
+/* Defines the name of a Customer or Company abbreviated to 35 characters.
+Multilanguage field. Where SWIFT is used the first language must only allow standard SWIFT character validation. If SWIFT is not used the languages can be configured via ASCII.VALUES and ASCII.VAL.TABLES to allow the required range of characters.
+Validation Rules:
+1-35 type S (SWIFT) characters. (Mandatory input) */
+        SHORT_NAME : T24BusinessTypes:SWI required
+            @i18n:Label (en="Short name")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, multiLanguage=true, sysNumber=6.0, core=true, t24Name=SHORT.NAME, mandatory=true)
+    }
+    DE_ADDRESS__STREET_ADDR
+    {
+/* Specifies a Customer's or Company's street address.
+Multilanguage field. Where SWIFT is used the first language must only allow standard SWIFT character validation. If SWIFT is not used the languages can be configured via ASCII.VALUES and ASCII.VAL.TABLES to allow the required range of characters.
+Validation Rules:
+
+
+1-35 type S (SWIFT) characters. (Not allowed for TELEX or SWIFT addresses.)
+For PRINT addresses: Non Mandatory, if the field STREET.NON.MANDAT = 'Y' in   the CUSTOMER.DEFAULT record whose ID is equal to the value of the Customer's   SECTOR field; otherwise Mandatory. */
+        STREET_ADDR : T24BusinessTypes:ADDR
+            @i18n:Label (en=Street)
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, multiLanguage=true, sysNumber=9.0, core=true, t24Name=STREET.ADDR, typeModifiers=SWI, mandatory=false)
+    }
+    DE_ADDRESS__TOWN_COUNTRY
+    {
+/* Specifies a Customer's or Company's town and country.
+Multilanguage field. Where SWIFT is used the first language must only allow standard SWIFT character validation. If SWIFT is not used the languages can be configured via ASCII.VALUES and ASCII.VAL.TABLES to allow the required range of characters.
+Validation Rules:
+1-35 type S (SWIFT) characters. (Mandatory input for print addresses. Not allowed for TELEX or SWIFT addresses.) */
+        TOWN_COUNTRY : T24BusinessTypes:ADDR
+            @i18n:Label (en=Town)
+            @i18n:Tooltip (en="Indicates a customer or company\'s town and country")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, multiLanguage=true, sysNumber=10.0, core=true, t24Name=TOWN.COUNTRY, typeModifiers=SWI, mandatory=false)
+    }
+}
+Enumerations {
+    ADDRESS_OUTPUT_FORMAT__NULL_LINES_ALLOWED : mml:string
+        NO=NO
+        NULL=NULL
+        YES=YES
+    DE_ADDRESS__ADDRESS_PURPOSE : mml:string
+        CTC=CTC
+        CTICOP=CTICOP
+        CTOP=CTOP
+    DE_ADDRESS__ADDRESS_TYP : mml:string
+        ADDRPARAM=ADDRPARAM
+    DE_ADDRESS__ADDRESS_TYPE : mml:string
+        T=T
+        W=W
+    DE_ADDRESS__ADDR_LOCATION : mml:string
+        OFFICE=OFFICE
+        PRIMARY=PRIMARY
+        SECONDARY=SECONDARY
+    DE_ADDRESS__CUS_CONTACT : mml:string
+        YES=YES
+    DE_ADDRESS__CUS_MAIL_IND : mml:string
+        B=B
+        F=F
+        H=H
+        M=M
+        O=O
+    DE_ADDRESS__HOLD_MAIL_OPT : mml:string
+        CLEAR=CLEAR
+        HELD=HELD
+        NO_MAIL=NO.MAIL
+        NULL=NULL
+        SEND=SEND
+    DE_ADDRESS__HOLD_OUTPUT : mml:string
+        NO=NO
+        Y=Y
+    DE_ADDRESS__TAG25_IND : mml:string
+        NO=NO
+        YES=YES
+    DE_ADDRESS__TITLE : mml:string
+        1Lt_=1Lt.
+        1stLt_=1stLt.
+        2Lt_=2Lt.
+        2ndLt_=2ndLt.
+        Adm_=Adm.
+        Amb_=Amb.
+        BG=BG
+        BGen_=BGen.
+        Bishop=Bishop
+        BrigGen_=BrigGen.
+        Brother=Brother
+        CAPT=CAPT
+        CDR=CDR
+        COL=COL
+        CPO=CPO
+        CPT=CPT
+        Capt_=Capt.
+        Chan_=Chan.
+        Chapln_=Chapln.
+        Cmdr_=Cmdr.
+        Col_=Col.
+        Col__Ret__="Col.(Ret.)"
+        Cpl_=Cpl.
+        DR=DR
+        Dean=Dean
+        Dr_=Dr.
+        Drs_=Drs.
+        ENS=ENS
+        Est_of=Est.of
+        Father=Father
+        GEN=GEN
+        Gen_=Gen.
+        Gov_=Gov.
+        Hon_=Hon.
+        Judge=Judge
+        Justice=Justice
+        LCDR=LCDR
+        LCpl=LCpl
+        LT=LT
+        LTC=LTC
+        LTG=LTG
+        LTJG=LTJG
+        LtCol_=LtCol.
+        LtGen_=LtGen.
+        Lt_=Lt.
+        MAJ=MAJ
+        MG=MG
+        MISS=MISS
+        MR=MR
+        MRS=MRS
+        MS=MS
+        MSG=MSG
+        MSgt_=MSgt.
+        MajGen_=MajGen.
+        Maj_=Maj.
+        Mayor=Mayor
+        Mdme_=Mdme.
+        Miss=Miss
+        Mr_=Mr.
+        Mrs_=Mrs.
+        Ms_=Ms.
+        Msgr_=Msgr.
+        OTHERS=OTHERS
+        Pres_=Pres.
+        Prince=Prince
+        Prof_=Prof.
+        Prof__AND_Mrs_=Prof.&Mrs.
+        RADM=RADM
+        REV=REV
+        RT_REV_=RT.REV.
+        Rabbi=Rabbi
+        Rep_=Rep.
+        Rev_=Rev.
+        Rev_Dr_=Rev.Dr.
+        Rev_Father=Rev.Father
+        Revs_=Revs.
+        S_Sgt_=S.Sgt.
+        Senator=Senator
+        Sgt_=Sgt.
+        Sir=Sir
+        Sister=Sister
+        Trust_ees_of="Trust(ees)of"
+        V_Adm_=V.Adm.
+}

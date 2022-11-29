@@ -1,0 +1,202 @@
+# UTF-8
+/* Regulation E */
+Domain USREGS_RegE
+    @t24:i (module=USREGS)
+    @java:Package (value=com.temenos.t24.datamodel.usregs.usregs_rege)
+namespace "http://www.temenos.com/t24/USREGS_RegE"
+metamodelVersion 1.30.6
+Classes {
+    /* This table is used store records of authorized SWIFT outwards payments transactions to be held for SWIFT Countdown process. */
+    SWIFT_HELD_TXNS
+        @i18n:Description (en="")
+        @t24:i (t24Name=SWIFT.HELD.TXNS, level=I, type=H, allowedFunctions="A C D E H I L P Q R S", localRefApplicationSysNo=43.0, localRefAllowed=true)
+    {
+        ADDRESS -> byValue USREGS_RegE:SWIFT_HELD_TXNS__ADDRESS *
+            @t24:i (t24Name=ADDRESS)
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=52.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=53.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=49.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        /* Bank Transfer */
+        BANK_TRANSFER : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=20.0, core=true, t24Name=BANK.TRANSFER, mandatory=false)
+        /* Name of the customer owning the beneficiary account */
+        BENEFICIARY_NAME : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=18.0, core=true, t24Name=BENEFICIARY.NAME, mandatory=false)
+        /* This field will indicate the company ID for which the record is created */
+        COMPANY_ID : T24BusinessTypes:A
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=2.0, core=true, t24Name=COMPANY.ID, mandatory=false)
+        /* Field will hold the value of actual date and time stamp of disclosure received by the customer. */
+        CONFIRMATION_TIME : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=25, sysNumber=6.0, core=true, t24Name=CONFIRMATION.TIME, mandatory=false)
+        /* This is to store the Confirmation Email address. */
+        CONFIRM_EMAIL : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=26.0, core=true, t24Name=CONFIRM.EMAIL, mandatory=false)
+        /* This field will hold the value of REGE Countdown indicator. */
+        COUNTDOWN : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=8.0, core=true, t24Name=COUNTDOWN, mandatory=false)
+        /* Numeric field to configure the SWIFT Countdown period in minutes. */
+        COUNTDOWN_PERIOD : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=6, sysNumber=10.0, core=true, t24Name=COUNTDOWN.PERIOD, mandatory=false)
+        /* Numeric field to configure SWIFT countdown period in minutes. Maximum limit for this field must be two digits. The difference between the current time and delivery confirmation time. */
+        COUNTER : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=3, sysNumber=9.0, core=true, t24Name=COUNTER, mandatory=false)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=50.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        /* Credit amount of the transaction */
+        CREDIT_MAIN_AMOUNT : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=19, sysNumber=15.0, core=true, t24Name=CREDIT.MAIN.AMOUNT, mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=46.0, core=true, t24Name=CURR.NO, mandatory=false)
+        /* Customer ID of the debit account */
+        CUSTOMER_ID -> ST_Customer:CUSTOMER
+            @i18n:Label (en="Customer Id")
+            @i18n:Tooltip (en="Identifies the Customer for the transaction.")
+            @t24:i (align=L, inputBehaviour=I, maxLength=15, sysNumber=16.0, core=true, businessType=A, t24Name=CUSTOMER.ID, mandatory=false)
+        DATE_TIME -> byValue USREGS_RegE:SWIFT_HELD_TXNS__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        /* Debit account of the SWIFT transaction */
+        DEBIT_ACCOUNT : T24BusinessTypes:N
+            @i18n:Label (en="Debit account")
+            @i18n:Tooltip (en="Indicates the account to be debited ")
+            @t24:i (align=R, inputBehaviour=I, maxLength=35, sysNumber=13.0, core=true, t24Name=DEBIT.ACCOUNT, mandatory=false)
+        /* Transfer amount to beneficiary */
+        DEBIT_MAIN_AMOUNT : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=19, sysNumber=21.0, core=true, t24Name=DEBIT.MAIN.AMOUNT, mandatory=false)
+        /* Debit value date */
+        DEBIT_VALUE_DATE : T24BusinessTypes:D
+            @i18n:Label (en="Debit Value Date")
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=14.0, core=true, t24Name=DEBIT.VALUE.DATE, mandatory=false)
+        DELIVERY_ID -> USREGS_RegE:SWIFT_HELD_TXNS PK required
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=0.0, core=true, businessType=A, t24Name=DELIVERY.ID, mandatory=true)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=51.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        /* This field holds the value of customer's primary email address */
+        DISCLOSURE_EMAIL : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=4.0, core=true, t24Name=DISCLOSURE.EMAIL, mandatory=false)
+        /* Field will hold the value of actual date and time stamp of disclosure sent to the customer. */
+        DISCLOSURE_TIME : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=25, sysNumber=5.0, core=true, t24Name=DISCLOSURE.TIME, mandatory=false)
+        FEE_DESCRIPTION -> byValue USREGS_RegE:SWIFT_HELD_TXNS__FEE_DESCRIPTION *
+            @t24:i (t24Name=FEE.DESCRIPTION)
+        INPUTTER -> byValue USREGS_RegE:SWIFT_HELD_TXNS__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        /* Field to store the address location */
+        LOCATION : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=19.0, core=true, t24Name=LOCATION, mandatory=false)
+        /* This is to store the notification email address. */
+        NOTIF_EMAIL : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=27.0, core=true, t24Name=NOTIF.EMAIL, mandatory=false)
+        OVERRIDE -> byValue USREGS_RegE:SWIFT_HELD_TXNS__OVERRIDE *
+            @t24:i (t24Name=OVERRIDE)
+        /* Field holds the value of the payment order product. */
+        PO_PRODUCT : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=3.0, core=true, t24Name=PO.PRODUCT, mandatory=false)
+        /* This field is an indicator of proof of payment disclosure has been sent to customer or not. */
+        PROOF_INDICATOR : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=3, sysNumber=11.0, core=true, t24Name=PROOF.INDICATOR, mandatory=false)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=45.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        RESERVED_1 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=42.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_10 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=33.0, core=true, t24Name=RESERVED.10, mandatory=false)
+        RESERVED_11 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=32.0, core=true, t24Name=RESERVED.11, mandatory=false)
+        RESERVED_12 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=31.0, core=true, t24Name=RESERVED.12, mandatory=false)
+        RESERVED_13 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=30.0, core=true, t24Name=RESERVED.13, mandatory=false)
+        RESERVED_14 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=29.0, core=true, t24Name=RESERVED.14, mandatory=false)
+        RESERVED_15 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=28.0, core=true, t24Name=RESERVED.15, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=41.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=40.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=39.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        RESERVED_5 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=38.0, core=true, t24Name=RESERVED.5, mandatory=false)
+        RESERVED_6 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=37.0, core=true, t24Name=RESERVED.6, mandatory=false)
+        RESERVED_7 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=36.0, core=true, t24Name=RESERVED.7, mandatory=false)
+        RESERVED_8 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=35.0, core=true, t24Name=RESERVED.8, mandatory=false)
+        RESERVED_9 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=34.0, core=true, t24Name=RESERVED.9, mandatory=false)
+        SENDER_NAME : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=12.0, core=true, t24Name=SENDER.NAME, mandatory=false)
+        /* Status of the swift held transaction. Valid values are NEW, RESEND, ERROR, VALIDATED, DISCLOSURE.SENT, DISCLOSURE.DELIVERED. */
+        STATUS : T24BusinessTypes:A
+            @i18n:Label (en=Status)
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=7.0, core=true, t24Name=STATUS, mandatory=false)
+        /* Total Debit amount. */
+        TOTAL_DEBIT : T24BusinessTypes:AMT
+            @i18n:Label (en="Total Debit")
+            @t24:i (align=R, inputBehaviour=I, maxLength=19, sysNumber=25.0, core=true, t24Name=TOTAL.DEBIT, mandatory=false)
+        /* This field will hold the FT Number (POR.TRANSACTION record key) */
+        TRANSACTION_REF : T24BusinessTypes:A
+            @i18n:Label (en="Transaction Ref")
+            @i18n:Tooltip (en="Transaction Reference")
+            @t24:i (align=L, inputBehaviour=I, maxLength=45, sysNumber=1.0, core=true, t24Name=TRANSACTION.REF, mandatory=false)
+    }
+    SWIFT_HELD_TXNS__ADDRESS
+    {
+        /* Address of primary owner of debit account */
+        ADDRESS : T24BusinessTypes:A
+            @i18n:Label (en=Address)
+            @i18n:Tooltip (en="Define the address")
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=17.0, core=true, t24Name=ADDRESS, mandatory=false)
+    }
+    SWIFT_HELD_TXNS__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=48.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    SWIFT_HELD_TXNS__FEE_DESCRIPTION
+    {
+        /* Charge amount for the Fee types. */
+        CHARGE_AMOUNT : T24BusinessTypes:AMT
+            @i18n:Label (en="Charge Amount")
+            @i18n:Tooltip (en="Indicates charge amount")
+            @t24:i (align=R, inputBehaviour=I, maxLength=19, sysNumber=24.0, core=true, t24Name=CHARGE.AMOUNT, mandatory=false)
+        /* Fee description. Example, transfer fee, transfer taxes etc.. */
+        FEE_DESCRIPTION : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=22.0, core=true, t24Name=FEE.DESCRIPTION, mandatory=false)
+        /* Field to store the value of the Fee types */
+        FEE_TYPE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=23.0, core=true, t24Name=FEE.TYPE, mandatory=false)
+    }
+    SWIFT_HELD_TXNS__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=47.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    SWIFT_HELD_TXNS__OVERRIDE
+    {
+        OVERRIDE : T24BusinessTypes:N
+            @i18n:Label (en=Override)
+            @i18n:Tooltip (en="Overrides generated by this transaction")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=44.0, core=true, t24Name=OVERRIDE, mandatory=false)
+    }
+}

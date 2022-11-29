@@ -1,0 +1,144 @@
+# UTF-8
+/* Seasonal Address and Address Change */
+Domain USREGS_AddressChange
+    @t24:i (module=USREGS)
+    @java:Package (value=com.temenos.t24.datamodel.usregs.usregs_addresschange)
+namespace "http://www.temenos.com/t24/USREGS_AddressChange"
+metamodelVersion 1.30.6
+Classes {
+/* The USREGS.ADDRESS.PREFERENCES record contains information about the Seasonal Address periods defined for a customer.
+Periods are defined for various PRINT address between JAN to DEC */
+    USREGS_ADDRESS_PREFERENCES
+        @i18n:Description (en="")
+        @t24:i (t24Name=USREGS.ADDRESS.PREFERENCES, level=C, type=H, additionalInfo=PREVIEW, allowedFunctions="A C D E H I L P Q R S", localRefAllowed=false)
+    {
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=28.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=29.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=25.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        CARRIER_ADDR_NO -> byValue USREGS_AddressChange:USREGS_ADDRESS_PREFERENCES__CARRIER_ADDR_NO *
+            @t24:i (t24Name=CARRIER.ADDR.NO)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=26.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=22.0, core=true, t24Name=CURR.NO, mandatory=false)
+        CUSTOMER_ID -> USREGS_AddressChange:USREGS_ADDRESS_PREFERENCES PK required
+            @i18n:Label (en="Customer Id")
+            @i18n:Tooltip (en="Identifies the Customer for the transaction.")
+            @t24:i (align=R, inputBehaviour=I, maxLength=10, sysNumber=0.0, core=true, businessType=CUS, t24Name=CUSTOMER.ID, mandatory=true)
+        DATE_TIME -> byValue USREGS_AddressChange:USREGS_ADDRESS_PREFERENCES__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+/* This field is inputted when the customer requires to send the communication letter to the different address from PRINT.1 
+			 (default to PRINT.1 in DE.PRODUCT) when the seasonal address for that period is not defined in the table USREGS.ADDRESS.PREFERENCES
+Validation Rules:
+Should be a valid PRINT carrier from DE.ADDRESS table. */
+        DEFAULT_CARRIER_NO : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=14, sysNumber=9.0, core=true, t24Name=DEFAULT.CARRIER.NO, mandatory=false)
+        DELIVERY_REF -> byValue USREGS_AddressChange:USREGS_ADDRESS_PREFERENCES__DELIVERY_REF *
+            @t24:i (t24Name=DELIVERY.REF)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=27.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        INPUTTER -> byValue USREGS_AddressChange:USREGS_ADDRESS_PREFERENCES__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        OVERRIDE -> byValue USREGS_AddressChange:USREGS_ADDRESS_PREFERENCES__OVERRIDE *
+            @t24:i (t24Name=OVERRIDE)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=21.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        RESERVED_10 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=15.0, core=true, t24Name=RESERVED.10, mandatory=false)
+        RESERVED_11 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=16.0, core=true, t24Name=RESERVED.11, mandatory=false)
+        RESERVED_12 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=17.0, core=true, t24Name=RESERVED.12, mandatory=false)
+        RESERVED_13 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=18.0, core=true, t24Name=RESERVED.13, mandatory=false)
+        RESERVED_14 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=19.0, core=true, t24Name=RESERVED.14, mandatory=false)
+        RESERVED_5 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=10.0, core=true, t24Name=RESERVED.5, mandatory=false)
+        RESERVED_6 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=11.0, core=true, t24Name=RESERVED.6, mandatory=false)
+        RESERVED_7 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=12.0, core=true, t24Name=RESERVED.7, mandatory=false)
+        RESERVED_8 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=13.0, core=true, t24Name=RESERVED.8, mandatory=false)
+        RESERVED_9 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=14.0, core=true, t24Name=RESERVED.9, mandatory=false)
+/* This field is used to indicate the end of current address period.
+Validation Rules:
+Calculated by the System.
+No Input field. */
+        REVIEW_DATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=N, maxLength=11, sysNumber=7.0, core=true, t24Name=REVIEW.DATE, mandatory=false)
+    }
+    USREGS_ADDRESS_PREFERENCES__CARRIER_ADDR_NO
+    {
+/* This field holds the DE.ADDRESS record identifier for which the period is defined.
+Specifies the carrier to be used, and the version of the address.
+Validation Rules:
+Should be a valid PRINT carrier from DE.ADDRESS table. */
+        CARRIER_ADDR_NO : T24BusinessTypes:A required
+            @i18n:Label (en=Carrier)
+            @i18n:Tooltip (en="Will this message go as SWIFT or PRINT or TELEX etc")
+            @t24:i (align=L, inputBehaviour=I, maxLength=14, sysNumber=1.0, core=true, t24Name=CARRIER.ADDR.NO, mandatory=true)
+/* This field will store the End of Period
+Validation Rules:
+
+Should be of the format DDMM */
+        END_PERIOD : T24BusinessTypes:A required
+            @i18n:Label (en="End Period")
+            @t24:i (align=L, inputBehaviour=I, maxLength=4, sysNumber=3.0, core=true, t24Name=END.PERIOD, mandatory=true)
+        RESERVED_1 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=4.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=5.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=6.0, core=true, t24Name=RESERVED.3, mandatory=false)
+/* This field will store the Start of Period.
+Validation Rules:
+Should be of the format DDMM */
+        START_PERIOD : T24BusinessTypes:A required
+            @t24:i (align=L, inputBehaviour=I, maxLength=4, sysNumber=2.0, core=true, t24Name=START.PERIOD, mandatory=true)
+    }
+    USREGS_ADDRESS_PREFERENCES__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=24.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    USREGS_ADDRESS_PREFERENCES__DELIVERY_REF
+    {
+        /* Indicates Delivery reference corresponding to the latest notice generated for change of Address or Email. */
+        DELIVERY_REF : T24BusinessTypes:N
+            @i18n:Label (en="Delivery Ref")
+            @i18n:Tooltip (en="System generated Delivery ref key")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=8.0, core=true, t24Name=DELIVERY.REF, mandatory=false)
+    }
+    USREGS_ADDRESS_PREFERENCES__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=23.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    USREGS_ADDRESS_PREFERENCES__OVERRIDE
+    {
+        OVERRIDE : T24BusinessTypes:A
+            @i18n:Label (en=Override)
+            @i18n:Tooltip (en="Overrides generated by this transaction")
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=20.0, core=true, t24Name=OVERRIDE, mandatory=false)
+    }
+}

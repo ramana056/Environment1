@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<localref:LocalRef xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:localref="http://www.odcgroup.com/t24/application/localref/model/LocalRef"
+    xmlns:translationDsl="http://www.odcgroup.com/translation/TranslationDsl" localRefID="CREDIT.BUREAU" maximumChars="35" minimumChars="0" mandatory="false"
+    charType="A" defaultPossible="false" virtualTable="CREDIT.BUREAU" description="Credit Bureau.">
+  <shortName xsi:type="translationDsl:LocalTranslations">
+    <translations locale="en" text="CREDIT.BUREAU"/>
+  </shortName>
+  <vettingTable vettingTable="Equifax">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Equifax"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="Experian">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Experian"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="TransUnion">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="TransUnion"/>
+    </remarks>
+  </vettingTable>
+</localref:LocalRef>

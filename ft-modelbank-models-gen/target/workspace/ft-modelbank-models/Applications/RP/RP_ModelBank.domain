@@ -1,0 +1,20 @@
+# UTF-8
+/* Model Configuration for RP */
+Domain RP_ModelBank
+    @t24:i (module=RP)
+    @java:Package (value=com.temenos.t24.datamodel.rp.rp_modelbank)
+namespace "http://www.temenos.com/t24/RP_ModelBank"
+metamodelVersion 1.30.6
+Classes {
+    NOFILE_TRILATERAL_REPO_DELIVERY
+        @i18n:Description (en="")
+        @t24:i (t24Name=NOFILE.TRILATERAL.REPO.DELIVERY, level=I, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        ID : T24BusinessTypes:N
+            @i18n:Label (en="Transaction Ref")
+            @i18n:Tooltip (en="Transaction Reference")
+            @t24:i (align=R, inputBehaviour=N, maxLength=10, core=false, t24Name="@ID", mandatory=false)
+        TRILATERAL_REPO_DELIVERY : T24BusinessTypes:N
+            @t24:i (align=L, inputBehaviour=N, maxLength=10, core=false, t24Name=TRILATERAL.REPO.DELIVERY, genOperation=E.NOFILE.TRILATERAL.REPO.DELIVERY, mandatory=true)
+    }
+}

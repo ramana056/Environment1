@@ -1,0 +1,385 @@
+# UTF-8
+/* US Regulation - Reg D */
+Domain USREGS_RegD
+    @t24:i (module=USREGS)
+    @java:Package (value=com.temenos.t24.datamodel.usregs.usregs_regd)
+namespace "http://www.temenos.com/t24/USREGS_RegD"
+metamodelVersion 1.30.6
+Classes {
+    NOFILE_REG_D_VIOL_ACCT_DET
+        @i18n:Description (en="")
+        @t24:i (t24Name=NOFILE.REG.D.VIOL.ACCT.DET, level=I, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        ACCT_NO : T24BusinessTypes:N
+            @i18n:Label (en="Account Number")
+            @t24:i (align=R, inputBehaviour=N, maxLength=15, core=false, t24Name=ACCT.NO, mandatory=true)
+        ENQUIRY_DATA : T24BusinessTypes:N
+            @t24:i (align=L, inputBehaviour=N, maxLength=20, core=false, t24Name=ENQUIRY.DATA, genOperation=USREGS.E.NOF.REGD.VIOL.ACCTS, mandatory=false)
+    }
+    NOFILE_REG_D_VIOL_DET_PROD
+        @i18n:Description (en="")
+        @t24:i (t24Name=NOFILE.REG.D.VIOL.DET.PROD, level=I, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        FROM_DATE : T24BusinessTypes:D
+            @i18n:Label (en="Start Date")
+            @i18n:Tooltip (en="Date from which it is effective")
+            @t24:i (align=R, inputBehaviour=N, maxLength=11, core=false, t24Name=FROM.DATE, mandatory=false)
+        PRODUCT -> AA_ProductManagement:AA_PRODUCT
+            @i18n:Label (en=Product)
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, core=false, t24Name=PRODUCT, mandatory=false)
+        VIOLATION_DETAIL : T24BusinessTypes:N
+            @t24:i (align=L, inputBehaviour=N, maxLength=20, core=false, t24Name=VIOLATION.DETAIL, genOperation=USREGS.E.NOF.REGD.VIOL.PROD, mandatory=true)
+    }
+    /* This table contains the information on what action has to be taken when a Reg D violation happens. */
+    USREGS_REG_D_VIOLATION_ACTION
+        @i18n:Description (en="")
+        @t24:i (t24Name=USREGS.REG.D.VIOLATION.ACTION, level=I, type=H, allowedFunctions="A C D E H I L P Q R S", localRefApplicationSysNo=23.0, localRefAllowed=true)
+    {
+        /* Field to define the letter type (format  &  layout) to be sent. Required letter format such as First letter, Second letter, etc. can be selected for corresponding violation action record. Input must be a valid record in EB.ADVICES. */
+        ADVICE -> EB_Delivery:EB_ADVICES
+            @i18n:Label (en=Advice)
+            @i18n:Tooltip (en="Specifies the link to a record in EB.ADVICES")
+            @t24:i (align=L, inputBehaviour=I, maxLength=10, sysNumber=2.0, core=true, businessType=A, t24Name=ADVICE, mandatory=false)
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=33.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=34.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=30.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        /* Indicator to determine whether product change is required as part of this violation action. The allowed values are YES  &  NO. */
+        CHANGE_PRODUCT : USREGS_RegD:USREGS_REG_D_VIOLATION_ACTION__CHANGE_PRODUCT
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=3.0, core=true, t24Name=CHANGE.PRODUCT, mandatory=false)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=31.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=27.0, core=true, t24Name=CURR.NO, mandatory=false)
+        DATE_TIME -> byValue USREGS_RegD:USREGS_REG_D_VIOLATION_ACTION__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        /* Number of business days from the period end date after which account product must be changed. Business day definition at account level will be used to identify the change product effective date. If not defined then change of product will occur on period end date. */
+        DEFER_DAYS : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=4, sysNumber=6.0, core=true, t24Name=DEFER.DAYS, mandatory=false)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=32.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        DESCRIPTION -> byValue USREGS_RegD:USREGS_REG_D_VIOLATION_ACTION__DESCRIPTION *
+            @t24:i (t24Name=DESCRIPTION)
+        ID -> USREGS_RegD:USREGS_REG_D_VIOLATION_ACTION PK required
+            @i18n:Label (en="Transaction Ref")
+            @i18n:Tooltip (en="Transaction Reference")
+            @t24:i (align=L, inputBehaviour=I, maxLength=20, sysNumber=0.0, core=true, businessType=A, t24Name="@ID", mandatory=true)
+        INPUTTER -> byValue USREGS_RegD:USREGS_REG_D_VIOLATION_ACTION__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        OVERRIDE -> byValue USREGS_RegD:USREGS_REG_D_VIOLATION_ACTION__OVERRIDE *
+            @t24:i (t24Name=OVERRIDE)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=26.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        RESERVED_1 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=22.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_10 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=13.0, core=true, t24Name=RESERVED.10, mandatory=false)
+        RESERVED_11 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=12.0, core=true, t24Name=RESERVED.11, mandatory=false)
+        RESERVED_12 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=11.0, core=true, t24Name=RESERVED.12, mandatory=false)
+        RESERVED_13 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=10.0, core=true, t24Name=RESERVED.13, mandatory=false)
+        RESERVED_14 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=9.0, core=true, t24Name=RESERVED.14, mandatory=false)
+        RESERVED_15 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=8.0, core=true, t24Name=RESERVED.15, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=21.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=20.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=19.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        RESERVED_5 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=18.0, core=true, t24Name=RESERVED.5, mandatory=false)
+        RESERVED_6 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=17.0, core=true, t24Name=RESERVED.6, mandatory=false)
+        RESERVED_7 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=16.0, core=true, t24Name=RESERVED.7, mandatory=false)
+        RESERVED_8 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=15.0, core=true, t24Name=RESERVED.8, mandatory=false)
+        RESERVED_9 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=14.0, core=true, t24Name=RESERVED.9, mandatory=false)
+        STMT_NOS -> byValue USREGS_RegD:USREGS_REG_D_VIOLATION_ACTION__STMT_NOS *
+            @t24:i (t24Name=STMT.NOS)
+        /* The change product activity that must be used to change product type of the account upon breach of Reg D threshold. */
+        TARGET_ACTIVITY -> AA_ProductFramework:AA_ACTIVITY
+            @t24:i (align=L, inputBehaviour=I, maxLength=80, sysNumber=7.0, core=true, businessType=A, t24Name=TARGET.ACTIVITY, mandatory=false)
+        /* Target product or new product to which account will be changed into, in the event of occurance of specified Reg-D violation. Current product type of the account and the target product must be part of same Product Group. Input is mandatory if Change Product is set to Yes and value is not defined in Change Product Rule field. */
+        TARGET_PRODUCT -> AA_ProductManagement:AA_PRODUCT
+            @t24:i (align=L, inputBehaviour=I, maxLength=30, sysNumber=4.0, core=true, businessType=A, t24Name=TARGET.PRODUCT, mandatory=false)
+        /* ID of rule defined using Rules Engine. The rule will dictate selection of product to change, based on user defined rules, in this case, account balance. Input is mandatory if Change Product is set to Yes and value is not defined in Target Product field. */
+        TARGET_PRODUCT_RULE -> EB_RulesEngine:EB_RULE_GATEWAY
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=5.0, core=true, businessType=A, t24Name=TARGET.PRODUCT.RULE, mandatory=false)
+    }
+    USREGS_REG_D_VIOLATION_ACTION__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=29.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    USREGS_REG_D_VIOLATION_ACTION__DESCRIPTION
+    {
+        /* Free-text field that describes the parameter record */
+        DESCRIPTION : T24BusinessTypes:A
+            @i18n:Label (en=Description)
+            @i18n:Tooltip (en=Description)
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, multiLanguage=true, sysNumber=1.0, core=true, t24Name=DESCRIPTION, mandatory=false)
+    }
+    USREGS_REG_D_VIOLATION_ACTION__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=28.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    USREGS_REG_D_VIOLATION_ACTION__OVERRIDE
+    {
+        OVERRIDE : T24BusinessTypes:N
+            @i18n:Label (en=Override)
+            @i18n:Tooltip (en="Overrides generated by this transaction")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=25.0, core=true, t24Name=OVERRIDE, mandatory=false)
+    }
+    USREGS_REG_D_VIOLATION_ACTION__STMT_NOS
+    {
+        STMT_NOS : T24BusinessTypes:N
+            @i18n:Label (en="Stmt Nos")
+            @i18n:Tooltip (en="Stmt Nos")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=24.0, core=true, t24Name=STMT.NOS, mandatory=false)
+    }
+    USREGS_REG_D_VIOLATION_DETAILS
+        @i18n:Description (en="")
+        @t24:i (t24Name=USREGS.REG.D.VIOLATION.DETAILS, level=F, type=H, allowedFunctions="A D E H I L P Q S", localRefAllowed=false)
+    {
+        /* N.A */
+        ACCOUNT_NO : T24BusinessTypes:ACC
+            @i18n:Label (en=Account)
+            @i18n:Tooltip (en="Indicates Customer Account Number")
+            @t24:i (align=R, inputBehaviour=N, maxLength=19, sysNumber=19.0, core=true, t24Name=ACCOUNT.NO, mandatory=false)
+        /* This field will be used to indicate product type of the violated account. */
+        ACCT_TYPE -> AA_ProductManagement:AA_PRODUCT
+            @i18n:Label (en="Account Type")
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=1.0, core=true, businessType=A, t24Name=ACCT.TYPE, mandatory=false)
+        ACTIVITY -> byValue USREGS_RegD:USREGS_REG_D_VIOLATION_DETAILS__ACTIVITY *
+            @t24:i (t24Name=ACTIVITY)
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=39.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=40.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=36.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=37.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=33.0, core=true, t24Name=CURR.NO, mandatory=false)
+        /* The customer of the account number will be stored. */
+        CUSTOMER_NO : T24BusinessTypes:CUS
+            @i18n:Label (en="Customer No")
+            @i18n:Tooltip (en="Identifies the Customer for the transaction.")
+            @t24:i (align=R, inputBehaviour=N, maxLength=10, sysNumber=18.0, core=true, t24Name=CUSTOMER.NO, mandatory=false)
+        DATE_TIME -> byValue USREGS_RegD:USREGS_REG_D_VIOLATION_DETAILS__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        /* This field will be used to reduce the net total of the Regulation-D transaction count. */
+        DECREASE_COUNT_BY : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=2, sysNumber=15.0, core=true, t24Name=DECREASE.COUNT.BY, mandatory=false)
+        /* It will be used to mention the reason for decreasing the transaction count. */
+        DECREASE_COUNT_REASON : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=16.0, core=true, t24Name=DECREASE.COUNT.REASON, mandatory=false)
+        DELIVERY_REF -> byValue USREGS_RegD:USREGS_REG_D_VIOLATION_DETAILS__DELIVERY_REF *
+            @t24:i (t24Name=DELIVERY.REF)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=38.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        ID -> USREGS_RegD:USREGS_REG_D_VIOLATION_DETAILS PK required
+            @i18n:Label (en="Transaction Ref")
+            @i18n:Tooltip (en="Transaction Reference")
+            @t24:i (align=L, inputBehaviour=I, maxLength=25, sysNumber=0.0, core=true, businessType=A, t24Name="@ID", mandatory=true)
+        INPUTTER -> byValue USREGS_RegD:USREGS_REG_D_VIOLATION_DETAILS__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        /* Not used; Help text not available. */
+        MONTH : T24BusinessTypes:N
+            @i18n:Label (en=Month)
+            @t24:i (align=R, inputBehaviour=N, maxLength=2, sysNumber=2.0, core=true, t24Name=MONTH, mandatory=false)
+        /* This will be a calculated value by subtracting the decrease count from total transaction count. */
+        NET_TXN_COUNT : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=2, sysNumber=17.0, core=true, t24Name=NET.TXN.COUNT, mandatory=false)
+        OVERRIDE -> byValue USREGS_RegD:USREGS_REG_D_VIOLATION_DETAILS__OVERRIDE *
+            @t24:i (t24Name=OVERRIDE)
+        /* The activity reference of change product activity. It will be used to reverse the activity when violation status changed from Breached to Not Violated by decreasing the count manually. */
+        PRD_CHANGE_ACTIVITY : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=22.0, core=true, t24Name=PRD.CHANGE.ACTIVITY, mandatory=false)
+        /* The effective date of change product activity will be stored here. From this date the account ' s product type will be changed to Non-Regulation-D product which parameterized in violation action configuration record. */
+        PRD_CHANGE_DATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=21.0, core=true, t24Name=PRD.CHANGE.DATE, mandatory=false)
+        /* Target product or new product to which account changed due to change product activity. */
+        PRD_CHANGE_PRODUCT : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=23.0, core=true, t24Name=PRD.CHANGE.PRODUCT, mandatory=false)
+        /* Not used; Help text not available. */
+        REASON : T24BusinessTypes:A
+            @i18n:Label (en=Reason)
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=5.0, core=true, t24Name=REASON, mandatory=false)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=32.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        RESERVED_1 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=30.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_17 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=3.0, core=true, t24Name=RESERVED.17, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=29.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=28.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=27.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        RESERVED_5 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=26.0, core=true, t24Name=RESERVED.5, mandatory=false)
+        RESERVED_6 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=25.0, core=true, t24Name=RESERVED.6, mandatory=false)
+        /* Not used; Help text not available. */
+        STATUS : USREGS_RegD:USREGS_REG_D_VIOLATION_DETAILS__STATUS
+            @i18n:Label (en=Status)
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=4.0, core=true, t24Name=STATUS, mandatory=false)
+        /* End date of this statement cycle. It will be updated when the record gets created. It will be account ' s statement generation date. */
+        STMT_CYCLE_END : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=20.0, core=true, t24Name=STMT.CYCLE.END, mandatory=false)
+        /* Total number of Regulation-D transaction happened on this statement cycle. */
+        TOTAL_TXN_COUNT : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=2, sysNumber=14.0, core=true, t24Name=TOTAL.TXN.COUNT, mandatory=false)
+    }
+    USREGS_REG_D_VIOLATION_DETAILS__ACTIVITY
+    {
+        /* All the activity id of Regulation-D activity happened in this statement cycle. */
+        ACTIVITY -> AA_ProductFramework:AA_ACTIVITY
+            @i18n:Label (en=Activity)
+            @t24:i (align=L, inputBehaviour=N, maxLength=80, sysNumber=6.0, core=true, businessType=A, t24Name=ACTIVITY, mandatory=false)
+        /* Number of time the regulation activity happened on this statement cycle. */
+        ACTIVITY_COUNT : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=2, sysNumber=10.0, core=true, t24Name=ACTIVITY.COUNT, mandatory=false)
+        /* Activity name of Regulation-D activity happened in this statement cycle. */
+        ACTIVITY_NAME : T24BusinessTypes:A
+            @i18n:Label (en=Activity)
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=7.0, core=true, t24Name=ACTIVITY.NAME, mandatory=false)
+        ACTIVITY_REF -> byValue USREGS_RegD:USREGS_REG_D_VIOLATION_DETAILS__ACTIVITY__ACTIVITY_REF *
+            @t24:i (t24Name=ACTIVITY.REF)
+        RESERVED_13 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=13.0, core=true, t24Name=RESERVED.13, mandatory=false)
+        RESERVED_14 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=12.0, core=true, t24Name=RESERVED.14, mandatory=false)
+        RESERVED_15 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=11.0, core=true, t24Name=RESERVED.15, mandatory=false)
+    }
+    USREGS_REG_D_VIOLATION_DETAILS__ACTIVITY__ACTIVITY_REF
+    {
+        /* The activity reference of Regulation-D activity happened in this statement cycle. */
+        ACTIVITY_REF : T24BusinessTypes:A
+            @i18n:Label (en="Activity ID")
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=8.0, core=true, t24Name=ACTIVITY.REF, mandatory=false)
+        /* Date of Regulation-D activity happened. */
+        DATE : T24BusinessTypes:D
+            @i18n:Label (en=Date)
+            @t24:i (align=R, inputBehaviour=N, maxLength=8, sysNumber=9.0, core=true, t24Name=DATE, mandatory=false)
+    }
+    USREGS_REG_D_VIOLATION_DETAILS__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=35.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    USREGS_REG_D_VIOLATION_DETAILS__DELIVERY_REF
+    {
+        DELIVERY_REF : T24BusinessTypes:N
+            @i18n:Label (en="Delivery Ref")
+            @i18n:Tooltip (en="System generated Delivery ref key")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=24.0, core=true, t24Name=DELIVERY.REF, mandatory=false)
+    }
+    USREGS_REG_D_VIOLATION_DETAILS__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=34.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    USREGS_REG_D_VIOLATION_DETAILS__OVERRIDE
+    {
+        OVERRIDE : T24BusinessTypes:A
+            @i18n:Label (en=Override)
+            @i18n:Tooltip (en="Overrides generated by this transaction")
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=31.0, core=true, t24Name=OVERRIDE, mandatory=false)
+    }
+    /* Table to hold USREGS.REG.D.VIOLATION.DETAILS record ids and list of violated record ids. The record will be created / updated whenever Reg-d violation happen. */
+    USREGS_REG_D_VIOLATION_ID
+        @i18n:Description (en="")
+        @t24:i (t24Name=USREGS.REG.D.VIOLATION.ID, level=F, type=L, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        ID -> USREGS_RegD:USREGS_REG_D_VIOLATION_ID PK required
+            @i18n:Label (en="Transaction Ref")
+            @i18n:Tooltip (en="Transaction Reference")
+            @t24:i (align=R, inputBehaviour=I, maxLength=19, sysNumber=0.0, core=true, businessType=ACC, t24Name="@ID", mandatory=true)
+        RESERVED_1 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=12.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_10 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=3.0, core=true, t24Name=RESERVED.10, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=11.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=10.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=9.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        RESERVED_5 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=8.0, core=true, t24Name=RESERVED.5, mandatory=false)
+        RESERVED_6 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=7.0, core=true, t24Name=RESERVED.6, mandatory=false)
+        RESERVED_7 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=6.0, core=true, t24Name=RESERVED.7, mandatory=false)
+        RESERVED_8 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=5.0, core=true, t24Name=RESERVED.8, mandatory=false)
+        RESERVED_9 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=4.0, core=true, t24Name=RESERVED.9, mandatory=false)
+        VIOLATION_DETAILS_ID -> byValue USREGS_RegD:USREGS_REG_D_VIOLATION_ID__VIOLATION_DETAILS_ID *
+            @t24:i (t24Name=VIOLATION.DETAILS.ID)
+        VIOLATION_ID -> byValue USREGS_RegD:USREGS_REG_D_VIOLATION_ID__VIOLATION_ID *
+            @t24:i (t24Name=VIOLATION.ID)
+    }
+    USREGS_REG_D_VIOLATION_ID__VIOLATION_DETAILS_ID
+    {
+        /* For every record created in VIOLATION.DETAILS table, its ids will be listed here in ascending order. */
+        VIOLATION_DETAILS_ID : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=25, sysNumber=1.0, core=true, t24Name=VIOLATION.DETAILS.ID, mandatory=false)
+    }
+    USREGS_REG_D_VIOLATION_ID__VIOLATION_ID
+    {
+        /* Hold the last violated VIOLATION.DETAILS table record. */
+        VIOLATION_ID : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=25, sysNumber=2.0, core=true, t24Name=VIOLATION.ID, mandatory=false)
+    }
+}
+Enumerations {
+    USREGS_REG_D_VIOLATION_ACTION__CHANGE_PRODUCT : mml:string
+        NO=NO
+        YES=YES
+    USREGS_REG_D_VIOLATION_DETAILS__STATUS : mml:string
+        NOT_VIOLATED=NOT.VIOLATED
+        VIOLATED=VIOLATED
+}

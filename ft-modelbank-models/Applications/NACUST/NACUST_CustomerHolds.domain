@@ -1,0 +1,853 @@
+# UTF-8
+/* NACUST Customer Holds */
+Domain NACUST_CustomerHolds
+    @t24:i (module=NACUST)
+    @java:Package (value=com.temenos.t24.datamodel.nacust.nacust_customerholds)
+namespace "http://www.temenos.com/t24/NACUST_CustomerHolds"
+metamodelVersion 1.30.6
+Classes {
+    NACUST_FT_LOCK
+        @i18n:Description (en="")
+        @t24:i (t24Name=NACUST.FT.LOCK, level=F, type=L, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        AC_LOCKED_EVENT_ID -> byValue NACUST_CustomerHolds:NACUST_FT_LOCK__AC_LOCKED_EVENT_ID *
+            @t24:i (t24Name=AC.LOCKED.EVENT.ID)
+        ID -> NACUST_CustomerHolds:NACUST_FT_LOCK PK required
+            @i18n:Label (en="Transaction Ref")
+            @i18n:Tooltip (en="Transaction Reference")
+            @t24:i (align=L, inputBehaviour=I, maxLength=20, sysNumber=0.0, core=true, businessType=A, t24Name="@ID", mandatory=true)
+        RESERVED_10 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=4.0, core=true, t24Name=RESERVED.10, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=10.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        RESERVED_5 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=9.0, core=true, t24Name=RESERVED.5, mandatory=false)
+        RESERVED_6 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=8.0, core=true, t24Name=RESERVED.6, mandatory=false)
+        RESERVED_7 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=7.0, core=true, t24Name=RESERVED.7, mandatory=false)
+        RESERVED_8 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=6.0, core=true, t24Name=RESERVED.8, mandatory=false)
+        RESERVED_9 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=5.0, core=true, t24Name=RESERVED.9, mandatory=false)
+    }
+    NACUST_FT_LOCK__AC_LOCKED_EVENT_ID
+    {
+        AC_LOCKED_EVENT_ID : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=20, sysNumber=1.0, core=true, t24Name=AC.LOCKED.EVENT.ID, mandatory=false)
+        HOLD_DATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=13, sysNumber=3.0, core=true, t24Name=HOLD.DATE, mandatory=false)
+        LOCKED_AMT : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=19, sysNumber=2.0, core=true, t24Name=LOCKED.AMT, mandatory=false)
+    }
+/* This template will hold the count on number of deposit returns happens every day
+and days on which the account has overdraft balance during EOD */
+    NACUST_OD_RETURN_ACTIVITY
+        @i18n:Description (en="")
+        @t24:i (t24Name=NACUST.OD.RETURN.ACTIVITY, level=F, type=L, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        /* Id of overdrawn account; same as account in Id. */
+        ACCOUNT : T24BusinessTypes:ACC
+            @i18n:Label (en=Account)
+            @i18n:Tooltip (en="Identifies the customer account")
+            @t24:i (align=R, inputBehaviour=I, maxLength=10, sysNumber=1.0, core=true, t24Name=ACCOUNT, mandatory=false)
+/* This field will be used to indicate that the account has excessively
+returned deposit. It will be flaged as Yes when the returned deposited
+items count breach threshold value.
+Allowed values are YES/NO. */
+        EXCESS_RETURNS : NACUST_CustomerHolds:NACUST_OD_RETURN_ACTIVITY__EXCESS_RETURNS
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=7.0, core=true, t24Name=EXCESS.RETURNS, mandatory=false)
+        /* AccountID followed by hiphen and followed by year. e.g., 100000001-2017 */
+        ID -> NACUST_CustomerHolds:NACUST_OD_RETURN_ACTIVITY PK required
+            @i18n:Label (en="Transaction Ref")
+            @i18n:Tooltip (en="Transaction Reference")
+            @t24:i (align=L, inputBehaviour=I, maxLength=20, sysNumber=0.0, core=true, businessType=A, t24Name="@ID", mandatory=true)
+        MONTH -> byValue NACUST_CustomerHolds:NACUST_OD_RETURN_ACTIVITY__MONTH *
+            @t24:i (t24Name=MONTH)
+        RESERVED_1 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=29.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_10 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=20.0, core=true, t24Name=RESERVED.10, mandatory=false)
+        RESERVED_11 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=19.0, core=true, t24Name=RESERVED.11, mandatory=false)
+        RESERVED_12 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=18.0, core=true, t24Name=RESERVED.12, mandatory=false)
+        RESERVED_13 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=17.0, core=true, t24Name=RESERVED.13, mandatory=false)
+        RESERVED_14 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=16.0, core=true, t24Name=RESERVED.14, mandatory=false)
+        RESERVED_15 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=15.0, core=true, t24Name=RESERVED.15, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=28.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=27.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=26.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        RESERVED_5 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=25.0, core=true, t24Name=RESERVED.5, mandatory=false)
+        RESERVED_6 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=24.0, core=true, t24Name=RESERVED.6, mandatory=false)
+        RESERVED_7 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=23.0, core=true, t24Name=RESERVED.7, mandatory=false)
+        RESERVED_8 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=22.0, core=true, t24Name=RESERVED.8, mandatory=false)
+        RESERVED_9 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=21.0, core=true, t24Name=RESERVED.9, mandatory=false)
+/* This field will hold the number of day the account got overdrawn consecutively.
+It will be incrementally updated during COB when account is overdrawn
+on a consecutive day.
+It must be reset to 'null' during COB if the account balance is found to be
+zero or has a positive balance */
+        THRESHOLD_CONSEC_OD : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=4, sysNumber=4.0, core=true, t24Name=THRESHOLD.CONSEC.OD, mandatory=false)
+        THRESHOLD_EXCESS_OD : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=4, sysNumber=5.0, core=true, t24Name=THRESHOLD.EXCESS.OD, mandatory=false)
+/* Excessive Amount Overdraft counter must follow parameter setup in
+USREGS.REGULATION.PARAM> REG.CC*REPEAT.OD within multi-value set in
+which the Threshold Type = Count
+This field must be incrementally updated during COB when account is
+found to be overdrawn.
+This field must be reset to 'null' if the account is not overdrawn
+for given retention period. E.g if retention period 3M; if the account
+was not overdrawn for 90 days then this field will reset to null. */
+        THRESHOLD_OD : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=4, sysNumber=3.0, core=true, t24Name=THRESHOLD.OD, mandatory=false)
+/* Deposit Items counter must follow parameter USREGS.REGULATION.PARAM>REG.CC*RETURN.DEPOSITED.ITEMS
+This counter will be incremented when the creidt or debit transaction happen on an account during the
+past period defined 'Threshold Period' that matches the transaction code defined in field 'Return Transaction Code'
+in parameter USREGS.REGULATION.PARAM
+Reset this field to 'null' when no returned deposited items are identified
+during the 'Threshold Period'. */
+        THRESHOLD_RETURNS : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=4, sysNumber=6.0, core=true, t24Name=THRESHOLD.RETURNS, mandatory=false)
+        /* Year when account was overdrawn; same as year in Id. */
+        YEAR : T24BusinessTypes:N
+            @i18n:Label (en=Year)
+            @t24:i (align=R, inputBehaviour=I, maxLength=4, sysNumber=2.0, core=true, t24Name=YEAR, mandatory=false)
+    }
+    NACUST_OD_RETURN_ACTIVITY__MONTH
+    {
+        EXCESS_OD_DATE -> byValue NACUST_CustomerHolds:NACUST_OD_RETURN_ACTIVITY__MONTH__EXCESS_OD_DATE *
+            @t24:i (t24Name=EXCESS.OD.DATE)
+        /* This is the month when the account has overdrawn or when the check return transaction debit happened on the account. */
+        MONTH : T24BusinessTypes:N
+            @i18n:Label (en=Month)
+            @t24:i (align=R, inputBehaviour=I, maxLength=2, sysNumber=8.0, core=true, t24Name=MONTH, mandatory=false)
+        OD_DATE -> byValue NACUST_CustomerHolds:NACUST_OD_RETURN_ACTIVITY__MONTH__OD_DATE *
+            @t24:i (t24Name=OD.DATE)
+        RETURN_DATE -> byValue NACUST_CustomerHolds:NACUST_OD_RETURN_ACTIVITY__MONTH__RETURN_DATE *
+            @t24:i (t24Name=RETURN.DATE)
+        /* Total number of days account has overdrawn during specific month */
+        TOTAL_OD : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=4, sysNumber=11.0, core=true, t24Name=TOTAL.OD, mandatory=false)
+        /* Total number of returned deposited transaction occurred on specific month */
+        TOTAL_RETURN : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=4, sysNumber=14.0, core=true, t24Name=TOTAL.RETURN, mandatory=false)
+    }
+    NACUST_OD_RETURN_ACTIVITY__MONTH__EXCESS_OD_DATE
+    {
+        /* Date when account has overdrawn by excessive amount */
+        EXCESS_OD_DATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=10.0, core=true, t24Name=EXCESS.OD.DATE, mandatory=false)
+    }
+    NACUST_OD_RETURN_ACTIVITY__MONTH__OD_DATE
+    {
+        /* Date when account has overdrawn */
+        OD_DATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=9.0, core=true, t24Name=OD.DATE, mandatory=false)
+    }
+    NACUST_OD_RETURN_ACTIVITY__MONTH__RETURN_DATE
+    {
+        /* Date when returned deposited transaction occurred in the account. */
+        RETURN_DATE : T24BusinessTypes:D
+            @i18n:Label (en="Return Date")
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=12.0, core=true, t24Name=RETURN.DATE, mandatory=false)
+        /* Total number of returned deposited transaction occurred on specific date. */
+        TOT_RET_DATE : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=4, sysNumber=13.0, core=true, t24Name=TOT.RET.DATE, mandatory=false)
+    }
+    /* This template is used to capture the transaction information of Teller which is again used to print on a deal slip. */
+    USREGS_HOLD_ELEMENTS
+        @i18n:Description (en="")
+        @t24:i (t24Name=USREGS.HOLD.ELEMENTS, level=F, type=L, allowedFunctions="L P S", localRefAllowed=false)
+    {
+/* This field is used to intimate the user that how much amount is next available to the customer.
+
+T24 Amount Field */
+        ACC_NEXT : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=18, sysNumber=15.0, core=true, t24Name=ACC.NEXT, mandatory=false)
+        AGR_CHECK_TOTAL : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=18, sysNumber=16.0, core=true, t24Name=AGR.CHECK.TOTAL, mandatory=false)
+        EXCEPTION : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=3, sysNumber=5.0, core=true, t24Name=EXCEPTION, mandatory=false)
+        /* This field is used to indicate whether the Account has exceeded return deposit count */
+        EXCESS_CHECK_RETURN : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=3, sysNumber=17.0, core=true, t24Name=EXCESS.CHECK.RETURN, mandatory=false)
+        /* It will be Valid Teller Transaction @id. */
+        ID -> NACUST_CustomerHolds:USREGS_HOLD_ELEMENTS PK required
+            @i18n:Label (en="Transaction Ref")
+            @i18n:Tooltip (en="Transaction Reference")
+            @t24:i (align=L, inputBehaviour=I, maxLength=20, sysNumber=0.0, core=true, businessType=A, t24Name="@ID", mandatory=true)
+        IMMEDIATE -> byValue NACUST_CustomerHolds:USREGS_HOLD_ELEMENTS__IMMEDIATE *
+            @t24:i (t24Name=IMMEDIATE)
+        /* This field is used to indicate whether there is any large deposit done. */
+        LARGE_DEPOSIT : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=3, sysNumber=1.0, core=true, t24Name=LARGE.DEPOSIT, mandatory=false)
+        /* This field is used to indicate whether the Account used for transaction is New account or not. */
+        NEW_ACCOUNT : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=3, sysNumber=2.0, core=true, t24Name=NEW.ACCOUNT, mandatory=false)
+        /* This field is used to indicate whether the Account used for transaction is Repeated overdraft or not. */
+        REPEAT_OD : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=3, sysNumber=3.0, core=true, t24Name=REPEAT.OD, mandatory=false)
+        RESERVED_1 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=25.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=24.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=23.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=22.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        RESERVED_5 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=21.0, core=true, t24Name=RESERVED.5, mandatory=false)
+        RESERVED_6 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=20.0, core=true, t24Name=RESERVED.6, mandatory=false)
+        RESERVED_7 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=19.0, core=true, t24Name=RESERVED.7, mandatory=false)
+        RESERVED_8 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=18.0, core=true, t24Name=RESERVED.8, mandatory=false)
+        /* This field will be set as YES when the default condition of the parameter table USREGS.REGULATION.PARAM is applied. */
+        STANDARD_HOLD : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=3, sysNumber=4.0, core=true, t24Name=STANDARD.HOLD, mandatory=false)
+    }
+    USREGS_HOLD_ELEMENTS__IMMEDIATE
+    {
+/* This field is used to indicate that how much amount is released when the transaction is done.
+
+Amount Field */
+        AMOUNT1 : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=18, sysNumber=8.0, core=true, t24Name=AMOUNT1, mandatory=false)
+/* The field is used to indicate that how much amount will be kept on hold.
+
+T24 Amount Field */
+        AMOUNT2 : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=18, sysNumber=10.0, core=true, t24Name=AMOUNT2, mandatory=false)
+/* This field will have the date on which the transaction is done.
+
+Date Field */
+        DATE1 : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=10, sysNumber=9.0, core=true, t24Name=DATE1, mandatory=false)
+/* This field will indicate the date that when the hold amount will get released.
+
+T24 Date Field */
+        DATE2 : T24BusinessTypes:D
+            @i18n:Label (en=Date)
+            @t24:i (align=R, inputBehaviour=I, maxLength=10, sysNumber=11.0, core=true, t24Name=DATE2, mandatory=false)
+/* This field is used to intimate that how much amount is released immediately.
+
+Amount field */
+        IMMEDIATE : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=18, sysNumber=6.0, core=true, t24Name=IMMEDIATE, mandatory=false)
+        IMMEDIATE_DATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=10, sysNumber=7.0, core=true, t24Name=IMMEDIATE.DATE, mandatory=false)
+        RESERVED_11 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=14.0, core=true, t24Name=RESERVED.11, mandatory=false)
+        RESERVED_12 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=13.0, core=true, t24Name=RESERVED.12, mandatory=false)
+        RESERVED_13 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=12.0, core=true, t24Name=RESERVED.13, mandatory=false)
+    }
+    /* This table will get updated by a cob job on a daily basis if AA account goes overdraft. */
+    USREGS_OVERDRAFT_NFS
+        @i18n:Description (en="")
+        @t24:i (t24Name=USREGS.OVERDRAFT.NFS, level=F, type=L, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        AGR_CHECK_TOTAL : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=18, sysNumber=4.0, core=true, t24Name=AGR.CHECK.TOTAL, mandatory=false)
+        /* Should be a Valid T24 Account record */
+        ID -> NACUST_CustomerHolds:USREGS_OVERDRAFT_NFS PK required
+            @i18n:Label (en="Transaction Ref")
+            @i18n:Tooltip (en="Transaction Reference")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=0.0, core=true, businessType=A, t24Name="@ID", mandatory=true)
+        /* This field is used to indicate that the amount which is next available to the customer. It will get cleared on a daily basis in a cob job. */
+        NEXT_AVAIL_AMOUNT : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=18, sysNumber=3.0, core=true, t24Name=NEXT.AVAIL.AMOUNT, mandatory=false)
+        RESERVED_1 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=18.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_10 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=9.0, core=true, t24Name=RESERVED.10, mandatory=false)
+        RESERVED_11 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=8.0, core=true, t24Name=RESERVED.11, mandatory=false)
+        RESERVED_12 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=7.0, core=true, t24Name=RESERVED.12, mandatory=false)
+        RESERVED_13 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=6.0, core=true, t24Name=RESERVED.13, mandatory=false)
+        RESERVED_14 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=5.0, core=true, t24Name=RESERVED.14, mandatory=false)
+        RESERVED_15 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=2.0, core=true, t24Name=RESERVED.15, mandatory=false)
+        RESERVED_16 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=1.0, core=true, t24Name=RESERVED.16, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=17.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=16.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=15.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        RESERVED_5 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=14.0, core=true, t24Name=RESERVED.5, mandatory=false)
+        RESERVED_6 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=13.0, core=true, t24Name=RESERVED.6, mandatory=false)
+        RESERVED_7 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=12.0, core=true, t24Name=RESERVED.7, mandatory=false)
+        RESERVED_8 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=11.0, core=true, t24Name=RESERVED.8, mandatory=false)
+        RESERVED_9 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=10.0, core=true, t24Name=RESERVED.9, mandatory=false)
+    }
+    /* This table is used to define the parameter records for Regulation CC, Regulation E, Regulation DD, Regulation E ,BNotices and Customer Escheat */
+    USREGS_REGULATION_PARAM
+        @i18n:Description (en="")
+        @t24:i (t24Name=USREGS.REGULATION.PARAM, level=I, type=H, allowedFunctions="A C D E H I L P Q R S", localRefAllowed=false)
+    {
+        AFFILIATE_MKT_PERIOD : T24BusinessTypes:PERIOD
+            @t24:i (align=L, inputBehaviour=I, maxLength=5, sysNumber=73.0, core=true, t24Name=AFFILIATE.MKT.PERIOD, mandatory=false)
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=82.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=83.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=79.0, core=true, t24Name=AUTHORISER, mandatory=false)
+/* This field indicates the amount that will be available for immediate withdrawal for the customer.
+
+Validation Rules
+
+Up to 14 characters plus a decimal point (Standard Amount Format) - type AMT. (Optional input) */
+        AVAIL_AMOUNT : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=19, sysNumber=7.0, core=true, t24Name=AVAIL.AMOUNT, mandatory=false)
+/* This field helps to choose the method of withdrawal for the Customer.
+
+If the value is selected as IMMEDIATE, then the amount given in the field AVAIL.AMOUNT will be immediately available to the Customer.
+If the value is selected as NEXTDAY, then the amount given in the field AVAIL.AMOUNT will be available next day to the Customer.
+
+Validation Rules
+
+Radio Button: Immediate, Next Day and Default Value - None. */
+        AVAIL_METHOD : NACUST_CustomerHolds:USREGS_REGULATION_PARAM__AVAIL_METHOD
+            @t24:i (align=L, inputBehaviour=I, maxLength=10, sysNumber=8.0, core=true, t24Name=AVAIL.METHOD, mandatory=false)
+/* This field is used to indicate number of days within which the customer has to submit the revised TIN/SSN information received from the IRS department.
+The END.DATE will be defaulted in CUST.DOCUMENT application based on this field.
+
+Validation Rules
+
+Optional Input, 1-4 numeric characters */
+        BNOTICE_PERIOD : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=4, sysNumber=33.0, core=true, t24Name=BNOTICE.PERIOD, mandatory=false)
+/* Should be a valid record id from the HOLIDAY application determining which calendar logic should be referred to determine the working /business days for hold condition.
+
+Validation Rules
+
+Optional input, Drop down values from the HOLIDAY table. */
+        CALENDAR -> ST_Config:HOLIDAY
+            @t24:i (align=L, inputBehaviour=I, maxLength=17, sysNumber=2.0, core=true, businessType=SS, t24Name=CALENDAR, mandatory=false)
+        CATEGORY -> byValue NACUST_CustomerHolds:USREGS_REGULATION_PARAM__CATEGORY *
+            @t24:i (t24Name=CATEGORY)
+        CHECK_TYPE -> byValue NACUST_CustomerHolds:USREGS_REGULATION_PARAM__CHECK_TYPE *
+            @t24:i (t24Name=CHECK.TYPE)
+        /* Email address to send the confirmation. */
+        CONFIRM_EMAIL : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=69.0, core=true, t24Name=CONFIRM.EMAIL, mandatory=false)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=80.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=76.0, core=true, t24Name=CURR.NO, mandatory=false)
+/* Define the No of Inactive months to set Customer to Escheat status
+Validation Rule:
+Numeric 1-15 digits */
+        CUST_INACTIV_MONTHS : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=4, sysNumber=46.0, core=true, t24Name=CUST.INACTIV.MONTHS, mandatory=false)
+        DATE_TIME -> byValue NACUST_CustomerHolds:USREGS_REGULATION_PARAM__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=81.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        DESCRIPTION -> byValue NACUST_CustomerHolds:USREGS_REGULATION_PARAM__DESCRIPTION *
+            @t24:i (t24Name=DESCRIPTION)
+        EXCL_AA_PRODUCT -> byValue NACUST_CustomerHolds:USREGS_REGULATION_PARAM__EXCL_AA_PRODUCT *
+            @t24:i (t24Name=EXCL.AA.PRODUCT)
+        /* Reserved for CTR development */
+        EXEMPT_PERIOD : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=29.0, core=true, t24Name=EXEMPT.PERIOD, mandatory=false)
+/* This field helps to indicate the Expiry Date for the hold condition of an Account. Any hold placed for that Account after this expiry date will be considered as the new condition or it will default SYSTEM/ Customer hold condition.
+
+Validation Rules
+
+Optional input. Standard date format. */
+        EXPIRY_DATE : T24BusinessTypes:D
+            @i18n:Label (en="Expiry Date")
+            @i18n:Tooltip (en="Indicates the Expiry Date of the Transaction")
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=3.0, core=true, t24Name=EXPIRY.DATE, mandatory=false)
+/* User can define whether hold must be placed upon check deposit based on breach of excessive returned deposited items.
+Validation Rules:
+YES or NO field */
+        HOLD_ON_RETURN : NACUST_CustomerHolds:USREGS_REGULATION_PARAM__HOLD_ON_RETURN
+            @t24:i (align=L, inputBehaviour=I, maxLength=5, sysNumber=54.0, core=true, t24Name=HOLD.ON.RETURN, mandatory=false)
+        HOLD_PROCESS : NACUST_CustomerHolds:USREGS_REGULATION_PARAM__HOLD_PROCESS
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=52.0, core=true, t24Name=HOLD.PROCESS, mandatory=false)
+/* Should be a valid US Regulations
+Validation Rules
+
+There should be a record in EB.LOOKUP for Valid US regulations. */
+        ID -> NACUST_CustomerHolds:USREGS_REGULATION_PARAM PK required
+            @i18n:Label (en="Transaction Ref")
+            @i18n:Tooltip (en="Transaction Reference")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=0.0, core=true, businessType=A, t24Name="@ID", mandatory=true)
+        INCL_AA_PRODUCT -> byValue NACUST_CustomerHolds:USREGS_REGULATION_PARAM__INCL_AA_PRODUCT *
+            @t24:i (t24Name=INCL.AA.PRODUCT)
+        INCL_AA_PRODUCT_GROUP -> byValue NACUST_CustomerHolds:USREGS_REGULATION_PARAM__INCL_AA_PRODUCT_GROUP *
+            @t24:i (t24Name=INCL.AA.PRODUCT.GROUP)
+        INPUTTER -> byValue NACUST_CustomerHolds:USREGS_REGULATION_PARAM__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        LOOKBACK_MONTH : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=1, sysNumber=53.0, core=true, t24Name=LOOKBACK.MONTH, mandatory=false)
+/* Number of days till which the account is considered as a new account.
+
+Validation Rules
+
+1-2 Numeric Characters, Optional Input. */
+        NEW_ACCT_PERIOD : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=2, sysNumber=4.0, core=true, t24Name=NEW.ACCT.PERIOD, mandatory=false)
+        NOTES -> byValue NACUST_CustomerHolds:USREGS_REGULATION_PARAM__NOTES *
+            @t24:i (t24Name=NOTES)
+        /* Email address to send the notification */
+        NOTIFICATION_EMAIL : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=70.0, core=true, t24Name=NOTIFICATION.EMAIL, mandatory=false)
+        OVERRIDE -> byValue NACUST_CustomerHolds:USREGS_REGULATION_PARAM__OVERRIDE *
+            @t24:i (t24Name=OVERRIDE)
+/* This field is used to define the valid Posting Restrict that should be used for Escheat Customer
+validation Rule : 1 to 4 numeric characters Posting Restriction code, based on EB.OBJECT Valid ID from POSTING.RESTRICT */
+        POSTING_RESTRICT -> AC_Config:POSTING_RESTRICT
+            @i18n:Label (en="Posting Restriction")
+            @t24:i (align=R, inputBehaviour=I, maxLength=4, sysNumber=45.0, core=true, t24Name=POSTING.RESTRICT, mandatory=false)
+        PRE_NOTICE_DAYS : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=4, sysNumber=48.0, core=true, t24Name=PRE.NOTICE.DAYS, mandatory=false)
+/* To flag a customer whether to opt in for the Privacy status or not
+Validation Rules:
+It can be either Opt-In or Opt-Out */
+        PRIVACY_STATUS : NACUST_CustomerHolds:USREGS_REGULATION_PARAM__PRIVACY_STATUS
+            @t24:i (align=L, inputBehaviour=I, maxLength=7, sysNumber=47.0, core=true, t24Name=PRIVACY.STATUS, mandatory=false)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=75.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        REG_D_ACTIVITIES -> byValue NACUST_CustomerHolds:USREGS_REGULATION_PARAM__REG_D_ACTIVITIES *
+            @t24:i (t24Name=REG.D.ACTIVITIES)
+        REL_CODE -> byValue NACUST_CustomerHolds:USREGS_REGULATION_PARAM__REL_CODE *
+            @t24:i (t24Name=REL.CODE)
+        RESERVED_09 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=6.0, core=true, t24Name=RESERVED.09, mandatory=false)
+        RESERVED_10 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=5.0, core=true, t24Name=RESERVED.10, mandatory=false)
+        RESERVED_22 -> byValue NACUST_CustomerHolds:USREGS_REGULATION_PARAM__RESERVED_22 *
+            @t24:i (t24Name=RESERVED.22)
+        ROLES -> byValue NACUST_CustomerHolds:USREGS_REGULATION_PARAM__ROLES *
+            @t24:i (t24Name=ROLES)
+        SECTOR -> byValue NACUST_CustomerHolds:USREGS_REGULATION_PARAM__SECTOR *
+            @t24:i (t24Name=SECTOR)
+        /* Field to configure the swift countdown period. */
+        SWIFT_COUNTDOWN : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=2, sysNumber=68.0, core=true, t24Name=SWIFT.COUNTDOWN, mandatory=false)
+        SWIFT_SECTOR_START -> byValue NACUST_CustomerHolds:USREGS_REGULATION_PARAM__SWIFT_SECTOR_START *
+            @t24:i (t24Name=SWIFT.SECTOR.START)
+        THRESHOLD_AMOUNT : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=19, sysNumber=28.0, core=true, t24Name=THRESHOLD.AMOUNT, mandatory=false)
+        THRESHOLD_DESC -> byValue NACUST_CustomerHolds:USREGS_REGULATION_PARAM__THRESHOLD_DESC *
+            @t24:i (t24Name=THRESHOLD.DESC)
+        TRANSACTION -> byValue NACUST_CustomerHolds:USREGS_REGULATION_PARAM__TRANSACTION *
+            @t24:i (t24Name=TRANSACTION)
+/* This field denotes the allowed number of days for a foreign customer to be exempted from withholding the tax.
+
+Validation Rules
+
+Optional Input, 1-4 numeric characters */
+        W8_BEN_PERIOD : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=4, sysNumber=32.0, core=true, t24Name=W8.BEN.PERIOD, mandatory=false)
+/* This field is used to indicate the number of days within which the form W9 has to be submitted for TIN/SSN certification.
+
+Validation Rules
+
+Optional Input, 1-4 numeric characters */
+        W9_PERIOD : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=4, sysNumber=31.0, core=true, t24Name=W9.PERIOD, mandatory=false)
+    }
+    USREGS_REGULATION_PARAM__CATEGORY
+    {
+/* This field will have valid category codes used for the regulations which is part of id.
+
+Validation Rules
+
+Valid record in the CATEGORY table. */
+        CATEGORY -> ST_Config:CATEGORY
+            @i18n:Label (en=Category)
+            @i18n:Tooltip (en="Specifies the Category")
+            @t24:i (align=R, inputBehaviour=I, maxLength=4, sysNumber=40.0, core=true, t24Name=CATEGORY, mandatory=false)
+    }
+    USREGS_REGULATION_PARAM__CHECK_TYPE
+    {
+        AMOUNT_GREATER : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=19, sysNumber=13.0, core=true, t24Name=AMOUNT.GREATER, mandatory=false)
+/* Shows the threshold amount to be considered as Small deposit, for which HOLD.DAYS1 condition would be applied.
+
+Validation Rules
+
+1-14 characters plus a decimal point (Standard Amount Format) type AMOUNT. (Optional input) */
+        AMT_LESS_OR_EQ : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=19, sysNumber=11.0, core=true, t24Name=AMT.LESS.OR.EQ, mandatory=false)
+/* This field would determine the type of check deposit. For any new type of check, create a record in EB.LOOKUP application.
+
+Validation Rules
+Multi value set, drop down with values Local, Non-Local, Next Day, On-Us and Government. */
+        CHECK_TYPE : NACUST_CustomerHolds:USREGS_REGULATION_PARAM__CHECK_TYPE__CHECK_TYPE
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=9.0, core=true, t24Name=CHECK.TYPE, mandatory=false)
+/* The currency for which the hold condition is being created for an account.
+
+Validation Rules
+
+Valid record in the CURRENCY table. */
+        CURRENCY -> ST_CurrencyConfig:CURRENCY
+            @i18n:Label (en=Ccy)
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=10.0, core=true, businessType=CCY, t24Name=CURRENCY, mandatory=false)
+/* This field indicates the number of days for hold condition for (small deposit) check amount which is lesser than AMT.LESS.OR.EQ value.
+
+Validation Rules
+
+1-2 Numeric Characters, Optional Input, No default values. */
+        HOLD_DAYS1 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=2, sysNumber=12.0, core=true, t24Name=HOLD.DAYS1, mandatory=false)
+/* This field indicates the number of days for hold condition for (large deposit) check amount which is greater than AMT.GREATER values.
+
+Validation Rules
+
+1-2 Numeric Characters, Optional Input, No default values. */
+        HOLD_DAYS2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=2, sysNumber=14.0, core=true, t24Name=HOLD.DAYS2, mandatory=false)
+        /* Reserve Fields */
+        RESERVED_23 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=17.0, core=true, t24Name=RESERVED.23, mandatory=false)
+        RESERVED_24 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=16.0, core=true, t24Name=RESERVED.24, mandatory=false)
+        RESERVED_25 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=15.0, core=true, t24Name=RESERVED.25, mandatory=false)
+    }
+    USREGS_REGULATION_PARAM__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=78.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    USREGS_REGULATION_PARAM__DESCRIPTION
+    {
+        /* This is to describe the purpose of the condition */
+        DESCRIPTION : T24BusinessTypes:A
+            @i18n:Label (en=Description)
+            @i18n:Tooltip (en=Description)
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, multiLanguage=true, sysNumber=1.0, core=true, t24Name=DESCRIPTION, mandatory=false)
+    }
+    USREGS_REGULATION_PARAM__EXCL_AA_PRODUCT
+    {
+/* This field is used to define the valid AA products that should be excluded from Customer Escheat
+validation Rule : Alphanumeric 1-20 character Valid ID from AA.PRODUCT */
+        EXCL_AA_PRODUCT -> AA_ProductManagement:AA_PRODUCT
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=44.0, core=true, businessType=ANY, t24Name=EXCL.AA.PRODUCT, mandatory=false)
+    }
+    USREGS_REGULATION_PARAM__INCL_AA_PRODUCT
+    {
+        INCL_AA_PRODUCT -> AA_ProductManagement:AA_PRODUCT
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=49.0, core=true, businessType=ANY, t24Name=INCL.AA.PRODUCT, mandatory=false)
+    }
+    USREGS_REGULATION_PARAM__INCL_AA_PRODUCT_GROUP
+    {
+        INCL_AA_PRODUCT_GROUP -> AA_ProductFramework:AA_PRODUCT_GROUP
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=51.0, core=true, businessType=ANY, t24Name=INCL.AA.PRODUCT.GROUP, mandatory=false)
+    }
+    USREGS_REGULATION_PARAM__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=77.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    USREGS_REGULATION_PARAM__NOTES
+    {
+        ALLOWED_SECTOR -> byValue NACUST_CustomerHolds:USREGS_REGULATION_PARAM__NOTES__ALLOWED_SECTOR *
+            @t24:i (t24Name=ALLOWED.SECTOR)
+        EXCLUDED_SECTOR -> byValue NACUST_CustomerHolds:USREGS_REGULATION_PARAM__NOTES__EXCLUDED_SECTOR *
+            @t24:i (t24Name=EXCLUDED.SECTOR)
+/* Free text field. Each regulation can customize the field to hold any specific details that has to be held.
+Optional field */
+        NOTES : T24BusinessTypes:A
+            @i18n:Label (en=Notes)
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=41.0, core=true, t24Name=NOTES, mandatory=false)
+    }
+    USREGS_REGULATION_PARAM__NOTES__ALLOWED_SECTOR
+    {
+/* This field will hold valid sectors that are to be included for validation from the regulation condition.
+It can be either specific sector or a range.
+When a range has to be captured, the start and end range should be input separated by space. */
+        ALLOWED_SECTOR : T24BusinessTypes:SS
+            @t24:i (align=L, inputBehaviour=I, maxLength=9, sysNumber=42.0, core=true, t24Name=ALLOWED.SECTOR, mandatory=false)
+    }
+    USREGS_REGULATION_PARAM__NOTES__EXCLUDED_SECTOR
+    {
+/* This field will hold valid sectors that are to be excluded for validation from the regulation condition.
+It can be either specific sector or a range.
+When a range has to be captured, the start and end range should be input separated by space */
+        EXCLUDED_SECTOR : T24BusinessTypes:SS
+            @t24:i (align=L, inputBehaviour=I, maxLength=9, sysNumber=43.0, core=true, t24Name=EXCLUDED.SECTOR, mandatory=false)
+    }
+    USREGS_REGULATION_PARAM__OVERRIDE
+    {
+        OVERRIDE : T24BusinessTypes:A
+            @i18n:Label (en=Override)
+            @i18n:Tooltip (en="Overrides generated by this transaction")
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=74.0, core=true, t24Name=OVERRIDE, mandatory=false)
+    }
+    USREGS_REGULATION_PARAM__REG_D_ACTIVITIES
+    {
+        /* Activities that must be treated as Reg-D activity must be defined here. */
+        REG_D_ACTIVITIES -> AA_ProductFramework:AA_ACTIVITY
+            @t24:i (align=L, inputBehaviour=I, maxLength=45, sysNumber=67.0, core=true, businessType=A, t24Name=REG.D.ACTIVITIES, mandatory=false)
+    }
+    USREGS_REGULATION_PARAM__REL_CODE
+    {
+        /* Reserved for CTR development. */
+        REL_CODE -> ST_Customer:RELATION
+            @i18n:Label (en="Relation Code")
+            @i18n:Tooltip (en="Relation Code")
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=30.0, core=true, businessType=A, t24Name=REL.CODE, mandatory=false)
+    }
+    USREGS_REGULATION_PARAM__RESERVED_22
+    {
+        RESERVED_17 -> byValue NACUST_CustomerHolds:USREGS_REGULATION_PARAM__RESERVED_22__RESERVED_17 *
+            @t24:i (t24Name=RESERVED.17)
+        /* Reserve Fields */
+        RESERVED_18 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=22.0, core=true, t24Name=RESERVED.18, mandatory=false)
+        /* Reserve Fields */
+        RESERVED_19 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=21.0, core=true, t24Name=RESERVED.19, mandatory=false)
+        /* Reserve Fields */
+        RESERVED_20 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=20.0, core=true, t24Name=RESERVED.20, mandatory=false)
+        /* Reserve Fields */
+        RESERVED_21 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=19.0, core=true, t24Name=RESERVED.21, mandatory=false)
+        /* Reserve Fields */
+        RESERVED_22 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=18.0, core=true, t24Name=RESERVED.22, mandatory=false)
+    }
+    USREGS_REGULATION_PARAM__RESERVED_22__RESERVED_17
+    {
+        RESERVED_13 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=27.0, core=true, t24Name=RESERVED.13, mandatory=false)
+        RESERVED_14 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=26.0, core=true, t24Name=RESERVED.14, mandatory=false)
+        /* Reserve Fields */
+        RESERVED_15 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=25.0, core=true, t24Name=RESERVED.15, mandatory=false)
+        /* Reserve Fields */
+        RESERVED_16 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=24.0, core=true, t24Name=RESERVED.16, mandatory=false)
+        /* Reserve Fields */
+        RESERVED_17 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=23.0, core=true, t24Name=RESERVED.17, mandatory=false)
+    }
+    USREGS_REGULATION_PARAM__ROLES
+    {
+        ROLES : NACUST_CustomerHolds:USREGS_REGULATION_PARAM__ROLES__ROLES
+            @t24:i (align=L, inputBehaviour=I, maxLength=75, sysNumber=50.0, core=true, t24Name=ROLES, mandatory=false)
+    }
+    USREGS_REGULATION_PARAM__SECTOR
+    {
+        /* Reserved for Regulation O development */
+        SECTOR -> ST_Config:SECTOR
+            @i18n:Label (en=Sector)
+            @i18n:Tooltip (en="Indicates the sector")
+            @t24:i (align=L, inputBehaviour=I, maxLength=10, sysNumber=34.0, core=true, businessType=A, t24Name=SECTOR, mandatory=false)
+    }
+    USREGS_REGULATION_PARAM__SWIFT_SECTOR_START
+    {
+        /* Swift countdown category end. */
+        SWIFT_SECTOR_END : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=5, sysNumber=72.0, core=true, t24Name=SWIFT.SECTOR.END, mandatory=false)
+        /* Swift countdown category start. */
+        SWIFT_SECTOR_START : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=5, sysNumber=71.0, core=true, t24Name=SWIFT.SECTOR.START, mandatory=false)
+    }
+    USREGS_REGULATION_PARAM__THRESHOLD_DESC
+    {
+        ALLOWED_CATEGORY -> byValue NACUST_CustomerHolds:USREGS_REGULATION_PARAM__THRESHOLD_DESC__ALLOWED_CATEGORY *
+            @t24:i (t24Name=ALLOWED.CATEGORY)
+        /* Number of rolling period (i.e. statement period or calendar period) for which the number of Reg-D threshold breach must be monitored for the purpose of taking appropriate violation action. */
+        EVALUATION_CYCLE : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=2, sysNumber=63.0, core=true, t24Name=EVALUATION.CYCLE, mandatory=false)
+        EXCLUDE_CATEGORY -> byValue NACUST_CustomerHolds:USREGS_REGULATION_PARAM__THRESHOLD_DESC__EXCLUDE_CATEGORY *
+            @t24:i (t24Name=EXCLUDE.CATEGORY)
+        /* The parameters can be defined by product hence the corresponding product which follows regulation-D has to be provided here. */
+        REG_D_PRODUCT : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=30, sysNumber=66.0, core=true, t24Name=REG.D.PRODUCT, mandatory=false)
+/* The periods defined up to which the Repeated Overdraft or Excessive Return flag at account level will be maintained
+Validation Rules:
+The periods can be defined in days or month or year; format is nnD, nnM or nnY
+e.g 10D (10 days), 2M(2 months), 1Y (1 Year) */
+        RETENTION_PERIOD : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=59.0, core=true, t24Name=RETENTION.PERIOD, mandatory=false)
+        RET_TRANSACTION_CODE -> byValue NACUST_CustomerHolds:USREGS_REGULATION_PARAM__THRESHOLD_DESC__RET_TRANSACTION_CODE *
+            @t24:i (t24Name=RET.TRANSACTION.CODE)
+        THRESHOLD_DESC -> byValue NACUST_CustomerHolds:USREGS_REGULATION_PARAM__THRESHOLD_DESC__THRESHOLD_DESC *
+            @t24:i (t24Name=THRESHOLD.DESC)
+/* The periods can be defined for the purposes of tracking Repeated Overdraft or Excessive Returns.
+Validation Rules:
+The periods can be defined in months; format is nnM
+e.g 2M(2 months) */
+        THRESHOLD_PERIOD : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=58.0, core=true, t24Name=THRESHOLD.PERIOD, mandatory=false)
+/* This field is used to select whether threshold type definition is based on excessive amount or excessive count when parameters
+are related to Regulation-CC. It will be used to select the period type definition as CALENDAR or STATEMENT when parameters are related to regulation-D.
+Validation Rules:
+Can be COUNT or AMOUNT if parameter id related to Regulation-CC. Mandatory input
+Can be STATEMENT or CALENDAR if parameter id related to Regulation-D. Mandatory input */
+        THRESHOLD_TYPE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=20, sysNumber=56.0, core=true, t24Name=THRESHOLD.TYPE, mandatory=false)
+/* This is the parameter to define the excessive amount or count that must be monitored on accounts.
+For Regulation-D this field will be used to indicate the transaction count of corresponding threshold period.
+Validation Rules:
+For REGCC REPEAT.OD  Cannot input if THRESHOLD.TYPE is COUNT. Inputtable if AMOUNT
+For REGCC RETURN.DEPOSIT.ITEMS, inputtable */
+        THRESHOLD_VALUE : T24BusinessTypes:DEC
+            @t24:i (align=L, inputBehaviour=I, maxLength=10, sysNumber=57.0, core=true, t24Name=THRESHOLD.VALUE, typeModifiers="2", mandatory=false)
+        VIOLATION_NUMBER -> byValue NACUST_CustomerHolds:USREGS_REGULATION_PARAM__THRESHOLD_DESC__VIOLATION_NUMBER *
+            @t24:i (t24Name=VIOLATION.NUMBER)
+    }
+    USREGS_REGULATION_PARAM__THRESHOLD_DESC__ALLOWED_CATEGORY
+    {
+/* User can select a valid category code in order to define returned deposited items threshold by account product type.
+Validation Rules:
+Can be part of the multi value set, and can be defined as a range (E.g 1001 1999).
+Category defined here can be independent of and can supersede general definition in REG.CC record */
+        ALLOWED_CATEGORY : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=15, sysNumber=60.0, core=true, t24Name=ALLOWED.CATEGORY, mandatory=false)
+    }
+    USREGS_REGULATION_PARAM__THRESHOLD_DESC__EXCLUDE_CATEGORY
+    {
+/* Validation Rules:
+User can select a valid category code those need to be excluded from the evaluation process to identify breach of returned deposited items threshold.
+Can be part of the multi value set, and can be defined as a range (E.g 1001 1999)
+Category defined here can be independent of and can supersede general definition in REG.CC
+Reserve Fields */
+        EXCLUDE_CATEGORY : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=15, sysNumber=61.0, core=true, t24Name=EXCLUDE.CATEGORY, mandatory=false)
+    }
+    USREGS_REGULATION_PARAM__THRESHOLD_DESC__RET_TRANSACTION_CODE
+    {
+/* The transaction codes provided here will be used to identify the check return transaction. If any accounting transaction code
+exist in this group then the transaction will be consider as reg-cc check return transaction. */
+        RET_TRANSACTION_CODE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=15, sysNumber=62.0, core=true, t24Name=RET.TRANSACTION.CODE, mandatory=false)
+    }
+    USREGS_REGULATION_PARAM__THRESHOLD_DESC__THRESHOLD_DESC
+    {
+/* Text field to provide a description for the threshold setup.
+Validation Rules:
+Free text field upto 35 chars */
+        THRESHOLD_DESC : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, multiLanguage=true, sysNumber=55.0, core=true, t24Name=THRESHOLD.DESC, mandatory=false)
+    }
+    USREGS_REGULATION_PARAM__THRESHOLD_DESC__VIOLATION_NUMBER
+    {
+        /* Action that must be performed upon occurrence of corresponding violation. Input is mandatory if Violation Occurrence is defined. It should be a valid record in USREGS.REG.D.VIOLATION.ACTION. */
+        VIOLATION_ACTION -> USREGS_RegD:USREGS_REG_D_VIOLATION_ACTION
+            @t24:i (align=L, inputBehaviour=I, maxLength=20, sysNumber=65.0, core=true, businessType=A, t24Name=VIOLATION.ACTION, mandatory=false)
+        /* Violation Occurrence along with Violation Action field are used to defined the action to be performed upon occurrence of specific violation. Input is mandatory if Violation Action is defined. */
+        VIOLATION_NUMBER : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=2, sysNumber=64.0, core=true, t24Name=VIOLATION.NUMBER, mandatory=false)
+    }
+    USREGS_REGULATION_PARAM__TRANSACTION
+    {
+/* This field would determine the type of check deposit. For any new type of check, create a record in EB.LOOKUP application.
+
+Validation Rules
+Multi value set, drop down with values Local, Non-Local, Next Day, On-Us and Government. */
+        REGCC_CHECK_TYPE : NACUST_CustomerHolds:USREGS_REGULATION_PARAM__TRANSACTION__REGCC_CHECK_TYPE
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=36.0, core=true, t24Name=REGCC.CHECK.TYPE, mandatory=false)
+        /* Reserve Fields */
+        RESERVED_6 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=39.0, core=true, t24Name=RESERVED.6, mandatory=false)
+        /* Reserve Fields */
+        RESERVED_7 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=38.0, core=true, t24Name=RESERVED.7, mandatory=false)
+        /* Reserve Fields */
+        RESERVED_8 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=37.0, core=true, t24Name=RESERVED.8, mandatory=false)
+/* This field will have valid transaction codes used for regulations which is part of id.
+
+Validation Rules
+
+Valid record in the TRANSACTION table. */
+        TRANSACTION -> ST_Config:TRANSACTION
+            @i18n:Label (en=Transaction)
+            @i18n:Tooltip (en="The reference number of the Transaction")
+            @t24:i (align=R, inputBehaviour=I, maxLength=4, sysNumber=35.0, core=true, t24Name=TRANSACTION, mandatory=false)
+    }
+}
+Enumerations {
+    NACUST_OD_RETURN_ACTIVITY__EXCESS_RETURNS : mml:string
+        NO=NO
+        YES=YES
+    USREGS_REGULATION_PARAM__AVAIL_METHOD : mml:string
+        IMMEDIATE=IMMEDIATE
+        NEXT_DAY=NEXT.DAY
+    USREGS_REGULATION_PARAM__CHECK_TYPE__CHECK_TYPE : mml:string
+        GOVERNMENT=GOVERNMENT
+        LOCAL=LOCAL
+        NEXTDAY=NEXTDAY
+        NONLOCAL=NONLOCAL
+        ONUS=ONUS
+    USREGS_REGULATION_PARAM__HOLD_ON_RETURN : mml:string
+        NO=NO
+        YES=YES
+    USREGS_REGULATION_PARAM__HOLD_PROCESS : mml:string
+        CHECK=CHECK
+        CUSTOMER=CUSTOMER
+    USREGS_REGULATION_PARAM__PRIVACY_STATUS : mml:string
+        OPT__IN=OPT-IN
+        OPT__OUT=OPT-OUT
+    USREGS_REGULATION_PARAM__ROLES__ROLES : mml:string
+        BEN=BEN
+        CO=CO
+        CO__SIGNER=CO-SIGNER
+        DBA=DBA
+        GUARANTOR=GUARANTOR
+        INDEMNATOR=INDEMNATOR
+        IOLTA=IOLTA
+        ITF=ITF
+        POD=POD
+        POWER_OF_ATTORNEY=POWER.OF.ATTORNEY
+        TRUST=TRUST
+        UGMA=UGMA
+        UTMA=UTMA
+    USREGS_REGULATION_PARAM__TRANSACTION__REGCC_CHECK_TYPE : mml:string
+        GOVERNMENT=GOVERNMENT
+        LOCAL=LOCAL
+        NEXTDAY=NEXTDAY
+        NONLOCAL=NONLOCAL
+        ONUS=ONUS
+}

@@ -1,0 +1,619 @@
+# UTF-8
+/* Product Importer for AA */
+Domain AA_ProductImporter
+    @t24:i (module=AA)
+    @java:Package (value=com.temenos.t24.datamodel.aa.aa_productimporter)
+namespace "http://www.temenos.com/t24/AA_ProductImporter"
+metamodelVersion 1.30.6
+Classes {
+    /* This application will collects the all API attributes and create the Run time application to IMPORT a new product while publishing the definition. */
+    AA_PRODUCT_IMPORT_CATALOG
+        @i18n:Description (en="")
+        @t24:i (t24Name=AA.PRODUCT.IMPORT.CATALOG, level=I, type=H, allowedFunctions="L Q S", localRefApplicationSysNo=37.0, localRefAllowed=true)
+    {
+/* This field indicates which action will be performed after the record is authorised. Allowed values are Null or PUBLISH.
+If action is null, the definition is simply being saved on file after authorization.
+If PUBLISH is specified, system would initiate a 'publish' mechanism of this record. */
+        ACTION : AA_ProductImporter:AA_PRODUCT_IMPORT_CATALOG__ACTION
+            @i18n:Label (en=Action)
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=30.0, core=true, t24Name=ACTION, mandatory=false)
+        API_SYSTEM_ATTRIBUTE -> byValue AA_ProductImporter:AA_PRODUCT_IMPORT_CATALOG__API_SYSTEM_ATTRIBUTE *
+            @t24:i (t24Name=API.SYSTEM.ATTRIBUTE)
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=46.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=47.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=43.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=44.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=40.0, core=true, t24Name=CURR.NO, mandatory=false)
+        DATE_TIME -> byValue AA_ProductImporter:AA_PRODUCT_IMPORT_CATALOG__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=45.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        /* Description of the Product taken from the original definition in Product import catalog. */
+        DESCRIPTION : T24BusinessTypes:ANY required
+            @i18n:Label (en=Description)
+            @i18n:Tooltip (en=Description)
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=1.0, core=true, t24Name=DESCRIPTION, mandatory=true)
+        FULL_DESCRIPTION -> byValue AA_ProductImporter:AA_PRODUCT_IMPORT_CATALOG__FULL_DESCRIPTION *
+            @t24:i (t24Name=FULL.DESCRIPTION)
+        /* It is a standard id component field. which will store the 1st of the id */
+        ID_COMP_1 : T24BusinessTypes:A
+            @i18n:Label (en="Arrangement Id")
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=34.0, core=true, t24Name=ID.COMP.1, mandatory=false)
+        /* It is standard id component field. which will store the 2nd of the id */
+        ID_COMP_2 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=35.0, core=true, t24Name=ID.COMP.2, mandatory=false)
+        /* It is standard id component field. which will store the 3rd of the id */
+        ID_COMP_3 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=36.0, core=true, t24Name=ID.COMP.3, mandatory=false)
+        INPUTTER -> byValue AA_ProductImporter:AA_PRODUCT_IMPORT_CATALOG__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        OVERRIDE -> byValue AA_ProductImporter:AA_PRODUCT_IMPORT_CATALOG__OVERRIDE *
+            @t24:i (t24Name=OVERRIDE)
+        PRODUCT_ID -> AA_ProductImporter:AA_PRODUCT_IMPORT_CATALOG PK required
+            @t24:i (align=L, inputBehaviour=I, maxLength=60, sysNumber=0.0, core=true, businessType=A, t24Name=PRODUCT.ID, mandatory=true)
+        PUBLISH_ERROR -> byValue AA_ProductImporter:AA_PRODUCT_IMPORT_CATALOG__PUBLISH_ERROR *
+            @t24:i (t24Name=PUBLISH.ERROR)
+        /* This field indicates whether current definition has published or not. If the definition was published successfully then status will get updated as COMPLETED SUCCESSFULLY */
+        PUBLISH_STATUS : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=31.0, core=true, t24Name=PUBLISH.STATUS, mandatory=false)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=39.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        /* Standard Reserved field */
+        RESERVED_1 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=29.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        /* Standard Reserved field */
+        RESERVED_10 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=20.0, core=true, t24Name=RESERVED.10, mandatory=false)
+        /* Standard Reserved field */
+        RESERVED_11 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=4.0, core=true, t24Name=RESERVED.11, mandatory=false)
+        /* Standard Reserved field */
+        RESERVED_12 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=3.0, core=true, t24Name=RESERVED.12, mandatory=false)
+        /* Standard Reserved field */
+        RESERVED_2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=28.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        /* Standard Reserved field */
+        RESERVED_3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=27.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        /* Standard Reserved field */
+        RESERVED_4 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=26.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        /* Standard Reserved field */
+        RESERVED_5 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=25.0, core=true, t24Name=RESERVED.5, mandatory=false)
+        /* Standard Reserved field */
+        RESERVED_6 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=24.0, core=true, t24Name=RESERVED.6, mandatory=false)
+        /* Standard Reserved field */
+        RESERVED_7 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=23.0, core=true, t24Name=RESERVED.7, mandatory=false)
+        /* Standard Reserved field */
+        RESERVED_8 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=22.0, core=true, t24Name=RESERVED.8, mandatory=false)
+        /* Standard Reserved field */
+        RESERVED_9 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=21.0, core=true, t24Name=RESERVED.9, mandatory=false)
+    }
+    AA_PRODUCT_IMPORT_CATALOG__API_SYSTEM_ATTRIBUTE
+    {
+/* Indicates the field name which would be used to form the underlying table fields for this group. This underlying table would be the gateway application for API to land.
+The field name is formed by the system by collating the various API flagged fields and trimming their length to comply with a length of 30 characters.
+The values here may not be deleted or new values included. Because the fields are the result of a design time and allowing the field to be included or removed here would make that design time redundant.
+It is a System maintained and Noinput field. */
+        API_SYSTEM_ATTRIBUTE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=5.0, core=true, t24Name=API.SYSTEM.ATTRIBUTE, mandatory=false)
+        /* If the user wants to make amendments to the name formed by the system, it could be done in this field. The value in this field 'overrides' the System attribute field name. */
+        API_USER_ATTRIBUTE : T24BusinessTypes:ANY required
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=6.0, core=true, t24Name=API.USER.ATTRIBUTE, mandatory=true)
+/* Indicates the application to which the vetting option points.
+Fetched from the data type of SS of the above attribute.
+NOINPUT and System maintained field. */
+        APPLICATION_VET : T24BusinessTypes:A
+            @i18n:Label (en="Linked Table")
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=16.0, core=true, t24Name=APPLICATION.VET, mandatory=false)
+/* Indicates the core data type of this attribute.
+Fetched from the data type of SS of the above attribute. There are only a few types that EB.TABLE.DEFINITION supports (the ones in EB.TABLE.DATA.TYPE) - if a field is defined as an item which is not in EB.TABLE.DATA.TYPE, then it would be flattened as an Alphanumeric field.
+NOINPUT and System maintained field. */
+        DATA_TYPE : T24BusinessTypes:A
+            @i18n:Label (en="Data Type")
+            @i18n:Tooltip (en="Indicates the data type ")
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=14.0, core=true, t24Name=DATA.TYPE, mandatory=false)
+/* Indicates any default value that this attribute could carry.
+Should be a valid entry in the VETTING.TABLE options list.
+User definable. */
+        DEFAULT_VALUE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=17.0, core=true, t24Name=DEFAULT.VALUE, mandatory=false)
+/* Indicates the Maximum character that this field can hold.
+This is fetched from the STANDARD.SELECTION of the source attribute.
+NOINPUT and System maintained field. */
+        MAXIMUM_CHARACTER : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=12.0, core=true, t24Name=MAXIMUM.CHARACTER, mandatory=false)
+        /* Standard Reserved field */
+        RESERVED : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=13.0, core=true, t24Name=RESERVED, mandatory=false)
+/* The source attribute of the source property from where this attribute has been built.
+This is deciphered from the catalog conditions attached to the product group.
+Should be a valid entry in the SS record of the Source property class.
+NOINPUT and System maintained field. */
+        SOURCE_ATTRIBUTE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=8.0, core=true, t24Name=SOURCE.ATTRIBUTE, mandatory=false)
+/* If the attribute is formed due to a negotiation rule, then the source negotiation rule of the condition is defaulted in this field.
+NOINPUT and System maintained field. */
+        SOURCE_NEG_RULE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=9.0, core=true, t24Name=SOURCE.NEG.RULE, mandatory=false)
+/* If the attribute is formed due to a period angle associated with the condition, then the period value is stated here.
+NOINPUT and System maintained field. */
+        SOURCE_PERIOD : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=11.0, core=true, t24Name=SOURCE.PERIOD, mandatory=false)
+        SOURCE_PERIODIC_RULE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=10.0, core=true, t24Name=SOURCE.PERIODIC.RULE, mandatory=false)
+/* The source property from where this attribute has been built.
+This is deciphered from the catalog conditions attached to the product group.
+Should be a valid AA.PROPERTY entry.
+NOINPUT and System maintained field. */
+        SOURCE_PROPERTY -> AA_ProductFramework:AA_PROPERTY
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=7.0, core=true, businessType=A, t24Name=SOURCE.PROPERTY, mandatory=false)
+/* Indicates whether the field is a Multi-value or a Sub-value.
+This is also derived from the core table of the attribute. There are a few rules which apply.
+1. If the underlying field is part of Associated MV, and no other associated fields have been defined, then the field becomes an independent MV here.
+2. If the underlying field is part of Associated MV and associated fields have been defined and included, then association would be established only between these fields.
+3. If the underlying field is part of a SV field, and no other associated fields have been defined, then the field becomes an independent MV here.
+4. If the underlying field is part of Associated SV and associated fields have been defined and included, then association would be established only between these fields.
+5. If the underlying field is part of Associated SV and associated fields in the MV have been defined and included, then the field becomes an independent SV.
+NOINPUT and System maintained. */
+        SUB_ASSOC_CODE : T24BusinessTypes:A
+            @i18n:Label (en=Type)
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=19.0, core=true, t24Name=SUB.ASSOC.CODE, mandatory=false)
+        VETTING_TABLE -> byValue AA_ProductImporter:AA_PRODUCT_IMPORT_CATALOG__API_SYSTEM_ATTRIBUTE__VETTING_TABLE *
+            @t24:i (t24Name=VETTING.TABLE)
+        /* Indicates the any EB.LOOKUP value that this attribute could carry. */
+        VIRTUAL_TABLE : T24BusinessTypes:A
+            @i18n:Label (en="Virtual Table")
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=18.0, core=true, t24Name=VIRTUAL.TABLE, mandatory=false)
+    }
+    AA_PRODUCT_IMPORT_CATALOG__API_SYSTEM_ATTRIBUTE__VETTING_TABLE
+    {
+/* Indicates the vetting options on this table.
+Fetched from the data type of SS of the above attribute.
+NOINPUT and System maintained field. */
+        VETTING_TABLE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=15.0, core=true, t24Name=VETTING.TABLE, mandatory=false)
+    }
+    AA_PRODUCT_IMPORT_CATALOG__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=42.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    AA_PRODUCT_IMPORT_CATALOG__FULL_DESCRIPTION
+    {
+        /* A full text based description to record the details of this group from an API perspective. */
+        FULL_DESCRIPTION : T24BusinessTypes:TEXT required
+            @t24:i (align=L, inputBehaviour=I, maxLength=100, multiLanguage=true, sysNumber=2.0, core=true, t24Name=FULL.DESCRIPTION, mandatory=true)
+    }
+    AA_PRODUCT_IMPORT_CATALOG__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=41.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    AA_PRODUCT_IMPORT_CATALOG__OVERRIDE
+    {
+        OVERRIDE : T24BusinessTypes:N
+            @i18n:Label (en=Override)
+            @i18n:Tooltip (en="Overrides generated by this transaction")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=38.0, core=true, t24Name=OVERRIDE, mandatory=false)
+    }
+    AA_PRODUCT_IMPORT_CATALOG__PUBLISH_ERROR
+    {
+        /* This field will give the suggestions for reported error in the Publish Error field */
+        ERROR_SUGGESTION : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=33.0, core=true, t24Name=ERROR.SUGGESTION, mandatory=false)
+        /* This field will hold the list of error messages raised as part of the publishing definition. */
+        PUBLISH_ERROR : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=32.0, core=true, t24Name=PUBLISH.ERROR, mandatory=false)
+    }
+    AA_PRODUCT_IMPORT_CLASS
+        @i18n:Description (en="")
+        @t24:i (t24Name=AA.PRODUCT.IMPORT.CLASS, level=I, type=H, allowedFunctions="A C D E H I L P Q S", localRefApplicationSysNo=14.0, localRefAllowed=true)
+    {
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=23.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=24.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=20.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=21.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=17.0, core=true, t24Name=CURR.NO, mandatory=false)
+        DATE_TIME -> byValue AA_ProductImporter:AA_PRODUCT_IMPORT_CLASS__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=22.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        DESCRIPTION -> byValue AA_ProductImporter:AA_PRODUCT_IMPORT_CLASS__DESCRIPTION *
+            @t24:i (t24Name=DESCRIPTION)
+        FULL_DESC -> byValue AA_ProductImporter:AA_PRODUCT_IMPORT_CLASS__FULL_DESC *
+            @t24:i (t24Name=FULL.DESC)
+        INPUTTER -> byValue AA_ProductImporter:AA_PRODUCT_IMPORT_CLASS__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        K_TYPE -> byValue AA_ProductImporter:AA_PRODUCT_IMPORT_CLASS__K_TYPE *
+            @t24:i (t24Name=K.TYPE)
+        OVERRIDE -> byValue AA_ProductImporter:AA_PRODUCT_IMPORT_CLASS__OVERRIDE *
+            @t24:i (t24Name=OVERRIDE)
+        PRODUCT_IMPORT_CLASS -> AA_ProductImporter:AA_PRODUCT_IMPORT_CLASS PK required
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=0.0, core=true, businessType=A, t24Name=PRODUCT.IMPORT.CLASS, mandatory=true)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=16.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        RESERVED_1 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=13.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_10 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=4.0, core=true, t24Name=RESERVED.10, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=12.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=11.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=10.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        RESERVED_5 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=9.0, core=true, t24Name=RESERVED.5, mandatory=false)
+        RESERVED_6 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=8.0, core=true, t24Name=RESERVED.6, mandatory=false)
+        RESERVED_7 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=7.0, core=true, t24Name=RESERVED.7, mandatory=false)
+        RESERVED_8 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=6.0, core=true, t24Name=RESERVED.8, mandatory=false)
+        RESERVED_9 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=5.0, core=true, t24Name=RESERVED.9, mandatory=false)
+        TYPE -> byValue AA_ProductImporter:AA_PRODUCT_IMPORT_CLASS__TYPE *
+            @t24:i (t24Name=TYPE)
+    }
+    AA_PRODUCT_IMPORT_CLASS__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=19.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    AA_PRODUCT_IMPORT_CLASS__DESCRIPTION
+    {
+        DESCRIPTION : T24BusinessTypes:A required
+            @i18n:Label (en=Description)
+            @i18n:Tooltip (en=Description)
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, multiLanguage=true, sysNumber=1.0, core=true, t24Name=DESCRIPTION, mandatory=true)
+    }
+    AA_PRODUCT_IMPORT_CLASS__FULL_DESC
+    {
+        FULL_DESC : T24BusinessTypes:A required
+            @i18n:Label (en="Full Description")
+            @i18n:Tooltip (en="Detailed Description ")
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=2.0, core=true, t24Name=FULL.DESC, isTextarea=true, mandatory=true)
+    }
+    AA_PRODUCT_IMPORT_CLASS__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=18.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    AA_PRODUCT_IMPORT_CLASS__K_TYPE
+    {
+        K_TYPE : AA_ProductImporter:AA_PRODUCT_IMPORT_CLASS__K_TYPE__K_TYPE
+            @i18n:Label (en=KType)
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=3.0, core=false, t24Name=K.TYPE, mandatory=false)
+    }
+    AA_PRODUCT_IMPORT_CLASS__OVERRIDE
+    {
+        OVERRIDE : T24BusinessTypes:N
+            @i18n:Label (en=Override)
+            @i18n:Tooltip (en="Overrides generated by this transaction")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=15.0, core=true, t24Name=OVERRIDE, mandatory=false)
+    }
+    AA_PRODUCT_IMPORT_CLASS__TYPE
+    {
+        TYPE : AA_ProductImporter:AA_PRODUCT_IMPORT_CLASS__TYPE__TYPE
+            @i18n:Label (en=Type)
+            @i18n:Tooltip (en=Type)
+            @t24:i (align=L, inputBehaviour=I, maxLength=15, sysNumber=3.0, core=true, t24Name=TYPE, mandatory=false)
+    }
+    /* This application will collects the all API attributes and create the Run time application to IMPORT a new product while publishing the definition. */
+    AA_PRODUCT_IMPORT_MANAGER
+        @i18n:Description (en="")
+        @t24:i (t24Name=AA.PRODUCT.IMPORT.MANAGER, level=I, type=H, allowedFunctions="A D E I L Q R S", localRefApplicationSysNo=37.0, localRefAllowed=true)
+    {
+/* This field indicates which action will be performed after the record is authorised. Allowed values are Null or PUBLISH.
+If action is null, the definition is simply being saved on file after authorization.
+If PUBLISH is specified, system would initiate a 'publish' mechanism of this record. */
+        ACTION : AA_ProductImporter:AA_PRODUCT_IMPORT_MANAGER__ACTION
+            @i18n:Label (en=Action)
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=30.0, core=true, t24Name=ACTION, mandatory=false)
+        API_SYSTEM_ATTRIBUTE -> byValue AA_ProductImporter:AA_PRODUCT_IMPORT_MANAGER__API_SYSTEM_ATTRIBUTE *
+            @t24:i (t24Name=API.SYSTEM.ATTRIBUTE)
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=46.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=47.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=43.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=44.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=40.0, core=true, t24Name=CURR.NO, mandatory=false)
+        DATE_TIME -> byValue AA_ProductImporter:AA_PRODUCT_IMPORT_MANAGER__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=45.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        /* Description of the Product taken from the original definition in Product import catalog. */
+        DESCRIPTION : T24BusinessTypes:ANY required
+            @i18n:Label (en=Description)
+            @i18n:Tooltip (en=Description)
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=1.0, core=true, t24Name=DESCRIPTION, mandatory=true)
+        FULL_DESCRIPTION -> byValue AA_ProductImporter:AA_PRODUCT_IMPORT_MANAGER__FULL_DESCRIPTION *
+            @t24:i (t24Name=FULL.DESCRIPTION)
+        /* It is a standard id component field. which will store the 1st of the id */
+        ID_COMP_1 : T24BusinessTypes:A
+            @i18n:Label (en="Arrangement Id")
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=34.0, core=true, t24Name=ID.COMP.1, mandatory=false)
+        /* It is standard id component field. which will store the 2nd of the id */
+        ID_COMP_2 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=35.0, core=true, t24Name=ID.COMP.2, mandatory=false)
+        /* It is standard id component field. which will store the 3rd of the id */
+        ID_COMP_3 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=36.0, core=true, t24Name=ID.COMP.3, mandatory=false)
+        INPUTTER -> byValue AA_ProductImporter:AA_PRODUCT_IMPORT_MANAGER__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        OVERRIDE -> byValue AA_ProductImporter:AA_PRODUCT_IMPORT_MANAGER__OVERRIDE *
+            @t24:i (t24Name=OVERRIDE)
+        PRODUCT_ID -> AA_ProductImporter:AA_PRODUCT_IMPORT_MANAGER PK required
+            @t24:i (align=L, inputBehaviour=I, maxLength=60, sysNumber=0.0, core=true, businessType=A, t24Name=PRODUCT.ID, mandatory=true)
+        PUBLISH_ERROR -> byValue AA_ProductImporter:AA_PRODUCT_IMPORT_MANAGER__PUBLISH_ERROR *
+            @t24:i (t24Name=PUBLISH.ERROR)
+        /* This field indicates whether current definition has published or not. If the definition was published successfully then status will get updated as COMPLETED SUCCESSFULLY */
+        PUBLISH_STATUS : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=31.0, core=true, t24Name=PUBLISH.STATUS, mandatory=false)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=39.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        /* Standard Reserved field */
+        RESERVED_1 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=29.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        /* Standard Reserved field */
+        RESERVED_10 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=20.0, core=true, t24Name=RESERVED.10, mandatory=false)
+        /* Standard Reserved field */
+        RESERVED_11 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=4.0, core=true, t24Name=RESERVED.11, mandatory=false)
+        /* Standard Reserved field */
+        RESERVED_12 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=3.0, core=true, t24Name=RESERVED.12, mandatory=false)
+        /* Standard Reserved field */
+        RESERVED_2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=28.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        /* Standard Reserved field */
+        RESERVED_3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=27.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        /* Standard Reserved field */
+        RESERVED_4 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=26.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        /* Standard Reserved field */
+        RESERVED_5 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=25.0, core=true, t24Name=RESERVED.5, mandatory=false)
+        /* Standard Reserved field */
+        RESERVED_6 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=24.0, core=true, t24Name=RESERVED.6, mandatory=false)
+        /* Standard Reserved field */
+        RESERVED_7 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=23.0, core=true, t24Name=RESERVED.7, mandatory=false)
+        /* Standard Reserved field */
+        RESERVED_8 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=22.0, core=true, t24Name=RESERVED.8, mandatory=false)
+        /* Standard Reserved field */
+        RESERVED_9 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=21.0, core=true, t24Name=RESERVED.9, mandatory=false)
+    }
+    AA_PRODUCT_IMPORT_MANAGER__API_SYSTEM_ATTRIBUTE
+    {
+/* Indicates the field name which would be used to form the underlying table fields for this group. This underlying table would be the gateway application for API to land.
+The field name is formed by the system by collating the various API flagged fields and trimming their length to comply with a length of 30 characters.
+The values here may not be deleted or new values included. Because the fields are the result of a design time and allowing the field to be included or removed here would make that design time redundant.
+It is a System maintained and Noinput field. */
+        API_SYSTEM_ATTRIBUTE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=5.0, core=true, t24Name=API.SYSTEM.ATTRIBUTE, mandatory=false)
+        /* If the user wants to make amendments to the name formed by the system, it could be done in this field. The value in this field 'overrides' the System attribute field name. */
+        API_USER_ATTRIBUTE : T24BusinessTypes:ANY required
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=6.0, core=true, t24Name=API.USER.ATTRIBUTE, mandatory=true)
+/* Indicates the application to which the vetting option points.
+Fetched from the data type of SS of the above attribute.
+NOINPUT and System maintained field. */
+        APPLICATION_VET : T24BusinessTypes:A
+            @i18n:Label (en="Linked Table")
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=16.0, core=true, t24Name=APPLICATION.VET, mandatory=false)
+/* Indicates the core data type of this attribute.
+Fetched from the data type of SS of the above attribute. There are only a few types that EB.TABLE.DEFINITION supports (the ones in EB.TABLE.DATA.TYPE) - if a field is defined as an item which is not in EB.TABLE.DATA.TYPE, then it would be flattened as an Alphanumeric field.
+NOINPUT and System maintained field. */
+        DATA_TYPE : T24BusinessTypes:A
+            @i18n:Label (en="Data Type")
+            @i18n:Tooltip (en="Indicates the data type ")
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=14.0, core=true, t24Name=DATA.TYPE, mandatory=false)
+/* Indicates any default value that this attribute could carry.
+Should be a valid entry in the VETTING.TABLE options list.
+User definable. */
+        DEFAULT_VALUE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=17.0, core=true, t24Name=DEFAULT.VALUE, mandatory=false)
+/* Indicates the Maximum character that this field can hold.
+This is fetched from the STANDARD.SELECTION of the source attribute.
+NOINPUT and System maintained field. */
+        MAXIMUM_CHARACTER : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=12.0, core=true, t24Name=MAXIMUM.CHARACTER, mandatory=false)
+        /* Standard Reserved field */
+        RESERVED : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=13.0, core=true, t24Name=RESERVED, mandatory=false)
+/* The source attribute of the source property from where this attribute has been built.
+This is deciphered from the catalog conditions attached to the product group.
+Should be a valid entry in the SS record of the Source property class.
+NOINPUT and System maintained field. */
+        SOURCE_ATTRIBUTE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=8.0, core=true, t24Name=SOURCE.ATTRIBUTE, mandatory=false)
+/* If the attribute is formed due to a negotiation rule, then the source negotiation rule of the condition is defaulted in this field.
+NOINPUT and System maintained field. */
+        SOURCE_NEG_RULE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=9.0, core=true, t24Name=SOURCE.NEG.RULE, mandatory=false)
+/* If the attribute is formed due to a period angle associated with the condition, then the period value is stated here.
+NOINPUT and System maintained field. */
+        SOURCE_PERIOD : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=11.0, core=true, t24Name=SOURCE.PERIOD, mandatory=false)
+        SOURCE_PERIODIC_RULE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=10.0, core=true, t24Name=SOURCE.PERIODIC.RULE, mandatory=false)
+/* The source property from where this attribute has been built.
+This is deciphered from the catalog conditions attached to the product group.
+Should be a valid AA.PROPERTY entry.
+NOINPUT and System maintained field. */
+        SOURCE_PROPERTY -> AA_ProductFramework:AA_PROPERTY
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=7.0, core=true, businessType=A, t24Name=SOURCE.PROPERTY, mandatory=false)
+/* Indicates whether the field is a Multi-value or a Sub-value.
+This is also derived from the core table of the attribute. There are a few rules which apply.
+1. If the underlying field is part of Associated MV, and no other associated fields have been defined, then the field becomes an independent MV here.
+2. If the underlying field is part of Associated MV and associated fields have been defined and included, then association would be established only between these fields.
+3. If the underlying field is part of a SV field, and no other associated fields have been defined, then the field becomes an independent MV here.
+4. If the underlying field is part of Associated SV and associated fields have been defined and included, then association would be established only between these fields.
+5. If the underlying field is part of Associated SV and associated fields in the MV have been defined and included, then the field becomes an independent SV.
+NOINPUT and System maintained. */
+        SUB_ASSOC_CODE : T24BusinessTypes:A
+            @i18n:Label (en=Type)
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=19.0, core=true, t24Name=SUB.ASSOC.CODE, mandatory=false)
+        VETTING_TABLE -> byValue AA_ProductImporter:AA_PRODUCT_IMPORT_MANAGER__API_SYSTEM_ATTRIBUTE__VETTING_TABLE *
+            @t24:i (t24Name=VETTING.TABLE)
+        /* Indicates the any EB.LOOKUP value that this attribute could carry. */
+        VIRTUAL_TABLE : T24BusinessTypes:A
+            @i18n:Label (en="Virtual Table")
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=18.0, core=true, t24Name=VIRTUAL.TABLE, mandatory=false)
+    }
+    AA_PRODUCT_IMPORT_MANAGER__API_SYSTEM_ATTRIBUTE__VETTING_TABLE
+    {
+/* Indicates the vetting options on this table.
+Fetched from the data type of SS of the above attribute.
+NOINPUT and System maintained field. */
+        VETTING_TABLE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=15.0, core=true, t24Name=VETTING.TABLE, mandatory=false)
+    }
+    AA_PRODUCT_IMPORT_MANAGER__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=42.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    AA_PRODUCT_IMPORT_MANAGER__FULL_DESCRIPTION
+    {
+        /* A full text based description to record the details of this group from an API perspective. */
+        FULL_DESCRIPTION : T24BusinessTypes:TEXT required
+            @t24:i (align=L, inputBehaviour=I, maxLength=100, multiLanguage=true, sysNumber=2.0, core=true, t24Name=FULL.DESCRIPTION, mandatory=true)
+    }
+    AA_PRODUCT_IMPORT_MANAGER__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=41.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    AA_PRODUCT_IMPORT_MANAGER__OVERRIDE
+    {
+        OVERRIDE : T24BusinessTypes:N
+            @i18n:Label (en=Override)
+            @i18n:Tooltip (en="Overrides generated by this transaction")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=38.0, core=true, t24Name=OVERRIDE, mandatory=false)
+    }
+    AA_PRODUCT_IMPORT_MANAGER__PUBLISH_ERROR
+    {
+        /* This field will give the suggestions for reported error in the Publish Error field */
+        ERROR_SUGGESTION : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=33.0, core=true, t24Name=ERROR.SUGGESTION, mandatory=false)
+        /* This field will hold the list of error messages raised as part of the publishing definition. */
+        PUBLISH_ERROR : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=32.0, core=true, t24Name=PUBLISH.ERROR, mandatory=false)
+    }
+}
+Enumerations {
+    AA_PRODUCT_IMPORT_CATALOG__ACTION : mml:string
+        NULL=NULL
+        PUBLISH=PUBLISH
+    AA_PRODUCT_IMPORT_CLASS__K_TYPE__K_TYPE : mml:string
+        CCY=CCY
+        COMMON=COMMON
+        DATED=DATED
+        DELAYED_TRACKING=DELAYED.TRACKING
+        EXTERNAL=EXTERNAL
+        EXTERNAL_FINANCIAL=EXTERNAL.FINANCIAL
+        FORWARD_DATED=FORWARD.DATED
+        INHERITANCE=INHERITANCE
+        MERGE=MERGE
+        MULTIPLE=MULTIPLE
+        NON_TRACKING=NON.TRACKING
+        OPT_CCY=OPT.CCY
+        TRACKING=TRACKING
+        TRACKING_ONLY=TRACKING.ONLY
+        TRANSACTION=TRANSACTION
+        TRIGGER=TRIGGER
+        VARIATION=VARIATION
+        VERSION=VERSION
+    AA_PRODUCT_IMPORT_CLASS__TYPE__TYPE : mml:string
+        CCY=CCY
+        COMMON=COMMON
+        DATED=DATED
+        DELAYED_TRACKING=DELAYED.TRACKING
+        EXTERNAL=EXTERNAL
+        EXTERNAL_FINANCIAL=EXTERNAL.FINANCIAL
+        FORWARD_DATED=FORWARD.DATED
+        INHERITANCE=INHERITANCE
+        MEMO_ENABLED=MEMO.ENABLED
+        MERGE=MERGE
+        MULTIPLE=MULTIPLE
+        NON_TRACKING=NON.TRACKING
+        OPT_CCY=OPT.CCY
+        TRACKING=TRACKING
+        TRACKING_ONLY=TRACKING.ONLY
+        TRANSACTION=TRANSACTION
+        TRIGGER=TRIGGER
+        VARIATION=VARIATION
+        VERSION=VERSION
+    AA_PRODUCT_IMPORT_MANAGER__ACTION : mml:string
+        NULL=NULL
+        PUBLISH=PUBLISH
+}

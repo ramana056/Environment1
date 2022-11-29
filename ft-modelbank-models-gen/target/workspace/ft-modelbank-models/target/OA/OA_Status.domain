@@ -1,0 +1,1739 @@
+# UTF-8
+/* Status Processing for Origination Architecture */
+Domain OA_Status
+    @t24:i (module=OA)
+    @java:Package (value=com.temenos.t24.datamodel.oa.oa_status)
+namespace "http://www.temenos.com/t24/OA_Status"
+metamodelVersion 1.30.6
+Classes {
+/* OA will have a single status table OA.APPLICATION.STATUS and each record will be for a single purpose within an Application. Therefore, for a multipurpose application there will be a record for each purpose of the application.
+The table will be comprised of both fields for the system defined statuses as well as a name-value pair of fields for the user defined status codes and their values. The record will only contain the user defined status specified for the purpose.
+Fields STATUS.CODE and STATUS.VALUE would be used to store the user defined status. Remaining fields would be used to store the system defined statuses. */
+    OA_APPLICATION_STATUS
+        @i18n:Description (en="")
+        @t24:i (t24Name=OA.APPLICATION.STATUS, level=I, type=L, allowedFunctions="L S", localRefAllowed=false)
+    {
+        ADVICE_TYPE -> byValue OA_Status:OA_APPLICATION_STATUS__ADVICE_TYPE *
+            @t24:i (t24Name=ADVICE.TYPE)
+        /* ID of an OA.APPLICATION */
+        APPLICATION_ID -> OA_Status:OA_APPLICATION_STATUS PK required
+            @i18n:Label (en="Application Id")
+            @t24:i (align=L, inputBehaviour=I, maxLength=52, sysNumber=0.0, core=true, businessType=A, t24Name=APPLICATION.ID, mandatory=true)
+        DATA_MODEL_CATEGORY -> byValue OA_Status:OA_APPLICATION_STATUS__DATA_MODEL_CATEGORY *
+            @t24:i (t24Name=DATA.MODEL.CATEGORY)
+        DECISION_TYPE -> byValue OA_Status:OA_APPLICATION_STATUS__DECISION_TYPE *
+            @t24:i (t24Name=DECISION.TYPE)
+        FORM_REFERENCE -> byValue OA_Status:OA_APPLICATION_STATUS__FORM_REFERENCE *
+            @t24:i (t24Name=FORM.REFERENCE)
+        FULFILMENT_TYPE -> byValue OA_Status:OA_APPLICATION_STATUS__FULFILMENT_TYPE *
+            @t24:i (t24Name=FULFILMENT.TYPE)
+        MAPPING_LOG_REF -> byValue OA_Status:OA_APPLICATION_STATUS__MAPPING_LOG_REF *
+            @t24:i (t24Name=MAPPING.LOG.REF)
+        OWNER -> PW_Foundation:PW_PARTICIPANT
+            @i18n:Label (en=Owner)
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=1.0, core=true, businessType=A, t24Name=OWNER, mandatory=false)
+        /* This field will hold the PW.PROCESS record id which is linked to the application for the specific purpose. */
+        PW_PROCESS_ID : T24BusinessTypes:A
+            @i18n:Label (en="Process Id")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=37.0, core=true, t24Name=PW.PROCESS.ID, mandatory=false)
+        /* This field specifies the Current stage of the application. It could be used to identify the current stage of the application to initiate the next processing which can be PW activity. */
+        STAGE : OA_Status:OA_APPLICATION_STATUS__STAGE
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=2.0, core=true, t24Name=STAGE, mandatory=false)
+        STAGE_OWNER -> PW_Foundation:PW_PARTICIPANT
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=3.0, core=true, businessType=A, t24Name=STAGE.OWNER, mandatory=false)
+        /* This field will hold the version of the current stage of the application. */
+        STAGE_VERSION : T24BusinessTypes:RR
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=38.0, core=true, t24Name=STAGE.VERSION, mandatory=false)
+        STATUS_CODE -> byValue OA_Status:OA_APPLICATION_STATUS__STATUS_CODE *
+            @t24:i (t24Name=STATUS.CODE)
+    }
+    OA_APPLICATION_STATUS_CATALOG
+        @i18n:Description (en="")
+        @t24:i (t24Name=OA.APPLICATION.STATUS.CATALOG, level=I, type=H, allowedFunctions="L Q S", localRefApplicationSysNo=34.0, localRefAllowed=true)
+    {
+        ACTION : OA_Status:OA_APPLICATION_STATUS_CATALOG__ACTION
+            @i18n:Label (en=Action)
+            @t24:i (align=L, inputBehaviour=I, maxLength=7, sysNumber=21.0, core=true, t24Name=ACTION, mandatory=false)
+        APPLICATION_STATUS -> byValue OA_Status:OA_APPLICATION_STATUS_CATALOG__APPLICATION_STATUS *
+            @t24:i (t24Name=APPLICATION.STATUS)
+        APPLICATION_STATUS_DEFINITION_ID -> OA_Status:OA_APPLICATION_STATUS_CATALOG PK required
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=0.0, core=true, businessType=A, t24Name=APPLICATION.STATUS.DEFINITION.ID, mandatory=true)
+        APP_STATUS_END_POINT -> byValue OA_Status:OA_APPLICATION_STATUS_CATALOG__APP_STATUS_END_POINT *
+            @t24:i (t24Name=APP.STATUS.END.POINT)
+        ARCHIVAL_PERIOD : T24BusinessTypes:PERIOD
+            @t24:i (align=L, inputBehaviour=I, maxLength=10, sysNumber=15.0, core=true, t24Name=ARCHIVAL.PERIOD, mandatory=false)
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=43.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=44.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=40.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=41.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=37.0, core=true, t24Name=CURR.NO, mandatory=false)
+        DATE_TIME -> byValue OA_Status:OA_APPLICATION_STATUS_CATALOG__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=42.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        DESCRIPTION -> byValue OA_Status:OA_APPLICATION_STATUS_CATALOG__DESCRIPTION *
+            @t24:i (t24Name=DESCRIPTION)
+        DORM_STATUS_END_POINT -> byValue OA_Status:OA_APPLICATION_STATUS_CATALOG__DORM_STATUS_END_POINT *
+            @t24:i (t24Name=DORM.STATUS.END.POINT)
+        FULL_DESCRIPTION -> byValue OA_Status:OA_APPLICATION_STATUS_CATALOG__FULL_DESCRIPTION *
+            @t24:i (t24Name=FULL.DESCRIPTION)
+        INACTIVE_PERIOD : T24BusinessTypes:PERIOD
+            @t24:i (align=L, inputBehaviour=I, maxLength=10, sysNumber=14.0, core=true, t24Name=INACTIVE.PERIOD, mandatory=false)
+        INPUTTER -> byValue OA_Status:OA_APPLICATION_STATUS_CATALOG__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        OVERRIDE -> byValue OA_Status:OA_APPLICATION_STATUS_CATALOG__OVERRIDE *
+            @t24:i (t24Name=OVERRIDE)
+        PUBLISH_DATE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=23.0, core=true, t24Name=PUBLISH.DATE, mandatory=false)
+        PUBLISH_ERROR -> byValue OA_Status:OA_APPLICATION_STATUS_CATALOG__PUBLISH_ERROR *
+            @t24:i (t24Name=PUBLISH.ERROR)
+        PUBLISH_STATUS : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=22.0, core=true, t24Name=PUBLISH.STATUS, mandatory=false)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=36.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        REFERENCE : T24BusinessTypes:ANY
+            @i18n:Label (en="Search by Referece")
+            @t24:i (align=L, inputBehaviour=N, maxLength=25, sysNumber=26.0, core=true, t24Name=REFERENCE, mandatory=true)
+        RESERVED_FIELD_1 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=33.0, core=true, t24Name=RESERVED.FIELD.1, mandatory=false)
+        RESERVED_FIELD_10 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=17.0, core=true, t24Name=RESERVED.FIELD.10, mandatory=false)
+        RESERVED_FIELD_11 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=13.0, core=true, t24Name=RESERVED.FIELD.11, mandatory=false)
+        RESERVED_FIELD_12 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=12.0, core=true, t24Name=RESERVED.FIELD.12, mandatory=false)
+        RESERVED_FIELD_2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=32.0, core=true, t24Name=RESERVED.FIELD.2, mandatory=false)
+        RESERVED_FIELD_3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=31.0, core=true, t24Name=RESERVED.FIELD.3, mandatory=false)
+        RESERVED_FIELD_4 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=30.0, core=true, t24Name=RESERVED.FIELD.4, mandatory=false)
+        RESERVED_FIELD_5 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=29.0, core=true, t24Name=RESERVED.FIELD.5, mandatory=false)
+        RESERVED_FIELD_6 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=28.0, core=true, t24Name=RESERVED.FIELD.6, mandatory=false)
+        RESERVED_FIELD_7 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=20.0, core=true, t24Name=RESERVED.FIELD.7, mandatory=false)
+        RESERVED_FIELD_8 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=19.0, core=true, t24Name=RESERVED.FIELD.8, mandatory=false)
+        RESERVED_FIELD_9 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=18.0, core=true, t24Name=RESERVED.FIELD.9, mandatory=false)
+        VERSION : T24BusinessTypes:ANY
+            @i18n:Label (en=Version)
+            @t24:i (align=L, inputBehaviour=N, maxLength=5, sysNumber=27.0, core=true, t24Name=VERSION, mandatory=true)
+    }
+    OA_APPLICATION_STATUS_CATALOG__APPLICATION_STATUS
+    {
+        APPLICATION_PERIOD : T24BusinessTypes:PERIOD
+            @t24:i (align=L, inputBehaviour=I, maxLength=10, sysNumber=6.0, core=true, t24Name=APPLICATION.PERIOD, mandatory=false)
+        APPLICATION_STATUS -> OA_Status:OA_APPLICATION_USER_STATUS
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=3.0, core=true, businessType=A, t24Name=APPLICATION.STATUS, mandatory=false)
+        LINKED_USER_STATUS -> OA_Status:OA_APPLICATION_USER_STATUS
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=9.0, core=true, businessType=A, t24Name=LINKED.USER.STATUS, mandatory=false)
+        RESERVED_FIELD_14 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=8.0, core=true, t24Name=RESERVED.FIELD.14, mandatory=false)
+        RESERVED_FIELD_15 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=7.0, core=true, t24Name=RESERVED.FIELD.15, mandatory=false)
+        RESERVED_FIELD_16 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=5.0, core=true, t24Name=RESERVED.FIELD.16, mandatory=false)
+        RESERVED_FIELD_17 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=4.0, core=true, t24Name=RESERVED.FIELD.17, mandatory=false)
+    }
+    OA_APPLICATION_STATUS_CATALOG__APP_STATUS_END_POINT
+    {
+        APP_STATUS_END_POINT -> OA_Status:OA_APPLICATION_USER_STATUS
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=10.0, core=true, businessType=A, t24Name=APP.STATUS.END.POINT, mandatory=false)
+        ARCHIVAL_OPTION : OA_Status:OA_APPLICATION_STATUS_CATALOG__APP_STATUS_END_POINT__ARCHIVAL_OPTION
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=11.0, core=true, t24Name=ARCHIVAL.OPTION, mandatory=false)
+    }
+    OA_APPLICATION_STATUS_CATALOG__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=39.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    OA_APPLICATION_STATUS_CATALOG__DESCRIPTION
+    {
+        DESCRIPTION : T24BusinessTypes:A required
+            @i18n:Label (en=Description)
+            @i18n:Tooltip (en=Description)
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, multiLanguage=true, sysNumber=1.0, core=true, t24Name=DESCRIPTION, mandatory=true)
+    }
+    OA_APPLICATION_STATUS_CATALOG__DORM_STATUS_END_POINT
+    {
+        DORM_STATUS_END_POINT : OA_Status:OA_APPLICATION_STATUS_CATALOG__DORM_STATUS_END_POINT__DORM_STATUS_END_POINT
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=16.0, core=true, t24Name=DORM.STATUS.END.POINT, mandatory=false)
+    }
+    OA_APPLICATION_STATUS_CATALOG__FULL_DESCRIPTION
+    {
+        FULL_DESCRIPTION : T24BusinessTypes:TEXT required
+            @t24:i (align=L, inputBehaviour=I, maxLength=100, sysNumber=2.0, core=true, t24Name=FULL.DESCRIPTION, mandatory=true)
+    }
+    OA_APPLICATION_STATUS_CATALOG__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=38.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    OA_APPLICATION_STATUS_CATALOG__OVERRIDE
+    {
+        OVERRIDE : T24BusinessTypes:N
+            @i18n:Label (en=Override)
+            @i18n:Tooltip (en="Overrides generated by this transaction")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=35.0, core=true, t24Name=OVERRIDE, mandatory=false)
+    }
+    OA_APPLICATION_STATUS_CATALOG__PUBLISH_ERROR
+    {
+        ERROR_SUGGESTION : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=25.0, core=true, t24Name=ERROR.SUGGESTION, mandatory=false)
+        PUBLISH_ERROR : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=24.0, core=true, t24Name=PUBLISH.ERROR, mandatory=false)
+    }
+    OA_APPLICATION_STATUS_DEFINITION
+        @i18n:Description (en="")
+        @t24:i (t24Name=OA.APPLICATION.STATUS.DEFINITION, level=I, type=H, allowedFunctions="A C D E H I L P Q S", localRefApplicationSysNo=34.0, localRefAllowed=true)
+    {
+        ACTION : OA_Status:OA_APPLICATION_STATUS_DEFINITION__ACTION
+            @i18n:Label (en=Action)
+            @t24:i (align=L, inputBehaviour=I, maxLength=7, sysNumber=21.0, core=true, t24Name=ACTION, mandatory=false)
+        APPLICATION_STATUS -> byValue OA_Status:OA_APPLICATION_STATUS_DEFINITION__APPLICATION_STATUS *
+            @t24:i (t24Name=APPLICATION.STATUS)
+        APPLICATION_STATUS_DEFINITION_ID -> OA_Status:OA_APPLICATION_STATUS_DEFINITION PK required
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=0.0, core=true, businessType=A, t24Name=APPLICATION.STATUS.DEFINITION.ID, mandatory=true)
+        APP_STATUS_END_POINT -> byValue OA_Status:OA_APPLICATION_STATUS_DEFINITION__APP_STATUS_END_POINT *
+            @t24:i (t24Name=APP.STATUS.END.POINT)
+        ARCHIVAL_PERIOD : T24BusinessTypes:PERIOD
+            @t24:i (align=L, inputBehaviour=I, maxLength=10, sysNumber=15.0, core=true, t24Name=ARCHIVAL.PERIOD, mandatory=false)
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=43.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=44.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=40.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=41.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=37.0, core=true, t24Name=CURR.NO, mandatory=false)
+        DATE_TIME -> byValue OA_Status:OA_APPLICATION_STATUS_DEFINITION__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=42.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        DESCRIPTION -> byValue OA_Status:OA_APPLICATION_STATUS_DEFINITION__DESCRIPTION *
+            @t24:i (t24Name=DESCRIPTION)
+        DORM_STATUS_END_POINT -> byValue OA_Status:OA_APPLICATION_STATUS_DEFINITION__DORM_STATUS_END_POINT *
+            @t24:i (t24Name=DORM.STATUS.END.POINT)
+        FULL_DESCRIPTION -> byValue OA_Status:OA_APPLICATION_STATUS_DEFINITION__FULL_DESCRIPTION *
+            @t24:i (t24Name=FULL.DESCRIPTION)
+        INACTIVE_PERIOD : T24BusinessTypes:PERIOD
+            @t24:i (align=L, inputBehaviour=I, maxLength=10, sysNumber=14.0, core=true, t24Name=INACTIVE.PERIOD, mandatory=false)
+        INPUTTER -> byValue OA_Status:OA_APPLICATION_STATUS_DEFINITION__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        OVERRIDE -> byValue OA_Status:OA_APPLICATION_STATUS_DEFINITION__OVERRIDE *
+            @t24:i (t24Name=OVERRIDE)
+        PUBLISH_DATE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=23.0, core=true, t24Name=PUBLISH.DATE, mandatory=false)
+        PUBLISH_ERROR -> byValue OA_Status:OA_APPLICATION_STATUS_DEFINITION__PUBLISH_ERROR *
+            @t24:i (t24Name=PUBLISH.ERROR)
+        PUBLISH_STATUS : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=22.0, core=true, t24Name=PUBLISH.STATUS, mandatory=false)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=36.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        REFERENCE : T24BusinessTypes:ANY
+            @i18n:Label (en="Search by Referece")
+            @t24:i (align=L, inputBehaviour=N, maxLength=25, sysNumber=26.0, core=true, t24Name=REFERENCE, mandatory=true)
+        RESERVED_FIELD_1 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=33.0, core=true, t24Name=RESERVED.FIELD.1, mandatory=false)
+        RESERVED_FIELD_10 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=17.0, core=true, t24Name=RESERVED.FIELD.10, mandatory=false)
+        RESERVED_FIELD_11 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=13.0, core=true, t24Name=RESERVED.FIELD.11, mandatory=false)
+        RESERVED_FIELD_12 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=12.0, core=true, t24Name=RESERVED.FIELD.12, mandatory=false)
+        RESERVED_FIELD_2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=32.0, core=true, t24Name=RESERVED.FIELD.2, mandatory=false)
+        RESERVED_FIELD_3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=31.0, core=true, t24Name=RESERVED.FIELD.3, mandatory=false)
+        RESERVED_FIELD_4 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=30.0, core=true, t24Name=RESERVED.FIELD.4, mandatory=false)
+        RESERVED_FIELD_5 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=29.0, core=true, t24Name=RESERVED.FIELD.5, mandatory=false)
+        RESERVED_FIELD_6 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=28.0, core=true, t24Name=RESERVED.FIELD.6, mandatory=false)
+        RESERVED_FIELD_7 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=20.0, core=true, t24Name=RESERVED.FIELD.7, mandatory=false)
+        RESERVED_FIELD_8 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=19.0, core=true, t24Name=RESERVED.FIELD.8, mandatory=false)
+        RESERVED_FIELD_9 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=18.0, core=true, t24Name=RESERVED.FIELD.9, mandatory=false)
+        VERSION : T24BusinessTypes:ANY
+            @i18n:Label (en=Version)
+            @t24:i (align=L, inputBehaviour=N, maxLength=5, sysNumber=27.0, core=true, t24Name=VERSION, mandatory=true)
+    }
+    OA_APPLICATION_STATUS_DEFINITION__APPLICATION_STATUS
+    {
+        APPLICATION_PERIOD : T24BusinessTypes:PERIOD
+            @t24:i (align=L, inputBehaviour=I, maxLength=10, sysNumber=6.0, core=true, t24Name=APPLICATION.PERIOD, mandatory=false)
+        APPLICATION_STATUS -> OA_Status:OA_APPLICATION_USER_STATUS
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=3.0, core=true, businessType=A, t24Name=APPLICATION.STATUS, mandatory=false)
+        LINKED_USER_STATUS -> OA_Status:OA_APPLICATION_USER_STATUS
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=9.0, core=true, businessType=A, t24Name=LINKED.USER.STATUS, mandatory=false)
+        RESERVED_FIELD_14 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=8.0, core=true, t24Name=RESERVED.FIELD.14, mandatory=false)
+        RESERVED_FIELD_15 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=7.0, core=true, t24Name=RESERVED.FIELD.15, mandatory=false)
+        RESERVED_FIELD_16 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=5.0, core=true, t24Name=RESERVED.FIELD.16, mandatory=false)
+        RESERVED_FIELD_17 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=4.0, core=true, t24Name=RESERVED.FIELD.17, mandatory=false)
+    }
+    OA_APPLICATION_STATUS_DEFINITION__APP_STATUS_END_POINT
+    {
+        APP_STATUS_END_POINT -> OA_Status:OA_APPLICATION_USER_STATUS
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=10.0, core=true, businessType=A, t24Name=APP.STATUS.END.POINT, mandatory=false)
+        ARCHIVAL_OPTION : OA_Status:OA_APPLICATION_STATUS_DEFINITION__APP_STATUS_END_POINT__ARCHIVAL_OPTION
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=11.0, core=true, t24Name=ARCHIVAL.OPTION, mandatory=false)
+    }
+    OA_APPLICATION_STATUS_DEFINITION__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=39.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    OA_APPLICATION_STATUS_DEFINITION__DESCRIPTION
+    {
+        DESCRIPTION : T24BusinessTypes:A required
+            @i18n:Label (en=Description)
+            @i18n:Tooltip (en=Description)
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, multiLanguage=true, sysNumber=1.0, core=true, t24Name=DESCRIPTION, mandatory=true)
+    }
+    OA_APPLICATION_STATUS_DEFINITION__DORM_STATUS_END_POINT
+    {
+        DORM_STATUS_END_POINT : OA_Status:OA_APPLICATION_STATUS_DEFINITION__DORM_STATUS_END_POINT__DORM_STATUS_END_POINT
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=16.0, core=true, t24Name=DORM.STATUS.END.POINT, mandatory=false)
+    }
+    OA_APPLICATION_STATUS_DEFINITION__FULL_DESCRIPTION
+    {
+        FULL_DESCRIPTION : T24BusinessTypes:TEXT required
+            @t24:i (align=L, inputBehaviour=I, maxLength=100, sysNumber=2.0, core=true, t24Name=FULL.DESCRIPTION, mandatory=true)
+    }
+    OA_APPLICATION_STATUS_DEFINITION__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=38.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    OA_APPLICATION_STATUS_DEFINITION__OVERRIDE
+    {
+        OVERRIDE : T24BusinessTypes:N
+            @i18n:Label (en=Override)
+            @i18n:Tooltip (en="Overrides generated by this transaction")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=35.0, core=true, t24Name=OVERRIDE, mandatory=false)
+    }
+    OA_APPLICATION_STATUS_DEFINITION__PUBLISH_ERROR
+    {
+        ERROR_SUGGESTION : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=25.0, core=true, t24Name=ERROR.SUGGESTION, mandatory=false)
+        PUBLISH_ERROR : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=24.0, core=true, t24Name=PUBLISH.ERROR, mandatory=false)
+    }
+    OA_APPLICATION_STATUS__ADVICE_TYPE
+    {
+        ADVICE_REFERENCE -> byValue OA_Status:OA_APPLICATION_STATUS__ADVICE_TYPE__ADVICE_REFERENCE *
+            @t24:i (t24Name=ADVICE.REFERENCE)
+        /* This field stores the ADVICE.TYPE for which the advices are generated */
+        ADVICE_TYPE -> AA_Advice:AA_ADVICE_TYPE
+            @i18n:Label (en="Advice Type")
+            @i18n:Tooltip (en="Denotes the type of the advice")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=43.0, core=true, businessType=ANY, t24Name=ADVICE.TYPE, mandatory=false)
+    }
+    OA_APPLICATION_STATUS__ADVICE_TYPE__ADVICE_REFERENCE
+    {
+        /* This field holds the Advice reference generated for the respective Advice type. Reference updated from AA.GENERATE.ADVICE table */
+        ADVICE_REFERENCE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=44.0, core=true, t24Name=ADVICE.REFERENCE, mandatory=false)
+    }
+    OA_APPLICATION_STATUS__DATA_MODEL_CATEGORY
+    {
+/* Conditionally available when the DATA.MODEL.CATEGORY is TEMENOS.CORE.
+Table Name from the TARGET of PW.ACTIVITY */
+        DATA : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=41.0, core=true, t24Name=DATA, mandatory=false)
+/* NA.QUESTIONNAIRE.TYPE for Needs Analysis
+PW.ACTIVITY for Temenos Core
+AA.QUOTATION.TYPE for Quotation */
+        DATA_MODEL : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=40.0, core=true, t24Name=DATA.MODEL, mandatory=false)
+/* A data object reference can be stored for any of the following types:
+NEEDS.ANALYSIS
+TEMENOS.CORE
+QUOTATION */
+        DATA_MODEL_CATEGORY : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=39.0, core=true, t24Name=DATA.MODEL.CATEGORY, mandatory=false)
+        DATA_REFERENCE -> byValue OA_Status:OA_APPLICATION_STATUS__DATA_MODEL_CATEGORY__DATA_REFERENCE *
+            @t24:i (t24Name=DATA.REFERENCE)
+    }
+    OA_APPLICATION_STATUS__DATA_MODEL_CATEGORY__DATA_REFERENCE
+    {
+/* The ID of the source:
+NA.QUESTIONNAIRE for Needs Analysis
+Table Record ID for TEMENOS.CORE AA.QUOTATION.REQUEST for a Quotation */
+        DATA_REFERENCE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=42.0, core=true, t24Name=DATA.REFERENCE, mandatory=false)
+    }
+    OA_APPLICATION_STATUS__DECISION_TYPE
+    {
+        DECISION_METHOD -> byValue OA_Status:OA_APPLICATION_STATUS__DECISION_TYPE__DECISION_METHOD *
+            @t24:i (t24Name=DECISION.METHOD)
+        /* Field to store the list of decision types that have been involved in this Application-purpose. Only when the OA.DECISION table is invoked, system would update this field. */
+        DECISION_TYPE -> OA_Decision:OA_DECISION_TYPE
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=51.0, core=true, businessType=A, t24Name=DECISION.TYPE, mandatory=false)
+    }
+    OA_APPLICATION_STATUS__DECISION_TYPE__DECISION_METHOD
+    {
+        /* Field to store the decision method which is responsible for the final decision result. Holds the evaluated decision body or AUTO for auto decision */
+        DECISION_METHOD : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=52.0, core=true, t24Name=DECISION.METHOD, mandatory=false)
+        /* Based on what is allowed for the decision type, this field holds the decision that has been arrived at, for the each Decision Reference stored in data reference field. */
+        DECISION_RESULT : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=53.0, core=true, t24Name=DECISION.RESULT, mandatory=false)
+    }
+    OA_APPLICATION_STATUS__FORM_REFERENCE
+    {
+        /* This field will hold the domain type to which the object belongs. ID referred from table OA.DOMAIN.TYPE */
+        DOMAIN_TYPE -> OA_Framework:OA_DOMAIN_TYPE
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=7.0, core=true, businessType=A, t24Name=DOMAIN.TYPE, mandatory=false)
+        EVIDENCE_REQUIREMENT -> byValue OA_Status:OA_APPLICATION_STATUS__FORM_REFERENCE__EVIDENCE_REQUIREMENT *
+            @t24:i (t24Name=EVIDENCE.REQUIREMENT)
+        FORMLET -> byValue OA_Status:OA_APPLICATION_STATUS__FORM_REFERENCE__FORMLET *
+            @t24:i (t24Name=FORMLET)
+        /* This field will specify the overall status of the Current form. */
+        FORM_DATA_STATUS : OA_Status:OA_APPLICATION_STATUS__FORM_REFERENCE__FORM_DATA_STATUS
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=11.0, core=true, t24Name=FORM.DATA.STATUS, mandatory=false)
+        /* This field will specify the overall evidence status of the current formlet, If formlet condition is defined with evidence requirements */
+        FORM_EVIDENCE_STATUS : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=12.0, core=true, t24Name=FORM.EVIDENCE.STATUS, mandatory=false)
+        /* The ID of the form (OA.FORM) */
+        FORM_ID -> OA_Framework:OA_FORM
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=10.0, core=true, businessType=A, t24Name=FORM.ID, mandatory=false)
+        FORM_OWNER -> byValue OA_Status:OA_APPLICATION_STATUS__FORM_REFERENCE__FORM_OWNER *
+            @t24:i (t24Name=FORM.OWNER)
+        /* This field specifies the reference of the OA.APPLICATION.FORM, which is created when authorising the OA.APPLICATION */
+        FORM_REFERENCE -> OA_Framework:OA_APPLICATION_FORM
+            @t24:i (align=L, inputBehaviour=I, maxLength=100, sysNumber=6.0, core=true, businessType=A, t24Name=FORM.REFERENCE, mandatory=false)
+/* This field specifies the overall Verification status of the Form.
+It will be the least status of all the Formlet Verification status belonging to the form */
+        FORM_VERIFICATION_STATUS : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=100, sysNumber=13.0, core=true, t24Name=FORM.VERIFICATION.STATUS, mandatory=false)
+        RESERVED_10 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=14.0, core=true, t24Name=RESERVED.10, mandatory=false)
+        RESERVED_6 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=18.0, core=true, t24Name=RESERVED.6, mandatory=false)
+        RESERVED_7 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=17.0, core=true, t24Name=RESERVED.7, mandatory=false)
+        RESERVED_8 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=16.0, core=true, t24Name=RESERVED.8, mandatory=false)
+        RESERVED_9 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=15.0, core=true, t24Name=RESERVED.9, mandatory=false)
+        /* This field will specify the customer role of the current party of the Form. */
+        ROLE -> OA_Framework:OA_ROLE
+            @i18n:Label (en=Role)
+            @i18n:Tooltip (en="Roles are user defined and specified in EB.LOOKUP")
+            @t24:i (align=L, inputBehaviour=I, maxLength=30, sysNumber=8.0, core=true, businessType=ANY, t24Name=ROLE, mandatory=false)
+        /* For an application that has multiples of a Domain Type or Role combination a number is needed to distinguish between them. */
+        SEQUENCE : T24BusinessTypes:A
+            @i18n:Label (en=Sequence)
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=9.0, core=true, t24Name=SEQUENCE, mandatory=false)
+    }
+    OA_APPLICATION_STATUS__FORM_REFERENCE__EVIDENCE_REQUIREMENT
+    {
+        /* This field will hold the EV.EVIDENCE.REQUIREMENT id. It is associative sub value field along with EVIDENCE.REQ.STATUS. All the evidence requirements defined for the current formlet will be updated here. */
+        EVIDENCE_REQUIREMENT -> EV_Framework:EV_EVIDENCE_REQUIREMENT
+            @t24:i (align=L, inputBehaviour=I, maxLength=100, sysNumber=35.0, core=true, businessType=A, t24Name=EVIDENCE.REQUIREMENT, mandatory=false)
+        /* The current status of the evidence requirement from the EV.EVIDENCE.REQUIREMENT.STATUS will be mirrored in this field. */
+        EVIDENCE_REQ_STATUS : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=36.0, core=true, t24Name=EVIDENCE.REQ.STATUS, mandatory=false)
+    }
+    OA_APPLICATION_STATUS__FORM_REFERENCE__FORMLET
+    {
+        /* This field will specify the reference of the OA.DATA.VERIFICATION record. It will get updated while submitting the application form. */
+        DATA_VERIFICATION_REF -> OA_Status:OA_DATA_VERIFICATION
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=30.0, core=true, businessType=ANY, t24Name=DATA.VERIFICATION.REF, mandatory=false)
+        /* This field specifies the ID of the Formet. Lets update both formlet and Formlet class even if class is not defined as multiple type. */
+        FORMLET -> OA_Framework:OA_FORMLET
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=23.0, core=true, businessType=A, t24Name=FORMLET, mandatory=false)
+/* This field would indicate whether Formlet is mandatory or Optional to complete before submitting the form.
+All the formlets which are defined as mandatory at OA.DOMAIN.TYPE level would be flagged as MANDATORY in this field. The formlets which are become mandatory because of the Conditional formlets Rule definition also would flag as MANDATORY once the Rule has been satisfied.
+The optional formlets would have the null value.  The system will not allow the user to submit the form until all MANDATORY formlets are recorded and complete status. */
+        FORMLET_ATTRIBUTE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=31.0, core=true, t24Name=FORMLET.ATTRIBUTE, mandatory=false)
+        /* This field specifies the ID of each Formlet Class which comprises a Form. */
+        FORMLET_CLASS -> OA_Framework:OA_FORMLET_CLASS
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=24.0, core=true, businessType=A, t24Name=FORMLET.CLASS, mandatory=false)
+        /* Evidence status of the formlet. If formlet has multiple evidences requirements, then worst evidence requirement status would be stored in this field. */
+        FORMLET_EVIDENCE_STATUS : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=27.0, core=true, t24Name=FORMLET.EVIDENCE.STATUS, mandatory=false)
+        /* This field specifies the owner of the formlet. */
+        FORMLET_OWNER -> OA_Framework:OA_ROLE
+            @t24:i (align=L, inputBehaviour=I, maxLength=30, sysNumber=26.0, core=true, businessType=ANY, t24Name=FORMLET.OWNER, mandatory=false)
+        /* It is record id of OA.APP.XXXX application of current formlet condition. */
+        FORMLET_RECORD_ID : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=100, sysNumber=25.0, core=true, t24Name=FORMLET.RECORD.ID, mandatory=false)
+/* The list of Status of the Formlet record are
+INCOMPLETE
+COMPLETE.NOT.VERIFIED
+COMPLETE */
+        FORMLET_STATUS : OA_Status:OA_APPLICATION_STATUS__FORM_REFERENCE__FORMLET__FORMLET_STATUS
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=29.0, core=true, t24Name=FORMLET.STATUS, mandatory=false)
+        /* This field holds the verification status from the application OA.DATA.VERIFICATION. */
+        FORMLET_VERIFICATION : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=100, sysNumber=28.0, core=true, t24Name=FORMLET.VERIFICATION, mandatory=false)
+        RESERVED_1 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=34.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=33.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=32.0, core=true, t24Name=RESERVED.3, mandatory=false)
+    }
+    OA_APPLICATION_STATUS__FORM_REFERENCE__FORM_OWNER
+    {
+        /* This field specifies the owner of form as well as Formlet owners. */
+        FORM_OWNER -> OA_Framework:OA_ROLE
+            @t24:i (align=L, inputBehaviour=I, maxLength=30, sysNumber=19.0, core=true, businessType=ANY, t24Name=FORM.OWNER, mandatory=false)
+/* This field specifies the overall form status of an owner.
+It will be the least status of all the Formlet status belonging to an owner. */
+        FORM_OWNER_DATA_STATUS : OA_Status:OA_APPLICATION_STATUS__FORM_REFERENCE__FORM_OWNER__FORM_OWNER_DATA_STATUS
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=20.0, core=true, t24Name=FORM.OWNER.DATA.STATUS, mandatory=false)
+/* This field specifies the overall evidence status of a Form owner.
+It will be the least status of all the Formlet evidence status belonging to an owner. */
+        FORM_OWNER_EVIDENCE_STATUS : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=21.0, core=true, t24Name=FORM.OWNER.EVIDENCE.STATUS, mandatory=false)
+/* This field specifies the overall Verification status of a Form owner.
+It will be the least status of all the Formlet Verification status belonging to an owner. */
+        FORM_OWNER_VERIFICATION : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=100, sysNumber=22.0, core=true, t24Name=FORM.OWNER.VERIFICATION, mandatory=false)
+    }
+    OA_APPLICATION_STATUS__FULFILMENT_TYPE
+    {
+        FULFILMENT_MAP_REFERENCE -> byValue OA_Status:OA_APPLICATION_STATUS__FULFILMENT_TYPE__FULFILMENT_MAP_REFERENCE *
+            @t24:i (t24Name=FULFILMENT.MAP.REFERENCE)
+/* This field indicates the fulfilment type that has been used for this purpose
+Input has corresponding values in AA.FULFILMENT.TYPE table */
+        FULFILMENT_TYPE -> AA_Mapping:AA_FULFILMENT_TYPE
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=45.0, core=true, businessType=A, t24Name=FULFILMENT.TYPE, mandatory=false)
+/* This field indicates the version of the fulfilment type that has been used for this Application-Purpose combination
+System maintained */
+        FULFILMENT_VERSION : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=5, sysNumber=46.0, core=true, t24Name=FULFILMENT.VERSION, mandatory=false)
+    }
+    OA_APPLICATION_STATUS__FULFILMENT_TYPE__FULFILMENT_MAP_REFERENCE
+    {
+/* Reference of the AA.MAPPING.REQUEST which was used to create the associated Fulfilment type above
+Input has corresponding values in AA.MAPPING.REQUEST table */
+        FULFILMENT_MAP_REFERENCE -> AA_Mapping:AA_MAPPING_REQUEST
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=47.0, core=true, businessType=ANY, t24Name=FULFILMENT.MAP.REFERENCE, mandatory=false)
+/* The application which was used to create the fulfilment request - like LIMIT, AA.ARRANGEMENT.ACTIVITY etc.
+Input has corresponding values in PGM.FILE table */
+        TARGET_APPLICATION -> EB_SystemTables:PGM_FILE
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=48.0, core=true, businessType=A, t24Name=TARGET.APPLICATION, mandatory=false)
+/* The Target application reference - like the AAAACTXXXXXXX etc.
+the value corresponds tp a correct reference for the associated Target Application above */
+        TARGET_REFERENCE : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=49.0, core=true, t24Name=TARGET.REFERENCE, mandatory=false)
+        /* It will hold the Final result of the Fulfilment type. Can be Failure/Success. */
+        TARGET_RESULT : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=50.0, core=true, t24Name=TARGET.RESULT, mandatory=false)
+    }
+    OA_APPLICATION_STATUS__MAPPING_LOG_REF
+    {
+        /* This field specifies the mapping log reference. */
+        MAPPING_LOG_REF : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=54.0, core=true, t24Name=MAPPING.LOG.REF, mandatory=false)
+        /* This field specifies the status of Mapping log reference specified. */
+        MAPPING_LOG_STATUS : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=55.0, core=true, t24Name=MAPPING.LOG.STATUS, mandatory=false)
+    }
+    OA_APPLICATION_STATUS__STATUS_CODE
+    {
+        /* These status codes would update when authorizing the OA.APPLICATION record. These are user defined Status codes defined in OA.APPLICATION.DEFINITION record STATUS.CODE field, valid EB.LOOKUP value from OA.STATUS.CODES. */
+        STATUS_CODE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=4.0, core=true, t24Name=STATUS.CODE, mandatory=false)
+        /* Status rule for the respective status code is evaluated and the outcome defined in OA.STATUS.RULES table is updated in this field. */
+        STATUS_VALUE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=5.0, core=true, t24Name=STATUS.VALUE, mandatory=false)
+    }
+    OA_APPLICATION_USER_STATUS
+        @i18n:Description (en="")
+        @t24:i (t24Name=OA.APPLICATION.USER.STATUS, level=I, type=H, allowedFunctions="A C D E H I L P Q R S", localRefAllowed=false)
+    {
+        APPLICATION_USER_STATUS_ID -> OA_Status:OA_APPLICATION_USER_STATUS PK required
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=0.0, core=true, businessType=A, t24Name=APPLICATION.USER.STATUS.ID, mandatory=true)
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=15.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=16.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=12.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=13.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=9.0, core=true, t24Name=CURR.NO, mandatory=false)
+        DATE_TIME -> byValue OA_Status:OA_APPLICATION_USER_STATUS__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=14.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        DESCRIPTION -> byValue OA_Status:OA_APPLICATION_USER_STATUS__DESCRIPTION *
+            @t24:i (t24Name=DESCRIPTION)
+        FULL_DESCRIPTION -> byValue OA_Status:OA_APPLICATION_USER_STATUS__FULL_DESCRIPTION *
+            @t24:i (t24Name=FULL.DESCRIPTION)
+        INPUTTER -> byValue OA_Status:OA_APPLICATION_USER_STATUS__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=8.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        RESERVED_FIELD_1 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=7.0, core=true, t24Name=RESERVED.FIELD.1, mandatory=false)
+        RESERVED_FIELD_2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=6.0, core=true, t24Name=RESERVED.FIELD.2, mandatory=false)
+        RESERVED_FIELD_3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=5.0, core=true, t24Name=RESERVED.FIELD.3, mandatory=false)
+        RESERVED_FIELD_4 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=4.0, core=true, t24Name=RESERVED.FIELD.4, mandatory=false)
+        RESERVED_FIELD_5 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=3.0, core=true, t24Name=RESERVED.FIELD.5, mandatory=false)
+    }
+    OA_APPLICATION_USER_STATUS__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=11.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    OA_APPLICATION_USER_STATUS__DESCRIPTION
+    {
+        DESCRIPTION : T24BusinessTypes:A required
+            @i18n:Label (en=Description)
+            @i18n:Tooltip (en=Description)
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, multiLanguage=true, sysNumber=1.0, core=true, t24Name=DESCRIPTION, mandatory=true)
+    }
+    OA_APPLICATION_USER_STATUS__FULL_DESCRIPTION
+    {
+        FULL_DESCRIPTION : T24BusinessTypes:TEXT required
+            @t24:i (align=L, inputBehaviour=I, maxLength=100, sysNumber=2.0, core=true, t24Name=FULL.DESCRIPTION, mandatory=true)
+    }
+    OA_APPLICATION_USER_STATUS__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=10.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    /* This table will store the conditional evidence definitions (list of initiation formlet names and status codes) which is related to the OA.APPLICATION. */
+    OA_CONDITIONAL_EVIDENCE_DETAILS
+        @i18n:Description (en="")
+        @t24:i (t24Name=OA.CONDITIONAL.EVIDENCE.DETAILS, level=I, type=L, allowedFunctions="L S", localRefAllowed=false)
+    {
+        /* The ID of OA.APPLICATION for which the verification rules are defined at formlet level. */
+        CONDITIONAL_EVIDENCE_DETAILS_ID -> OA_Status:OA_CONDITIONAL_EVIDENCE_DETAILS PK required
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=0.0, core=true, businessType=A, t24Name=CONDITIONAL.EVIDENCE.DETAILS.ID, mandatory=true)
+        FORM -> byValue OA_Status:OA_CONDITIONAL_EVIDENCE_DETAILS__FORM *
+            @t24:i (t24Name=FORM)
+        RESERVED_1 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=9.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=8.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=7.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=6.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        RESERVED_5 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=5.0, core=true, t24Name=RESERVED.5, mandatory=false)
+    }
+    OA_CONDITIONAL_EVIDENCE_DETAILS__FORM
+    {
+        /* Holds the form ids to which the initiation formlets and status codes belong to. */
+        FORM -> OA_Framework:OA_FORM
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=1.0, core=true, businessType=A, t24Name=FORM, mandatory=false)
+        FORMLET -> byValue OA_Status:OA_CONDITIONAL_EVIDENCE_DETAILS__FORM__FORMLET *
+            @t24:i (t24Name=FORMLET)
+        STATUS_CODES -> byValue OA_Status:OA_CONDITIONAL_EVIDENCE_DETAILS__FORM__STATUS_CODES *
+            @t24:i (t24Name=STATUS.CODES)
+    }
+    OA_CONDITIONAL_EVIDENCE_DETAILS__FORM__FORMLET
+    {
+        /* Holds the list of initiation formlets in which evidence requirements and verification rules are defined. During run time when ever this formlet is updated,verification rule will be triggered which will decide the Conditional Evidences */
+        FORMLET -> OA_Framework:OA_FORMLET
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=2.0, core=true, businessType=A, t24Name=FORMLET, mandatory=false)
+    }
+    OA_CONDITIONAL_EVIDENCE_DETAILS__FORM__STATUS_CODES
+    {
+/* "It will hold the list of formlets which will get effected due the associated status code. List of formlets would be separated by ##.
+Eg. If the same verification rule (Assume Rule is IS.FOREIGN.APPLICANT== 'TRUE') is attatched to 2 formlets(Assume WORK.ADDRESS and PROPERTY.ADDRESS) in a form, then this field will be updated as WORK.ADDRESS##PROPERTY.ADDRESS" */
+        ASSOC_FORMLET : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=100, sysNumber=4.0, core=true, t24Name=ASSOC.FORMLET, mandatory=false)
+        /* Holds the list of initiation status codes defined in verification rules attached to the forms for the current purpose.During run time when ever this status code is updated, Verification Rule Evaluation will be triggered which will decide the Conditional Evidences */
+        STATUS_CODES : OA_Status:OA_CONDITIONAL_EVIDENCE_DETAILS__FORM__STATUS_CODES__STATUS_CODES
+            @i18n:Label (en="Status Codes")
+            @i18n:Tooltip (en="Status Codes")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=3.0, core=true, t24Name=STATUS.CODES, mandatory=false)
+    }
+    /* This table will store the conditional formlet definitions (list of initiation formlet names and status codes) which is related to the current purpose. */
+    OA_CONDITIONAL_FORMLET_DETAILS
+        @i18n:Description (en="")
+        @t24:i (t24Name=OA.CONDITIONAL.FORMLET.DETAILS, level=I, type=L, allowedFunctions="L S", localRefAllowed=false)
+    {
+        /* The ID of OA.APPLICATION.DEFINTIION for which form rules are defined */
+        CONDITIONAL_FORMLET_DETAILS_ID -> OA_Status:OA_CONDITIONAL_FORMLET_DETAILS PK required
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=0.0, core=true, businessType=A, t24Name=CONDITIONAL.FORMLET.DETAILS.ID, mandatory=true)
+        FORM -> byValue OA_Status:OA_CONDITIONAL_FORMLET_DETAILS__FORM *
+            @t24:i (t24Name=FORM)
+        RESERVED_1 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=8.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=7.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=6.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=5.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        RESERVED_5 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=4.0, core=true, t24Name=RESERVED.5, mandatory=false)
+    }
+    OA_CONDITIONAL_FORMLET_DETAILS__FORM
+    {
+        /* This field will indicate the FORM to which the initiation formlets and status codes belong to. */
+        FORM -> OA_Framework:OA_FORM
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=1.0, core=true, businessType=A, t24Name=FORM, mandatory=false)
+        FORMLET -> byValue OA_Status:OA_CONDITIONAL_FORMLET_DETAILS__FORM__FORMLET *
+            @t24:i (t24Name=FORMLET)
+        STATUS_CODES -> byValue OA_Status:OA_CONDITIONAL_FORMLET_DETAILS__FORM__STATUS_CODES *
+            @t24:i (t24Name=STATUS.CODES)
+    }
+    OA_CONDITIONAL_FORMLET_DETAILS__FORM__FORMLET
+    {
+        /* This field will indicate the list of initiation formlets defined in Form Rule Definition attached to the forms for the current purpose. During run time when ever this formlet is updated, Form Rule Evaluation will be triggered  which will decide the Conditional formlets. */
+        FORMLET -> OA_Framework:OA_FORMLET
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=2.0, core=true, businessType=A, t24Name=FORMLET, mandatory=false)
+    }
+    OA_CONDITIONAL_FORMLET_DETAILS__FORM__STATUS_CODES
+    {
+        /* This field will indicate the list of initiation status codes defined in Form Rule Definition attached to the forms for the current purpose.During run time when ever this status code is updated, Form Rule Evaluation will be triggered  which will decide the Conditional formlets. */
+        STATUS_CODES : OA_Status:OA_CONDITIONAL_FORMLET_DETAILS__FORM__STATUS_CODES__STATUS_CODES
+            @i18n:Label (en="Status Codes")
+            @i18n:Tooltip (en="Status Codes")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=3.0, core=true, t24Name=STATUS.CODES, mandatory=false)
+    }
+/* Verify data with Evidence
+The ID of the record will be made up of 6 parts:               Application ID-Domain Type-Role-Number-Form-Formlet
+The first 4 parts result in a unique Domain while the Form and Formlet are necessary to cater for the possibility of multiple purposes and multiple forms for a single domain. */
+    OA_DATA_VERIFICATION
+        @i18n:Description (en="")
+        @t24:i (t24Name=OA.DATA.VERIFICATION, nonStop=true, level=I, type=H, allowedFunctions="A C D E I L Q R S", localRefApplicationSysNo=29.0, localRefAllowed=true)
+    {
+/* This field defines the activity to be processed against the data verification.
+1. Input in this field should be valid record under AA.CLASS.TYPE.ACTIVITY.CLASS application.
+2. Input is mandatory in this field to commit the data verification transaction. */
+        ACTIVITY -> AA_ClassFramework:AA_CLASS_TYPE_ACTIVITY required
+            @i18n:Label (en=Activity)
+            @t24:i (align=L, inputBehaviour=I, maxLength=60, sysNumber=2.0, core=true, businessType=A, t24Name=ACTIVITY, mandatory=true)
+        /* It is system populated and no change field. It specify the application id of the current data verification. It should be a valid record under OA.APPLICATION.  This field value will be used to construct the Formlet Record id to verify the data. */
+        APPLICATION -> OA_Framework:OA_APPLICATION
+            @i18n:Label (en=Application)
+            @t24:i (align=L, inputBehaviour=F, maxLength=35, sysNumber=21.0, core=true, businessType=A, t24Name=APPLICATION, mandatory=false)
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=38.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=39.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=35.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=36.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=32.0, core=true, t24Name=CURR.NO, mandatory=false)
+        /* The record ID of OA.DATA.VERIFICATION. */
+        DATA_VERIFICATION -> OA_Status:OA_DATA_VERIFICATION PK required
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=0.0, core=true, businessType=A, t24Name=DATA.VERIFICATION, mandatory=true)
+        DATE_TIME -> byValue OA_Status:OA_DATA_VERIFICATION__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=37.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        /* It is system populated and no change field. It specify the name of the domain type, which belongs to the form. It should be a valid record under OA.DOMAIN.TYPE.  This field value will be used to construct the Formlet Record id to verify the data. */
+        DOMAIN_TYPE -> OA_Framework:OA_DOMAIN_TYPE
+            @t24:i (align=L, inputBehaviour=F, maxLength=35, sysNumber=22.0, core=true, businessType=A, t24Name=DOMAIN.TYPE, mandatory=false)
+        EVIDENCE_REQUIREMENT -> byValue OA_Status:OA_DATA_VERIFICATION__EVIDENCE_REQUIREMENT *
+            @t24:i (t24Name=EVIDENCE.REQUIREMENT)
+        /* It is system populated and no change field. It specifies the name of the form. It should be a valid record under OA.FORM application. */
+        FORM -> OA_Framework:OA_FORM
+            @t24:i (align=L, inputBehaviour=F, maxLength=35, sysNumber=25.0, core=true, businessType=A, t24Name=FORM, mandatory=false)
+/* It is system populated and no change field. It specify the name of the formlet which requires the data verification. It should be a valid record under OA.FORMLET application.
+This input will be used to construct the formlet record key. */
+        FORMLET -> OA_Framework:OA_FORMLET
+            @t24:i (align=L, inputBehaviour=F, maxLength=35, sysNumber=26.0, core=true, businessType=A, t24Name=FORMLET, mandatory=false)
+        INPUTTER -> byValue OA_Status:OA_DATA_VERIFICATION__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        OVERRIDE -> byValue OA_Status:OA_DATA_VERIFICATION__OVERRIDE *
+            @t24:i (t24Name=OVERRIDE)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=31.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        RESERVED_1 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=28.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_12 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=4.0, core=true, t24Name=RESERVED.12, mandatory=false)
+        RESERVED_13 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=3.0, core=true, t24Name=RESERVED.13, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=27.0, core=true, t24Name=RESERVED.2, mandatory=false)
+/* It is system populated and no change field. It specify the Role of the form. It should be a valid record under OA.ROLE.
+This field value will be used to construct the Formlet Record id to verify the data. */
+        ROLE -> OA_Framework:OA_ROLE
+            @i18n:Label (en=Role)
+            @i18n:Tooltip (en="Roles are user defined and specified in EB.LOOKUP")
+            @t24:i (align=L, inputBehaviour=F, maxLength=30, sysNumber=23.0, core=true, businessType=A, t24Name=ROLE, mandatory=false)
+/* It is system populated and no change field. It specify the sequence number of the current FORM.
+This field value will be used to construct the Formlet Record id to verify the data. */
+        SEQUENCE_NO : T24BusinessTypes:RR
+            @t24:i (align=L, inputBehaviour=F, maxLength=5, sysNumber=24.0, core=true, t24Name=SEQUENCE.NO, mandatory=false)
+/* It is a system Calculated field and describes the overall verification status of the formlet. The verification value will be set as PENDING when it is creating first time.  Then it will be calculated by the system based upon the worst status of each of the associated Evidence Requirements.
+Allowed values are PENDING, VERIFIED or NOT.VERIFIED */
+        VERIFICATION : OA_Status:OA_DATA_VERIFICATION__VERIFICATION
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=1.0, core=true, t24Name=VERIFICATION, mandatory=false)
+    }
+    OA_DATA_VERIFICATION__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=34.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    OA_DATA_VERIFICATION__EVIDENCE_REQUIREMENT
+    {
+        COMMENTS -> byValue OA_Status:OA_DATA_VERIFICATION__EVIDENCE_REQUIREMENT__COMMENTS *
+            @t24:i (t24Name=COMMENTS)
+/* It is a NOINPUT field updated by system. Contains evidence requirement defined for the formlet.
+It is an associative multi value set along with EVIDENCE.REQ.STATUS, EVIDENCE.TYPE, EVIDENCE.ID, EVIDENCE.USED, FIELD.TO.VERIFY, FIELD.VALUE, VERIFIED and COMMENTS */
+        EVIDENCE_REQUIREMENT -> EV_Framework:EV_EVIDENCE_REQUIREMENT
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=5.0, core=true, businessType=A, t24Name=EVIDENCE.REQUIREMENT, mandatory=false)
+        /* It is a NOINPUT field updated by system. This field reflects the status of Evidence requirement from table EV.EVIDENCE.REQUIREMENT.STATUS. */
+        EVIDENCE_REQ_STATUS : OA_Status:OA_DATA_VERIFICATION__EVIDENCE_REQUIREMENT__EVIDENCE_REQ_STATUS
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=6.0, core=true, t24Name=EVIDENCE.REQ.STATUS, mandatory=false)
+        EVIDENCE_TYPE -> byValue OA_Status:OA_DATA_VERIFICATION__EVIDENCE_REQUIREMENT__EVIDENCE_TYPE *
+            @t24:i (t24Name=EVIDENCE.TYPE)
+        FIELD_TO_VERIFY -> byValue OA_Status:OA_DATA_VERIFICATION__EVIDENCE_REQUIREMENT__FIELD_TO_VERIFY *
+            @t24:i (t24Name=FIELD.TO.VERIFY)
+        RESERVED_10 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=11.0, core=true, t24Name=RESERVED.10, mandatory=false)
+        RESERVED_11 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=10.0, core=true, t24Name=RESERVED.11, mandatory=false)
+        RESERVED_9 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=12.0, core=true, t24Name=RESERVED.9, mandatory=false)
+        VERIFICATION_STATUS -> OA_Status:OA_EVIDENCE_STATUS
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=18.0, core=true, businessType=A, t24Name=VERIFICATION.STATUS, mandatory=false)
+/* It is a user INPUT field. It accepts two values YES or NO.
+If user selects YES indicating that the data has been verified then EVIDENCE.USED must also be updated by the user for the evidence they used in the decision.
+It is mandatory field to commit the record. User should select either YES or NO. */
+        VERIFIED : OA_Status:OA_DATA_VERIFICATION__EVIDENCE_REQUIREMENT__VERIFIED
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=19.0, core=true, t24Name=VERIFIED, mandatory=false)
+    }
+    OA_DATA_VERIFICATION__EVIDENCE_REQUIREMENT__COMMENTS
+    {
+        /* User can input their comments that supporting to their decision either VERIFIED as YES or NO. */
+        COMMENTS : T24BusinessTypes:TEXT
+            @i18n:Label (en=Comments)
+            @i18n:Tooltip (en="Comments if any")
+            @t24:i (align=L, inputBehaviour=I, maxLength=100, sysNumber=20.0, core=true, t24Name=COMMENTS, mandatory=false)
+    }
+    OA_DATA_VERIFICATION__EVIDENCE_REQUIREMENT__EVIDENCE_TYPE
+    {
+/* It is a NOINPUT field updated by system and associative multi value set along with EVIDENCE.TYPE. It will hold the record id of the EV.EVIDENCE record.
+Similar to EVIDENCE.TYPE, these values are also updated from EV.EVIDENCE.REQUIREMENT.STATUS table. */
+        EVIDENCE -> EV_Framework:EV_EVIDENCE
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=8.0, core=true, businessType=A, t24Name=EVIDENCE, mandatory=false)
+        /* It is a NOINPUT field updated by system. This field reflects the evidence type from table EV.EVIDENCE.REQUIREMENT.STATUS. */
+        EVIDENCE_TYPE -> EV_Framework:EV_EVIDENCE_TYPE
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=7.0, core=true, businessType=A, t24Name=EVIDENCE.TYPE, mandatory=false)
+        /* When the EVIDENCE.USED field is set to YES then it is considered that the data is verified using the EVIDENCE.TYPE mentioned in the associated multivalue. */
+        EVIDENCE_USED : OA_Status:OA_DATA_VERIFICATION__EVIDENCE_REQUIREMENT__EVIDENCE_TYPE__EVIDENCE_USED
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=9.0, core=true, t24Name=EVIDENCE.USED, mandatory=false)
+    }
+    OA_DATA_VERIFICATION__EVIDENCE_REQUIREMENT__FIELD_TO_VERIFY
+    {
+        COMPARISON_TYPE : OA_Status:OA_DATA_VERIFICATION__EVIDENCE_REQUIREMENT__FIELD_TO_VERIFY__COMPARISON_TYPE
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=17.0, core=true, t24Name=COMPARISON.TYPE, mandatory=false)
+        EVIDENCE_DATA : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=16.0, core=true, t24Name=EVIDENCE.DATA, mandatory=false)
+        EVIDENCE_SOURCE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=15.0, core=true, t24Name=EVIDENCE.SOURCE, mandatory=false)
+/* It is a NOINPUT field updated by system. Defaulted from the respective formlet condition.
+The multivalued set begins with a name value pair subvalue set to reflect the field name that is to be verified. */
+        FIELD_TO_VERIFY : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=13.0, core=true, t24Name=FIELD.TO.VERIFY, mandatory=false)
+/* It is a NOINPUT field updated by system. Defaulted from the respective formlet condition.
+The multivalued set begins with a name value pair subvalue set to reflect the field value that is to be verified. */
+        FIELD_VALUE : T24BusinessTypes:ANY
+            @i18n:Label (en="Field Value")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=14.0, core=true, t24Name=FIELD.VALUE, mandatory=false)
+    }
+    OA_DATA_VERIFICATION__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=33.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    OA_DATA_VERIFICATION__OVERRIDE
+    {
+        /* Overrides raised for this application will be stored here. */
+        OVERRIDE : T24BusinessTypes:N
+            @i18n:Label (en=Override)
+            @i18n:Tooltip (en="Overrides generated by this transaction")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=30.0, core=true, t24Name=OVERRIDE, mandatory=false)
+    }
+    OA_EVIDENCE_STATUS
+        @i18n:Description (en="")
+        @t24:i (t24Name=OA.EVIDENCE.STATUS, level=I, type=H, allowedFunctions="A C D E I L Q R S", localRefApplicationSysNo=9.0, localRefAllowed=true)
+    {
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=18.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=19.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=15.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=16.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=12.0, core=true, t24Name=CURR.NO, mandatory=false)
+        DATE_TIME -> byValue OA_Status:OA_EVIDENCE_STATUS__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=17.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        DESCRIPTION -> byValue OA_Status:OA_EVIDENCE_STATUS__DESCRIPTION *
+            @t24:i (t24Name=DESCRIPTION)
+        EVIDENCE_STATUS_ID -> OA_Status:OA_EVIDENCE_STATUS PK required
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=0.0, core=true, businessType=A, t24Name=EVIDENCE.STATUS.ID, mandatory=true)
+        FULL_DESCRIPTION -> byValue OA_Status:OA_EVIDENCE_STATUS__FULL_DESCRIPTION *
+            @t24:i (t24Name=FULL.DESCRIPTION)
+        INPUTTER -> byValue OA_Status:OA_EVIDENCE_STATUS__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        OVERRIDE -> byValue OA_Status:OA_EVIDENCE_STATUS__OVERRIDE *
+            @t24:i (t24Name=OVERRIDE)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=11.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        RESERVED_1 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=8.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=7.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=6.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=5.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        RESERVED_5 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=4.0, core=true, t24Name=RESERVED.5, mandatory=false)
+        VERIFIED : OA_Status:OA_EVIDENCE_STATUS__VERIFIED required
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=3.0, core=true, t24Name=VERIFIED, mandatory=true)
+    }
+    OA_EVIDENCE_STATUS__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=14.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    OA_EVIDENCE_STATUS__DESCRIPTION
+    {
+        DESCRIPTION : T24BusinessTypes:A required
+            @i18n:Label (en=Description)
+            @i18n:Tooltip (en=Description)
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, multiLanguage=true, sysNumber=1.0, core=true, t24Name=DESCRIPTION, mandatory=true)
+    }
+    OA_EVIDENCE_STATUS__FULL_DESCRIPTION
+    {
+        FULL_DESCRIPTION : T24BusinessTypes:A required
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=2.0, core=true, t24Name=FULL.DESCRIPTION, isTextarea=true, mandatory=true)
+    }
+    OA_EVIDENCE_STATUS__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=13.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    OA_EVIDENCE_STATUS__OVERRIDE
+    {
+        OVERRIDE : T24BusinessTypes:N
+            @i18n:Label (en=Override)
+            @i18n:Tooltip (en="Overrides generated by this transaction")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=10.0, core=true, t24Name=OVERRIDE, mandatory=false)
+    }
+    /* This table contains the high-level definition of a class of type FORM.RULE.CLASS. This table is maintained by the system, and will be updated when a new definition is created and authorised in AA.CLASS.DEFINITION */
+    OA_FORM_RULE_CLASS
+        @i18n:Description (en="")
+        @t24:i (t24Name=OA.FORM.RULE.CLASS, level=I, type=H, allowedFunctions="A C D E H I L P Q S", localRefApplicationSysNo=14.0, localRefAllowed=true)
+    {
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=23.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=24.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=20.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=21.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=17.0, core=true, t24Name=CURR.NO, mandatory=false)
+        DATE_TIME -> byValue OA_Status:OA_FORM_RULE_CLASS__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=22.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        DESCRIPTION -> byValue OA_Status:OA_FORM_RULE_CLASS__DESCRIPTION *
+            @t24:i (t24Name=DESCRIPTION)
+        /* Class name of type Form Rule class, updated by the system based on the definition in AA.CLASS.DEFINITION. */
+        FORM_RULE_CLASS -> OA_Status:OA_FORM_RULE_CLASS PK required
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=0.0, core=true, businessType=A, t24Name=FORM.RULE.CLASS, mandatory=true)
+        FULL_DESC -> byValue OA_Status:OA_FORM_RULE_CLASS__FULL_DESC *
+            @t24:i (t24Name=FULL.DESC)
+        INPUTTER -> byValue OA_Status:OA_FORM_RULE_CLASS__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        K_TYPE -> byValue OA_Status:OA_FORM_RULE_CLASS__K_TYPE *
+            @t24:i (t24Name=K.TYPE)
+        OVERRIDE -> byValue OA_Status:OA_FORM_RULE_CLASS__OVERRIDE *
+            @t24:i (t24Name=OVERRIDE)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=16.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        RESERVED_1 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=13.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_10 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=4.0, core=true, t24Name=RESERVED.10, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=12.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=11.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=10.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        RESERVED_5 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=9.0, core=true, t24Name=RESERVED.5, mandatory=false)
+        RESERVED_6 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=8.0, core=true, t24Name=RESERVED.6, mandatory=false)
+        RESERVED_7 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=7.0, core=true, t24Name=RESERVED.7, mandatory=false)
+        RESERVED_8 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=6.0, core=true, t24Name=RESERVED.8, mandatory=false)
+        RESERVED_9 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=5.0, core=true, t24Name=RESERVED.9, mandatory=false)
+        TYPE -> byValue OA_Status:OA_FORM_RULE_CLASS__TYPE *
+            @t24:i (t24Name=TYPE)
+    }
+    OA_FORM_RULE_CLASS__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=19.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    OA_FORM_RULE_CLASS__DESCRIPTION
+    {
+        /* Short description of the class, updated from AA.CLASS.DEFINITION. Used for enrichment when this table is used as vetting table */
+        DESCRIPTION : T24BusinessTypes:A required
+            @i18n:Label (en=Description)
+            @i18n:Tooltip (en=Description)
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, multiLanguage=true, sysNumber=1.0, core=true, t24Name=DESCRIPTION, mandatory=true)
+    }
+    OA_FORM_RULE_CLASS__FULL_DESC
+    {
+        /* Full description of the class, updated from AA.CLASS.DEFINITION */
+        FULL_DESC : T24BusinessTypes:A required
+            @i18n:Label (en="Full Description")
+            @i18n:Tooltip (en="Detailed Description ")
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=2.0, core=true, t24Name=FULL.DESC, isTextarea=true, mandatory=true)
+    }
+    OA_FORM_RULE_CLASS__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=18.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    OA_FORM_RULE_CLASS__K_TYPE
+    {
+        K_TYPE : OA_Status:OA_FORM_RULE_CLASS__K_TYPE__K_TYPE
+            @i18n:Label (en=KType)
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=3.0, core=false, t24Name=K.TYPE, mandatory=false)
+    }
+    OA_FORM_RULE_CLASS__OVERRIDE
+    {
+        /* Standard override field */
+        OVERRIDE : T24BusinessTypes:N
+            @i18n:Label (en=Override)
+            @i18n:Tooltip (en="Overrides generated by this transaction")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=15.0, core=true, t24Name=OVERRIDE, mandatory=false)
+    }
+    OA_FORM_RULE_CLASS__TYPE
+    {
+/* This multi-valued field controls attributes that a property of this class may or may not have.
+Valid options are,
+Version Type - Each amendment of the definition in the form rule class is identified by unique version */
+        TYPE : OA_Status:OA_FORM_RULE_CLASS__TYPE__TYPE
+            @i18n:Label (en=Type)
+            @i18n:Tooltip (en=Type)
+            @t24:i (align=L, inputBehaviour=I, maxLength=15, sysNumber=3.0, core=true, t24Name=TYPE, mandatory=false)
+    }
+/* It is the centralised table to define the Boolean rules in OA.
+The Rule would be used where ever required. */
+    OA_RULE_DEFINITION
+        @i18n:Description (en="")
+        @t24:i (t24Name=OA.RULE.DEFINITION, level=I, type=H, allowedFunctions="A C D E I L Q R S", localRefApplicationSysNo=24.0, localRefAllowed=true)
+    {
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=33.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=34.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=30.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        CONSOLIDATE_EXPRESSION -> byValue OA_Status:OA_RULE_DEFINITION__CONSOLIDATE_EXPRESSION *
+            @t24:i (t24Name=CONSOLIDATE.EXPRESSION)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=31.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=27.0, core=true, t24Name=CURR.NO, mandatory=false)
+        DATE_TIME -> byValue OA_Status:OA_RULE_DEFINITION__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=32.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        DESCRIPTION -> byValue OA_Status:OA_RULE_DEFINITION__DESCRIPTION *
+            @t24:i (t24Name=DESCRIPTION)
+        FULL_DESCRIPTION -> byValue OA_Status:OA_RULE_DEFINITION__FULL_DESCRIPTION *
+            @t24:i (t24Name=FULL.DESCRIPTION)
+        INPUTTER -> byValue OA_Status:OA_RULE_DEFINITION__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        OVERRIDE -> byValue OA_Status:OA_RULE_DEFINITION__OVERRIDE *
+            @t24:i (t24Name=OVERRIDE)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=26.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        RESERVED_1 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=23.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_13 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=4.0, core=true, t24Name=RESERVED.13, mandatory=false)
+        RESERVED_14 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=3.0, core=true, t24Name=RESERVED.14, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=22.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=21.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=20.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        RESERVED_5 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=19.0, core=true, t24Name=RESERVED.5, mandatory=false)
+        RESERVED_6 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=17.0, core=true, t24Name=RESERVED.6, mandatory=false)
+        RESERVED_7 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=16.0, core=true, t24Name=RESERVED.7, mandatory=false)
+        /* ID of OA.RULE.DEFINITION */
+        RULE_DEFINITION_ID -> OA_Status:OA_RULE_DEFINITION PK required
+            @t24:i (align=L, inputBehaviour=I, maxLength=70, sysNumber=0.0, core=true, businessType=A, t24Name=RULE.DEFINITION.ID, mandatory=true)
+        RULE_NAME -> byValue OA_Status:OA_RULE_DEFINITION__RULE_NAME *
+            @t24:i (t24Name=RULE.NAME)
+    }
+    OA_RULE_DEFINITION__CONSOLIDATE_EXPRESSION
+    {
+/* Consolidate the multiple RULE.NAME expressions and define a consolidated rule. This is so that conditions from multiple formlets (contexts) could be combined. This would be used to cater to scenarios where a formlet is made mandatory in FORM.RULE based on conditions getting satisfied from multiple formlets.
+
+Eg. If the Rule Names are NON.IRISH and DATA.INPUT.COMPLETED, the Consolidated expression can be like NON.IRISH AND DATA.INPUT.COMPLETED */
+        CONSOLIDATE_EXPRESSION : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=100, sysNumber=18.0, core=true, t24Name=CONSOLIDATE.EXPRESSION, mandatory=false)
+    }
+    OA_RULE_DEFINITION__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=29.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    OA_RULE_DEFINITION__DESCRIPTION
+    {
+/* Standard multi-language description type field to update description for the record.
+1. mandatory field */
+        DESCRIPTION : T24BusinessTypes:A required
+            @i18n:Label (en=Description)
+            @i18n:Tooltip (en=Description)
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, multiLanguage=true, sysNumber=1.0, core=true, t24Name=DESCRIPTION, mandatory=true)
+    }
+    OA_RULE_DEFINITION__FULL_DESCRIPTION
+    {
+/* Standard full description field where a detailed notes on the purpose of the record could be updated
+1. mandatory field */
+        FULL_DESCRIPTION : T24BusinessTypes:TEXT required
+            @t24:i (align=L, inputBehaviour=I, maxLength=100, sysNumber=2.0, core=true, t24Name=FULL.DESCRIPTION, mandatory=true)
+    }
+    OA_RULE_DEFINITION__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=28.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    OA_RULE_DEFINITION__OVERRIDE
+    {
+        /* Any overrides raised */
+        OVERRIDE : T24BusinessTypes:N
+            @i18n:Label (en=Override)
+            @i18n:Tooltip (en="Overrides generated by this transaction")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=25.0, core=true, t24Name=OVERRIDE, mandatory=false)
+    }
+    OA_RULE_DEFINITION__RULE_NAME
+    {
+/* This field will indicate the rule is based on which context.
+It will be a valid record from EB.CONTEXT.
+
+Input should be mandatory and allowed only when CONTEXT.TYPE is EB.CONTEXT. */
+        CONTEXT -> EB_RulesEngine:EB_CONTEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=7.0, core=true, businessType=A, t24Name=CONTEXT, mandatory=false)
+/* This fields describes the name of the instance could be used to extract the data for rule evaluation.
+If the CONTEXT is of a class type which can have multiple instances, then the user must specify the instance name in this field.
+
+Input is allowed only when CONTEXT.TYPE is EB.CONTEXT.
+
+Example : Suppose ADDRESS is one formlet class, and user creates the multiple instances HOME.ADDRESS and OFFICE.ADDRESS, in this case, when defining rule definition, the user should define the INSTANCE name against to the Context to extract the data from corresponding arrangement condition. */
+        CONTEXT_INSTANCE -> OA_Framework:OA_FORMLET
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=8.0, core=true, businessType=A, t24Name=CONTEXT.INSTANCE, mandatory=false)
+/* This field will indicate the type of context to be used in this rule item. Allowed types currently are:
+EB.CONTEXT - Indicating the rule would refer to an EB.CONTEXT entity (for example, a table).
+
+STATUS.CODE - Indicating the rule would refer to a "Status code" in its rule. The actual code would be defined where these items are used.
+
+1. mandatory field */
+        CONTEXT_TYPE : OA_Status:OA_RULE_DEFINITION__RULE_NAME__CONTEXT_TYPE required
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=6.0, core=true, t24Name=CONTEXT.TYPE, mandatory=true)
+        RESERVED_10 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=12.0, core=true, t24Name=RESERVED.10, mandatory=false)
+        RESERVED_11 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=11.0, core=true, t24Name=RESERVED.11, mandatory=false)
+        RESERVED_12 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=10.0, core=true, t24Name=RESERVED.12, mandatory=false)
+        RESERVED_8 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=15.0, core=true, t24Name=RESERVED.8, mandatory=false)
+        RESERVED_9 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=13.0, core=true, t24Name=RESERVED.9, mandatory=false)
+        RULE_EXPRESSION -> byValue OA_Status:OA_RULE_DEFINITION__RULE_NAME__RULE_EXPRESSION *
+            @t24:i (t24Name=RULE.EXPRESSION)
+/* This field will indicate the name of the rule.
+1. mandatory field
+
+Example:
+
+NON.IRISH
+DATA.INPUT.COMPLETED */
+        RULE_NAME : T24BusinessTypes:A required
+            @i18n:Label (en=Comparison)
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=5.0, core=true, t24Name=RULE.NAME, mandatory=true)
+        RULE_VARIABLE -> byValue OA_Status:OA_RULE_DEFINITION__RULE_NAME__RULE_VARIABLE *
+            @t24:i (t24Name=RULE.VARIABLE)
+    }
+    OA_RULE_DEFINITION__RULE_NAME__RULE_EXPRESSION
+    {
+/* Boolean expression dealing with either Context attribute or Status code.
+EX : NATIONALITY != "US"
+PURCHASE.PRICE >= VALUATION.LEVEL
+SCORE > 0                                                                                                       PERSONAL.DATA = "COMPLETED"
+
+Expression can also be defined by comparing two context attributes or status codes.
+Eg - NATIONALITY!=RESIDENCE or HOMEADDRESSTATUS == WORKADDRESSSTATUS
+Here, NATIONALITY and RESIDENCE are fields from formlet and HOMEADDRESSTATUS and WORKADDRESSSTATUS are user defined status codes.
+
+Here  NATIONALITY, PURCHASE.PRICE and SCORE are fields from the Formlet class application. And PERSONAL.DATA is user defined status Code.
+
+eg1 : ADDRESS.TYPE == 'OWNED'
+
+Here "ADDRESS.TYPE" is a valid field name in the SS record of the primary table OA.APP.ADDRESS which is defined in the context "OA.APP.ADDRESS*ADDRESS"
+
+"==" is an operand
+
+'OWNED' is a literal
+
+eg2 : MARKET.VALUE >= MARKET.VALUE.AAA
+
+Here "MARKET.VALUE" is a valid field name of the SS record of the primarytable OA.APP.COLLATERAL which is defined in the context "OA.APP.COLLATERAL*COLLATERAL"
+
+">=" is an operand
+
+"MARKET.VALUE.AAA" is the Rule Variable which is defined in the same Status Rules application.
+
+The list of comparison operands are here.
+
+Comparison List = "<", "<=", "==", "!=", ">=", ">"
+
+Join List = "||", "&&", "OR", "AND"
+
+Here is the explanation for Comparison List operators
+
+Equals Operator ==
+
+Not Equals operator !=
+
+Less than operator "<"
+
+Greater than operator ">"
+
+Less than or Equals to operator "<="
+
+Greater than or Equals to operator ">="
+
+Some of the Rule Examples :
+
+1. COUNTRY != "US"
+
+2. CURRENCY == "USD"
+
+3. (GENDER == "MALE") AND (AGE >= 35) */
+        RULE_EXPRESSION : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=100, sysNumber=14.0, core=true, t24Name=RULE.EXPRESSION, mandatory=false)
+    }
+    OA_RULE_DEFINITION__RULE_NAME__RULE_VARIABLE
+    {
+/* If the rule contains variables they must be declared here.
+It will be a Valid EB.LOOKUP value from OA.STATUS.RULE.VARIABLE */
+        RULE_VARIABLE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=9.0, core=true, t24Name=RULE.VARIABLE, mandatory=false)
+    }
+    /* A user defined status which is based upon data from single class requires a rule. This rule will be determined at runtime if a status code should be set and what the value should be. Users will define each of these rules in OA.STATUS.RULES application */
+    OA_STATUS_RULES
+        @i18n:Description (en="")
+        @t24:i (t24Name=OA.STATUS.RULES, level=I, type=H, allowedFunctions="A C D E I L Q R S", localRefApplicationSysNo=20.0, localRefAllowed=true)
+    {
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=29.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=30.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=26.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=27.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=23.0, core=true, t24Name=CURR.NO, mandatory=false)
+        DATE_TIME -> byValue OA_Status:OA_STATUS_RULES__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=28.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        DESCRIPTION -> byValue OA_Status:OA_STATUS_RULES__DESCRIPTION *
+            @t24:i (t24Name=DESCRIPTION)
+        FULL_DESCRIPTION -> byValue OA_Status:OA_STATUS_RULES__FULL_DESCRIPTION *
+            @t24:i (t24Name=FULL.DESCRIPTION)
+        INPUTTER -> byValue OA_Status:OA_STATUS_RULES__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        OVERRIDE -> byValue OA_Status:OA_STATUS_RULES__OVERRIDE *
+            @t24:i (t24Name=OVERRIDE)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=22.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        RESERVED_1 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=19.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_10 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=7.0, core=true, t24Name=RESERVED.10, mandatory=false)
+        RESERVED_11 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=6.0, core=true, t24Name=RESERVED.11, mandatory=false)
+        RESERVED_12 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=5.0, core=true, t24Name=RESERVED.12, mandatory=false)
+        RESERVED_13 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=4.0, core=true, t24Name=RESERVED.13, mandatory=false)
+        RESERVED_14 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=3.0, core=true, t24Name=RESERVED.14, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=18.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=17.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=16.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        RESERVED_5 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=15.0, core=true, t24Name=RESERVED.5, mandatory=false)
+        RESERVED_6 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=14.0, core=true, t24Name=RESERVED.6, mandatory=false)
+        RESERVED_8 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=9.0, core=true, t24Name=RESERVED.8, mandatory=false)
+        RESERVED_9 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=8.0, core=true, t24Name=RESERVED.9, mandatory=false)
+        RULE_DESCRIPTION -> byValue OA_Status:OA_STATUS_RULES__RULE_DESCRIPTION *
+            @t24:i (t24Name=RULE.DESCRIPTION)
+        RULE_REFERENCE -> OA_Status:OA_STATUS_RULES PK required
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=0.0, core=true, businessType=A, t24Name=RULE.REFERENCE, mandatory=true)
+    }
+    OA_STATUS_RULES__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=25.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    OA_STATUS_RULES__DESCRIPTION
+    {
+        /* Standrad multi-language description type field to update description for the record */
+        DESCRIPTION : T24BusinessTypes:A required
+            @i18n:Label (en=Description)
+            @i18n:Tooltip (en=Description)
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, multiLanguage=true, sysNumber=1.0, core=true, t24Name=DESCRIPTION, mandatory=true)
+    }
+    OA_STATUS_RULES__FULL_DESCRIPTION
+    {
+        /* Standard full description field where a detailed notes on the purpose of the record could be updated */
+        FULL_DESCRIPTION : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=2.0, core=true, t24Name=FULL.DESCRIPTION, isTextarea=true, mandatory=false)
+    }
+    OA_STATUS_RULES__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=24.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    OA_STATUS_RULES__OVERRIDE
+    {
+        OVERRIDE : T24BusinessTypes:N
+            @i18n:Label (en=Override)
+            @i18n:Tooltip (en="Overrides generated by this transaction")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=21.0, core=true, t24Name=OVERRIDE, mandatory=false)
+    }
+    OA_STATUS_RULES__RULE_DESCRIPTION
+    {
+        RESERVED_7 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=12.0, core=true, t24Name=RESERVED.7, mandatory=false)
+/* This field would contain a valid record from OA.RULE.DEFINITION. Wherein a Boolean Rule can be defined for comparing the field values to either literals or with variables. It should be defined with the field names of the SS record of the primary table defined in the corresponding Context record. Here, the first word should be a valid field name of the context primary table. Second word should be an operand and third word can be a literal (one with quotes) or it can be a Rule variable which is defined in the same application.
+eg1 : ADDRESS.TYPE == 'OWNED'
+Here "ADDRESS.TYPE" is a valid field name in the SS record of the  primary table OA.APP.ADDRESS which is defined in the context "OA.APP.ADDRESS*ADDRESS"
+"==" is an operand
+'OWNED' is a literal
+
+eg2 : MARKET.VALUE >= MARKET.VALUE.AAA
+Here "MARKET.VALUE" is a valid field name of the SS record of the primarytable OA.APP.COLLATERAL which is defined in the context "OA.APP.COLLATERAL*COLLATERAL"
+">=" is an operand
+"MARKET.VALUE.AAA" is the Rule Variable which is defined in the same Status Rules application.
+
+The list of comparison operands are here.
+Comparison List  =  "<",  "<=",  "==", "!=", ">=", ">"
+Join List       = "||",  "&&", "OR",  "AND"
+Here is the explanation for Comparison List operators
+Equals Operator  ==
+Not Equals operator !=
+Less than operator "<"
+Greater than operator ">"
+Less than or Equals to operator "<="
+Greater than or Equals to operator ">="
+
+Some of the Rule Examples :
+1. COUNTRY != "US"
+2. CURRENCY == "USD"
+3. (GENDER == "MALE") AND (AGE >= 35) */
+        RULE -> OA_Status:OA_RULE_DEFINITION
+            @i18n:Label (en=Rule)
+            @i18n:Tooltip (en="Rule to evaluate if client fits into profile")
+            @t24:i (align=L, inputBehaviour=I, maxLength=70, sysNumber=11.0, core=true, businessType=A, t24Name=RULE, mandatory=false)
+        /* This field specifies the description of the Rule. */
+        RULE_DESCRIPTION : T24BusinessTypes:A required
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=10.0, core=true, t24Name=RULE.DESCRIPTION, mandatory=true)
+        /* This field specifies the Result of the status code if the rule has Passes.  It can be a literal (within single quotes or double quotes) or a field value from the context or a numeric. */
+        TRUE_RESULT : T24BusinessTypes:A required
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=13.0, core=true, t24Name=TRUE.RESULT, mandatory=true)
+    }
+}
+Enumerations {
+    OA_APPLICATION_STATUS_CATALOG__ACTION : mml:string
+        PUBLISH=PUBLISH
+    OA_APPLICATION_STATUS_CATALOG__APP_STATUS_END_POINT__ARCHIVAL_OPTION : mml:string
+        NULL=NULL
+        REVERSE_FULFILMENTS=REVERSE.FULFILMENTS
+    OA_APPLICATION_STATUS_CATALOG__DORM_STATUS_END_POINT__DORM_STATUS_END_POINT : mml:string
+        INACTIVE=INACTIVE
+        NULL=NULL
+    OA_APPLICATION_STATUS_DEFINITION__ACTION : mml:string
+        PUBLISH=PUBLISH
+    OA_APPLICATION_STATUS_DEFINITION__APP_STATUS_END_POINT__ARCHIVAL_OPTION : mml:string
+        NULL=NULL
+        REVERSE_FULFILMENTS=REVERSE.FULFILMENTS
+    OA_APPLICATION_STATUS_DEFINITION__DORM_STATUS_END_POINT__DORM_STATUS_END_POINT : mml:string
+        INACTIVE=INACTIVE
+        NULL=NULL
+    OA_APPLICATION_STATUS__FORM_REFERENCE__FORMLET__FORMLET_STATUS : mml:string
+        COMPLETE=COMPLETE
+        COMPLETE_NOT_VERIFIED=COMPLETE.NOT.VERIFIED
+        INCOMPLETE=INCOMPLETE
+    OA_APPLICATION_STATUS__FORM_REFERENCE__FORM_DATA_STATUS : mml:string
+        AWAITING_SUBMISSION=AWAITING.SUBMISSION
+        COMPLETE=COMPLETE
+        INCOMPLETE=INCOMPLETE
+        NULL=NULL
+        SUBMITTED_NOT_VERIFIED=SUBMITTED.NOT.VERIFIED
+    OA_APPLICATION_STATUS__FORM_REFERENCE__FORM_OWNER__FORM_OWNER_DATA_STATUS : mml:string
+        AWAITING_SUBMISSION=AWAITING.SUBMISSION
+        COMPLETE=COMPLETE
+        INCOMPLETE=INCOMPLETE
+        NULL=NULL
+        SUBMITTED_NOT_VERIFIED=SUBMITTED.NOT.VERIFIED
+    OA_APPLICATION_STATUS__STAGE : mml:string
+        APPLICATION=APPLICATION
+        COMPLETION=COMPLETION
+        CREDIT_DECISION=CREDIT.DECISION
+    OA_CONDITIONAL_EVIDENCE_DETAILS__FORM__STATUS_CODES__STATUS_CODES : mml:string
+        ADDITIONAL_INCOME_=ADDITIONAL.INCOME.
+        AFFORDABILITY_CHECK=AFFORDABILITY.CHECK
+        ALL_FORMS_SUBMITTED=ALL.FORMS.SUBMITTED
+        APPLICANT_EVIDENCE=APPLICANT.EVIDENCE
+        APPLICANT_FORM=APPLICANT.FORM
+        ARRANGEMENT=ARRANGEMENT
+        BROKER_EVIDENCE=BROKER.EVIDENCE
+        BROKER_FORM=BROKER.FORM
+        CCSTATUS=CCSTATUS
+        CONTACT=CONTACT
+        CONTRACT_SIGNED=CONTRACT.SIGNED
+        CUSTOMER_DECISION=CUSTOMER.DECISION
+        EMPLOYER_DETAILS=EMPLOYER.DETAILS
+        EMPLOYMENT_=EMPLOYMENT.
+        EMPLOYMENT_EVIDENCE=EMPLOYMENT.EVIDENCE
+        FINANCIAL_=FINANCIAL.
+        FORMLET_ABOUT_YOU=FORMLET.ABOUT.YOU
+        FT_INFO=FT.INFO
+        GOVERNMENT_DATA=GOVERNMENT.DATA
+        GUARANTOR=GUARANTOR
+        HOME_ADDRESS=HOME.ADDRESS
+        INTERFACES=INTERFACES
+        INTERNET=INTERNET
+        INTERNET_ID=INTERNET.ID
+        KYC_RISK_RATING=KYC.RISK.RATING
+        KYC_SCREENING_RESULT=KYC.SCREENING.RESULT
+        MAXIMUM_SALARY=MAXIMUM.SALARY
+        PASSPORT_NO=PASSPORT.NO
+        PAYOUT_DECISION=PAYOUT.DECISION
+        PROOF_ID_EVIDENCE=PROOF.ID.EVIDENCE
+        PROOF_INCOME_EVIDENCE=PROOF.INCOME.EVIDENCE
+        PROPERTY_EVIDENCE=PROPERTY.EVIDENCE
+        PROPERTY_FORM=PROPERTY.FORM
+        PURPOSE=PURPOSE
+        READY_FOR_COMPLETION=READY.FOR.COMPLETION
+        REPAYMENT_DECISION=REPAYMENT.DECISION
+        REQUESTED=REQUESTED
+        REQUEST_EVIDENCE=REQUEST.EVIDENCE
+        REQUEST_FORM=REQUEST.FORM
+        REVIEWER=REVIEWER
+        SAVING_PRODUCT=SAVING.PRODUCT
+        SECOND_APPLICANT_EVIDENCE=SECOND.APPLICANT.EVIDENCE
+        SECOND_APPLICANT_FORM=SECOND.APPLICANT.FORM
+        SETTLEMENT_=SETTLEMENT.
+        SOLICITOR_ADDRESS_=SOLICITOR.ADDRESS.
+        SOLICITOR_CONTACT=SOLICITOR.CONTACT
+        SOLICITOR_EVIDENCE=SOLICITOR.EVIDENCE
+        SOLICITOR_FORM=SOLICITOR.FORM
+        SPARE_1=SPARE.1
+        SPARE_10=SPARE.10
+        SPARE_2=SPARE.2
+        SPARE_3=SPARE.3
+        SPARE_4=SPARE.4
+        SPARE_5=SPARE.5
+        SPARE_6=SPARE.6
+        SPARE_7=SPARE.7
+        SPARE_8=SPARE.8
+        SPARE_9=SPARE.9
+    OA_CONDITIONAL_FORMLET_DETAILS__FORM__STATUS_CODES__STATUS_CODES : mml:string
+        ADDITIONAL_INCOME_=ADDITIONAL.INCOME.
+        AFFORDABILITY_CHECK=AFFORDABILITY.CHECK
+        ALL_FORMS_SUBMITTED=ALL.FORMS.SUBMITTED
+        APPLICANT_EVIDENCE=APPLICANT.EVIDENCE
+        APPLICANT_FORM=APPLICANT.FORM
+        ARRANGEMENT=ARRANGEMENT
+        BROKER_EVIDENCE=BROKER.EVIDENCE
+        BROKER_FORM=BROKER.FORM
+        CCSTATUS=CCSTATUS
+        CONTACT=CONTACT
+        CONTRACT_SIGNED=CONTRACT.SIGNED
+        CUSTOMER_DECISION=CUSTOMER.DECISION
+        EMPLOYER_DETAILS=EMPLOYER.DETAILS
+        EMPLOYMENT_=EMPLOYMENT.
+        EMPLOYMENT_EVIDENCE=EMPLOYMENT.EVIDENCE
+        FINANCIAL_=FINANCIAL.
+        FORMLET_ABOUT_YOU=FORMLET.ABOUT.YOU
+        FT_INFO=FT.INFO
+        GOVERNMENT_DATA=GOVERNMENT.DATA
+        GUARANTOR=GUARANTOR
+        HOME_ADDRESS=HOME.ADDRESS
+        INTERFACES=INTERFACES
+        INTERNET=INTERNET
+        INTERNET_ID=INTERNET.ID
+        KYC_RISK_RATING=KYC.RISK.RATING
+        KYC_SCREENING_RESULT=KYC.SCREENING.RESULT
+        MAXIMUM_SALARY=MAXIMUM.SALARY
+        PASSPORT_NO=PASSPORT.NO
+        PAYOUT_DECISION=PAYOUT.DECISION
+        PROOF_ID_EVIDENCE=PROOF.ID.EVIDENCE
+        PROOF_INCOME_EVIDENCE=PROOF.INCOME.EVIDENCE
+        PROPERTY_EVIDENCE=PROPERTY.EVIDENCE
+        PROPERTY_FORM=PROPERTY.FORM
+        PURPOSE=PURPOSE
+        READY_FOR_COMPLETION=READY.FOR.COMPLETION
+        REPAYMENT_DECISION=REPAYMENT.DECISION
+        REQUESTED=REQUESTED
+        REQUEST_EVIDENCE=REQUEST.EVIDENCE
+        REQUEST_FORM=REQUEST.FORM
+        REVIEWER=REVIEWER
+        SAVING_PRODUCT=SAVING.PRODUCT
+        SECOND_APPLICANT_EVIDENCE=SECOND.APPLICANT.EVIDENCE
+        SECOND_APPLICANT_FORM=SECOND.APPLICANT.FORM
+        SETTLEMENT_=SETTLEMENT.
+        SOLICITOR_ADDRESS_=SOLICITOR.ADDRESS.
+        SOLICITOR_CONTACT=SOLICITOR.CONTACT
+        SOLICITOR_EVIDENCE=SOLICITOR.EVIDENCE
+        SOLICITOR_FORM=SOLICITOR.FORM
+        SPARE_1=SPARE.1
+        SPARE_10=SPARE.10
+        SPARE_2=SPARE.2
+        SPARE_3=SPARE.3
+        SPARE_4=SPARE.4
+        SPARE_5=SPARE.5
+        SPARE_6=SPARE.6
+        SPARE_7=SPARE.7
+        SPARE_8=SPARE.8
+        SPARE_9=SPARE.9
+    OA_DATA_VERIFICATION__EVIDENCE_REQUIREMENT__EVIDENCE_REQ_STATUS : mml:string
+        REQUESTED=REQUESTED
+        SATISFIED=SATISFIED
+    OA_DATA_VERIFICATION__EVIDENCE_REQUIREMENT__EVIDENCE_TYPE__EVIDENCE_USED : mml:string
+        NULL=NULL
+        YES=YES
+    OA_DATA_VERIFICATION__EVIDENCE_REQUIREMENT__FIELD_TO_VERIFY__COMPARISON_TYPE : mml:string
+        MAXIMUM=MAXIMUM
+        MINIMUM=MINIMUM
+        NULL=NULL
+    OA_DATA_VERIFICATION__EVIDENCE_REQUIREMENT__VERIFIED : mml:string
+        NO=NO
+        NULL=NULL
+        YES=YES
+    OA_DATA_VERIFICATION__VERIFICATION : mml:string
+        NOT_VERIFIED=NOT.VERIFIED
+        PENDING=PENDING
+        VERIFIED=VERIFIED
+    OA_EVIDENCE_STATUS__VERIFIED : mml:string
+        NO=NO
+        NULL=NULL
+        WAIVE=WAIVE
+        YES=YES
+    OA_FORM_RULE_CLASS__K_TYPE__K_TYPE : mml:string
+        CCY=CCY
+        COMMON=COMMON
+        DATED=DATED
+        DELAYED_TRACKING=DELAYED.TRACKING
+        EXTERNAL=EXTERNAL
+        EXTERNAL_FINANCIAL=EXTERNAL.FINANCIAL
+        FORWARD_DATED=FORWARD.DATED
+        INHERITANCE=INHERITANCE
+        MERGE=MERGE
+        MULTIPLE=MULTIPLE
+        NON_TRACKING=NON.TRACKING
+        OPT_CCY=OPT.CCY
+        TRACKING=TRACKING
+        TRACKING_ONLY=TRACKING.ONLY
+        TRANSACTION=TRANSACTION
+        TRIGGER=TRIGGER
+        VARIATION=VARIATION
+        VERSION=VERSION
+    OA_FORM_RULE_CLASS__TYPE__TYPE : mml:string
+        CCY=CCY
+        COMMON=COMMON
+        DATED=DATED
+        DELAYED_TRACKING=DELAYED.TRACKING
+        EXTERNAL=EXTERNAL
+        EXTERNAL_FINANCIAL=EXTERNAL.FINANCIAL
+        FORWARD_DATED=FORWARD.DATED
+        INHERITANCE=INHERITANCE
+        MEMO_ENABLED=MEMO.ENABLED
+        MERGE=MERGE
+        MULTIPLE=MULTIPLE
+        NON_TRACKING=NON.TRACKING
+        OPT_CCY=OPT.CCY
+        TRACKING=TRACKING
+        TRACKING_ONLY=TRACKING.ONLY
+        TRANSACTION=TRANSACTION
+        TRIGGER=TRIGGER
+        VARIATION=VARIATION
+        VERSION=VERSION
+    OA_RULE_DEFINITION__RULE_NAME__CONTEXT_TYPE : mml:string
+        EB_CONTEXT=EB.CONTEXT
+        NULL=NULL
+        STATUS_CODE=STATUS.CODE
+}

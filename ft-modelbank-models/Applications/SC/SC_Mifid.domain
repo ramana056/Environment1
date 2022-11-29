@@ -1,0 +1,518 @@
+# UTF-8
+/* Client categories for MiFID */
+Domain SC_Mifid
+    @t24:i (module=SC)
+    @java:Package (value=com.temenos.t24.datamodel.sc.sc_mifid)
+namespace "http://www.temenos.com/t24/SC_Mifid"
+metamodelVersion 1.30.6
+Classes {
+/* Overview of SC.MIFID.CLIENT.INFO
+MiFID refers to the Markets in Financial Instruments Directiveis which is a regulation that increases the transparency across the European Union's financial markets and standardizes the regulatory disclosures required for particular markets.
+The SC.MIFID.CLIENT.INFO is core Template which is used for enabling categorization of the client
+MiFID is to categorise clients between three types: "retail clients", "professional clients" and "eligible counterparties".
+The reasoning behind the categorisation of clients is the acknowledgement that different types of clients should be afforded at different level of investor protection and be provided with appropriate information about the investment firm’s products and investment services */
+    SC_MIFID_CLIENT_INFO
+        @i18n:Description (en="")
+        @t24:i (t24Name=SC.MIFID.CLIENT.INFO, level=C, type=H, allowedFunctions="A C D E I L P Q R S", localRefApplicationSysNo=65.0, localRefAllowed=true)
+    {
+        /* This Field Specifies Customer's Age */
+        AGE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=6.0, core=true, t24Name=AGE, mandatory=false)
+        ASSETS_HELD -> byValue SC_Mifid:SC_MIFID_CLIENT_INFO__ASSETS_HELD *
+            @t24:i (t24Name=ASSETS.HELD)
+        ASSET_CLASS -> byValue SC_Mifid:SC_MIFID_CLIENT_INFO__ASSET_CLASS *
+            @t24:i (t24Name=ASSET.CLASS)
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=74.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=75.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=71.0, core=true, t24Name=AUTHORISER, mandatory=false)
+/* Indicates the status of the client’s approval on the mandate shared
+This Field is linked to EB.LOOKUP with ID as MIFID.MANDATE.STATUS */
+        BEST_EXE_MANDATE_STATUS : SC_Mifid:SC_MIFID_CLIENT_INFO__BEST_EXE_MANDATE_STATUS
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=44.0, core=true, t24Name=BEST.EXE.MANDATE.STATUS, mandatory=false)
+/* Indicates the customer's knowledge level in Bonds including Money Market
+This Field is linked to EB.LOOKUP with ID as MIFID.KNOWLEDGE.INFO*KNOW4 */
+        BONDS : SC_Mifid:SC_MIFID_CLIENT_INFO__BONDS
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=29.0, core=true, t24Name=BONDS, mandatory=false)
+/* MiFID Category of the client :
+RETAIL
+PROFESSIONAL
+PROFESSIONAL.ON.REQUEST
+ELIGIBLE.COUNTERPARTY */
+        CLASSIFICATION : SC_Mifid:SC_MIFID_CLIENT_INFO__CLASSIFICATION
+            @i18n:Label (en=Classification)
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=42.0, core=true, t24Name=CLASSIFICATION, mandatory=false)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=72.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        /* Denotes the currency in which the amounts and values in this table are specified */
+        CURRENCY -> ST_CurrencyConfig:CURRENCY
+            @i18n:Label (en=Ccy)
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=1.0, core=true, businessType=CCY, t24Name=CURRENCY, mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=68.0, core=true, t24Name=CURR.NO, mandatory=false)
+        CUSTOMER_ID -> SC_Mifid:SC_MIFID_CLIENT_INFO PK required
+            @i18n:Label (en="Customer Id")
+            @i18n:Tooltip (en="Identifies the Customer for the transaction.")
+            @t24:i (align=R, inputBehaviour=I, maxLength=10, sysNumber=0.0, core=true, businessType=CUS, t24Name=CUSTOMER.ID, mandatory=true)
+        DATE_TIME -> byValue SC_Mifid:SC_MIFID_CLIENT_INFO__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=73.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+/* This field shows the customer's level of knowledge in Derivatives.
+This Field is linked to EB.LOOKUP with ID as MIFID.KNOWLEDGE.INFO*KNOW4 */
+        DERIVATIVES : SC_Mifid:SC_MIFID_CLIENT_INFO__DERIVATIVES
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=38.0, core=true, t24Name=DERIVATIVES, mandatory=false)
+/* Specifies the customer's highest level of Education
+This field should be linked to EB.LOOKUP with ID as MIFID.CLIENT.EDUCATION*LEV */
+        EDUCATION_LEVEL : SC_Mifid:SC_MIFID_CLIENT_INFO__EDUCATION_LEVEL
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=7.0, core=true, t24Name=EDUCATION.LEVEL, mandatory=false)
+        /* Specifies the annual return that is expected by the customer */
+        EXPECT_RETURN : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=24.0, core=true, t24Name=EXPECT.RETURN, mandatory=false)
+        FIN_COMMIT -> byValue SC_Mifid:SC_MIFID_CLIENT_INFO__FIN_COMMIT *
+            @t24:i (t24Name=FIN.COMMIT)
+/* This field shows the customer's level of knowledge in Fixed Deposits
+This Field is linked to EB.LOOKUP with ID as MIFID.KNOWLEDGE.INFO*KNOW4 */
+        FIXED_DEPOSITS : SC_Mifid:SC_MIFID_CLIENT_INFO__FIXED_DEPOSITS
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=31.0, core=true, t24Name=FIXED.DEPOSITS, mandatory=false)
+/* Indicates the customer's knowledge level in Hedge Funds
+This Field is linked to EB.LOOKUP with ID as MIFID.KNOWLEDGE.INFO*KNOW4 */
+        HEDGE_FUNDS : SC_Mifid:SC_MIFID_CLIENT_INFO__HEDGE_FUNDS
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=34.0, core=true, t24Name=HEDGE.FUNDS, mandatory=false)
+        INCOME_SOURCE -> byValue SC_Mifid:SC_MIFID_CLIENT_INFO__INCOME_SOURCE *
+            @t24:i (t24Name=INCOME.SOURCE)
+        INPUTTER -> byValue SC_Mifid:SC_MIFID_CLIENT_INFO__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        INVESTMENT_OBJECTIVE -> byValue SC_Mifid:SC_MIFID_CLIENT_INFO__INVESTMENT_OBJECTIVE *
+            @t24:i (t24Name=INVESTMENT.OBJECTIVE)
+/* Indicates the initial investment amount of the customer
+This field is linked to EB.LOOKUP with ID as SC.MIFID.INV.AMT*AMT */
+        INVEST_AMOUNT : SC_Mifid:SC_MIFID_CLIENT_INFO__INVEST_AMOUNT
+            @t24:i (align=L, inputBehaviour=I, maxLength=25, sysNumber=16.0, core=true, t24Name=INVEST.AMOUNT, mandatory=false)
+/* This Field Specifies Desired Investment Period
+This field is linked to EB.LOOKUP with ID as SC.MIFID.INV.AMT*AMT */
+        INVEST_PERIOD : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=25, sysNumber=17.0, core=true, t24Name=INVEST.PERIOD, mandatory=false)
+/* Indicates the customer's knowledge level in Metals and Commodities.
+This Field is linked to EB.LOOKUP with ID as MIFID.KNOWLEDGE.INFO*KNOW4 */
+        METALS_COMMO : SC_Mifid:SC_MIFID_CLIENT_INFO__METALS_COMMO
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=39.0, core=true, t24Name=METALS.COMMO, mandatory=false)
+        /* This Field Specifies whether Mifid Check is Required or not */
+        MIFID_REQUIRED : SC_Mifid:SC_MIFID_CLIENT_INFO__MIFID_REQUIRED
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=2.0, core=true, t24Name=MIFID.REQUIRED, mandatory=false)
+/* Indicates the customer's knowledge level in Money Market instruments
+This Field is linked to EB.LOOKUP with ID as MIFID.KNOWLEDGE.INFO*KNOW4 */
+        MONEY_MARKET_INSTRUMENTS : SC_Mifid:SC_MIFID_CLIENT_INFO__MONEY_MARKET_INSTRUMENTS
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=30.0, core=true, t24Name=MONEY.MARKET.INSTRUMENTS, mandatory=false)
+/* Indicates the customer's knowledge level in Mutual Funds
+This Field is linked to EB.LOOKUP with ID as MIFID.KNOWLEDGE.INFO*KNOW4 */
+        MUTUAL_FUNDS : SC_Mifid:SC_MIFID_CLIENT_INFO__MUTUAL_FUNDS
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=33.0, core=true, t24Name=MUTUAL.FUNDS, mandatory=false)
+        /* Date when next review is due. System will calculate based on review date and frequency */
+        NEXT_REVIEW_DATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=5.0, core=true, t24Name=NEXT.REVIEW.DATE, mandatory=false)
+        OVERRIDE -> byValue SC_Mifid:SC_MIFID_CLIENT_INFO__OVERRIDE *
+            @t24:i (t24Name=OVERRIDE)
+        PROFESSION -> byValue SC_Mifid:SC_MIFID_CLIENT_INFO__PROFESSION *
+            @t24:i (t24Name=PROFESSION)
+/* This filed shows the customer's level of knowledge in Private Equity and other unquoted products
+This Field is linked to EB.LOOKUP with ID as MIFID.KNOWLEDGE.INFO*KNOW4 */
+        PVT_EQUITY : SC_Mifid:SC_MIFID_CLIENT_INFO__PVT_EQUITY
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=35.0, core=true, t24Name=PVT.EQUITY, mandatory=false)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=67.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        /* Defines the end date for the last regular payment */
+        REG_PAY_END_DATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=10, sysNumber=21.0, core=true, t24Name=REG.PAY.END.DATE, mandatory=false)
+/* Defines the frequency of the regular investment amount
+This field is linked to EB.LOOKUP with ID as FREQUENCY.GENERAL */
+        REG_PAY_FREQ : SC_Mifid:SC_MIFID_CLIENT_INFO__REG_PAY_FREQ
+            @t24:i (align=L, inputBehaviour=I, maxLength=25, sysNumber=19.0, core=true, t24Name=REG.PAY.FREQ, mandatory=false)
+        /* Defines the start date for when first regular payment will start */
+        REG_PAY_START_DATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=10, sysNumber=20.0, core=true, t24Name=REG.PAY.START.DATE, mandatory=false)
+        /* Field Specifies the regular amount that will be invested into the investment program by the customer */
+        REG_PYMT_AMT : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=19, sysNumber=18.0, core=true, t24Name=REG.PYMT.AMT, mandatory=false)
+        /* Indicates the date on which the client’s request to be classified as professional has been received */
+        REQUEST_DATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=43.0, core=true, t24Name=REQUEST.DATE, mandatory=false)
+        RESERVED10 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=54.0, core=true, t24Name=RESERVED10, mandatory=false)
+        RESERVED11 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=55.0, core=true, t24Name=RESERVED11, mandatory=false)
+        RESERVED12 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=56.0, core=true, t24Name=RESERVED12, mandatory=false)
+        RESERVED13 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=57.0, core=true, t24Name=RESERVED13, mandatory=false)
+        RESERVED14 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=58.0, core=true, t24Name=RESERVED14, mandatory=false)
+        RESERVED15 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=59.0, core=true, t24Name=RESERVED15, mandatory=false)
+        RESERVED16 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=60.0, core=true, t24Name=RESERVED16, mandatory=false)
+        RESERVED17 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=61.0, core=true, t24Name=RESERVED17, mandatory=false)
+        RESERVED18 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=62.0, core=true, t24Name=RESERVED18, mandatory=false)
+        RESERVED19 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=63.0, core=true, t24Name=RESERVED19, mandatory=false)
+        RESERVED2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=46.0, core=true, t24Name=RESERVED2, mandatory=false)
+        RESERVED20 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=64.0, core=true, t24Name=RESERVED20, mandatory=false)
+        RESERVED3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=47.0, core=true, t24Name=RESERVED3, mandatory=false)
+        RESERVED4 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=48.0, core=true, t24Name=RESERVED4, mandatory=false)
+        RESERVED5 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=49.0, core=true, t24Name=RESERVED5, mandatory=false)
+        RESERVED6 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=50.0, core=true, t24Name=RESERVED6, mandatory=false)
+        RESERVED7 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=51.0, core=true, t24Name=RESERVED7, mandatory=false)
+        RESERVED8 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=52.0, core=true, t24Name=RESERVED8, mandatory=false)
+        RESERVED9 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=53.0, core=true, t24Name=RESERVED9, mandatory=false)
+        /* This Field Specifies the Date when lats Review was made */
+        REVIEW_DATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=3.0, core=true, t24Name=REVIEW.DATE, mandatory=false)
+        /* Frequency field showing the frequency in which review needs to be made */
+        REVIEW_FQNCY : T24BusinessTypes:FQU
+            @t24:i (align=L, inputBehaviour=I, maxLength=17, sysNumber=4.0, core=true, t24Name=REVIEW.FQNCY, mask="RDDDD DD  DD #####", mandatory=false)
+/* Defines the level of risk that a customer is willing to take
+This Field is linked to EB.LOOKUP with ID as AM.MIFID.RISK */
+        RISK_APPETITE : SC_Mifid:SC_MIFID_CLIENT_INFO__RISK_APPETITE
+            @t24:i (align=L, inputBehaviour=I, maxLength=5, sysNumber=23.0, core=true, t24Name=RISK.APPETITE, mandatory=false)
+        RISK_PROFILE : SC_Mifid:SC_MIFID_CLIENT_INFO__RISK_PROFILE
+            @t24:i (align=L, inputBehaviour=I, maxLength=25, sysNumber=45.0, core=true, t24Name=RISK.PROFILE, mandatory=false)
+/* Specifies the customer's knowledge level in Shares/Equity
+This Field is linked to EB.LOOKUP with ID as MIFID.KNOWLEDGE.INFO*KNOW4 */
+        SHARES : SC_Mifid:SC_MIFID_CLIENT_INFO__SHARES
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=32.0, core=true, t24Name=SHARES, mandatory=false)
+/* Specifies the customer's knowledge level in Structured Products
+This Field is linked to EB.LOOKUP with ID as MIFID.KNOWLEDGE.INFO*KNOW4 */
+        STRUCTURED_PRDS : SC_Mifid:SC_MIFID_CLIENT_INFO__STRUCTURED_PRDS
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=36.0, core=true, t24Name=STRUCTURED.PRDS, mandatory=false)
+        TRANS_ACTIVITIES -> byValue SC_Mifid:SC_MIFID_CLIENT_INFO__TRANS_ACTIVITIES *
+            @t24:i (t24Name=TRANS.ACTIVITIES)
+/* This field relates to the TRANS.ACTIVITIES and indicates the period for which the transactions have taken place
+This Field is linked to EB.LOOKUP with ID as MIFID.TRANS.PERIOD */
+        TRANS_PERIOD : SC_Mifid:SC_MIFID_CLIENT_INFO__TRANS_PERIOD
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=28.0, core=true, t24Name=TRANS.PERIOD, mandatory=false)
+/* Indicates the customer's knowledge level in Warrants
+This Field is linked to EB.LOOKUP with ID as MIFID.KNOWLEDGE.INFO*KNOW4 */
+        WARRANTS : SC_Mifid:SC_MIFID_CLIENT_INFO__WARRANTS
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=37.0, core=true, t24Name=WARRANTS, mandatory=false)
+    }
+    SC_MIFID_CLIENT_INFO__ASSETS_HELD
+    {
+/* This Field Specifies Assets Held by the Customer
+This field is linked to EB.LOOKUP with ID as MIFID.CLIENT.ASSETS.HELD*LOAN */
+        ASSETS_HELD : SC_Mifid:SC_MIFID_CLIENT_INFO__ASSETS_HELD__ASSETS_HELD
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=12.0, core=true, t24Name=ASSETS.HELD, mandatory=false)
+        /* This field is associated with ASSETS and specifies the value of the respective assets specified in the field ASSETS.HELD */
+        VALUE_ASSETS : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=25, sysNumber=13.0, core=true, t24Name=VALUE.ASSETS, mandatory=false)
+    }
+    SC_MIFID_CLIENT_INFO__ASSET_CLASS
+    {
+        /* Any asset class can be included here, which is not covered above */
+        ASSET_CLASS : T24BusinessTypes:A
+            @i18n:Label (en="Asset Class")
+            @i18n:Tooltip (en="Indicates the asset class")
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=40.0, core=true, t24Name=ASSET.CLASS, mandatory=false)
+/* Associated multivalue field with ASSET.CLASS.  Determines the level of knowledge in that Asset Class
+This Field is linked to EB.LOOKUP with ID as MIFID.KNOWLEDGE.INFO*KNOW4 */
+        KNOW_ASSET_CLASS : SC_Mifid:SC_MIFID_CLIENT_INFO__ASSET_CLASS__KNOW_ASSET_CLASS
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=41.0, core=true, t24Name=KNOW.ASSET.CLASS, mandatory=false)
+    }
+    SC_MIFID_CLIENT_INFO__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=70.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    SC_MIFID_CLIENT_INFO__FIN_COMMIT
+    {
+/* This field specifies the present and future financial commitments of the customer
+This field is linked to EB.LOOKUP with ID as MIFID.FIN.COMMIT*LOAN */
+        FIN_COMMIT : SC_Mifid:SC_MIFID_CLIENT_INFO__FIN_COMMIT__FIN_COMMIT
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=14.0, core=true, t24Name=FIN.COMMIT, mandatory=false)
+        /* This field is associated with the FIN.COMMIT and specifies the customer's respective financial commitment amounts */
+        VAL_FIN_COMMIT : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=19, sysNumber=15.0, core=true, t24Name=VAL.FIN.COMMIT, mandatory=false)
+    }
+    SC_MIFID_CLIENT_INFO__INCOME_SOURCE
+    {
+/* This Field Associated with INCOME.SOURCE and Specifies the Income Amount from the respective Source.
+This field is linked to EB.LOOKUP with ID as SC.MIFID.CLIENT.INFO*AMOUNT1 */
+        AMT_INCOME : SC_Mifid:SC_MIFID_CLIENT_INFO__INCOME_SOURCE__AMT_INCOME
+            @t24:i (align=L, inputBehaviour=I, maxLength=19, sysNumber=11.0, core=true, t24Name=AMT.INCOME, mandatory=false)
+/* This Field Spcifies the various Sources of income
+This field is linked to EB.LOOKUP with ID as MIFID.CLIENT.EDUCATION*COMPANY */
+        INCOME_SOURCE : SC_Mifid:SC_MIFID_CLIENT_INFO__INCOME_SOURCE__INCOME_SOURCE
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=10.0, core=true, t24Name=INCOME.SOURCE, mandatory=false)
+    }
+    SC_MIFID_CLIENT_INFO__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=69.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    SC_MIFID_CLIENT_INFO__INVESTMENT_OBJECTIVE
+    {
+/* This Field Specifies the primary objective of the investement
+This Field is linked to EB.LOOKUP with ID as INV.OBJ */
+        INVESTMENT_OBJECTIVE : SC_Mifid:SC_MIFID_CLIENT_INFO__INVESTMENT_OBJECTIVE__INVESTMENT_OBJECTIVE
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=22.0, core=true, t24Name=INVESTMENT.OBJECTIVE, mandatory=false)
+    }
+    SC_MIFID_CLIENT_INFO__OVERRIDE
+    {
+        OVERRIDE : T24BusinessTypes:N
+            @i18n:Label (en=Override)
+            @i18n:Tooltip (en="Overrides generated by this transaction")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=66.0, core=true, t24Name=OVERRIDE, mandatory=false)
+    }
+    SC_MIFID_CLIENT_INFO__PROFESSION
+    {
+        /* This field indicates the experience of the customer in the profession specified in the PROFESSION field */
+        EXPERIENCE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=9.0, core=true, t24Name=EXPERIENCE, mandatory=false)
+        /* This field indicates the current or relavent former profession of customer */
+        PROFESSION : SC_Mifid:SC_MIFID_CLIENT_INFO__PROFESSION__PROFESSION
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=8.0, core=true, t24Name=PROFESSION, mandatory=false)
+    }
+    SC_MIFID_CLIENT_INFO__TRANS_ACTIVITIES
+    {
+/* Defines the type of Transaction activity
+This Field is linked to EB.LOOKUP with ID as MIFID.TRANS.ACT */
+        TRANS_ACTIVITIES : SC_Mifid:SC_MIFID_CLIENT_INFO__TRANS_ACTIVITIES__TRANS_ACTIVITIES
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=25.0, core=true, t24Name=TRANS.ACTIVITIES, mandatory=false)
+/* This Field is associated with TRANS.ACTIVITIES and specifies frequency of the Transaction activity
+This Field is linked to EB.LOOKUP with ID as FREQUENCY.GENERAL */
+        TRANS_FREQ : SC_Mifid:SC_MIFID_CLIENT_INFO__TRANS_ACTIVITIES__TRANS_FREQ
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=27.0, core=true, t24Name=TRANS.FREQ, mandatory=false)
+/* This Field is associated with TRANS.ACTIVITIES and specifies the volume of transaction related to the activity specified in the TRANS.ACTIVITIES
+This Field is linked to EB.LOOKUP with ID as MIFID.TRANS.VOL */
+        TRANS_VOL : SC_Mifid:SC_MIFID_CLIENT_INFO__TRANS_ACTIVITIES__TRANS_VOL
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=26.0, core=true, t24Name=TRANS.VOL, mandatory=false)
+    }
+}
+Enumerations {
+    SC_MIFID_CLIENT_INFO__ASSETS_HELD__ASSETS_HELD : mml:string
+        BA=BA
+        DX=DX
+        FA=FA
+        FAFB=FAFB
+        FBA=FBA
+        FI=FI
+        GOLD=GOLD
+        INS=INS
+        OC=OC
+        OTHER=OTHER
+        PROPERTY=PROPERTY
+        SHARES=SHARES
+    SC_MIFID_CLIENT_INFO__ASSET_CLASS__KNOW_ASSET_CLASS : mml:string
+        KNOW4=KNOW4
+        KNOW5=KNOW5
+        KNOW6=KNOW6
+        KNOW7=KNOW7
+    SC_MIFID_CLIENT_INFO__BEST_EXE_MANDATE_STATUS : mml:string
+        FIVE=FIVE
+        FOUR=FOUR
+        "ONE"="ONE"
+        THREE=THREE
+        TWO=TWO
+        ZERO=ZERO
+    SC_MIFID_CLIENT_INFO__BONDS : mml:string
+        KNOW4=KNOW4
+        KNOW5=KNOW5
+        KNOW6=KNOW6
+        KNOW7=KNOW7
+    SC_MIFID_CLIENT_INFO__CLASSIFICATION : mml:string
+        ELIGIBLE_COUNTERPARTY=ELIGIBLE.COUNTERPARTY
+        INSTITUTIONAL=INSTITUTIONAL
+        PROFESSIONAL=PROFESSIONAL
+        PROFESSIONAL_ON_REQUEST=PROFESSIONAL.ON.REQUEST
+        RETAIL=RETAIL
+    SC_MIFID_CLIENT_INFO__DERIVATIVES : mml:string
+        KNOW4=KNOW4
+        KNOW5=KNOW5
+        KNOW6=KNOW6
+        KNOW7=KNOW7
+    SC_MIFID_CLIENT_INFO__EDUCATION_LEVEL : mml:string
+        LEV1=LEV1
+        LEV10=LEV10
+        LEV2=LEV2
+        LEV3=LEV3
+        LEV4=LEV4
+        LEV5=LEV5
+        LEV6=LEV6
+        LEV7=LEV7
+        LEV8=LEV8
+        LEV9=LEV9
+    SC_MIFID_CLIENT_INFO__FIN_COMMIT__FIN_COMMIT : mml:string
+        BILL=BILL
+        CHARITY=CHARITY
+        CHILDSUPPORT=CHILDSUPPORT
+        EXPENSE=EXPENSE
+        FC=FC
+        FEES=FEES
+        LOAN=LOAN
+        MORT=MORT
+        OTHERS=OTHERS
+        TL=TL
+    SC_MIFID_CLIENT_INFO__FIXED_DEPOSITS : mml:string
+        KNOW4=KNOW4
+        KNOW5=KNOW5
+        KNOW6=KNOW6
+        KNOW7=KNOW7
+    SC_MIFID_CLIENT_INFO__HEDGE_FUNDS : mml:string
+        KNOW4=KNOW4
+        KNOW5=KNOW5
+        KNOW6=KNOW6
+        KNOW7=KNOW7
+    SC_MIFID_CLIENT_INFO__INCOME_SOURCE__AMT_INCOME : mml:string
+        AMOUNT1=AMOUNT1
+        AMOUNT2=AMOUNT2
+        AMOUNT3=AMOUNT3
+        AMOUNT4=AMOUNT4
+        AMOUNT5=AMOUNT5
+        AMOUNT6=AMOUNT6
+        AMOUNT7=AMOUNT7
+    SC_MIFID_CLIENT_INFO__INCOME_SOURCE__INCOME_SOURCE : mml:string
+        COMPANY=COMPANY
+        DIRECTOR=DIRECTOR
+        EMP=EMP
+        FII=FII
+        INTEREST=INTEREST
+        OTHER=OTHER
+        PROPERTY=PROPERTY
+    SC_MIFID_CLIENT_INFO__INVESTMENT_OBJECTIVE__INVESTMENT_OBJECTIVE : mml:string
+        ASSET_ACCUMULATION=ASSET.ACCUMULATION
+        CAPITAL_GROWTH=CAPITAL.GROWTH
+        CAPITAL_PRESERVATION=CAPITAL.PRESERVATION
+        INCOME_GENERATION=INCOME.GENERATION
+        MEDIUM_TERM_RETURNS=MEDIUM.TERM.RETURNS
+        SHORT_TERM_RETURNS=SHORT.TERM.RETURNS
+    SC_MIFID_CLIENT_INFO__INVEST_AMOUNT : mml:string
+        AMT1=AMT1
+        AMT2=AMT2
+        AMT3=AMT3
+        AMT4=AMT4
+        AMT5=AMT5
+        AMT6=AMT6
+        AMT7=AMT7
+        AMT8=AMT8
+    SC_MIFID_CLIENT_INFO__METALS_COMMO : mml:string
+        KNOW4=KNOW4
+        KNOW5=KNOW5
+        KNOW6=KNOW6
+        KNOW7=KNOW7
+    SC_MIFID_CLIENT_INFO__MIFID_REQUIRED : mml:string
+        NO=NO
+        YES=YES
+    SC_MIFID_CLIENT_INFO__MONEY_MARKET_INSTRUMENTS : mml:string
+        KNOW4=KNOW4
+        KNOW5=KNOW5
+        KNOW6=KNOW6
+        KNOW7=KNOW7
+    SC_MIFID_CLIENT_INFO__MUTUAL_FUNDS : mml:string
+        KNOW4=KNOW4
+        KNOW5=KNOW5
+        KNOW6=KNOW6
+        KNOW7=KNOW7
+    SC_MIFID_CLIENT_INFO__PROFESSION__PROFESSION : mml:string
+        ARTS=ARTS
+        BO=BO
+        EXECUTIVE=EXECUTIVE
+        MEDIA=MEDIA
+        OTHER=OTHER
+        PROFESSIONAL=PROFESSIONAL
+        RETIRED=RETIRED
+        SM=SM
+        SPORTS=SPORTS
+    SC_MIFID_CLIENT_INFO__PVT_EQUITY : mml:string
+        KNOW4=KNOW4
+        KNOW5=KNOW5
+        KNOW6=KNOW6
+        KNOW7=KNOW7
+    SC_MIFID_CLIENT_INFO__REG_PAY_FREQ : mml:string
+        Daily=Daily
+        Fortnightly=Fortnightly
+        HalfYearly=HalfYearly
+        Monthly=Monthly
+        Quaterly=Quaterly
+        Weekly=Weekly
+        Yearly=Yearly
+    SC_MIFID_CLIENT_INFO__RISK_APPETITE : mml:string
+        FIVE=FIVE
+        FOUR=FOUR
+        "ONE"="ONE"
+        SEVEN=SEVEN
+        SIX=SIX
+        THREE=THREE
+        TWO=TWO
+    SC_MIFID_CLIENT_INFO__RISK_PROFILE : mml:string
+        Advanced__Risk=Advanced-Risk
+        High__Risk=High-Risk
+        Moderate__Risk=Moderate-Risk
+        Risk__Averse=Risk-Averse
+    SC_MIFID_CLIENT_INFO__SHARES : mml:string
+        KNOW4=KNOW4
+        KNOW5=KNOW5
+        KNOW6=KNOW6
+        KNOW7=KNOW7
+    SC_MIFID_CLIENT_INFO__STRUCTURED_PRDS : mml:string
+        KNOW4=KNOW4
+        KNOW5=KNOW5
+        KNOW6=KNOW6
+        KNOW7=KNOW7
+    SC_MIFID_CLIENT_INFO__TRANS_ACTIVITIES__TRANS_ACTIVITIES : mml:string
+        BUYS=BUYS
+        CONTRIBUTIONS=CONTRIBUTIONS
+        SELLS=SELLS
+        TRANSFERS=TRANSFERS
+        WITHDRAWALS=WITHDRAWALS
+    SC_MIFID_CLIENT_INFO__TRANS_ACTIVITIES__TRANS_FREQ : mml:string
+        Daily=Daily
+        Fortnightly=Fortnightly
+        HalfYearly=HalfYearly
+        Monthly=Monthly
+        Quaterly=Quaterly
+        Weekly=Weekly
+        Yearly=Yearly
+    SC_MIFID_CLIENT_INFO__TRANS_ACTIVITIES__TRANS_VOL : mml:string
+        FIVE=FIVE
+        FOUR=FOUR
+        "ONE"="ONE"
+        THREE=THREE
+        TWO=TWO
+    SC_MIFID_CLIENT_INFO__TRANS_PERIOD : mml:string
+        FIVETOTEN=FIVETOTEN
+        MORETHAN10=MORETHAN10
+        ONETOTWO=ONETOTWO
+        THREETOFIVE=THREETOFIVE
+        ZEROTOONE=ZEROTOONE
+    SC_MIFID_CLIENT_INFO__WARRANTS : mml:string
+        KNOW4=KNOW4
+        KNOW5=KNOW5
+        KNOW6=KNOW6
+        KNOW7=KNOW7
+}

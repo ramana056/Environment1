@@ -1,0 +1,826 @@
+# UTF-8
+/* AUWHTX- Australia Withholding Tax */
+Domain AUWHTX_Foundation
+    @t24:i (module=AUWHTX)
+    @java:Package (value=com.temenos.t24.datamodel.auwhtx.auwhtx_foundation)
+namespace "http://www.temenos.com/t24/AUWHTX_Foundation"
+metamodelVersion 1.30.6
+Classes {
+    /* This table holds the details of the Total interest earned, current interest earned and the tax deducted at arrangement wise. This also holds the details of the interest received and tax deducted for joint holders in a single record. */
+    AUWHTX_ARRANGEMENT_TAX
+        @i18n:Description (en="")
+        @t24:i (t24Name=AUWHTX.ARRANGEMENT.TAX, level=F, type=L, allowedFunctions="L P S", localRefApplicationSysNo=21.0, localRefAllowed=true)
+    {
+        /* This field contains the Currency of the arrangement */
+        CURRENCY -> ST_CurrencyConfig:CURRENCY
+            @i18n:Label (en=Ccy)
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=1.0, core=true, businessType=CCY, t24Name=CURRENCY, mandatory=false)
+        CUSTOMER -> byValue AUWHTX_Foundation:AUWHTX_ARRANGEMENT_TAX__CUSTOMER *
+            @t24:i (t24Name=CUSTOMER)
+/* The ID to be in the format of Arrangement ID “-“ current tax year
+Validation Rule:
+The ID to be in the format of Arrangement ID “-“ current tax year, e.g. */
+        ID -> AUWHTX_Foundation:AUWHTX_ARRANGEMENT_TAX PK required
+            @i18n:Label (en="Transaction Ref")
+            @i18n:Tooltip (en="Transaction Reference")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=0.0, core=true, businessType=A, t24Name="@ID", mandatory=true)
+        RESERVED_1 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=11.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_10 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=20.0, core=true, t24Name=RESERVED.10, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=12.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=13.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=14.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        RESERVED_5 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=15.0, core=true, t24Name=RESERVED.5, mandatory=false)
+        RESERVED_6 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=16.0, core=true, t24Name=RESERVED.6, mandatory=false)
+        RESERVED_7 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=17.0, core=true, t24Name=RESERVED.7, mandatory=false)
+        RESERVED_8 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=18.0, core=true, t24Name=RESERVED.8, mandatory=false)
+        RESERVED_9 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=19.0, core=true, t24Name=RESERVED.9, mandatory=false)
+        /* Total Interest earned for all interest periods (INT.EARNED.1+ INT.EARNED.2) */
+        TOTAL_INT_EARNED : T24BusinessTypes:BMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=35, sysNumber=2.0, core=true, t24Name=TOTAL.INT.EARNED, typeModifiers="1", mandatory=false)
+        /* Total Tax deducted for all interest period (TAX.DEDUCTED.1+TAX.DEDUCTED.2) RES.TAX.DEDUCTED.1 + NONRES.TAX.DEDUCTED.1 */
+        TOTAL_TAX_DEDUCTED : T24BusinessTypes:BMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=35, sysNumber=3.0, core=true, t24Name=TOTAL.TAX.DEDUCTED, typeModifiers="1", mandatory=false)
+    }
+    AUWHTX_ARRANGEMENT_TAX__CUSTOMER
+    {
+        /* Sum of all Bonus Interest for Accounts and Deposits */
+        BONUS_INTEREST : T24BusinessTypes:R
+            @t24:i (align=R, inputBehaviour=I, maxLength=6, sysNumber=9.0, core=true, t24Name=BONUS.INTEREST, mandatory=false)
+        /* Tax Amount Deducted on Bonus Interest */
+        BONUS_TAX_DEDUCT : T24BusinessTypes:BMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=35, sysNumber=10.0, core=true, t24Name=BONUS.TAX.DEDUCT, typeModifiers="1", mandatory=false)
+        /* Customer ID */
+        CUSTOMER -> ST_Customer:CUSTOMER
+            @i18n:Label (en=Customer)
+            @i18n:Tooltip (en="Customer Liability")
+            @t24:i (align=R, inputBehaviour=I, maxLength=10, sysNumber=4.0, core=true, t24Name=CUSTOMER, mandatory=false)
+        /* Credit Interest for Accounts and Deposits */
+        STANDARD_INTEREST : T24BusinessTypes:R
+            @t24:i (align=R, inputBehaviour=I, maxLength=6, sysNumber=7.0, core=true, t24Name=STANDARD.INTEREST, mandatory=false)
+        STANDARD_TAX_DEDUCT : T24BusinessTypes:BMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=35, sysNumber=8.0, core=true, t24Name=STANDARD.TAX.DEDUCT, typeModifiers="1", mandatory=false)
+        /* Total Interest earned for current period (Standard plus Bonus Interest for the period) (Sum of STANDARD.INTEREST.1 and BONUS.TOT.INTEREST.1) */
+        TOTAL_INT_AMOUNT : T24BusinessTypes:BMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=35, sysNumber=5.0, core=true, t24Name=TOTAL.INT.AMOUNT, typeModifiers="1", mandatory=false)
+        /* Total Tax deducted for current period (Standard plus Bonus tax deducted for the period) (Sum of STD.TAX.DEDUCT.1 and BONUS.TOT.TAX.1) */
+        TOTAL_TAX_AMOUNT : T24BusinessTypes:BMT
+            @i18n:Label (en="Total Tax Amount")
+            @t24:i (align=R, inputBehaviour=I, maxLength=35, sysNumber=6.0, core=true, t24Name=TOTAL.TAX.AMOUNT, typeModifiers="1", mandatory=false)
+    }
+    AUWHTX_IDC_PARAMETER
+        @i18n:Description (en="")
+        @t24:i (t24Name=AUWHTX.IDC.PARAMETER, level=I, type=H, allowedFunctions="A C D E H I L P Q S", localRefApplicationSysNo=12.0, localRefAllowed=true)
+    {
+        ACCOUNTING_COST_BASE_ADJ : AUWHTX_Foundation:AUWHTX_IDC_PARAMETER__ACCOUNTING_COST_BASE_ADJ
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=8.0, core=true, t24Name=ACCOUNTING.COST.BASE.ADJ, mandatory=false)
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=31.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=32.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=28.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        COST_BASE_ADJUSTMENT_TYPE : AUWHTX_Foundation:AUWHTX_IDC_PARAMETER__COST_BASE_ADJUSTMENT_TYPE
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=9.0, core=true, t24Name=COST.BASE.ADJUSTMENT.TYPE, mandatory=false)
+        COST_BASE_SIGN : AUWHTX_Foundation:AUWHTX_IDC_PARAMETER__COST_BASE_SIGN
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=10.0, core=true, t24Name=COST.BASE.SIGN, mandatory=false)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=29.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=25.0, core=true, t24Name=CURR.NO, mandatory=false)
+        DATE_TIME -> byValue AUWHTX_Foundation:AUWHTX_IDC_PARAMETER__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=30.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        DESCRIPTION : T24BusinessTypes:ANY required
+            @i18n:Label (en=Description)
+            @i18n:Tooltip (en=Description)
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=1.0, core=true, t24Name=DESCRIPTION, mandatory=true)
+        ID -> AUWHTX_Foundation:AUWHTX_IDC_PARAMETER PK required
+            @i18n:Label (en="Transaction Ref")
+            @i18n:Tooltip (en="Transaction Reference")
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=0.0, core=true, businessType=S, t24Name="@ID", mandatory=true)
+        IDC_CATEGORY : AUWHTX_Foundation:AUWHTX_IDC_PARAMETER__IDC_CATEGORY
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=11.0, core=true, t24Name=IDC.CATEGORY, mandatory=false)
+        INPUTTER -> byValue AUWHTX_Foundation:AUWHTX_IDC_PARAMETER__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        NR_RESIDENT_TAX_TREATMENT : AUWHTX_Foundation:AUWHTX_IDC_PARAMETER__NR_RESIDENT_TAX_TREATMENT
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=6.0, core=true, t24Name=NR.RESIDENT.TAX.TREATMENT, mandatory=false)
+        NR_RESIDENT_WHT_CODE : T24BusinessTypes:TAX
+            @t24:i (align=L, inputBehaviour=I, maxLength=11, sysNumber=7.0, core=true, t24Name=NR.RESIDENT.WHT.CODE, mandatory=false)
+        NR_TAX_COMPONENT_TYPE : AUWHTX_Foundation:AUWHTX_IDC_PARAMETER__NR_TAX_COMPONENT_TYPE
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=3.0, core=true, t24Name=NR.TAX.COMPONENT.TYPE, mandatory=false)
+        OVERRIDE -> byValue AUWHTX_Foundation:AUWHTX_IDC_PARAMETER__OVERRIDE *
+            @t24:i (t24Name=OVERRIDE)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=24.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        RESERVED_1 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=13.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_10 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=22.0, core=true, t24Name=RESERVED.10, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=14.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=15.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=16.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        RESERVED_5 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=17.0, core=true, t24Name=RESERVED.5, mandatory=false)
+        RESERVED_6 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=18.0, core=true, t24Name=RESERVED.6, mandatory=false)
+        RESERVED_7 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=19.0, core=true, t24Name=RESERVED.7, mandatory=false)
+        RESERVED_8 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=20.0, core=true, t24Name=RESERVED.8, mandatory=false)
+        RESERVED_9 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=21.0, core=true, t24Name=RESERVED.9, mandatory=false)
+        RESIDENT_TAX_TREATMENT : AUWHTX_Foundation:AUWHTX_IDC_PARAMETER__RESIDENT_TAX_TREATMENT
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=4.0, core=true, t24Name=RESIDENT.TAX.TREATMENT, mandatory=false)
+        RESIDENT_WHT_CODE : T24BusinessTypes:TAX
+            @t24:i (align=L, inputBehaviour=I, maxLength=11, sysNumber=5.0, core=true, t24Name=RESIDENT.WHT.CODE, mandatory=false)
+        TAX_COMPONENT_TYPE : AUWHTX_Foundation:AUWHTX_IDC_PARAMETER__TAX_COMPONENT_TYPE required
+            @t24:i (align=L, inputBehaviour=F, maxLength=25, sysNumber=2.0, core=true, t24Name=TAX.COMPONENT.TYPE, mandatory=true)
+    }
+    AUWHTX_IDC_PARAMETER__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=27.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    AUWHTX_IDC_PARAMETER__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=26.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    AUWHTX_IDC_PARAMETER__OVERRIDE
+    {
+        OVERRIDE : T24BusinessTypes:N
+            @i18n:Label (en=Override)
+            @i18n:Tooltip (en="Overrides generated by this transaction")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=23.0, core=true, t24Name=OVERRIDE, mandatory=false)
+    }
+    AUWHTX_IDC_YEAR_END_TAX_PROFILE
+        @i18n:Description (en="")
+        @t24:i (t24Name=AUWHTX.IDC.YEAR.END.TAX.PROFILE, level=F, type=H, allowedFunctions="A C D E H L P Q S", localRefApplicationSysNo=22.0, localRefAllowed=true)
+    {
+        APPL_CUSTOMER_TYPE : AUWHTX_Foundation:AUWHTX_IDC_YEAR_END_TAX_PROFILE__APPL_CUSTOMER_TYPE
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=2.0, core=true, t24Name=APPL.CUSTOMER.TYPE, mandatory=false)
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=31.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=32.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=28.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        COMPONENT -> byValue AUWHTX_Foundation:AUWHTX_IDC_YEAR_END_TAX_PROFILE__COMPONENT *
+            @t24:i (t24Name=COMPONENT)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=29.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=25.0, core=true, t24Name=CURR.NO, mandatory=false)
+        DATE_TIME -> byValue AUWHTX_Foundation:AUWHTX_IDC_YEAR_END_TAX_PROFILE__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=30.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        DIARY_ID -> byValue AUWHTX_Foundation:AUWHTX_IDC_YEAR_END_TAX_PROFILE__DIARY_ID *
+            @t24:i (t24Name=DIARY.ID)
+        ENTITLEMENT_BASE : AUWHTX_Foundation:AUWHTX_IDC_YEAR_END_TAX_PROFILE__ENTITLEMENT_BASE
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=5.0, core=true, t24Name=ENTITLEMENT.BASE, mandatory=false)
+        ID -> AUWHTX_Foundation:AUWHTX_IDC_YEAR_END_TAX_PROFILE PK required
+            @i18n:Label (en="Transaction Ref")
+            @i18n:Tooltip (en="Transaction Reference")
+            @t24:i (align=L, inputBehaviour=I, maxLength=13, sysNumber=0.0, core=true, businessType=A, t24Name="@ID", mandatory=true)
+        INPUTTER -> byValue AUWHTX_Foundation:AUWHTX_IDC_YEAR_END_TAX_PROFILE__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        OVERRIDE -> byValue AUWHTX_Foundation:AUWHTX_IDC_YEAR_END_TAX_PROFILE__OVERRIDE *
+            @t24:i (t24Name=OVERRIDE)
+        PERCENTAGE_TO_MATCHED : T24BusinessTypes:R
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=6.0, core=true, t24Name=PERCENTAGE.TO.MATCHED, mandatory=false)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=24.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        RESERVED_1 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=12.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_10 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=21.0, core=true, t24Name=RESERVED.10, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=13.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=14.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=15.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        RESERVED_5 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=16.0, core=true, t24Name=RESERVED.5, mandatory=false)
+        RESERVED_6 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=17.0, core=true, t24Name=RESERVED.6, mandatory=false)
+        RESERVED_7 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=18.0, core=true, t24Name=RESERVED.7, mandatory=false)
+        RESERVED_8 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=19.0, core=true, t24Name=RESERVED.8, mandatory=false)
+        RESERVED_9 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=20.0, core=true, t24Name=RESERVED.9, mandatory=false)
+        SECURITY_NO -> SC_ScoSecurityMasterMaintenance:SECURITY_MASTER
+            @i18n:Label (en="Security No")
+            @i18n:Tooltip (en="Indicates the security code/number")
+            @t24:i (align=L, inputBehaviour=N, maxLength=12, sysNumber=3.0, core=true, businessType=SEC, t24Name=SECURITY.NO, mandatory=false)
+        SURPLUS_DEFICIT_PERCENTAGE : AUWHTX_Foundation:AUWHTX_IDC_YEAR_END_TAX_PROFILE__SURPLUS_DEFICIT_PERCENTAGE
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=7.0, core=true, t24Name=SURPLUS.DEFICIT.PERCENTAGE, mandatory=false)
+        TAX_YEAR_END : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=9.0, core=true, t24Name=TAX.YEAR.END, mandatory=false)
+        TOTAL_AMT : T24BusinessTypes:AMT
+            @i18n:Label (en="Total Units")
+            @t24:i (align=R, inputBehaviour=I, maxLength=19, sysNumber=8.0, core=true, t24Name=TOTAL.AMT, mandatory=false)
+        YEAR_END_TAX_TYPE : AUWHTX_Foundation:AUWHTX_IDC_YEAR_END_TAX_PROFILE__YEAR_END_TAX_TYPE
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=4.0, core=true, t24Name=YEAR.END.TAX.TYPE, mandatory=false)
+    }
+    AUWHTX_IDC_YEAR_END_TAX_PROFILE__COMPONENT
+    {
+        COMPONENT -> AUWHTX_Foundation:AUWHTX_IDC_PARAMETER
+            @i18n:Label (en=Component)
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=10.0, core=true, businessType=S, t24Name=COMPONENT, mandatory=false)
+        PERCENTAGE : T24BusinessTypes:R
+            @i18n:Label (en="% Change")
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=11.0, core=true, t24Name=PERCENTAGE, mandatory=false)
+    }
+    AUWHTX_IDC_YEAR_END_TAX_PROFILE__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=27.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    AUWHTX_IDC_YEAR_END_TAX_PROFILE__DIARY_ID
+    {
+        DIARY_ID -> SC_SccEventCapture:DIARY
+            @i18n:Label (en="Diary Id")
+            @i18n:Tooltip (en="Indicates the diary Id")
+            @t24:i (align=L, inputBehaviour=I, maxLength=16, sysNumber=1.0, core=true, businessType=S, t24Name=DIARY.ID, mandatory=false)
+    }
+    AUWHTX_IDC_YEAR_END_TAX_PROFILE__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=26.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    AUWHTX_IDC_YEAR_END_TAX_PROFILE__OVERRIDE
+    {
+        OVERRIDE : T24BusinessTypes:N
+            @i18n:Label (en=Override)
+            @i18n:Tooltip (en="Overrides generated by this transaction")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=23.0, core=true, t24Name=OVERRIDE, mandatory=false)
+    }
+    AUWHTX_INCOME_DIST_ENTRY
+        @i18n:Description (en="")
+        @t24:i (t24Name=AUWHTX.INCOME.DIST.ENTRY, level=I, type=H, allowedFunctions="A C D E H I L P Q R S", localRefApplicationSysNo=24.0, localRefAllowed=true)
+    {
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=32.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=33.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=29.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=30.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURRENCY -> ST_CurrencyConfig:CURRENCY
+            @i18n:Label (en=Ccy)
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=6.0, core=true, businessType=CCY, t24Name=CURRENCY, mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=26.0, core=true, t24Name=CURR.NO, mandatory=false)
+        DATE_TIME -> byValue AUWHTX_Foundation:AUWHTX_INCOME_DIST_ENTRY__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=31.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        EVENT_TYPE -> SC_SccEventCapture:DIARY_TYPE
+            @i18n:Label (en="Event type")
+            @i18n:Tooltip (en="Type of event - Dividend Payment/Bonus etc.")
+            @t24:i (align=L, inputBehaviour=I, maxLength=15, sysNumber=2.0, core=true, businessType=A, t24Name=EVENT.TYPE, mandatory=false)
+        EX_DATE : T24BusinessTypes:D
+            @i18n:Label (en="Ex Date")
+            @i18n:Tooltip (en="Holds Ex Dividend date of the Diary.")
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=3.0, core=true, t24Name=EX.DATE, mandatory=false)
+        ID -> AUWHTX_Foundation:AUWHTX_INCOME_DIST_ENTRY PK required
+            @i18n:Label (en="Transaction Ref")
+            @i18n:Tooltip (en="Transaction Reference")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=0.0, core=true, businessType=A, t24Name="@ID", mandatory=true)
+        INPUTTER -> byValue AUWHTX_Foundation:AUWHTX_INCOME_DIST_ENTRY__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        NON_RESIDENT_COMPONENT -> byValue AUWHTX_Foundation:AUWHTX_INCOME_DIST_ENTRY__NON_RESIDENT_COMPONENT *
+            @t24:i (t24Name=NON.RESIDENT.COMPONENT)
+        NO_TFN_COMPONENT -> byValue AUWHTX_Foundation:AUWHTX_INCOME_DIST_ENTRY__NO_TFN_COMPONENT *
+            @t24:i (t24Name=NO.TFN.COMPONENT)
+        OPTION_DESC -> byValue AUWHTX_Foundation:AUWHTX_INCOME_DIST_ENTRY__OPTION_DESC *
+            @t24:i (t24Name=OPTION.DESC)
+        PAY_DATE : T24BusinessTypes:D
+            @i18n:Label (en="Pay Date")
+            @i18n:Tooltip (en="Holds the date the Event is Paid or Issued")
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=4.0, core=true, t24Name=PAY.DATE, mandatory=false)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=25.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        RESERVED_1 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=14.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_10 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=23.0, core=true, t24Name=RESERVED.10, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=15.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=16.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=17.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        RESERVED_5 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=18.0, core=true, t24Name=RESERVED.5, mandatory=false)
+        RESERVED_6 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=19.0, core=true, t24Name=RESERVED.6, mandatory=false)
+        RESERVED_7 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=20.0, core=true, t24Name=RESERVED.7, mandatory=false)
+        RESERVED_8 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=21.0, core=true, t24Name=RESERVED.8, mandatory=false)
+        RESERVED_9 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=22.0, core=true, t24Name=RESERVED.9, mandatory=false)
+        SECURITY_NO -> SC_ScoSecurityMasterMaintenance:SECURITY_MASTER
+            @i18n:Label (en="Security No")
+            @i18n:Tooltip (en="Indicates the security code/number")
+            @t24:i (align=L, inputBehaviour=I, maxLength=12, sysNumber=1.0, core=true, businessType=SEC, t24Name=SECURITY.NO, mandatory=false)
+        STATUS : T24BusinessTypes:A
+            @i18n:Label (en=Status)
+            @t24:i (align=L, inputBehaviour=I, maxLength=20, sysNumber=13.0, core=true, t24Name=STATUS, mandatory=false)
+        VALUE_DATE : T24BusinessTypes:D
+            @i18n:Label (en="Value Date")
+            @i18n:Tooltip (en="Indicates the Value date of the Contract")
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=5.0, core=true, t24Name=VALUE.DATE, mandatory=false)
+    }
+    AUWHTX_INCOME_DIST_ENTRY__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=28.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    AUWHTX_INCOME_DIST_ENTRY__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=27.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    AUWHTX_INCOME_DIST_ENTRY__NON_RESIDENT_COMPONENT
+    {
+        NON_RESIDENT_COMPONENT -> AUWHTX_Foundation:AUWHTX_IDC_PARAMETER
+            @t24:i (align=L, inputBehaviour=N, maxLength=65, sysNumber=11.0, core=true, businessType=A, t24Name=NON.RESIDENT.COMPONENT, mandatory=false)
+        NON_RESIDENT_PCT : T24BusinessTypes:R
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=12.0, core=true, t24Name=NON.RESIDENT.PCT, mandatory=false)
+    }
+    AUWHTX_INCOME_DIST_ENTRY__NO_TFN_COMPONENT
+    {
+        NO_TFN_COMPONENT -> AUWHTX_Foundation:AUWHTX_IDC_PARAMETER
+            @t24:i (align=L, inputBehaviour=N, maxLength=65, sysNumber=9.0, core=true, businessType=A, t24Name=NO.TFN.COMPONENT, mandatory=false)
+        NO_TFN_PCT : T24BusinessTypes:R
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=10.0, core=true, t24Name=NO.TFN.PCT, mandatory=false)
+    }
+    AUWHTX_INCOME_DIST_ENTRY__OPTION_DESC
+    {
+        OPTION_DESC : T24BusinessTypes:S
+            @i18n:Label (en=Options)
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=7.0, core=true, t24Name=OPTION.DESC, mandatory=false)
+        RATE_IN_DPU : T24BusinessTypes:R
+            @t24:i (align=R, inputBehaviour=N, maxLength=11, sysNumber=8.0, core=true, t24Name=RATE.IN.DPU, mandatory=false)
+    }
+    AUWHTX_INCOME_WHT_DETAILS
+        @i18n:Description (en="")
+        @t24:i (t24Name=AUWHTX.INCOME.WHT.DETAILS, level=F, type=H, allowedFunctions="A C D E H I L P Q R S", localRefApplicationSysNo=6.0, localRefAllowed=true)
+    {
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=25.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=26.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=22.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        COMPONENT -> byValue AUWHTX_Foundation:AUWHTX_INCOME_WHT_DETAILS__COMPONENT *
+            @t24:i (t24Name=COMPONENT)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=23.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURRENCY -> ST_CurrencyConfig:CURRENCY
+            @i18n:Label (en=Ccy)
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=1.0, core=true, businessType=CCY, t24Name=CURRENCY, mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=19.0, core=true, t24Name=CURR.NO, mandatory=false)
+        DATE_TIME -> byValue AUWHTX_Foundation:AUWHTX_INCOME_WHT_DETAILS__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=24.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        IDC_WHT_ID -> AUWHTX_Foundation:AUWHTX_INCOME_WHT_DETAILS PK required
+            @t24:i (align=L, inputBehaviour=I, maxLength=97, sysNumber=0.0, core=true, businessType=S, t24Name=IDC.WHT.ID, mandatory=true)
+        INPUTTER -> byValue AUWHTX_Foundation:AUWHTX_INCOME_WHT_DETAILS__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        OVERRIDE -> byValue AUWHTX_Foundation:AUWHTX_INCOME_WHT_DETAILS__OVERRIDE *
+            @t24:i (t24Name=OVERRIDE)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=18.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        RESERVED_1 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=7.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_10 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=16.0, core=true, t24Name=RESERVED.10, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=8.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=9.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=10.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        RESERVED_5 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=11.0, core=true, t24Name=RESERVED.5, mandatory=false)
+        RESERVED_6 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=12.0, core=true, t24Name=RESERVED.6, mandatory=false)
+        RESERVED_7 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=13.0, core=true, t24Name=RESERVED.7, mandatory=false)
+        RESERVED_8 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=14.0, core=true, t24Name=RESERVED.8, mandatory=false)
+        RESERVED_9 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=15.0, core=true, t24Name=RESERVED.9, mandatory=false)
+        TAX_COMPONENT_TYPE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=25, sysNumber=2.0, core=true, t24Name=TAX.COMPONENT.TYPE, mandatory=false)
+        TOTAL : T24BusinessTypes:AMT
+            @i18n:Label (en=Total)
+            @t24:i (align=R, inputBehaviour=I, maxLength=19, sysNumber=5.0, core=true, t24Name=TOTAL, typeModifiers="-1", mandatory=false)
+    }
+    AUWHTX_INCOME_WHT_DETAILS__COMPONENT
+    {
+        COMPONENT -> AUWHTX_Foundation:AUWHTX_IDC_PARAMETER
+            @i18n:Label (en=Component)
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=3.0, core=true, businessType=S, t24Name=COMPONENT, mandatory=false)
+        VALUE : T24BusinessTypes:AMT
+            @i18n:Label (en=Value)
+            @i18n:Tooltip (en=Value)
+            @t24:i (align=R, inputBehaviour=I, maxLength=19, sysNumber=4.0, core=true, t24Name=VALUE, typeModifiers="-1", mandatory=false)
+    }
+    AUWHTX_INCOME_WHT_DETAILS__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=21.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    AUWHTX_INCOME_WHT_DETAILS__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=20.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    AUWHTX_INCOME_WHT_DETAILS__OVERRIDE
+    {
+        OVERRIDE : T24BusinessTypes:N
+            @i18n:Label (en=Override)
+            @i18n:Tooltip (en="Overrides generated by this transaction")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=17.0, core=true, t24Name=OVERRIDE, mandatory=false)
+    }
+    AUWHTX_PRODUCT_TRANSACTIONS
+        @i18n:Description (en="")
+        @t24:i (t24Name=AUWHTX.PRODUCT.TRANSACTIONS, level=F, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        ENTITLEMENT -> byValue AUWHTX_Foundation:AUWHTX_PRODUCT_TRANSACTIONS__ENTITLEMENT *
+            @t24:i (t24Name=ENTITLEMENT)
+        ID -> AUWHTX_Foundation:AUWHTX_PRODUCT_TRANSACTIONS PK required
+            @i18n:Label (en="Transaction Ref")
+            @i18n:Tooltip (en="Transaction Reference")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=0.0, core=true, businessType=A, t24Name="@ID", mandatory=true)
+    }
+    AUWHTX_PRODUCT_TRANSACTIONS__ENTITLEMENT
+    {
+        ENTITLEMENT : AUWHTX_Foundation:AUWHTX_PRODUCT_TRANSACTIONS__ENTITLEMENT__ENTITLEMENT
+            @i18n:Label (en=Entitlement)
+            @t24:i (align=L, inputBehaviour=I, maxLength=0, sysNumber=1.0, core=true, t24Name=ENTITLEMENT, mandatory=false)
+    }
+    /* This table is required to configure the Interest properties that has to be considered for the tax calculations under there respective product line. */
+    AUWHTX_TAX_PARAMETER
+        @i18n:Description (en="")
+        @t24:i (t24Name=AUWHTX.TAX.PARAMETER, level=I, type=H, allowedFunctions="A C D E H I L P Q R S", localRefApplicationSysNo=19.0, localRefAllowed=true)
+    {
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=28.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=29.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=25.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        AUWHTX_TAX_PARAMETER : AUWHTX_Foundation:AUWHTX_TAX_PARAMETER__AUWHTX_TAX_PARAMETER PK required
+            @t24:i (align=L, inputBehaviour=I, maxLength=6, sysNumber=0.0, core=true, t24Name=AUWHTX.TAX.PARAMETER, mandatory=true)
+        BONUS_INTEREST -> byValue AUWHTX_Foundation:AUWHTX_TAX_PARAMETER__BONUS_INTEREST *
+            @t24:i (t24Name=BONUS.INTEREST)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=26.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=22.0, core=true, t24Name=CURR.NO, mandatory=false)
+        CUSTOMER_TYPE -> byValue AUWHTX_Foundation:AUWHTX_TAX_PARAMETER__CUSTOMER_TYPE *
+            @t24:i (t24Name=CUSTOMER.TYPE)
+        DATE_TIME -> byValue AUWHTX_Foundation:AUWHTX_TAX_PARAMETER__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=27.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        INPUTTER -> byValue AUWHTX_Foundation:AUWHTX_TAX_PARAMETER__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        OVERRIDE -> byValue AUWHTX_Foundation:AUWHTX_TAX_PARAMETER__OVERRIDE *
+            @t24:i (t24Name=OVERRIDE)
+        PRODUCT_LINE -> byValue AUWHTX_Foundation:AUWHTX_TAX_PARAMETER__PRODUCT_LINE *
+            @t24:i (t24Name=PRODUCT.LINE)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=21.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        RESERVED_1 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=9.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_10 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=18.0, core=true, t24Name=RESERVED.10, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=10.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=11.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=12.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        RESERVED_5 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=13.0, core=true, t24Name=RESERVED.5, mandatory=false)
+        RESERVED_6 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=14.0, core=true, t24Name=RESERVED.6, mandatory=false)
+        RESERVED_7 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=15.0, core=true, t24Name=RESERVED.7, mandatory=false)
+        RESERVED_8 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=16.0, core=true, t24Name=RESERVED.8, mandatory=false)
+        RESERVED_9 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=17.0, core=true, t24Name=RESERVED.9, mandatory=false)
+        /* TFN.EXECEMPTION.CODE for Resident Minor */
+        RESIDENT_TFN_EXEMPT : AUWHTX_Foundation:AUWHTX_TAX_PARAMETER__RESIDENT_TFN_EXEMPT
+            @t24:i (align=R, inputBehaviour=I, maxLength=35, sysNumber=4.0, core=true, t24Name=RESIDENT.TFN.EXEMPT, mandatory=false)
+        STD_INTEREST -> byValue AUWHTX_Foundation:AUWHTX_TAX_PARAMETER__STD_INTEREST *
+            @t24:i (t24Name=STD.INTEREST)
+    }
+    AUWHTX_TAX_PARAMETER__BONUS_INTEREST
+    {
+        /* This field holds the value of the  Customer's Standard Interest */
+        BONUS_INTEREST -> AA_ProductFramework:AA_PROPERTY
+            @t24:i (align=L, inputBehaviour=I, maxLength=30, sysNumber=8.0, core=true, businessType=A, t24Name=BONUS.INTEREST, mandatory=false)
+    }
+    AUWHTX_TAX_PARAMETER__CUSTOMER_TYPE
+    {
+        /* This field holds the value of the  Customer's Annual Threshold */
+        ANNUAL_THRESHOLD : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=35, sysNumber=2.0, core=true, t24Name=ANNUAL.THRESHOLD, typeModifiers="USD", mandatory=false)
+        /* This field holds the value of the  Customer's Capital Threshold */
+        CAP_THRESHOLD : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=35, sysNumber=3.0, core=true, t24Name=CAP.THRESHOLD, typeModifiers="USD", mandatory=false)
+        /* ,It is a drop down field , which indicates the customer classification,ie Resident Minor , Resident Adult and NonResident.Associated multivalued set along with ANNUAL.THRES AND CAP.THRESHOLD */
+        CUSTOMER_TYPE : AUWHTX_Foundation:AUWHTX_TAX_PARAMETER__CUSTOMER_TYPE__CUSTOMER_TYPE
+            @i18n:Label (en="Customer Type")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=1.0, core=true, t24Name=CUSTOMER.TYPE, mandatory=false)
+    }
+    AUWHTX_TAX_PARAMETER__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=24.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    AUWHTX_TAX_PARAMETER__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=23.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    AUWHTX_TAX_PARAMETER__OVERRIDE
+    {
+        OVERRIDE : T24BusinessTypes:N
+            @i18n:Label (en=Override)
+            @i18n:Tooltip (en="Overrides generated by this transaction")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=20.0, core=true, t24Name=OVERRIDE, mandatory=false)
+    }
+    AUWHTX_TAX_PARAMETER__PRODUCT_LINE
+    {
+/* This value holds the value of a valid  Product Line .Associated multivalued set along with PROPERTY
+Validation Rule:AA.PRODUCT.LINE values */
+        PRODUCT_LINE -> AA_ProductFramework:AA_PRODUCT_LINE
+            @i18n:Label (en="Product Line")
+            @t24:i (align=L, inputBehaviour=I, maxLength=20, sysNumber=5.0, core=true, businessType=A, t24Name=PRODUCT.LINE, mandatory=false)
+        PROPERTY -> byValue AUWHTX_Foundation:AUWHTX_TAX_PARAMETER__PRODUCT_LINE__PROPERTY *
+            @t24:i (t24Name=PROPERTY)
+    }
+    AUWHTX_TAX_PARAMETER__PRODUCT_LINE__PROPERTY
+    {
+        /* This field accepts a INTEREST property.Associated sub value set. */
+        PROPERTY -> AA_ProductFramework:AA_PROPERTY
+            @i18n:Label (en=Property)
+            @t24:i (align=L, inputBehaviour=I, maxLength=30, sysNumber=6.0, core=true, businessType=A, t24Name=PROPERTY, mandatory=false)
+    }
+    AUWHTX_TAX_PARAMETER__STD_INTEREST
+    {
+        /* This field holds the value of the  Customer's Standard Interest */
+        STD_INTEREST -> AA_ProductFramework:AA_PROPERTY
+            @t24:i (align=L, inputBehaviour=I, maxLength=30, sysNumber=7.0, core=true, businessType=A, t24Name=STD.INTEREST, mandatory=false)
+    }
+    AUWHTX_YEAR_END_COMPONENT_VALUES
+        @i18n:Description (en="")
+        @t24:i (t24Name=AUWHTX.YEAR.END.COMPONENT.VALUES, level=F, type=U, allowedFunctions="A C D E I L P Q R S", localRefApplicationSysNo=4.0, localRefAllowed=true)
+    {
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=23.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=24.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=20.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        COMPONENT -> byValue AUWHTX_Foundation:AUWHTX_YEAR_END_COMPONENT_VALUES__COMPONENT *
+            @t24:i (t24Name=COMPONENT)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=21.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURRENCY -> ST_CurrencyConfig:CURRENCY
+            @i18n:Label (en=Ccy)
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=1.0, core=true, businessType=CCY, t24Name=CURRENCY, mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=17.0, core=true, t24Name=CURR.NO, mandatory=false)
+        DATE_TIME -> byValue AUWHTX_Foundation:AUWHTX_YEAR_END_COMPONENT_VALUES__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=22.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        INPUTTER -> byValue AUWHTX_Foundation:AUWHTX_YEAR_END_COMPONENT_VALUES__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        OVERRIDE -> byValue AUWHTX_Foundation:AUWHTX_YEAR_END_COMPONENT_VALUES__OVERRIDE *
+            @t24:i (t24Name=OVERRIDE)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=16.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        RESERVED_1 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=5.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_10 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=14.0, core=true, t24Name=RESERVED.10, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=6.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=7.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=8.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        RESERVED_5 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=9.0, core=true, t24Name=RESERVED.5, mandatory=false)
+        RESERVED_6 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=10.0, core=true, t24Name=RESERVED.6, mandatory=false)
+        RESERVED_7 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=11.0, core=true, t24Name=RESERVED.7, mandatory=false)
+        RESERVED_8 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=12.0, core=true, t24Name=RESERVED.8, mandatory=false)
+        RESERVED_9 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=13.0, core=true, t24Name=RESERVED.9, mandatory=false)
+        YEAREND_PROFILE_ID -> AUWHTX_Foundation:AUWHTX_YEAR_END_COMPONENT_VALUES PK required
+            @t24:i (align=L, inputBehaviour=I, maxLength=97, sysNumber=0.0, core=true, businessType=S, t24Name=YEAREND.PROFILE.ID, mandatory=true)
+    }
+    AUWHTX_YEAR_END_COMPONENT_VALUES__COMPONENT
+    {
+        COMPONENT -> AUWHTX_Foundation:AUWHTX_IDC_PARAMETER
+            @i18n:Label (en=Component)
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=2.0, core=true, businessType=A, t24Name=COMPONENT, mandatory=false)
+        VALUE : T24BusinessTypes:AMT
+            @i18n:Label (en=Value)
+            @i18n:Tooltip (en=Value)
+            @t24:i (align=R, inputBehaviour=I, maxLength=19, sysNumber=3.0, core=true, t24Name=VALUE, typeModifiers="-1", mandatory=false)
+    }
+    AUWHTX_YEAR_END_COMPONENT_VALUES__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=19.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    AUWHTX_YEAR_END_COMPONENT_VALUES__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=18.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    AUWHTX_YEAR_END_COMPONENT_VALUES__OVERRIDE
+    {
+        OVERRIDE : T24BusinessTypes:N
+            @i18n:Label (en=Override)
+            @i18n:Tooltip (en="Overrides generated by this transaction")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=15.0, core=true, t24Name=OVERRIDE, mandatory=false)
+    }
+}
+Enumerations {
+    AUWHTX_IDC_PARAMETER__ACCOUNTING_COST_BASE_ADJ : mml:string
+        NO=NO
+        YES=YES
+    AUWHTX_IDC_PARAMETER__COST_BASE_ADJUSTMENT_TYPE : mml:string
+        REDUCED_COST=REDUCED.COST
+        REDUCED_COST_TAX_COST=REDUCED.COST.TAX.COST
+    AUWHTX_IDC_PARAMETER__COST_BASE_SIGN : mml:string
+        MINUS=MINUS
+        PLUS=PLUS
+    AUWHTX_IDC_PARAMETER__IDC_CATEGORY : mml:string
+        CASH=CASH
+        NONCASH=NONCASH
+    AUWHTX_IDC_PARAMETER__NR_RESIDENT_TAX_TREATMENT : mml:string
+        ASSESSABLE=ASSESSABLE
+        NONASSESSABLE=NONASSESSABLE
+    AUWHTX_IDC_PARAMETER__NR_TAX_COMPONENT_TYPE : mml:string
+        12HTAX=12HTAX
+        INTEREST_ROYALTIES=INTEREST.ROYALTIES
+    AUWHTX_IDC_PARAMETER__RESIDENT_TAX_TREATMENT : mml:string
+        ASSESSABLE=ASSESSABLE
+        NONASSESSABLE=NONASSESSABLE
+    AUWHTX_IDC_PARAMETER__TAX_COMPONENT_TYPE : mml:string
+        NONRESIDENTTAX=NONRESIDENTTAX
+        NOTFNTAX=NOTFNTAX
+        YEARENDTAXPROFILE=YEARENDTAXPROFILE
+    AUWHTX_IDC_YEAR_END_TAX_PROFILE__APPL_CUSTOMER_TYPE : mml:string
+        ALL=ALL
+        NONRESIDENTS=NONRESIDENTS
+        RESIDENTS=RESIDENTS
+    AUWHTX_IDC_YEAR_END_TAX_PROFILE__ENTITLEMENT_BASE : mml:string
+        NO=NO
+        YES=YES
+    AUWHTX_IDC_YEAR_END_TAX_PROFILE__SURPLUS_DEFICIT_PERCENTAGE : mml:string
+        NO=NO
+        YES=YES
+    AUWHTX_IDC_YEAR_END_TAX_PROFILE__YEAR_END_TAX_TYPE : mml:string
+        FINAL=FINAL
+        INITIAL=INITIAL
+    AUWHTX_PRODUCT_TRANSACTIONS__ENTITLEMENT__ENTITLEMENT : mml:string
+        97_1=97.1
+    AUWHTX_TAX_PARAMETER__AUWHTX_TAX_PARAMETER : mml:string
+        SYSTEM=SYSTEM
+    AUWHTX_TAX_PARAMETER__CUSTOMER_TYPE__CUSTOMER_TYPE : mml:string
+        NONRESIDENT=NONRESIDENT
+        RESIDENT_ADULT=RESIDENT.ADULT
+        RESIDENT_MINOR=RESIDENT.MINOR
+    AUWHTX_TAX_PARAMETER__RESIDENT_TFN_EXEMPT : mml:string
+        000000000=000000000
+        111111111=111111111
+        222222222=222222222
+        333333333=333333333
+        444444444=444444444
+        555555555=555555555
+        777777777=777777777
+        888888888=888888888
+        987654321=987654321
+}

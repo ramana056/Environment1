@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<localref:LocalRef xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:localref="http://www.odcgroup.com/t24/application/localref/model/LocalRef"
+    xmlns:translationDsl="http://www.odcgroup.com/translation/TranslationDsl" localRefID="USREGS.AFFL.MKT.STATUS" maximumChars="11" minimumChars="0"
+    mandatory="false" charType="A" defaultPossible="false" description="Affiliate marketing customer option">
+  <shortName xsi:type="translationDsl:LocalTranslations">
+    <translations locale="en" text="AFFL.MKT.STATUS"/>
+  </shortName>
+  <vettingTable vettingTable="OPT-IN">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Opt In"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="OPT-OUT">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Opt Out"/>
+    </remarks>
+  </vettingTable>
+</localref:LocalRef>

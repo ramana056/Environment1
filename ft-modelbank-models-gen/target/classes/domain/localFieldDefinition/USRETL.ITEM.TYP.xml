@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<localref:LocalRef xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:localref="http://www.odcgroup.com/t24/application/localref/model/LocalRef"
+    xmlns:translationDsl="http://www.odcgroup.com/translation/TranslationDsl" localRefID="USRETL.ITEM.TYP" maximumChars="25" minimumChars="0"
+    mandatory="false" charType="A" defaultPossible="false" virtualTable="AA.ACTIVITY.ITEM"
+    description="USRETL.ITEM.TYP">
+  <shortName xsi:type="translationDsl:LocalTranslations">
+    <translations locale="en" text="USRETL.ITEM.TYP"/>
+  </shortName>
+  <vettingTable vettingTable="COINS.DENOM">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="No. of coins (Denomination)"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="DEPOSITED.ITEM">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Deposited Items"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="NO.OF.ROLLS">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="No. of Coin Rolls"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="NOTES.DENOM">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="No. of notes (Denomination)"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="ONUS.ITEM">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="ONUS Items"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="PHOTOCOPY.PAGES">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Photocopy Pages"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="STMT.PAGES">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Statement Pages"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="STRAPPED.CCY">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="No. of Strapped Currency"/>
+    </remarks>
+  </vettingTable>
+</localref:LocalRef>

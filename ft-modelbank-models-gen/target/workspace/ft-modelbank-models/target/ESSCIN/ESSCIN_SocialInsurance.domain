@@ -1,0 +1,569 @@
+# UTF-8
+/* Social Insurance Payments */
+Domain ESSCIN_SocialInsurance
+    @t24:i (module=ESSCIN)
+    @java:Package (value=com.temenos.t24.datamodel.esscin.esscin_socialinsurance)
+namespace "http://www.temenos.com/t24/ESSCIN_SocialInsurance"
+metamodelVersion 1.30.6
+Classes {
+    /* This template is used to store the insurance amount collected on every month */
+    ESSCIN_INSURANCE_AMOUNT
+        @i18n:Description (en="")
+        @t24:i (t24Name=ESSCIN.INSURANCE.AMOUNT, level=F, type=L, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        /* It holds the INSURANCE Amount collected */
+        AMOUNT : T24BusinessTypes:AMT
+            @i18n:Label (en=Amount)
+            @i18n:Tooltip (en="Indicates the Amount")
+            @t24:i (align=R, inputBehaviour=I, maxLength=12, sysNumber=1.0, core=true, t24Name=AMOUNT, typeModifiers="-USD", mandatory=false)
+        /* The @ID will be the YEAR and MONTH */
+        ID -> ESSCIN_SocialInsurance:ESSCIN_INSURANCE_AMOUNT PK required
+            @i18n:Label (en="Transaction Ref")
+            @i18n:Tooltip (en="Transaction Reference")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=0.0, core=true, businessType=A, t24Name="@ID", mandatory=true)
+    }
+    /* This template holds the details of insurance payments made by customers for CUADERNO57 and other TR  insurance types. The insurance payment details stored in this template forms the basis or source of information for generation of outward files from the bank to the insurance authorities. */
+    ESSCIN_INSURANCE_DATA_FORM
+        @i18n:Description (en="")
+        @t24:i (t24Name=ESSCIN.INSURANCE.DATA.FORM, level=F, type=H, allowedFunctions="A C D E H I L P Q R S", localRefApplicationSysNo=35.0, localRefAllowed=true)
+    {
+        /* Auto-populated with value from DEBIT.ACCOUNT field from PAYMENT.ORDER table  (for Social Insurance payment via Account Transfer) */
+        ACCOUNT_NUMBER -> AC_AccountOpening:ACCOUNT
+            @i18n:Label (en="Account Number")
+            @t24:i (align=R, inputBehaviour=I, maxLength=36, sysNumber=15.0, core=true, businessType=ACC, t24Name=ACCOUNT.NUMBER, mandatory=false)
+        /* Refers to the action */
+        ACTION : ESSCIN_SocialInsurance:ESSCIN_INSURANCE_DATA_FORM__ACTION
+            @i18n:Label (en=Action)
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=1.0, core=true, t24Name=ACTION, mandatory=false)
+        /* Auto-populated with value from AMOUNT.LOCAL.1 field from TELLER table (for Social Insurance Cash payment) or PAYMENT.AMOUNT field from PAYMENT.ORDER table (for Social Insurance payment via Account Transfer) */
+        AMOUNT : T24BusinessTypes:AMT
+            @i18n:Label (en=Amount)
+            @i18n:Tooltip (en="Indicates the Amount")
+            @t24:i (align=R, inputBehaviour=I, maxLength=12, sysNumber=9.0, core=true, t24Name=AMOUNT, typeModifiers="-USD", mandatory=false)
+        /* This field is to store any At/Ep. User Input, Amount field which can take a negative sign */
+        AT_EP : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=12, sysNumber=25.0, core=true, t24Name=AT.EP, typeModifiers="-USD", mandatory=false)
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=59.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=60.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=56.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        /* This field stores type of the insurance collected */
+        COLLECTION_TYPE : ESSCIN_SocialInsurance:ESSCIN_INSURANCE_DATA_FORM__COLLECTION_TYPE
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=14.0, core=true, t24Name=COLLECTION.TYPE, mandatory=false)
+        /* This field is to stores Comments */
+        COMMENTS : T24BusinessTypes:A
+            @i18n:Label (en=Comments)
+            @i18n:Tooltip (en="Comments if any")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=30.0, core=true, t24Name=COMMENTS, mandatory=false)
+        /* Compensation/Reduction User Input, Amount field */
+        COMPENSATION : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=12, sysNumber=23.0, core=true, t24Name=COMPENSATION, typeModifiers="-USD", mandatory=false)
+        /* This field is to store any contingencies. User Input, Amount field which can take a negative sign */
+        CONTINGENCIES : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=12, sysNumber=24.0, core=true, t24Name=CONTINGENCIES, typeModifiers="-USD", mandatory=false)
+        /* This field stores the control digit of the entity number, branch code and Account Number */
+        CONTROL_DIGIT : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=2, sysNumber=16.0, core=true, t24Name=CONTROL.DIGIT, mandatory=false)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=57.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        /* Auto-populated with value from CURRENCY.1 field from TELLER table (for Social Insurance Cash payment) or PAYMENT.CURRENCY field from PAYMENT.ORDER table  (for Social Insurance payment via Account Transfer) */
+        CURRENCY -> ST_CurrencyConfig:CURRENCY
+            @i18n:Label (en=Ccy)
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=10.0, core=true, businessType=A, t24Name=CURRENCY, mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=53.0, core=true, t24Name=CURR.NO, mandatory=false)
+        CUSTOMER -> ST_Customer:CUSTOMER
+            @i18n:Label (en=Customer)
+            @i18n:Tooltip (en="Customer Liability")
+            @t24:i (align=R, inputBehaviour=I, maxLength=10, sysNumber=36.0, core=true, businessType=CUS, t24Name=CUSTOMER, mandatory=false)
+        /* Refers to customer type (customer or non customer) */
+        CUSTOMER_TYPE : ESSCIN_SocialInsurance:ESSCIN_INSURANCE_DATA_FORM__CUSTOMER_TYPE
+            @i18n:Label (en="Customer Type")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=3.0, core=true, t24Name=CUSTOMER.TYPE, mandatory=false)
+        DATE_TIME -> byValue ESSCIN_SocialInsurance:ESSCIN_INSURANCE_DATA_FORM__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=58.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        /* This field is to store the Document type */
+        DOCUMENT_TYPE : T24BusinessTypes:A
+            @i18n:Label (en="Document Type")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=7.0, core=true, t24Name=DOCUMENT.TYPE, mandatory=false)
+        /* This field is to store File Number */
+        FILE_NUMBER : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=31.0, core=true, t24Name=FILE.NUMBER, mandatory=false)
+        /* The @ID will be auto generated */
+        ID -> ESSCIN_SocialInsurance:ESSCIN_INSURANCE_DATA_FORM PK required
+            @i18n:Label (en="Transaction Ref")
+            @i18n:Tooltip (en="Transaction Reference")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=0.0, core=true, businessType=A, t24Name="@ID", mandatory=true)
+        /* This field is to store the Identification code */
+        IDENTIFICATION : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=12, sysNumber=22.0, core=true, t24Name=IDENTIFICATION, mandatory=false)
+        INPUTTER -> byValue ESSCIN_SocialInsurance:ESSCIN_INSURANCE_DATA_FORM__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        /* This field is to store internal Account */
+        INTERNAL_ACCOUNT -> AC_AccountOpening:ACCOUNT
+            @t24:i (align=L, inputBehaviour=I, maxLength=36, sysNumber=33.0, core=true, businessType=INT, t24Name=INTERNAL.ACCOUNT, mandatory=false)
+        /* Value retrieved from REGIME field in ESSSPY.INSURANCE.MODEL.DETAILS table based on ISSUER.SUFFIX field input by the user */
+        ISSUER_NAME : T24BusinessTypes:TEXT
+            @i18n:Label (en="Issuer Name")
+            @i18n:Tooltip (en="Issuer Name")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=19.0, core=true, t24Name=ISSUER.NAME, mandatory=false)
+        /* User Input (Dropdown values)Stored in SUFFIX field in ESSSPY.INSURANCE.MODEL.DETAILS table */
+        ISSUER_SUFFIX : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=18.0, core=true, t24Name=ISSUER.SUFFIX, mandatory=false)
+        K_TYPE : T24BusinessTypes:A
+            @i18n:Label (en=KType)
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=8.0, core=false, t24Name=K.TYPE, mandatory=false)
+        /* This field is to store the language */
+        LANGUAGE : ESSCIN_SocialInsurance:ESSCIN_INSURANCE_DATA_FORM__LANGUAGE
+            @i18n:Label (en=Language)
+            @i18n:Tooltip (en="Indicates the Language used")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=11.0, core=true, t24Name=LANGUAGE, mandatory=false)
+        /* This field is to store start date of liquidation period */
+        LIQUIDATION_PERIOD_FROM : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=28.0, core=true, t24Name=LIQUIDATION.PERIOD.FROM, mandatory=false)
+        /* This field is to store end date of liquidation period */
+        LIQUIDATION_PERIOD_TO : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=29.0, core=true, t24Name=LIQUIDATION.PERIOD.TO, mandatory=false)
+        /* Value retrieved from MODEL.CODE field stored in ESSSPY.INSURANCE.MODEL.DETAILS table based on TC.CODE field input by the user */
+        MODEL_CODE : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=6, sysNumber=5.0, core=true, t24Name=MODEL.CODE, mandatory=false)
+        /* Value retrieved from MODEL.DESCRIPTION field stored in ESSSPY.INSURANCE.MODEL.DETAILS table based on TC.CODE field input by the user */
+        MODEL_CODE_DESCRIPTION : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=6.0, core=true, t24Name=MODEL.CODE.DESCRIPTION, mandatory=false)
+        /* Refers to the insurance type */
+        MODEL_TYPE : ESSCIN_SocialInsurance:ESSCIN_INSURANCE_DATA_FORM__MODEL_TYPE
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=2.0, core=true, t24Name=MODEL.TYPE, mandatory=false)
+        /* This field is to store the NIB Value */
+        NIB : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=20.0, core=true, t24Name=NIB, mandatory=false)
+        /* This field stores the date of the insurance transaction */
+        OPERATION_DATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=12.0, core=true, t24Name=OPERATION.DATE, mandatory=false)
+        /* This field is to store any other quatation. User Input, Amount field which can take a negative sign */
+        OTHER_QUOTATION : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=12, sysNumber=26.0, core=true, t24Name=OTHER.QUOTATION, typeModifiers="-USD", mandatory=false)
+        OVERRIDE -> byValue ESSCIN_SocialInsurance:ESSCIN_INSURANCE_DATA_FORM__OVERRIDE *
+            @t24:i (t24Name=OVERRIDE)
+        /* This field stores the date of the insurance presentation */
+        PRESENTATION_DATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=13.0, core=true, t24Name=PRESENTATION.DATE, mandatory=false)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=52.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        /* This field is to store the Reference Number */
+        REFERENCE_NUMBER : T24BusinessTypes:A
+            @i18n:Label (en=Reference)
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=21.0, core=true, t24Name=REFERENCE.NUMBER, mandatory=false)
+        /* This field stores the code of direction provincial */
+        REGION_DIGIT : ESSCIN_SocialInsurance:ESSCIN_INSURANCE_DATA_FORM__REGION_DIGIT
+            @t24:i (align=R, inputBehaviour=I, maxLength=35, sysNumber=17.0, core=true, t24Name=REGION.DIGIT, mandatory=false)
+        RESERVED_10 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=45.0, core=true, t24Name=RESERVED.10, mandatory=false)
+        RESERVED_11 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=46.0, core=true, t24Name=RESERVED.11, mandatory=false)
+        RESERVED_12 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=47.0, core=true, t24Name=RESERVED.12, mandatory=false)
+        RESERVED_13 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=48.0, core=true, t24Name=RESERVED.13, mandatory=false)
+        RESERVED_14 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=49.0, core=true, t24Name=RESERVED.14, mandatory=false)
+        RESERVED_15 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=50.0, core=true, t24Name=RESERVED.15, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=37.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=38.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=39.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        RESERVED_5 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=40.0, core=true, t24Name=RESERVED.5, mandatory=false)
+        RESERVED_6 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=41.0, core=true, t24Name=RESERVED.6, mandatory=false)
+        RESERVED_7 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=42.0, core=true, t24Name=RESERVED.7, mandatory=false)
+        RESERVED_8 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=43.0, core=true, t24Name=RESERVED.8, mandatory=false)
+        RESERVED_9 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=44.0, core=true, t24Name=RESERVED.9, mandatory=false)
+        /* This field is to store social security identifier */
+        SOCIAL_SECURITY_IDENTIFIER : ESSCIN_SocialInsurance:ESSCIN_INSURANCE_DATA_FORM__SOCIAL_SECURITY_IDENTIFIER
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=34.0, core=true, t24Name=SOCIAL.SECURITY.IDENTIFIER, mandatory=false)
+        /* This field is to store any other Surcharge */
+        SURCHARGE : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=12, sysNumber=27.0, core=true, t24Name=SURCHARGE, typeModifiers="-USD", mandatory=false)
+        /* User Input (Dropdown values)Values stored in ESSSPY.INSURANCE.MODEL.DETAILS table */
+        TC_CODE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=10, sysNumber=4.0, core=true, t24Name=TC.CODE, mandatory=false)
+        /* This field is to store transaction ref */
+        TRANSACTION_REF : T24BusinessTypes:A
+            @i18n:Label (en="Transaction Ref")
+            @i18n:Tooltip (en="Transaction Reference")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=32.0, core=true, t24Name=TRANSACTION.REF, mandatory=false)
+        /* This field is to store the Insurance Transaction type */
+        TYPE : T24BusinessTypes:A
+            @i18n:Label (en=Type)
+            @i18n:Tooltip (en=Type)
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=8.0, core=true, t24Name=TYPE, mandatory=false)
+    }
+    ESSCIN_INSURANCE_DATA_FORM__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=55.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    ESSCIN_INSURANCE_DATA_FORM__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=54.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    ESSCIN_INSURANCE_DATA_FORM__OVERRIDE
+    {
+        OVERRIDE : T24BusinessTypes:N
+            @i18n:Label (en=Override)
+            @i18n:Tooltip (en="Overrides generated by this transaction")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=51.0, core=true, t24Name=OVERRIDE, mandatory=false)
+    }
+    /* This template holds the Insurance Model details infromation for reference */
+    ESSCIN_INSURANCE_MODEL_DETAILS
+        @i18n:Description (en="")
+        @t24:i (t24Name=ESSCIN.INSURANCE.MODEL.DETAILS, level=F, type=H, allowedFunctions="A C D E H I L P Q R S", localRefApplicationSysNo=8.0, localRefAllowed=true)
+    {
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=32.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=33.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=29.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        /* User configures CODE QUOTE MODEL corresponding to the MODEL */
+        CODE_QUOTE_MODEL : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=2, sysNumber=7.0, core=true, t24Name=CODE.QUOTE.MODEL, mandatory=false)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=30.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=26.0, core=true, t24Name=CURR.NO, mandatory=false)
+        DATE_TIME -> byValue ESSCIN_SocialInsurance:ESSCIN_INSURANCE_MODEL_DETAILS__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=31.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        /* The @ID will be either issuer suffix or TC code */
+        ID -> ESSCIN_SocialInsurance:ESSCIN_INSURANCE_MODEL_DETAILS PK required
+            @i18n:Label (en="Transaction Ref")
+            @i18n:Tooltip (en="Transaction Reference")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=0.0, core=true, businessType=A, t24Name="@ID", mandatory=true)
+        INPUTTER -> byValue ESSCIN_SocialInsurance:ESSCIN_INSURANCE_MODEL_DETAILS__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        /* Referes to TC Code */
+        MODEL : T24BusinessTypes:A
+            @i18n:Label (en=Model)
+            @t24:i (align=L, inputBehaviour=I, maxLength=10, sysNumber=2.0, core=true, t24Name=MODEL, mandatory=false)
+        /* User configures Model Code corresponding to the MODEL */
+        MODEL_CODE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=6, sysNumber=3.0, core=true, t24Name=MODEL.CODE, mandatory=false)
+        MODEL_DESCRIPTION : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=4.0, core=true, t24Name=MODEL.DESCRIPTION, mandatory=false)
+        /* Refers to the insurance type */
+        MODEL_TYPE : ESSCIN_SocialInsurance:ESSCIN_INSURANCE_MODEL_DETAILS__MODEL_TYPE
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=1.0, core=true, t24Name=MODEL.TYPE, mandatory=false)
+        OVERRIDE -> byValue ESSCIN_SocialInsurance:ESSCIN_INSURANCE_MODEL_DETAILS__OVERRIDE *
+            @t24:i (t24Name=OVERRIDE)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=25.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        /* User configures ISSUER NAME */
+        REGIME : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=6.0, core=true, t24Name=REGIME, mandatory=false)
+        RESERVED_10 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=18.0, core=true, t24Name=RESERVED.10, mandatory=false)
+        RESERVED_11 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=19.0, core=true, t24Name=RESERVED.11, mandatory=false)
+        RESERVED_12 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=20.0, core=true, t24Name=RESERVED.12, mandatory=false)
+        RESERVED_13 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=21.0, core=true, t24Name=RESERVED.13, mandatory=false)
+        RESERVED_14 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=22.0, core=true, t24Name=RESERVED.14, mandatory=false)
+        RESERVED_15 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=23.0, core=true, t24Name=RESERVED.15, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=10.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=11.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=12.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        RESERVED_5 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=13.0, core=true, t24Name=RESERVED.5, mandatory=false)
+        RESERVED_6 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=14.0, core=true, t24Name=RESERVED.6, mandatory=false)
+        RESERVED_7 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=15.0, core=true, t24Name=RESERVED.7, mandatory=false)
+        RESERVED_8 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=16.0, core=true, t24Name=RESERVED.8, mandatory=false)
+        RESERVED_9 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=17.0, core=true, t24Name=RESERVED.9, mandatory=false)
+        SOCIAL_SECURITY_IDENTIFIER -> byValue ESSCIN_SocialInsurance:ESSCIN_INSURANCE_MODEL_DETAILS__SOCIAL_SECURITY_IDENTIFIER *
+            @t24:i (t24Name=SOCIAL.SECURITY.IDENTIFIER)
+        /* User configures ISSUER SUFFIX */
+        SUFFIX : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=5.0, core=true, t24Name=SUFFIX, mandatory=false)
+    }
+    ESSCIN_INSURANCE_MODEL_DETAILS__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=28.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    ESSCIN_INSURANCE_MODEL_DETAILS__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=27.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    ESSCIN_INSURANCE_MODEL_DETAILS__OVERRIDE
+    {
+        OVERRIDE : T24BusinessTypes:N
+            @i18n:Label (en=Override)
+            @i18n:Tooltip (en="Overrides generated by this transaction")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=24.0, core=true, t24Name=OVERRIDE, mandatory=false)
+    }
+    ESSCIN_INSURANCE_MODEL_DETAILS__SOCIAL_SECURITY_IDENTIFIER
+    {
+        SOCIAL_SECURITY_IDENTIFIER : ESSCIN_SocialInsurance:ESSCIN_INSURANCE_MODEL_DETAILS__SOCIAL_SECURITY_IDENTIFIER__SOCIAL_SECURITY_IDENTIFIER
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=9.0, core=true, t24Name=SOCIAL.SECURITY.IDENTIFIER, mandatory=false)
+    }
+    /* This template is used to store the configuration parameters for Social Insurance */
+    ESSCIN_INSURANCE_PARAMETER
+        @i18n:Description (en="")
+        @t24:i (t24Name=ESSCIN.INSURANCE.PARAMETER, level=I, type=H, allowedFunctions="A C D E H I L P Q R S", localRefApplicationSysNo=6.0, localRefAllowed=true)
+    {
+        /* It holds the TGSS Category */
+        ACCOUNT_CATEGORY -> ST_Config:CATEGORY
+            @i18n:Label (en="Account Category ")
+            @t24:i (align=R, inputBehaviour=I, maxLength=6, sysNumber=3.0, core=true, t24Name=ACCOUNT.CATEGORY, mandatory=false)
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=30.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=31.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=27.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        /* It holds CECA Vostro Acoount */
+        CECA_ACCOUNT -> AC_AccountOpening:ACCOUNT
+            @t24:i (align=R, inputBehaviour=I, maxLength=36, sysNumber=5.0, core=true, businessType=ACC, t24Name=CECA.ACCOUNT, mandatory=false)
+        COMPANY_CODE -> ESSCIN_SocialInsurance:ESSCIN_INSURANCE_PARAMETER PK required
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=I, maxLength=11, sysNumber=0.0, core=true, businessType=COM, t24Name=COMPANY.CODE, mandatory=true)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=28.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=24.0, core=true, t24Name=CURR.NO, mandatory=false)
+        DATE_TIME -> byValue ESSCIN_SocialInsurance:ESSCIN_INSURANCE_PARAMETER__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=29.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        /* It Holds the Bank Entity Number */
+        ENTITY_NUMBER : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=4, sysNumber=2.0, core=true, t24Name=ENTITY.NUMBER, mandatory=false)
+        INPUTTER -> byValue ESSCIN_SocialInsurance:ESSCIN_INSURANCE_PARAMETER__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        OUTFILE_FROM_DATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=7.0, core=true, t24Name=OUTFILE.FROM.DATE, mandatory=false)
+        OUTFILE_TO_DATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=8.0, core=true, t24Name=OUTFILE.TO.DATE, mandatory=false)
+        OVERRIDE -> byValue ESSCIN_SocialInsurance:ESSCIN_INSURANCE_PARAMETER__OVERRIDE *
+            @t24:i (t24Name=OVERRIDE)
+        /* It holds the Payment Order Product */
+        PAYMENT_ORDER_PRODUCT -> PI_Config:PAYMENT_ORDER_PRODUCT
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=1.0, core=true, businessType=A, t24Name=PAYMENT.ORDER.PRODUCT, mandatory=false)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=23.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        RESERVED_10 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=16.0, core=true, t24Name=RESERVED.10, mandatory=false)
+        RESERVED_11 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=17.0, core=true, t24Name=RESERVED.11, mandatory=false)
+        RESERVED_12 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=18.0, core=true, t24Name=RESERVED.12, mandatory=false)
+        RESERVED_13 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=19.0, core=true, t24Name=RESERVED.13, mandatory=false)
+        RESERVED_14 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=20.0, core=true, t24Name=RESERVED.14, mandatory=false)
+        RESERVED_15 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=21.0, core=true, t24Name=RESERVED.15, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=9.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=10.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        RESERVED_5 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=11.0, core=true, t24Name=RESERVED.5, mandatory=false)
+        RESERVED_6 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=12.0, core=true, t24Name=RESERVED.6, mandatory=false)
+        RESERVED_7 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=13.0, core=true, t24Name=RESERVED.7, mandatory=false)
+        RESERVED_8 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=14.0, core=true, t24Name=RESERVED.8, mandatory=false)
+        RESERVED_9 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=15.0, core=true, t24Name=RESERVED.9, mandatory=false)
+        /* It holds TGSS Vostro Account */
+        TGSS_ACCOUNT -> AC_AccountOpening:ACCOUNT
+            @t24:i (align=R, inputBehaviour=I, maxLength=36, sysNumber=4.0, core=true, businessType=ACC, t24Name=TGSS.ACCOUNT, mandatory=false)
+    }
+    ESSCIN_INSURANCE_PARAMETER__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=26.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    ESSCIN_INSURANCE_PARAMETER__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=25.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    ESSCIN_INSURANCE_PARAMETER__OVERRIDE
+    {
+        OVERRIDE : T24BusinessTypes:N
+            @i18n:Label (en=Override)
+            @i18n:Tooltip (en="Overrides generated by this transaction")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=22.0, core=true, t24Name=OVERRIDE, mandatory=false)
+    }
+    /* This template is a Concat file and used to store the ESSCIN.INSURANCE.DATA.FORM @ID */
+    ESSCIN_TRANSACTION_REF
+        @i18n:Description (en="")
+        @t24:i (t24Name=ESSCIN.TRANSACTION.REF, level=F, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        ID -> ESSCIN_SocialInsurance:ESSCIN_TRANSACTION_REF PK required
+            @i18n:Label (en="Transaction Ref")
+            @i18n:Tooltip (en="Transaction Reference")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=0.0, core=true, businessType=A, t24Name="@ID", mandatory=true)
+        TRANSACTION_REF -> byValue ESSCIN_SocialInsurance:ESSCIN_TRANSACTION_REF__TRANSACTION_REF *
+            @t24:i (t24Name=TRANSACTION.REF)
+    }
+    ESSCIN_TRANSACTION_REF__TRANSACTION_REF
+    {
+        /* Refers to the insurance data form id */
+        TRANSACTION_REF : T24BusinessTypes:A
+            @i18n:Label (en="Transaction Ref")
+            @i18n:Tooltip (en="Transaction Reference")
+            @t24:i (align=L, inputBehaviour=I, maxLength=10, sysNumber=1.0, core=true, t24Name=TRANSACTION.REF, mandatory=false)
+    }
+}
+Enumerations {
+    ESSCIN_INSURANCE_DATA_FORM__ACTION : mml:string
+        ALTA=ALTA
+        CONSULTA=CONSULTA
+        MANTENIMIENTO=MANTENIMIENTO
+    ESSCIN_INSURANCE_DATA_FORM__COLLECTION_TYPE : mml:string
+        EFECTIVO=EFECTIVO
+        NUMEROCUENTA=NUMEROCUENTA
+    ESSCIN_INSURANCE_DATA_FORM__CUSTOMER_TYPE : mml:string
+        CUSTOMER=CUSTOMER
+        NON_CUSTOMER=NON.CUSTOMER
+    ESSCIN_INSURANCE_DATA_FORM__LANGUAGE : mml:string
+        CASTELLANO=CASTELLANO
+        CATALAN=CATALAN
+        INGLES=INGLES
+    ESSCIN_INSURANCE_DATA_FORM__MODEL_TYPE : mml:string
+        CUADERNO57=CUADERNO57
+        TR=TR
+    ESSCIN_INSURANCE_DATA_FORM__REGION_DIGIT : mml:string
+        01=01
+        02=02
+        03=03
+        04=04
+        05=05
+        06=06
+        07=07
+        08=08
+        09=09
+        10=10
+        11=11
+        12=12
+        13=13
+        14=14
+        15=15
+        16=16
+        17=17
+        18=18
+        19=19
+        20=20
+        21=21
+        22=22
+        23=23
+        24=24
+        25=25
+        26=26
+        27=27
+        28=28
+        29=29
+        30=30
+        31=31
+        32=32
+        33=33
+        34=34
+        35=35
+        36=36
+        37=37
+        38=38
+        39=39
+        40=40
+        41=41
+        42=42
+        43=43
+        44=44
+        45=45
+        46=46
+        47=47
+        48=48
+        49=49
+        50=50
+        51=51
+        52=52
+    ESSCIN_INSURANCE_DATA_FORM__SOCIAL_SECURITY_IDENTIFIER : mml:string
+        CCC=CCC
+        NAF=NAF
+        OTHER=OTHER
+    ESSCIN_INSURANCE_MODEL_DETAILS__MODEL_TYPE : mml:string
+        CUADERNO57=CUADERNO57
+        TR=TR
+    ESSCIN_INSURANCE_MODEL_DETAILS__SOCIAL_SECURITY_IDENTIFIER__SOCIAL_SECURITY_IDENTIFIER : mml:string
+        CCC=CCC
+        NAF=NAF
+        OTHER=OTHER
+}

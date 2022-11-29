@@ -1,0 +1,981 @@
+# UTF-8
+/* UK Financial Services Comp Scheme */
+Domain UKFSCS_Reporting
+    @t24:i (module=UKFSCS)
+    @java:Package (value=com.temenos.t24.datamodel.ukfscs.ukfscs_reporting)
+namespace "http://www.temenos.com/t24/UKFSCS_Reporting"
+metamodelVersion 1.30.6
+Classes {
+/* This table classifies the legal status of the account and map the status to the FFSTP/NFFST processing flag in the FSCS reporting:
+The FSCS Account Status is used to classify deposits into : FFSTP-Fit-for-straight-through-payout or NFFSTP-Not-fit-for-straight-through-payout.
+If also marks deposits this are either:Sanctioned,Legally disputed,Legally dormant or Held behalf of another beneficiary. */
+    FSCS_ACCOUNT_STATUS
+        @i18n:Description (en="")
+        @t24:i (t24Name=FSCS.ACCOUNT.STATUS, level=F, type=H, allowedFunctions="A C D E H I L P Q R S", localRefApplicationSysNo=4.0, localRefAllowed=true)
+    {
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=23.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=24.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=20.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=21.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=17.0, core=true, t24Name=CURR.NO, mandatory=false)
+        DATE_TIME -> byValue UKFSCS_Reporting:FSCS_ACCOUNT_STATUS__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=22.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+/* Account Status Code Description.
+Example:
+Normal */
+        DESCRIPTION : T24BusinessTypes:A
+            @i18n:Label (en=Description)
+            @i18n:Tooltip (en=Description)
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=1.0, core=true, t24Name=DESCRIPTION, mandatory=false)
+/* Fit For Straight Through Payout
+Possible values:
+"Y" or "N" */
+        FFSTP : UKFSCS_Reporting:FSCS_ACCOUNT_STATUS__FFSTP
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=2.0, core=true, t24Name=FFSTP, mandatory=false)
+/* Exclusion type for FSCS reporting
+Validation Rule:
+Null, if FFSTP = 'Y'. Otherwise one of (HMTS, LEGDIS, LEGDOR, BEN) */
+        FSCS_EXCLUSION : UKFSCS_Reporting:FSCS_ACCOUNT_STATUS__FSCS_EXCLUSION
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=3.0, core=true, t24Name=FSCS.EXCLUSION, mandatory=false)
+        ID -> UKFSCS_Reporting:FSCS_ACCOUNT_STATUS PK required
+            @i18n:Label (en="Transaction Ref")
+            @i18n:Tooltip (en="Transaction Reference")
+            @t24:i (align=L, inputBehaviour=I, maxLength=6, sysNumber=0.0, core=true, businessType=A, t24Name="@ID", mandatory=true)
+        INPUTTER -> byValue UKFSCS_Reporting:FSCS_ACCOUNT_STATUS__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        OVERRIDE -> byValue UKFSCS_Reporting:FSCS_ACCOUNT_STATUS__OVERRIDE *
+            @t24:i (t24Name=OVERRIDE)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=16.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        RESERVED_1 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=14.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_10 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=5.0, core=true, t24Name=RESERVED.10, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=13.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=12.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=11.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        RESERVED_5 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=10.0, core=true, t24Name=RESERVED.5, mandatory=false)
+        RESERVED_6 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=9.0, core=true, t24Name=RESERVED.6, mandatory=false)
+        RESERVED_7 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=8.0, core=true, t24Name=RESERVED.7, mandatory=false)
+        RESERVED_8 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=7.0, core=true, t24Name=RESERVED.8, mandatory=false)
+        RESERVED_9 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=6.0, core=true, t24Name=RESERVED.9, mandatory=false)
+    }
+    FSCS_ACCOUNT_STATUS__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=19.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    FSCS_ACCOUNT_STATUS__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=18.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    FSCS_ACCOUNT_STATUS__OVERRIDE
+    {
+        OVERRIDE : T24BusinessTypes:N
+            @i18n:Label (en=Override)
+            @i18n:Tooltip (en="Overrides generated by this transaction")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=15.0, core=true, t24Name=OVERRIDE, mandatory=false)
+    }
+/* This application is supposed to maintain the FSCS eligibility on deposit level. Any entry made here will overwrite the FSCSC eligibility given in customer level. A status can be assigned to each account or contract that will be reported as 'Account Status' to FSCS and determines, if the deposit fit for straight though payout or not.:
+User should enter only accounts and deposits or eligible customers, which are either not eligible and/or one of the following conditions apply:
+The deposit is sanctioned
+The deposit is legally disputed
+The deposit is legally dormant
+The owner is not the beneficiary */
+    FSCS_DEPOSIT_EXCEPTION
+        @i18n:Description (en="")
+        @t24:i (t24Name=FSCS.DEPOSIT.EXCEPTION, level=F, type=H, allowedFunctions="A C D E H I L P Q R S", localRefApplicationSysNo=3.0, localRefAllowed=true)
+    {
+/* Classification of the account or contract, to determine if the deposit fits for straight through payout (FFSTP).
+Validation Rule:
+Must be a valid entry in UKMB.H.FSCS.ACCOUNT.STATUS */
+        ACCOUNT_STATUS -> UKFSCS_Reporting:FSCS_ACCOUNT_STATUS required
+            @t24:i (align=L, inputBehaviour=I, maxLength=6, sysNumber=2.0, core=true, businessType=A, t24Name=ACCOUNT.STATUS, mandatory=true)
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=22.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=23.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=19.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=20.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=16.0, core=true, t24Name=CURR.NO, mandatory=false)
+        DATE_TIME -> byValue UKFSCS_Reporting:FSCS_DEPOSIT_EXCEPTION__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=21.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+/* Eligibility Code for depositors. The code determines if a customer is eligible for FSCS protection or not. The given code is a reason code that is mapped to 'yes' or 'no' in table UKMB.H.FSCS.ELIG.REASON.
+Validation Rule:
+Must be a valid entry in UKMB.H.FSCS.ELIG.REASON */
+        FSCS_ELIGIBILITY -> UKFSCS_Reporting:FSCS_ELIGIBILITY required
+            @t24:i (align=L, inputBehaviour=I, maxLength=2, sysNumber=1.0, core=true, businessType=A, t24Name=FSCS.ELIGIBILITY, mandatory=true)
+        ID -> UKFSCS_Reporting:FSCS_DEPOSIT_EXCEPTION PK required
+            @i18n:Label (en="Transaction Ref")
+            @i18n:Tooltip (en="Transaction Reference")
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=0.0, core=true, businessType=A, t24Name="@ID", mandatory=true)
+        INPUTTER -> byValue UKFSCS_Reporting:FSCS_DEPOSIT_EXCEPTION__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        OVERRIDE -> byValue UKFSCS_Reporting:FSCS_DEPOSIT_EXCEPTION__OVERRIDE *
+            @t24:i (t24Name=OVERRIDE)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=15.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        RESERVED_1 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=13.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_10 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=4.0, core=true, t24Name=RESERVED.10, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=12.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=11.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=10.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        RESERVED_5 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=9.0, core=true, t24Name=RESERVED.5, mandatory=false)
+        RESERVED_6 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=8.0, core=true, t24Name=RESERVED.6, mandatory=false)
+        RESERVED_7 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=7.0, core=true, t24Name=RESERVED.7, mandatory=false)
+        RESERVED_8 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=6.0, core=true, t24Name=RESERVED.8, mandatory=false)
+        RESERVED_9 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=5.0, core=true, t24Name=RESERVED.9, mandatory=false)
+    }
+    FSCS_DEPOSIT_EXCEPTION__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=18.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    FSCS_DEPOSIT_EXCEPTION__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=17.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    FSCS_DEPOSIT_EXCEPTION__OVERRIDE
+    {
+        OVERRIDE : T24BusinessTypes:N
+            @i18n:Label (en=Override)
+            @i18n:Tooltip (en="Overrides generated by this transaction")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=14.0, core=true, t24Name=OVERRIDE, mandatory=false)
+    }
+    /* This table keeps FSCS eligibility codes. Each code contains a reason and is mapped to 'yes', the customer is eligible to FSCS or 'no', the customer is not eligible. The T24 client bank capture their own codes and descriptions as required. */
+    FSCS_ELIGIBILITY
+        @i18n:Description (en="")
+        @t24:i (t24Name=FSCS.ELIGIBILITY, level=I, type=H, allowedFunctions="A C D E H I L P Q R S", localRefApplicationSysNo=3.0, localRefAllowed=true)
+    {
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=22.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=23.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=19.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=20.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=16.0, core=true, t24Name=CURR.NO, mandatory=false)
+        DATE_TIME -> byValue UKFSCS_Reporting:FSCS_ELIGIBILITY__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=21.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+/* Reason, why a customer is or is not eligible for the FSCS.
+Example:
+Private individual resident */
+        DESCRIPTION : T24BusinessTypes:A
+            @i18n:Label (en=Description)
+            @i18n:Tooltip (en=Description)
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=1.0, core=true, t24Name=DESCRIPTION, mandatory=false)
+/* Flag, if customer is eligible to FSCS or not.
+Validation Rule:
+'Y' or 'N' */
+        ELIGIBILITY : UKFSCS_Reporting:FSCS_ELIGIBILITY__ELIGIBILITY
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=2.0, core=true, t24Name=ELIGIBILITY, mandatory=false)
+        ID -> UKFSCS_Reporting:FSCS_ELIGIBILITY PK required
+            @i18n:Label (en="Transaction Ref")
+            @i18n:Tooltip (en="Transaction Reference")
+            @t24:i (align=L, inputBehaviour=I, maxLength=2, sysNumber=0.0, core=true, businessType=A, t24Name="@ID", mandatory=true)
+        INPUTTER -> byValue UKFSCS_Reporting:FSCS_ELIGIBILITY__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        OVERRIDE -> byValue UKFSCS_Reporting:FSCS_ELIGIBILITY__OVERRIDE *
+            @t24:i (t24Name=OVERRIDE)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=15.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        RESERVED_1 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=13.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_10 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=4.0, core=true, t24Name=RESERVED.10, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=12.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=11.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=10.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        RESERVED_5 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=9.0, core=true, t24Name=RESERVED.5, mandatory=false)
+        RESERVED_6 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=8.0, core=true, t24Name=RESERVED.6, mandatory=false)
+        RESERVED_7 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=7.0, core=true, t24Name=RESERVED.7, mandatory=false)
+        RESERVED_8 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=6.0, core=true, t24Name=RESERVED.8, mandatory=false)
+        RESERVED_9 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=5.0, core=true, t24Name=RESERVED.9, mandatory=false)
+    }
+    FSCS_ELIGIBILITY__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=18.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    FSCS_ELIGIBILITY__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=17.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    FSCS_ELIGIBILITY__OVERRIDE
+    {
+        OVERRIDE : T24BusinessTypes:N
+            @i18n:Label (en=Override)
+            @i18n:Tooltip (en="Overrides generated by this transaction")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=14.0, core=true, t24Name=OVERRIDE, mandatory=false)
+    }
+    /* This log table is used to store account details to generate reports */
+    FSCS_LOG_ACCOUNT
+        @i18n:Description (en="")
+        @t24:i (t24Name=FSCS.LOG.ACCOUNT, level=F, type=L, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        /* Account Number */
+        ACCOUNT_NO -> AC_AccountOpening:ACCOUNT
+            @i18n:Label (en=Account)
+            @i18n:Tooltip (en="Indicates Customer Account Number")
+            @t24:i (align=R, inputBehaviour=I, maxLength=36, sysNumber=2.0, core=true, businessType=ACC, t24Name=ACCOUNT.NO, mandatory=false)
+        /* AC.BALANCE.ORG.CCY */
+        AC_BALANCE_ORG_CCY : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=15, sysNumber=25.0, core=true, t24Name=AC.BALANCE.ORG.CCY, typeModifiers="-24", mandatory=false)
+        /* AC.BAL.STERLING */
+        AC_BAL_STERLING : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=15, sysNumber=22.0, core=true, t24Name=AC.BAL.STERLING, typeModifiers="-24", mandatory=false)
+        /* AC.BRANCH.JURISDICTION */
+        AC_BRANCH_JURISDICTION : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=19.0, core=true, t24Name=AC.BRANCH.JURISDICTION, mandatory=false)
+        /* AC.HOLDER.IND */
+        AC_HOLDER_IND : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=15.0, core=true, t24Name=AC.HOLDER.IND, mandatory=false)
+        /* AC.STATUS.CODE */
+        AC_STATUS_CODE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=16.0, core=true, t24Name=AC.STATUS.CODE, mandatory=false)
+/* Fit For Straight Through Payout
+Validation Rule:
+'Y' or 'N' */
+        AC_TITLE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=9.0, core=true, t24Name=AC.TITLE, mandatory=false)
+        /* AUTHORISED */
+        AUTHORISED : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=15, sysNumber=23.0, core=true, t24Name=AUTHORISED, mandatory=false)
+/* Fit For Straight Through Payout
+Validation Rule:
+'Y' or 'N' */
+        BIC : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=11, sysNumber=10.0, core=true, t24Name=BIC, mandatory=false)
+        /* BRRD.FLAG */
+        BRRD_FLAG : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=20.0, core=true, t24Name=BRRD.FLAG, mandatory=false)
+        /* CCY.AC */
+        CCY_AC -> ST_CurrencyConfig:CURRENCY
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=24.0, core=true, businessType=CCY, t24Name=CCY.AC, mandatory=false)
+        /* Customer Number */
+        CUSTOMER_NO -> ST_Customer:CUSTOMER
+            @i18n:Label (en="Customer No")
+            @i18n:Tooltip (en="Identifies the Customer for the transaction.")
+            @t24:i (align=R, inputBehaviour=I, maxLength=12, sysNumber=3.0, core=true, businessType=CUS, t24Name=CUSTOMER.NO, mandatory=false)
+/* Creation date and Time
+Example:
+22 APR 16 20:10 */
+        DATE_TIME : T24BusinessTypes:ANY
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=I, maxLength=15, sysNumber=6.0, core=true, t24Name=DATE.TIME, mandatory=false)
+        /* EXCHANGE.RATE */
+        EXCHANGE_RATE : T24BusinessTypes:ANY
+            @i18n:Label (en="Exchange Rate")
+            @t24:i (align=L, inputBehaviour=I, maxLength=29, sysNumber=26.0, core=true, t24Name=EXCHANGE.RATE, mandatory=false)
+/* Exclusion File
+Validation Rule:
+'Y' or 'N' */
+        EXCLUSION : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=1, sysNumber=7.0, core=true, t24Name=EXCLUSION, mandatory=false)
+        /* EXCLUSION.TYPE */
+        EXCLUSION_TYPE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=6, sysNumber=17.0, core=true, t24Name=EXCLUSION.TYPE, mandatory=false)
+/* Fit For Straight Through Payout
+Validation Rule:
+'Y' or 'N' */
+        FFSTP : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=1, sysNumber=8.0, core=true, t24Name=FFSTP, mandatory=false)
+/* Fit For Straight Through Payout
+Validation Rule:
+'Y' or 'N' */
+        IBAN : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=34, sysNumber=11.0, core=true, t24Name=IBAN, mandatory=false)
+        ID -> UKFSCS_Reporting:FSCS_LOG_ACCOUNT PK required
+            @i18n:Label (en="Transaction Ref")
+            @i18n:Tooltip (en="Transaction Reference")
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=0.0, core=true, businessType=A, t24Name="@ID", mandatory=true)
+        /* ORG.AC.BAL.BEFORE.INT */
+        ORG_AC_BAL_BEFORE_INT : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=15, sysNumber=27.0, core=true, t24Name=ORG.AC.BAL.BEFORE.INT, typeModifiers="-24", mandatory=false)
+/* T24 product code of the account or contact
+Validation Rule:
+T24 product code */
+        PRODUCT -> EB_SystemTables:EB_PRODUCT
+            @i18n:Label (en=Product)
+            @t24:i (align=L, inputBehaviour=I, maxLength=4, sysNumber=5.0, core=true, businessType=A, t24Name=PRODUCT, mandatory=false)
+        /* PRODUCT.NAME */
+        PRODUCT_NAME : T24BusinessTypes:A
+            @i18n:Label (en="Product Name")
+            @i18n:Tooltip (en="Indicates name of product owned by customer")
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=14.0, core=true, t24Name=PRODUCT.NAME, mandatory=false)
+        /* PRODUCT.TYPE */
+        PRODUCT_TYPE -> ST_Config:CATEGORY
+            @i18n:Label (en="Product Type")
+            @t24:i (align=L, inputBehaviour=I, maxLength=6, sysNumber=13.0, core=true, businessType=CAT, t24Name=PRODUCT.TYPE, mandatory=false)
+        /* RECENT */
+        RECENT : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=18.0, core=true, t24Name=RECENT, mandatory=false)
+/* Account or Contract ID
+Validation Rule:
+This files refers to the T24 account number or deposit contract Id. */
+        REFERENCE : T24BusinessTypes:A
+            @i18n:Label (en="Search by Referece")
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=4.0, core=true, t24Name=REFERENCE, mandatory=false)
+        RESERVED_1 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=38.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_10 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=29.0, core=true, t24Name=RESERVED.10, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=37.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=36.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=35.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        RESERVED_5 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=34.0, core=true, t24Name=RESERVED.5, mandatory=false)
+        RESERVED_6 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=33.0, core=true, t24Name=RESERVED.6, mandatory=false)
+        RESERVED_7 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=32.0, core=true, t24Name=RESERVED.7, mandatory=false)
+        RESERVED_8 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=31.0, core=true, t24Name=RESERVED.8, mandatory=false)
+        RESERVED_9 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=30.0, core=true, t24Name=RESERVED.9, mandatory=false)
+        /* SCV Record Number */
+        SCV_NUMBER : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=16, sysNumber=1.0, core=true, t24Name=SCV.NUMBER, mandatory=false)
+        /* SORT.CODE */
+        SORT_CODE : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=6, sysNumber=12.0, core=true, t24Name=SORT.CODE, mandatory=false)
+        /* STR.DEPO.AC */
+        STR_DEPO_AC : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=21.0, core=true, t24Name=STR.DEPO.AC, mandatory=false)
+        /* TRANS.ELIGIBLE.DEPO */
+        TRANS_ELIGIBLE_DEPO : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=15, sysNumber=28.0, core=true, t24Name=TRANS.ELIGIBLE.DEPO, typeModifiers="-24", mandatory=false)
+    }
+    /* Purpose of this live template, to capture the depositor level log details for the FSCS: */
+    FSCS_LOG_DEPOSITOR
+        @i18n:Description (en="")
+        @t24:i (t24Name=FSCS.LOG.DEPOSITOR, level=F, type=L, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        /* ADDRESS.LINE1 */
+        ADDRESS_LINE1 : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=18.0, core=true, t24Name=ADDRESS.LINE1, mandatory=false)
+        /* ADDRESS.LINE2 */
+        ADDRESS_LINE2 : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=19.0, core=true, t24Name=ADDRESS.LINE2, mandatory=false)
+        /* ADDRESS.LINE3 */
+        ADDRESS_LINE3 : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=20.0, core=true, t24Name=ADDRESS.LINE3, mandatory=false)
+        /* ADDRESS.LINE4 */
+        ADDRESS_LINE4 : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=21.0, core=true, t24Name=ADDRESS.LINE4, mandatory=false)
+        /* ADDRESS.LINE5 */
+        ADDRESS_LINE5 : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=22.0, core=true, t24Name=ADDRESS.LINE5, mandatory=false)
+        /* ADDRESS.LINE6 */
+        ADDRESS_LINE6 : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=23.0, core=true, t24Name=ADDRESS.LINE6, mandatory=false)
+        /* AGG.BALANCE */
+        AGG_BALANCE : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=15, sysNumber=30.0, core=true, t24Name=AGG.BALANCE, typeModifiers="-USD", mandatory=false)
+        /* COMPANY */
+        COMPANY -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=I, maxLength=12, sysNumber=16.0, core=true, businessType=COM, t24Name=COMPANY, mandatory=false)
+        /* COMP.AMOUNT */
+        COMP_AMOUNT : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=15, sysNumber=31.0, core=true, t24Name=COMP.AMOUNT, typeModifiers="-USD", mandatory=false)
+        /* COUNTRY */
+        COUNTRY : T24BusinessTypes:A
+            @i18n:Label (en=Country)
+            @i18n:Tooltip (en="Holds the country code")
+            @t24:i (align=L, inputBehaviour=I, maxLength=30, sysNumber=25.0, core=true, t24Name=COUNTRY, mandatory=false)
+/* Customer Id
+Example:
+12345678 */
+        CUSTOMER -> ST_Customer:CUSTOMER
+            @i18n:Label (en=Customer)
+            @i18n:Tooltip (en="Customer Liability")
+            @t24:i (align=R, inputBehaviour=I, maxLength=10, sysNumber=2.0, core=true, businessType=CUS, t24Name=CUSTOMER, mandatory=false)
+        /* CUS.FIRST.NAME */
+        CUS_FIRST_NAME : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=7.0, core=true, t24Name=CUS.FIRST.NAME, mandatory=false)
+        /* CUS.SECOND.NAME */
+        CUS_SECOND_NAME : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=8.0, core=true, t24Name=CUS.SECOND.NAME, mandatory=false)
+        CUS_THIRD_NAME : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=9.0, core=true, t24Name=CUS.THIRD.NAME, mandatory=false)
+/* Creation date and Time
+Example:
+22 APR 16 20:10 */
+        DATE_TIME : T24BusinessTypes:ANY
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=I, maxLength=15, sysNumber=3.0, core=true, t24Name=DATE.TIME, mandatory=false)
+        /* DOB */
+        DOB : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=17.0, core=true, t24Name=DOB, mandatory=false)
+        /* EMAIL.ADD */
+        EMAIL_ADD : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=30, sysNumber=26.0, core=true, t24Name=EMAIL.ADD, mandatory=false)
+        /* EVE.PHONE.NO */
+        EVE_PHONE_NO : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=40, sysNumber=28.0, core=true, t24Name=EVE.PHONE.NO, mandatory=false)
+/* Exclusion File
+Validation Rule:
+Y or N */
+        EXCLUSION : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=1, sysNumber=4.0, core=true, t24Name=EXCLUSION, mandatory=false)
+/* Fit For Straight Through Payout
+Validation Rule:
+Y or N */
+        FFSTP : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=1, sysNumber=5.0, core=true, t24Name=FFSTP, mandatory=false)
+        ID -> UKFSCS_Reporting:FSCS_LOG_DEPOSITOR PK required
+            @i18n:Label (en="Transaction Ref")
+            @i18n:Tooltip (en="Transaction Reference")
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=0.0, core=true, businessType=A, t24Name="@ID", mandatory=true)
+        /* MAIN.PHONE.NO */
+        MAIN_PHONE_NO : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=40, sysNumber=27.0, core=true, t24Name=MAIN.PHONE.NO, mandatory=false)
+        /* MOBILE.PHONE */
+        MOBILE_PHONE : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=30, sysNumber=29.0, core=true, t24Name=MOBILE.PHONE, mandatory=false)
+        /* NINO */
+        NINO : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=9, sysNumber=12.0, core=true, t24Name=NINO, mandatory=false)
+        /* OTHER.NATIONAL */
+        OTHER_NATIONAL : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=14.0, core=true, t24Name=OTHER.NATIONAL, mandatory=false)
+        /* OTHER.NATIONAL.NO */
+        OTHER_NATIONAL_NO : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=30, sysNumber=15.0, core=true, t24Name=OTHER.NATIONAL.NO, mandatory=false)
+        /* PASSPORT.NO */
+        PASSPORT_NO : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=10, sysNumber=13.0, core=true, t24Name=PASSPORT.NO, mandatory=false)
+        /* POSTCODE */
+        POSTCODE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=30, sysNumber=24.0, core=true, t24Name=POSTCODE, mandatory=false)
+        /* PREVIOUS.NAME */
+        PREVIOUS_NAME : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=11.0, core=true, t24Name=PREVIOUS.NAME, mandatory=false)
+        RESERVED_1 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=41.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_10 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=32.0, core=true, t24Name=RESERVED.10, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=40.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=39.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=38.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        RESERVED_5 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=37.0, core=true, t24Name=RESERVED.5, mandatory=false)
+        RESERVED_6 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=36.0, core=true, t24Name=RESERVED.6, mandatory=false)
+        RESERVED_7 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=35.0, core=true, t24Name=RESERVED.7, mandatory=false)
+        RESERVED_8 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=34.0, core=true, t24Name=RESERVED.8, mandatory=false)
+        RESERVED_9 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=33.0, core=true, t24Name=RESERVED.9, mandatory=false)
+        /* SCV.NUMBER */
+        SCV_NUMBER : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=16, sysNumber=1.0, core=true, t24Name=SCV.NUMBER, mandatory=false)
+        /* SUR.NAME */
+        SUR_NAME : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=10.0, core=true, t24Name=SUR.NAME, mandatory=false)
+        /* TITLE */
+        TITLE : T24BusinessTypes:A
+            @i18n:Label (en=Description)
+            @t24:i (align=L, inputBehaviour=I, maxLength=20, sysNumber=6.0, core=true, t24Name=TITLE, mandatory=false)
+    }
+    /* Parameter Template for the FSCS */
+    FSCS_PARAMETER
+        @i18n:Description (en="")
+        @t24:i (t24Name=FSCS.PARAMETER, level=I, type=H, allowedFunctions="A C D E H I L P Q R S", localRefApplicationSysNo=18.0, localRefAllowed=true)
+    {
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=37.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=38.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=34.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        CORP_SECTORS -> byValue UKFSCS_Reporting:FSCS_PARAMETER__CORP_SECTORS *
+            @t24:i (t24Name=CORP.SECTORS)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=35.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=31.0, core=true, t24Name=CURR.NO, mandatory=false)
+        DATE_TIME -> byValue UKFSCS_Reporting:FSCS_PARAMETER__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DEPOSIT_CAT -> byValue UKFSCS_Reporting:FSCS_PARAMETER__DEPOSIT_CAT *
+            @t24:i (t24Name=DEPOSIT.CAT)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=36.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        /* DOC.NAME.COMP.REG.NO */
+        DOC_NAME_COMP_REG_NO : UKFSCS_Reporting:FSCS_PARAMETER__DOC_NAME_COMP_REG_NO
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=8.0, core=true, t24Name=DOC.NAME.COMP.REG.NO, mandatory=false)
+        /* DOC.NAME.DL */
+        DOC_NAME_DL : UKFSCS_Reporting:FSCS_PARAMETER__DOC_NAME_DL
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=7.0, core=true, t24Name=DOC.NAME.DL, mandatory=false)
+/* Document Name NID
+Example:
+National ID */
+        DOC_NAME_NID : UKFSCS_Reporting:FSCS_PARAMETER__DOC_NAME_NID
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=6.0, core=true, t24Name=DOC.NAME.NID, mandatory=false)
+        /* DOC.NAME.NINO */
+        DOC_NAME_NINO : UKFSCS_Reporting:FSCS_PARAMETER__DOC_NAME_NINO
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=4.0, core=true, t24Name=DOC.NAME.NINO, mandatory=false)
+/* Document Name Passport
+Example:
+Passport */
+        DOC_NAME_PASSPORT : UKFSCS_Reporting:FSCS_PARAMETER__DOC_NAME_PASSPORT
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=5.0, core=true, t24Name=DOC.NAME.PASSPORT, mandatory=false)
+/* FSA Registration Number
+Examplee:
+123456 */
+        FSA_REG_NO : T24BusinessTypes:N required
+            @t24:i (align=R, inputBehaviour=I, maxLength=6, sysNumber=3.0, core=true, t24Name=FSA.REG.NO, mandatory=true)
+/* FSCS Limit in GBP
+Example:
+75,000 */
+        FSCS_LIMIT : T24BusinessTypes:DEC required
+            @t24:i (align=L, inputBehaviour=I, maxLength=15, sysNumber=1.0, core=true, t24Name=FSCS.LIMIT, typeModifiers="00", mandatory=true)
+        ID -> UKFSCS_Reporting:FSCS_PARAMETER PK required
+            @i18n:Label (en="Transaction Ref")
+            @i18n:Tooltip (en="Transaction Reference")
+            @t24:i (align=L, inputBehaviour=I, maxLength=12, sysNumber=0.0, core=true, businessType=COM, t24Name="@ID", mandatory=true)
+        IND_SECTORS -> byValue UKFSCS_Reporting:FSCS_PARAMETER__IND_SECTORS *
+            @t24:i (t24Name=IND.SECTORS)
+        INPUTTER -> byValue UKFSCS_Reporting:FSCS_PARAMETER__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        /* INT.CAP.DATE */
+        INT_CAP_DATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=10, sysNumber=16.0, core=true, t24Name=INT.CAP.DATE, mandatory=false)
+        JOINT_RELATION -> byValue UKFSCS_Reporting:FSCS_PARAMETER__JOINT_RELATION *
+            @t24:i (t24Name=JOINT.RELATION)
+        OVERRIDE -> byValue UKFSCS_Reporting:FSCS_PARAMETER__OVERRIDE *
+            @t24:i (t24Name=OVERRIDE)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=30.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        /* REPLACE.CHARS */
+        REPLACE_CHARS : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=30, sysNumber=15.0, core=true, t24Name=REPLACE.CHARS, mandatory=false)
+/* Reporting File Directory
+Validation Rule:
+Should be a valid directory name */
+        REP_FILE_DIR : T24BusinessTypes:BCON_FILEPATH
+            @t24:i (align=L, inputBehaviour=I, maxLength=80, sysNumber=2.0, core=true, t24Name=REP.FILE.DIR, mandatory=false)
+        RESERVED_1 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=28.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_10 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=19.0, core=true, t24Name=RESERVED.10, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=27.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=26.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=25.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        RESERVED_5 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=24.0, core=true, t24Name=RESERVED.5, mandatory=false)
+        RESERVED_6 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=23.0, core=true, t24Name=RESERVED.6, mandatory=false)
+        RESERVED_7 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=22.0, core=true, t24Name=RESERVED.7, mandatory=false)
+        RESERVED_8 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=21.0, core=true, t24Name=RESERVED.8, mandatory=false)
+        RESERVED_9 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=20.0, core=true, t24Name=RESERVED.9, mandatory=false)
+        /* SUSPENSE.CATEGORY */
+        SUSPENSE_CATEGORY -> ST_Config:CATEGORY
+            @t24:i (align=L, inputBehaviour=I, maxLength=20, sysNumber=17.0, core=true, businessType=A, t24Name=SUSPENSE.CATEGORY, mandatory=false)
+    }
+    FSCS_PARAMETER__CORP_SECTORS
+    {
+        /* CORP.SECTORS */
+        CORP_SECTORS -> ST_Config:SECTOR
+            @t24:i (align=R, inputBehaviour=I, maxLength=10, sysNumber=14.0, core=true, t24Name=CORP.SECTORS, mandatory=false)
+    }
+    FSCS_PARAMETER__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=33.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    FSCS_PARAMETER__DEPOSIT_CAT
+    {
+        /* DEPOSIT.CAT */
+        DEPOSIT_CAT -> ST_Config:CATEGORY
+            @t24:i (align=L, inputBehaviour=I, maxLength=10, sysNumber=9.0, core=true, businessType=CAT, t24Name=DEPOSIT.CAT, mandatory=false)
+        /* DEPOSIT.PRIO */
+        DEPOSIT_PRIO : UKFSCS_Reporting:FSCS_PARAMETER__DEPOSIT_CAT__DEPOSIT_PRIO
+            @t24:i (align=R, inputBehaviour=I, maxLength=35, sysNumber=11.0, core=true, t24Name=DEPOSIT.PRIO, mandatory=false)
+        /* DEPOSIT.PROD */
+        DEPOSIT_PROD : UKFSCS_Reporting:FSCS_PARAMETER__DEPOSIT_CAT__DEPOSIT_PROD
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=10.0, core=true, t24Name=DEPOSIT.PROD, mandatory=false)
+    }
+    FSCS_PARAMETER__IND_SECTORS
+    {
+        /* IND.SECTORS */
+        IND_SECTORS -> ST_Config:SECTOR
+            @t24:i (align=R, inputBehaviour=I, maxLength=10, sysNumber=13.0, core=true, t24Name=IND.SECTORS, mandatory=false)
+    }
+    FSCS_PARAMETER__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=32.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    FSCS_PARAMETER__JOINT_RELATION
+    {
+        /* JOINT.RELATION */
+        JOINT_RELATION -> ST_Customer:RELATION
+            @t24:i (align=L, inputBehaviour=I, maxLength=2, sysNumber=12.0, core=true, businessType=A, t24Name=JOINT.RELATION, mandatory=false)
+    }
+    FSCS_PARAMETER__OVERRIDE
+    {
+        OVERRIDE : T24BusinessTypes:N
+            @i18n:Label (en=Override)
+            @i18n:Tooltip (en="Overrides generated by this transaction")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=29.0, core=true, t24Name=OVERRIDE, mandatory=false)
+    }
+}
+Enumerations {
+    FSCS_ACCOUNT_STATUS__FFSTP : mml:string
+        NULL=NULL
+        YES=YES
+    FSCS_ACCOUNT_STATUS__FSCS_EXCLUSION : mml:string
+        BEN=BEN
+        HMTS=HMTS
+        LEGDIS=LEGDIS
+        LEGDOR=LEGDOR
+    FSCS_ELIGIBILITY__ELIGIBILITY : mml:string
+        NULL=NULL
+        YES=YES
+    FSCS_PARAMETER__DEPOSIT_CAT__DEPOSIT_PRIO : mml:string
+        1=1
+        2=2
+        3=3
+        4=4
+        5=5
+        6=6
+        7=7
+        8=8
+    FSCS_PARAMETER__DEPOSIT_CAT__DEPOSIT_PROD : mml:string
+        FD1=FD1
+        FD2=FD2
+        FD4=FD4
+        FP4P=FP4P
+        IAA=IAA
+        ISA=ISA
+        NA=NA
+        OTHER=OTHER
+    FSCS_PARAMETER__DOC_NAME_COMP_REG_NO : mml:string
+        ART_OF_ORGANIZATION=ART.OF.ORGANIZATION
+        AUS_BUSINESS_NO=AUS.BUSINESS.NO
+        AUS_COMPANY_NO=AUS.COMPANY.NO
+        BIRTH_CERTIFICATE=BIRTH.CERTIFICATE
+        BUSINESS_LICENSE=BUSINESS.LICENSE
+        CDI=CDI
+        COMMERCIAL_REGISTER=COMMERCIAL.REGISTER
+        COMPANY_REG_NO=COMPANY.REG.NO
+        CORPORATE_RESOLUTION=CORPORATE.RESOLUTION
+        COURT_ORDER=COURT.ORDER
+        CREDIT_CARD=CREDIT.CARD
+        CUIL=CUIL
+        CUIT=CUIT
+        CURP=CURP
+        D=D
+        DRIVERS_LICENSE=DRIVERS.LICENSE
+        DRIVING_LICENSE=DRIVING.LICENSE
+        FED_GOVT_ID=FED.GOVT.ID
+        FICTICIOUS_NAME_CERT=FICTICIOUS.NAME.CERT
+        INCORP_CERT=INCORP.CERT
+        INE=INE
+        INSURANCE_CARD=INSURANCE.CARD
+        LETTERS_OF_ADMIN=LETTERS.OF.ADMIN
+        MEET_MIN_BYLAWS=MEET.MIN.BYLAWS
+        MILITARY_ID=MILITARY.ID
+        NATIONAL_ID=NATIONAL.ID
+        NINO=NINO
+        PARTNERSHIP_AGRMNT=PARTNERSHIP.AGRMNT
+        PASSPORT=PASSPORT
+        RESIDENT_ALIEN_CARD=RESIDENT.ALIEN.CARD
+        RFC__CORP=RFC-CORP
+        RFC__IND=RFC-IND
+        SECR_OF_STATE_CERT=SECR.OF.STATE.CERT
+        SOCIAL_SECURITY_NO=SOCIAL.SECURITY.NO
+        SOCIAL_SEC_CARD=SOCIAL.SEC.CARD
+        STUDENT_ID_CARD=STUDENT.ID.CARD
+        T=T
+        TIN_CERTIFICATION=TIN.CERTIFICATION
+        TRUST_AGREEMENT=TRUST.AGREEMENT
+        UTILITY_BILL=UTILITY.BILL
+        VOTER_REG_CARD=VOTER.REG.CARD
+    FSCS_PARAMETER__DOC_NAME_DL : mml:string
+        ART_OF_ORGANIZATION=ART.OF.ORGANIZATION
+        AUS_BUSINESS_NO=AUS.BUSINESS.NO
+        AUS_COMPANY_NO=AUS.COMPANY.NO
+        BIRTH_CERTIFICATE=BIRTH.CERTIFICATE
+        BUSINESS_LICENSE=BUSINESS.LICENSE
+        CDI=CDI
+        COMMERCIAL_REGISTER=COMMERCIAL.REGISTER
+        COMPANY_REG_NO=COMPANY.REG.NO
+        CORPORATE_RESOLUTION=CORPORATE.RESOLUTION
+        COURT_ORDER=COURT.ORDER
+        CREDIT_CARD=CREDIT.CARD
+        CUIL=CUIL
+        CUIT=CUIT
+        CURP=CURP
+        D=D
+        DRIVERS_LICENSE=DRIVERS.LICENSE
+        DRIVING_LICENSE=DRIVING.LICENSE
+        FED_GOVT_ID=FED.GOVT.ID
+        FICTICIOUS_NAME_CERT=FICTICIOUS.NAME.CERT
+        INCORP_CERT=INCORP.CERT
+        INE=INE
+        INSURANCE_CARD=INSURANCE.CARD
+        LETTERS_OF_ADMIN=LETTERS.OF.ADMIN
+        MEET_MIN_BYLAWS=MEET.MIN.BYLAWS
+        MILITARY_ID=MILITARY.ID
+        NATIONAL_ID=NATIONAL.ID
+        NINO=NINO
+        PARTNERSHIP_AGRMNT=PARTNERSHIP.AGRMNT
+        PASSPORT=PASSPORT
+        RESIDENT_ALIEN_CARD=RESIDENT.ALIEN.CARD
+        RFC__CORP=RFC-CORP
+        RFC__IND=RFC-IND
+        SECR_OF_STATE_CERT=SECR.OF.STATE.CERT
+        SOCIAL_SECURITY_NO=SOCIAL.SECURITY.NO
+        SOCIAL_SEC_CARD=SOCIAL.SEC.CARD
+        STUDENT_ID_CARD=STUDENT.ID.CARD
+        T=T
+        TIN_CERTIFICATION=TIN.CERTIFICATION
+        TRUST_AGREEMENT=TRUST.AGREEMENT
+        UTILITY_BILL=UTILITY.BILL
+        VOTER_REG_CARD=VOTER.REG.CARD
+    FSCS_PARAMETER__DOC_NAME_NID : mml:string
+        ART_OF_ORGANIZATION=ART.OF.ORGANIZATION
+        AUS_BUSINESS_NO=AUS.BUSINESS.NO
+        AUS_COMPANY_NO=AUS.COMPANY.NO
+        BIRTH_CERTIFICATE=BIRTH.CERTIFICATE
+        BUSINESS_LICENSE=BUSINESS.LICENSE
+        CDI=CDI
+        COMMERCIAL_REGISTER=COMMERCIAL.REGISTER
+        COMPANY_REG_NO=COMPANY.REG.NO
+        CORPORATE_RESOLUTION=CORPORATE.RESOLUTION
+        COURT_ORDER=COURT.ORDER
+        CREDIT_CARD=CREDIT.CARD
+        CUIL=CUIL
+        CUIT=CUIT
+        CURP=CURP
+        D=D
+        DRIVERS_LICENSE=DRIVERS.LICENSE
+        DRIVING_LICENSE=DRIVING.LICENSE
+        FED_GOVT_ID=FED.GOVT.ID
+        FICTICIOUS_NAME_CERT=FICTICIOUS.NAME.CERT
+        INCORP_CERT=INCORP.CERT
+        INE=INE
+        INSURANCE_CARD=INSURANCE.CARD
+        LETTERS_OF_ADMIN=LETTERS.OF.ADMIN
+        MEET_MIN_BYLAWS=MEET.MIN.BYLAWS
+        MILITARY_ID=MILITARY.ID
+        NATIONAL_ID=NATIONAL.ID
+        NINO=NINO
+        PARTNERSHIP_AGRMNT=PARTNERSHIP.AGRMNT
+        PASSPORT=PASSPORT
+        RESIDENT_ALIEN_CARD=RESIDENT.ALIEN.CARD
+        RFC__CORP=RFC-CORP
+        RFC__IND=RFC-IND
+        SECR_OF_STATE_CERT=SECR.OF.STATE.CERT
+        SOCIAL_SECURITY_NO=SOCIAL.SECURITY.NO
+        SOCIAL_SEC_CARD=SOCIAL.SEC.CARD
+        STUDENT_ID_CARD=STUDENT.ID.CARD
+        T=T
+        TIN_CERTIFICATION=TIN.CERTIFICATION
+        TRUST_AGREEMENT=TRUST.AGREEMENT
+        UTILITY_BILL=UTILITY.BILL
+        VOTER_REG_CARD=VOTER.REG.CARD
+    FSCS_PARAMETER__DOC_NAME_NINO : mml:string
+        ART_OF_ORGANIZATION=ART.OF.ORGANIZATION
+        AUS_BUSINESS_NO=AUS.BUSINESS.NO
+        AUS_COMPANY_NO=AUS.COMPANY.NO
+        BIRTH_CERTIFICATE=BIRTH.CERTIFICATE
+        BUSINESS_LICENSE=BUSINESS.LICENSE
+        CDI=CDI
+        COMMERCIAL_REGISTER=COMMERCIAL.REGISTER
+        COMPANY_REG_NO=COMPANY.REG.NO
+        CORPORATE_RESOLUTION=CORPORATE.RESOLUTION
+        COURT_ORDER=COURT.ORDER
+        CREDIT_CARD=CREDIT.CARD
+        CUIL=CUIL
+        CUIT=CUIT
+        CURP=CURP
+        D=D
+        DRIVERS_LICENSE=DRIVERS.LICENSE
+        DRIVING_LICENSE=DRIVING.LICENSE
+        FED_GOVT_ID=FED.GOVT.ID
+        FICTICIOUS_NAME_CERT=FICTICIOUS.NAME.CERT
+        INCORP_CERT=INCORP.CERT
+        INE=INE
+        INSURANCE_CARD=INSURANCE.CARD
+        LETTERS_OF_ADMIN=LETTERS.OF.ADMIN
+        MEET_MIN_BYLAWS=MEET.MIN.BYLAWS
+        MILITARY_ID=MILITARY.ID
+        NATIONAL_ID=NATIONAL.ID
+        NINO=NINO
+        PARTNERSHIP_AGRMNT=PARTNERSHIP.AGRMNT
+        PASSPORT=PASSPORT
+        RESIDENT_ALIEN_CARD=RESIDENT.ALIEN.CARD
+        RFC__CORP=RFC-CORP
+        RFC__IND=RFC-IND
+        SECR_OF_STATE_CERT=SECR.OF.STATE.CERT
+        SOCIAL_SECURITY_NO=SOCIAL.SECURITY.NO
+        SOCIAL_SEC_CARD=SOCIAL.SEC.CARD
+        STUDENT_ID_CARD=STUDENT.ID.CARD
+        T=T
+        TIN_CERTIFICATION=TIN.CERTIFICATION
+        TRUST_AGREEMENT=TRUST.AGREEMENT
+        UTILITY_BILL=UTILITY.BILL
+        VOTER_REG_CARD=VOTER.REG.CARD
+    FSCS_PARAMETER__DOC_NAME_PASSPORT : mml:string
+        ART_OF_ORGANIZATION=ART.OF.ORGANIZATION
+        AUS_BUSINESS_NO=AUS.BUSINESS.NO
+        AUS_COMPANY_NO=AUS.COMPANY.NO
+        BIRTH_CERTIFICATE=BIRTH.CERTIFICATE
+        BUSINESS_LICENSE=BUSINESS.LICENSE
+        CDI=CDI
+        COMMERCIAL_REGISTER=COMMERCIAL.REGISTER
+        COMPANY_REG_NO=COMPANY.REG.NO
+        CORPORATE_RESOLUTION=CORPORATE.RESOLUTION
+        COURT_ORDER=COURT.ORDER
+        CREDIT_CARD=CREDIT.CARD
+        CUIL=CUIL
+        CUIT=CUIT
+        CURP=CURP
+        D=D
+        DRIVERS_LICENSE=DRIVERS.LICENSE
+        DRIVING_LICENSE=DRIVING.LICENSE
+        FED_GOVT_ID=FED.GOVT.ID
+        FICTICIOUS_NAME_CERT=FICTICIOUS.NAME.CERT
+        INCORP_CERT=INCORP.CERT
+        INE=INE
+        INSURANCE_CARD=INSURANCE.CARD
+        LETTERS_OF_ADMIN=LETTERS.OF.ADMIN
+        MEET_MIN_BYLAWS=MEET.MIN.BYLAWS
+        MILITARY_ID=MILITARY.ID
+        NATIONAL_ID=NATIONAL.ID
+        NINO=NINO
+        PARTNERSHIP_AGRMNT=PARTNERSHIP.AGRMNT
+        PASSPORT=PASSPORT
+        RESIDENT_ALIEN_CARD=RESIDENT.ALIEN.CARD
+        RFC__CORP=RFC-CORP
+        RFC__IND=RFC-IND
+        SECR_OF_STATE_CERT=SECR.OF.STATE.CERT
+        SOCIAL_SECURITY_NO=SOCIAL.SECURITY.NO
+        SOCIAL_SEC_CARD=SOCIAL.SEC.CARD
+        STUDENT_ID_CARD=STUDENT.ID.CARD
+        T=T
+        TIN_CERTIFICATION=TIN.CERTIFICATION
+        TRUST_AGREEMENT=TRUST.AGREEMENT
+        UTILITY_BILL=UTILITY.BILL
+        VOTER_REG_CARD=VOTER.REG.CARD
+}

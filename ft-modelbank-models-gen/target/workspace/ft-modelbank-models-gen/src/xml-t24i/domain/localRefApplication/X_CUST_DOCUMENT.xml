@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<localReferenceApplication:LocalReferenceApplication xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:localReferenceApplication="http://www.odcgroup.com/t24/application/localRefApplication/model/LocalReferenceApplication"
+    xmlns:translationDsl="http://www.odcgroup.com/translation/TranslationDsl" forApplication="name://DM_Foundation:CUST_DOCUMENT#">
+  <localField groupName="USCORE_NOTES" localRefID="USCORE.NOTES">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="NOTES"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+  <localField groupName="No" localRefID="USCORE.COUNTRY">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="COUNTRY"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+  <localField groupName="No" localRefID="USCORE.DOC.ISSUER">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="DOC.ISSUER"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+  <localField groupName="No" localRefID="USCORE.DOC.ISSUE.DATE">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="DOC.ISSUE.DATE"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+  <localField groupName="No" localRefID="USCORE.DOC.IMAGE.REF.NUMBER">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="DOC.IMAGE.REF"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+  <localField groupName="No" localRefID="USREGS.US.STATE">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="US.STATE"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+</localReferenceApplication:LocalReferenceApplication>

@@ -1,0 +1,56 @@
+# UTF-8
+/* Argentina Payment Debit Order */
+Domain ARPYMT_DebitOrder
+    @t24:i (module=ARPYMT)
+    @java:Package (value=com.temenos.t24.datamodel.arpymt.arpymt_debitorder)
+namespace "http://www.temenos.com/t24/ARPYMT_DebitOrder"
+metamodelVersion 1.30.6
+Classes {
+    NOFILE_DISPALY_DEBIN_REQUEST
+        @i18n:Description (en="")
+        @t24:i (t24Name=NOFILE.DISPALY.DEBIN.REQUEST, level=I, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        ACCOUNT_TYPE : T24BusinessTypes:N
+            @i18n:Label (en="Account Type")
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, core=false, t24Name=ACCOUNT.TYPE, mandatory=false)
+        CREATION_DATE_FROM : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, core=false, t24Name=CREATION.DATE.FROM, mandatory=false)
+        CREATION_DATE_TO : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, core=false, t24Name=CREATION.DATE.TO, mandatory=false)
+        CREDIT_ACCOUNT : T24BusinessTypes:N
+            @i18n:Label (en="Credit Acct")
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, core=false, t24Name=CREDIT.ACCOUNT, mandatory=false)
+        CREDIT_BANK_CODE : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, core=false, t24Name=CREDIT.BANK.CODE, mandatory=false)
+        CREDIT_LOT_ID : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, core=false, t24Name=CREDIT.LOT.ID, mandatory=false)
+        CREDIT_REFERENCE : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, core=false, t24Name=CREDIT.REFERENCE, mandatory=true)
+        CREDIT_TERMINAL : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, core=false, t24Name=CREDIT.TERMINAL, mandatory=false)
+        DEBIT_ACCOUNT : T24BusinessTypes:N
+            @i18n:Label (en="Debit account")
+            @i18n:Tooltip (en="Indicates the account to be debited ")
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, core=false, t24Name=DEBIT.ACCOUNT, mandatory=false)
+        DEBIT_BANK_CODE : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, core=false, t24Name=DEBIT.BANK.CODE, mandatory=false)
+        DEBIT_REFERENCE : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, core=false, t24Name=DEBIT.REFERENCE, mandatory=false)
+        RET_STR : T24BusinessTypes:N
+            @t24:i (align=L, inputBehaviour=N, maxLength=30, core=false, t24Name=RET.STR, genOperation=ARPYMT.PAYLOAD.DETAILS.FROM.COELSA, mandatory=false)
+        STATUS : T24BusinessTypes:N
+            @i18n:Label (en=Status)
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, core=false, t24Name=STATUS, mandatory=false)
+    }
+    NOFILE_VIEW_DEBIN_DETAILS
+        @i18n:Description (en="")
+        @t24:i (t24Name=NOFILE.VIEW.DEBIN.DETAILS, level=I, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        ID : T24BusinessTypes:N
+            @i18n:Label (en="Transaction Ref")
+            @i18n:Tooltip (en="Transaction Reference")
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, core=false, t24Name=ID, mandatory=true)
+        RET_STR : T24BusinessTypes:N
+            @t24:i (align=L, inputBehaviour=N, maxLength=30, core=false, t24Name=RET.STR, genOperation=ARPYMT.GET.DETAILS.FROM.COELSA, mandatory=false)
+    }
+}

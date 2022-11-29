@@ -1,0 +1,229 @@
+# UTF-8
+/* Rebatable Insurance */
+Domain USLREG_RebatableInsurance
+    @t24:i (module=USLREG)
+    @java:Package (value=com.temenos.t24.datamodel.uslreg.uslreg_rebatableinsurance)
+namespace "http://www.temenos.com/t24/USLREG_RebatableInsurance"
+metamodelVersion 1.30.6
+Classes {
+    NOFILE_E_AA_INSURANCE_CANCEL
+        @i18n:Description (en="")
+        @t24:i (t24Name=NOFILE.E.AA.INSURANCE.CANCEL, level=I, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        RET_ERR : T24BusinessTypes:N
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, core=false, t24Name=RET.ERR, genOperation=USLREG.NOFILE.INSURANCE.REP, mandatory=true)
+    }
+    NOFILE_E_AA_INSURANCE_NEW
+        @i18n:Description (en="")
+        @t24:i (t24Name=NOFILE.E.AA.INSURANCE.NEW, level=I, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        RET_ERR : T24BusinessTypes:N
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, core=false, t24Name=RET.ERR, genOperation=USLREG.NOFILE.INSURANCE.REP, mandatory=true)
+    }
+    NOFILE_LIST_INSURANCE_TYPE
+        @i18n:Description (en="")
+        @t24:i (t24Name=NOFILE.LIST.INSURANCE.TYPE, level=I, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        INSURANCE_COMPANY -> byValue USLREG_RebatableInsurance:NOFILE_LIST_INSURANCE_TYPE__INSURANCE_COMPANY *
+            @t24:i (t24Name=INSURANCE.COMPANY)
+    }
+    NOFILE_LIST_INSURANCE_TYPE__INSURANCE_COMPANY
+    {
+        INSURANCE_COMPANY : T24BusinessTypes:N
+            @t24:i (align=L, inputBehaviour=N, maxLength=30, core=false, t24Name=INSURANCE.COMPANY, genOperation=1, mandatory=true)
+    }
+/* This table is used to define a discount factor applicable for the residual term. This factor is used while calculating amortization amounts using Rule of Anticipation method. The ID has 2 parts to it. The first part represents the insurance company ID as defined in USLREG.INSURANCE.COMPANY and the second part represents the term.
+The Rule of anticipation methods use this table to find the discount factor applicable for the loan term. If the residual term is 12M (or 1Y) and the insurance company is Metlife (defined in USLREG.INSURANCE.COMPANY with ID as 1)then it will look at the record 1-12 and get the discount factor. This will be used to find the monthly amortization amounts. */
+    USLREG_DISCOUNT_FACTOR
+        @i18n:Description (en="")
+        @t24:i (t24Name=USLREG.DISCOUNT.FACTOR, level=F, type=H, allowedFunctions="A C D E H I L P Q R S", localRefAllowed=false)
+    {
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=19.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=20.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=16.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=17.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=13.0, core=true, t24Name=CURR.NO, mandatory=false)
+        DATE_TIME -> byValue USLREG_RebatableInsurance:USLREG_DISCOUNT_FACTOR__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=18.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        DISCOUNT_FACTOR : T24BusinessTypes:R
+            @i18n:Label (en="Discount Factor")
+            @t24:i (align=R, inputBehaviour=I, maxLength=12, sysNumber=1.0, core=true, t24Name=DISCOUNT.FACTOR, mandatory=false)
+        ID -> USLREG_RebatableInsurance:USLREG_DISCOUNT_FACTOR PK required
+            @i18n:Label (en="Transaction Ref")
+            @i18n:Tooltip (en="Transaction Reference")
+            @t24:i (align=L, inputBehaviour=I, maxLength=8, sysNumber=0.0, core=true, businessType=A, t24Name="@ID", mandatory=true)
+        INPUTTER -> byValue USLREG_RebatableInsurance:USLREG_DISCOUNT_FACTOR__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=12.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        RESERVED_1 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=11.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_10 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=2.0, core=true, t24Name=RESERVED.10, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=10.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=9.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=8.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        RESERVED_5 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=7.0, core=true, t24Name=RESERVED.5, mandatory=false)
+        RESERVED_6 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=6.0, core=true, t24Name=RESERVED.6, mandatory=false)
+        RESERVED_7 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=5.0, core=true, t24Name=RESERVED.7, mandatory=false)
+        RESERVED_8 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=4.0, core=true, t24Name=RESERVED.8, mandatory=false)
+        RESERVED_9 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=3.0, core=true, t24Name=RESERVED.9, mandatory=false)
+    }
+    USLREG_DISCOUNT_FACTOR__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=15.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    USLREG_DISCOUNT_FACTOR__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=14.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+/* This table store is used to create insurance companies and define the insurance types applicable for the insurance company.
+The field effective date has to be used when defining a record in this table.
+Example:1. ID = 1 (ABC), Type.1 = Disability, Type.2 = Life, Effective Date = 01 JAN 2014
+2. ID = 1 (ABC), Type.1 = Null, Effective Date = 01 FEB 2014
+These 2 records imply, the insurance company ABC has a relationship from 01-Jan and is allowed to provide Disability and Life policies. From 01-Feb, there cannot be any new arrangements created with ABC insurance company. */
+    USLREG_INSURANCE_COMPANY
+        @i18n:Description (en="")
+        @t24:i (t24Name=USLREG.INSURANCE.COMPANY, level=F, type=H, allowedFunctions="A C D E H I L P Q R S", localRefAllowed=false)
+    {
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=24.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=25.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=21.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=22.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=18.0, core=true, t24Name=CURR.NO, mandatory=false)
+        DATE_TIME -> byValue USLREG_RebatableInsurance:USLREG_INSURANCE_COMPANY__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=23.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        /* Used to define the full name of the insurance company. */
+        DESCRIPTION : T24BusinessTypes:A
+            @i18n:Label (en=Description)
+            @i18n:Tooltip (en=Description)
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=1.0, core=true, t24Name=DESCRIPTION, mandatory=false)
+        ID -> USLREG_RebatableInsurance:USLREG_INSURANCE_COMPANY PK required
+            @i18n:Label (en="Transaction Ref")
+            @i18n:Tooltip (en="Transaction Reference")
+            @t24:i (align=R, inputBehaviour=I, maxLength=0, sysNumber=0.0, core=true, businessType=CUS, t24Name="@ID", mandatory=true)
+        INACTIVE_DATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=7.0, core=true, t24Name=INACTIVE.DATE, mandatory=false)
+        INPUTTER -> byValue USLREG_RebatableInsurance:USLREG_INSURANCE_COMPANY__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        K_TYPE -> byValue USLREG_RebatableInsurance:USLREG_INSURANCE_COMPANY__K_TYPE *
+            @t24:i (t24Name=K.TYPE)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=17.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        RESERVED_1 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=16.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=15.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=14.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=13.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        RESERVED_5 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=12.0, core=true, t24Name=RESERVED.5, mandatory=false)
+        RESERVED_6 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=11.0, core=true, t24Name=RESERVED.6, mandatory=false)
+        RESERVED_7 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=10.0, core=true, t24Name=RESERVED.7, mandatory=false)
+        RESERVED_8 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=9.0, core=true, t24Name=RESERVED.8, mandatory=false)
+        RESERVED_9 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=8.0, core=true, t24Name=RESERVED.9, mandatory=false)
+        TYPE -> byValue USLREG_RebatableInsurance:USLREG_INSURANCE_COMPANY__TYPE *
+            @t24:i (t24Name=TYPE)
+    }
+    USLREG_INSURANCE_COMPANY__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=20.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    USLREG_INSURANCE_COMPANY__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=19.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    USLREG_INSURANCE_COMPANY__K_TYPE
+    {
+        K_TYPE : T24BusinessTypes:A
+            @i18n:Label (en=KType)
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=2.0, core=false, t24Name=K.TYPE, mandatory=false)
+    }
+    USLREG_INSURANCE_COMPANY__TYPE
+    {
+        /* : This field is used to indicate the date from which a particular change is applicable. */
+        EFFECTIVE_DATE : T24BusinessTypes:D required
+            @i18n:Label (en="Effective Date")
+            @i18n:Tooltip (en="Effective date of the transaction")
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=5.0, core=true, t24Name=EFFECTIVE.DATE, mandatory=true)
+        EXPIRY_DATE : T24BusinessTypes:D
+            @i18n:Label (en="Expiry Date")
+            @i18n:Tooltip (en="Indicates the Expiry Date of the Transaction")
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=6.0, core=true, t24Name=EXPIRY.DATE, mandatory=false)
+        RESERVED_10 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=4.0, core=true, t24Name=RESERVED.10, mandatory=false)
+        RESERVED_11 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=3.0, core=true, t24Name=RESERVED.11, mandatory=false)
+        /* This field represents the insurance types. Any value defined in the virtual table AA.INSURANCE.TYPE can be selected. */
+        TYPE : USLREG_RebatableInsurance:USLREG_INSURANCE_COMPANY__TYPE__TYPE
+            @i18n:Label (en=Type)
+            @i18n:Tooltip (en=Type)
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=2.0, core=true, t24Name=TYPE, mandatory=false)
+    }
+}
+Enumerations {
+    USLREG_INSURANCE_COMPANY__TYPE__TYPE : mml:string
+        A_AND_H=A&H
+        DISABILITY=DISABILITY
+        LIFE=LIFE
+}

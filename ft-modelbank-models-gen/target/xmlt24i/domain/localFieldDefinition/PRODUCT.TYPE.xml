@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<localref:LocalRef xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:localref="http://www.odcgroup.com/t24/application/localref/model/LocalRef"
+    xmlns:translationDsl="http://www.odcgroup.com/translation/TranslationDsl" localRefID="PRODUCT.TYPE" maximumChars="20" minimumChars="0" mandatory="false"
+    charType="A" defaultPossible="false" virtualTable="MSO.PRODUCT.TYPE" description="Defines the type of product">
+  <shortName xsi:type="translationDsl:LocalTranslations">
+    <translations locale="en" text="PRODUCT.TYPE"/>
+  </shortName>
+  <vettingTable vettingTable="DISCOUNT">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Discount"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="FIXED">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Fixed"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="TRACKER">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Tracker"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="VARIABLE">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Variable"/>
+    </remarks>
+  </vettingTable>
+</localref:LocalRef>

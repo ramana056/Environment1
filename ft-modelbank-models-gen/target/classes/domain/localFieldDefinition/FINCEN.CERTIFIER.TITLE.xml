@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<localref:LocalRef xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:localref="http://www.odcgroup.com/t24/application/localref/model/LocalRef"
+    xmlns:translationDsl="http://www.odcgroup.com/translation/TranslationDsl" localRefID="FINCEN.CERTIFIER.TITLE" maximumChars="35" minimumChars="0"
+    mandatory="false" charType="A" defaultPossible="false" virtualTable="CERTIFIER.TITLE"
+    description="Certifier title">
+  <shortName xsi:type="translationDsl:LocalTranslations">
+    <translations locale="en" text="CERTIFIER.TITLE"/>
+  </shortName>
+  <vettingTable vettingTable="Accountant.Bookkeeper">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Accountant/Bookkeeper"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="Agent">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Agent"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="AssistantSecretary">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Assistant Secretary"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="AssistantTreasurer">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Assistant Treasurer"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="AssistantTroopLeader">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Assistant Troop Leader"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="Associate">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Associate"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="BoardMember">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Board Member"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="Cashier">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Cashier"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="ChiefExecutiveOfficer">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Chief Executive Officer"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="ChiefFinancialOfficer">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Chief Financial Officer"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="ChiefOperationsOfficer">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Chief Operations Officer"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="Coach">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Coach"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="Controller">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Controller"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="Director">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Director"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="ExecutiveDirector">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Executive Director"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="ExecutiveVicePresident">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Executive Vice President"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="FinancialAnalyst">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Financial Analyst"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="GeneralPartner">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="General Partner"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="LimitedPartner">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Limited Partner"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="Manager">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Manager"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="Member">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Member"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="OfficeManager.Assistant">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Office Manager/Assistant"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="Officer">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Officer"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="Owner.Proprietor">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Owner/Proprietor"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="Partner">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Partner"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="Pastor">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Pastor"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="President">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="President"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="SeasonalWorker">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Seasonal Worker"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="Secretary">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Secretary"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="SeniorVicePresident">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Senior Vice President"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="Treasurer">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Treasurer"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="TroopLeader">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Troop Leader"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="VicePresident">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Vice President"/>
+    </remarks>
+  </vettingTable>
+</localref:LocalRef>

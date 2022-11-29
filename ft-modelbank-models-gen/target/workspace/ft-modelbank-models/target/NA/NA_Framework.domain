@@ -1,0 +1,2110 @@
+# UTF-8
+/* NA Framework */
+Domain NA_Framework
+    @t24:i (module=NA)
+    @java:Package (value=com.temenos.t24.datamodel.na.na_framework)
+namespace "http://www.temenos.com/t24/NA_Framework"
+metamodelVersion 1.30.6
+Classes {
+    /* This table contains the high-level definition of a class of type NEEDS.CLASS. This table is maintained by the system, and will be updated when a new definition is created and authorised in AA.CLASS.DEFINITION */
+    NA_NEEDS_CLASS
+        @i18n:Description (en="")
+        @t24:i (t24Name=NA.NEEDS.CLASS, level=I, type=H, allowedFunctions="A C D E H I L P Q S", localRefApplicationSysNo=14.0, localRefAllowed=true)
+    {
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=23.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=24.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=20.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=21.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=17.0, core=true, t24Name=CURR.NO, mandatory=false)
+        DATE_TIME -> byValue NA_Framework:NA_NEEDS_CLASS__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=22.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        DESCRIPTION -> byValue NA_Framework:NA_NEEDS_CLASS__DESCRIPTION *
+            @t24:i (t24Name=DESCRIPTION)
+        FULL_DESC -> byValue NA_Framework:NA_NEEDS_CLASS__FULL_DESC *
+            @t24:i (t24Name=FULL.DESC)
+        INPUTTER -> byValue NA_Framework:NA_NEEDS_CLASS__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        K_TYPE -> byValue NA_Framework:NA_NEEDS_CLASS__K_TYPE *
+            @t24:i (t24Name=K.TYPE)
+        /* Class name of type NeedsClass, updated by the system based on the definition in AA.CLASS.DEFINITION. */
+        NEEDS_CLASS -> NA_Framework:NA_NEEDS_CLASS PK required
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=0.0, core=true, businessType=A, t24Name=NEEDS.CLASS, mandatory=true)
+        OVERRIDE -> byValue NA_Framework:NA_NEEDS_CLASS__OVERRIDE *
+            @t24:i (t24Name=OVERRIDE)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=16.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        RESERVED_1 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=13.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_10 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=4.0, core=true, t24Name=RESERVED.10, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=12.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=11.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=10.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        RESERVED_5 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=9.0, core=true, t24Name=RESERVED.5, mandatory=false)
+        RESERVED_6 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=8.0, core=true, t24Name=RESERVED.6, mandatory=false)
+        RESERVED_7 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=7.0, core=true, t24Name=RESERVED.7, mandatory=false)
+        RESERVED_8 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=6.0, core=true, t24Name=RESERVED.8, mandatory=false)
+        RESERVED_9 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=5.0, core=true, t24Name=RESERVED.9, mandatory=false)
+        TYPE -> byValue NA_Framework:NA_NEEDS_CLASS__TYPE *
+            @t24:i (t24Name=TYPE)
+    }
+    NA_NEEDS_CLASS__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=19.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    NA_NEEDS_CLASS__DESCRIPTION
+    {
+        /* Short description of the class, updated from AA.CLASS.DEFINITION. Used for enrichment when this table is used as vetting table */
+        DESCRIPTION : T24BusinessTypes:A required
+            @i18n:Label (en=Description)
+            @i18n:Tooltip (en=Description)
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, multiLanguage=true, sysNumber=1.0, core=true, t24Name=DESCRIPTION, mandatory=true)
+    }
+    NA_NEEDS_CLASS__FULL_DESC
+    {
+        /* Full description of the class, updated from AA.CLASS.DEFINITIOn */
+        FULL_DESC : T24BusinessTypes:A required
+            @i18n:Label (en="Full Description")
+            @i18n:Tooltip (en="Detailed Description ")
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=2.0, core=true, t24Name=FULL.DESC, isTextarea=true, mandatory=true)
+    }
+    NA_NEEDS_CLASS__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=18.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    NA_NEEDS_CLASS__K_TYPE
+    {
+        K_TYPE : NA_Framework:NA_NEEDS_CLASS__K_TYPE__K_TYPE
+            @i18n:Label (en=KType)
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=3.0, core=false, t24Name=K.TYPE, mandatory=false)
+    }
+    NA_NEEDS_CLASS__OVERRIDE
+    {
+        /* Standard override field. */
+        OVERRIDE : T24BusinessTypes:N
+            @i18n:Label (en=Override)
+            @i18n:Tooltip (en="Overrides generated by this transaction")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=15.0, core=true, t24Name=OVERRIDE, mandatory=false)
+    }
+    NA_NEEDS_CLASS__TYPE
+    {
+/* This multi-valued field controls attributes that a property of this class may or may not have.
+Valid options are,
+Version Type - Each amendment of the definition in the Needs class is identified by unique version */
+        TYPE : NA_Framework:NA_NEEDS_CLASS__TYPE__TYPE
+            @i18n:Label (en=Type)
+            @i18n:Tooltip (en=Type)
+            @t24:i (align=L, inputBehaviour=I, maxLength=15, sysNumber=3.0, core=true, t24Name=TYPE, mandatory=false)
+    }
+    /* This application will be used to define the metric details of the questionnaire attributes, which will be used to calculate the product fit scoring for the particular purpose. */
+    NA_PRODUCT_FIT_DEFINITION
+        @i18n:Description (en="")
+        @t24:i (t24Name=NA.PRODUCT.FIT.DEFINITION, level=I, type=H, allowedFunctions="A C D E H I L P Q S", localRefApplicationSysNo=28.0, localRefAllowed=true)
+    {
+/* This field indicates which action will be performed after the record is authorised
+Optional Input
+Validation Rules
+a. Allowed values are Null of PUBLISH : If action is null the definition is simply being saved on file after authorization. If PUBLISH is specified, then the data will be written to catalog file - NA.PRODUCT.FIT.METHOD.CATALOG and updates application NA.PRODUCT.FIT.METHOD
+b.T24 string Input */
+        ACTION : NA_Framework:NA_PRODUCT_FIT_DEFINITION__ACTION
+            @i18n:Label (en=Action)
+            @t24:i (align=L, inputBehaviour=I, maxLength=10, sysNumber=13.0, core=true, t24Name=ACTION, mandatory=false)
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=37.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=38.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=34.0, core=true, t24Name=AUTHORISER, mandatory=false)
+/* This field will indicate from when the product fit definition object is available.
+Noinput field
+System Maintained */
+        AVAILABLE_DATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=N, maxLength=11, sysNumber=17.0, core=true, t24Name=AVAILABLE.DATE, mandatory=false)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=35.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=31.0, core=true, t24Name=CURR.NO, mandatory=false)
+        DATE_TIME -> byValue NA_Framework:NA_PRODUCT_FIT_DEFINITION__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=36.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+/* Once defined , the product fit definition object can be PUBLISHED as many times as needed until it is expired.
+The product fit definition object can be set to expire by providing a future date in the EXPIRY.DATE field
+Optional Input
+Validation Rules
+a. Date provided should be in the future.
+b.T24 Date Input */
+        EXPIRY_DATE : T24BusinessTypes:D
+            @i18n:Label (en="Expiry Date")
+            @i18n:Tooltip (en="Indicates the Expiry Date of the Transaction")
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=14.0, core=true, t24Name=EXPIRY.DATE, mandatory=false)
+        EXT_ENQ_MC_FIELDS -> byValue NA_Framework:NA_PRODUCT_FIT_DEFINITION__EXT_ENQ_MC_FIELDS *
+            @t24:i (t24Name=EXT.ENQ.MC.FIELDS)
+        EXT_ENQ_REC_FIELDS -> byValue NA_Framework:NA_PRODUCT_FIT_DEFINITION__EXT_ENQ_REC_FIELDS *
+            @t24:i (t24Name=EXT.ENQ.REC.FIELDS)
+        INPUTTER -> byValue NA_Framework:NA_PRODUCT_FIT_DEFINITION__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        INT_ENQ_MC_FIELDS -> byValue NA_Framework:NA_PRODUCT_FIT_DEFINITION__INT_ENQ_MC_FIELDS *
+            @t24:i (t24Name=INT.ENQ.MC.FIELDS)
+        INT_ENQ_REC_FIELDS -> byValue NA_Framework:NA_PRODUCT_FIT_DEFINITION__INT_ENQ_REC_FIELDS *
+            @t24:i (t24Name=INT.ENQ.REC.FIELDS)
+        MC_FIELD -> byValue NA_Framework:NA_PRODUCT_FIT_DEFINITION__MC_FIELD *
+            @t24:i (t24Name=MC.FIELD)
+        MC_OUT_FIELD -> byValue NA_Framework:NA_PRODUCT_FIT_DEFINITION__MC_OUT_FIELD *
+            @t24:i (t24Name=MC.OUT.FIELD)
+        OVERRIDE -> byValue NA_Framework:NA_PRODUCT_FIT_DEFINITION__OVERRIDE *
+            @t24:i (t24Name=OVERRIDE)
+/* ID of NA.PRODUCT.FIT.DEFINITION
+It has three components - <PURPOSE>-<VERSION>-<EFFECTIVE.DATE> */
+        PRODUCT_FIT_DEFINITION_ID -> NA_Framework:NA_PRODUCT_FIT_DEFINITION PK required
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=0.0, core=true, businessType=A, t24Name=PRODUCT.FIT.DEFINITION.ID, mandatory=true)
+/* PUBLISH.STATUS
+This field will contain the result of the publishing effort
+1) Validation Rules
+a. No Input.
+b. System Maintained
+c. Allowed values are : Completed Successfully or Completed with Errors */
+        PUBLISH_STATUS : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=15.0, core=true, t24Name=PUBLISH.STATUS, mandatory=false)
+/* This field will indicate the date on which the product fit definition object was published.
+System maintained noinput field */
+        PUBLISH_STATUS_DATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=N, maxLength=11, sysNumber=16.0, core=true, t24Name=PUBLISH.STATUS.DATE, mandatory=false)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=30.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+/* This field indicates the name of the product fit definition Object (valid purpose).
+System maintained noinput field */
+        REFERENCE : T24BusinessTypes:A
+            @i18n:Label (en="Search by Referece")
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=20.0, core=true, t24Name=REFERENCE, mandatory=true)
+        RESERVED_1 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=27.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=26.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=25.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=24.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        RESERVED_7 -> byValue NA_Framework:NA_PRODUCT_FIT_DEFINITION__RESERVED_7 *
+            @t24:i (t24Name=RESERVED.7)
+        RESERVED_8 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=12.0, core=true, t24Name=RESERVED.8, mandatory=false)
+/* This field specifies the version of the current product fit definition purpose.
+System maintained noinput field */
+        VERSION : T24BusinessTypes:N
+            @i18n:Label (en=Version)
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=21.0, core=true, t24Name=VERSION, mandatory=true)
+/* This field specifies the effective date of the current product fit definition purpose.
+System maintained noinput field */
+        VERSION_DATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=N, maxLength=11, sysNumber=22.0, core=true, t24Name=VERSION.DATE, mandatory=true)
+    }
+    NA_PRODUCT_FIT_DEFINITION__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=33.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    NA_PRODUCT_FIT_DEFINITION__EXT_ENQ_MC_FIELDS
+    {
+/* This field would have the list of marketing Catalogue fields associated with the current product fit definition purpose.  User can select the required marketing catalogue fields to create the Customer needs Recommendation enquiry.
+It is associative field along with EXT.ENQ.REC.FIELDS. */
+        EXT_ENQ_MC_FIELDS : NA_Framework:NA_PRODUCT_FIT_DEFINITION__EXT_ENQ_MC_FIELDS__EXT_ENQ_MC_FIELDS
+            @t24:i (align=R, inputBehaviour=I, maxLength=35, sysNumber=10.0, core=true, t24Name=EXT.ENQ.MC.FIELDS, mandatory=false)
+    }
+    NA_PRODUCT_FIT_DEFINITION__EXT_ENQ_REC_FIELDS
+    {
+/* This field would have the list of NA.PRODUCT.RECOMMENDATION attributes which describes the recommendation details of the product. Such as PRODUCT, MC.FIELD, VALUE, VALUE.TYPE, FIT.TYPE, QUESTION, ANSWER, WEIGHT, KNOCKOUT.METRIC, TOTAL.WEIGHTS, TOTAL.SCORE etc.
+User can select the list of necessary recommendation field for his customer needs enquiry.
+It is association multi value set along with EXT.ENQ.MC.FIELDS.
+Optional Field */
+        EXT_ENQ_REC_FIELDS : NA_Framework:NA_PRODUCT_FIT_DEFINITION__EXT_ENQ_REC_FIELDS__EXT_ENQ_REC_FIELDS
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=11.0, core=true, t24Name=EXT.ENQ.REC.FIELDS, mandatory=false)
+    }
+    NA_PRODUCT_FIT_DEFINITION__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=32.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    NA_PRODUCT_FIT_DEFINITION__INT_ENQ_MC_FIELDS
+    {
+/* This field would have the list of marketing Catalogue fields associated with the current product fit definition purpose.
+User can select the required marketing catalogue fields to create the Bank needs Recommendation enquiry. It is associative field along with INT.ENQ.REC.FIELDS. Input is mandatory when user provide the input in INT.ENQ.REC.FIELDS. */
+        INT_ENQ_MC_FIELDS : NA_Framework:NA_PRODUCT_FIT_DEFINITION__INT_ENQ_MC_FIELDS__INT_ENQ_MC_FIELDS
+            @t24:i (align=R, inputBehaviour=I, maxLength=35, sysNumber=8.0, core=true, t24Name=INT.ENQ.MC.FIELDS, mandatory=false)
+    }
+    NA_PRODUCT_FIT_DEFINITION__INT_ENQ_REC_FIELDS
+    {
+/* This field would have the list of NA.PRODUCT.RECOMMENDATION attributes which describes the recommendation details of the product. Such as PRODUCT, MC.FIELD, VALUE, VALUE.TYPE, FIT.TYPE, QUESTION, ANSWER, WEIGHT, KNOCKOUT.METRIC, TOTAL.WEIGHTS, TOTAL.SCORE etc.
+User can select the list of necessary recommendation field for his Bank needs enquiry.
+It is association multi value set along with INT.ENQ.MC.FIELDS.
+Input is mandatory when user provide the input in INT.ENQ.MC.FIELDS. */
+        INT_ENQ_REC_FIELDS : NA_Framework:NA_PRODUCT_FIT_DEFINITION__INT_ENQ_REC_FIELDS__INT_ENQ_REC_FIELDS
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=9.0, core=true, t24Name=INT.ENQ.REC.FIELDS, mandatory=false)
+    }
+    NA_PRODUCT_FIT_DEFINITION__MC_FIELD
+    {
+        /* Each metric results in a "fit score" and some will be considered knockouts(This means that if score is not sufficient the product will not be offered to the customer) */
+        KNOCKOUT : NA_Framework:NA_PRODUCT_FIT_DEFINITION__MC_FIELD__KNOCKOUT
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=7.0, core=true, t24Name=KNOCKOUT, mandatory=false)
+/* This field would have the list of Marketing Catalogue standard fields associated with the current product fit definition purpose.
+Value of the MC field in the dynamic catalogue will be compared to a needs answer.
+Mandatory field
+Valid record from AA.MARKETING.CATALOGUE.STANDARD.FIELDS */
+        MC_FIELD : NA_Framework:NA_PRODUCT_FIT_DEFINITION__MC_FIELD__MC_FIELD required
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=1.0, core=true, t24Name=MC.FIELD, mandatory=true)
+        /* If the dynamic catalogue returns null value for the MC field, then this default field value will be used. */
+        MC_FIELD_DEFAULT : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=2.0, core=true, t24Name=MC.FIELD.DEFAULT, mandatory=false)
+/* Each weight will be a numeric value ranging from 0 to 10.
+If the metric evaluation (MC field and Needs Question) is true, then metric score will be calculated based on the metric weight.
+It will be either Raw Score of each product * Metric Weight or the standardized score * Metric Weight
+If a metric is only used as a knockout the weight can be set to 0. */
+        METRIC_WEIGHT : NA_Framework:NA_PRODUCT_FIT_DEFINITION__MC_FIELD__METRIC_WEIGHT
+            @t24:i (align=R, inputBehaviour=I, maxLength=2, sysNumber=6.0, core=true, t24Name=METRIC.WEIGHT, mandatory=false)
+/* Field Name from the needs questionnaire associated with this purpose.
+Valid record from NA.QUESTION.NAME */
+        NEEDS_QUESTION : NA_Framework:NA_PRODUCT_FIT_DEFINITION__MC_FIELD__NEEDS_QUESTION
+            @t24:i (align=R, inputBehaviour=I, maxLength=35, sysNumber=4.0, core=true, t24Name=NEEDS.QUESTION, mandatory=false)
+/* This field defines how the MC Field value should be compared to the Needs Answer.
+Valid options are EQ (Equals), NE (Not Equal), GT (Greater than), GE (Greater Than or Greather Than Equal to), LT (Less than), LE (Less than or Less Than Equal to) */
+        PRODUCT_FIT_TYPE : NA_Framework:NA_PRODUCT_FIT_DEFINITION__MC_FIELD__PRODUCT_FIT_TYPE
+            @t24:i (align=L, inputBehaviour=I, maxLength=2, sysNumber=3.0, core=true, t24Name=PRODUCT.FIT.TYPE, mandatory=false)
+/* This field specifies whether the raw score should be standardized.
+Valid options are YES and null. */
+        STANDARDIZE : NA_Framework:NA_PRODUCT_FIT_DEFINITION__MC_FIELD__STANDARDIZE
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=5.0, core=true, t24Name=STANDARDIZE, mandatory=false)
+    }
+    NA_PRODUCT_FIT_DEFINITION__MC_OUT_FIELD
+    {
+        /* List of Marketing Catalogue fields to be displayed on the recommendation record if it is not already shown as product metric */
+        MC_OUT_FIELD : NA_Framework:NA_PRODUCT_FIT_DEFINITION__MC_OUT_FIELD__MC_OUT_FIELD
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=23.0, core=true, t24Name=MC.OUT.FIELD, mandatory=false)
+    }
+    NA_PRODUCT_FIT_DEFINITION__OVERRIDE
+    {
+        /* Any overrides raised will be stored here. */
+        OVERRIDE : T24BusinessTypes:N
+            @i18n:Label (en=Override)
+            @i18n:Tooltip (en="Overrides generated by this transaction")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=29.0, core=true, t24Name=OVERRIDE, mandatory=false)
+    }
+    NA_PRODUCT_FIT_DEFINITION__RESERVED_7
+    {
+        RESERVED_6 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=19.0, core=true, t24Name=RESERVED.6, mandatory=false)
+        RESERVED_7 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=18.0, core=true, t24Name=RESERVED.7, mandatory=false)
+    }
+    NA_PRODUCT_FIT_METHOD
+        @i18n:Description (en="")
+        @t24:i (t24Name=NA.PRODUCT.FIT.METHOD, level=I, type=L, allowedFunctions="L S", localRefAllowed=false)
+    {
+        AVAILABLE_DATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=3.0, core=true, t24Name=AVAILABLE.DATE, mandatory=false)
+        DESCRIPTION -> byValue NA_Framework:NA_PRODUCT_FIT_METHOD__DESCRIPTION *
+            @t24:i (t24Name=DESCRIPTION)
+        EXPIRY_DATE : T24BusinessTypes:D
+            @i18n:Label (en="Expiry Date")
+            @i18n:Tooltip (en="Indicates the Expiry Date of the Transaction")
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=4.0, core=true, t24Name=EXPIRY.DATE, mandatory=false)
+        FIT_METHOD_TYPE -> NA_Framework:NA_PRODUCT_FIT_METHOD PK required
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=0.0, core=true, businessType=A, t24Name=FIT.METHOD.TYPE, mandatory=true)
+        LAST_PUBLISHED : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=5.0, core=true, t24Name=LAST.PUBLISHED, mandatory=false)
+        STATUS : T24BusinessTypes:A
+            @i18n:Label (en=Status)
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=2.0, core=true, t24Name=STATUS, mandatory=false)
+    }
+    /* Catalog table for NA.PRODUCT.FIT.DEFINITION */
+    NA_PRODUCT_FIT_METHOD_CATALOG
+        @i18n:Description (en="")
+        @t24:i (t24Name=NA.PRODUCT.FIT.METHOD.CATALOG, level=I, type=H, allowedFunctions="L Q S", localRefApplicationSysNo=28.0, localRefAllowed=true)
+    {
+/* This field indicates which action will be performed after the record is authorised
+Optional Input
+Validation Rules
+a. Allowed values are Null of PUBLISH : If action is null the definition is simply being saved on file after authorization. If PUBLISH is specified, then the data will be written to catalog file - NA.PRODUCT.FIT.METHOD.CATALOG and updates application NA.PRODUCT.FIT.METHOD
+b.T24 string Input */
+        ACTION : NA_Framework:NA_PRODUCT_FIT_METHOD_CATALOG__ACTION
+            @i18n:Label (en=Action)
+            @t24:i (align=L, inputBehaviour=I, maxLength=10, sysNumber=13.0, core=true, t24Name=ACTION, mandatory=false)
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=37.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=38.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=34.0, core=true, t24Name=AUTHORISER, mandatory=false)
+/* This field will indicate from when the product fit definition object is available.
+Noinput field
+System Maintained */
+        AVAILABLE_DATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=N, maxLength=11, sysNumber=17.0, core=true, t24Name=AVAILABLE.DATE, mandatory=false)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=35.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=31.0, core=true, t24Name=CURR.NO, mandatory=false)
+        DATE_TIME -> byValue NA_Framework:NA_PRODUCT_FIT_METHOD_CATALOG__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=36.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+/* Once defined , the product fit definition object can be PUBLISHED as many times as needed until it is expired.
+The product fit definition object can be set to expire by providing a future date in the EXPIRY.DATE field
+Optional Input
+Validation Rules
+a. Date provided should be in the future.
+b.T24 Date Input */
+        EXPIRY_DATE : T24BusinessTypes:D
+            @i18n:Label (en="Expiry Date")
+            @i18n:Tooltip (en="Indicates the Expiry Date of the Transaction")
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=14.0, core=true, t24Name=EXPIRY.DATE, mandatory=false)
+        EXT_ENQ_MC_FIELDS -> byValue NA_Framework:NA_PRODUCT_FIT_METHOD_CATALOG__EXT_ENQ_MC_FIELDS *
+            @t24:i (t24Name=EXT.ENQ.MC.FIELDS)
+        EXT_ENQ_REC_FIELDS -> byValue NA_Framework:NA_PRODUCT_FIT_METHOD_CATALOG__EXT_ENQ_REC_FIELDS *
+            @t24:i (t24Name=EXT.ENQ.REC.FIELDS)
+        INPUTTER -> byValue NA_Framework:NA_PRODUCT_FIT_METHOD_CATALOG__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        INT_ENQ_MC_FIELDS -> byValue NA_Framework:NA_PRODUCT_FIT_METHOD_CATALOG__INT_ENQ_MC_FIELDS *
+            @t24:i (t24Name=INT.ENQ.MC.FIELDS)
+        INT_ENQ_REC_FIELDS -> byValue NA_Framework:NA_PRODUCT_FIT_METHOD_CATALOG__INT_ENQ_REC_FIELDS *
+            @t24:i (t24Name=INT.ENQ.REC.FIELDS)
+        MC_FIELD -> byValue NA_Framework:NA_PRODUCT_FIT_METHOD_CATALOG__MC_FIELD *
+            @t24:i (t24Name=MC.FIELD)
+        MC_OUT_FIELD -> byValue NA_Framework:NA_PRODUCT_FIT_METHOD_CATALOG__MC_OUT_FIELD *
+            @t24:i (t24Name=MC.OUT.FIELD)
+        OVERRIDE -> byValue NA_Framework:NA_PRODUCT_FIT_METHOD_CATALOG__OVERRIDE *
+            @t24:i (t24Name=OVERRIDE)
+        PRODUCT_FIT_DEFINITION_ID -> NA_Framework:NA_PRODUCT_FIT_METHOD_CATALOG PK required
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=0.0, core=true, businessType=A, t24Name=PRODUCT.FIT.DEFINITION.ID, mandatory=true)
+/* PUBLISH.STATUS
+This field will contain the result of the publishing effort
+1) Validation Rules
+a. No Input.
+b. System Maintained
+c. Allowed values are : Completed Successfully or Completed with Errors */
+        PUBLISH_STATUS : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=15.0, core=true, t24Name=PUBLISH.STATUS, mandatory=false)
+/* This field will indicate the date on which the product fit definition object was published.
+System maintained noinput field */
+        PUBLISH_STATUS_DATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=N, maxLength=11, sysNumber=16.0, core=true, t24Name=PUBLISH.STATUS.DATE, mandatory=false)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=30.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+/* This field indicates the name of the product fit definition Object (valid purpose).
+System maintained noinput field */
+        REFERENCE : T24BusinessTypes:A
+            @i18n:Label (en="Search by Referece")
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=20.0, core=true, t24Name=REFERENCE, mandatory=true)
+        RESERVED_1 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=27.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=26.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=25.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=24.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        RESERVED_7 -> byValue NA_Framework:NA_PRODUCT_FIT_METHOD_CATALOG__RESERVED_7 *
+            @t24:i (t24Name=RESERVED.7)
+        RESERVED_8 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=12.0, core=true, t24Name=RESERVED.8, mandatory=false)
+/* This field specifies the version of the current product fit definition purpose.
+System maintained noinput field */
+        VERSION : T24BusinessTypes:N
+            @i18n:Label (en=Version)
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=21.0, core=true, t24Name=VERSION, mandatory=true)
+/* This field specifies the effective date of the current product fit definition purpose.
+System maintained noinput field */
+        VERSION_DATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=N, maxLength=11, sysNumber=22.0, core=true, t24Name=VERSION.DATE, mandatory=true)
+    }
+    NA_PRODUCT_FIT_METHOD_CATALOG__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=33.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    NA_PRODUCT_FIT_METHOD_CATALOG__EXT_ENQ_MC_FIELDS
+    {
+/* This field would have the list of marketing Catalogue fields associated with the current product fit definition purpose.  User can select the required marketing catalogue fields to create the Customer needs Recommendation enquiry.
+It is associative field along with EXT.ENQ.REC.FIELDS. */
+        EXT_ENQ_MC_FIELDS : NA_Framework:NA_PRODUCT_FIT_METHOD_CATALOG__EXT_ENQ_MC_FIELDS__EXT_ENQ_MC_FIELDS
+            @t24:i (align=R, inputBehaviour=I, maxLength=35, sysNumber=10.0, core=true, t24Name=EXT.ENQ.MC.FIELDS, mandatory=false)
+    }
+    NA_PRODUCT_FIT_METHOD_CATALOG__EXT_ENQ_REC_FIELDS
+    {
+/* This field would have the list of NA.PRODUCT.RECOMMENDATION attributes which describes the recommendation details of the product. Such as PRODUCT, MC.FIELD, VALUE, VALUE.TYPE, FIT.TYPE, QUESTION, ANSWER, WEIGHT, KNOCKOUT.METRIC, TOTAL.WEIGHTS, TOTAL.SCORE etc.
+User can select the list of necessary recommendation field for his customer needs enquiry.
+It is association multi value set along with EXT.ENQ.MC.FIELDS.
+Optional Field */
+        EXT_ENQ_REC_FIELDS : NA_Framework:NA_PRODUCT_FIT_METHOD_CATALOG__EXT_ENQ_REC_FIELDS__EXT_ENQ_REC_FIELDS
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=11.0, core=true, t24Name=EXT.ENQ.REC.FIELDS, mandatory=false)
+    }
+    NA_PRODUCT_FIT_METHOD_CATALOG__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=32.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    NA_PRODUCT_FIT_METHOD_CATALOG__INT_ENQ_MC_FIELDS
+    {
+/* This field would have the list of marketing Catalogue fields associated with the current product fit definition purpose.
+User can select the required marketing catalogue fields to create the Bank needs Recommendation enquiry. It is associative field along with INT.ENQ.REC.FIELDS. Input is mandatory when user provide the input in INT.ENQ.REC.FIELDS. */
+        INT_ENQ_MC_FIELDS : NA_Framework:NA_PRODUCT_FIT_METHOD_CATALOG__INT_ENQ_MC_FIELDS__INT_ENQ_MC_FIELDS
+            @t24:i (align=R, inputBehaviour=I, maxLength=35, sysNumber=8.0, core=true, t24Name=INT.ENQ.MC.FIELDS, mandatory=false)
+    }
+    NA_PRODUCT_FIT_METHOD_CATALOG__INT_ENQ_REC_FIELDS
+    {
+/* This field would have the list of NA.PRODUCT.RECOMMENDATION attributes which describes the recommendation details of the product. Such as PRODUCT, MC.FIELD, VALUE, VALUE.TYPE, FIT.TYPE, QUESTION, ANSWER, WEIGHT, KNOCKOUT.METRIC, TOTAL.WEIGHTS, TOTAL.SCORE etc.
+User can select the list of necessary recommendation field for his Bank needs enquiry.
+It is association multi value set along with INT.ENQ.MC.FIELDS.
+Input is mandatory when user provide the input in INT.ENQ.MC.FIELDS. */
+        INT_ENQ_REC_FIELDS : NA_Framework:NA_PRODUCT_FIT_METHOD_CATALOG__INT_ENQ_REC_FIELDS__INT_ENQ_REC_FIELDS
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=9.0, core=true, t24Name=INT.ENQ.REC.FIELDS, mandatory=false)
+    }
+    NA_PRODUCT_FIT_METHOD_CATALOG__MC_FIELD
+    {
+        /* Each metric results in a "fit score" and some will be considered knockouts(This means that if score is not sufficient the product will not be offered to the customer) */
+        KNOCKOUT : NA_Framework:NA_PRODUCT_FIT_METHOD_CATALOG__MC_FIELD__KNOCKOUT
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=7.0, core=true, t24Name=KNOCKOUT, mandatory=false)
+/* This field would have the list of Marketing Catalogue standard fields associated with the current product fit definition purpose.
+Value of the MC field in the dynamic catalogue will be compared to a needs answer.
+Mandatory field
+Valid record from AA.MARKETING.CATALOGUE.STANDARD.FIELDS */
+        MC_FIELD : NA_Framework:NA_PRODUCT_FIT_METHOD_CATALOG__MC_FIELD__MC_FIELD required
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=1.0, core=true, t24Name=MC.FIELD, mandatory=true)
+        /* If the dynamic catalogue returns null value for the MC field, then this default field value will be used. */
+        MC_FIELD_DEFAULT : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=2.0, core=true, t24Name=MC.FIELD.DEFAULT, mandatory=false)
+/* Each weight will be a numeric value ranging from 0 to 10.
+If the metric evaluation (MC field and Needs Question) is true, then metric score will be calculated based on the metric weight.
+It will be either Raw Score of each product * Metric Weight or the standardized score * Metric Weight
+If a metric is only used as a knockout the weight can be set to 0. */
+        METRIC_WEIGHT : NA_Framework:NA_PRODUCT_FIT_METHOD_CATALOG__MC_FIELD__METRIC_WEIGHT
+            @t24:i (align=R, inputBehaviour=I, maxLength=2, sysNumber=6.0, core=true, t24Name=METRIC.WEIGHT, mandatory=false)
+/* Field Name from the needs questionnaire associated with this purpose.
+Valid record from NA.QUESTION.NAME */
+        NEEDS_QUESTION : NA_Framework:NA_PRODUCT_FIT_METHOD_CATALOG__MC_FIELD__NEEDS_QUESTION
+            @t24:i (align=R, inputBehaviour=I, maxLength=35, sysNumber=4.0, core=true, t24Name=NEEDS.QUESTION, mandatory=false)
+/* This field defines how the MC Field value should be compared to the Needs Answer.
+Valid options are EQ (Equals), NE (Not Equal), GT (Greater than), GE (Greater Than or Greather Than Equal to), LT (Less than), LE (Less than or Less Than Equal to) */
+        PRODUCT_FIT_TYPE : NA_Framework:NA_PRODUCT_FIT_METHOD_CATALOG__MC_FIELD__PRODUCT_FIT_TYPE
+            @t24:i (align=L, inputBehaviour=I, maxLength=2, sysNumber=3.0, core=true, t24Name=PRODUCT.FIT.TYPE, mandatory=false)
+/* This field specifies whether the raw score should be standardized.
+Valid options are YES and null. */
+        STANDARDIZE : NA_Framework:NA_PRODUCT_FIT_METHOD_CATALOG__MC_FIELD__STANDARDIZE
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=5.0, core=true, t24Name=STANDARDIZE, mandatory=false)
+    }
+    NA_PRODUCT_FIT_METHOD_CATALOG__MC_OUT_FIELD
+    {
+        /* List of Marketing Catalogue fields to be displayed on the recommendation record if it is not already shown as product metric */
+        MC_OUT_FIELD : NA_Framework:NA_PRODUCT_FIT_METHOD_CATALOG__MC_OUT_FIELD__MC_OUT_FIELD
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=23.0, core=true, t24Name=MC.OUT.FIELD, mandatory=false)
+    }
+    NA_PRODUCT_FIT_METHOD_CATALOG__OVERRIDE
+    {
+        /* Any overrides raised will be stored here. */
+        OVERRIDE : T24BusinessTypes:N
+            @i18n:Label (en=Override)
+            @i18n:Tooltip (en="Overrides generated by this transaction")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=29.0, core=true, t24Name=OVERRIDE, mandatory=false)
+    }
+    NA_PRODUCT_FIT_METHOD_CATALOG__RESERVED_7
+    {
+        RESERVED_6 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=19.0, core=true, t24Name=RESERVED.6, mandatory=false)
+        RESERVED_7 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=18.0, core=true, t24Name=RESERVED.7, mandatory=false)
+    }
+    NA_PRODUCT_FIT_METHOD__DESCRIPTION
+    {
+        DESCRIPTION : T24BusinessTypes:A
+            @i18n:Label (en=Description)
+            @i18n:Tooltip (en=Description)
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, multiLanguage=true, sysNumber=1.0, core=true, t24Name=DESCRIPTION, isTextarea=true, mandatory=false)
+    }
+/* This table will display the score card of product available based on the needs.
+System will calculate a product fit score for each of the products available for the specified purpose based upon the answers to the Needs Questionnaire.
+It will then produce the results in a Recommendation "scorecard" */
+    NA_PRODUCT_RECOMMENDATION
+        @i18n:Description (en="")
+        @t24:i (t24Name=NA.PRODUCT.RECOMMENDATION, nonStop=true, level=I, type=H, allowedFunctions="A C D E H I L P Q S", localRefApplicationSysNo=32.0, localRefAllowed=true)
+    {
+        ACTION : NA_Framework:NA_PRODUCT_RECOMMENDATION__ACTION
+            @i18n:Label (en=Action)
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=22.0, core=true, t24Name=ACTION, mandatory=false)
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=41.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=42.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=38.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=39.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=35.0, core=true, t24Name=CURR.NO, mandatory=false)
+        DATE_TIME -> byValue NA_Framework:NA_PRODUCT_RECOMMENDATION__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=40.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        /* The purpose code which specifies which fit method is being used. */
+        FIT_METHOD -> NA_Framework:NA_PRODUCT_FIT_METHOD
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=2.0, core=true, businessType=A, t24Name=FIT.METHOD, mandatory=false)
+        /* Version of the product fit definition Method */
+        FIT_METHOD_VERSION : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=3.0, core=true, t24Name=FIT.METHOD.VERSION, mandatory=false)
+        INPUTTER -> byValue NA_Framework:NA_PRODUCT_RECOMMENDATION__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        MC_OUT_PRODUCT -> byValue NA_Framework:NA_PRODUCT_RECOMMENDATION__MC_OUT_PRODUCT *
+            @t24:i (t24Name=MC.OUT.PRODUCT)
+        OVERRIDE -> byValue NA_Framework:NA_PRODUCT_RECOMMENDATION__OVERRIDE *
+            @t24:i (t24Name=OVERRIDE)
+        PRODUCT -> byValue NA_Framework:NA_PRODUCT_RECOMMENDATION__PRODUCT *
+            @t24:i (t24Name=PRODUCT)
+/* ID of NA.PRODUCT.RECOMMENDATION
+It will be the ID of NA.QUESTIONNAIRE. */
+        PRODUCT_RECOMMENDATION_ID -> NA_Framework:NA_PRODUCT_RECOMMENDATION PK required
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=0.0, core=true, businessType=A, t24Name=PRODUCT.RECOMMENDATION.ID, mandatory=true)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=34.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        RESERVED_1 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=31.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=30.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=29.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=28.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        RESERVED_5 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=27.0, core=true, t24Name=RESERVED.5, mandatory=false)
+        RESERVED_6 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=26.0, core=true, t24Name=RESERVED.6, mandatory=false)
+        RESERVED_7 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=1.0, core=true, t24Name=RESERVED.7, mandatory=false)
+    }
+    NA_PRODUCT_RECOMMENDATION__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=37.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    NA_PRODUCT_RECOMMENDATION__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=36.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    NA_PRODUCT_RECOMMENDATION__MC_OUT_PRODUCT
+    {
+        MC_OUT_FIELD -> byValue NA_Framework:NA_PRODUCT_RECOMMENDATION__MC_OUT_PRODUCT__MC_OUT_FIELD *
+            @t24:i (t24Name=MC.OUT.FIELD)
+        /* This field defines the list of product listed by the marketing catalogue for the needs. */
+        MC_OUT_PRODUCT -> AA_ProductManagement:AA_PRODUCT
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=23.0, core=true, businessType=A, t24Name=MC.OUT.PRODUCT, mandatory=false)
+    }
+    NA_PRODUCT_RECOMMENDATION__MC_OUT_PRODUCT__MC_OUT_FIELD
+    {
+        /* List of Marketing Catalogue fields to be displayed in the recommendation record if it is not already shown as product metric */
+        MC_OUT_FIELD : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=24.0, core=true, t24Name=MC.OUT.FIELD, mandatory=false)
+        /* List of Marketing Catalogue field values to be displayed in the recommendation record if it is not already shown as product metric */
+        MC_OUT_VALUE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=25.0, core=true, t24Name=MC.OUT.VALUE, mandatory=false)
+    }
+    NA_PRODUCT_RECOMMENDATION__OVERRIDE
+    {
+        OVERRIDE : T24BusinessTypes:N
+            @i18n:Label (en=Override)
+            @i18n:Tooltip (en="Overrides generated by this transaction")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=33.0, core=true, t24Name=OVERRIDE, mandatory=false)
+    }
+    NA_PRODUCT_RECOMMENDATION__PRODUCT
+    {
+        MC_FIELD -> byValue NA_Framework:NA_PRODUCT_RECOMMENDATION__PRODUCT__MC_FIELD *
+            @t24:i (t24Name=MC.FIELD)
+/* This field indicates the relative value of how much a product is fit for the needs.
+It is calculated as the Total Score / Total Weights * 100 */
+        PERCENTAGE_FIT : T24BusinessTypes:RR
+            @t24:i (align=L, inputBehaviour=N, maxLength=5, sysNumber=20.0, core=true, t24Name=PERCENTAGE.FIT, mandatory=false)
+        /* List of products selected by the product recommendation engine based on the marketing catalogue output. */
+        PRODUCT -> AA_ProductManagement:AA_PRODUCT
+            @i18n:Label (en=Product)
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=4.0, core=true, businessType=A, t24Name=PRODUCT, mandatory=false)
+        /* Total of all Knockouts for Product. */
+        TOTAL_KNOCKOUTS : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=3, sysNumber=21.0, core=true, t24Name=TOTAL.KNOCKOUTS, mandatory=false)
+        /* Total of all Weighted Scores. */
+        TOTAL_SCORE : T24BusinessTypes:RR
+            @t24:i (align=L, inputBehaviour=N, maxLength=5, sysNumber=19.0, core=true, t24Name=TOTAL.SCORE, mandatory=false)
+        /* This field will indicate the total of all metric Weights. */
+        TOTAL_WEIGHTS : T24BusinessTypes:RR
+            @t24:i (align=L, inputBehaviour=N, maxLength=5, sysNumber=18.0, core=true, t24Name=TOTAL.WEIGHTS, mandatory=false)
+    }
+    NA_PRODUCT_RECOMMENDATION__PRODUCT__MC_FIELD
+    {
+        /* This field will indicate the value of the Questionnaire field It will be populated from the Needs Questionnaire. */
+        ANSWER : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=10.0, core=true, t24Name=ANSWER, mandatory=false)
+/* This field indicates how the MC Field value is compared with Needs Answer.
+
+Valid options are EQ (Equals), NE (Not Equal), GT (Greater than), GE (Greater Than or Greater Than Equal to),LT (Less than), LE (Less than or Less Than Equal to) */
+        FIT_TYPE : NA_Framework:NA_PRODUCT_RECOMMENDATION__PRODUCT__MC_FIELD__FIT_TYPE
+            @t24:i (align=L, inputBehaviour=N, maxLength=2, sysNumber=8.0, core=true, t24Name=FIT.TYPE, mandatory=false)
+        /* This field indicates if the MC field is knocked out of product selection. */
+        KNOCKOUT : NA_Framework:NA_PRODUCT_RECOMMENDATION__PRODUCT__MC_FIELD__KNOCKOUT
+            @t24:i (align=L, inputBehaviour=N, maxLength=3, sysNumber=17.0, core=true, t24Name=KNOCKOUT, mandatory=false)
+        /* This field would have the list of knockout metrics associated with the Fit Method. */
+        KNOCKOUT_METRIC : NA_Framework:NA_PRODUCT_RECOMMENDATION__PRODUCT__MC_FIELD__KNOCKOUT_METRIC
+            @t24:i (align=L, inputBehaviour=N, maxLength=3, sysNumber=12.0, core=true, t24Name=KNOCKOUT.METRIC, mandatory=false)
+        /* This field would have the list of Marketing Catalogue fields associated with the Fit Method. */
+        MC_FIELD : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=5.0, core=true, t24Name=MC.FIELD, mandatory=false)
+        /* This field would have the list of questionnaire fields associated with the Fit Method. */
+        QUESTION : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=9.0, core=true, t24Name=QUESTION, mandatory=false)
+        /* This field indicates the final calculated score based upon the fit type. */
+        RAW_SCORE : T24BusinessTypes:R
+            @t24:i (align=R, inputBehaviour=N, maxLength=3, sysNumber=14.0, core=true, t24Name=RAW.SCORE, mandatory=false)
+/* This field specifies whether the raw score should be standardized.
+Valid options are YES and null. */
+        STANDARDIZE_METRIC : NA_Framework:NA_PRODUCT_RECOMMENDATION__PRODUCT__MC_FIELD__STANDARDIZE_METRIC
+            @t24:i (align=L, inputBehaviour=N, maxLength=3, sysNumber=13.0, core=true, t24Name=STANDARDIZE.METRIC, mandatory=false)
+/* This field will indicate the standardized score.
+If the RAW.SCORE is greater than 1 and if standardize metric is set as YES, then the standard score will be evaluated as 1. */
+        STANDARD_SCORE : T24BusinessTypes:R
+            @t24:i (align=R, inputBehaviour=N, maxLength=3, sysNumber=15.0, core=true, t24Name=STANDARD.SCORE, mandatory=false)
+        /* This field will indicate the value of the Marketing catalogue field. */
+        VALUE : T24BusinessTypes:A
+            @i18n:Label (en=Value)
+            @i18n:Tooltip (en=Value)
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=6.0, core=true, t24Name=VALUE, mandatory=false)
+/* This field define if the value is fetched the Marketing Catalog enquiry or if the value is taken from MC.FIELD.DEFAULT.
+Valid values are DEFAULT and CATALOGUE */
+        VALUE_TYPE : NA_Framework:NA_PRODUCT_RECOMMENDATION__PRODUCT__MC_FIELD__VALUE_TYPE
+            @t24:i (align=L, inputBehaviour=N, maxLength=10, sysNumber=7.0, core=true, t24Name=VALUE.TYPE, mandatory=false)
+/* Each weight will be a numeric value ranging from 0 to 10.
+This weight will be used for evaluating Weighted score. */
+        WEIGHT : NA_Framework:NA_PRODUCT_RECOMMENDATION__PRODUCT__MC_FIELD__WEIGHT
+            @i18n:Label (en=Weight)
+            @t24:i (align=R, inputBehaviour=N, maxLength=2, sysNumber=11.0, core=true, t24Name=WEIGHT, mandatory=false)
+/* This field will indicate the score evaluating the metric weight given to each MC field.
+If standardize metric is set as Yes and when raw score is greater than 1 then weighted score will be standardized score * Metric Weight
+or else it will be Raw Score of each product * Metric Weight. */
+        WEIGHTED_SCORE : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=16.0, core=true, t24Name=WEIGHTED.SCORE, mandatory=false)
+    }
+    /* This is the Runtime Master table for Needs class type. The application NA.QUESTIONNAIRE is similar to AA.ARRANGEMENT.ACTIVITY, and it is used for analyzing the customer needs. */
+    NA_QUESTIONNAIRE
+        @i18n:Description (en="")
+        @t24:i (t24Name=NA.QUESTIONNAIRE, nonStop=true, level=F, type=H, additionalInfo="TABS NA.NEEDS.,-NA.DES.,-NA.CAT.", allowedFunctions="A C D E H I L P Q S", localRefApplicationSysNo=27.0, localRefAllowed=true)
+    {
+/* This field defines the Activity to be processed against the Questionnaire. The activity may be a user activity or a system generated activity. The business functionality of the activity would be defined in the action routines which are defined in ACTIVITY.ACTION or ACTION fields.
+
+Validation Rules
+
+1. Input is mandatory in this field.
+2. It must be a valid record in AA.CLASS.TYPE.ACTIVITY and valid evidence activity.
+3. The very first activity to capture the needs would be NEW.REQUEST-NEEDS.
+4. Any modification to an existing record must be done through UPDATE.REQUEST-NEEDS. */
+        ACTIVITY -> AA_ClassFramework:AA_CLASS_TYPE_ACTIVITY
+            @i18n:Label (en=Activity)
+            @t24:i (align=L, inputBehaviour=I, maxLength=60, sysNumber=3.0, core=true, businessType=A, t24Name=ACTIVITY, mandatory=false)
+        /* It is a valid record from the OA.APPLICATION table.  If the user gives input this field then the system will link the current quotation Request along with Application. And the Linked quotation details will get updated in the OA.APPLICATION.STATUS record. */
+        APPLICATION -> OA_Framework:OA_APPLICATION
+            @i18n:Label (en=Application)
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=21.0, core=true, businessType=A, t24Name=APPLICATION, mandatory=false)
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=37.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=38.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=34.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        CLASS_INSTANCE -> byValue NA_Framework:NA_QUESTIONNAIRE__CLASS_INSTANCE *
+            @t24:i (t24Name=CLASS.INSTANCE)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=35.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=31.0, core=true, t24Name=CURR.NO, mandatory=false)
+        CUSTOMER -> byValue NA_Framework:NA_QUESTIONNAIRE__CUSTOMER *
+            @t24:i (t24Name=CUSTOMER)
+        DATE_TIME -> byValue NA_Framework:NA_QUESTIONNAIRE__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+/* This field defines that type of the needs questionnaire for the customer.
+Validation Rules
+1. It should be valid record from NA.QUESTIONNAIRE.TYPE.
+2. It should be a published definition */
+        DEFINITION -> NA_Framework:NA_QUESTIONNAIRE_TYPE required
+            @i18n:Label (en="Process Name")
+            @t24:i (align=L, inputBehaviour=I, maxLength=30, sysNumber=1.0, core=true, businessType=A, t24Name=DEFINITION, mandatory=true)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=36.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+/* Effective date of the evidence being inputted. It will default to system date when the user does not input any date.
+Validation rules are
+1. The effective date should be greater than or equals to AVAILABLE.DATE of questionnaire definition, which will be taken from NA.QUESTIONNAIRE.TYPE record of definition.
+
+2. The effective date should be less than to EXPIRY.DATE of questionnaire definition, which will be taken from NA.QUESTIONNAIRE.TYPE record of definition. */
+        EFFECTIVE_DATE : T24BusinessTypes:D
+            @i18n:Label (en="Effective Date")
+            @i18n:Tooltip (en="Effective date of the transaction")
+            @t24:i (align=R, inputBehaviour=I, maxLength=8, sysNumber=4.0, core=true, t24Name=EFFECTIVE.DATE, mandatory=false)
+        INPUTTER -> byValue NA_Framework:NA_QUESTIONNAIRE__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        /* Details of last activity performed on the current record. */
+        LAST_ACTIVITY : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=50, sysNumber=16.0, core=true, t24Name=LAST.ACTIVITY, mandatory=false)
+        OVERRIDE -> byValue NA_Framework:NA_QUESTIONNAIRE__OVERRIDE *
+            @t24:i (t24Name=OVERRIDE)
+        PURPOSE -> byValue NA_Framework:NA_QUESTIONNAIRE__PURPOSE *
+            @t24:i (t24Name=PURPOSE)
+        /* Unique ID for the table, in the format NAJJJJJAAAAA - where JJJJJ is system date in the Julian date format and AAAAA is the random alphanumeric character, which is unique. */
+        QUESTIONNAIRE_ID -> NA_Framework:NA_QUESTIONNAIRE PK required
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=0.0, core=true, businessType=A, t24Name=QUESTIONNAIRE.ID, mandatory=true)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=30.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        RESERVED_1 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=26.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=25.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=24.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=23.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        STD_RESERVE1 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=20.0, core=true, t24Name=STD.RESERVE1, mandatory=false)
+        STD_RESERVE2 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=19.0, core=true, t24Name=STD.RESERVE2, mandatory=false)
+        STD_RESERVE3 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=18.0, core=true, t24Name=STD.RESERVE3, mandatory=false)
+        STD_RESERVE4 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=17.0, core=true, t24Name=STD.RESERVE4, mandatory=false)
+        STD_RESERVE6 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=10.0, core=true, t24Name=STD.RESERVE6, mandatory=false)
+        STD_RESERVE7 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=9.0, core=true, t24Name=STD.RESERVE7, mandatory=false)
+        STD_RESERVE8 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=8.0, core=true, t24Name=STD.RESERVE8, mandatory=false)
+        STMT_NOS -> byValue NA_Framework:NA_QUESTIONNAIRE__STMT_NOS *
+            @t24:i (t24Name=STMT.NOS)
+        TO_CLASS_INSTANCE -> byValue NA_Framework:NA_QUESTIONNAIRE__TO_CLASS_INSTANCE *
+            @t24:i (t24Name=TO.CLASS.INSTANCE)
+        /* The version of the Questionnaire type being utilized for this application. If the user doesn't input any version, then the system will default the latest version number of current questionnaire type(DEFINITION). If user inputs, then version would be validated against all available versions of evidence. */
+        VERSION : T24BusinessTypes:A
+            @i18n:Label (en=Version)
+            @t24:i (align=L, inputBehaviour=I, maxLength=10, sysNumber=2.0, core=true, t24Name=VERSION, mandatory=false)
+    }
+    /* The objective of this table is to record ‘every activity’ or event happening as part of the Application. */
+    NA_QUESTIONNAIRE_DIARY
+        @i18n:Description (en="")
+        @t24:i (t24Name=NA.QUESTIONNAIRE.DIARY, level=I, type=L, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        ACTIVITY -> byValue NA_Framework:NA_QUESTIONNAIRE_DIARY__ACTIVITY *
+            @t24:i (t24Name=ACTIVITY)
+        /* The record ID of NA.QUESTIONNAIRE.DIARY. */
+        QUESTIONNAIRE_DIARY_ID -> NA_Framework:NA_QUESTIONNAIRE_DIARY PK required
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=0.0, core=true, businessType=A, t24Name=QUESTIONNAIRE.DIARY.ID, mandatory=true)
+        RESERVED_1 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=28.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_15 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=5.0, core=true, t24Name=RESERVED.15, mandatory=false)
+        RESERVED_16 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=4.0, core=true, t24Name=RESERVED.16, mandatory=false)
+        RESERVED_17 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=3.0, core=true, t24Name=RESERVED.17, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=27.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=26.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=25.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        RESERVED_5 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=24.0, core=true, t24Name=RESERVED.5, mandatory=false)
+        RESERVED_6 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=23.0, core=true, t24Name=RESERVED.6, mandatory=false)
+/* The status of the Application. Could hold 3 values:
+ACTIVE - Application is in progress
+INACTIVE - Application began, but no activity has happened for a long time. The time is controlled by a parameter in AA.ORIGINATION.PARAMETER table.
+COMPLETE - Application reached its logical end.
+READY.FOR.ARCHIVE - Indicates the record has crossed its threshold of inactivity or completion and is ready to be picked by Archival service. */
+        STATUS : NA_Framework:NA_QUESTIONNAIRE_DIARY__STATUS
+            @i18n:Label (en=Status)
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=1.0, core=true, t24Name=STATUS, mandatory=false)
+        /* The date on which the above status was updated. Would be useful to know when the system moved to READY.FOR.ARCHIVE status so that the same can be compared against the RETENTION.PERIOD stated in the ARCHIVE record. Would also be a useful indicator on how long has it remained in this status. */
+        STATUS_DATE : T24BusinessTypes:D
+            @i18n:Label (en="Status Date")
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=2.0, core=true, t24Name=STATUS.DATE, mandatory=false)
+    }
+    NA_QUESTIONNAIRE_DIARY__ACTIVITY
+    {
+/* Name of the activity that was performed - like NEW.REQUEST-QUESTIONNAIRE, UPDATE.REQUEST-QUESTIONNAIRE etc.
+Should be a valid AA.CLASS.TYPE.ACTIVITY entry */
+        ACTIVITY -> AA_ClassFramework:AA_CLASS_TYPE_ACTIVITY
+            @i18n:Label (en=Activity)
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=6.0, core=true, businessType=A, t24Name=ACTIVITY, mandatory=false)
+/* Indicates the status of the activity. If the activity is in INAU, then this would indicate it as UNAUTH and if it is Authorized, this would be in AUTH.
+Valid Statuses are UNAUTH and AUTH. */
+        ACTIVITY_STATUS : NA_Framework:NA_QUESTIONNAIRE_DIARY__ACTIVITY__ACTIVITY_STATUS
+            @i18n:Label (en="Activity Status")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=14.0, core=true, t24Name=ACTIVITY.STATUS, mandatory=false)
+/* Indicates the application involved in this activity. Since an origination could involve activities in multiple components, this would indicate the valid Application of those components.
+For example, if the activity is NEW.REQUEST-QUESTIONNAIRE, then this field would hold NA.QUESTIONNAIRE. */
+        APPLICATION -> EB_SystemTables:PGM_FILE
+            @i18n:Label (en=Application)
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=15.0, core=true, businessType=A, t24Name=APPLICATION, mandatory=false)
+        /* Date on which the event happened. */
+        DATE : T24BusinessTypes:D
+            @i18n:Label (en=Date)
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=10.0, core=true, t24Name=DATE, mandatory=false)
+/* Indicates the definition id used in the above activity. For example, if the activity is a NEW.REQUEST-QUESTIONNAIRE, this would hold the NA.QUESTIONNAIRE.TYPE reference.
+This is only relevant for Quotation, Needs, and Decision activities. For Application level activities, a TRANSIT.STAGE would populate this activity to indicate on what purpose was the stage activity run against. */
+        DEFINITION : T24BusinessTypes:A
+            @i18n:Label (en="Process Name")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=17.0, core=true, t24Name=DEFINITION, mandatory=false)
+        /* Would hold the OFS source that was used for the activity. The value could be used to identify the source of update - for example, a mobile channel could use a different source from internet and storing this could show from which channel was a formlet updated or submitted. Should be a valid entry in OFS.SOURCE */
+        OFS_SOURCE -> EB_Interface:OFS_SOURCE
+            @i18n:Label (en="OFS Source")
+            @i18n:Tooltip (en="The OFS Source record ID")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=13.0, core=true, businessType=A, t24Name=OFS.SOURCE, mandatory=false)
+        /* Would hold the reference of the APPLICATION on which the activity was performed. */
+        REFERENCE : T24BusinessTypes:A
+            @i18n:Label (en="Search by Referece")
+            @t24:i (align=L, inputBehaviour=I, maxLength=100, sysNumber=16.0, core=true, t24Name=REFERENCE, mandatory=false)
+        RESERVED_10 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=19.0, core=true, t24Name=RESERVED.10, mandatory=false)
+        RESERVED_11 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=18.0, core=true, t24Name=RESERVED.11, mandatory=false)
+        RESERVED_12 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=9.0, core=true, t24Name=RESERVED.12, mandatory=false)
+        RESERVED_13 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=8.0, core=true, t24Name=RESERVED.13, mandatory=false)
+        RESERVED_14 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=7.0, core=true, t24Name=RESERVED.14, mandatory=false)
+        RESERVED_7 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=22.0, core=true, t24Name=RESERVED.7, mandatory=false)
+        RESERVED_8 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=21.0, core=true, t24Name=RESERVED.8, mandatory=false)
+        RESERVED_9 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=20.0, core=true, t24Name=RESERVED.9, mandatory=false)
+        /* Time of the recorded event. When the status is ‘UNAUTH’ the date and time would indicate when the activity was input. When the status is ‘AUTH’, they indicate the details on when the activity was authorized. */
+        TIME : T24BusinessTypes:TIME
+            @i18n:Label (en=Time)
+            @t24:i (align=L, inputBehaviour=I, maxLength=15, sysNumber=11.0, core=true, t24Name=TIME, mandatory=false)
+        /* Indicates the user who input this activity. For example, if it was self-filled by the user, this would be the User name(external user id possibly) and if it is bank user, would indicate which user. Should be a valid USER record */
+        USER -> EB_Security:USER
+            @i18n:Label (en=User)
+            @i18n:Tooltip (en="Indicates teller id")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=12.0, core=true, businessType=A, t24Name=USER, mandatory=false)
+    }
+    /* This table is system maintained and is updated when a new needs questionnaire type definition is published through AA.DEFINITION.MANAGER application. */
+    NA_QUESTIONNAIRE_TYPE
+        @i18n:Description (en="")
+        @t24:i (t24Name=NA.QUESTIONNAIRE.TYPE, level=I, type=L, allowedFunctions="L S", localRefAllowed=false)
+    {
+        /* The Date from which the Evidence Type is Valid. Standard T24 Date, format is YYYYMMDD */
+        AVAILABLE_DATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=4.0, core=true, t24Name=AVAILABLE.DATE, mandatory=false)
+        /* Name of the class as given in AA.DEFINITION.MANAGER. Should belong to NA.NEEDS.CLASS */
+        CLASS_NAME : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=2.0, core=true, t24Name=CLASS.NAME, mandatory=false)
+        DESCRIPTION -> byValue NA_Framework:NA_QUESTIONNAIRE_TYPE__DESCRIPTION *
+            @t24:i (t24Name=DESCRIPTION)
+        /* The Date beyond which the Questionnaire Type is no longer Valid.Standard T24 Date, format is YYYYMMDD */
+        EXPIRY_DATE : T24BusinessTypes:D
+            @i18n:Label (en="Expiry Date")
+            @i18n:Tooltip (en="Indicates the Expiry Date of the Transaction")
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=5.0, core=true, t24Name=EXPIRY.DATE, mandatory=false)
+        /* The Date at which the Evidence Type is published. It will be TODAY's date.Standard T24 Date, format is YYYYMMDD */
+        LAST_PUBLISHED : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=6.0, core=true, t24Name=LAST.PUBLISHED, mandatory=false)
+        /* The record ID of NA.QUESTIONNAIRE.TYPE. */
+        QUESTIONNAIRE_TYPE -> NA_Framework:NA_QUESTIONNAIRE_TYPE PK required
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=0.0, core=true, businessType=A, t24Name=QUESTIONNAIRE.TYPE, mandatory=true)
+        /* The current STATUS of the Needs Questionnaire Type. The only allowed Status PUBLISHED will get update after publishing the definition. */
+        STATUS : T24BusinessTypes:A
+            @i18n:Label (en=Status)
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=3.0, core=true, t24Name=STATUS, mandatory=false)
+    }
+    /* This table is system maintained and is updated when a new  needs questionnaire definition defined in AA.DEFINITION.MANAGER is published, this is used by the system for processing needs analysis of customer and serves to separate the design-time definition in AA.DEFINITION.MANAGER */
+    NA_QUESTIONNAIRE_TYPE_CATALOG
+        @i18n:Description (en="")
+        @t24:i (t24Name=NA.QUESTIONNAIRE.TYPE.CATALOG, level=I, type=H, allowedFunctions="L Q S", localRefApplicationSysNo=39.0, localRefAllowed=true)
+    {
+/* Allowed options are
+1. "Null"- the record is simply being updated.
+2. PUBLISH - record is proofed and published. */
+        ACTION : NA_Framework:NA_QUESTIONNAIRE_TYPE_CATALOG__ACTION
+            @i18n:Label (en=Action)
+            @t24:i (align=L, inputBehaviour=I, maxLength=7, sysNumber=34.0, core=true, t24Name=ACTION, mandatory=false)
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=52.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=53.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=49.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        CLASS -> byValue NA_Framework:NA_QUESTIONNAIRE_TYPE_CATALOG__CLASS *
+            @t24:i (t24Name=CLASS)
+        /* Valid entry in AA.CLASS.TYPE. */
+        CLASS_TYPE -> AA_Framework:AA_CLASS_TYPE
+            @i18n:Label (en="Class Type")
+            @t24:i (align=L, inputBehaviour=N, maxLength=25, sysNumber=40.0, core=true, businessType=ANY, t24Name=CLASS.TYPE, mandatory=true)
+        COMMON_CLASS_TYPE -> byValue NA_Framework:NA_QUESTIONNAIRE_TYPE_CATALOG__COMMON_CLASS_TYPE *
+            @t24:i (t24Name=COMMON.CLASS.TYPE)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=50.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=46.0, core=true, t24Name=CURR.NO, mandatory=false)
+        DATE_TIME -> byValue NA_Framework:NA_QUESTIONNAIRE_TYPE_CATALOG__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DEFAULT_ROLE -> byValue NA_Framework:NA_QUESTIONNAIRE_TYPE_CATALOG__DEFAULT_ROLE *
+            @t24:i (t24Name=DEFAULT.ROLE)
+        /* The record ID of NA.QUESTIONNAIRE.TYPE.CATALOG */
+        DEFINITION_MANAGER -> NA_Framework:NA_QUESTIONNAIRE_TYPE_CATALOG PK required
+            @t24:i (align=L, inputBehaviour=I, maxLength=60, sysNumber=0.0, core=true, businessType=A, t24Name=DEFINITION.MANAGER, mandatory=true)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=51.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        DESCRIPTION -> byValue NA_Framework:NA_QUESTIONNAIRE_TYPE_CATALOG__DESCRIPTION *
+            @t24:i (t24Name=DESCRIPTION)
+        /* Used for Form Definition to specify which domain type the form is used in and therefore will default the Instances (i.e. the formlets) in the domain type into the mv set. */
+        DOMAIN_TYPE -> OA_Framework:OA_DOMAIN_TYPE
+            @t24:i (align=L, inputBehaviour=I, maxLength=36, sysNumber=3.0, core=true, businessType=ANY, t24Name=DOMAIN.TYPE, mandatory=false)
+        /* Date from which the resultant Questionnaire type will no longer be available for use. */
+        EXPIRY_DATE : T24BusinessTypes:D
+            @i18n:Label (en="Expiry Date")
+            @i18n:Tooltip (en="Indicates the Expiry Date of the Transaction")
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=35.0, core=true, t24Name=EXPIRY.DATE, mandatory=false)
+        FORM_OWNER -> OA_Framework:OA_ROLE
+            @t24:i (align=L, inputBehaviour=I, maxLength=30, sysNumber=4.0, core=true, businessType=ANY, t24Name=FORM.OWNER, mandatory=false)
+        FULL_DESC -> byValue NA_Framework:NA_QUESTIONNAIRE_TYPE_CATALOG__FULL_DESC *
+            @t24:i (t24Name=FULL.DESC)
+        INPUTTER -> byValue NA_Framework:NA_QUESTIONNAIRE_TYPE_CATALOG__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        OVERRIDE -> byValue NA_Framework:NA_QUESTIONNAIRE_TYPE_CATALOG__OVERRIDE *
+            @t24:i (t24Name=OVERRIDE)
+        PUBLISH_ERROR -> byValue NA_Framework:NA_QUESTIONNAIRE_TYPE_CATALOG__PUBLISH_ERROR *
+            @t24:i (t24Name=PUBLISH.ERROR)
+        /* This field will contain the result of the publishing effort. Validation Rules - Non Inputtable, System Maintained, Allowed values are : Completed Successfully or Completed with Errors. */
+        PUBLISH_STATUS : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=36.0, core=true, t24Name=PUBLISH.STATUS, mandatory=false)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=45.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        /* ID Component 2: Is the main "ID" of the item being designed. For questionnaire this is the name of the questionnaire type */
+        REFERENCE : T24BusinessTypes:ANY
+            @i18n:Label (en="Search by Referece")
+            @t24:i (align=L, inputBehaviour=N, maxLength=25, sysNumber=41.0, core=true, t24Name=REFERENCE, mandatory=true)
+        RESERVED_1 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=33.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=32.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=31.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=30.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        RESERVED_5 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=29.0, core=true, t24Name=RESERVED.5, mandatory=false)
+        RESERVED_6 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=28.0, core=true, t24Name=RESERVED.6, mandatory=false)
+        RESERVED_7 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=27.0, core=true, t24Name=RESERVED.7, mandatory=false)
+        RESERVED_8 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=26.0, core=true, t24Name=RESERVED.8, mandatory=false)
+        RESERVED_9 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=25.0, core=true, t24Name=RESERVED.9, mandatory=false)
+        /* This field will allow a user to specify which mapping definition to use when syncing data for the form. */
+        SYNC_MAPPING -> AA_Mapping:AA_MAPPING_TYPE
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=24.0, core=true, businessType=ANY, t24Name=SYNC.MAPPING, mandatory=false)
+        /* ID Component 3: Version number identifier. */
+        VERSION : T24BusinessTypes:ANY
+            @i18n:Label (en=Version)
+            @t24:i (align=L, inputBehaviour=N, maxLength=5, sysNumber=42.0, core=true, t24Name=VERSION, mandatory=true)
+        /* ID Component 4: Date when the version becomes effective. */
+        VERSION_DATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=N, maxLength=11, sysNumber=43.0, core=true, t24Name=VERSION.DATE, mandatory=true)
+    }
+    NA_QUESTIONNAIRE_TYPE_CATALOG__CLASS
+    {
+        /* ID from corresponding *.CLASS table. (e.g. NA.NEEDS.CLASS) */
+        CLASS : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=7.0, core=true, t24Name=CLASS, mandatory=false)
+/* Name of an the CONDITION being included on the definition line.
+1. Associated Multivalue Field beginning with CLASS, including INSTANCE , CONDITION and ending with CONDITION.VERSION.
+2. Mandatory Input
+3. Validation Rules:
+I. Must be a valid condition previously defined in the condition class file indicated in the CLASS field or implied from the INSTANCE field. The condition file name is formed by concatenating values of the PRODUCT.CODE, PREFIX.DESIGN fields from AA.CLASS.TYPE and the value of the CLASS field.
+Examples CLASS : BASIC.INFO CLASS.TYPE : FORMLET.CLASS PRODUCT.CODE in AA.CLASS.TYPE for FORMLET.CLASS : OA PREFIX.DESIGN in AA.CLASS.TYPE for FORMLET.CLASS : DES CONDITION FILE NAME : OA.DES.BASIC.INFO
+II. T24 String of 35 Characters Maximum */
+        CONDITION : T24BusinessTypes:ANY required
+            @i18n:Label (en=Condition)
+            @i18n:Tooltip (en="Value that the field name is to be compared with")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=14.0, core=true, t24Name=CONDITION, mandatory=true)
+/* Indicate which version of the condition the definition uses. A class may have one or more CONDITIONS, and CONDITIONs may have one or more VERSIONs
+1. Associated Multivalue Field beginning with CLASS, including INSTANCE , CONDITION and ending with CONDITION.VERSION
+2. Optional Input
+3. Validation Rules:
+I. Must be a valid condition-version previously defined in the condition class file indicated in the CLASS field or implied from the INSTANCE field. If not provided the system will default the current applicable version of the condition on file
+II. T24 Numeric Input */
+        CONDITION_VERSION : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=5, sysNumber=15.0, core=true, t24Name=CONDITION.VERSION, mandatory=false)
+        /* Used when designing Forms to indicated the instance of a formlet class.(e.g. Home Address vs. Work Address) */
+        INSTANCE : T24BusinessTypes:A
+            @i18n:Label (en=Instance)
+            @i18n:Tooltip (en=Instance)
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=8.0, core=true, t24Name=INSTANCE, mandatory=false)
+        OWNER -> OA_Framework:OA_ROLE
+            @i18n:Label (en=Owner)
+            @t24:i (align=L, inputBehaviour=I, maxLength=30, sysNumber=16.0, core=true, businessType=ANY, t24Name=OWNER, mandatory=false)
+        RESERVED_11 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=13.0, core=true, t24Name=RESERVED.11, mandatory=false)
+        RESERVED_12 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=12.0, core=true, t24Name=RESERVED.12, mandatory=false)
+        RESERVED_13 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=11.0, core=true, t24Name=RESERVED.13, mandatory=false)
+        RESERVED_14 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=10.0, core=true, t24Name=RESERVED.14, mandatory=false)
+        RESERVED_15 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=9.0, core=true, t24Name=RESERVED.15, mandatory=false)
+        ROLE -> byValue NA_Framework:NA_QUESTIONNAIRE_TYPE_CATALOG__CLASS__ROLE *
+            @t24:i (t24Name=ROLE)
+    }
+    NA_QUESTIONNAIRE_TYPE_CATALOG__CLASS__ROLE
+    {
+        PRIVILEGE : NA_Framework:NA_QUESTIONNAIRE_TYPE_CATALOG__CLASS__ROLE__PRIVILEGE
+            @t24:i (align=L, inputBehaviour=I, maxLength=7, sysNumber=18.0, core=true, t24Name=PRIVILEGE, mandatory=false)
+        ROLE -> OA_Framework:OA_ROLE
+            @i18n:Label (en=Role)
+            @i18n:Tooltip (en="Roles are user defined and specified in EB.LOOKUP")
+            @t24:i (align=L, inputBehaviour=I, maxLength=30, sysNumber=17.0, core=true, businessType=ANY, t24Name=ROLE, mandatory=false)
+    }
+    NA_QUESTIONNAIRE_TYPE_CATALOG__COMMON_CLASS_TYPE
+    {
+        /* It should be the valid CLASS record belongs to the class type defined in above COMMON.CLASS.TYPE field.   It is an associative multi-value set beginning with COMMON.CLASS.TYPE, Including COMMON.CLASS, COMMON.CLASS.CONDITION, COMMON.CONDITION.VERSION. */
+        COMMON_CLASS : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=20.0, core=true, t24Name=COMMON.CLASS, mandatory=false)
+/* Name of the CONDITION being included on the definition line
+1) It is an associative multi-value set beginning with COMMON.CLASS.TYPE, Including COMMON.CLASS, COMMON.CLASS.CONDITION and ending with COMMON.CONDITION.VERSION.
+2) Mandatory Input
+3) Validation Rules
+a. Must be a valid condition previously defined in the condition class file indicated in the COMMON.CLASS field.  The condition file name is formed by concatenating values of the PRODUCT.CODE and PREFIX.DESIGN fields from AA.CLASS.TYPE and the value of the CLASS field Examples COMMON.CLASS : MORTGAGE
+CLASS.TYPE : ACTIVITY.PROCESSING
+PRODUCT.CODE in AA.CLASS.TYPE for ACTIVITY.PROCESSING : AA
+PREFIX.DESIGN in AA.CLASS.TYPE for ACTIVITY.PROCESSING : ACT.DES
+CONDITION FILE NAME : AA.ACT.DES.MORTGAGE
+b. T24 String of 35 Characters Maximum */
+        COMMON_CLASS_CONDITION : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=22.0, core=true, t24Name=COMMON.CLASS.CONDITION, mandatory=false)
+/* This field specifies the name of the common class which is going to link to the current product definition.  Currently, three common class types exist in the system.
+Those are
+1. ACTIVITY.PROCESSING.CLASS
+2. API.CLASS
+3. DYNAMIC.DESCRIPTION.CLASS
+It is an associative multi-value set beginning with COMMON.CLASS.TYPE, Including COMMON.CLASS, COMMON.CLASS.CONDITION and ending with COMMON.CONDITION.VERSION.
+Validation Rule –
+1. It should be a valid class type record from AA.CLASS.TYPE application.
+2. The class types which are having the FUTURE attribute Value as COMMON only allowed as Common class types. */
+        COMMON_CLASS_TYPE -> AA_Framework:AA_CLASS_TYPE
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=19.0, core=true, businessType=ANY, t24Name=COMMON.CLASS.TYPE, mandatory=false)
+/* Indicate which version of the condition the definition  uses. A class may have one or more CONDITIONS, and CONDITIONs may have one or more VERSIONs
+1) It is an associative multi-value set beginning with COMMON.CLASS.TYPE, Including COMMON.CLASS, COMMON.CLASS.CONDITION and ending with COMMON.CONDITION.VERSION.
+2)Optional Input
+3) Validation Rules
+a. Must be a valid condition-version previously defined in the condition class file indicated in the COMMON.CLASS field. If not provided then system will default the latest version of the given CONDITION for the COMMON.CLASS.
+b.T24 Numeric Input */
+        COMMON_CONDITION_VERSION : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=5, sysNumber=23.0, core=true, t24Name=COMMON.CONDITION.VERSION, mandatory=false)
+        RESERVED_16 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=21.0, core=true, t24Name=RESERVED.16, mandatory=false)
+    }
+    NA_QUESTIONNAIRE_TYPE_CATALOG__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=48.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    NA_QUESTIONNAIRE_TYPE_CATALOG__DEFAULT_ROLE
+    {
+        DEFAULT_PRIVILEGE : NA_Framework:NA_QUESTIONNAIRE_TYPE_CATALOG__DEFAULT_ROLE__DEFAULT_PRIVILEGE
+            @t24:i (align=L, inputBehaviour=I, maxLength=7, sysNumber=6.0, core=true, t24Name=DEFAULT.PRIVILEGE, mandatory=false)
+        DEFAULT_ROLE -> OA_Framework:OA_ROLE
+            @t24:i (align=L, inputBehaviour=I, maxLength=30, sysNumber=5.0, core=true, businessType=ANY, t24Name=DEFAULT.ROLE, mandatory=false)
+    }
+    NA_QUESTIONNAIRE_TYPE_CATALOG__DESCRIPTION
+    {
+        /* The Description of the Questionnaire as defined in AA.DEFINITION.MANAGER */
+        DESCRIPTION : T24BusinessTypes:ANY required
+            @i18n:Label (en=Description)
+            @i18n:Tooltip (en=Description)
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, multiLanguage=true, sysNumber=1.0, core=true, t24Name=DESCRIPTION, mandatory=true)
+    }
+    NA_QUESTIONNAIRE_TYPE_CATALOG__FULL_DESC
+    {
+        /* Detailed description defined in AA.DEFINITION.MANAGER */
+        FULL_DESC : T24BusinessTypes:ANY required
+            @i18n:Label (en="Full Description")
+            @i18n:Tooltip (en="Detailed Description ")
+            @t24:i (align=L, inputBehaviour=I, maxLength=60, multiLanguage=true, sysNumber=2.0, core=true, t24Name=FULL.DESC, mandatory=true)
+    }
+    NA_QUESTIONNAIRE_TYPE_CATALOG__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=47.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    NA_QUESTIONNAIRE_TYPE_CATALOG__OVERRIDE
+    {
+        /* Standard override field. */
+        OVERRIDE : T24BusinessTypes:N
+            @i18n:Label (en=Override)
+            @i18n:Tooltip (en="Overrides generated by this transaction")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=44.0, core=true, t24Name=OVERRIDE, mandatory=false)
+    }
+    NA_QUESTIONNAIRE_TYPE_CATALOG__PUBLISH_ERROR
+    {
+        /* Suggestion on how to correct the associated error. */
+        ERROR_SUGGESTION : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=38.0, core=true, t24Name=ERROR.SUGGESTION, mandatory=false)
+        /* In the event of the publishing effort resulting in a error,the PUBLISH.ERROR field being set to "Completed with Error". This field will contain error messages encountered. Validation Rules - Non Inputtable, System Maintained. */
+        PUBLISH_ERROR : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=37.0, core=true, t24Name=PUBLISH.ERROR, mandatory=false)
+    }
+    NA_QUESTIONNAIRE_TYPE__DESCRIPTION
+    {
+        /* The Description of the Evidence as defined in AA.DEFINITION.MANAGER. */
+        DESCRIPTION : T24BusinessTypes:ANY
+            @i18n:Label (en=Description)
+            @i18n:Tooltip (en=Description)
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, multiLanguage=true, sysNumber=1.0, core=true, t24Name=DESCRIPTION, mandatory=false)
+    }
+    NA_QUESTIONNAIRE__CLASS_INSTANCE
+    {
+        /* This field will hold the list of INSTANCES or CLASSES processed as part of current questionnaire record. It should be a valid record from NA.NEEDS.CLASS. */
+        CLASS_INSTANCE -> NA_Framework:NA_NEEDS_CLASS
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=5.0, core=true, businessType=A, t24Name=CLASS.INSTANCE, mandatory=false)
+        /* This field would hold the list of all applications and those record keys that were processed as part of current transactions. The format for storing is - Application: Space : Function : Space : Record Id. */
+        INSTANCE_KEY : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=60, sysNumber=6.0, core=true, t24Name=INSTANCE.KEY, mandatory=false)
+        /* Reserved field for future purpose. */
+        INSTANCE_STATUS : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=30, sysNumber=7.0, core=true, t24Name=INSTANCE.STATUS, mandatory=false)
+    }
+    NA_QUESTIONNAIRE__CUSTOMER
+    {
+        /* Reserved field for future purpose. */
+        CUSTOMER -> ST_Customer:CUSTOMER
+            @i18n:Label (en=Customer)
+            @i18n:Tooltip (en="Customer Liability")
+            @t24:i (align=R, inputBehaviour=I, maxLength=10, sysNumber=11.0, core=true, businessType=CUS, t24Name=CUSTOMER, mandatory=false)
+        /* Reserved field for future purpose. */
+        CUSTOMER_ROLE -> OA_Framework:OA_ROLE
+            @t24:i (align=L, inputBehaviour=N, maxLength=30, sysNumber=12.0, core=true, businessType=ANY, t24Name=CUSTOMER.ROLE, mandatory=false)
+    }
+    NA_QUESTIONNAIRE__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=33.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    NA_QUESTIONNAIRE__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=32.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    NA_QUESTIONNAIRE__OVERRIDE
+    {
+        OVERRIDE : T24BusinessTypes:N
+            @i18n:Label (en=Override)
+            @i18n:Tooltip (en="Overrides generated by this transaction")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=29.0, core=true, t24Name=OVERRIDE, mandatory=false)
+    }
+    NA_QUESTIONNAIRE__PURPOSE
+    {
+/* It is the PURPOSE of the APPLICATION, which is linked to the current quotation.  If the APPLICATION is having a single purpose then the system will default the PURPOSE if the user does not input also. But if APPLICATION is created with multiple PURPOSES then the user should input one of the purposes from the APPLICATION purposes.   It is an associative multi-value field.
+
+Validation Rules - The user input PURPOSE should be a valid PURPOSE from the purposes of the OA.APPLICATION record which is input in previous APPLICATION field. Otherwise, the system will raise an error message.  This purpose is linked to AA.PURPOSE table. */
+        PURPOSE -> AA_ProductFramework:AA_PURPOSE
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=22.0, core=true, businessType=A, t24Name=PURPOSE, mandatory=false)
+    }
+    NA_QUESTIONNAIRE__STMT_NOS
+    {
+        /* Standard statement number field, not used at the moment. */
+        STMT_NOS : T24BusinessTypes:N
+            @i18n:Label (en="Stmt Nos")
+            @i18n:Tooltip (en="Stmt Nos")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=28.0, core=true, t24Name=STMT.NOS, mandatory=false)
+    }
+    NA_QUESTIONNAIRE__TO_CLASS_INSTANCE
+    {
+        /* The fields from TO.CLASS.INSTANCE, TO.FIELD & TO.VALUE are used for scripting test scenarios. The field TO.CLASS.INSTANCE will accept the valid record id from NA.NEEDS.CLASS. The value in the TO.FIELD should be a valid field name from questionnaire table, and value to this field can be defined in TO.VALUE field. An OFS message would be formed for the given NA.NEEDS.CLASS application with the fields and values defined. */
+        TO_CLASS_INSTANCE -> NA_Framework:NA_NEEDS_CLASS
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=13.0, core=true, businessType=A, t24Name=TO.CLASS.INSTANCE, mandatory=false)
+        TO_FIELD -> byValue NA_Framework:NA_QUESTIONNAIRE__TO_CLASS_INSTANCE__TO_FIELD *
+            @t24:i (t24Name=TO.FIELD)
+    }
+    NA_QUESTIONNAIRE__TO_CLASS_INSTANCE__TO_FIELD
+    {
+        /* The fields from TO.CLASS.INSTANCE, TO.FIELD & TO.VALUE are used for scripting test scenarios. The field TO.CLASS.INSTANCE will accept the valid record id from NA.NEEDS.CLASS. The value in the TO.FIELD should be a valid field name from questionnaire table, and value to this field can be defined in TO.VALUE field. An OFS message would be formed for the given NA.NEEDS.CLASS application with the fields and values defined. */
+        TO_FIELD : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=14.0, core=true, t24Name=TO.FIELD, mandatory=false)
+        /* The fields from TO.CLASS.INSTANCE, TO.FIELD & TO.VALUE are used for scripting test scenarios. The field TO.CLASS.INSTANCE will accept the valid record id from NA.NEEDS.CLASS. The value in the TO.FIELD should be a valid field name from questionnaire table, and value to this field can be defined in TO.VALUE field. An OFS message would be formed for the given NA.NEEDS.CLASS application with the fields and values defined. */
+        TO_VALUE : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=100, sysNumber=15.0, core=true, t24Name=TO.VALUE, mandatory=false)
+    }
+    /* Concat file to store NEEDS.QUESTION used in NA.PRODUCT.FIT.DEFINITION to associate Questions to Purpose */
+    NA_QUESTION_NAME
+        @i18n:Description (en="")
+        @t24:i (t24Name=NA.QUESTION.NAME, level=I, type=T, allowedFunctions="L S", localRefAllowed=false)
+    {
+        AUDITOR_CODE -> byValue NA_Framework:NA_QUESTION_NAME__AUDITOR_CODE *
+            @t24:i (t24Name=AUDITOR.CODE)
+        AUDIT_DATE_TIME -> byValue NA_Framework:NA_QUESTION_NAME__AUDIT_DATE_TIME *
+            @t24:i (t24Name=AUDIT.DATE.TIME)
+        AUTHORISER -> byValue NA_Framework:NA_QUESTION_NAME__AUTHORISER *
+            @t24:i (t24Name=AUTHORISER)
+        CO_CODE -> byValue NA_Framework:NA_QUESTION_NAME__CO_CODE *
+            @t24:i (t24Name=CO.CODE)
+        CURR_NO -> byValue NA_Framework:NA_QUESTION_NAME__CURR_NO *
+            @t24:i (t24Name=CURR.NO)
+        DATE_TIME -> byValue NA_Framework:NA_QUESTION_NAME__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DEPT_CODE -> byValue NA_Framework:NA_QUESTION_NAME__DEPT_CODE *
+            @t24:i (t24Name=DEPT.CODE)
+        INPUTTER -> byValue NA_Framework:NA_QUESTION_NAME__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        NEEDS_CLASS_NAME -> byValue NA_Framework:NA_QUESTION_NAME__NEEDS_CLASS_NAME *
+            @t24:i (t24Name=NEEDS.CLASS.NAME)
+        /* The record ID of NA.QUESTION.NAME */
+        QUESTION_NAME -> NA_Framework:NA_QUESTION_NAME PK required
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=0.0, core=true, businessType=A, t24Name=QUESTION.NAME, mandatory=true)
+        RECORD_STATUS -> byValue NA_Framework:NA_QUESTION_NAME__RECORD_STATUS *
+            @t24:i (t24Name=RECORD.STATUS)
+    }
+    NA_QUESTION_NAME__AUDITOR_CODE
+    {
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=9.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+    }
+    NA_QUESTION_NAME__AUDIT_DATE_TIME
+    {
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=10.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    NA_QUESTION_NAME__AUTHORISER
+    {
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=6.0, core=true, t24Name=AUTHORISER, mandatory=false)
+    }
+    NA_QUESTION_NAME__CO_CODE
+    {
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=7.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+    }
+    NA_QUESTION_NAME__CURR_NO
+    {
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=3.0, core=true, t24Name=CURR.NO, mandatory=false)
+    }
+    NA_QUESTION_NAME__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=5.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    NA_QUESTION_NAME__DEPT_CODE
+    {
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=8.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+    }
+    NA_QUESTION_NAME__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=4.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    NA_QUESTION_NAME__NEEDS_CLASS_NAME
+    {
+        /* The class name used in AA.CLASS.DEFINITION. */
+        NEEDS_CLASS_NAME -> NA_Framework:NA_NEEDS_CLASS
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=1.0, core=true, businessType=ANY, t24Name=NEEDS.CLASS.NAME, mandatory=false)
+    }
+    NA_QUESTION_NAME__RECORD_STATUS
+    {
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=2.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+    }
+    NOFILE_PRD_REC_ACCOUNT_OPENING_BANK_1
+        @i18n:Description (en="")
+        @t24:i (t24Name=NOFILE.PRD.REC.ACCOUNT.OPENING.BANK.1, level=I, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        ACCOUNT_NEEDS : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, sysNumber=6.0, core=true, t24Name=ACCOUNT.NEEDS, mandatory=false)
+        ANSWER : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, sysNumber=23.0, core=true, t24Name=ANSWER, mandatory=false)
+        APPLICATION : T24BusinessTypes:A
+            @i18n:Label (en=Application)
+            @t24:i (align=L, inputBehaviour=N, maxLength=30, sysNumber=5.0, core=true, t24Name=APPLICATION, mandatory=false)
+        CR_BASE_INT_RATE : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, sysNumber=8.0, core=true, t24Name=CR.BASE.INT.RATE, mandatory=false)
+        CR_EFF_INT_RATE : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, sysNumber=11.0, core=true, t24Name=CR.EFF.INT.RATE, mandatory=false)
+        CR_INT_MARGIN : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, sysNumber=9.0, core=true, t24Name=CR.INT.MARGIN, mandatory=false)
+        CR_INT_RATE_TYPE : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, sysNumber=7.0, core=true, t24Name=CR.INT.RATE.TYPE, mandatory=false)
+        CR_INT_REL_MARGIN : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, sysNumber=10.0, core=true, t24Name=CR.INT.REL.MARGIN, mandatory=false)
+        CURRENCY : T24BusinessTypes:CCY
+            @i18n:Label (en=Ccy)
+            @t24:i (align=L, inputBehaviour=N, maxLength=30, sysNumber=2.0, core=true, t24Name=CURRENCY, mandatory=false)
+        CUSTOMER : T24BusinessTypes:CUS
+            @i18n:Label (en=Customer)
+            @i18n:Tooltip (en="Customer Liability")
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, sysNumber=4.0, core=true, t24Name=CUSTOMER, mandatory=false)
+        DR_BASE_INT_RATE : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, sysNumber=13.0, core=true, t24Name=DR.BASE.INT.RATE, mandatory=false)
+        DR_EFF_INT_RATE : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, sysNumber=16.0, core=true, t24Name=DR.EFF.INT.RATE, mandatory=false)
+        DR_INT_MARGIN : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, sysNumber=14.0, core=true, t24Name=DR.INT.MARGIN, mandatory=false)
+        DR_INT_RATE_TYPE : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, sysNumber=12.0, core=true, t24Name=DR.INT.RATE.TYPE, mandatory=false)
+        DR_INT_REL_MARGIN : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, sysNumber=15.0, core=true, t24Name=DR.INT.REL.MARGIN, mandatory=false)
+        FIT_TYPE : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, sysNumber=21.0, core=true, t24Name=FIT.TYPE, mandatory=false)
+        ID : T24BusinessTypes:N
+            @i18n:Label (en="Transaction Ref")
+            @i18n:Tooltip (en="Transaction Reference")
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, core=false, t24Name=ID, genOperation=E.NA.BUILD.RECOMMENDATION.PRODUCT.DETAILS, mandatory=true)
+        KNOCKOUT : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, sysNumber=30.0, core=true, t24Name=KNOCKOUT, mandatory=false)
+        KNOCKOUT_METRIC : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, sysNumber=25.0, core=true, t24Name=KNOCKOUT.METRIC, mandatory=false)
+        MANAGEMENT_FEE : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, sysNumber=17.0, core=true, t24Name=MANAGEMENT.FEE, mandatory=false)
+        MC_FIELD : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, sysNumber=18.0, core=true, t24Name=MC.FIELD, mandatory=false)
+        NQ_ACCOUNT_OPTIONS : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, sysNumber=35.0, core=true, t24Name=NQ.ACCOUNT.OPTIONS, mandatory=false)
+        NQ_MONTHLY_FEE : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, sysNumber=36.0, core=true, t24Name=NQ.MONTHLY.FEE, mandatory=false)
+        PERCENTAGE_FIT : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, sysNumber=33.0, core=true, t24Name=PERCENTAGE.FIT, mandatory=false)
+        PRODUCT_ID : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=30, sysNumber=1.0, core=true, t24Name=PRODUCT.ID, mandatory=false)
+        QUESTION : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, sysNumber=22.0, core=true, t24Name=QUESTION, mandatory=false)
+        RAW_SCORE : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, sysNumber=27.0, core=true, t24Name=RAW.SCORE, mandatory=false)
+        STANDARDIZE_METRIC : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, sysNumber=26.0, core=true, t24Name=STANDARDIZE.METRIC, mandatory=false)
+        STANDARD_SCORE : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, sysNumber=28.0, core=true, t24Name=STANDARD.SCORE, mandatory=false)
+        TOTAL_KNOCKOUTS : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, sysNumber=34.0, core=true, t24Name=TOTAL.KNOCKOUTS, mandatory=false)
+        TOTAL_SCORE : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, sysNumber=32.0, core=true, t24Name=TOTAL.SCORE, mandatory=false)
+        TOTAL_WEIGHTS : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, sysNumber=31.0, core=true, t24Name=TOTAL.WEIGHTS, mandatory=false)
+        VALUE : T24BusinessTypes:N
+            @i18n:Label (en=Value)
+            @i18n:Tooltip (en=Value)
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, sysNumber=19.0, core=true, t24Name=VALUE, mandatory=false)
+        VALUE_TYPE : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, sysNumber=20.0, core=true, t24Name=VALUE.TYPE, mandatory=false)
+        VARIATION : T24BusinessTypes:A
+            @i18n:Label (en=Variation)
+            @t24:i (align=L, inputBehaviour=N, maxLength=30, sysNumber=3.0, core=true, t24Name=VARIATION, mandatory=false)
+        WEIGHT : T24BusinessTypes:N
+            @i18n:Label (en=Weight)
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, sysNumber=24.0, core=true, t24Name=WEIGHT, mandatory=false)
+        WEIGHTED_SCORE : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, sysNumber=29.0, core=true, t24Name=WEIGHTED.SCORE, mandatory=false)
+    }
+    NOFILE_PRD_REC_ACCOUNT_OPENING_CUSTOMER_1
+        @i18n:Description (en="")
+        @t24:i (t24Name=NOFILE.PRD.REC.ACCOUNT.OPENING.CUSTOMER.1, level=I, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        ACCOUNT_NEEDS : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, sysNumber=6.0, core=true, t24Name=ACCOUNT.NEEDS, mandatory=false)
+        APPLICATION : T24BusinessTypes:A
+            @i18n:Label (en=Application)
+            @t24:i (align=L, inputBehaviour=N, maxLength=30, sysNumber=5.0, core=true, t24Name=APPLICATION, mandatory=false)
+        CR_EFF_INT_RATE : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, sysNumber=7.0, core=true, t24Name=CR.EFF.INT.RATE, mandatory=false)
+        CURRENCY : T24BusinessTypes:CCY
+            @i18n:Label (en=Ccy)
+            @t24:i (align=L, inputBehaviour=N, maxLength=30, sysNumber=2.0, core=true, t24Name=CURRENCY, mandatory=false)
+        CUSTOMER : T24BusinessTypes:CUS
+            @i18n:Label (en=Customer)
+            @i18n:Tooltip (en="Customer Liability")
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, sysNumber=4.0, core=true, t24Name=CUSTOMER, mandatory=false)
+        DR_EFF_INT_RATE : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, sysNumber=8.0, core=true, t24Name=DR.EFF.INT.RATE, mandatory=false)
+        ID : T24BusinessTypes:N
+            @i18n:Label (en="Transaction Ref")
+            @i18n:Tooltip (en="Transaction Reference")
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, core=false, t24Name=ID, genOperation=E.NA.BUILD.RECOMMENDATION.PRODUCT.DETAILS, mandatory=true)
+        MANAGEMENT_FEE : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, sysNumber=9.0, core=true, t24Name=MANAGEMENT.FEE, mandatory=false)
+        NQ_ACCOUNT_OPTIONS : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, sysNumber=10.0, core=true, t24Name=NQ.ACCOUNT.OPTIONS, mandatory=false)
+        NQ_MONTHLY_FEE : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, sysNumber=11.0, core=true, t24Name=NQ.MONTHLY.FEE, mandatory=false)
+        PRODUCT_ID : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=30, sysNumber=1.0, core=true, t24Name=PRODUCT.ID, mandatory=false)
+        VARIATION : T24BusinessTypes:A
+            @i18n:Label (en=Variation)
+            @t24:i (align=L, inputBehaviour=N, maxLength=30, sysNumber=3.0, core=true, t24Name=VARIATION, mandatory=false)
+    }
+    NOFILE_PRD_REC_SAVE_MONEY_BANK_1
+        @i18n:Description (en="")
+        @t24:i (t24Name=NOFILE.PRD.REC.SAVE.MONEY.BANK.1, level=I, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        ANSWER : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, sysNumber=27.0, core=true, t24Name=ANSWER, mandatory=false)
+        APPLICATION : T24BusinessTypes:A
+            @i18n:Label (en=Application)
+            @t24:i (align=L, inputBehaviour=N, maxLength=30, sysNumber=5.0, core=true, t24Name=APPLICATION, mandatory=false)
+        BASE_INT_RATE : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, sysNumber=18.0, core=true, t24Name=BASE.INT.RATE, mandatory=false)
+        BONUS : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, sysNumber=16.0, core=true, t24Name=BONUS, mandatory=false)
+        CR_BASE_INT_RATE : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, sysNumber=8.0, core=true, t24Name=CR.BASE.INT.RATE, mandatory=false)
+        CR_EFF_INT_RATE : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, sysNumber=11.0, core=true, t24Name=CR.EFF.INT.RATE, mandatory=false)
+        CR_INT_MARGIN : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, sysNumber=9.0, core=true, t24Name=CR.INT.MARGIN, mandatory=false)
+        CR_INT_REL_MARGIN : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, sysNumber=10.0, core=true, t24Name=CR.INT.REL.MARGIN, mandatory=false)
+        CURRENCY : T24BusinessTypes:CCY
+            @i18n:Label (en=Ccy)
+            @t24:i (align=L, inputBehaviour=N, maxLength=30, sysNumber=2.0, core=true, t24Name=CURRENCY, mandatory=false)
+        CUSTOMER : T24BusinessTypes:CUS
+            @i18n:Label (en=Customer)
+            @i18n:Tooltip (en="Customer Liability")
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, sysNumber=4.0, core=true, t24Name=CUSTOMER, mandatory=false)
+        EFF_INT_RATE : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, sysNumber=21.0, core=true, t24Name=EFF.INT.RATE, mandatory=false)
+        FIT_TYPE : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, sysNumber=25.0, core=true, t24Name=FIT.TYPE, mandatory=false)
+        ID : T24BusinessTypes:N
+            @i18n:Label (en="Transaction Ref")
+            @i18n:Tooltip (en="Transaction Reference")
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, core=false, t24Name=ID, genOperation=E.NA.BUILD.RECOMMENDATION.PRODUCT.DETAILS, mandatory=true)
+        INT_MARGIN : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, sysNumber=19.0, core=true, t24Name=INT.MARGIN, mandatory=false)
+        INT_REL_MARGIN : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, sysNumber=20.0, core=true, t24Name=INT.REL.MARGIN, mandatory=false)
+        KNOCKOUT : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, sysNumber=34.0, core=true, t24Name=KNOCKOUT, mandatory=false)
+        KNOCKOUT_METRIC : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, sysNumber=29.0, core=true, t24Name=KNOCKOUT.METRIC, mandatory=false)
+        MANAGEMENT_FEE : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, sysNumber=7.0, core=true, t24Name=MANAGEMENT.FEE, mandatory=false)
+        MAX_AMOUNT : T24BusinessTypes:N
+            @i18n:Label (en="Maximum Amount")
+            @i18n:Tooltip (en="Maximum charge amount in MIN.MAX.CCY")
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, sysNumber=15.0, core=true, t24Name=MAX.AMOUNT, mandatory=false)
+        MAX_TERM : T24BusinessTypes:N
+            @i18n:Label (en="Maximum Term")
+            @i18n:Tooltip (en="Indicates maximum term for the contract")
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, sysNumber=13.0, core=true, t24Name=MAX.TERM, mandatory=false)
+        MC_FIELD : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, sysNumber=22.0, core=true, t24Name=MC.FIELD, mandatory=false)
+        MIN_AMOUNT : T24BusinessTypes:N
+            @i18n:Label (en="Minimum Amount")
+            @i18n:Tooltip (en="Minimum charge amount in MIN.MAX.CCY")
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, sysNumber=14.0, core=true, t24Name=MIN.AMOUNT, mandatory=false)
+        MIN_TERM : T24BusinessTypes:N
+            @i18n:Label (en="Minimum Term")
+            @i18n:Tooltip (en="Indicates maximum term for the contract")
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, sysNumber=12.0, core=true, t24Name=MIN.TERM, mandatory=false)
+        NQ_SAVE_NEEDS : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, sysNumber=39.0, core=true, t24Name=NQ.SAVE.NEEDS, mandatory=false)
+        PERCENTAGE_FIT : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, sysNumber=37.0, core=true, t24Name=PERCENTAGE.FIT, mandatory=false)
+        PRODUCT_ID : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=30, sysNumber=1.0, core=true, t24Name=PRODUCT.ID, mandatory=false)
+        QUESTION : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, sysNumber=26.0, core=true, t24Name=QUESTION, mandatory=false)
+        RAW_SCORE : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, sysNumber=31.0, core=true, t24Name=RAW.SCORE, mandatory=false)
+        REDEMPTION_FEE : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, sysNumber=17.0, core=true, t24Name=REDEMPTION.FEE, mandatory=false)
+        SAVING_NEEDS : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, sysNumber=6.0, core=true, t24Name=SAVING.NEEDS, mandatory=false)
+        STANDARDIZE_METRIC : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, sysNumber=30.0, core=true, t24Name=STANDARDIZE.METRIC, mandatory=false)
+        STANDARD_SCORE : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, sysNumber=32.0, core=true, t24Name=STANDARD.SCORE, mandatory=false)
+        TOTAL_KNOCKOUTS : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, sysNumber=38.0, core=true, t24Name=TOTAL.KNOCKOUTS, mandatory=false)
+        TOTAL_SCORE : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, sysNumber=36.0, core=true, t24Name=TOTAL.SCORE, mandatory=false)
+        TOTAL_WEIGHTS : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, sysNumber=35.0, core=true, t24Name=TOTAL.WEIGHTS, mandatory=false)
+        VALUE : T24BusinessTypes:N
+            @i18n:Label (en=Value)
+            @i18n:Tooltip (en=Value)
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, sysNumber=23.0, core=true, t24Name=VALUE, mandatory=false)
+        VALUE_TYPE : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, sysNumber=24.0, core=true, t24Name=VALUE.TYPE, mandatory=false)
+        VARIATION : T24BusinessTypes:A
+            @i18n:Label (en=Variation)
+            @t24:i (align=L, inputBehaviour=N, maxLength=30, sysNumber=3.0, core=true, t24Name=VARIATION, mandatory=false)
+        WEIGHT : T24BusinessTypes:N
+            @i18n:Label (en=Weight)
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, sysNumber=28.0, core=true, t24Name=WEIGHT, mandatory=false)
+        WEIGHTED_SCORE : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, sysNumber=33.0, core=true, t24Name=WEIGHTED.SCORE, mandatory=false)
+    }
+    NOFILE_PRD_REC_SAVE_MONEY_CUSTOMER_1
+        @i18n:Description (en="")
+        @t24:i (t24Name=NOFILE.PRD.REC.SAVE.MONEY.CUSTOMER.1, level=I, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        APPLICATION : T24BusinessTypes:A
+            @i18n:Label (en=Application)
+            @t24:i (align=L, inputBehaviour=N, maxLength=30, sysNumber=5.0, core=true, t24Name=APPLICATION, mandatory=false)
+        BONUS : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, sysNumber=13.0, core=true, t24Name=BONUS, mandatory=false)
+        CR_EFF_INT_RATE : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, sysNumber=8.0, core=true, t24Name=CR.EFF.INT.RATE, mandatory=false)
+        CURRENCY : T24BusinessTypes:CCY
+            @i18n:Label (en=Ccy)
+            @t24:i (align=L, inputBehaviour=N, maxLength=30, sysNumber=2.0, core=true, t24Name=CURRENCY, mandatory=false)
+        CUSTOMER : T24BusinessTypes:CUS
+            @i18n:Label (en=Customer)
+            @i18n:Tooltip (en="Customer Liability")
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, sysNumber=4.0, core=true, t24Name=CUSTOMER, mandatory=false)
+        EFF_INT_RATE : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, sysNumber=15.0, core=true, t24Name=EFF.INT.RATE, mandatory=false)
+        ID : T24BusinessTypes:N
+            @i18n:Label (en="Transaction Ref")
+            @i18n:Tooltip (en="Transaction Reference")
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, core=false, t24Name=ID, genOperation=E.NA.BUILD.RECOMMENDATION.PRODUCT.DETAILS, mandatory=true)
+        MANAGEMENT_FEE : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, sysNumber=7.0, core=true, t24Name=MANAGEMENT.FEE, mandatory=false)
+        MAX_AMOUNT : T24BusinessTypes:N
+            @i18n:Label (en="Maximum Amount")
+            @i18n:Tooltip (en="Maximum charge amount in MIN.MAX.CCY")
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, sysNumber=12.0, core=true, t24Name=MAX.AMOUNT, mandatory=false)
+        MAX_TERM : T24BusinessTypes:N
+            @i18n:Label (en="Maximum Term")
+            @i18n:Tooltip (en="Indicates maximum term for the contract")
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, sysNumber=10.0, core=true, t24Name=MAX.TERM, mandatory=false)
+        MIN_AMOUNT : T24BusinessTypes:N
+            @i18n:Label (en="Minimum Amount")
+            @i18n:Tooltip (en="Minimum charge amount in MIN.MAX.CCY")
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, sysNumber=11.0, core=true, t24Name=MIN.AMOUNT, mandatory=false)
+        MIN_TERM : T24BusinessTypes:N
+            @i18n:Label (en="Minimum Term")
+            @i18n:Tooltip (en="Indicates maximum term for the contract")
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, sysNumber=9.0, core=true, t24Name=MIN.TERM, mandatory=false)
+        NQ_SAVE_NEEDS : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, sysNumber=16.0, core=true, t24Name=NQ.SAVE.NEEDS, mandatory=false)
+        PRODUCT_ID : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=30, sysNumber=1.0, core=true, t24Name=PRODUCT.ID, mandatory=false)
+        REDEMPTION_FEE : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, sysNumber=14.0, core=true, t24Name=REDEMPTION.FEE, mandatory=false)
+        SAVING_NEEDS : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, sysNumber=6.0, core=true, t24Name=SAVING.NEEDS, mandatory=false)
+        VARIATION : T24BusinessTypes:A
+            @i18n:Label (en=Variation)
+            @t24:i (align=L, inputBehaviour=N, maxLength=30, sysNumber=3.0, core=true, t24Name=VARIATION, mandatory=false)
+    }
+    NOFILE_PRD_REC_SHORT_TERM_FINANCE_BANK_1
+        @i18n:Description (en="")
+        @t24:i (t24Name=NOFILE.PRD.REC.SHORT.TERM.FINANCE.BANK.1, level=I, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        ANSWER : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, sysNumber=19.0, core=true, t24Name=ANSWER, mandatory=false)
+        APPLICATION : T24BusinessTypes:A
+            @i18n:Label (en=Application)
+            @t24:i (align=L, inputBehaviour=N, maxLength=30, sysNumber=5.0, core=true, t24Name=APPLICATION, mandatory=false)
+        CURRENCY : T24BusinessTypes:CCY
+            @i18n:Label (en=Ccy)
+            @t24:i (align=L, inputBehaviour=N, maxLength=30, sysNumber=2.0, core=true, t24Name=CURRENCY, mandatory=false)
+        CUSTOMER : T24BusinessTypes:CUS
+            @i18n:Label (en=Customer)
+            @i18n:Tooltip (en="Customer Liability")
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, sysNumber=4.0, core=true, t24Name=CUSTOMER, mandatory=false)
+        EFF_INT_RATE : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, sysNumber=10.0, core=true, t24Name=EFF.INT.RATE, mandatory=false)
+        FIT_TYPE : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, sysNumber=17.0, core=true, t24Name=FIT.TYPE, mandatory=false)
+        ID : T24BusinessTypes:N
+            @i18n:Label (en="Transaction Ref")
+            @i18n:Tooltip (en="Transaction Reference")
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, core=false, t24Name=ID, genOperation=E.NA.BUILD.RECOMMENDATION.PRODUCT.DETAILS, mandatory=true)
+        KNOCKOUT : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, sysNumber=26.0, core=true, t24Name=KNOCKOUT, mandatory=false)
+        KNOCKOUT_METRIC : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, sysNumber=21.0, core=true, t24Name=KNOCKOUT.METRIC, mandatory=false)
+        MAX_AMOUNT : T24BusinessTypes:N
+            @i18n:Label (en="Maximum Amount")
+            @i18n:Tooltip (en="Maximum charge amount in MIN.MAX.CCY")
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, sysNumber=9.0, core=true, t24Name=MAX.AMOUNT, mandatory=false)
+        MAX_TERM : T24BusinessTypes:N
+            @i18n:Label (en="Maximum Term")
+            @i18n:Tooltip (en="Indicates maximum term for the contract")
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, sysNumber=7.0, core=true, t24Name=MAX.TERM, mandatory=false)
+        MC_FIELD : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, sysNumber=14.0, core=true, t24Name=MC.FIELD, mandatory=false)
+        MIN_AMOUNT : T24BusinessTypes:N
+            @i18n:Label (en="Minimum Amount")
+            @i18n:Tooltip (en="Minimum charge amount in MIN.MAX.CCY")
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, sysNumber=8.0, core=true, t24Name=MIN.AMOUNT, mandatory=false)
+        MIN_TERM : T24BusinessTypes:N
+            @i18n:Label (en="Minimum Term")
+            @i18n:Tooltip (en="Indicates maximum term for the contract")
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, sysNumber=6.0, core=true, t24Name=MIN.TERM, mandatory=false)
+        NQ_LOAN_AMOUNT : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, sysNumber=32.0, core=true, t24Name=NQ.LOAN.AMOUNT, mandatory=false)
+        NQ_LOAN_PURPOSE : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, sysNumber=31.0, core=true, t24Name=NQ.LOAN.PURPOSE, mandatory=false)
+        NQ_LOAN_TERM : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, sysNumber=33.0, core=true, t24Name=NQ.LOAN.TERM, mandatory=false)
+        PAYMENT_FREQ_DESC : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, sysNumber=12.0, core=true, t24Name=PAYMENT.FREQ.DESC, mandatory=false)
+        PAYMENT_TYPE : T24BusinessTypes:N
+            @i18n:Label (en="Payment Type")
+            @i18n:Tooltip (en="Type of Payment (Annuity or Linear)")
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, sysNumber=11.0, core=true, t24Name=PAYMENT.TYPE, mandatory=false)
+        PERCENTAGE_FIT : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, sysNumber=29.0, core=true, t24Name=PERCENTAGE.FIT, mandatory=false)
+        PRODUCT_ID : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=30, sysNumber=1.0, core=true, t24Name=PRODUCT.ID, mandatory=false)
+        QUESTION : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, sysNumber=18.0, core=true, t24Name=QUESTION, mandatory=false)
+        RAW_SCORE : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, sysNumber=23.0, core=true, t24Name=RAW.SCORE, mandatory=false)
+        REPAYMENT_AMOUNT : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, sysNumber=13.0, core=true, t24Name=REPAYMENT.AMOUNT, mandatory=false)
+        STANDARDIZE_METRIC : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, sysNumber=22.0, core=true, t24Name=STANDARDIZE.METRIC, mandatory=false)
+        STANDARD_SCORE : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, sysNumber=24.0, core=true, t24Name=STANDARD.SCORE, mandatory=false)
+        TOTAL_KNOCKOUTS : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, sysNumber=30.0, core=true, t24Name=TOTAL.KNOCKOUTS, mandatory=false)
+        TOTAL_SCORE : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, sysNumber=28.0, core=true, t24Name=TOTAL.SCORE, mandatory=false)
+        TOTAL_WEIGHTS : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, sysNumber=27.0, core=true, t24Name=TOTAL.WEIGHTS, mandatory=false)
+        VALUE : T24BusinessTypes:N
+            @i18n:Label (en=Value)
+            @i18n:Tooltip (en=Value)
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, sysNumber=15.0, core=true, t24Name=VALUE, mandatory=false)
+        VALUE_TYPE : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, sysNumber=16.0, core=true, t24Name=VALUE.TYPE, mandatory=false)
+        VARIATION : T24BusinessTypes:A
+            @i18n:Label (en=Variation)
+            @t24:i (align=L, inputBehaviour=N, maxLength=30, sysNumber=3.0, core=true, t24Name=VARIATION, mandatory=false)
+        WEIGHT : T24BusinessTypes:N
+            @i18n:Label (en=Weight)
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, sysNumber=20.0, core=true, t24Name=WEIGHT, mandatory=false)
+        WEIGHTED_SCORE : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, sysNumber=25.0, core=true, t24Name=WEIGHTED.SCORE, mandatory=false)
+    }
+    NOFILE_PRD_REC_SHORT_TERM_FINANCE_CUSTOMER_1
+        @i18n:Description (en="")
+        @t24:i (t24Name=NOFILE.PRD.REC.SHORT.TERM.FINANCE.CUSTOMER.1, level=I, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        APPLICATION : T24BusinessTypes:A
+            @i18n:Label (en=Application)
+            @t24:i (align=L, inputBehaviour=N, maxLength=30, sysNumber=5.0, core=true, t24Name=APPLICATION, mandatory=false)
+        CURRENCY : T24BusinessTypes:CCY
+            @i18n:Label (en=Ccy)
+            @t24:i (align=L, inputBehaviour=N, maxLength=30, sysNumber=2.0, core=true, t24Name=CURRENCY, mandatory=false)
+        CUSTOMER : T24BusinessTypes:CUS
+            @i18n:Label (en=Customer)
+            @i18n:Tooltip (en="Customer Liability")
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, sysNumber=4.0, core=true, t24Name=CUSTOMER, mandatory=false)
+        EFF_INT_RATE : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, sysNumber=10.0, core=true, t24Name=EFF.INT.RATE, mandatory=false)
+        ID : T24BusinessTypes:N
+            @i18n:Label (en="Transaction Ref")
+            @i18n:Tooltip (en="Transaction Reference")
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, core=false, t24Name=ID, genOperation=E.NA.BUILD.RECOMMENDATION.PRODUCT.DETAILS, mandatory=true)
+        MAX_AMOUNT : T24BusinessTypes:N
+            @i18n:Label (en="Maximum Amount")
+            @i18n:Tooltip (en="Maximum charge amount in MIN.MAX.CCY")
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, sysNumber=9.0, core=true, t24Name=MAX.AMOUNT, mandatory=false)
+        MAX_TERM : T24BusinessTypes:N
+            @i18n:Label (en="Maximum Term")
+            @i18n:Tooltip (en="Indicates maximum term for the contract")
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, sysNumber=7.0, core=true, t24Name=MAX.TERM, mandatory=false)
+        MIN_AMOUNT : T24BusinessTypes:N
+            @i18n:Label (en="Minimum Amount")
+            @i18n:Tooltip (en="Minimum charge amount in MIN.MAX.CCY")
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, sysNumber=8.0, core=true, t24Name=MIN.AMOUNT, mandatory=false)
+        MIN_TERM : T24BusinessTypes:N
+            @i18n:Label (en="Minimum Term")
+            @i18n:Tooltip (en="Indicates maximum term for the contract")
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, sysNumber=6.0, core=true, t24Name=MIN.TERM, mandatory=false)
+        NQ_LOAN_AMOUNT : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, sysNumber=14.0, core=true, t24Name=NQ.LOAN.AMOUNT, mandatory=false)
+        NQ_LOAN_PURPOSE : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, sysNumber=13.0, core=true, t24Name=NQ.LOAN.PURPOSE, mandatory=false)
+        NQ_LOAN_TERM : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, sysNumber=15.0, core=true, t24Name=NQ.LOAN.TERM, mandatory=false)
+        PAYMENT_FREQ_DESC : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, sysNumber=11.0, core=true, t24Name=PAYMENT.FREQ.DESC, mandatory=false)
+        PRODUCT_ID : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=30, sysNumber=1.0, core=true, t24Name=PRODUCT.ID, mandatory=false)
+        REPAYMENT_AMOUNT : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, sysNumber=12.0, core=true, t24Name=REPAYMENT.AMOUNT, mandatory=false)
+        VARIATION : T24BusinessTypes:A
+            @i18n:Label (en=Variation)
+            @t24:i (align=L, inputBehaviour=N, maxLength=30, sysNumber=3.0, core=true, t24Name=VARIATION, mandatory=false)
+    }
+}
+Enumerations {
+    NA_NEEDS_CLASS__K_TYPE__K_TYPE : mml:string
+        CCY=CCY
+        COMMON=COMMON
+        DATED=DATED
+        DELAYED_TRACKING=DELAYED.TRACKING
+        EXTERNAL=EXTERNAL
+        EXTERNAL_FINANCIAL=EXTERNAL.FINANCIAL
+        FORWARD_DATED=FORWARD.DATED
+        INHERITANCE=INHERITANCE
+        MERGE=MERGE
+        MULTIPLE=MULTIPLE
+        NON_TRACKING=NON.TRACKING
+        OPT_CCY=OPT.CCY
+        TRACKING=TRACKING
+        TRACKING_ONLY=TRACKING.ONLY
+        TRANSACTION=TRANSACTION
+        TRIGGER=TRIGGER
+        VARIATION=VARIATION
+        VERSION=VERSION
+    NA_NEEDS_CLASS__TYPE__TYPE : mml:string
+        CCY=CCY
+        COMMON=COMMON
+        DATED=DATED
+        DELAYED_TRACKING=DELAYED.TRACKING
+        EXTERNAL=EXTERNAL
+        EXTERNAL_FINANCIAL=EXTERNAL.FINANCIAL
+        FORWARD_DATED=FORWARD.DATED
+        INHERITANCE=INHERITANCE
+        MEMO_ENABLED=MEMO.ENABLED
+        MERGE=MERGE
+        MULTIPLE=MULTIPLE
+        NON_TRACKING=NON.TRACKING
+        OPT_CCY=OPT.CCY
+        TRACKING=TRACKING
+        TRACKING_ONLY=TRACKING.ONLY
+        TRANSACTION=TRANSACTION
+        TRIGGER=TRIGGER
+        VARIATION=VARIATION
+        VERSION=VERSION
+    NA_PRODUCT_FIT_DEFINITION__ACTION : mml:string
+        NULL=NULL
+        PUBLISH=PUBLISH
+    NA_PRODUCT_FIT_DEFINITION__EXT_ENQ_MC_FIELDS__EXT_ENQ_MC_FIELDS : mml:string
+        NULL=NULL
+    NA_PRODUCT_FIT_DEFINITION__EXT_ENQ_REC_FIELDS__EXT_ENQ_REC_FIELDS : mml:string
+        ANSWER=ANSWER
+        FIT_TYPE=FIT.TYPE
+        MC_FIELD=MC.FIELD
+        NULL=NULL
+        PERCENTAGE_FIT=PERCENTAGE.FIT
+        QUESTION=QUESTION
+        RAW_SCORE=RAW.SCORE
+        STANDARDIZE_METRIC=STANDARDIZE.METRIC
+        STANDARD_SCORE=STANDARD.SCORE
+        TOTAL_SCORE=TOTAL.SCORE
+        TOTAL_WEIGHTS=TOTAL.WEIGHTS
+        VALUE=VALUE
+        VALUE_TYPE=VALUE.TYPE
+        WEIGHT=WEIGHT
+        WEIGHTED_SCORE=WEIGHTED.SCORE
+    NA_PRODUCT_FIT_DEFINITION__INT_ENQ_MC_FIELDS__INT_ENQ_MC_FIELDS : mml:string
+        NULL=NULL
+    NA_PRODUCT_FIT_DEFINITION__INT_ENQ_REC_FIELDS__INT_ENQ_REC_FIELDS : mml:string
+        ANSWER=ANSWER
+        FIT_TYPE=FIT.TYPE
+        KNOCKOUT=KNOCKOUT
+        KNOCKOUT_METRIC=KNOCKOUT.METRIC
+        MC_FIELD=MC.FIELD
+        NULL=NULL
+        PERCENTAGE_FIT=PERCENTAGE.FIT
+        QUESTION=QUESTION
+        RAW_SCORE=RAW.SCORE
+        STANDARDIZE_METRIC=STANDARDIZE.METRIC
+        STANDARD_SCORE=STANDARD.SCORE
+        TOTAL_KNOCKOUTS=TOTAL.KNOCKOUTS
+        TOTAL_SCORE=TOTAL.SCORE
+        TOTAL_WEIGHTS=TOTAL.WEIGHTS
+        VALUE=VALUE
+        VALUE_TYPE=VALUE.TYPE
+        WEIGHT=WEIGHT
+        WEIGHTED_SCORE=WEIGHTED.SCORE
+    NA_PRODUCT_FIT_DEFINITION__MC_FIELD__KNOCKOUT : mml:string
+        NULL=NULL
+        YES=YES
+    NA_PRODUCT_FIT_DEFINITION__MC_FIELD__MC_FIELD : mml:string
+        CURRENCY=CURRENCY
+        NULL=NULL
+        VARIATION=VARIATION
+    NA_PRODUCT_FIT_DEFINITION__MC_FIELD__METRIC_WEIGHT : mml:string
+        0=0
+        1=1
+        10=10
+        2=2
+        3=3
+        4=4
+        5=5
+        6=6
+        7=7
+        8=8
+        9=9
+    NA_PRODUCT_FIT_DEFINITION__MC_FIELD__NEEDS_QUESTION : mml:string
+        NULL=NULL
+    NA_PRODUCT_FIT_DEFINITION__MC_FIELD__PRODUCT_FIT_TYPE : mml:string
+        EQ=EQ
+        GE=GE
+        GT=GT
+        LE=LE
+        LT=LT
+        NE=NE
+        NULL=NULL
+    NA_PRODUCT_FIT_DEFINITION__MC_FIELD__STANDARDIZE : mml:string
+        NULL=NULL
+        YES=YES
+    NA_PRODUCT_FIT_DEFINITION__MC_OUT_FIELD__MC_OUT_FIELD : mml:string
+        NULL=NULL
+    NA_PRODUCT_FIT_METHOD_CATALOG__ACTION : mml:string
+        NULL=NULL
+        PUBLISH=PUBLISH
+    NA_PRODUCT_FIT_METHOD_CATALOG__EXT_ENQ_MC_FIELDS__EXT_ENQ_MC_FIELDS : mml:string
+        NULL=NULL
+    NA_PRODUCT_FIT_METHOD_CATALOG__EXT_ENQ_REC_FIELDS__EXT_ENQ_REC_FIELDS : mml:string
+        ANSWER=ANSWER
+        FIT_TYPE=FIT.TYPE
+        MC_FIELD=MC.FIELD
+        NULL=NULL
+        PERCENTAGE_FIT=PERCENTAGE.FIT
+        QUESTION=QUESTION
+        RAW_SCORE=RAW.SCORE
+        STANDARDIZE_METRIC=STANDARDIZE.METRIC
+        STANDARD_SCORE=STANDARD.SCORE
+        TOTAL_SCORE=TOTAL.SCORE
+        TOTAL_WEIGHTS=TOTAL.WEIGHTS
+        VALUE=VALUE
+        VALUE_TYPE=VALUE.TYPE
+        WEIGHT=WEIGHT
+        WEIGHTED_SCORE=WEIGHTED.SCORE
+    NA_PRODUCT_FIT_METHOD_CATALOG__INT_ENQ_MC_FIELDS__INT_ENQ_MC_FIELDS : mml:string
+        NULL=NULL
+    NA_PRODUCT_FIT_METHOD_CATALOG__INT_ENQ_REC_FIELDS__INT_ENQ_REC_FIELDS : mml:string
+        ANSWER=ANSWER
+        FIT_TYPE=FIT.TYPE
+        KNOCKOUT=KNOCKOUT
+        KNOCKOUT_METRIC=KNOCKOUT.METRIC
+        MC_FIELD=MC.FIELD
+        NULL=NULL
+        PERCENTAGE_FIT=PERCENTAGE.FIT
+        QUESTION=QUESTION
+        RAW_SCORE=RAW.SCORE
+        STANDARDIZE_METRIC=STANDARDIZE.METRIC
+        STANDARD_SCORE=STANDARD.SCORE
+        TOTAL_KNOCKOUTS=TOTAL.KNOCKOUTS
+        TOTAL_SCORE=TOTAL.SCORE
+        TOTAL_WEIGHTS=TOTAL.WEIGHTS
+        VALUE=VALUE
+        VALUE_TYPE=VALUE.TYPE
+        WEIGHT=WEIGHT
+        WEIGHTED_SCORE=WEIGHTED.SCORE
+    NA_PRODUCT_FIT_METHOD_CATALOG__MC_FIELD__KNOCKOUT : mml:string
+        NULL=NULL
+        YES=YES
+    NA_PRODUCT_FIT_METHOD_CATALOG__MC_FIELD__MC_FIELD : mml:string
+        CURRENCY=CURRENCY
+        NULL=NULL
+        VARIATION=VARIATION
+    NA_PRODUCT_FIT_METHOD_CATALOG__MC_FIELD__METRIC_WEIGHT : mml:string
+        0=0
+        1=1
+        10=10
+        2=2
+        3=3
+        4=4
+        5=5
+        6=6
+        7=7
+        8=8
+        9=9
+    NA_PRODUCT_FIT_METHOD_CATALOG__MC_FIELD__NEEDS_QUESTION : mml:string
+        NULL=NULL
+    NA_PRODUCT_FIT_METHOD_CATALOG__MC_FIELD__PRODUCT_FIT_TYPE : mml:string
+        EQ=EQ
+        GE=GE
+        GT=GT
+        LE=LE
+        LT=LT
+        NE=NE
+        NULL=NULL
+    NA_PRODUCT_FIT_METHOD_CATALOG__MC_FIELD__STANDARDIZE : mml:string
+        NULL=NULL
+        YES=YES
+    NA_PRODUCT_FIT_METHOD_CATALOG__MC_OUT_FIELD__MC_OUT_FIELD : mml:string
+        NULL=NULL
+    NA_PRODUCT_RECOMMENDATION__ACTION : mml:string
+        NULL=NULL
+        SUBMIT=SUBMIT
+    NA_PRODUCT_RECOMMENDATION__PRODUCT__MC_FIELD__FIT_TYPE : mml:string
+        EQ=EQ
+        GE=GE
+        GT=GT
+        LE=LE
+        LT=LT
+        NE=NE
+        NULL=NULL
+    NA_PRODUCT_RECOMMENDATION__PRODUCT__MC_FIELD__KNOCKOUT : mml:string
+        NULL=NULL
+        YES=YES
+    NA_PRODUCT_RECOMMENDATION__PRODUCT__MC_FIELD__KNOCKOUT_METRIC : mml:string
+        NULL=NULL
+        YES=YES
+    NA_PRODUCT_RECOMMENDATION__PRODUCT__MC_FIELD__STANDARDIZE_METRIC : mml:string
+        NULL=NULL
+        YES=YES
+    NA_PRODUCT_RECOMMENDATION__PRODUCT__MC_FIELD__VALUE_TYPE : mml:string
+        CATALOGUE=CATALOGUE
+        DEFAULT=DEFAULT
+    NA_PRODUCT_RECOMMENDATION__PRODUCT__MC_FIELD__WEIGHT : mml:string
+        0=0
+        1=1
+        10=10
+        2=2
+        3=3
+        4=4
+        5=5
+        6=6
+        7=7
+        8=8
+        9=9
+    NA_QUESTIONNAIRE_DIARY__ACTIVITY__ACTIVITY_STATUS : mml:string
+        AUTH=AUTH
+        NULL=NULL
+        UNAUTH=UNAUTH
+    NA_QUESTIONNAIRE_DIARY__STATUS : mml:string
+        ACTIVE=ACTIVE
+        COMPLETE=COMPLETE
+        INACTIVE=INACTIVE
+        NULL=NULL
+        READY_FOR_ARCHIVE=READY.FOR.ARCHIVE
+    NA_QUESTIONNAIRE_TYPE_CATALOG__ACTION : mml:string
+        PUBLISH=PUBLISH
+    NA_QUESTIONNAIRE_TYPE_CATALOG__CLASS__ROLE__PRIVILEGE : mml:string
+        INPUT=INPUT
+        NULL=NULL
+        SEE=SEE
+    NA_QUESTIONNAIRE_TYPE_CATALOG__DEFAULT_ROLE__DEFAULT_PRIVILEGE : mml:string
+        INPUT=INPUT
+        NULL=NULL
+        SEE=SEE
+}

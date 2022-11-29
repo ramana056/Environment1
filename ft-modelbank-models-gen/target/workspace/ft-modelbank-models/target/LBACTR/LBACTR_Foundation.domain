@@ -1,0 +1,313 @@
+# UTF-8
+/* LBACTR Negotiable Deal (Feature) */
+Domain LBACTR_Foundation
+    @t24:i (module=LBACTR)
+    @java:Package (value=com.temenos.t24.datamodel.lbactr.lbactr_foundation)
+namespace "http://www.temenos.com/t24/LBACTR_Foundation"
+metamodelVersion 1.30.6
+Classes {
+    /* This table used to store and retrieve the cheque ID sequence and last cheque number used for particular customer. */
+    LBACTR_CHEQUE_CUSTOMER_DETAILS
+        @i18n:Description (en="")
+        @t24:i (t24Name=LBACTR.CHEQUE.CUSTOMER.DETAILS, level=F, type=L, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        ACCOUNT_NO -> byValue LBACTR_Foundation:LBACTR_CHEQUE_CUSTOMER_DETAILS__ACCOUNT_NO *
+            @t24:i (t24Name=ACCOUNT.NO)
+        /* Id of the record should be valid customer id. */
+        ID -> LBACTR_Foundation:LBACTR_CHEQUE_CUSTOMER_DETAILS PK required
+            @i18n:Label (en="Transaction Ref")
+            @i18n:Tooltip (en="Transaction Reference")
+            @t24:i (align=L, inputBehaviour=I, maxLength=10, sysNumber=0.0, core=true, businessType=A, t24Name="@ID", mandatory=true)
+        /* Holds the last cheque number issued for the particular customer. */
+        LAST_CHQ_NO : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=10, sysNumber=3.0, core=true, t24Name=LAST.CHQ.NO, mandatory=false)
+        /* Reserved for future use */
+        RESERVED_1 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=4.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_10 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=13.0, core=true, t24Name=RESERVED.10, mandatory=false)
+        /* Reserved for future use */
+        RESERVED_2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=5.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        /* Reserved for future use */
+        RESERVED_3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=6.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        /* Reserved for future use */
+        RESERVED_4 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=7.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        /* Reserved for future use */
+        RESERVED_5 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=8.0, core=true, t24Name=RESERVED.5, mandatory=false)
+        /* Reserved for future use */
+        RESERVED_6 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=9.0, core=true, t24Name=RESERVED.6, mandatory=false)
+        RESERVED_7 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=10.0, core=true, t24Name=RESERVED.7, mandatory=false)
+        RESERVED_8 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=11.0, core=true, t24Name=RESERVED.8, mandatory=false)
+        RESERVED_9 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=12.0, core=true, t24Name=RESERVED.9, mandatory=false)
+    }
+    LBACTR_CHEQUE_CUSTOMER_DETAILS__ACCOUNT_NO
+    {
+        /* Account for which the chequebook issued should be stored here. */
+        ACCOUNT_NO -> AC_AccountOpening:ACCOUNT
+            @i18n:Label (en=Account)
+            @i18n:Tooltip (en="Indicates Customer Account Number")
+            @t24:i (align=R, inputBehaviour=I, maxLength=36, sysNumber=1.0, core=true, t24Name=ACCOUNT.NO, mandatory=false)
+        /* Associated multivalue set with ACCOUNT.NO field. Holds ID sequence for which the last cheuqe book issued to that particular customer. */
+        CHQ_LAST_SEQ : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=10, sysNumber=2.0, core=true, t24Name=CHQ.LAST.SEQ, mandatory=false)
+    }
+    /* This table used to record the negotiable deal rate */
+    LBACTR_NEG_DEAL
+        @i18n:Description (en="")
+        @t24:i (t24Name=LBACTR.NEG.DEAL, level=I, type=H, allowedFunctions="A C D E H I L P Q R S", localRefApplicationSysNo=22.0, localRefAllowed=true)
+    {
+        /* This contains the buy amount */
+        AMOUNT_BOUGHT : T24BusinessTypes:AMT
+            @i18n:Label (en="Buy Amount")
+            @t24:i (align=R, inputBehaviour=I, maxLength=21, sysNumber=3.0, core=true, t24Name=AMOUNT.BOUGHT, typeModifiers="-2", mandatory=false)
+        /* This contains the sell amount */
+        AMOUNT_SELL : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=21, sysNumber=5.0, core=true, t24Name=AMOUNT.SELL, typeModifiers="-4", mandatory=false)
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=31.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=32.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=28.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        /* Holds the Teller @ID */
+        BRANCH_REFERENCE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=8.0, core=true, t24Name=BRANCH.REFERENCE, mandatory=false)
+        /* The valid buy currency has to be defined here. */
+        CCY_BUY -> ST_CurrencyConfig:CURRENCY required
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=2.0, core=true, businessType=CCY, t24Name=CCY.BUY, mandatory=true)
+        /* The valid sell currency has to be defined here */
+        CCY_SELL -> ST_CurrencyConfig:CURRENCY required
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=4.0, core=true, businessType=CCY, t24Name=CCY.SELL, mandatory=true)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=29.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=25.0, core=true, t24Name=CURR.NO, mandatory=false)
+        /* Holds the valid customer ID. The customer ID will be accepted when DEAL.CUS.DEPEND in LBACTR.PARAMETER is set as YES */
+        CUSTOMER_ID -> ST_Customer:CUSTOMER
+            @i18n:Label (en="Customer Id")
+            @i18n:Tooltip (en="Identifies the Customer for the transaction.")
+            @t24:i (align=R, inputBehaviour=I, maxLength=10, sysNumber=10.0, core=true, businessType=CUS, t24Name=CUSTOMER.ID, mandatory=false)
+        DATE_TIME -> byValue LBACTR_Foundation:LBACTR_NEG_DEAL__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        /* This contains the rate. */
+        DEAL_RATE : T24BusinessTypes:R required
+            @i18n:Label (en="Exchange Rate")
+            @i18n:Tooltip (en="Exchange Rate for the transaction")
+            @t24:i (align=R, inputBehaviour=I, maxLength=10, sysNumber=6.0, core=true, t24Name=DEAL.RATE, mandatory=true)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=30.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+/* Valid values are B and S.
+When the user keys in Buy currency (CCY.BUY), Buy amount (AMOUNT.BOUGHT) along with Sell currency (CCY.SELL) the value in the field DR-CR indicator is defaulted as B (Denoting the Buy side amount provided).
+If the user keys in sell currency, sell amount along with Buy currency the value in the field DR-CR indicator is defaulted as S (Denoting the Sell side amount provided). */
+        DR_CR_INDICATOR : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=1, sysNumber=11.0, core=true, t24Name=DR.CR.INDICATOR, mandatory=false)
+        /* Id of the Negotiable deal reference */
+        ID -> LBACTR_Foundation:LBACTR_NEG_DEAL PK required
+            @i18n:Label (en="Transaction Ref")
+            @i18n:Tooltip (en="Transaction Reference")
+            @t24:i (align=L, inputBehaviour=I, maxLength=12, sysNumber=0.0, core=true, businessType=A, t24Name="@ID", mandatory=true)
+        /* The valid company Id */
+        INITIATING_COMPANY -> ST_CompanyCreation:COMPANY required
+            @t24:i (align=L, inputBehaviour=I, maxLength=11, sysNumber=1.0, core=true, businessType=COM, t24Name=INITIATING.COMPANY, mandatory=true)
+        INPUTTER -> byValue LBACTR_Foundation:LBACTR_NEG_DEAL__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        /* Holds description about the deal */
+        NARRATIVE : T24BusinessTypes:A
+            @i18n:Label (en=Narrative)
+            @i18n:Tooltip (en="Any narrative to be input for user information")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=7.0, core=true, t24Name=NARRATIVE, mandatory=false)
+        OVERRIDE -> byValue LBACTR_Foundation:LBACTR_NEG_DEAL__OVERRIDE *
+            @t24:i (t24Name=OVERRIDE)
+        /* Holds the teller transaction processing date */
+        PROCESSING_DATE : T24BusinessTypes:D
+            @i18n:Label (en="Processing Date")
+            @t24:i (align=R, inputBehaviour=N, maxLength=11, sysNumber=9.0, core=true, t24Name=PROCESSING.DATE, mandatory=false)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=24.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        /* Reserved for future use */
+        RESERVED_1 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=21.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        /* Reserved for future use */
+        RESERVED_10 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=12.0, core=true, t24Name=RESERVED.10, mandatory=false)
+        /* Reserved for future use */
+        RESERVED_2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=20.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        /* Reserved for future use */
+        RESERVED_3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=19.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        /* Reserved for future use */
+        RESERVED_4 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=18.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        /* Reserved for future use */
+        RESERVED_5 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=17.0, core=true, t24Name=RESERVED.5, mandatory=false)
+        /* Reserved for future use */
+        RESERVED_6 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=16.0, core=true, t24Name=RESERVED.6, mandatory=false)
+        /* Reserved for future use */
+        RESERVED_7 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=15.0, core=true, t24Name=RESERVED.7, mandatory=false)
+        /* Reserved for future use */
+        RESERVED_8 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=14.0, core=true, t24Name=RESERVED.8, mandatory=false)
+        /* Reserved for future use */
+        RESERVED_9 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=13.0, core=true, t24Name=RESERVED.9, mandatory=false)
+    }
+    LBACTR_NEG_DEAL__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=27.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    LBACTR_NEG_DEAL__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=26.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    LBACTR_NEG_DEAL__OVERRIDE
+    {
+        OVERRIDE : T24BusinessTypes:N
+            @i18n:Label (en=Override)
+            @i18n:Tooltip (en="Overrides generated by this transaction")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=23.0, core=true, t24Name=OVERRIDE, mandatory=false)
+    }
+    /* This table used for setting the parameter for negotiable reference deal */
+    LBACTR_PARAMETER
+        @i18n:Description (en="")
+        @t24:i (t24Name=LBACTR.PARAMETER, level=I, type=H, allowedFunctions="A C D E H I L P Q R S", localRefApplicationSysNo=15.0, localRefAllowed=true)
+    {
+        /* If set to YES then even if the transaction amount is less than the ceiling amount defined at the respective currency level system allows to provide Negotiable reference for all TT versions.If set to No if the transaction amount is less than the ceiling amount defined at the respective currency level system does not allow to provide Negotiable reference for all TT versions. */
+        ALLOW_NEG_CEILING : LBACTR_Foundation:LBACTR_PARAMETER__ALLOW_NEG_CEILING
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=2.0, core=true, t24Name=ALLOW.NEG.CEILING, mandatory=false)
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=24.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=25.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=21.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=22.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        /* A valid currency market value must be inputted */
+        CURRENCY_MARKET -> ST_CurrencyConfig:CURRENCY_MARKET required
+            @i18n:Label (en=Market)
+            @t24:i (align=L, inputBehaviour=I, maxLength=2, sysNumber=1.0, core=true, businessType=A, t24Name=CURRENCY.MARKET, mandatory=true)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=18.0, core=true, t24Name=CURR.NO, mandatory=false)
+        DATE_TIME -> byValue LBACTR_Foundation:LBACTR_PARAMETER__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        /* If Set to YES then in Customer ID becomes mandatory field.If Set to NO then Customer ID is not a mandatory field. */
+        DEAL_CUS_DEPEND : LBACTR_Foundation:LBACTR_PARAMETER__DEAL_CUS_DEPEND
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=4.0, core=true, t24Name=DEAL.CUS.DEPEND, mandatory=false)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=23.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        /* Id of the record should be existing Company Id */
+        ID -> LBACTR_Foundation:LBACTR_PARAMETER PK required
+            @i18n:Label (en="Transaction Ref")
+            @i18n:Tooltip (en="Transaction Reference")
+            @t24:i (align=L, inputBehaviour=I, maxLength=11, sysNumber=0.0, core=true, businessType=COM, t24Name="@ID", mandatory=true)
+        INPUTTER -> byValue LBACTR_Foundation:LBACTR_PARAMETER__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        /* If Set  to YES for all cross currency transactions done between two foreign currencies the Negotiable Reference becomes mandatory in all TT versions.If Set  to NO for all cross currency transactions done between two foreign currencies, it follows the respective scenario as provided in Allow nego below Ceiling. */
+        NEGOTIABLE_FCY : LBACTR_Foundation:LBACTR_PARAMETER__NEGOTIABLE_FCY
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=3.0, core=true, t24Name=NEGOTIABLE.FCY, mandatory=false)
+        OVERRIDE -> byValue LBACTR_Foundation:LBACTR_PARAMETER__OVERRIDE *
+            @t24:i (t24Name=OVERRIDE)
+        /* Used to define CHEQUE.STATUS from which the user can't use same cheque number/range in another chequebook. Valid id from CHEQUE.STATUS */
+        PRINT_CHQ_STATUS -> CQ_ChqConfig:CHEQUE_STATUS
+            @t24:i (align=R, inputBehaviour=I, maxLength=3, sysNumber=5.0, core=true, t24Name=PRINT.CHQ.STATUS, mandatory=false)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=17.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        /* Reserved for future use */
+        RESERVED_10 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=14.0, core=true, t24Name=RESERVED.10, mandatory=false)
+        /* Reserved for future use */
+        RESERVED_2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=6.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        /* Reserved for future use */
+        RESERVED_3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=7.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        /* Reserved for future use */
+        RESERVED_4 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=8.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        /* Reserved for future use */
+        RESERVED_5 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=9.0, core=true, t24Name=RESERVED.5, mandatory=false)
+        /* Reserved for future use */
+        RESERVED_6 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=10.0, core=true, t24Name=RESERVED.6, mandatory=false)
+        /* Reserved for future use */
+        RESERVED_7 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=11.0, core=true, t24Name=RESERVED.7, mandatory=false)
+        /* Reserved for future use */
+        RESERVED_8 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=12.0, core=true, t24Name=RESERVED.8, mandatory=false)
+        /* Reserved for future use */
+        RESERVED_9 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=13.0, core=true, t24Name=RESERVED.9, mandatory=false)
+    }
+    LBACTR_PARAMETER__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=20.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    LBACTR_PARAMETER__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=19.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    LBACTR_PARAMETER__OVERRIDE
+    {
+        OVERRIDE : T24BusinessTypes:N
+            @i18n:Label (en=Override)
+            @i18n:Tooltip (en="Overrides generated by this transaction")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=16.0, core=true, t24Name=OVERRIDE, mandatory=false)
+    }
+}
+Enumerations {
+    LBACTR_PARAMETER__ALLOW_NEG_CEILING : mml:string
+        NO=NO
+        YES=YES
+    LBACTR_PARAMETER__DEAL_CUS_DEPEND : mml:string
+        NO=NO
+        YES=YES
+    LBACTR_PARAMETER__NEGOTIABLE_FCY : mml:string
+        NO=NO
+        YES=YES
+}

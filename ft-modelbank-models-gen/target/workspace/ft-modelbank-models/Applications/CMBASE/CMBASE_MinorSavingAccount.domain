@@ -1,0 +1,24 @@
+# UTF-8
+/* Saving Account for Minors */
+Domain CMBASE_MinorSavingAccount
+    @t24:i (module=CMBASE)
+    @java:Package (value=com.temenos.t24.datamodel.cmbase.cmbase_minorsavingaccount)
+namespace "http://www.temenos.com/t24/CMBASE_MinorSavingAccount"
+metamodelVersion 1.30.6
+Classes {
+    NOFILE_ARR_BY_CUSTOMER_AGE_AR
+        @i18n:Description (en="")
+        @t24:i (t24Name=NOFILE.ARR.BY.CUSTOMER.AGE.AR, level=I, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        AGE : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=20, core=false, t24Name=AGE, mandatory=true)
+        CUSTOMER_ROLE -> AA_Customer:AA_CUSTOMER_ROLE
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, core=false, t24Name=CUSTOMER.ROLE, mandatory=false)
+        NO_OF_DAYS : T24BusinessTypes:N
+            @i18n:Label (en="No. of Days")
+            @t24:i (align=R, inputBehaviour=N, maxLength=20, core=false, t24Name=NO.OF.DAYS, mandatory=false)
+        PRODUCT -> AA_ProductManagement:AA_PRODUCT
+            @i18n:Label (en=Product)
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, core=false, t24Name=PRODUCT, genOperation=CMBASE.ARR.BY.CUSTOMER.AGE, mandatory=false)
+    }
+}

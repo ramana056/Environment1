@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<localref:LocalRef xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:localref="http://www.odcgroup.com/t24/application/localref/model/LocalRef"
+    xmlns:translationDsl="http://www.odcgroup.com/translation/TranslationDsl" localRefID="USREGS.OWNERSHIP.CODE" maximumChars="10" minimumChars="0"
+    mandatory="false" charType="A" defaultPossible="false" virtualTable="FDIC.OWNERSHIP.CODE"
+    description="FDIC Ownership code">
+  <shortName xsi:type="translationDsl:LocalTranslations">
+    <translations locale="en" text="OWNERSHIP.CODE"/>
+  </shortName>
+  <vettingTable vettingTable="B">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Brokered Deposit"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="C">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Corporation"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="E">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Employee Benefit Plan Accounts"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="G">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Government Accounts"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="I">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="IRA"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="IR">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Irrevocable Trust"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="J">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Joint"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="O">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Other"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="P">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Partnership"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="R">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Revocable Trust"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="S">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Single"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="U">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Unincorporated Association"/>
+    </remarks>
+  </vettingTable>
+</localref:LocalRef>

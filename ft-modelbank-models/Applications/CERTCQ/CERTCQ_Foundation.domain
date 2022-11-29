@@ -1,0 +1,28 @@
+# UTF-8
+/* Base Component */
+Domain CERTCQ_Foundation
+    @t24:i (module=CERTCQ)
+    @java:Package (value=com.temenos.t24.datamodel.certcq.certcq_foundation)
+namespace "http://www.temenos.com/t24/CERTCQ_Foundation"
+metamodelVersion 1.30.6
+Classes {
+    /* This is an internal file providing a reference for confirmed cheques */
+    CERTCQ_CONFIRMED_CHEQUE_DETAILS
+        @i18n:Description (en="")
+        @t24:i (t24Name=CERTCQ.CONFIRMED.CHEQUE.DETAILS, level=F, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        CHEQUE_REGISTER_SUPPLEMENT_ID -> byValue CERTCQ_Foundation:CERTCQ_CONFIRMED_CHEQUE_DETAILS__CHEQUE_REGISTER_SUPPLEMENT_ID *
+            @t24:i (t24Name=CHEQUE.REGISTER.SUPPLEMENT.ID)
+        /* ID - Holds the Cheque register supplement ID for Original Cheque */
+        ID -> CERTCQ_Foundation:CERTCQ_CONFIRMED_CHEQUE_DETAILS PK required
+            @i18n:Label (en="Transaction Ref")
+            @i18n:Tooltip (en="Transaction Reference")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=0.0, core=true, businessType=A, t24Name="@ID", mandatory=true)
+    }
+    CERTCQ_CONFIRMED_CHEQUE_DETAILS__CHEQUE_REGISTER_SUPPLEMENT_ID
+    {
+        /* Holds the Cheque register supplement ID for Confirmed Cheque */
+        CHEQUE_REGISTER_SUPPLEMENT_ID : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=1.0, core=true, t24Name=CHEQUE.REGISTER.SUPPLEMENT.ID, mandatory=false)
+    }
+}

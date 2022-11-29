@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<localReferenceApplication:LocalReferenceApplication xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:localReferenceApplication="http://www.odcgroup.com/t24/application/localRefApplication/model/LocalReferenceApplication"
+    xmlns:translationDsl="http://www.odcgroup.com/translation/TranslationDsl" forApplication="name://SC_SctBlocking:SC_BLOCK_SEC_POS#">
+  <localField groupName="No" localRefID="RLGAAP.PLEDGE.PURPOSE">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="PLEDGE.PURPOSE"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+  <localField groupName="No" localRefID="RLGAAP.PLEDGE.FLAG">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="PLEDGE.FLAG"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+  <localField groupName="No" localRefID="RLGAAP.ORG.FACE.VALUE">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="ORG.FACE.VALUE"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+  <localField groupName="No" localRefID="RLGAAP.PLEDGED.BLOCKS">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="PLEDGED.BLOCKS"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+</localReferenceApplication:LocalReferenceApplication>

@@ -1,0 +1,7 @@
+INDEX VERSION 1.130+C:\R20\R20_DesignStudioT24-R20.1\nani\.metadata\.plugins\org.eclipse.jdt.core
+301511476.index
+2853515223.index
+3335193235.index
+978595818.index
+1490780176.index
+3167966888.index

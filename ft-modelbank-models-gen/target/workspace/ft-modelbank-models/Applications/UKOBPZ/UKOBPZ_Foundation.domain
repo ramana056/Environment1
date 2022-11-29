@@ -1,0 +1,192 @@
+# UTF-8
+/* UK Open Bank PSD2 */
+Domain UKOBPZ_Foundation
+    @t24:i (module=UKOBPZ)
+    @java:Package (value=com.temenos.t24.datamodel.ukobpz.ukobpz_foundation)
+namespace "http://www.temenos.com/t24/UKOBPZ_Foundation"
+metamodelVersion 1.30.6
+Classes {
+    NOFILE_UKOBPZ_GET_ACCOUNT_BALANCE
+        @i18n:Description (en="")
+        @t24:i (t24Name=NOFILE.UKOBPZ.GET.ACCOUNT.BALANCE, level=I, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        ACCOUNTNUMBER : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, core=false, t24Name=ACCOUNTNUMBER, mandatory=true)
+        ACC_DATA -> byValue UKOBPZ_Foundation:NOFILE_UKOBPZ_GET_ACCOUNT_BALANCE__ACC_DATA *
+            @t24:i (t24Name=ACC.DATA)
+    }
+    NOFILE_UKOBPZ_GET_ACCOUNT_BALANCE__ACC_DATA
+    {
+        ACC_DATA : T24BusinessTypes:N
+            @t24:i (align=L, inputBehaviour=N, maxLength=30, core=false, t24Name=ACC.DATA, genOperation=UKOBPZ.NOFILE.GET.ACCOUNT.BALANCE, mandatory=false)
+    }
+    NOFILE_UKOBPZ_GET_ACCOUNT_INFO
+        @i18n:Description (en="")
+        @t24:i (t24Name=NOFILE.UKOBPZ.GET.ACCOUNT.INFO, level=I, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        ACCOUNTNUMBER : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=15, core=false, t24Name=ACCOUNTNUMBER, mandatory=true)
+        AccountInformation -> byValue UKOBPZ_Foundation:NOFILE_UKOBPZ_GET_ACCOUNT_INFO__AccountInformation *
+            @t24:i (t24Name=AccountInformation)
+    }
+    NOFILE_UKOBPZ_GET_ACCOUNT_INFO__AccountInformation
+    {
+        AccountInformation : T24BusinessTypes:N
+            @t24:i (align=L, inputBehaviour=N, maxLength=250, core=false, t24Name=AccountInformation, genOperation=UKOBPZ.NOFILE.GET.ACCOUNT.INFO, mandatory=false)
+    }
+    NOFILE_UKOBPZ_GET_ACCOUNT_TRANSACTION
+        @i18n:Description (en="")
+        @t24:i (t24Name=NOFILE.UKOBPZ.GET.ACCOUNT.TRANSACTION, level=I, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        ACCOUNT_ID : T24BusinessTypes:N
+            @i18n:Label (en="Account No")
+            @i18n:Tooltip (en="Indicates the Account Number")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, core=false, t24Name=ACCOUNT.ID, mandatory=false)
+        FROM_BOOKING_DATE : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, core=false, t24Name=FROM.BOOKING.DATE, mandatory=false)
+        ROUTINE : T24BusinessTypes:N
+            @i18n:Label (en=Routine)
+            @i18n:Tooltip (en=Routine)
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, core=false, t24Name=ROUTINE, genOperation=UKOBPZ.NOFILE.GET.ACCOUNT.TRANSACTION, mandatory=true)
+        STATEMENT_ID : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, core=false, t24Name=STATEMENT.ID, mandatory=false)
+        TO_BOOKING_DATE : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, core=false, t24Name=TO.BOOKING.DATE, mandatory=false)
+    }
+    /* A parameterised table created for UK open bank */
+    UKOBPZ_PARAMETER
+        @i18n:Description (en="")
+        @t24:i (t24Name=UKOBPZ.PARAMETER, level=I, type=H, allowedFunctions="A C D E H I L P Q R S", localRefApplicationSysNo=18.0, localRefAllowed=true)
+    {
+        ACCOUNT_SCHEME : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=5.0, core=true, t24Name=ACCOUNT.SCHEME, mandatory=false)
+        ALT_ACCT_TYPE -> AC_AccountOpening:ALT_ACCT_PARAMETER
+            @t24:i (align=L, inputBehaviour=I, maxLength=10, sysNumber=6.0, core=true, businessType=A, t24Name=ALT.ACCT.TYPE, mandatory=false)
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=26.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=27.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=23.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        BIC_SCHEME : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=7.0, core=true, t24Name=BIC.SCHEME, mandatory=false)
+        BNF_ACCOUNT_STATUS -> byValue UKOBPZ_Foundation:UKOBPZ_PARAMETER__BNF_ACCOUNT_STATUS *
+            @t24:i (t24Name=BNF.ACCOUNT.STATUS)
+        BUSINESS_SECTOR_FROM -> ST_Config:SECTOR
+            @t24:i (align=R, inputBehaviour=I, maxLength=10, sysNumber=3.0, core=true, t24Name=BUSINESS.SECTOR.FROM, mandatory=false)
+        BUSINESS_SECTOR_TO -> ST_Config:SECTOR
+            @t24:i (align=R, inputBehaviour=I, maxLength=10, sysNumber=4.0, core=true, t24Name=BUSINESS.SECTOR.TO, mandatory=false)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=24.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=20.0, core=true, t24Name=CURR.NO, mandatory=false)
+        DATE_TIME -> byValue UKOBPZ_Foundation:UKOBPZ_PARAMETER__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DD_ACCOUNT_STATUS -> byValue UKOBPZ_Foundation:UKOBPZ_PARAMETER__DD_ACCOUNT_STATUS *
+            @t24:i (t24Name=DD.ACCOUNT.STATUS)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=25.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+/* Should be valid entry from company table.If valid company is not entered system will trigger an error.
+This is a MANDATORY field. */
+        ID -> UKOBPZ_Foundation:UKOBPZ_PARAMETER PK required
+            @i18n:Label (en="Transaction Ref")
+            @i18n:Tooltip (en="Transaction Reference")
+            @t24:i (align=L, inputBehaviour=I, maxLength=9, sysNumber=0.0, core=true, businessType=A, t24Name="@ID", mandatory=true)
+        INPUTTER -> byValue UKOBPZ_Foundation:UKOBPZ_PARAMETER__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        OVERRIDE -> byValue UKOBPZ_Foundation:UKOBPZ_PARAMETER__OVERRIDE *
+            @t24:i (t24Name=OVERRIDE)
+        PERSONAL_SECTOR_FROM -> ST_Config:SECTOR
+            @t24:i (align=R, inputBehaviour=I, maxLength=10, sysNumber=1.0, core=true, t24Name=PERSONAL.SECTOR.FROM, mandatory=false)
+        PERSONAL_SECTOR_TO -> ST_Config:SECTOR
+            @t24:i (align=R, inputBehaviour=I, maxLength=10, sysNumber=2.0, core=true, t24Name=PERSONAL.SECTOR.TO, mandatory=false)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=19.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        RESERVED_1 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=15.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=16.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        STO_ACCOUNT_STATUS -> byValue UKOBPZ_Foundation:UKOBPZ_PARAMETER__STO_ACCOUNT_STATUS *
+            @t24:i (t24Name=STO.ACCOUNT.STATUS)
+        TRANSACTION_PERIOD : T24BusinessTypes:PERIOD required
+            @t24:i (align=L, inputBehaviour=I, maxLength=4, sysNumber=8.0, core=true, t24Name=TRANSACTION.PERIOD, mandatory=true)
+    }
+    UKOBPZ_PARAMETER__BNF_ACCOUNT_STATUS
+    {
+        BNF_ACCOUNT_STATUS : UKOBPZ_Foundation:UKOBPZ_PARAMETER__BNF_ACCOUNT_STATUS__BNF_ACCOUNT_STATUS required
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=13.0, core=true, t24Name=BNF.ACCOUNT.STATUS, mandatory=true)
+        BNF_STATUS -> byValue UKOBPZ_Foundation:UKOBPZ_PARAMETER__BNF_ACCOUNT_STATUS__BNF_STATUS *
+            @t24:i (t24Name=BNF.STATUS)
+    }
+    UKOBPZ_PARAMETER__BNF_ACCOUNT_STATUS__BNF_STATUS
+    {
+        BNF_STATUS : T24BusinessTypes:A required
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=14.0, core=true, t24Name=BNF.STATUS, mandatory=true)
+    }
+    UKOBPZ_PARAMETER__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=22.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    UKOBPZ_PARAMETER__DD_ACCOUNT_STATUS
+    {
+        DD_ACCOUNT_STATUS : UKOBPZ_Foundation:UKOBPZ_PARAMETER__DD_ACCOUNT_STATUS__DD_ACCOUNT_STATUS required
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=9.0, core=true, t24Name=DD.ACCOUNT.STATUS, mandatory=true)
+        DD_STATUS -> byValue UKOBPZ_Foundation:UKOBPZ_PARAMETER__DD_ACCOUNT_STATUS__DD_STATUS *
+            @t24:i (t24Name=DD.STATUS)
+    }
+    UKOBPZ_PARAMETER__DD_ACCOUNT_STATUS__DD_STATUS
+    {
+        DD_STATUS : T24BusinessTypes:A required
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=10.0, core=true, t24Name=DD.STATUS, mandatory=true)
+    }
+    UKOBPZ_PARAMETER__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=21.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    UKOBPZ_PARAMETER__OVERRIDE
+    {
+        OVERRIDE : T24BusinessTypes:N
+            @i18n:Label (en=Override)
+            @i18n:Tooltip (en="Overrides generated by this transaction")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=17.0, core=true, t24Name=OVERRIDE, mandatory=false)
+    }
+    UKOBPZ_PARAMETER__STO_ACCOUNT_STATUS
+    {
+        STO_ACCOUNT_STATUS : UKOBPZ_Foundation:UKOBPZ_PARAMETER__STO_ACCOUNT_STATUS__STO_ACCOUNT_STATUS required
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=11.0, core=true, t24Name=STO.ACCOUNT.STATUS, mandatory=true)
+        STO_STATUS -> byValue UKOBPZ_Foundation:UKOBPZ_PARAMETER__STO_ACCOUNT_STATUS__STO_STATUS *
+            @t24:i (t24Name=STO.STATUS)
+    }
+    UKOBPZ_PARAMETER__STO_ACCOUNT_STATUS__STO_STATUS
+    {
+        STO_STATUS : T24BusinessTypes:A required
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=12.0, core=true, t24Name=STO.STATUS, mandatory=true)
+    }
+}
+Enumerations {
+    UKOBPZ_PARAMETER__BNF_ACCOUNT_STATUS__BNF_ACCOUNT_STATUS : mml:string
+        ACTIVE=ACTIVE
+        INACTIVE=INACTIVE
+    UKOBPZ_PARAMETER__DD_ACCOUNT_STATUS__DD_ACCOUNT_STATUS : mml:string
+        ACTIVE=ACTIVE
+        INACTIVE=INACTIVE
+    UKOBPZ_PARAMETER__STO_ACCOUNT_STATUS__STO_ACCOUNT_STATUS : mml:string
+        ACTIVE=ACTIVE
+        INACTIVE=INACTIVE
+}

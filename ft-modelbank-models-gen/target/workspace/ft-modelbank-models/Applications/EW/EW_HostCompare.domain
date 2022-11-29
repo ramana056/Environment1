@@ -1,0 +1,130 @@
+# UTF-8
+/* Host Compare */
+Domain EW_HostCompare
+    @t24:i (module=EW)
+    @java:Package (value=com.temenos.t24.datamodel.ew.ew_hostcompare)
+namespace "http://www.temenos.com/t24/EW_HostCompare"
+metamodelVersion 1.30.6
+Classes {
+    EW_HOST_COMPARE_ONLINE
+        @i18n:Description (en="")
+        @t24:i (t24Name=EW.HOST.COMPARE.ONLINE, level=F, type=H, allowedFunctions="A C D E I L P Q S", localRefApplicationSysNo=19.0, localRefAllowed=true)
+    {
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=29.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=30.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=26.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=27.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=23.0, core=true, t24Name=CURR.NO, mandatory=false)
+        DATE_TIME -> byValue EW_HostCompare:EW_HOST_COMPARE_ONLINE__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=28.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        EW_HOST_COMPARE_ONLINE_ID -> EW_HostCompare:EW_HOST_COMPARE_ONLINE PK required
+            @t24:i (align=L, inputBehaviour=I, maxLength=18, sysNumber=0.0, core=true, businessType=S, t24Name=EW.HOST.COMPARE.ONLINE.ID, mandatory=true)
+        INPUTTER -> byValue EW_HostCompare:EW_HOST_COMPARE_ONLINE__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        MISMATCH_REASON : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=10, sysNumber=1.0, core=true, t24Name=MISMATCH.REASON, mandatory=false)
+        OVERRIDE -> byValue EW_HostCompare:EW_HOST_COMPARE_ONLINE__OVERRIDE *
+            @t24:i (t24Name=OVERRIDE)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=22.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        RERUN : EW_HostCompare:EW_HOST_COMPARE_ONLINE__RERUN
+            @i18n:Label (en=Rerun)
+            @i18n:Tooltip (en="Whether to rerun the diary?")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=3.0, core=true, t24Name=RERUN, mandatory=false)
+        RESERVED1 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=18.0, core=true, t24Name=RESERVED1, mandatory=false)
+        RESERVED10 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=9.0, core=true, t24Name=RESERVED10, mandatory=false)
+        RESERVED11 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=8.0, core=true, t24Name=RESERVED11, mandatory=false)
+        RESERVED12 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=7.0, core=true, t24Name=RESERVED12, mandatory=false)
+        RESERVED13 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=6.0, core=true, t24Name=RESERVED13, mandatory=false)
+        RESERVED14 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=5.0, core=true, t24Name=RESERVED14, mandatory=false)
+        RESERVED15 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=4.0, core=true, t24Name=RESERVED15, mandatory=false)
+        RESERVED2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=17.0, core=true, t24Name=RESERVED2, mandatory=false)
+        RESERVED3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=16.0, core=true, t24Name=RESERVED3, mandatory=false)
+        RESERVED4 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=15.0, core=true, t24Name=RESERVED4, mandatory=false)
+        RESERVED5 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=14.0, core=true, t24Name=RESERVED5, mandatory=false)
+        RESERVED6 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=13.0, core=true, t24Name=RESERVED6, mandatory=false)
+        RESERVED7 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=12.0, core=true, t24Name=RESERVED7, mandatory=false)
+        RESERVED8 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=11.0, core=true, t24Name=RESERVED8, mandatory=false)
+        RESERVED9 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=10.0, core=true, t24Name=RESERVED9, mandatory=false)
+        STATUS : T24BusinessTypes:A
+            @i18n:Label (en=Status)
+            @t24:i (align=L, inputBehaviour=N, maxLength=10, sysNumber=2.0, core=true, t24Name=STATUS, mandatory=false)
+        STMT_NOS -> byValue EW_HostCompare:EW_HOST_COMPARE_ONLINE__STMT_NOS *
+            @t24:i (t24Name=STMT.NOS)
+    }
+    EW_HOST_COMPARE_ONLINE__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=25.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    EW_HOST_COMPARE_ONLINE__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=24.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    EW_HOST_COMPARE_ONLINE__OVERRIDE
+    {
+        OVERRIDE : T24BusinessTypes:N
+            @i18n:Label (en=Override)
+            @i18n:Tooltip (en="Overrides generated by this transaction")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=21.0, core=true, t24Name=OVERRIDE, mandatory=false)
+    }
+    EW_HOST_COMPARE_ONLINE__STMT_NOS
+    {
+        STMT_NOS : T24BusinessTypes:N
+            @i18n:Label (en="Stmt Nos")
+            @i18n:Tooltip (en="Stmt Nos")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=20.0, core=true, t24Name=STMT.NOS, mandatory=false)
+    }
+    NOFILE_EW_HOST_COMPARISON
+        @i18n:Description (en="")
+        @t24:i (t24Name=NOFILE.EW.HOST.COMPARISON, level=I, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        HOST_COMPARE_DATA : T24BusinessTypes:N
+            @t24:i (align=L, inputBehaviour=N, maxLength=10, core=false, t24Name=HOST.COMPARE.DATA, genOperation=E.NOFILE.EW.HOST.COMPARISON, mandatory=true)
+        PORTFOLIO_ID : T24BusinessTypes:N
+            @i18n:Label (en="Portfolio Id")
+            @t24:i (align=R, inputBehaviour=N, maxLength=10, core=false, t24Name=PORTFOLIO.ID, mandatory=false)
+    }
+}
+Enumerations {
+    EW_HOST_COMPARE_ONLINE__RERUN : mml:string
+        ALL=ALL
+        YES=YES
+}

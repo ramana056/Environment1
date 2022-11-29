@@ -1,0 +1,18 @@
+# UTF-8
+/* Regulation Z */
+Domain USLREG_RegZ
+    @t24:i (module=USLREG)
+    @java:Package (value=com.temenos.t24.datamodel.uslreg.uslreg_regz)
+namespace "http://www.temenos.com/t24/USLREG_RegZ"
+metamodelVersion 1.30.6
+Classes {
+    NOFILE_AL_UNC_BALANCE
+        @i18n:Description (en="")
+        @t24:i (t24Name=NOFILE.AL.UNC.BALANCE, level=I, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        LAST_PAY_DATE : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=15, core=false, t24Name=LAST.PAY.DATE, mandatory=false)
+        UNC_DETAILS : T24BusinessTypes:N
+            @t24:i (align=L, inputBehaviour=N, maxLength=999, core=false, t24Name=UNC.DETAILS, genOperation=USLREG.AL.UNC.BALANCE, mandatory=true)
+    }
+}

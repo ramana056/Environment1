@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<localReferenceApplication:LocalReferenceApplication xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:localReferenceApplication="http://www.odcgroup.com/t24/application/localRefApplication/model/LocalReferenceApplication"
+    xmlns:translationDsl="http://www.odcgroup.com/translation/TranslationDsl" forApplication="name://ST_ChargeConfig:TAX#">
+  <localField groupName="No" localRefID="MINIMUM.TAX.THRESHOLD">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="MIN.TAX.THR"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+  <localField groupName="No" localRefID="FLAT.AMOUNT">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="FLAT.AMOUNT"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+  <localField groupName="No" localRefID="SURPLUS.RATE">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="SURPLUS.RATE"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+</localReferenceApplication:LocalReferenceApplication>

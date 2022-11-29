@@ -1,0 +1,205 @@
+# UTF-8
+/* Legal Entity Fund Structure */
+Domain AULEFS_Foundation
+    @t24:i (module=AULEFS)
+    @java:Package (value=com.temenos.t24.datamodel.aulefs.aulefs_foundation)
+namespace "http://www.temenos.com/t24/AULEFS_Foundation"
+metamodelVersion 1.30.6
+Classes {
+    AULEFS_ENTITY_PORTFOLIO_RELATION
+        @i18n:Description (en="")
+        @t24:i (t24Name=AULEFS.ENTITY.PORTFOLIO.RELATION, level=C, type=L, allowedFunctions="L P S", localRefApplicationSysNo=4.0, localRefAllowed=true)
+    {
+        ASSOCIATED_PORTFOLIO -> byValue AULEFS_Foundation:AULEFS_ENTITY_PORTFOLIO_RELATION__ASSOCIATED_PORTFOLIO *
+            @t24:i (t24Name=ASSOCIATED.PORTFOLIO)
+        ID -> AULEFS_Foundation:AULEFS_ENTITY_PORTFOLIO_RELATION PK required
+            @i18n:Label (en="Transaction Ref")
+            @i18n:Tooltip (en="Transaction Reference")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=0.0, core=true, businessType=A, t24Name=ID, mandatory=true)
+        PORTFOLIO_TAX_RESIDENCE -> ST_Config:COUNTRY
+            @t24:i (align=L, inputBehaviour=I, maxLength=2, sysNumber=1.0, core=true, businessType=S, t24Name=PORTFOLIO.TAX.RESIDENCE, mandatory=false)
+        RESERVED_1 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=5.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_10 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=14.0, core=true, t24Name=RESERVED.10, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=6.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=7.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=8.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        RESERVED_5 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=9.0, core=true, t24Name=RESERVED.5, mandatory=false)
+        RESERVED_6 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=10.0, core=true, t24Name=RESERVED.6, mandatory=false)
+        RESERVED_7 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=11.0, core=true, t24Name=RESERVED.7, mandatory=false)
+        RESERVED_8 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=12.0, core=true, t24Name=RESERVED.8, mandatory=false)
+        RESERVED_9 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=13.0, core=true, t24Name=RESERVED.9, mandatory=false)
+        RESIDENCE_CHANGE_INDICATOR : AULEFS_Foundation:AULEFS_ENTITY_PORTFOLIO_RELATION__RESIDENCE_CHANGE_INDICATOR
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=2.0, core=true, t24Name=RESIDENCE.CHANGE.INDICATOR, mandatory=false)
+    }
+    AULEFS_ENTITY_PORTFOLIO_RELATION__ASSOCIATED_PORTFOLIO
+    {
+        ASSOCIATED_PORTFOLIO -> SC_ScoPortfolioMaintenance:SEC_ACC_MASTER
+            @t24:i (align=L, inputBehaviour=I, maxLength=20, sysNumber=3.0, core=true, businessType=SAM, t24Name=ASSOCIATED.PORTFOLIO, mandatory=false)
+    }
+    AULEFS_LEGAL_ENTITY_PLATFORM
+        @i18n:Description (en="")
+        @t24:i (t24Name=AULEFS.LEGAL.ENTITY.PLATFORM, level=C, type=H, allowedFunctions="A C D E H I L P Q R S", localRefApplicationSysNo=9.0, localRefAllowed=true)
+    {
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=28.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=29.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=25.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=26.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=22.0, core=true, t24Name=CURR.NO, mandatory=false)
+        CURR_RITC_EFF_DATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=6.0, core=true, t24Name=CURR.RITC.EFF.DATE, mandatory=false)
+        CURR_RITC_RATE : T24BusinessTypes:R
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=5.0, core=true, t24Name=CURR.RITC.RATE, mandatory=false)
+        DATE_TIME -> byValue AULEFS_Foundation:AULEFS_LEGAL_ENTITY_PLATFORM__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=27.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        FUND_NAME : T24BusinessTypes:ANY required
+            @i18n:Label (en="Fund Name")
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=3.0, core=true, t24Name=FUND.NAME, mandatory=true)
+        FUND_RESIDENCE -> ST_Config:COUNTRY required
+            @t24:i (align=L, inputBehaviour=I, maxLength=2, sysNumber=4.0, core=true, businessType=A, t24Name=FUND.RESIDENCE, mandatory=true)
+        FWD_RITC_RATE -> byValue AULEFS_Foundation:AULEFS_LEGAL_ENTITY_PLATFORM__FWD_RITC_RATE *
+            @t24:i (t24Name=FWD.RITC.RATE)
+        ID -> AULEFS_Foundation:AULEFS_LEGAL_ENTITY_PLATFORM PK required
+            @i18n:Label (en="Transaction Ref")
+            @i18n:Tooltip (en="Transaction Reference")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=0.0, core=true, businessType=A, t24Name=ID, mandatory=true)
+        INPUTTER -> byValue AULEFS_Foundation:AULEFS_LEGAL_ENTITY_PLATFORM__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        LEGAL_ENTITY_SUB_TYPE : AULEFS_Foundation:AULEFS_LEGAL_ENTITY_PLATFORM__LEGAL_ENTITY_SUB_TYPE
+            @t24:i (align=L, inputBehaviour=N, maxLength=10, sysNumber=2.0, core=true, t24Name=LEGAL.ENTITY.SUB.TYPE, mandatory=false)
+        LEGAL_ENTITY_TYPE : AULEFS_Foundation:AULEFS_LEGAL_ENTITY_PLATFORM__LEGAL_ENTITY_TYPE required
+            @t24:i (align=L, inputBehaviour=I, maxLength=10, sysNumber=1.0, core=true, t24Name=LEGAL.ENTITY.TYPE, mandatory=true)
+        OVERRIDE -> byValue AULEFS_Foundation:AULEFS_LEGAL_ENTITY_PLATFORM__OVERRIDE *
+            @t24:i (t24Name=OVERRIDE)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=21.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        RESERVED_1 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=10.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_10 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=19.0, core=true, t24Name=RESERVED.10, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=11.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=12.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=13.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        RESERVED_5 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=14.0, core=true, t24Name=RESERVED.5, mandatory=false)
+        RESERVED_6 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=15.0, core=true, t24Name=RESERVED.6, mandatory=false)
+        RESERVED_7 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=16.0, core=true, t24Name=RESERVED.7, mandatory=false)
+        RESERVED_8 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=17.0, core=true, t24Name=RESERVED.8, mandatory=false)
+        RESERVED_9 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=18.0, core=true, t24Name=RESERVED.9, mandatory=false)
+    }
+    AULEFS_LEGAL_ENTITY_PLATFORM__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=24.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    AULEFS_LEGAL_ENTITY_PLATFORM__FWD_RITC_RATE
+    {
+        FWD_RITC_EFF_DATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=8.0, core=true, t24Name=FWD.RITC.EFF.DATE, mandatory=false)
+        FWD_RITC_RATE : T24BusinessTypes:R
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=7.0, core=true, t24Name=FWD.RITC.RATE, mandatory=false)
+    }
+    AULEFS_LEGAL_ENTITY_PLATFORM__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=23.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    AULEFS_LEGAL_ENTITY_PLATFORM__OVERRIDE
+    {
+        OVERRIDE : T24BusinessTypes:N
+            @i18n:Label (en=Override)
+            @i18n:Tooltip (en="Overrides generated by this transaction")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=20.0, core=true, t24Name=OVERRIDE, mandatory=false)
+    }
+    AULEFS_LEGAL_ENTITY_RITC_HISTORY
+        @i18n:Description (en="")
+        @t24:i (t24Name=AULEFS.LEGAL.ENTITY.RITC.HISTORY, level=C, type=L, allowedFunctions="L P S", localRefApplicationSysNo=3.0, localRefAllowed=true)
+    {
+        ID -> AULEFS_Foundation:AULEFS_LEGAL_ENTITY_RITC_HISTORY PK required
+            @i18n:Label (en="Transaction Ref")
+            @i18n:Tooltip (en="Transaction Reference")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=0.0, core=true, businessType=A, t24Name=ID, mandatory=true)
+        RESERVED_1 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=4.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_10 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=13.0, core=true, t24Name=RESERVED.10, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=5.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=6.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=7.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        RESERVED_5 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=8.0, core=true, t24Name=RESERVED.5, mandatory=false)
+        RESERVED_6 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=9.0, core=true, t24Name=RESERVED.6, mandatory=false)
+        RESERVED_7 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=10.0, core=true, t24Name=RESERVED.7, mandatory=false)
+        RESERVED_8 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=11.0, core=true, t24Name=RESERVED.8, mandatory=false)
+        RESERVED_9 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=12.0, core=true, t24Name=RESERVED.9, mandatory=false)
+        RITC_RATE -> byValue AULEFS_Foundation:AULEFS_LEGAL_ENTITY_RITC_HISTORY__RITC_RATE *
+            @t24:i (t24Name=RITC.RATE)
+    }
+    AULEFS_LEGAL_ENTITY_RITC_HISTORY__RITC_RATE
+    {
+        RITC_EFF_DATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=2.0, core=true, t24Name=RITC.EFF.DATE, mandatory=false)
+        RITC_RATE : T24BusinessTypes:R
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=1.0, core=true, t24Name=RITC.RATE, mandatory=false)
+    }
+}
+Enumerations {
+    AULEFS_ENTITY_PORTFOLIO_RELATION__RESIDENCE_CHANGE_INDICATOR : mml:string
+        NULL=NULL
+        YES=YES
+    AULEFS_LEGAL_ENTITY_PLATFORM__LEGAL_ENTITY_SUB_TYPE : mml:string
+        ACCU=ACCU
+        NONE=NONE
+        PENSION=PENSION
+        TTR=TTR
+    AULEFS_LEGAL_ENTITY_PLATFORM__LEGAL_ENTITY_TYPE : mml:string
+        IDPS=IDPS
+        IMA=IMA
+        SMA=SMA
+        SMSF=SMSF
+        SUPER=SUPER
+}

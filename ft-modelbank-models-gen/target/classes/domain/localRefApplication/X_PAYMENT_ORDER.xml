@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<localReferenceApplication:LocalReferenceApplication xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:localReferenceApplication="http://www.odcgroup.com/t24/application/localRefApplication/model/LocalReferenceApplication"
+    xmlns:translationDsl="http://www.odcgroup.com/translation/TranslationDsl" forApplication="name://PI_Contract:PAYMENT_ORDER#">
+  <localField groupName="No" localRefID="TAP.REF.ID">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="TAP.REF.ID"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+  <localField groupName="No" localRefID="TAP.EVENT.ID">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="TAP.EVENT.ID"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+  <localField groupName="No" localRefID="TAP.OPER.NATURE">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="TAP.OPER.NATURE"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+  <localField groupName="No" localRefID="USRETL.PYMT.EXTRACTED">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="PYMT.EXTRACTED"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+  <localField groupName="No" localRefID="ACHFRM.TXN.CODE">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="TXN.CODE"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+  <localField groupName="No" localRefID="ACHFRM.SEC.CODE">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="SEC.CODE"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+  <localField groupName="No" localRefID="ACHFRM.FX.EXCH.IND">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="FX.EXCH.IND"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+  <localField groupName="No" localRefID="ACHFRM.FX.EXCH.REF.IND">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="FX.EXCH.REF.IND"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+  <localField groupName="No" localRefID="ACHFRM.FGN.PAYMENT.AMOUNT">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="FGN.PAYMENT.AMT"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+  <localField groupName="No" localRefID="ACHFRM.FX.EXCH.REF">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="FX.EXCH.REF"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+  <localField groupName="No" localRefID="ACHFRM.COMP.ENT.DESC">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="COMP.ENT.DESC"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+  <localField groupName="No" localRefID="ACHFRM.COMPANY.ID">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="COMPANY.ID"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+  <localField groupName="No" localRefID="ACHFRM.BEN.ACCT.NUMBER">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="BEN.ACCT.NUMBER"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+  <localField groupName="No" localRefID="ACHFRM.IAT.COMPANY.ID">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="IAT.COMPANY.ID"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+  <localField groupName="No" localRefID="ACHFRM.IAT.TXN.TYPE.CODE">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="IAT.TXN.TYPE"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+  <localField groupName="No" localRefID="ACHFRM.RECEIVING.DFI.NAME">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="RDFI.NAME"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+  <localField groupName="No" localRefID="ACHFRM.RDFI.IDNUM.QUALIFIER">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="RDFI.IDNUM.QFR"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+  <localField groupName="ACHFRM_ACCT_WITH_BR_COUNTRY" localRefID="ACHFRM.ACCT.WITH.BR.COUNTRY">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="AC.WITH.BR.CTRY"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+  <localField groupName="ACHFRM_ACCT_WITH_BR_COUNTRY" localRefID="ACHFRM.FGN.CORR.BANK.NAME">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="FC.BANK.NAME"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+  <localField groupName="ACHFRM_ACCT_WITH_BR_COUNTRY" localRefID="ACHFRM.FGN.CORR.BANK.QUALIFIER">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="FC.BANK.QFR"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+  <localField groupName="ACHFRM_ACCT_WITH_BR_COUNTRY" localRefID="ACHFRM.FGN.CORR.BR.COCODE">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="FC.BR.COCODE"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+  <localField groupName="ACHFRM_FGN_CORR_BANK_ID" localRefID="ACHFRM.FGN.CORR.BANK.ID">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="FC.BANK.ID"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+  <localField groupName="ACHFRM_IAT_PAYINFO_ONE" localRefID="ACHFRM.IAT.PAYINFO.ONE">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="IAT.PAYINFO.ONE"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+  <localField groupName="ACHFRM_IAT_PAYINFO_TWO" localRefID="ACHFRM.IAT.PAYINFO.TWO">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="IAT.PAYINFO.TWO"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+  <localField groupName="No" localRefID="ACHFRM.ISO.DEST.CCY.CODE">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="ISO.DES.CCYCODE"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+  <localField groupName="No" localRefID="ACHFRM.SVC.CLASS.CODE">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="SVC.CLASS.CODE"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+  <localField groupName="No" localRefID="ACHFRM.RDFI.ID">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="RDFI.ID"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+</localReferenceApplication:LocalReferenceApplication>

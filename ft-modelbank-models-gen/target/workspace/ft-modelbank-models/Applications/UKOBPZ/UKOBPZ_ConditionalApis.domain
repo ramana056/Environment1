@@ -1,0 +1,44 @@
+# UTF-8
+/* UK Open bank Feature */
+Domain UKOBPZ_ConditionalApis
+    @t24:i (module=UKOBPZ)
+    @java:Package (value=com.temenos.t24.datamodel.ukobpz.ukobpz_conditionalapis)
+namespace "http://www.temenos.com/t24/UKOBPZ_ConditionalApis"
+metamodelVersion 1.30.6
+Classes {
+    NOFILE_GET_BENEFICIARY
+        @i18n:Description (en="")
+        @t24:i (t24Name=NOFILE.GET.BENEFICIARY, level=I, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        ACCOUNTNUMBER : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=15, core=false, t24Name=ACCOUNTNUMBER, mandatory=true)
+        RET_DATA : T24BusinessTypes:N
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, core=false, t24Name=RET.DATA, genOperation=UKOBPZ.NOFILE.GET.BENEFICIARY, mandatory=false)
+    }
+    NOFILE_UKOBPZ_GET_PARTY_INFO
+        @i18n:Description (en="")
+        @t24:i (t24Name=NOFILE.UKOBPZ.GET.PARTY.INFO, level=I, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        ACCOUNT_ID : T24BusinessTypes:N
+            @i18n:Label (en="Account No")
+            @i18n:Tooltip (en="Indicates the Account Number")
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, core=false, t24Name=ACCOUNT.ID, mandatory=false)
+        ROUTINE : T24BusinessTypes:N
+            @i18n:Label (en=Routine)
+            @i18n:Tooltip (en=Routine)
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, core=false, t24Name=ROUTINE, genOperation=UKOBPZ.NOFILE.GET.PARTY.INFO, mandatory=true)
+    }
+    NOFILE_UKOBPZ_GET_STATEMENT
+        @i18n:Description (en="")
+        @t24:i (t24Name=NOFILE.UKOBPZ.GET.STATEMENT, level=I, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        ACCOUNT_NUM : T24BusinessTypes:N
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, core=false, t24Name=ACCOUNT.NUM, genOperation=UKOBPZ.NOFILE.GET.ACCOUNT.STATEMENT, mandatory=true)
+        FROM_BOOKING_DATE : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=15, core=false, t24Name=FROM.BOOKING.DATE, mandatory=false)
+        STATEMENT_ID : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=15, core=false, t24Name=STATEMENT.ID, mandatory=false)
+        TO_BOOKING_DATE : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=15, core=false, t24Name=TO.BOOKING.DATE, mandatory=false)
+    }
+}

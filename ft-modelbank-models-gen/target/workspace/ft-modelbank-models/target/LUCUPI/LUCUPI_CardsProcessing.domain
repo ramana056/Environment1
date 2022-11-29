@@ -1,0 +1,535 @@
+# UTF-8
+/* LUCUPI CardsProcessing */
+Domain LUCUPI_CardsProcessing
+    @t24:i (module=LUCUPI)
+    @java:Package (value=com.temenos.t24.datamodel.lucupi.lucupi_cardsprocessing)
+namespace "http://www.temenos.com/t24/LUCUPI_CardsProcessing"
+metamodelVersion 1.30.6
+Classes {
+    /* Table used to store the ISANOTE generation detail */
+    LUCUPI_CARD_DETAILS
+        @i18n:Description (en="")
+        @t24:i (t24Name=LUCUPI.CARD.DETAILS, level=F, type=L, allowedFunctions="L P S", localRefAllowed=false)
+    {
+/* Holds agency code specified in file.
+00000 if no agency code is defined. */
+        AGENCY_CODE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=5, sysNumber=6.0, core=true, t24Name=AGENCY.CODE, mandatory=false)
+        BANK_CODE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=5, sysNumber=5.0, core=true, t24Name=BANK.CODE, mandatory=false)
+/* Usage limit + bank limit fields (the amount is signed according to the result of the addition. For negative value, the amount is prefixed by the - sign, for positive value, prefixed by + sign..
+The amount is provided with the decimal position specified by a comma. For example, 1 000 € will be +1000,00. */
+        BANK_LIMIT_PREPAID_CARD : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=16, sysNumber=63.0, core=true, t24Name=BANK.LIMIT.PREPAID.CARD, mandatory=false)
+        /* Provided by the Issuer */
+        BANK_REFERENCE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=62.0, core=true, t24Name=BANK.REFERENCE, mandatory=false)
+        /* ABBL Code  prefixed by 0. */
+        BCL_CODE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=5, sysNumber=7.0, core=true, t24Name=BCL.CODE, mandatory=false)
+        /* Blocking date of card. Format: YYYYMMDD. */
+        BLOCKING_DEC_DATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=37.0, core=true, t24Name=BLOCKING.DEC.DATE, mandatory=false)
+/* Values:.
+NONRECUE: the card has never been received by the cardholder.
+PERDU: the card has been lost.
+VOLE: the card has been stolen.
+FRAUDE: the card has been used fraudulently.
+CONTREFA: the card has been counterfeit.
+BANQUE: the card has been blocked on bank request.
+SPACES */
+        BLOCKING_REASON : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=8, sysNumber=49.0, core=true, t24Name=BLOCKING.REASON, mandatory=false)
+/* Electronic format of the bank account number.
+Default value are spaces. */
+        CARDHOLDER_ACCOUNT : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=34, sysNumber=8.0, core=true, t24Name=CARDHOLDER.ACCOUNT, mandatory=false)
+        /* Card Holderss Address. */
+        CARDHOLDER_ADDRESS_L1 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=32, sysNumber=34.0, core=true, t24Name=CARDHOLDER.ADDRESS.L1, mandatory=false)
+        /* Card Holder's Address continuation. */
+        CARDHOLDER_ADDRESS_L2 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=32, sysNumber=35.0, core=true, t24Name=CARDHOLDER.ADDRESS.L2, mandatory=false)
+        /* Concatenation of : the zip code + 1 space + the city label. */
+        CARDHOLDER_ADD_ZIPCODE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=32, sysNumber=36.0, core=true, t24Name=CARDHOLDER.ADD.ZIPCODE, mandatory=false)
+        /* Birth Date of card holder. Format: YYYYMMDD */
+        CARDHOLDER_BIRTH_DATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=53.0, core=true, t24Name=CARDHOLDER.BIRTH.DATE, mandatory=false)
+        /* Country code of the cardholder according to ISO 3166 3 digits numeric code. */
+        CARDHOLDER_COUNTRY_CODE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=44.0, core=true, t24Name=CARDHOLDER.COUNTRY.CODE, mandatory=false)
+/* Values:.
+M: Male.
+F: Female. */
+        CARDHOLDER_GENDER : LUCUPI_CardsProcessing:LUCUPI_CARD_DETAILS__CARDHOLDER_GENDER
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=54.0, core=true, t24Name=CARDHOLDER.GENDER, mandatory=false)
+        /* Last Name and Firstname of the cardholder. */
+        CARDHOLDER_NAME : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=24, sysNumber=10.0, core=true, t24Name=CARDHOLDER.NAME, mandatory=false)
+        CARDHOLDER_TITLE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=20, sysNumber=52.0, core=true, t24Name=CARDHOLDER.TITLE, mandatory=false)
+        /* Card cancel date. Format: YYYYMMDD */
+        CARD_ACCOUNT_CANCEL_DATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=55.0, core=true, t24Name=CARD.ACCOUNT.CANCEL.DATE, mandatory=false)
+/* Values:.
+AA: Automatic cancellation at card renewal.
+AG: Cancellation because the age limit of the cardholder is reached.
+BA: Cancellation upon request of the bank.
+CC: Cancellation because the bank account is closed.
+CP: Cancellation because the product was changed.
+PO: Cancellation initiated by the card holder.
+RM: Mass renewal (automatic product change at card renewal).
+TI: Cancellation initiated by the contract holder.
+AU: Cancellation for another reason but the above mentioned.
+SPACES  No Cancellation has been performed on this card. */
+        CARD_ACCOUNT_CANCEL_REASON : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=8, sysNumber=56.0, core=true, t24Name=CARD.ACCOUNT.CANCEL.REASON, mandatory=false)
+        /* Internal identifier by Cetrel left padded by 0 (e.g: 000012345). */
+        CARD_ACCOUNT_IDENTIFIER : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=9, sysNumber=60.0, core=true, t24Name=CARD.ACCOUNT.IDENTIFIER, mandatory=false)
+/* Values: .
+NORMAL: The normal and the most common situation: a card can work normally and authorisations can be given.
+REFERAL: Authorisations are still possible, but every authorisation requires a  call issuer procedure.
+A_AVALER: The card has been blocked and all authorisations are refused. A request to retrieve the card has been issued .
+A_RESTITUE: The card has been blocked and all authorisations are refused. No request to retrieve the card has been issued. */
+        CARD_BLOCKING_CODE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=10, sysNumber=48.0, core=true, t24Name=CARD.BLOCKING.CODE, mandatory=false)
+/* Following values are permitted :
+A : distributed by the bank agency.
+B : distributed by the bank.
+C : distributed by Cetrel.
+S : Simple letter sent to cardholder.
+R : Registered letter sent to cardholder. */
+        CARD_DISTRIBUTION_MODE : LUCUPI_CardsProcessing:LUCUPI_CARD_DETAILS__CARD_DISTRIBUTION_MODE
+            @t24:i (align=L, inputBehaviour=I, maxLength=1, sysNumber=11.0, core=true, t24Name=CARD.DISTRIBUTION.MODE, mandatory=false)
+/* Expiry date of the card.
+Format YYMM. */
+        CARD_EXPIRY_DATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=14.0, core=true, t24Name=CARD.EXPIRY.DATE, mandatory=false)
+/* If the Card has been issued by VISA Network : VISA.
+If the Card has been issued by MasterCard network : EURO.
+If the Card has been issued by another network : SPACES. */
+        CARD_NETWORK : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=4, sysNumber=38.0, core=true, t24Name=CARD.NETWORK, mandatory=false)
+        /* Card Number of account holder. */
+        CARD_NUMBER : T24BusinessTypes:A
+            @i18n:Label (en="Card Number")
+            @t24:i (align=L, inputBehaviour=I, maxLength=19, sysNumber=9.0, core=true, t24Name=CARD.NUMBER, mandatory=false)
+        /* Card order date. Format: YYYYMMDD */
+        CARD_ORDER_DATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=50.0, core=true, t24Name=CARD.ORDER.DATE, mandatory=false)
+/* The following values are available:
+PREMI: First Card.
+ECHUE: Previous card expired.
+PERDU: Previous card lost.
+VOLEE: Previous card stolen.
+DEFEC: Previous card defective.
+MODIF: Update of cardholder information. */
+        CARD_ORDER_REASON : LUCUPI_CardsProcessing:LUCUPI_CARD_DETAILS__CARD_ORDER_REASON
+            @t24:i (align=L, inputBehaviour=I, maxLength=5, sysNumber=27.0, core=true, t24Name=CARD.ORDER.REASON, mandatory=false)
+        /* Reference of the picture to be printed on the card (Picture Card) */
+        CARD_PICTURE_REF : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=64.0, core=true, t24Name=CARD.PICTURE.REF, mandatory=false)
+        CARD_PLASTIC_CODE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=2, sysNumber=21.0, core=true, t24Name=CARD.PLASTIC.CODE, mandatory=false)
+        CARD_REASON : LUCUPI_CardsProcessing:LUCUPI_CARD_DETAILS__CARD_REASON
+            @t24:i (align=L, inputBehaviour=I, maxLength=10, sysNumber=12.0, core=true, t24Name=CARD.REASON, mandatory=false)
+/* Format: YYYYMMDD
+Only when the card has been received by the issuer or Cetrel. This corresponds to the date when the card has been set to the status RECUPBQE or RECUPCET . */
+        CARD_RETRIEVAL_DATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=28.0, core=true, t24Name=CARD.RETRIEVAL.DATE, mandatory=false)
+/* 3 digit number in file.
+000 for new card. */
+        CARD_SEQ_NO : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=18.0, core=true, t24Name=CARD.SEQ.NO, mandatory=false)
+/* Values :
+CREE – The card has been created in the database, but has not yet been sent to the personalization system.
+ABANDON – The card has been abandoned.
+OMMANDE - The personalisation file has been sent to the personaliser to make the card.
+RICAT – The card is in the process of being made.
+TEUR – The card has been handed out to the cardholder and can be used.
+RECUPCET The card is no longer active and has been taken back by the processing centre (card not active anymore).
+RECUPBQE - The card is no longer active and has been taken back by the bank (card not active anymore). */
+        CARD_STATUS : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=8, sysNumber=47.0, core=true, t24Name=CARD.STATUS, mandatory=false)
+/* For instance:.
+EMPBANQE : Bank employee.
+DEMITARI : half price for Card subscription. */
+        CLIENT_CLASS_CODE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=8, sysNumber=42.0, core=true, t24Name=CLIENT.CLASS.CODE, mandatory=false)
+        CODE_BANK_HOLDER_CARD_AC : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=5, sysNumber=26.0, core=true, t24Name=CODE.BANK.HOLDER.CARD.AC, mandatory=false)
+        /* Contract currency according to ISO 4217 numeric code. */
+        CONTRACT_CURRENCY : T24BusinessTypes:CCY
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=29.0, core=true, t24Name=CONTRACT.CURRENCY, mandatory=false)
+        /* Issuing contract number that identify a corporate/personal contract. */
+        CONTRACT_IDENTIFIER : T24BusinessTypes:A
+            @i18n:Label (en="Contract Identifier")
+            @i18n:Tooltip (en="Contract Identifier")
+            @t24:i (align=L, inputBehaviour=I, maxLength=9, sysNumber=67.0, core=true, t24Name=CONTRACT.IDENTIFIER, mandatory=false)
+/* Credit limit defined by the contract.
+Format: 12,2 (2 decimals).
+For example, 1000 € will be 1000,00. */
+        CREDIT_LIMIT : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=15, sysNumber=30.0, core=true, t24Name=CREDIT.LIMIT, typeModifiers="-USD", mandatory=false)
+/* If a valid promotional tariff is defined for the Card : O.
+If the cardholder belongs to a special client class : O.
+In all other cases : N. */
+        DEROGATION_TARIFF : LUCUPI_CardsProcessing:LUCUPI_CARD_DETAILS__DEROGATION_TARIFF
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=43.0, core=true, t24Name=DEROGATION.TARIFF, mandatory=false)
+        ECI_NUMBER : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=6, sysNumber=16.0, core=true, t24Name=ECI.NUMBER, mandatory=false)
+        /* Line 4 embossed on the card plastic. The content is defined by the product definition (product option). The current setup allow to emboss the company name for credit card products. */
+        EMBOSSED_LINE4 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=27, sysNumber=68.0, core=true, t24Name=EMBOSSED.LINE4, mandatory=false)
+        /* If SUCCESS.INDICATOR=N, then appropriate error message is updated; otherwise NULL. */
+        ERROR_MSG : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=4.0, core=true, t24Name=ERROR.MSG, mandatory=false)
+/* Name of the file received from SIX
+xample:REFC.20130528105933.00099.bbbb */
+        FILE_NAME : T24BusinessTypes:A
+            @i18n:Label (en="File Name")
+            @t24:i (align=L, inputBehaviour=I, maxLength=32, sysNumber=1.0, core=true, t24Name=FILE.NAME, mandatory=false)
+        /* If the record concerns a Debit Card or a Credit Card for which no statement is sent, the First Name provided is the Cardholders First NameIf the record concerns a Credit Card for which a statement is sent:  the First Name provided is the Contracts holder if the contract is for a private person. If the contract is for a company, no First Name is provided. If the Contract is mixed, the Last Name provided is the Contracts holder. */
+        FIRST_NAME : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=16, sysNumber=33.0, core=true, t24Name=FIRST.NAME, mandatory=false)
+        /* File Reference ID for Inward Pain file */
+        ID -> LUCUPI_CardsProcessing:LUCUPI_CARD_DETAILS PK required
+            @i18n:Label (en="Transaction Ref")
+            @i18n:Tooltip (en="Transaction Reference")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=0.0, core=true, businessType=A, t24Name="@ID", mandatory=true)
+        /* Provided by the Issuer. */
+        ISSUER_ECI_NUMBER : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=24, sysNumber=51.0, core=true, t24Name=ISSUER.ECI.NUMBER, mandatory=false)
+        LAST_MAX_PIN_ENTRY_DATE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=24, sysNumber=59.0, core=true, t24Name=LAST.MAX.PIN.ENTRY.DATE, mandatory=false)
+        /* If the record concerns a Debit Card or a Credit Card for which no statement is sent, the Last Name provided is the Cardholders Last Name.If the record concerns a Credit Card for which a statement is sent:  the Last Name provided is the Contracts holder if the contract is for a private person or the company name if the Contracts holder is a company. If the Contract is mixed, the Last Name provided is the Contracts holder. */
+        LAST_NAME : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=32, sysNumber=32.0, core=true, t24Name=LAST.NAME, mandatory=false)
+        /* Last subscription date for card. Format: YYYYMMDD */
+        LAST_SUBSCRIPTION_DATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=57.0, core=true, t24Name=LAST.SUBSCRIPTION.DATE, mandatory=false)
+        /* Amount in the contract currency of the last subscription fee. 0 if no subscription fee applied */
+        LAST_SUB_FEE_AMT : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=15, sysNumber=39.0, core=true, t24Name=LAST.SUB.FEE.AMT, typeModifiers="-USD", mandatory=false)
+        /* Current value of the PIN try counter. */
+        MAX_PIN_RETRY : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=1, sysNumber=58.0, core=true, t24Name=MAX.PIN.RETRY, mandatory=false)
+        /* Amount in the contract currency of the next subscription fee. 0 if no subscription fee applied */
+        NEXT_SUB_FEE_AMT : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=15, sysNumber=40.0, core=true, t24Name=NEXT.SUB.FEE.AMT, typeModifiers="-USD", mandatory=false)
+        /* Date of the next subscription fee. 00000000 if no subscription fee applied. */
+        NEXT_SUB_FEE_DATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=41.0, core=true, t24Name=NEXT.SUB.FEE.DATE, mandatory=false)
+/* Values:.
+IMMED – Immediate Payment (Debit Cards).
+LIBRE - if Card Contract reimbursement mode is free.
+GLOBAL - if Card Contract reimbursement mode is levy or domiciliation and reimbursement rate is equal to 100%.
+ECHELO - if Card Contract reimbursement mode is levy or domiciliation and reimbursement rate is not equal to 100%. */
+        PAYMENT_MODE : LUCUPI_CardsProcessing:LUCUPI_CARD_DETAILS__PAYMENT_MODE
+            @i18n:Label (en="Payment Mode")
+            @i18n:Tooltip (en="Mode of payment like account, cash, cheque etc.")
+            @t24:i (align=L, inputBehaviour=I, maxLength=6, sysNumber=31.0, core=true, t24Name=PAYMENT.MODE, mandatory=false)
+        /* Bank account number which is credited by the cardholder to reimburse it's loan when the working mode is credit revolving. */
+        PERMANENT_CREDIT_ACCOUNT_NO : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=34, sysNumber=46.0, core=true, t24Name=PERMANENT.CREDIT.ACCOUNT.NO, mandatory=false)
+        /* Permanent Credit Limit without sign left padded with zeroes */
+        PERMANENT_CREDIT_LIMIT : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=15, sysNumber=73.0, core=true, t24Name=PERMANENT.CREDIT.LIMIT, typeModifiers="-USD", mandatory=false)
+/* The following modes are available:.
+A: distribution to bank agency.
+B: distribution by the bank.
+C: withdrawal at CETREL reception desk.
+R: direct sending to the cardholder by registered mail.
+S: direct sending to the cardholder by normal mailing. */
+        PIN_DISTRIBUTION_MODE : LUCUPI_CardsProcessing:LUCUPI_CARD_DETAILS__PIN_DISTRIBUTION_MODE
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=61.0, core=true, t24Name=PIN.DISTRIBUTION.MODE, mandatory=false)
+/* This fieLd has values N or O.
+If PIN mailer has been produced O else N */
+        PIN_MAILER : LUCUPI_CardsProcessing:LUCUPI_CARD_DETAILS__PIN_MAILER
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=22.0, core=true, t24Name=PIN.MAILER, mandatory=false)
+        /* Reference image to be printed on the PIN-MAILER (). */
+        PIN_MAILER_PICTURE_REF : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=65.0, core=true, t24Name=PIN.MAILER.PICTURE.REF, mandatory=false)
+        /* Reduced label of the product. */
+        PRODUCT : T24BusinessTypes:A
+            @i18n:Label (en=Product)
+            @t24:i (align=L, inputBehaviour=I, maxLength=8, sysNumber=15.0, core=true, t24Name=PRODUCT, mandatory=false)
+        PRODUCTION_BATCH_SERIAL : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=8, sysNumber=23.0, core=true, t24Name=PRODUCTION.BATCH.SERIAL, mandatory=false)
+        PRODUCTION_REASON : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=17.0, core=true, t24Name=PRODUCTION.REASON, mandatory=false)
+        PRODUCTION_TYPE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=12, sysNumber=24.0, core=true, t24Name=PRODUCTION.TYPE, mandatory=false)
+        PRODUCT_CATEGORY : T24BusinessTypes:A
+            @i18n:Label (en="Product Category")
+            @t24:i (align=L, inputBehaviour=I, maxLength=8, sysNumber=25.0, core=true, t24Name=PRODUCT.CATEGORY, mandatory=false)
+        /* Cardholders quality, for instance: M, M., MME, ... */
+        QUALITY : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=45.0, core=true, t24Name=QUALITY, mandatory=false)
+        /* Red plan label if the card has a red plan linked to it, space otherwise.If the card is connected to several red plans, the last one is present here. */
+        RED_PLAN_LABEL : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=8, sysNumber=66.0, core=true, t24Name=RED.PLAN.LABEL, mandatory=false)
+        /* If the file is RENC.YYYYMMDDXXXXXX.ZZ and the file contains the old card number in field REPLACED.CARD.NUMBER, then this field is to be updated with value Y (yes). Else NULL */
+        RENEWED : LUCUPI_CardsProcessing:LUCUPI_CARD_DETAILS__RENEWED
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=2.0, core=true, t24Name=RENEWED, mandatory=false)
+/* Expiry date of the card.
+Format YYMM.
+Spaces for new card. */
+        REPLACED_CARD_EXPIRY_DATE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=4, sysNumber=20.0, core=true, t24Name=REPLACED.CARD.EXPIRY.DATE, mandatory=false)
+        /* Card number of the replaced card, spaces for the new card. */
+        REPLACED_CARD_NUMBER : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=19, sysNumber=13.0, core=true, t24Name=REPLACED.CARD.NUMBER, mandatory=false)
+/* 3 digit number in file.
+000 for new card. */
+        REPLACED_CARD_SEQ_NO : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=19.0, core=true, t24Name=REPLACED.CARD.SEQ.NO, mandatory=false)
+        RESERVED_1 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=74.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_10 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=83.0, core=true, t24Name=RESERVED.10, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=75.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=76.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=77.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        RESERVED_5 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=78.0, core=true, t24Name=RESERVED.5, mandatory=false)
+        RESERVED_6 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=79.0, core=true, t24Name=RESERVED.6, mandatory=false)
+        RESERVED_7 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=80.0, core=true, t24Name=RESERVED.7, mandatory=false)
+        RESERVED_8 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=81.0, core=true, t24Name=RESERVED.8, mandatory=false)
+        RESERVED_9 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=82.0, core=true, t24Name=RESERVED.9, mandatory=false)
+/* Statement printing and sending information. This flag is extracted from the most recent address used for a private contract (private) or for a cardholder corporate contract..
+The possible value are :.
+O if one statement has been printed and sent to the cardholder.
+N if one statement has been printed and sent to the bank.
+(space) if no statement has been generated */
+        STATEMENT_FLAG_INFO : LUCUPI_CardsProcessing:LUCUPI_CARD_DETAILS__STATEMENT_FLAG_INFO
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=69.0, core=true, t24Name=STATEMENT.FLAG.INFO, mandatory=false)
+/* This fieLd has values Yes or No.
+In case of errors, this field is updated as N ; Else Y. */
+        SUCCESS_INDICATOR : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=1, sysNumber=3.0, core=true, t24Name=SUCCESS.INDICATOR, mandatory=false)
+        /* Signed amount of Temporary Credit Limit currently Active or Planned. */
+        TEMP_LIMIT_AMT : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=16, sysNumber=70.0, core=true, t24Name=TEMP.LIMIT.AMT, typeModifiers="-USD", mandatory=false)
+        /* End date of the Temporary Credit Limit validity. Format: YYYYMMDD */
+        TEMP_LIMIT_END_DATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=72.0, core=true, t24Name=TEMP.LIMIT.END.DATE, mandatory=false)
+        /* Start date of the Temporary Credit Limit validity. Format: YYYYMMDD */
+        TEMP_LIMIT_START_DATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=71.0, core=true, t24Name=TEMP.LIMIT.START.DATE, mandatory=false)
+    }
+    /* Table introduced to capture important details of the files PREE and PRVP. */
+    LUCUPI_CARD_FINTRAN
+        @i18n:Description (en="")
+        @t24:i (t24Name=LUCUPI.CARD.FINTRAN, level=F, type=L, allowedFunctions="L P S", localRefAllowed=false)
+    {
+/* This field is used to indicate the type of transaction movement.
+Type of account movement
+PDI
+RDI
+PRG
+RRG */
+        ACCOUNT_MOVEMENT_TYPE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=8.0, core=true, t24Name=ACCOUNT.MOVEMENT.TYPE, mandatory=false)
+        /* Applicable only for PRVP file */
+        ACQUIRER_REF_NO : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=23, sysNumber=24.0, core=true, t24Name=ACQUIRER.REF.NO, mandatory=false)
+/* Reference of the award :
+R.yyyymmdd.PDI
+R.yyyymmdd.RDI
+R.yyyymmdd.PRG
+R.yyyymmdd.RRG */
+        AWARD_REFERENCE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=14, sysNumber=5.0, core=true, t24Name=AWARD.REFERENCE, mandatory=false)
+        /* Cardholder account number to debit if levy to credit if payback. */
+        CARDHOLDER_ACCOUNT : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=34, sysNumber=13.0, core=true, t24Name=CARDHOLDER.ACCOUNT, mandatory=false)
+        /* Cardholder bank code (issuing bank swift code) */
+        CARDHOLDER_BANK : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=4, sysNumber=11.0, core=true, t24Name=CARDHOLDER.BANK, mandatory=false)
+        /* This field contains cardholder name */
+        CARDHOLDER_NAME : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=17.0, core=true, t24Name=CARDHOLDER.NAME, mandatory=false)
+        /* Cardholder amount to debit if levy to credit if payback */
+        CARD_AMOUNT : T24BusinessTypes:AMT
+            @i18n:Label (en="Card Amount")
+            @i18n:Tooltip (en="Identifes the amount of payment made by card")
+            @t24:i (align=R, inputBehaviour=I, maxLength=15, sysNumber=15.0, core=true, t24Name=CARD.AMOUNT, typeModifiers="-USD", mandatory=false)
+        /* cardholder amount in EURO to debit if levy to credit if payback */
+        CARD_AMT_EURO : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=15, sysNumber=16.0, core=true, t24Name=CARD.AMT.EURO, typeModifiers="-USD", mandatory=false)
+        /* ISO cardholder currency code */
+        CARD_CURRENCY : T24BusinessTypes:CCY
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=14.0, core=true, t24Name=CARD.CURRENCY, mandatory=false)
+        /* This field contains card's expiration date(YYMM) */
+        CARD_EXPIRY_DATE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=4, sysNumber=19.0, core=true, t24Name=CARD.EXPIRY.DATE, mandatory=false)
+        /* This field contains cardholder's card number */
+        CARD_NUMBER : T24BusinessTypes:A
+            @i18n:Label (en="Card Number")
+            @t24:i (align=L, inputBehaviour=I, maxLength=19, sysNumber=18.0, core=true, t24Name=CARD.NUMBER, mandatory=false)
+        /* This field contains card's sequence number */
+        CARD_SEQ_NO : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=20.0, core=true, t24Name=CARD.SEQ.NO, mandatory=false)
+        /* Company identifier EUROPAYLUX if cyclic PREL for license managing company ERPLUX otherwise : name of license managing company (CDE_STE_GESTION) */
+        CARD_TYPE : T24BusinessTypes:A
+            @i18n:Label (en="Card Type")
+            @t24:i (align=L, inputBehaviour=I, maxLength=10, sysNumber=2.0, core=true, t24Name=CARD.TYPE, mandatory=false)
+        /* Unique identifier for all transactions Applicable only for PRVP file */
+        CENTRAL_UNIQUE_IDENTIFIER : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=12, sysNumber=26.0, core=true, t24Name=CENTRAL.UNIQUE.IDENTIFIER, mandatory=false)
+        /* Message sequence number from 0001 */
+        DATARECORD_SEQ_NO : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=4, sysNumber=10.0, core=true, t24Name=DATARECORD.SEQ.NO, mandatory=false)
+        /* Contains Error Message */
+        ERROR_MSG : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=31.0, core=true, t24Name=ERROR.MSG, mandatory=false)
+        /* Fee amount  (commission fee amount + processing fee amount) */
+        FEE_AMT : T24BusinessTypes:AMT
+            @i18n:Label (en="Fee Amount")
+            @i18n:Tooltip (en="Fee Amount")
+            @t24:i (align=R, inputBehaviour=I, maxLength=15, sysNumber=21.0, core=true, t24Name=FEE.AMT, mandatory=false)
+        /* This field denotes File creation date YYYYMMDD */
+        FILE_DATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=8, sysNumber=3.0, core=true, t24Name=FILE.DATE, mandatory=false)
+        /* Name of the file received from SIX Ex: PREE20190322HHMMSS.XX. */
+        FILE_NAME : T24BusinessTypes:A
+            @i18n:Label (en="File Name")
+            @t24:i (align=L, inputBehaviour=I, maxLength=21, sysNumber=1.0, core=true, t24Name=FILE.NAME, mandatory=false)
+        /* Batch sequence number within file */
+        HEADER_SEQ_NO : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=9.0, core=true, t24Name=HEADER.SEQ.NO, mandatory=false)
+        /* The Record id for this table shall be CARD.NUMBER.TIMESTAMP (time stamp includes the date and time) */
+        ID -> LUCUPI_CardsProcessing:LUCUPI_CARD_FINTRAN PK required
+            @i18n:Label (en="Transaction Ref")
+            @i18n:Tooltip (en="Transaction Reference")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=0.0, core=true, businessType=A, t24Name="@ID", mandatory=true)
+        /* Applicable only for PRVP file */
+        MARKUP_AMT : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=15, sysNumber=25.0, core=true, t24Name=MARKUP.AMT, mandatory=false)
+        /* product label Example : VISACLAS , MAESPRM */
+        PRODUCT_LABEL : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=8, sysNumber=23.0, core=true, t24Name=PRODUCT.LABEL, mandatory=false)
+        /* Header account for the transactions with ACCOUNT.MOVEMENT.TYPE as PIM or PDI. */
+        P_NOSTRO_ACCOUNT : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=34, sysNumber=6.0, core=true, t24Name=P.NOSTRO.ACCOUNT, mandatory=false)
+        RELEASE_KEY : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=14, sysNumber=33.0, core=true, t24Name=RELEASE.KEY, mandatory=false)
+        RESERVED_10 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=42.0, core=true, t24Name=RESERVED.10, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=34.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=35.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=36.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        RESERVED_5 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=37.0, core=true, t24Name=RESERVED.5, mandatory=false)
+        RESERVED_6 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=38.0, core=true, t24Name=RESERVED.6, mandatory=false)
+        RESERVED_7 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=39.0, core=true, t24Name=RESERVED.7, mandatory=false)
+        RESERVED_8 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=40.0, core=true, t24Name=RESERVED.8, mandatory=false)
+        RESERVED_9 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=41.0, core=true, t24Name=RESERVED.9, mandatory=false)
+        /* Header account for the transactions with ACCOUNT.MOVEMENT.TYPE as RIM or RDI. */
+        R_NOSTRO_ACCOUNT : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=34, sysNumber=7.0, core=true, t24Name=R.NOSTRO.ACCOUNT, mandatory=false)
+        /* The statement entry number picked up from AC.INWARD.ENTRY STMT.NO of the transaction corresponding to the Card Holder account. */
+        STMT_NO : T24BusinessTypes:A
+            @i18n:Label (en="Statement number")
+            @t24:i (align=L, inputBehaviour=I, maxLength=13, sysNumber=32.0, core=true, t24Name=STMT.NO, mandatory=false)
+        /* If execution of the data record  fails then update this field as N (Default value is Y) */
+        SUCCESS_INDICATOR : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=1, sysNumber=30.0, core=true, t24Name=SUCCESS.INDICATOR, mandatory=false)
+        /* Issuing bank  swift code PRELMENS : issuing bank  swift code PRELGEST : swift code of the administrative bank (some banks use a domiciled account in another bank – this other bank is the administrative bank) */
+        SWIFT_CODE : T24BusinessTypes:A
+            @i18n:Label (en="SWIFT Code")
+            @t24:i (align=L, inputBehaviour=I, maxLength=4, sysNumber=4.0, core=true, t24Name=SWIFT.CODE, mandatory=false)
+        /* Total amount in cardholder currency */
+        TOTAL_AMT : T24BusinessTypes:AMT
+            @i18n:Label (en="Total Units")
+            @t24:i (align=R, inputBehaviour=I, maxLength=15, sysNumber=28.0, core=true, t24Name=TOTAL.AMT, mandatory=false)
+        /* Batch total amount in EURO */
+        TOTAL_AMT_EURO : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=15, sysNumber=29.0, core=true, t24Name=TOTAL.AMT.EURO, mandatory=false)
+        /* Messages number (DATA Record items counter). */
+        TOTAL_NO_DATA_RECORDS : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=5, sysNumber=27.0, core=true, t24Name=TOTAL.NO.DATA.RECORDS, mandatory=false)
+        /* Town code (Example : LL for Luxembourg, BB for Bruxelles) */
+        TOWN_CODE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=2, sysNumber=12.0, core=true, t24Name=TOWN.CODE, mandatory=false)
+/* Transaction region
+ONUS = Six/Cetrel network
+BANK = bank network
+INTL = outside Europe
+EURO = Europe outside ONUS */
+        TRANSACTION_REGION : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=4, sysNumber=22.0, core=true, t24Name=TRANSACTION.REGION, mandatory=false)
+    }
+}
+Enumerations {
+    LUCUPI_CARD_DETAILS__CARDHOLDER_GENDER : mml:string
+        F=F
+        M=M
+    LUCUPI_CARD_DETAILS__CARD_DISTRIBUTION_MODE : mml:string
+        A=A
+        B=B
+        C=C
+        R=R
+        S=S
+    LUCUPI_CARD_DETAILS__CARD_ORDER_REASON : mml:string
+        DEFEC=DEFEC
+        ECHUE=ECHUE
+        MODIF=MODIF
+        PERDU=PERDU
+        PREMI=PREMI
+        VOLEE=VOLEE
+    LUCUPI_CARD_DETAILS__CARD_REASON : mml:string
+        1ERECARTE=1ERECARTE
+        AGE=AGE
+        CHGTCNT=CHGTCNT
+        CHTPDTM=CHTPDTM
+        CONTREFAITE=CONTREFAITE
+        FRAUDE=FRAUDE
+        NONRECUE=NONRECUE
+        OPPOBQE=OPPOBQE
+        PERDUE=PERDUE
+        REMPL=REMPL
+        REMPL_PIN="REMPL+PIN"
+        RENOUVECH=RENOUVECH
+        VOLEE=VOLEE
+    LUCUPI_CARD_DETAILS__DEROGATION_TARIFF : mml:string
+        N=N
+        O=O
+    LUCUPI_CARD_DETAILS__PAYMENT_MODE : mml:string
+        ECHELO=ECHELO
+        GLOBAL=GLOBAL
+        IMMED=IMMED
+        LIBRE=LIBRE
+    LUCUPI_CARD_DETAILS__PIN_DISTRIBUTION_MODE : mml:string
+        A=A
+        B=B
+        C=C
+        R=R
+        S=S
+    LUCUPI_CARD_DETAILS__PIN_MAILER : mml:string
+        N=N
+        O=O
+    LUCUPI_CARD_DETAILS__RENEWED : mml:string
+        N=N
+        Y=Y
+    LUCUPI_CARD_DETAILS__STATEMENT_FLAG_INFO : mml:string
+        N=N
+        O=O
+}

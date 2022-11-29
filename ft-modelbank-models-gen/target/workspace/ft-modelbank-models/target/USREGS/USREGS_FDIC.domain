@@ -1,0 +1,883 @@
+# UTF-8
+/* US Regulation - FDIC */
+Domain USREGS_FDIC
+    @t24:i (module=USREGS)
+    @java:Package (value=com.temenos.t24.datamodel.usregs.usregs_fdic)
+namespace "http://www.temenos.com/t24/USREGS_FDIC"
+metamodelVersion 1.30.6
+Classes {
+    NOFILE_FDIC_EXTRACT_SUMMARY
+        @i18n:Description (en="")
+        @t24:i (t24Name=NOFILE.FDIC.EXTRACT.SUMMARY, level=I, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        FIELD_VALUE -> byValue USREGS_FDIC:NOFILE_FDIC_EXTRACT_SUMMARY__FIELD_VALUE *
+            @t24:i (t24Name=FIELD.VALUE)
+        FILE_NAME : T24BusinessTypes:N
+            @i18n:Label (en="File Name")
+            @t24:i (align=R, inputBehaviour=N, maxLength=40, core=false, t24Name=FILE.NAME, mandatory=false)
+    }
+    NOFILE_FDIC_EXTRACT_SUMMARY__FIELD_VALUE
+    {
+        FIELD_VALUE : T24BusinessTypes:N
+            @i18n:Label (en="Field Value")
+            @t24:i (align=L, inputBehaviour=N, maxLength=50, core=false, t24Name=FIELD.VALUE, genOperation=USREGS.E.FDIC.EXTRACT.SUMMARY, mandatory=true)
+    }
+    NOFILE_FDIC_HOLD_SUMMARY
+        @i18n:Description (en="")
+        @t24:i (t24Name=NOFILE.FDIC.HOLD.SUMMARY, level=I, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        FDIC_TXN_ID : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, core=false, t24Name=FDIC.TXN.ID, mandatory=false)
+        OutArray : T24BusinessTypes:N
+            @t24:i (align=L, inputBehaviour=N, maxLength=10000, core=false, t24Name=OutArray, genOperation=USREGS.E.FDIC.HOLD.SUMMARY, mandatory=true)
+    }
+    NOFILE_FDIC_RECON
+        @i18n:Description (en="")
+        @t24:i (t24Name=NOFILE.FDIC.RECON, level=I, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        REPORT_NAME : T24BusinessTypes:N
+            @i18n:Label (en="Report Name")
+            @t24:i (align=L, inputBehaviour=N, maxLength=21, core=false, t24Name=REPORT.NAME, genOperation=USREGS.E.FDIC.RECON, mandatory=true)
+    }
+/* This table is used to capture all account related information when upload the hold or trans file through DFE
+@ID will be the combination of USREGS.FDIC.TRANSACTION*ACCOUNT.ID*ID.COMPANY */
+    USREGS_FDIC_ACCOUNT_DETAILS
+        @i18n:Description (en="")
+        @t24:i (t24Name=USREGS.FDIC.ACCOUNT.DETAILS, level=F, type=L, allowedFunctions="L S", localRefAllowed=false)
+    {
+        /* Account id of the Transaction */
+        ACCOUNT -> AC_AccountOpening:ACCOUNT
+            @i18n:Label (en=Account)
+            @i18n:Tooltip (en="Identifies the customer account")
+            @t24:i (align=L, inputBehaviour=I, maxLength=36, sysNumber=2.0, core=true, businessType=POSANT, t24Name=ACCOUNT, mandatory=false)
+        /* Action to be performed - ADD, REMOVE, CREDIT or DEBIT */
+        ACTION : T24BusinessTypes:A
+            @i18n:Label (en=Action)
+            @t24:i (align=L, inputBehaviour=I, maxLength=15, sysNumber=20.0, core=true, t24Name=ACTION, mandatory=false)
+        /* Category of the account */
+        CATEGORY -> ST_Config:CATEGORY
+            @i18n:Label (en=Category)
+            @i18n:Tooltip (en="Specifies the Category")
+            @t24:i (align=R, inputBehaviour=I, maxLength=6, sysNumber=21.0, core=true, t24Name=CATEGORY, mandatory=false)
+        /* Company where the Account exists */
+        COMPANY_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=I, maxLength=15, sysNumber=6.0, core=true, businessType=COM, t24Name=COMPANY.CODE, mandatory=false)
+        CREDIT_AMT : T24BusinessTypes:AMT
+            @i18n:Label (en="Credit Amount")
+            @t24:i (align=R, inputBehaviour=I, maxLength=19, sysNumber=25.0, core=true, t24Name=CREDIT.AMT, typeModifiers="USD", mandatory=false)
+        /* Account Currency of the Transaction */
+        CURRENCY -> ST_CurrencyConfig:CURRENCY
+            @i18n:Label (en=Ccy)
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=3.0, core=true, businessType=CCY, t24Name=CURRENCY, mandatory=false)
+        /* Credit amount for the account */
+        DEBIT_AMT : T24BusinessTypes:AMT
+            @i18n:Label (en="Amount Debited")
+            @t24:i (align=R, inputBehaviour=I, maxLength=19, sysNumber=24.0, core=true, t24Name=DEBIT.AMT, typeModifiers="USD", mandatory=false)
+        /* Account Identifier */
+        DP_ACCT_IDENTIFIER : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=15, sysNumber=7.0, core=true, t24Name=DP.ACCT.IDENTIFIER, mandatory=false)
+        /* Account Identifier 2 */
+        DP_ACCT_IDENTIFIER_2 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=15, sysNumber=8.0, core=true, t24Name=DP.ACCT.IDENTIFIER.2, mandatory=false)
+        /* Account Identifier 3 */
+        DP_ACCT_IDENTIFIER_3 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=15, sysNumber=9.0, core=true, t24Name=DP.ACCT.IDENTIFIER.3, mandatory=false)
+        /* Account Identifier 4 */
+        DP_ACCT_IDENTIFIER_4 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=15, sysNumber=10.0, core=true, t24Name=DP.ACCT.IDENTIFIER.4, mandatory=false)
+        /* Account Identifier 5 */
+        DP_ACCT_IDENTIFIER_5 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=15, sysNumber=11.0, core=true, t24Name=DP.ACCT.IDENTIFIER.5, mandatory=false)
+        /* Sub Account Identifier */
+        DP_SUBACCT_IDENTIFIER : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=15, sysNumber=12.0, core=true, t24Name=DP.SUBACCT.IDENTIFIER, mandatory=false)
+        /* Transaction reference id(FDIC.ID) */
+        FDIC_ID : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=15, sysNumber=1.0, core=true, t24Name=FDIC.ID, mandatory=false)
+        /* A Valid FT.TXN.TYPE.CONDITION record id. */
+        FTTC -> FT_Config:FT_TXN_TYPE_CONDITION
+            @t24:i (align=L, inputBehaviour=I, maxLength=10, sysNumber=5.0, core=true, businessType=A, t24Name=FTTC, mandatory=false)
+        /* Hold amount for the account */
+        HOLD_AMOUNT : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=19, sysNumber=16.0, core=true, t24Name=HOLD.AMOUNT, typeModifiers="USD", mandatory=false)
+        /* Expiry date of AC.LOCKED.EVENTS. Will be updated only for Auto and Manual holds. For hold file, this information will be defaulted to processing date or system date */
+        HOLD_END_DATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=12, sysNumber=19.0, core=true, t24Name=HOLD.END.DATE, mandatory=false)
+        /* Threshold percentage for the account */
+        HOLD_PERCENTAGE : T24BusinessTypes:R
+            @t24:i (align=R, inputBehaviour=I, maxLength=6, sysNumber=15.0, core=true, t24Name=HOLD.PERCENTAGE, mandatory=false)
+        /* Transaction date for AC.LOCKED.EVENTS. Will be updated only for Auto and Manual holds. For hold file, this information will be defaulted to processing date or system date */
+        HOLD_START_DATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=12, sysNumber=18.0, core=true, t24Name=HOLD.START.DATE, mandatory=false)
+        /* Description of the transaction */
+        HOLD_TXN_DESCRIPTION : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=17.0, core=true, t24Name=HOLD.TXN.DESCRIPTION, mandatory=false)
+        ID -> USREGS_FDIC:USREGS_FDIC_ACCOUNT_DETAILS PK required
+            @i18n:Label (en="Transaction Ref")
+            @i18n:Tooltip (en="Transaction Reference")
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=0.0, core=true, businessType=ANY, t24Name="@ID", mandatory=true)
+        /* Product of the account */
+        PRODUCT -> AA_ProductManagement:AA_PRODUCT
+            @i18n:Label (en=Product)
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=23.0, core=true, businessType=A, t24Name=PRODUCT, mandatory=false)
+        /* Product group of the account */
+        PRODUCT_GROUP -> AA_ProductFramework:AA_PRODUCT_GROUP
+            @i18n:Label (en="Product Group")
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=22.0, core=true, businessType=A, t24Name=PRODUCT.GROUP, mandatory=false)
+        RESERVED_1 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=40.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_10 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=31.0, core=true, t24Name=RESERVED.10, mandatory=false)
+        RESERVED_11 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=30.0, core=true, t24Name=RESERVED.11, mandatory=false)
+        RESERVED_12 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=29.0, core=true, t24Name=RESERVED.12, mandatory=false)
+        RESERVED_13 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=28.0, core=true, t24Name=RESERVED.13, mandatory=false)
+        RESERVED_14 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=27.0, core=true, t24Name=RESERVED.14, mandatory=false)
+        RESERVED_15 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=26.0, core=true, t24Name=RESERVED.15, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=39.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=38.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=37.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        RESERVED_5 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=36.0, core=true, t24Name=RESERVED.5, mandatory=false)
+        RESERVED_6 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=35.0, core=true, t24Name=RESERVED.6, mandatory=false)
+        RESERVED_7 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=34.0, core=true, t24Name=RESERVED.7, mandatory=false)
+        RESERVED_8 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=33.0, core=true, t24Name=RESERVED.8, mandatory=false)
+        RESERVED_9 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=32.0, core=true, t24Name=RESERVED.9, mandatory=false)
+        /* Settlement account to which the entries will be posted in case of FUNDS.TRANSFER transaction */
+        SUSP_ACCOUNT -> AC_AccountOpening:ACCOUNT
+            @t24:i (align=L, inputBehaviour=I, maxLength=36, sysNumber=4.0, core=true, businessType=POSANT, t24Name=SUSP.ACCOUNT, mandatory=false)
+        /* Threshold amount for the account */
+        THRESHOLD_AMT : T24BusinessTypes:AMT
+            @i18n:Label (en="Threshold Amount")
+            @i18n:Tooltip (en="Threshold amount for client level apportioning")
+            @t24:i (align=R, inputBehaviour=I, maxLength=15, sysNumber=14.0, core=true, t24Name=THRESHOLD.AMT, typeModifiers="USD", mandatory=false)
+        /* Valid transaction type(AUTO.HOLD,MANUAL.HOLD,HOLD.FILE,TRANS.FILE) */
+        TXN_TYPE : T24BusinessTypes:A
+            @i18n:Label (en="Trans Type")
+            @t24:i (align=L, inputBehaviour=I, maxLength=15, sysNumber=13.0, core=true, t24Name=TXN.TYPE, mandatory=false)
+    }
+/* This table is used to capture the deposit class code and the deposit class type it is linked to. The new local field will refer to this table while arrangement is created and defaulted with the value linked to the corresponding class type
+@ID will be the numberic with 10 digit char length to define the class code. */
+    USREGS_FDIC_DEPOSIT_CLASS_CODE
+        @i18n:Description (en="")
+        @t24:i (t24Name=USREGS.FDIC.DEPOSIT.CLASS.CODE, level=I, type=H, allowedFunctions="A C D E I L Q S", localRefApplicationSysNo=13.0, localRefAllowed=true)
+    {
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=22.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=23.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=19.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=20.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=16.0, core=true, t24Name=CURR.NO, mandatory=false)
+        DATE_TIME -> byValue USREGS_FDIC:USREGS_FDIC_DEPOSIT_CLASS_CODE__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+/* The Deposit Class Type (Parent) of the Deposit Class Codes.
+A Virtual table name FDIC.CLASS.TYPE has been defined in EB.LOOKUP table to define the set of values which required as drop down to this field. */
+        DEPOSIT_CLASS_TYPE : USREGS_FDIC:USREGS_FDIC_DEPOSIT_CLASS_CODE__DEPOSIT_CLASS_TYPE
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=2.0, core=true, t24Name=DEPOSIT.CLASS.TYPE, mandatory=false)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=21.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        DESCRIPTION -> byValue USREGS_FDIC:USREGS_FDIC_DEPOSIT_CLASS_CODE__DESCRIPTION *
+            @t24:i (t24Name=DESCRIPTION)
+        ID -> USREGS_FDIC:USREGS_FDIC_DEPOSIT_CLASS_CODE PK required
+            @i18n:Label (en="Transaction Ref")
+            @i18n:Tooltip (en="Transaction Reference")
+            @t24:i (align=R, inputBehaviour=I, maxLength=10, sysNumber=0.0, core=true, t24Name="@ID", mandatory=true)
+        INPUTTER -> byValue USREGS_FDIC:USREGS_FDIC_DEPOSIT_CLASS_CODE__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        OVERRIDE -> byValue USREGS_FDIC:USREGS_FDIC_DEPOSIT_CLASS_CODE__OVERRIDE *
+            @t24:i (t24Name=OVERRIDE)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=15.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        RESERVED_1 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=12.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_10 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=3.0, core=true, t24Name=RESERVED.10, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=11.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=10.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=9.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        RESERVED_5 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=8.0, core=true, t24Name=RESERVED.5, mandatory=false)
+        RESERVED_6 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=7.0, core=true, t24Name=RESERVED.6, mandatory=false)
+        RESERVED_7 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=6.0, core=true, t24Name=RESERVED.7, mandatory=false)
+        RESERVED_8 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=5.0, core=true, t24Name=RESERVED.8, mandatory=false)
+        RESERVED_9 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=4.0, core=true, t24Name=RESERVED.9, mandatory=false)
+    }
+    USREGS_FDIC_DEPOSIT_CLASS_CODE__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=18.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    USREGS_FDIC_DEPOSIT_CLASS_CODE__DESCRIPTION
+    {
+        /* The Deposit Class Code or Ownership Class Description. */
+        DESCRIPTION : T24BusinessTypes:A required
+            @i18n:Label (en=Description)
+            @i18n:Tooltip (en=Description)
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, multiLanguage=true, sysNumber=1.0, core=true, t24Name=DESCRIPTION, mandatory=true)
+    }
+    USREGS_FDIC_DEPOSIT_CLASS_CODE__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=17.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    USREGS_FDIC_DEPOSIT_CLASS_CODE__OVERRIDE
+    {
+        OVERRIDE : T24BusinessTypes:N
+            @i18n:Label (en=Override)
+            @i18n:Tooltip (en="Overrides generated by this transaction")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=14.0, core=true, t24Name=OVERRIDE, mandatory=false)
+    }
+/* All transactions processed through FDIC.TRANSACTION should be updated in this table and should have the status as Success/Failure.
+@ID will be the combination of USREGS.FDIC.TRANSACTION*ACCOUNT.ID*ID.COMPANY */
+    USREGS_FDIC_DETAILS
+        @i18n:Description (en="")
+        @t24:i (t24Name=USREGS.FDIC.DETAILS, level=I, type=L, allowedFunctions="L S", localRefAllowed=false)
+    {
+        /* Account id of the transaction */
+        ACCOUNT -> AC_AccountOpening:ACCOUNT
+            @i18n:Label (en=Account)
+            @i18n:Tooltip (en="Identifies the customer account")
+            @t24:i (align=L, inputBehaviour=I, maxLength=36, sysNumber=1.0, core=true, businessType=POSANT, t24Name=ACCOUNT, mandatory=false)
+        /* The Action can be ADD, REMOVE, CREDIT or DEBIT. It indicates if the AC.LOCKED.EVENTS was an additin or removal of Locked amount on an account or if the transaction type was a debit or a credit of funds on the account done through FUNDS.TRANSFER transaction */
+        ACTION : T24BusinessTypes:A
+            @i18n:Label (en=Action)
+            @t24:i (align=L, inputBehaviour=I, maxLength=15, sysNumber=19.0, core=true, t24Name=ACTION, mandatory=false)
+        /* Available balance for the Account, it is the Account balance reduced by the FDIC Hold Amount */
+        AVAILABLE_BALANCE : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=19, sysNumber=14.0, core=true, t24Name=AVAILABLE.BALANCE, typeModifiers="USD", mandatory=false)
+        /* Branch to which the account belongs */
+        BRANCH : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=15, sysNumber=4.0, core=true, t24Name=BRANCH, mandatory=false)
+        /* Category id of the Account */
+        CATEGORY -> ST_Config:CATEGORY
+            @i18n:Label (en=Category)
+            @i18n:Tooltip (en="Specifies the Category")
+            @t24:i (align=R, inputBehaviour=I, maxLength=6, sysNumber=5.0, core=true, t24Name=CATEGORY, mandatory=false)
+        /* Company where the Account exists */
+        COMPANY_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=I, maxLength=15, sysNumber=3.0, core=true, businessType=COM, t24Name=COMPANY.CODE, mandatory=false)
+        /* The FDIC Amount on an account that is credited to the account */
+        CREDIT_AMOUNT : T24BusinessTypes:AMT
+            @i18n:Label (en="Credit Amount")
+            @t24:i (align=R, inputBehaviour=I, maxLength=19, sysNumber=12.0, core=true, t24Name=CREDIT.AMOUNT, typeModifiers="USD", mandatory=false)
+        /* Current balance of the Account */
+        CUR_BALANCE : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=19, sysNumber=8.0, core=true, t24Name=CUR.BALANCE, typeModifiers="USD", mandatory=false)
+        /* The FDIC Amount on an account that is debited from the account */
+        DEBIT_AMOUNT : T24BusinessTypes:AMT
+            @i18n:Label (en="Debit Amount")
+            @t24:i (align=R, inputBehaviour=I, maxLength=19, sysNumber=13.0, core=true, t24Name=DEBIT.AMOUNT, typeModifiers="USD", mandatory=false)
+        /* USREGS.FDIC.TRANSACTION record ID */
+        FDIC_TRANSACTION -> USREGS_FDIC:USREGS_FDIC_TRANSACTION
+            @t24:i (align=L, inputBehaviour=I, maxLength=10, sysNumber=17.0, core=true, businessType=A, t24Name=FDIC.TRANSACTION, mandatory=false)
+        /* The FDIC Amount on an account that is the either being locked or reversed on the account */
+        HOLD_AMOUNT : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=19, sysNumber=11.0, core=true, t24Name=HOLD.AMOUNT, typeModifiers="USD", mandatory=false)
+        /* Hold percentage for the Account */
+        HOLD_PERCENTAGE : T24BusinessTypes:R
+            @t24:i (align=R, inputBehaviour=I, maxLength=6, sysNumber=10.0, core=true, t24Name=HOLD.PERCENTAGE, mandatory=false)
+        ID -> USREGS_FDIC:USREGS_FDIC_DETAILS PK required
+            @i18n:Label (en="Transaction Ref")
+            @i18n:Tooltip (en="Transaction Reference")
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=0.0, core=true, businessType=A, t24Name="@ID", mandatory=true)
+        /* Product of the Account */
+        PRODUCT -> AA_ProductManagement:AA_PRODUCT
+            @i18n:Label (en=Product)
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=7.0, core=true, businessType=A, t24Name=PRODUCT, mandatory=false)
+        /* Product group of the Account */
+        PRODUCT_GROUP -> AA_ProductFramework:AA_PRODUCT_GROUP
+            @i18n:Label (en="Product Group")
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=6.0, core=true, businessType=A, t24Name=PRODUCT.GROUP, mandatory=false)
+        RESERVED_1 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=34.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_10 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=25.0, core=true, t24Name=RESERVED.10, mandatory=false)
+        RESERVED_11 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=24.0, core=true, t24Name=RESERVED.11, mandatory=false)
+        RESERVED_12 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=23.0, core=true, t24Name=RESERVED.12, mandatory=false)
+        RESERVED_13 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=22.0, core=true, t24Name=RESERVED.13, mandatory=false)
+        RESERVED_14 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=21.0, core=true, t24Name=RESERVED.14, mandatory=false)
+        RESERVED_15 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=20.0, core=true, t24Name=RESERVED.15, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=33.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=32.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=31.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        RESERVED_5 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=30.0, core=true, t24Name=RESERVED.5, mandatory=false)
+        RESERVED_6 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=29.0, core=true, t24Name=RESERVED.6, mandatory=false)
+        RESERVED_7 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=28.0, core=true, t24Name=RESERVED.7, mandatory=false)
+        RESERVED_8 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=27.0, core=true, t24Name=RESERVED.8, mandatory=false)
+        RESERVED_9 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=26.0, core=true, t24Name=RESERVED.9, mandatory=false)
+        /* Status of the Transaction */
+        STATUS : T24BusinessTypes:A
+            @i18n:Label (en=Status)
+            @t24:i (align=L, inputBehaviour=I, maxLength=10, sysNumber=16.0, core=true, t24Name=STATUS, mandatory=false)
+        /* Account to which settlement has been done in case of FUNDS.TRANSFER transaction */
+        SUSP_ACCOUNT -> AC_AccountOpening:ACCOUNT
+            @t24:i (align=L, inputBehaviour=I, maxLength=36, sysNumber=2.0, core=true, businessType=POSANT, t24Name=SUSP.ACCOUNT, mandatory=false)
+        /* Threshold amount for the Account */
+        THRESHOLD_AMOUNT : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=19, sysNumber=9.0, core=true, t24Name=THRESHOLD.AMOUNT, typeModifiers="USD", mandatory=false)
+        /* Transaction Reference created for the FDIC Transaction. It can be a AC.LOCKED.EVENT or an FUNDS.TRANSFER transaction reference */
+        TXN_REFERENCE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=15, sysNumber=15.0, core=true, t24Name=TXN.REFERENCE, mandatory=false)
+        /* Transaction types can be AUTO.HOLD,MANUAL.HOLD,HOLD.FILE,TRANS.FILE. It is the FDIC.TRANSACTION type that initiated the processing */
+        TXN_TYPE : T24BusinessTypes:A
+            @i18n:Label (en="Trans Type")
+            @t24:i (align=L, inputBehaviour=I, maxLength=15, sysNumber=18.0, core=true, t24Name=TXN.TYPE, mandatory=false)
+    }
+/* This FDIC parameter table will allow banks to define the Settlement Instructions (GL Account). The bank can be able to define
+the settlement instruction at individual leval or product level or product group level.
+@ID will be defined by the user and should be as SYSTEM. */
+    USREGS_FDIC_PARAMETER
+        @i18n:Description (en="")
+        @t24:i (t24Name=USREGS.FDIC.PARAMETER, level=I, type=H, allowedFunctions="A C D E I L Q S", localRefApplicationSysNo=51.0, localRefAllowed=true)
+    {
+        AA_PRODUCT_GROUP -> byValue USREGS_FDIC:USREGS_FDIC_PARAMETER__AA_PRODUCT_GROUP *
+            @t24:i (t24Name=AA.PRODUCT.GROUP)
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=60.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=61.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=57.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        CATEGORY -> byValue USREGS_FDIC:USREGS_FDIC_PARAMETER__CATEGORY *
+            @t24:i (t24Name=CATEGORY)
+        COMPANY_CODE -> USREGS_FDIC:USREGS_FDIC_PARAMETER PK required
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=I, maxLength=11, sysNumber=0.0, core=true, businessType=COM, t24Name=COMPANY.CODE, mandatory=true)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=58.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=54.0, core=true, t24Name=CURR.NO, mandatory=false)
+        DATE_TIME -> byValue USREGS_FDIC:USREGS_FDIC_PARAMETER__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DEFAULT_CURRENCY -> byValue USREGS_FDIC:USREGS_FDIC_PARAMETER__DEFAULT_CURRENCY *
+            @t24:i (t24Name=DEFAULT.CURRENCY)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=59.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        DESCRIPTION -> byValue USREGS_FDIC:USREGS_FDIC_PARAMETER__DESCRIPTION *
+            @t24:i (t24Name=DESCRIPTION)
+        /* The System/Network directory (path) where the FDIC Incoming Files are will be stored for importing and processing. */
+        DIR_PATH : T24BusinessTypes:BCON_FILEPATH required
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=3.0, core=true, t24Name=DIR.PATH, mandatory=true)
+/* The bank must select FDIC Hold as the type of hold to identify each AC.LOCKED.EVENT record where an FDIC Provisional Hold is required.
+A Valid record must be created in USCORE.HOLD.PARAMETER table in order to list as drop down in this field. */
+        FDIC_HOLD_TYPE -> USCORE_Holds:USCORE_HOLD_PARAMETER required
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=2.0, core=true, businessType=A, t24Name=FDIC.HOLD.TYPE, mandatory=true)
+        INPUTTER -> byValue USREGS_FDIC:USREGS_FDIC_PARAMETER__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        OVERRIDE -> byValue USREGS_FDIC:USREGS_FDIC_PARAMETER__OVERRIDE *
+            @t24:i (t24Name=OVERRIDE)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=53.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        RESERVED_1 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=50.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_10 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=41.0, core=true, t24Name=RESERVED.10, mandatory=false)
+        RESERVED_11 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=40.0, core=true, t24Name=RESERVED.11, mandatory=false)
+        RESERVED_12 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=39.0, core=true, t24Name=RESERVED.12, mandatory=false)
+        RESERVED_13 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=38.0, core=true, t24Name=RESERVED.13, mandatory=false)
+        RESERVED_14 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=37.0, core=true, t24Name=RESERVED.14, mandatory=false)
+        RESERVED_15 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=36.0, core=true, t24Name=RESERVED.15, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=49.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=48.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=47.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        RESERVED_5 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=46.0, core=true, t24Name=RESERVED.5, mandatory=false)
+        RESERVED_6 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=45.0, core=true, t24Name=RESERVED.6, mandatory=false)
+        RESERVED_7 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=44.0, core=true, t24Name=RESERVED.7, mandatory=false)
+        RESERVED_8 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=43.0, core=true, t24Name=RESERVED.8, mandatory=false)
+        RESERVED_9 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=42.0, core=true, t24Name=RESERVED.9, mandatory=false)
+    }
+    USREGS_FDIC_PARAMETER__AA_PRODUCT_GROUP
+    {
+        AA_PG_PRODUCT -> byValue USREGS_FDIC:USREGS_FDIC_PARAMETER__AA_PRODUCT_GROUP__AA_PG_PRODUCT *
+            @t24:i (t24Name=AA.PG.PRODUCT)
+        /* The Product Groups for which the FDIC hold should be placed against. Product Group should be limited to product line ACCOUNTS and DEPOSITS. */
+        AA_PRODUCT_GROUP -> AA_ProductFramework:AA_PRODUCT_GROUP
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=24.0, core=true, businessType=A, t24Name=AA.PRODUCT.GROUP, mandatory=false)
+    }
+    USREGS_FDIC_PARAMETER__AA_PRODUCT_GROUP__AA_PG_PRODUCT
+    {
+        /* A valid FT.TXN.TYPE.CONDITION record will be listing to set the product based transaction type. */
+        AA_FTTC -> FT_Config:FT_TXN_TYPE_CONDITION
+            @t24:i (align=L, inputBehaviour=I, maxLength=10, sysNumber=30.0, core=true, businessType=A, t24Name=AA.FTTC, mandatory=false)
+/* The balance above the Balance Threshold is the amount the Percentage should be calculated on to determine the FDIC Hold amount.
+Amount Field. */
+        AA_PG_BALANCE_THRESHOLD : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=19, sysNumber=27.0, core=true, t24Name=AA.PG.BALANCE.THRESHOLD, typeModifiers="USD", mandatory=false)
+        /* The Currency of the AA.PRODUCT(s) which the FDIC hold will be placed against. */
+        AA_PG_CURRENCY -> ST_CurrencyConfig:CURRENCY
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=26.0, core=true, businessType=CCY, t24Name=AA.PG.CURRENCY, mandatory=false)
+        /* The percentage is calculated on the balance in excess of the Balance Threshold and is the FDIC HOLD amount that should be placed against the account in AC.LOCKED.EVENTS */
+        AA_PG_HOLD_PERCENTAGE : T24BusinessTypes:R
+            @t24:i (align=R, inputBehaviour=I, maxLength=6, sysNumber=28.0, core=true, t24Name=AA.PG.HOLD.PERCENTAGE, mandatory=false)
+        /* The specific Product(s) that the FDIC hold should be placed against and valid within the Product Group defined. PRODUCT must be the products of the PRODUCT.GROUP. */
+        AA_PG_PRODUCT -> AA_ProductManagement:AA_PRODUCT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=25.0, core=true, businessType=A, t24Name=AA.PG.PRODUCT, mandatory=false)
+        /* The internal GL account used for settlement, or as and offset, when posting the incoming FDIC Debit or Credit Transaction files. If no Settlement Account is provided, then the default Settlement Account will be used. */
+        AA_PG_SETTLEMENT_ACCT -> AC_AccountOpening:ACCOUNT
+            @t24:i (align=L, inputBehaviour=I, maxLength=36, sysNumber=29.0, core=true, businessType=INT, t24Name=AA.PG.SETTLEMENT.ACCT, mandatory=false)
+        RESERVED_16 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=35.0, core=true, t24Name=RESERVED.16, mandatory=false)
+        RESERVED_17 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=34.0, core=true, t24Name=RESERVED.17, mandatory=false)
+        RESERVED_18 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=33.0, core=true, t24Name=RESERVED.18, mandatory=false)
+        RESERVED_19 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=32.0, core=true, t24Name=RESERVED.19, mandatory=false)
+        RESERVED_20 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=31.0, core=true, t24Name=RESERVED.20, mandatory=false)
+    }
+    USREGS_FDIC_PARAMETER__CATEGORY
+    {
+/* Allows user to designate products defined within ACCOUNT.CLASS based upon CATEGORY codes.
+A Valid record must be present in ACCOUNT.CLASS table in order to list as drop down in this field. */
+        ACCOUNT_CLASS -> AC_Config:ACCOUNT_CLASS
+            @t24:i (align=L, inputBehaviour=I, maxLength=15, sysNumber=13.0, core=true, businessType=ANY, t24Name=ACCOUNT.CLASS, mandatory=false)
+/* Allows the user to designate specific CATEGORY codes used for products outside of AA.
+A Valid record must be present in CATEGORY table in order to list as drop down in this field. */
+        CATEGORY -> ST_Config:CATEGORY
+            @i18n:Label (en=Category)
+            @i18n:Tooltip (en="Specifies the Category")
+            @t24:i (align=R, inputBehaviour=I, maxLength=6, sysNumber=12.0, core=true, t24Name=CATEGORY, mandatory=false)
+        CURRENCY -> byValue USREGS_FDIC:USREGS_FDIC_PARAMETER__CATEGORY__CURRENCY *
+            @t24:i (t24Name=CURRENCY)
+    }
+    USREGS_FDIC_PARAMETER__CATEGORY__CURRENCY
+    {
+/* The balance above the Balance Threshold is the amount the Percentage should be calculated on to determine the FDIC Hold amount.
+Amount Field. */
+        BALANCE_THRESHOLD : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=19, sysNumber=15.0, core=true, t24Name=BALANCE.THRESHOLD, typeModifiers="USD", mandatory=false)
+        /* A valid FT.TXN.TYPE.CONDITION record will be listing to set the category based transaction type. */
+        CAT_FTTC -> FT_Config:FT_TXN_TYPE_CONDITION
+            @t24:i (align=L, inputBehaviour=I, maxLength=10, sysNumber=18.0, core=true, businessType=A, t24Name=CAT.FTTC, mandatory=false)
+        /* The internal GL account used for settlement, or as and offset, when posting the incoming FDIC Debit or Credit Transaction files. If no Settlement Account is provided, then the default Settlement Account will be used. */
+        CAT_SETTLEMENT_ACCT -> AC_AccountOpening:ACCOUNT
+            @t24:i (align=L, inputBehaviour=I, maxLength=36, sysNumber=17.0, core=true, businessType=INT, t24Name=CAT.SETTLEMENT.ACCT, mandatory=false)
+/* Currency for the transaction,which the FDIC hold will be placed against.
+A Valid record must be present in CURRENCY table in order to list as drop down in this field. */
+        CURRENCY -> ST_CurrencyConfig:CURRENCY
+            @i18n:Label (en=Ccy)
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=14.0, core=true, businessType=CCY, t24Name=CURRENCY, mandatory=false)
+        /* The percentage is calculated on the balance in excess of the Balance Threshold and is the FDIC HOLD amount that should be placed against the account in AC.LOCKED.EVENTS */
+        HOLD_PERCENTAGE : T24BusinessTypes:R
+            @t24:i (align=R, inputBehaviour=I, maxLength=6, sysNumber=16.0, core=true, t24Name=HOLD.PERCENTAGE, mandatory=false)
+        RESERVED_21 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=23.0, core=true, t24Name=RESERVED.21, mandatory=false)
+        RESERVED_22 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=22.0, core=true, t24Name=RESERVED.22, mandatory=false)
+        RESERVED_23 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=21.0, core=true, t24Name=RESERVED.23, mandatory=false)
+        RESERVED_24 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=20.0, core=true, t24Name=RESERVED.24, mandatory=false)
+        RESERVED_25 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=19.0, core=true, t24Name=RESERVED.25, mandatory=false)
+    }
+    USREGS_FDIC_PARAMETER__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=56.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    USREGS_FDIC_PARAMETER__DEFAULT_CURRENCY
+    {
+        /* Default curreny for an account */
+        DEFAULT_CURRENCY -> ST_CurrencyConfig:CURRENCY required
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=4.0, core=true, businessType=CCY, t24Name=DEFAULT.CURRENCY, mandatory=true)
+        /* A valid FT.TXN.TYPE.CONDITION record will be listing to set the default transaction type. */
+        DEFAULT_FTTC -> FT_Config:FT_TXN_TYPE_CONDITION required
+            @t24:i (align=L, inputBehaviour=I, maxLength=10, sysNumber=6.0, core=true, businessType=A, t24Name=DEFAULT.FTTC, mandatory=true)
+        /* The default internal GL account used as settlement account if no settlement account is defined at the product level. Used as the offset entry when posting the incoming FDIC Debit or Credit Transaction files */
+        DEFAULT_SETTLEMENT_ACCT -> AC_AccountOpening:ACCOUNT required
+            @t24:i (align=L, inputBehaviour=I, maxLength=36, sysNumber=5.0, core=true, businessType=INT, t24Name=DEFAULT.SETTLEMENT.ACCT, mandatory=true)
+        RESERVED_26 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=11.0, core=true, t24Name=RESERVED.26, mandatory=false)
+        RESERVED_27 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=10.0, core=true, t24Name=RESERVED.27, mandatory=false)
+        RESERVED_28 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=9.0, core=true, t24Name=RESERVED.28, mandatory=false)
+        RESERVED_29 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=8.0, core=true, t24Name=RESERVED.29, mandatory=false)
+        RESERVED_30 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=7.0, core=true, t24Name=RESERVED.30, mandatory=false)
+    }
+    USREGS_FDIC_PARAMETER__DESCRIPTION
+    {
+/* Describe the purpose of the parameter table.
+Mandatory input */
+        DESCRIPTION : T24BusinessTypes:A required
+            @i18n:Label (en=Description)
+            @i18n:Tooltip (en=Description)
+            @t24:i (align=L, inputBehaviour=I, maxLength=45, multiLanguage=true, sysNumber=1.0, core=true, t24Name=DESCRIPTION, mandatory=true)
+    }
+    USREGS_FDIC_PARAMETER__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=55.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    USREGS_FDIC_PARAMETER__OVERRIDE
+    {
+        OVERRIDE : T24BusinessTypes:N
+            @i18n:Label (en=Override)
+            @i18n:Tooltip (en="Overrides generated by this transaction")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=52.0, core=true, t24Name=OVERRIDE, mandatory=false)
+    }
+/* This table is used to initiate the FDIC Transaction based on the parameter setup, manual selection or file uploads.
+@ID will be the auto generated unique based on the t24 julian date. */
+    USREGS_FDIC_TRANSACTION
+        @i18n:Description (en="")
+        @t24:i (t24Name=USREGS.FDIC.TRANSACTION, level=F, type=H, allowedFunctions="A C D E I L Q S", localRefApplicationSysNo=26.0, localRefAllowed=true)
+    {
+        ACCOUNT -> byValue USREGS_FDIC:USREGS_FDIC_TRANSACTION__ACCOUNT *
+            @t24:i (t24Name=ACCOUNT)
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=35.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=36.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=32.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=33.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=29.0, core=true, t24Name=CURR.NO, mandatory=false)
+        DATE_TIME -> byValue USREGS_FDIC:USREGS_FDIC_TRANSACTION__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=34.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        DESCRIPTION -> byValue USREGS_FDIC:USREGS_FDIC_TRANSACTION__DESCRIPTION *
+            @t24:i (t24Name=DESCRIPTION)
+        /* Effective date to create AC.LOCKED.EVENTS for an account */
+        EFFECTIVE_DATE : T24BusinessTypes:D
+            @i18n:Label (en="Effective Date")
+            @i18n:Tooltip (en="Effective date of the transaction")
+            @t24:i (align=R, inputBehaviour=I, maxLength=12, sysNumber=2.0, core=true, t24Name=EFFECTIVE.DATE, mandatory=false)
+        /* Expiration date to create AC.LOCKED.EVENTS for an account */
+        EXPIRATION_DATE : T24BusinessTypes:D
+            @i18n:Label (en="Expiry Date")
+            @i18n:Tooltip (en="Indicates the Expiry Date of the Transaction")
+            @t24:i (align=R, inputBehaviour=I, maxLength=12, sysNumber=3.0, core=true, t24Name=EXPIRATION.DATE, mandatory=false)
+        /* FDIC file name */
+        FDIC_FILE_NAME : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=4.0, core=true, t24Name=FDIC.FILE.NAME, mandatory=false)
+        ID -> USREGS_FDIC:USREGS_FDIC_TRANSACTION PK required
+            @i18n:Label (en="Transaction Ref")
+            @i18n:Tooltip (en="Transaction Reference")
+            @t24:i (align=L, inputBehaviour=I, maxLength=15, sysNumber=0.0, core=true, businessType=A, t24Name="@ID", mandatory=true)
+        INPUTTER -> byValue USREGS_FDIC:USREGS_FDIC_TRANSACTION__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        OVERRIDE -> byValue USREGS_FDIC:USREGS_FDIC_TRANSACTION__OVERRIDE *
+            @t24:i (t24Name=OVERRIDE)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=28.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        RESERVED_1 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=25.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_10 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=16.0, core=true, t24Name=RESERVED.10, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=24.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=23.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=22.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        RESERVED_5 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=21.0, core=true, t24Name=RESERVED.5, mandatory=false)
+        RESERVED_6 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=20.0, core=true, t24Name=RESERVED.6, mandatory=false)
+        RESERVED_7 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=19.0, core=true, t24Name=RESERVED.7, mandatory=false)
+        RESERVED_8 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=18.0, core=true, t24Name=RESERVED.8, mandatory=false)
+        RESERVED_9 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=17.0, core=true, t24Name=RESERVED.9, mandatory=false)
+        /* Status of the Transaction */
+        STATUS : T24BusinessTypes:A
+            @i18n:Label (en=Status)
+            @t24:i (align=L, inputBehaviour=I, maxLength=20, sysNumber=15.0, core=true, t24Name=STATUS, mandatory=false)
+        /* Transaction types can be AUTO.HOLD,MANUAL.HOLD,HOLD.FILE,TRANS.FILE. */
+        TXN_TYPE : USREGS_FDIC:USREGS_FDIC_TRANSACTION__TXN_TYPE
+            @i18n:Label (en="Trans Type")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=14.0, core=true, t24Name=TXN.TYPE, mandatory=false)
+    }
+    USREGS_FDIC_TRANSACTION__ACCOUNT
+    {
+        /* The default internal GL account used as settlement account if no settlement account is defined at the product level. Used as the offset entry when posting the incoming FDIC Debit/Credit Transaction files */
+        ACCOUNT -> AC_AccountOpening:ACCOUNT
+            @i18n:Label (en=Account)
+            @i18n:Tooltip (en="Identifies the customer account")
+            @t24:i (align=L, inputBehaviour=I, maxLength=36, sysNumber=5.0, core=true, businessType=A, t24Name=ACCOUNT, mandatory=false)
+        /* The balance above the Balance Threshold is the amount the Percentage should be calculated on to determine the FDIC Hold amount. */
+        BALANCE_THRESHOLD : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=19, sysNumber=7.0, core=true, t24Name=BALANCE.THRESHOLD, typeModifiers="USD", mandatory=false)
+        /* Currency for the transaction,which the FDIC hold will be placed against. */
+        CURRENCY -> ST_CurrencyConfig:CURRENCY
+            @i18n:Label (en=Ccy)
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=6.0, core=true, businessType=CCY, t24Name=CURRENCY, mandatory=false)
+        /* The percentage is calculated on the balance in excess of the Balance Threshold and is the FDIC HOLD amount that should be placed against the account in AC.LOCKED.EVENTS */
+        HOLD_PERCENTAGE : T24BusinessTypes:R
+            @t24:i (align=R, inputBehaviour=I, maxLength=6, sysNumber=8.0, core=true, t24Name=HOLD.PERCENTAGE, mandatory=false)
+        RESERVED_11 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=13.0, core=true, t24Name=RESERVED.11, mandatory=false)
+        RESERVED_12 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=12.0, core=true, t24Name=RESERVED.12, mandatory=false)
+        RESERVED_13 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=11.0, core=true, t24Name=RESERVED.13, mandatory=false)
+        RESERVED_14 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=10.0, core=true, t24Name=RESERVED.14, mandatory=false)
+        RESERVED_15 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=9.0, core=true, t24Name=RESERVED.15, mandatory=false)
+    }
+    USREGS_FDIC_TRANSACTION__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=31.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    USREGS_FDIC_TRANSACTION__DESCRIPTION
+    {
+        /* Describe the purpose of the TRANSACTION */
+        DESCRIPTION : T24BusinessTypes:A required
+            @i18n:Label (en=Description)
+            @i18n:Tooltip (en=Description)
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, multiLanguage=true, sysNumber=1.0, core=true, t24Name=DESCRIPTION, mandatory=true)
+    }
+    USREGS_FDIC_TRANSACTION__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=30.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    USREGS_FDIC_TRANSACTION__OVERRIDE
+    {
+        OVERRIDE : T24BusinessTypes:N
+            @i18n:Label (en=Override)
+            @i18n:Tooltip (en="Overrides generated by this transaction")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=27.0, core=true, t24Name=OVERRIDE, mandatory=false)
+    }
+/* This table is required to capture the information for a T24 Field and it is corresponding FDIC value. This information will be used in FDIC extract to translate T24 value to a FDIC Value.
+@ID of the table is 50 char length which accepts alphanumeric values. */
+    USREGS_FDIC_XREF
+        @i18n:Description (en="")
+        @t24:i (t24Name=USREGS.FDIC.XREF, level=I, type=H, allowedFunctions="A C D E I L Q S", localRefApplicationSysNo=20.0, localRefAllowed=true)
+    {
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=29.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=30.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=26.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=27.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=23.0, core=true, t24Name=CURR.NO, mandatory=false)
+        DATE_TIME -> byValue USREGS_FDIC:USREGS_FDIC_XREF__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=28.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        DESCRIPTION -> byValue USREGS_FDIC:USREGS_FDIC_XREF__DESCRIPTION *
+            @t24:i (t24Name=DESCRIPTION)
+        FIELD_DESCRIPTION -> byValue USREGS_FDIC:USREGS_FDIC_XREF__FIELD_DESCRIPTION *
+            @t24:i (t24Name=FIELD.DESCRIPTION)
+        ID -> USREGS_FDIC:USREGS_FDIC_XREF PK required
+            @i18n:Label (en="Transaction Ref")
+            @i18n:Tooltip (en="Transaction Reference")
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=0.0, core=true, businessType=A, t24Name="@ID", mandatory=true)
+        INPUTTER -> byValue USREGS_FDIC:USREGS_FDIC_XREF__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        OVERRIDE -> byValue USREGS_FDIC:USREGS_FDIC_XREF__OVERRIDE *
+            @t24:i (t24Name=OVERRIDE)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=22.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        RESERVED_1 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=19.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_10 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=10.0, core=true, t24Name=RESERVED.10, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=18.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=17.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=16.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        RESERVED_5 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=15.0, core=true, t24Name=RESERVED.5, mandatory=false)
+        RESERVED_6 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=14.0, core=true, t24Name=RESERVED.6, mandatory=false)
+        RESERVED_7 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=13.0, core=true, t24Name=RESERVED.7, mandatory=false)
+        RESERVED_8 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=12.0, core=true, t24Name=RESERVED.8, mandatory=false)
+        RESERVED_9 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=11.0, core=true, t24Name=RESERVED.9, mandatory=false)
+    }
+    USREGS_FDIC_XREF__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=25.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    USREGS_FDIC_XREF__DESCRIPTION
+    {
+        /* Define the purpose of the table. */
+        DESCRIPTION : T24BusinessTypes:A required
+            @i18n:Label (en=Description)
+            @i18n:Tooltip (en=Description)
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, multiLanguage=true, sysNumber=1.0, core=true, t24Name=DESCRIPTION, mandatory=true)
+    }
+    USREGS_FDIC_XREF__FIELD_DESCRIPTION
+    {
+/* Input the expected values as required in the FDIC Data Extract files.
+Multi-value Set */
+        FDIC_VALUE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=20, sysNumber=3.0, core=true, t24Name=FDIC.VALUE, mandatory=false)
+/* FDIC field description
+Multi-value Set */
+        FIELD_DESCRIPTION : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=2.0, core=true, t24Name=FIELD.DESCRIPTION, mandatory=false)
+        T24_VALUE -> byValue USREGS_FDIC:USREGS_FDIC_XREF__FIELD_DESCRIPTION__T24_VALUE *
+            @t24:i (t24Name=T24.VALUE)
+    }
+    USREGS_FDIC_XREF__FIELD_DESCRIPTION__T24_VALUE
+    {
+        RESERVED_11 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=9.0, core=true, t24Name=RESERVED.11, mandatory=false)
+        RESERVED_12 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=8.0, core=true, t24Name=RESERVED.12, mandatory=false)
+        RESERVED_13 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=7.0, core=true, t24Name=RESERVED.13, mandatory=false)
+        RESERVED_14 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=6.0, core=true, t24Name=RESERVED.14, mandatory=false)
+        RESERVED_15 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=5.0, core=true, t24Name=RESERVED.15, mandatory=false)
+/* Input a fixed value for the expected values received in the T24 mappings.
+Associated subvalue */
+        T24_VALUE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=20, sysNumber=4.0, core=true, t24Name=T24.VALUE, mandatory=false)
+    }
+    USREGS_FDIC_XREF__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=24.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    USREGS_FDIC_XREF__OVERRIDE
+    {
+        OVERRIDE : T24BusinessTypes:N
+            @i18n:Label (en=Override)
+            @i18n:Tooltip (en="Overrides generated by this transaction")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=21.0, core=true, t24Name=OVERRIDE, mandatory=false)
+    }
+}
+Enumerations {
+    USREGS_FDIC_DEPOSIT_CLASS_CODE__DEPOSIT_CLASS_TYPE : mml:string
+        BANK=BANK
+        COMM=COMM
+        CORP=CORP
+        DUETO=DUETO
+        FED=FED
+        RTL=RTL
+        STATE=STATE
+    USREGS_FDIC_TRANSACTION__TXN_TYPE : mml:string
+        AUTO_HOLD=AUTO.HOLD
+        HOLD_FILE=HOLD.FILE
+        MANUAL_HOLD=MANUAL.HOLD
+        TRANS_FILE=TRANS.FILE
+}

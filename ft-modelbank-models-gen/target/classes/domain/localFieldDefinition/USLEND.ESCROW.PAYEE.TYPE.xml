@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<localref:LocalRef xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:localref="http://www.odcgroup.com/t24/application/localref/model/LocalRef"
+    xmlns:translationDsl="http://www.odcgroup.com/translation/TranslationDsl" localRefID="USLEND.ESCROW.PAYEE.TYPE" maximumChars="45" minimumChars="0"
+    mandatory="false" charType="A" defaultPossible="false" virtualTable="USLEND.PAYEE.TYPE"
+    description="Escrow Payee Type">
+  <shortName xsi:type="translationDsl:LocalTranslations">
+    <translations locale="en" text="PAYEE.TYPE"/>
+  </shortName>
+  <vettingTable vettingTable="HAZARD.INSURANCE">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Hazard Insurance"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="PMI">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="PMI"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="PROPERTY.INSURANCE">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Property Insurance"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="REAL.ESTATE.TAXED">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Real Estate Tax"/>
+    </remarks>
+  </vettingTable>
+</localref:LocalRef>

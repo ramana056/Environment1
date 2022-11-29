@@ -1,0 +1,247 @@
+# UTF-8
+/* Lebanon Reports */
+Domain LBRPTS_Foundation
+    @t24:i (module=LBRPTS)
+    @java:Package (value=com.temenos.t24.datamodel.lbrpts.lbrpts_foundation)
+namespace "http://www.temenos.com/t24/LBRPTS_Foundation"
+metamodelVersion 1.30.6
+Classes {
+    /* Table which records the EOD transaction details */
+    LBRPTS_MISC_TAXES
+        @i18n:Description (en="")
+        @t24:i (t24Name=LBRPTS.MISC.TAXES, level=F, type=L, allowedFunctions="L P S", localRefApplicationSysNo=13.0, localRefAllowed=true)
+    {
+        /* Amount of transaction */
+        AMOUNT : T24BusinessTypes:AMT
+            @i18n:Label (en=Amount)
+            @i18n:Tooltip (en="Indicates the Amount")
+            @t24:i (align=R, inputBehaviour=I, maxLength=19, sysNumber=6.0, core=true, t24Name=AMOUNT, typeModifiers="-5", mandatory=false)
+        COMPANY : T24BusinessTypes:A
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=I, maxLength=11, sysNumber=1.0, core=true, t24Name=COMPANY, mandatory=false)
+        /* Crdeit account of the head office to which the transaction is made */
+        CREDIT_ACCOUNT -> AC_AccountOpening:ACCOUNT
+            @i18n:Label (en="Credit Acct")
+            @t24:i (align=L, inputBehaviour=I, maxLength=36, sysNumber=4.0, core=true, businessType=ANT, t24Name=CREDIT.ACCOUNT, mandatory=false)
+        /* Currency in which the transaction is made */
+        CURRENCY -> ST_CurrencyConfig:CURRENCY
+            @i18n:Label (en=Ccy)
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=5.0, core=true, businessType=CCY, t24Name=CURRENCY, mandatory=false)
+        /* DATE in which the transaction is made */
+        DATE : T24BusinessTypes:D
+            @i18n:Label (en=Date)
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=7.0, core=true, t24Name=DATE, mandatory=false)
+        /* Debit account of the branch from which the transaction is made */
+        DEBIT_ACCOUNT -> AC_AccountOpening:ACCOUNT
+            @i18n:Label (en="Debit account")
+            @i18n:Tooltip (en="Indicates the account to be debited ")
+            @t24:i (align=L, inputBehaviour=I, maxLength=36, sysNumber=3.0, core=true, businessType=S, t24Name=DEBIT.ACCOUNT, mandatory=false)
+        /* ID should be Transaction ID */
+        ID -> LBRPTS_Foundation:LBRPTS_MISC_TAXES PK required
+            @i18n:Label (en="Transaction Ref")
+            @i18n:Tooltip (en="Transaction Reference")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=0.0, core=true, businessType=A, t24Name="@ID", mandatory=true)
+        /* Reference number for each transaction by the branch. Format is YYYY.sequence.no */
+        REF_NO : T24BusinessTypes:A
+            @i18n:Label (en="Reference Number")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=8.0, core=true, t24Name=REF.NO, mandatory=false)
+        RESERVED2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=12.0, core=true, t24Name=RESERVED2, mandatory=false)
+        RESERVED3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=11.0, core=true, t24Name=RESERVED3, mandatory=false)
+        RESERVED4 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=10.0, core=true, t24Name=RESERVED4, mandatory=false)
+        RESERVED5 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=9.0, core=true, t24Name=RESERVED5, mandatory=false)
+        /* Type of tax for which the transaction is made */
+        TAX_TYPE : T24BusinessTypes:A
+            @i18n:Label (en="Tax Type")
+            @i18n:Tooltip (en="Defines the tax type")
+            @t24:i (align=L, inputBehaviour=I, maxLength=9, sysNumber=2.0, core=true, t24Name=TAX.TYPE, mandatory=false)
+    }
+    /* Parameter table for Stamps and taxes transactions */
+    LBRPTS_PARAMETER
+        @i18n:Description (en="")
+        @t24:i (t24Name=LBRPTS.PARAMETER, level=I, type=H, allowedFunctions="A C D E H I L P Q R S", localRefApplicationSysNo=19.0, localRefAllowed=true)
+    {
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=28.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=29.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=25.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=26.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        /* Indicates the number of time record is modified and saved */
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=22.0, core=true, t24Name=CURR.NO, mandatory=false)
+        DATE_TIME -> byValue LBRPTS_Foundation:LBRPTS_PARAMETER__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=27.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        /* ID should be the company ID */
+        ID -> LBRPTS_Foundation:LBRPTS_PARAMETER PK required
+            @i18n:Label (en="Transaction Ref")
+            @i18n:Tooltip (en="Transaction Reference")
+            @t24:i (align=L, inputBehaviour=I, maxLength=11, sysNumber=0.0, core=true, businessType=COM, t24Name="@ID", mandatory=true)
+        INPUTTER -> byValue LBRPTS_Foundation:LBRPTS_PARAMETER__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        OVERRIDE -> byValue LBRPTS_Foundation:LBRPTS_PARAMETER__OVERRIDE *
+            @t24:i (t24Name=OVERRIDE)
+        /* Indicates the record status */
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=21.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        RESERVED1 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=18.0, core=true, t24Name=RESERVED1, mandatory=false)
+        RESERVED10 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=9.0, core=true, t24Name=RESERVED10, mandatory=false)
+        RESERVED2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=17.0, core=true, t24Name=RESERVED2, mandatory=false)
+        RESERVED3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=16.0, core=true, t24Name=RESERVED3, mandatory=false)
+        RESERVED4 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=15.0, core=true, t24Name=RESERVED4, mandatory=false)
+        RESERVED5 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=14.0, core=true, t24Name=RESERVED5, mandatory=false)
+        RESERVED6 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=13.0, core=true, t24Name=RESERVED6, mandatory=false)
+        RESERVED7 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=12.0, core=true, t24Name=RESERVED7, mandatory=false)
+        RESERVED8 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=11.0, core=true, t24Name=RESERVED8, mandatory=false)
+        RESERVED9 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=10.0, core=true, t24Name=RESERVED9, mandatory=false)
+        STAMP_CATEG_CODE -> byValue LBRPTS_Foundation:LBRPTS_PARAMETER__STAMP_CATEG_CODE *
+            @t24:i (t24Name=STAMP.CATEG.CODE)
+        /* PL Category code which corresponds to the account which is used in the stamps transaction */
+        STAMP_PL_CATEG_CODE -> ST_Config:CATEGORY required
+            @t24:i (align=L, inputBehaviour=I, maxLength=6, sysNumber=8.0, core=true, businessType=CAT, t24Name=STAMP.PL.CATEG.CODE, typeModifiers=50000...59999, mandatory=true)
+        TAX_TYPE -> byValue LBRPTS_Foundation:LBRPTS_PARAMETER__TAX_TYPE *
+            @t24:i (t24Name=TAX.TYPE)
+    }
+    LBRPTS_PARAMETER__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=24.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    LBRPTS_PARAMETER__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=23.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    LBRPTS_PARAMETER__OVERRIDE
+    {
+        OVERRIDE : T24BusinessTypes:N
+            @i18n:Label (en=Override)
+            @i18n:Tooltip (en="Overrides generated by this transaction")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=20.0, core=true, t24Name=OVERRIDE, mandatory=false)
+    }
+    LBRPTS_PARAMETER__STAMP_CATEG_CODE
+    {
+        /* Category code which corresponds to the stamps account which is used in the stamps transaction */
+        STAMP_CATEG_CODE -> ST_Config:CATEGORY required
+            @t24:i (align=L, inputBehaviour=I, maxLength=6, sysNumber=7.0, core=true, businessType=CAT, t24Name=STAMP.CATEG.CODE, typeModifiers=10000...19999, mandatory=true)
+    }
+    LBRPTS_PARAMETER__TAX_TYPE
+    {
+        /* Credit Category corresponding to the Credit account */
+        TAX_CREDIT_CATEGORY -> ST_Config:CATEGORY required
+            @t24:i (align=L, inputBehaviour=I, maxLength=6, sysNumber=3.0, core=true, businessType=CAT, t24Name=TAX.CREDIT.CATEGORY, mandatory=true)
+        /* Debit Category corresponding to the debit account */
+        TAX_DEBIT_CATEGORY -> ST_Config:CATEGORY required
+            @t24:i (align=L, inputBehaviour=I, maxLength=6, sysNumber=2.0, core=true, businessType=CAT, t24Name=TAX.DEBIT.CATEGORY, mandatory=true)
+        /* Amount till which tax can be paid in the branch */
+        TAX_LIMIT_AMT : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=19, sysNumber=6.0, core=true, t24Name=TAX.LIMIT.AMT, typeModifiers="-USD", mandatory=false)
+        TAX_PAY_TYPE -> byValue LBRPTS_Foundation:LBRPTS_PARAMETER__TAX_TYPE__TAX_PAY_TYPE *
+            @t24:i (t24Name=TAX.PAY.TYPE)
+        /* Type of tax to be paid */
+        TAX_TYPE : LBRPTS_Foundation:LBRPTS_PARAMETER__TAX_TYPE__TAX_TYPE required
+            @i18n:Label (en="Tax Type")
+            @i18n:Tooltip (en="Defines the tax type")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=1.0, core=true, t24Name=TAX.TYPE, mandatory=true)
+    }
+    LBRPTS_PARAMETER__TAX_TYPE__TAX_PAY_TYPE
+    {
+        /* Mode of payment of Tax */
+        TAX_PAY_TYPE : LBRPTS_Foundation:LBRPTS_PARAMETER__TAX_TYPE__TAX_PAY_TYPE__TAX_PAY_TYPE required
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=4.0, core=true, t24Name=TAX.PAY.TYPE, mandatory=true)
+        /* Transaction code for the teller transaction for tax payment */
+        TAX_TELLER_TRAN_CO -> TT_Config:TELLER_TRANSACTION required
+            @t24:i (align=R, inputBehaviour=I, maxLength=3, sysNumber=5.0, core=true, t24Name=TAX.TELLER.TRAN.CO, mandatory=true)
+    }
+    /* Table which list the unauthorised EOD transaction from the branch to head office for the given tax type */
+    LBRPTS_UNAUTH_TAX_TXN
+        @i18n:Description (en="")
+        @t24:i (t24Name=LBRPTS.UNAUTH.TAX.TXN, level=F, type=L, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        /* ID should be Company ID */
+        ID -> LBRPTS_Foundation:LBRPTS_UNAUTH_TAX_TXN PK required
+            @i18n:Label (en="Transaction Ref")
+            @i18n:Tooltip (en="Transaction Reference")
+            @t24:i (align=L, inputBehaviour=I, maxLength=11, sysNumber=0.0, core=true, businessType=A, t24Name="@ID", mandatory=true)
+        OVERRIDE -> byValue LBRPTS_Foundation:LBRPTS_UNAUTH_TAX_TXN__OVERRIDE *
+            @t24:i (t24Name=OVERRIDE)
+        RESERVED2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=7.0, core=true, t24Name=RESERVED2, mandatory=false)
+        RESERVED3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=6.0, core=true, t24Name=RESERVED3, mandatory=false)
+        RESERVED4 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=5.0, core=true, t24Name=RESERVED4, mandatory=false)
+        RESERVED5 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=4.0, core=true, t24Name=RESERVED5, mandatory=false)
+        TAX_TYPE -> byValue LBRPTS_Foundation:LBRPTS_UNAUTH_TAX_TXN__TAX_TYPE *
+            @t24:i (t24Name=TAX.TYPE)
+        TRANSACTION_ID -> byValue LBRPTS_Foundation:LBRPTS_UNAUTH_TAX_TXN__TRANSACTION_ID *
+            @t24:i (t24Name=TRANSACTION.ID)
+    }
+    LBRPTS_UNAUTH_TAX_TXN__OVERRIDE
+    {
+        OVERRIDE : T24BusinessTypes:N
+            @i18n:Label (en=Override)
+            @i18n:Tooltip (en="Overrides generated by this transaction")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=8.0, core=true, t24Name=OVERRIDE, mandatory=false)
+    }
+    LBRPTS_UNAUTH_TAX_TXN__TAX_TYPE
+    {
+        /* The next number is incremented and decremented based on the  statuses of the transactions */
+        NEXT_NUMBER : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=3.0, core=true, t24Name=NEXT.NUMBER, mandatory=false)
+        /* Tax type for which the trasaction is left unauthorised */
+        TAX_TYPE : T24BusinessTypes:A
+            @i18n:Label (en="Tax Type")
+            @i18n:Tooltip (en="Defines the tax type")
+            @t24:i (align=L, inputBehaviour=I, maxLength=9, sysNumber=2.0, core=true, t24Name=TAX.TYPE, mandatory=false)
+    }
+    LBRPTS_UNAUTH_TAX_TXN__TRANSACTION_ID
+    {
+        /* @ID of the unauthorised transaction */
+        TRANSACTION_ID : T24BusinessTypes:A
+            @i18n:Label (en="Transaction ID")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=1.0, core=true, t24Name=TRANSACTION.ID, mandatory=false)
+    }
+}
+Enumerations {
+    LBRPTS_PARAMETER__TAX_TYPE__TAX_PAY_TYPE__TAX_PAY_TYPE : mml:string
+        Account=Account
+        Cash=Cash
+    LBRPTS_PARAMETER__TAX_TYPE__TAX_TYPE : mml:string
+        CMPN_TAX=CMPN.TAX
+        MECANIQUE=MECANIQUE
+        TAX=TAX
+        VAT=VAT
+}

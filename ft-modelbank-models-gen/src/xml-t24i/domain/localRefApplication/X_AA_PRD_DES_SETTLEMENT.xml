@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<localReferenceApplication:LocalReferenceApplication xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:localReferenceApplication="http://www.odcgroup.com/t24/application/localRefApplication/model/LocalReferenceApplication"
+    xmlns:translationDsl="http://www.odcgroup.com/translation/TranslationDsl" forApplication="name://AA_Settlement:AA_PRD_DES_SETTLEMENT#">
+  <localField groupName="No" localRefID="INT.LIQ.ACCOUNT">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="CHKG.ACCOUNT"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+  <localField groupName="No" localRefID="IS.PAYOUT">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="IS.PAYOUT"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+  <localField groupName="No" localRefID="HOLD.FUND">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="HOLD.FUND"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+  <localField groupName="No" localRefID="LOCKED.ID">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="LOCKED.ID"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+  <localField groupName="No" localRefID="USREGS.ACH.BEN">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="USREGS.ACH.BEN"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+  <localField groupName="No" localRefID="USRETL.PAY.BY.CHECK">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="PAY.BY.CHECK"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+  <localField groupName="ACH_NOTES" localRefID="ACH.NOTES">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="ACH.NOTES"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+</localReferenceApplication:LocalReferenceApplication>

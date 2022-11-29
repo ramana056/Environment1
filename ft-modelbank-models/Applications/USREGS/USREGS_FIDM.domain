@@ -1,0 +1,415 @@
+# UTF-8
+/* Financial Institution data match */
+Domain USREGS_FIDM
+    @t24:i (module=USREGS)
+    @java:Package (value=com.temenos.t24.datamodel.usregs.usregs_fidm)
+namespace "http://www.temenos.com/t24/USREGS_FIDM"
+metamodelVersion 1.30.6
+Classes {
+    /* Parameter table to setup FIDM configurations. */
+    USREGS_FIDM_PARAMETER
+        @i18n:Description (en="")
+        @t24:i (t24Name=USREGS.FIDM.PARAMETER, level=I, type=H, allowedFunctions="A C D E H I L P Q R S", localRefAllowed=false)
+    {
+        AC_TYPE_CODE -> byValue USREGS_FIDM:USREGS_FIDM_PARAMETER__AC_TYPE_CODE *
+            @t24:i (t24Name=AC.TYPE.CODE)
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=17.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=18.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=14.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=15.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=11.0, core=true, t24Name=CURR.NO, mandatory=false)
+        DATE_TIME -> byValue USREGS_FIDM:USREGS_FIDM_PARAMETER__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=16.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        EXCLUDE_CATEGORY -> byValue USREGS_FIDM:USREGS_FIDM_PARAMETER__EXCLUDE_CATEGORY *
+            @t24:i (t24Name=EXCLUDE.CATEGORY)
+        EXCLUDE_SECTOR -> byValue USREGS_FIDM:USREGS_FIDM_PARAMETER__EXCLUDE_SECTOR *
+            @t24:i (t24Name=EXCLUDE.SECTOR)
+        EXCL_PRODUCT_LINE -> byValue USREGS_FIDM:USREGS_FIDM_PARAMETER__EXCL_PRODUCT_LINE *
+            @t24:i (t24Name=EXCL.PRODUCT.LINE)
+        /* SYSTEM */
+        ID : USREGS_FIDM:USREGS_FIDM_PARAMETER__ID PK required
+            @i18n:Label (en="Transaction Ref")
+            @i18n:Tooltip (en="Transaction Reference")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=0.0, core=true, t24Name="@ID", mandatory=true)
+        INPUTTER -> byValue USREGS_FIDM:USREGS_FIDM_PARAMETER__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        OVERRIDE -> byValue USREGS_FIDM:USREGS_FIDM_PARAMETER__OVERRIDE *
+            @t24:i (t24Name=OVERRIDE)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=10.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        /* Values Allowed: All Accounts Method and Matched Accounts Method. */
+        REPORTING_METHOD : USREGS_FIDM:USREGS_FIDM_PARAMETER__REPORTING_METHOD
+            @t24:i (align=L, inputBehaviour=I, maxLength=20, sysNumber=4.0, core=true, t24Name=REPORTING.METHOD, mandatory=false)
+        TRUST_CODE -> byValue USREGS_FIDM:USREGS_FIDM_PARAMETER__TRUST_CODE *
+            @t24:i (t24Name=TRUST.CODE)
+    }
+    USREGS_FIDM_PARAMETER__AC_TYPE_CODE
+    {
+        AC_CATEGORY -> byValue USREGS_FIDM:USREGS_FIDM_PARAMETER__AC_TYPE_CODE__AC_CATEGORY *
+            @t24:i (t24Name=AC.CATEGORY)
+        /* Two-digits code which identifies the type of account for the category defined in AC.CATEGORY field. */
+        AC_TYPE_CODE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=2, sysNumber=5.0, core=true, t24Name=AC.TYPE.CODE, mandatory=false)
+    }
+    USREGS_FIDM_PARAMETER__AC_TYPE_CODE__AC_CATEGORY
+    {
+        /* Category code for account type code mapping. */
+        AC_CATEGORY : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=15, sysNumber=6.0, core=true, t24Name=AC.CATEGORY, mandatory=false)
+    }
+    USREGS_FIDM_PARAMETER__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=13.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    USREGS_FIDM_PARAMETER__EXCLUDE_CATEGORY
+    {
+/* User can select a valid category code those need to be excluded from the FIDM report.
+validation Rule :  It should be a valid code on the CATEGORY table. Multi value field and can be defined as a range (E.g 1001 1999) */
+        EXCLUDE_CATEGORY : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=15, sysNumber=1.0, core=true, t24Name=EXCLUDE.CATEGORY, mandatory=false)
+    }
+    USREGS_FIDM_PARAMETER__EXCLUDE_SECTOR
+    {
+/* This field is used to input the sector types of the customer who should be excluded from FIDM report.
+validation Rule : It should be a valid code on the SECTOR table. Multi-value field and can be defined as a range (E.g 1001 1999). */
+        EXCLUDE_SECTOR : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=15, sysNumber=2.0, core=true, t24Name=EXCLUDE.SECTOR, mandatory=false)
+    }
+    USREGS_FIDM_PARAMETER__EXCL_PRODUCT_LINE
+    {
+/* This field is used to define the valid AA products Line that should be excluded from Report.
+validation Rule : Valid ID from AA.PRODUCT.LINE. */
+        EXCL_PRODUCT_LINE -> AA_ProductFramework:AA_PRODUCT_LINE
+            @t24:i (align=L, inputBehaviour=I, maxLength=20, sysNumber=3.0, core=true, businessType=A, t24Name=EXCL.PRODUCT.LINE, mandatory=false)
+    }
+    USREGS_FIDM_PARAMETER__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=12.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    USREGS_FIDM_PARAMETER__OVERRIDE
+    {
+        OVERRIDE : T24BusinessTypes:N
+            @i18n:Label (en=Override)
+            @i18n:Tooltip (en="Overrides generated by this transaction")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=9.0, core=true, t24Name=OVERRIDE, mandatory=false)
+    }
+    USREGS_FIDM_PARAMETER__TRUST_CODE
+    {
+        TRUST_CATEGORY -> byValue USREGS_FIDM:USREGS_FIDM_PARAMETER__TRUST_CODE__TRUST_CATEGORY *
+            @t24:i (t24Name=TRUST.CATEGORY)
+        /* Code which identifies the type of trust for the category defined in TRUST.CATEGORY field. */
+        TRUST_CODE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=2, sysNumber=7.0, core=true, t24Name=TRUST.CODE, mandatory=false)
+    }
+    USREGS_FIDM_PARAMETER__TRUST_CODE__TRUST_CATEGORY
+    {
+        /* Category code for trust fund indicator mapping. */
+        TRUST_CATEGORY : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=15, sysNumber=8.0, core=true, t24Name=TRUST.CATEGORY, mandatory=false)
+    }
+    /* This is the warehouse table for FIDM file upload and extraction process. This table should consist of fields equivalent to FIDM fields defined as  A, B, D,I and T records. */
+    USREGS_FIDM_WAREHOUSE
+        @i18n:Description (en="")
+        @t24:i (t24Name=USREGS.FIDM.WAREHOUSE, level=C, type=L, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        /* Zeroes required if position 361 is '0'      The account balance is necessary to prevent financial institutions from receiving large numbers of state levies for accounts with insufficient funds. Show the account balance or value in whole dollars only with the sign trailing (positive or negative). For brokerage firms reporting margin accounts, the balance or value is the account holders equity position, or the value of the account less any borrowed amount. For closed accounts, or where the information is unavailable, fill with zeroes. For accounts with balances greater than 9,999,999, enter 9,999,999. */
+        ACCOUNT_BALANCE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=7, sysNumber=43.0, core=true, t24Name=ACCOUNT.BALANCE, mandatory=false)
+/* Possible values based on value entered in positions 351-357:
+Enter 0 if there is no account balance.
+Enter 1 if there is an average balance.
+Enter 2 if there is a current balance (as of the day the report is created). */
+        ACCOUNT_BALANCE_IND : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=1, sysNumber=47.0, core=true, t24Name=ACCOUNT.BALANCE.IND, mandatory=false)
+/* Possible values:
+Enter 0 if the account is open.
+Enter 1 if the account is closed.
+Enter 2 if the account is inactive. An inactive account is an account that has not had activity for a specified period of time determined by the financial institution. */
+        ACCOUNT_STATUS_IND : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=1, sysNumber=46.0, core=true, t24Name=ACCOUNT.STATUS.IND, mandatory=false)
+/* Value is two-digits for the code which identifies the type of account
+00 - Not Applicable
+01 - Savings Account
+04 - Checking/Demand Deposit Account
+05 - Term Deposit Certificate
+06 - Collateral Account
+11 - Money Market Account
+12 - IRA/KEOGH
+14 - ERISA Plan Account
+16 - Cash Balances
+17 - Compound Account
+18 - Other
+Note: If an IRA or ERISA plan contains any of the other types, identify the account only as an IRA or ERISA plan. A compound account is an investment account where portions of the balance are in differing funds: stock, money market, bonds, etc. */
+        ACCOUNT_TYPE : T24BusinessTypes:N
+            @i18n:Label (en="Account Type")
+            @t24:i (align=R, inputBehaviour=I, maxLength=2, sysNumber=51.0, core=true, t24Name=ACCOUNT.TYPE, mandatory=false)
+        /* Report the full account title of the account reported. Some institutions may find this helpful to report trust accounts, or other titles (for example: Law Office of). (Optional) */
+        ACCT_LEGAL_TITLE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=100, sysNumber=34.0, core=true, t24Name=ACCT.LEGAL.TITLE, mandatory=false)
+/* For account update files only (if not sending Account Update files, leave this blank).
+Enter 0 if this account has been closed.
+Enter 1 if this is a new account, opened since the last report the financial institution filed
+Enter 2 if there is revised account information from the last report the financial institution filed (changes in address, ownership, etc.). */
+        ACCT_UPDATE_FILE_IND : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=1, sysNumber=48.0, core=true, t24Name=ACCT.UPDATE.FILE.IND, mandatory=false)
+        /* Optional field used by the state to pass information to the financial institution. */
+        ADDL_STATE_PB_INFO : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=23, sysNumber=61.0, core=true, t24Name=ADDL.STATE.PB.INFO, mandatory=false)
+        /* Null. */
+        A_FILLER_1 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=2, sysNumber=2.0, core=true, t24Name=A.FILLER.1, mandatory=false)
+        /* Space filled. */
+        A_FILLER_2 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=6, sysNumber=7.0, core=true, t24Name=A.FILLER.2, mandatory=false)
+        /* Space filled. */
+        A_FILLER_3 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=8, sysNumber=10.0, core=true, t24Name=A.FILLER.3, mandatory=false)
+        /* Space filled. */
+        A_FILLER_4 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=5, sysNumber=12.0, core=true, t24Name=A.FILLER.4, mandatory=false)
+        /* Space filled. */
+        A_FILLER_5 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=49, sysNumber=28.0, core=true, t24Name=A.FILLER.5, mandatory=false)
+        /* Space filled. */
+        B_FILLER_1 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=30.0, core=true, t24Name=B.FILLER.1, mandatory=false)
+        /* Space filled. */
+        B_FILLER_2 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=17, sysNumber=33.0, core=true, t24Name=B.FILLER.2, mandatory=false)
+        /* Space filled. */
+        B_FILLER_3 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=29, sysNumber=42.0, core=true, t24Name=B.FILLER.3, mandatory=false)
+        /* Space filled. */
+        B_FILLER_4 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=1, sysNumber=44.0, core=true, t24Name=B.FILLER.4, mandatory=false)
+        /* Space filled. */
+        B_FILLER_5 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=10, sysNumber=50.0, core=true, t24Name=B.FILLER.5, mandatory=false)
+        /* Space filled. */
+        B_FILLER_6 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=28, sysNumber=52.0, core=true, t24Name=B.FILLER.6, mandatory=false)
+        /* Space filled. */
+        B_FILLER_7 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=1, sysNumber=54.0, core=true, t24Name=B.FILLER.7, mandatory=false)
+        /* This 18-digit alphanumeric field (may be blank) has significance to the state for its child support case administration. This field must be passed back to the state if a match is found. (If the ID Suffix is a blank, a blank is passed back.) */
+        CASE_PB_INFO : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=15, sysNumber=59.0, core=true, t24Name=CASE.PB.INFO, mandatory=false)
+/* M - The file submitted is a match file (M); the institution has elected Method Two, has matched its accounts to a State Inquiry file, and is remitting a list of those accounts owned by persons on that Inquiry File.                                                                                                                                                                                                          A - The institution elected Method One and is submitting the file quarterly for the state to use in its internal data matching system.
+U - In states where permitted, the institution that elected Method One may have the option to submit a quarterly file to update the first quarter account file, identifying those accounts opened and closed in the prior quarter. */
+        DATA_MATCH_IND : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=1, sysNumber=27.0, core=true, t24Name=DATA.MATCH.IND, mandatory=false)
+        /* Report the account owners date of birth in CCYYMMDD format. If not available, enter blanks. For example, enter August 1, 1970 as 19700801. */
+        DATE_OF_BIRTH : T24BusinessTypes:N
+            @i18n:Label (en="Date of Birth")
+            @t24:i (align=R, inputBehaviour=I, maxLength=8, sysNumber=49.0, core=true, t24Name=DATE.OF.BIRTH, mandatory=false)
+/* T24 Date.
+File generation should be in CCYYMM format. For example, you would enter April 2013 as 201304. */
+        FILE_DATE : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=8, sysNumber=6.0, core=true, t24Name=FILE.DATE, mandatory=false)
+        /* Value is sequence number 001. This field is not relevant to Data Match, and may be left blank. (Optional) */
+        FILE_SEQ_NUMBER : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=3, sysNumber=3.0, core=true, t24Name=FILE.SEQ.NUMBER, mandatory=false)
+        /* Can accept below values. LOADED, COMPLETED */
+        FILE_STATUS : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=10, sysNumber=74.0, core=true, t24Name=FILE.STATUS, mandatory=false)
+        /* This field is a five-digit alphanumeric field which contains the FIPS code of the state inquiring about the SSN. This information must be passed back to the state if a match is found. Financial institutions will use this code to determine which state will receive the account information for the match. */
+        FIPS_PB_INFO : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=5, sysNumber=60.0, core=true, t24Name=FIPS.PB.INFO, mandatory=false)
+        /* The city for the person whose SSN is in positions 15-23. If this does not exist, enter the city for the second account owner. */
+        FIRST_PAYEE_CITY : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=29, sysNumber=39.0, core=true, t24Name=FIRST.PAYEE.CITY, mandatory=false)
+        /* Value is the name of the primary owner of the account (preferably surname first) whose Social Security number (SSN) is in positions 15-23 of the B Record. */
+        FIRST_PAYEE_NAME : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=40, sysNumber=36.0, core=true, t24Name=FIRST.PAYEE.NAME, mandatory=false)
+        /* The two-character state abbreviation for the person whose SSN is in positions 15-23. If this does not exist, enter the two-character state abbreviation for the second account owner. */
+        FIRST_PAYEE_STATE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=2, sysNumber=40.0, core=true, t24Name=FIRST.PAYEE.STATE, mandatory=false)
+        /* The street address for the person whose SSN is in positions 15-23. If this does not exist, enter the street address for the second account owner. */
+        FIRST_PAYEE_STREET : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=40, sysNumber=38.0, core=true, t24Name=FIRST.PAYEE.STREET, mandatory=false)
+        /* The ZIP Code for the person whose SSN is in positions 15-23. If this does not exist, enter the ZIP Code for the second account owner. */
+        FIRST_PAYEE_ZIP : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=9, sysNumber=41.0, core=true, t24Name=FIRST.PAYEE.ZIP, mandatory=false)
+        /* Value is 1 if the financial institution is a foreign corporation. If not, leave blank. A foreign corporation is any corporation organized or created other than in or under the laws of the Unites States, any of its states or territories, or the District of Columbia. (Optional) */
+        FOREIGN_CORP_IND : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=1, sysNumber=13.0, core=true, t24Name=FOREIGN.CORP.IND, mandatory=false)
+        ID -> USREGS_FIDM:USREGS_FIDM_WAREHOUSE PK required
+            @i18n:Label (en="Transaction Ref")
+            @i18n:Tooltip (en="Transaction Reference")
+            @t24:i (align=L, inputBehaviour=I, maxLength=60, sysNumber=0.0, core=true, businessType=ANY, t24Name="@ID", mandatory=true)
+        /* This is the SSN of the person to be matched. A match is to be reported by the financial institution anytime an account with the SSN indicated on the Inquiry File is found. It is possible that a single SSN will appear more than once on the Inquiry File. These multiple entries will be differentiated by entries in the Case Pass-Back Information in positions 57-71. If a match is found, matches should be reported for each account with each SSN and Case Pass-Back Information. */
+        INQUIRY_SSN : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=9, sysNumber=55.0, core=true, t24Name=INQUIRY.SSN, mandatory=false)
+        /* Left-justified and filled with spaces. */
+        INQ_FIRST_NAME : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=16, sysNumber=58.0, core=true, t24Name=INQ.FIRST.NAME, mandatory=false)
+        /* This alphanumeric field will be left-justified and filled with blanks. If the name to be recorded in this field exceeds 20 characters, it will be continued in positions 41-56. Matches identified by a corresponding SSN should be reported by the financial institution even if the name does not match the inquiry record. */
+        INQ_LAST_NAME : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=20, sysNumber=57.0, core=true, t24Name=INQ.LAST.NAME, mandatory=false)
+        /* City to which a levy should be mailed. */
+        INSTITUTION_CITY : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=29, sysNumber=18.0, core=true, t24Name=INSTITUTION.CITY, mandatory=false)
+        /* Institution name for levy service.  Value is name of the institution whose TIN appears in positions 7-15 of this A Record. Enter the name the state will use for proper levy processing. This is especially important for mutual funds. */
+        INSTITUTION_NAME : T24BusinessTypes:A
+            @i18n:Label (en=Institution)
+            @t24:i (align=L, inputBehaviour=I, maxLength=40, sysNumber=14.0, core=true, t24Name=INSTITUTION.NAME, mandatory=false)
+        /* State to which a levy should be mailed. */
+        INSTITUTION_STATE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=2, sysNumber=19.0, core=true, t24Name=INSTITUTION.STATE, mandatory=false)
+        /* Address to which a levy should be mailed. This address may differ from that entered in these positions for Internal Revenue Service 1099 reporting, particularly for larger institutions. Verify and enter the address authorized to receive a state levy served upon your institution. */
+        INSTITUTION_STREET : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=40, sysNumber=17.0, core=true, t24Name=INSTITUTION.STREET, mandatory=false)
+        /* This must be the valid nine-digit Taxpayer Identification Number (TIN) assigned to your financial institution. Do not enter spaces, hyphens, or alpha characters. */
+        INSTITUTION_TIN : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=9, sysNumber=4.0, core=true, t24Name=INSTITUTION.TIN, mandatory=false)
+        /* ZIP Code to which a levy should be mailed. */
+        INSTITUTION_ZIP : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=9, sysNumber=20.0, core=true, t24Name=INSTITUTION.ZIP, mandatory=false)
+        /* You can obtain the Payer Name Control only from the mail label on the 1099 package mailed to most payers each December. If a 1099 package was not received or the Payer Name Control is unknown, leave this field blank. (Optional) */
+        INSTITUT_NAME_CTRL : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=4, sysNumber=5.0, core=true, t24Name=INSTITUT.NAME.CTRL, mandatory=false)
+        /* Value is letters LS if you are filing a magnetic tape or cartridge, otherwise leave blank. (Optional) */
+        MAG_TAP_IND : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=2, sysNumber=11.0, core=true, t24Name=MAG.TAP.IND, mandatory=false)
+        OVERRIDE -> byValue USREGS_FIDM:USREGS_FIDM_WAREHOUSE__OVERRIDE *
+            @t24:i (t24Name=OVERRIDE)
+        /* Report the account number associated with the payees matched account. */
+        PAYEE_ACCOUNT : T24BusinessTypes:ACC
+            @t24:i (align=R, inputBehaviour=I, maxLength=20, sysNumber=32.0, core=true, t24Name=PAYEE.ACCOUNT, mandatory=false)
+        /* If the address of the payee is in a foreign country, enter a 1 in this field; otherwise leave it blank. */
+        PAYEE_FOREIGN_INDICATOR : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=1, sysNumber=35.0, core=true, t24Name=PAYEE.FOREIGN.INDICATOR, mandatory=false)
+        /* Value is the first four characters of the last name on the matched account. */
+        PAYEE_LAST_NAME_CTRL : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=4, sysNumber=29.0, core=true, t24Name=PAYEE.LAST.NAME.CTRL, mandatory=false)
+        /* Value is the Social Security number (SSN) of the primary owner of the account. */
+        PAYEE_SSN : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=9, sysNumber=31.0, core=true, t24Name=PAYEE.SSN, mandatory=false)
+        /* Values accepted are  A, B, D,I and T. */
+        RECORD_TYPE : T24BusinessTypes:A
+            @i18n:Label (en="Record Type")
+            @t24:i (align=L, inputBehaviour=I, maxLength=1, sysNumber=1.0, core=true, t24Name=RECORD.TYPE, mandatory=false)
+        /* If the Transfer Agent Indicator in position 130 contains a 0, signifying there is no transfer agent, you may use this field to continue the institution name above. If the indicator in position 130 contains a 1, this field may contain the name of the transfer agent. Transfer agents are not relevant to data match, but this information will be accepted from institutions that change their Form 1099 programming for data match reporting. Fill unused positions with spaces. (Optional) */
+        SECOND_INST_NAME : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=40, sysNumber=15.0, core=true, t24Name=SECOND.INST.NAME, mandatory=false)
+        /* If there are multiple payees, (for example: joint owners, partners, or spouses), use this field for those names not associated with the SSN in positions 15-23 of the B Record. If none, enter spaces. */
+        SECOND_PAYEE_NAME : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=40, sysNumber=37.0, core=true, t24Name=SECOND.PAYEE.NAME, mandatory=false)
+        /* Value is the SSN of the second owner of the account. If none, enter spaces. */
+        SECOND_PAYEE_SSN : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=9, sysNumber=53.0, core=true, t24Name=SECOND.PAYEE.SSN, mandatory=false)
+        /* Value is 1 if you used a person or organization to prepare or submit data match information. A parent company submitting data for a subsidiary is not considered a service agent. (Optional) */
+        SERVICE_BUREAU_IND : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=1, sysNumber=9.0, core=true, t24Name=SERVICE.BUREAU.IND, mandatory=false)
+        /* This field is a 10-digit alphanumeric (may be blank) entry which has significance to the state in its administration of the Data Match system. This information must be passed back to the state if a match is found. (If this field is blank, a blank is passed back.) */
+        STATE_PB_INFO : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=10, sysNumber=56.0, core=true, t24Name=STATE.PB.INFO, mandatory=false)
+        /* Value is a valid test/corr indicator. Enter a T if this is a test file, otherwise leave blank. (Optional) */
+        TEST_INDICATOR : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=1, sysNumber=8.0, core=true, t24Name=TEST.INDICATOR, mandatory=false)
+        /* Numeric, sign trailing. */
+        TOT_AC_COMPARE : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=9, sysNumber=70.0, core=true, t24Name=TOT.AC.COMPARE, mandatory=false)
+        /* Value is the total number of accounts matched to the SSNs on the Inquiry File. */
+        TOT_AC_REPORTED : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=9, sysNumber=62.0, core=true, t24Name=TOT.AC.REPORTED, mandatory=false)
+        /* Numeric, sign trailing. */
+        TOT_AMOUNT : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=9, sysNumber=71.0, core=true, t24Name=TOT.AMOUNT, mandatory=false)
+        /* Numeric, sign trailing. */
+        TOT_CHANGE_AC : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=9, sysNumber=68.0, core=true, t24Name=TOT.CHANGE.AC, mandatory=false)
+        /* Numeric, sign trailing */
+        TOT_CLOSED_AC : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=9, sysNumber=63.0, core=true, t24Name=TOT.CLOSED.AC, mandatory=false)
+        /* Numeric, sign trailing. */
+        TOT_IRA_AC : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=9, sysNumber=72.0, core=true, t24Name=TOT.IRA.AC, mandatory=false)
+        /* Numeric, sign trailing Enter the total number of matches identified by SSN and the first four letters of the last name which are reported by the institution (where B Record position 358 is 1). This comparison of the matched last name to the last name on the Inquiry File may prevent financial institutions from receiving incorrect levies. */
+        TOT_MATCH_AC : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=9, sysNumber=64.0, core=true, t24Name=TOT.MATCH.AC, mandatory=false)
+        /* Numeric, sign trailing. */
+        TOT_NEW_AC : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=9, sysNumber=66.0, core=true, t24Name=TOT.NEW.AC, mandatory=false)
+        /* Numeric, sign trailing. */
+        TOT_TRUST_AC : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=9, sysNumber=65.0, core=true, t24Name=TOT.TRUST.AC, mandatory=false)
+        /* Value is 1 if the entity in 90-129 is the Transfer Agent. A transfer agent is used by institutions to pay certain taxes. Transfer agents are not relevant to data match, but this information will be accepted from institutions that change their Form 1099 programming for data match reporting. Fill unused positions with spaces. (Optional) */
+        TRANSFER_AGENT_IND : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=1, sysNumber=16.0, core=true, t24Name=TRANSFER.AGENT.IND, mandatory=false)
+        /* The transmitters city. */
+        TRANSMITTER_CITY : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=29, sysNumber=24.0, core=true, t24Name=TRANSMITTER.CITY, mandatory=false)
+        /* This is not required if the Institution Name in positions 50-89 and Reporting Agent/Transmitter Name are the same. */
+        TRANSMITTER_NAME : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=71, sysNumber=22.0, core=true, t24Name=TRANSMITTER.NAME, mandatory=false)
+        /* The transmitters state. */
+        TRANSMITTER_STATE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=2, sysNumber=25.0, core=true, t24Name=TRANSMITTER.STATE, mandatory=false)
+        /* The transmitters street address. */
+        TRANSMITTER_STREET : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=40, sysNumber=23.0, core=true, t24Name=TRANSMITTER.STREET, mandatory=false)
+/* This must be the valid nine-digit TIN assigned to the reporting agent or transmitter filing the report. This is for both Method One and Method Two reporting agents or transmitters. For Method Two filers, this TIN would belong to the agent designated to receive the Data Match Inquiry file on an institution's behalf.
+This TIN must be the one entered on the Quarterly Inquiry/Response File Transmission Form. Do not enter hyphens or alpha characters. If the Institution TIN in positions 7-15 and the Reporting Agent/Transmitter TIN are the same, enter spaces. */
+        TRANSMITTER_TIN : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=9, sysNumber=21.0, core=true, t24Name=TRANSMITTER.TIN, mandatory=false)
+        /* The transmitters ZIP Code. */
+        TRANSMITTER_ZIP : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=9, sysNumber=26.0, core=true, t24Name=TRANSMITTER.ZIP, mandatory=false)
+/* The Trust Fund Indicator is necessary for effective state levy service. For closed accounts, you may enter a zero but not a space.                                                   Possible values:0 - Not a trust account; closed account
+1 - UTMA/UGMA account
+2 - IOLTA account
+3 - Mortgage escrow account
+4 - Security deposits (including Real Estate)
+5 - Other trust or escrow
+6 - Information not available */
+        TRUST_FUND_IND : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=1, sysNumber=45.0, core=true, t24Name=TRUST.FUND.IND, mandatory=false)
+        /* Space filled. */
+        T_FILLER_1 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=9, sysNumber=67.0, core=true, t24Name=T.FILLER.1, mandatory=false)
+        /* Space filled. */
+        T_FILLER_2 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=9, sysNumber=69.0, core=true, t24Name=T.FILLER.2, mandatory=false)
+        /* Space filled. */
+        T_FILLER_3 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=320, sysNumber=73.0, core=true, t24Name=T.FILLER.3, mandatory=false)
+    }
+    USREGS_FIDM_WAREHOUSE__OVERRIDE
+    {
+        OVERRIDE : T24BusinessTypes:N
+            @i18n:Label (en=Override)
+            @i18n:Tooltip (en="Overrides generated by this transaction")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=75.0, core=true, t24Name=OVERRIDE, mandatory=false)
+    }
+}
+Enumerations {
+    USREGS_FIDM_PARAMETER__ID : mml:string
+        SYSTEM=SYSTEM
+    USREGS_FIDM_PARAMETER__REPORTING_METHOD : mml:string
+        ALL_ACCOUNT=ALL.ACCOUNT
+        MATCHED_ACCOUNT=MATCHED.ACCOUNT
+}

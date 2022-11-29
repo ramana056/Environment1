@@ -1,0 +1,18 @@
+# UTF-8
+/* Argentina Payment Debin Utilities */
+Domain ARPYMT_DebinUtilities
+    @t24:i (module=ARPYMT)
+    @java:Package (value=com.temenos.t24.datamodel.arpymt.arpymt_debinutilities)
+namespace "http://www.temenos.com/t24/ARPYMT_DebinUtilities"
+metamodelVersion 1.30.6
+Classes {
+    NOFILE_DEBIN_GET_DATE_TIME
+        @i18n:Description (en="")
+        @t24:i (t24Name=NOFILE.DEBIN.GET.DATE.TIME, level=I, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        DATE_TIME : T24BusinessTypes:N
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, core=false, t24Name=DATE.TIME, genOperation=ARPYMT.GET.DATE.TIME, mandatory=true)
+    }
+}

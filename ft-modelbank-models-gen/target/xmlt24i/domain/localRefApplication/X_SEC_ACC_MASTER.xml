@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<localReferenceApplication:LocalReferenceApplication xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:localReferenceApplication="http://www.odcgroup.com/t24/application/localRefApplication/model/LocalReferenceApplication"
+    xmlns:translationDsl="http://www.odcgroup.com/translation/TranslationDsl" forApplication="name://SC_ScoPortfolioMaintenance:SEC_ACC_MASTER#">
+  <localField groupName="SAM_CUST_REL_ID" localRefID="SAM.CUST.REL.ID">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="SAM.CUST.REL.ID"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+  <localField groupName="No" localRefID="SAM.ALTERNATE.KEY">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="PORT.ALT.ID"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+  <localField groupName="No" localRefID="TAX.CODE">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="TAX.CODE"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+  <localField groupName="No" localRefID="LEGAL.ENTITY.PF.ID">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="LE.PF.ID"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+  <localField groupName="No" localRefID="PARENT.PF.ID">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="PARENT.PF.ID"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+  <localField groupName="No" localRefID="PORTFOLIO.RESIDENCE">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="PF.RESIDENCE"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+  <localField groupName="No" localRefID="TFN.STATUS">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="TFN.STATUS"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+  <localField groupName="No" localRefID="LEGAL.ENTITY.SUB.TYPE">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="LE.SUB.TYPE"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+  <localField groupName="No" localRefID="SMA.APIR">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="SMA.APIR"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+</localReferenceApplication:LocalReferenceApplication>

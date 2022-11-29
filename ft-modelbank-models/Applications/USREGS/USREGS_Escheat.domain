@@ -1,0 +1,221 @@
+# UTF-8
+/* Dormancy and Escheatment */
+Domain USREGS_Escheat
+    @t24:i (module=USREGS)
+    @java:Package (value=com.temenos.t24.datamodel.usregs.usregs_escheat)
+namespace "http://www.temenos.com/t24/USREGS_Escheat"
+metamodelVersion 1.30.6
+Classes {
+    NOFILE_USREGS_ESCHEATED_DETAILS
+        @i18n:Description (en="")
+        @t24:i (t24Name=NOFILE.USREGS.ESCHEATED.DETAILS, level=I, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        ESCHEAT_DETAILS : T24BusinessTypes:N
+            @t24:i (align=L, inputBehaviour=N, maxLength=25, core=false, t24Name=ESCHEAT.DETAILS, genOperation=USREGS.E.ESCHEATED.DETAILS, mandatory=true)
+        STATE -> NACUST_Foundation:US_STATE
+            @t24:i (align=R, inputBehaviour=N, maxLength=15, core=false, t24Name=STATE, mandatory=false)
+    }
+    /* This is regulatory parameter table to define regulation parameters forDormancy and Escheatment. It will be used to configure rules, which willbe applied to dormancy and escheatment processing */
+    USREGS_DORMANCY_PARAM
+        @i18n:Description (en="")
+        @t24:i (t24Name=USREGS.DORMANCY.PARAM, level=I, type=H, allowedFunctions="A C D E H I L P Q R S", localRefApplicationSysNo=37.0, localRefAllowed=true)
+    {
+        ACTIVITY_CLASS -> byValue USREGS_Escheat:USREGS_DORMANCY_PARAM__ACTIVITY_CLASS *
+            @t24:i (t24Name=ACTIVITY.CLASS)
+        ALLOW_ACTIVITY -> byValue USREGS_Escheat:USREGS_DORMANCY_PARAM__ALLOW_ACTIVITY *
+            @t24:i (t24Name=ALLOW.ACTIVITY)
+        ALLOW_ACTIVITY_CLASS -> byValue USREGS_Escheat:USREGS_DORMANCY_PARAM__ALLOW_ACTIVITY_CLASS *
+            @t24:i (t24Name=ALLOW.ACTIVITY.CLASS)
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=46.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=47.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=43.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        /* This will be a 'Y' or blank. In case the value is 'Y' then the account will be set to auto close on the filing date after the funds have been transferred to the offset account. */
+        AUTO_CLOSE_IND : USREGS_Escheat:USREGS_DORMANCY_PARAM__AUTO_CLOSE_IND
+            @t24:i (align=L, inputBehaviour=I, maxLength=1, sysNumber=6.0, core=true, t24Name=AUTO.CLOSE.IND, mandatory=false)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=44.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=40.0, core=true, t24Name=CURR.NO, mandatory=false)
+        /* This field accepts the cut-off date of escheatment in the format 'MMDD'. All pending escheatment accounts / deposits will be again evaluated on the cut-off date to check if the account/deposit is still eligible for escheatment. In case there is any customer contact or account activity in any of the related accounts of the customers of this account, the account will be moved to the earlier dormancy status. In case the account is still eligible for escheatment then filing date for the state is arrived and then the final escheatment evaluation is scheduled. */
+        CUTOFF_DATE : T24BusinessTypes:MD required
+            @t24:i (align=L, inputBehaviour=I, maxLength=4, sysNumber=4.0, core=true, t24Name=CUTOFF.DATE, mandatory=true)
+        DATE_TIME -> byValue USREGS_Escheat:USREGS_DORMANCY_PARAM__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DEFAULT_STATE -> NACUST_Foundation:US_STATE
+            @t24:i (align=L, inputBehaviour=I, maxLength=2, sysNumber=2.0, core=true, businessType=A, t24Name=DEFAULT.STATE, mandatory=false)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=45.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        DESCRIPTION -> byValue USREGS_Escheat:USREGS_DORMANCY_PARAM__DESCRIPTION *
+            @t24:i (t24Name=DESCRIPTION)
+        /* This attribute will allow the escheatment period in days, months and years. The escheatment evaluation would be performed depending on the value defined in this field. In case the account do not have any account related activities on any of the accounts or deposits of the primary customer or joint customers the account will be flagged as pending escheatment account . The account will also be added to the list to be evaluated on the cut-off date. */
+        ESCHEATMENT_PERIOD : T24BusinessTypes:PERIOD required
+            @t24:i (align=L, inputBehaviour=I, maxLength=5, sysNumber=3.0, core=true, t24Name=ESCHEATMENT.PERIOD, mandatory=true)
+        /* This field will accepts the filing date of escheated account / Deposits in the format 'MMDD'. The funds will be moved to the state on this date. The format of the date entered here will be MMDD. On the filing date the evaluation will be again performed to check if the account can be escheated. In case there is any customer contact or account activity in any of the related accounts of the customers of this account , the account will be moved to the earlier dormancy status .If the account is still eligible for escheatment then the funds will be moved the offset account specified in the default record in dormancy parameter. */
+        FILING_DATE : T24BusinessTypes:MD required
+            @t24:i (align=L, inputBehaviour=I, maxLength=4, sysNumber=5.0, core=true, t24Name=FILING.DATE, mandatory=true)
+        /* ID will equal DORMANT or DORMANT*States' group (as defined in States Grouptable) or DORMANT*State (as defined in US.STATE table). This definitionsfor the state level dormancy would be applied on top of product levelconditions for dormancy. The escheat definition will be configured in thisparameter. The id of the parameter table would be  < PRODUCT.LINE >  or < PRODUCT.LINE > * < GROUP >  or  < PRODUCT.LINE > * < US.STATE > . Example ACCOUNTS orACCOUNTS*GRP01 or ACCOUNTS*NJ. */
+        ID -> USREGS_Escheat:USREGS_DORMANCY_PARAM PK required
+            @i18n:Label (en="Transaction Ref")
+            @i18n:Tooltip (en="Transaction Reference")
+            @t24:i (align=L, inputBehaviour=I, maxLength=60, sysNumber=0.0, core=true, businessType=A, t24Name="@ID", mandatory=true)
+        INPUTTER -> byValue USREGS_Escheat:USREGS_DORMANCY_PARAM__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        /* Optional for product line .This field will be mandatory when the AUTO.CLOSE.IND is set to 'Y'. This is the account that will be credited with the money when escheated account is auto closed. */
+        OFFSET_ACCOUNT -> AC_Config:ACCOUNT_CLASS
+            @t24:i (align=L, inputBehaviour=I, maxLength=15, sysNumber=7.0, core=true, businessType=AA, t24Name=OFFSET.ACCOUNT, mandatory=false)
+        OVERRIDE -> byValue USREGS_Escheat:USREGS_DORMANCY_PARAM__OVERRIDE *
+            @t24:i (t24Name=OVERRIDE)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=39.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        RESERVED_1 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=36.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_10 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=27.0, core=true, t24Name=RESERVED.10, mandatory=false)
+        RESERVED_11 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=26.0, core=true, t24Name=RESERVED.11, mandatory=false)
+        RESERVED_12 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=25.0, core=true, t24Name=RESERVED.12, mandatory=false)
+        RESERVED_13 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=24.0, core=true, t24Name=RESERVED.13, mandatory=false)
+        RESERVED_14 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=23.0, core=true, t24Name=RESERVED.14, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=35.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=34.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=33.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        RESERVED_5 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=32.0, core=true, t24Name=RESERVED.5, mandatory=false)
+        RESERVED_6 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=31.0, core=true, t24Name=RESERVED.6, mandatory=false)
+        RESERVED_7 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=30.0, core=true, t24Name=RESERVED.7, mandatory=false)
+        RESERVED_8 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=29.0, core=true, t24Name=RESERVED.8, mandatory=false)
+        RESERVED_9 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=28.0, core=true, t24Name=RESERVED.9, mandatory=false)
+        STATUS -> byValue USREGS_Escheat:USREGS_DORMANCY_PARAM__STATUS *
+            @t24:i (t24Name=STATUS)
+        /* Field to indicate whether the dormant charge is applied for that state.  Valid values are Y < null. If the value is Y then system will waive dormancy charge. */
+        WAIVE_DORMANT_CHARGE : USREGS_Escheat:USREGS_DORMANCY_PARAM__WAIVE_DORMANT_CHARGE
+            @t24:i (align=L, inputBehaviour=I, maxLength=1, sysNumber=22.0, core=true, t24Name=WAIVE.DORMANT.CHARGE, mandatory=false)
+    }
+    USREGS_DORMANCY_PARAM__ACTIVITY_CLASS
+    {
+        /* State specific activity class definition for defaulting in arrangement for dormancy property class would be defined here. The activity class could be either included or excluded for consideration as a customer activity when dormancy processing is evaluated by T24. Either activity class or activity name can be specified in the associated multi value. */
+        ACTIVITY_CLASS -> AA_ProductFramework:AA_ACTIVITY_CLASS
+            @i18n:Label (en="Activity Class")
+            @i18n:Tooltip (en="Activity class related to the activity")
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=8.0, core=true, businessType=A, t24Name=ACTIVITY.CLASS, mandatory=false)
+        /* State specific activities that has to be either included or excluded from maintaining an account from becoming inactive would be defined here. These activities would override the setup at an activity class level. These activities would be overlaid on the conditions set in the product for the specific arrangement. The state level definitions (state /group or default) that would be applied would be based on the state of the primary customer. Either activity class or activity name can be specified in the associated multivalued. If both are specified an error has to be raised. */
+        ACTIVITY_NAME -> AA_ProductFramework:AA_ACTIVITY
+            @i18n:Label (en=Activity)
+            @t24:i (align=L, inputBehaviour=I, maxLength=80, sysNumber=9.0, core=true, businessType=A, t24Name=ACTIVITY.NAME, mandatory=false)
+        /* This is a conditional mandatory field if there is any activity or activity class defined in the associated set. The vetting values for this field would be 'INCLUDE' or 'EXCLUDE'. */
+        INCLUDE_INDICATOR : USREGS_Escheat:USREGS_DORMANCY_PARAM__ACTIVITY_CLASS__INCLUDE_INDICATOR
+            @t24:i (align=L, inputBehaviour=I, maxLength=15, sysNumber=10.0, core=true, t24Name=INCLUDE.INDICATOR, mandatory=false)
+        /* This is an optional routine that would be utilised for deposits product line that would be triggered if the activity/activity.class is configured as 'INCLUDE' in INCLUDE.INDICATOR but has additional logic to further analyse the activity classify it as inactive . This would be utilised for rollover activity. The hook routine will pass the activity in the first parameter and get the result in the second parameter . In case the result is a 'SUCCESS' then the activity would be considered as a customer activity. */
+        OVERRIDE_RTN -> EB_SystemTables:EB_API
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=11.0, core=true, businessType=A, t24Name=OVERRIDE.RTN, mandatory=false)
+        RESERVED_19 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=13.0, core=true, t24Name=RESERVED.19, mandatory=false)
+        RESERVED_20 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=12.0, core=true, t24Name=RESERVED.20, mandatory=false)
+    }
+    USREGS_DORMANCY_PARAM__ALLOW_ACTIVITY
+    {
+        ALLOW_ACTIVITY -> AA_ProductFramework:AA_ACTIVITY
+            @t24:i (align=L, inputBehaviour=I, maxLength=80, sysNumber=20.0, core=true, businessType=A, t24Name=ALLOW.ACTIVITY, mandatory=false)
+    }
+    USREGS_DORMANCY_PARAM__ALLOW_ACTIVITY_CLASS
+    {
+        ALLOW_ACTIVITY_CLASS -> AA_ProductFramework:AA_ACTIVITY_CLASS
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=21.0, core=true, businessType=A, t24Name=ALLOW.ACTIVITY.CLASS, mandatory=false)
+    }
+    USREGS_DORMANCY_PARAM__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=42.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    USREGS_DORMANCY_PARAM__DESCRIPTION
+    {
+        /* Description of the record .This is a mandatory field. */
+        DESCRIPTION : T24BusinessTypes:A required
+            @i18n:Label (en=Description)
+            @i18n:Tooltip (en=Description)
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, multiLanguage=true, sysNumber=1.0, core=true, t24Name=DESCRIPTION, mandatory=true)
+    }
+    USREGS_DORMANCY_PARAM__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=41.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    USREGS_DORMANCY_PARAM__OVERRIDE
+    {
+        OVERRIDE : T24BusinessTypes:N
+            @i18n:Label (en=Override)
+            @i18n:Tooltip (en="Overrides generated by this transaction")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=38.0, core=true, t24Name=OVERRIDE, mandatory=false)
+    }
+    USREGS_DORMANCY_PARAM__STATUS
+    {
+        EXCEPTION_RULE -> byValue USREGS_Escheat:USREGS_DORMANCY_PARAM__STATUS__EXCEPTION_RULE *
+            @t24:i (t24Name=EXCEPTION.RULE)
+        RESERVED_16 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=19.0, core=true, t24Name=RESERVED.16, mandatory=false)
+        RESERVED_17 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=18.0, core=true, t24Name=RESERVED.17, mandatory=false)
+        /* The dormancy status that would be set in the dormancy parameter to monitor inactivity of an account. */
+        STATUS : USREGS_Escheat:USREGS_DORMANCY_PARAM__STATUS__STATUS
+            @i18n:Label (en=Status)
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=14.0, core=true, t24Name=STATUS, mandatory=false)
+    }
+    USREGS_DORMANCY_PARAM__STATUS__EXCEPTION_RULE
+    {
+        /* Define any state level exception logic that would be built in a API . */
+        EXCEPTION_API -> EB_SystemTables:EB_API
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=16.0, core=true, businessType=A, t24Name=EXCEPTION.API, mandatory=false)
+        /* It will hold exception rules at States' group/State's level. The state level exception rules will be added to the ones defined in the product conditions. */
+        EXCEPTION_RULE -> EB_RulesEngine:EB_RULE_GATEWAY
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=15.0, core=true, businessType=A, t24Name=EXCEPTION.RULE, mandatory=false)
+        RESERVED_18 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=17.0, core=true, t24Name=RESERVED.18, mandatory=false)
+    }
+}
+Enumerations {
+    USREGS_DORMANCY_PARAM__ACTIVITY_CLASS__INCLUDE_INDICATOR : mml:string
+        EXCLUDE=EXCLUDE
+        INCLUDE=INCLUDE
+    USREGS_DORMANCY_PARAM__AUTO_CLOSE_IND : mml:string
+        NULL=NULL
+        Y=Y
+    USREGS_DORMANCY_PARAM__STATUS__STATUS : mml:string
+        CLOSEREADY=CLOSEREADY
+        DORMANT=DORMANT
+        ESCHEAT=ESCHEAT
+        INACTIVE=INACTIVE
+        PREDORMANT=PREDORMANT
+        PREESCHEAT=PREESCHEAT
+        UNCLAIMED=UNCLAIMED
+    USREGS_DORMANCY_PARAM__WAIVE_DORMANT_CHARGE : mml:string
+        NULL=NULL
+        Y=Y
+}

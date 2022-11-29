@@ -1,0 +1,179 @@
+# UTF-8
+/* Component for Non Standard Messages */
+Domain CMBASE_NonStandardMessages
+    @t24:i (module=CMBASE)
+    @java:Package (value=com.temenos.t24.datamodel.cmbase.cmbase_nonstandardmessages)
+namespace "http://www.temenos.com/t24/CMBASE_NonStandardMessages"
+metamodelVersion 1.30.6
+Classes {
+    /* This table will record the values obtained through Incoming Messages that ae required to process the messages */
+    CMBASE_BIC_REACHABILITY
+        @i18n:Description (en="")
+        @t24:i (t24Name=CMBASE.BIC.REACHABILITY, nonStop=true, level=I, type=H, allowedFunctions="A C D E H I L P Q R S", localRefApplicationSysNo=14.0, localRefAllowed=true)
+    {
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=38.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=39.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=35.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        /* This field holds the BIC of the financial institution reachable through the payment channel. */
+        BIC_ID : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=11, sysNumber=1.0, core=true, t24Name=BIC.ID, mandatory=false)
+        /* This field holds the value of Clearing BIC */
+        CLEARING_BIC : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=11, sysNumber=2.0, core=true, t24Name=CLEARING.BIC, mandatory=false)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=36.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=32.0, core=true, t24Name=CURR.NO, mandatory=false)
+        DATE_TIME -> byValue CMBASE_NonStandardMessages:CMBASE_BIC_REACHABILITY__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=37.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        /* This field captures the outage end date */
+        END_DATE : T24BusinessTypes:D
+            @i18n:Label (en="End Date")
+            @i18n:Tooltip (en="End Date")
+            @t24:i (align=R, inputBehaviour=I, maxLength=0, sysNumber=9.0, core=true, t24Name=END.DATE, mandatory=false)
+        /* This field captures the outage end time */
+        END_TIME : T24BusinessTypes:TIME
+            @i18n:Label (en="End Time")
+            @i18n:Tooltip (en="End Time")
+            @t24:i (align=L, inputBehaviour=I, maxLength=11, sysNumber=11.0, core=true, t24Name=END.TIME, mandatory=false)
+        /* ID will be auto generated */
+        ID -> CMBASE_NonStandardMessages:CMBASE_BIC_REACHABILITY PK required
+            @i18n:Label (en="Transaction Ref")
+            @i18n:Tooltip (en="Transaction Reference")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=0.0, core=true, businessType=A, t24Name="@ID", mandatory=true)
+        INPUTTER -> byValue CMBASE_NonStandardMessages:CMBASE_BIC_REACHABILITY__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        /* This field holds the Instrument Id required for sending outage message */
+        INSTRUMENT_ID : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=12.0, core=true, t24Name=INSTRUMENT.ID, mandatory=false)
+        /* This field holds the Message Id required for sending outage message */
+        MESSAGE_ID : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=13.0, core=true, t24Name=MESSAGE.ID, mandatory=false)
+        /* This field holds the Message type P-Planification and D-DIFU */
+        MSG_TYPE : T24BusinessTypes:A
+            @i18n:Label (en="Message Type")
+            @t24:i (align=L, inputBehaviour=I, maxLength=1, sysNumber=5.0, core=true, t24Name=MSG.TYPE, mandatory=false)
+        /* This field captures the outage type */
+        OUTAGE_TYPE : CMBASE_NonStandardMessages:CMBASE_BIC_REACHABILITY__OUTAGE_TYPE
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=6.0, core=true, t24Name=OUTAGE.TYPE, mandatory=false)
+        OVERRIDE -> byValue CMBASE_NonStandardMessages:CMBASE_BIC_REACHABILITY__OVERRIDE *
+            @t24:i (t24Name=OVERRIDE)
+        /* This field is used to hold the clearing channel through which the beneficiary institution is reachable. */
+        PAYMENT_CHANNEL : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=3.0, core=true, t24Name=PAYMENT.CHANNEL, mandatory=false)
+        PRODUCT_TYPE : CMBASE_NonStandardMessages:CMBASE_BIC_REACHABILITY__PRODUCT_TYPE
+            @i18n:Label (en="Product Type")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=7.0, core=true, t24Name=PRODUCT.TYPE, mandatory=false)
+        /* This field holds the status of the BIC. */
+        REACHABLE_STATUS : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=11, sysNumber=4.0, core=true, t24Name=REACHABLE.STATUS, mandatory=false)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=31.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        /* Reserved for future use */
+        RESERVED_10 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=24.0, core=true, t24Name=RESERVED.10, mandatory=false)
+        /* Reserved for future use */
+        RESERVED_11 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=25.0, core=true, t24Name=RESERVED.11, mandatory=false)
+        /* Reserved for future use */
+        RESERVED_12 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=26.0, core=true, t24Name=RESERVED.12, mandatory=false)
+        /* Reserved for future use */
+        RESERVED_13 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=27.0, core=true, t24Name=RESERVED.13, mandatory=false)
+        /* Reserved for future use */
+        RESERVED_14 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=28.0, core=true, t24Name=RESERVED.14, mandatory=false)
+        /* Reserved for future use */
+        RESERVED_15 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=29.0, core=true, t24Name=RESERVED.15, mandatory=false)
+        /* Reserved for future use */
+        RESERVED_2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=16.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        /* Reserved for future use */
+        RESERVED_3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=17.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        /* Reserved for future use */
+        RESERVED_4 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=18.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        /* Reserved for future use */
+        RESERVED_5 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=19.0, core=true, t24Name=RESERVED.5, mandatory=false)
+        /* Reserved for future use */
+        RESERVED_6 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=20.0, core=true, t24Name=RESERVED.6, mandatory=false)
+        /* Reserved for future use */
+        RESERVED_7 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=21.0, core=true, t24Name=RESERVED.7, mandatory=false)
+        /* Reserved for future use */
+        RESERVED_8 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=22.0, core=true, t24Name=RESERVED.8, mandatory=false)
+        /* Reserved for future use */
+        RESERVED_9 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=23.0, core=true, t24Name=RESERVED.9, mandatory=false)
+        RESPONSE_MSG -> byValue CMBASE_NonStandardMessages:CMBASE_BIC_REACHABILITY__RESPONSE_MSG *
+            @t24:i (t24Name=RESPONSE.MSG)
+        /* This field captures the outage start date */
+        START_DATE : T24BusinessTypes:D
+            @i18n:Label (en="Start Date")
+            @i18n:Tooltip (en="Start Date")
+            @t24:i (align=R, inputBehaviour=I, maxLength=0, sysNumber=8.0, core=true, t24Name=START.DATE, mandatory=false)
+        /* This field captures the outage start time */
+        START_TIME : T24BusinessTypes:TIME
+            @i18n:Label (en="Start Time")
+            @i18n:Tooltip (en="Start Time")
+            @t24:i (align=L, inputBehaviour=I, maxLength=11, sysNumber=10.0, core=true, t24Name=START.TIME, mandatory=false)
+    }
+    CMBASE_BIC_REACHABILITY__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=34.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    CMBASE_BIC_REACHABILITY__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=33.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    CMBASE_BIC_REACHABILITY__OVERRIDE
+    {
+        /* Override field */
+        OVERRIDE : T24BusinessTypes:N
+            @i18n:Label (en=Override)
+            @i18n:Tooltip (en="Overrides generated by this transaction")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=30.0, core=true, t24Name=OVERRIDE, mandatory=false)
+    }
+    CMBASE_BIC_REACHABILITY__RESPONSE_MSG
+    {
+        RESPONSE_MSG : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=15.0, core=true, t24Name=RESPONSE.MSG, mandatory=false)
+    }
+}
+Enumerations {
+    CMBASE_BIC_REACHABILITY__OUTAGE_TYPE : mml:string
+        SIGNOFF=SIGNOFF
+        SIGNON=SIGNON
+    CMBASE_BIC_REACHABILITY__PRODUCT_TYPE : mml:string
+        BC2C=BC2C
+        BC2E=BC2E
+        BC2R=BC2R
+        CORE=CORE
+}

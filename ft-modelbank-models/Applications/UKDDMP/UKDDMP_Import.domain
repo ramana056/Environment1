@@ -1,0 +1,184 @@
+# UTF-8
+/* Direct Debit Mandate Processing */
+Domain UKDDMP_Import
+    @t24:i (module=UKDDMP)
+    @java:Package (value=com.temenos.t24.datamodel.ukddmp.ukddmp_import)
+namespace "http://www.temenos.com/t24/UKDDMP_Import"
+metamodelVersion 1.30.6
+Classes {
+    UKDDMP_DDO_DIRECTORY
+        @i18n:Description (en="")
+        @t24:i (t24Name=UKDDMP.DDO.DIRECTORY, level=I, type=H, allowedFunctions="A C D E H I L P Q R S", localRefApplicationSysNo=36.0, localRefAllowed=true)
+    {
+        ACC_RECORD_TYPE -> byValue UKDDMP_Import:UKDDMP_DDO_DIRECTORY__ACC_RECORD_TYPE *
+            @t24:i (t24Name=ACC.RECORD.TYPE)
+        /* Amalgamation Segment */
+        AMAL_SEGMENT : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=1, sysNumber=26.0, core=true, t24Name=AMAL.SEGMENT, mandatory=false)
+        /* AUDDIS status of the user – can be either L, M, T or N */
+        AUDDIS_STATUS : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=1, sysNumber=22.0, core=true, t24Name=AUDDIS.STATUS, mandatory=false)
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=49.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=50.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=46.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=47.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=43.0, core=true, t24Name=CURR.NO, mandatory=false)
+        DATE_TIME -> byValue UKDDMP_Import:UKDDMP_DDO_DIRECTORY__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=48.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        /* Dormancy period for the mandate. Will be numeric, zero (0) filled to the left where required. 999 means the DD is indefinite */
+        DORMANCY_PERIOD : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=24.0, core=true, t24Name=DORMANCY.PERIOD, mandatory=false)
+        /* Fax number */
+        FAX_NUMBER : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=20, sysNumber=13.0, core=true, t24Name=FAX.NUMBER, mandatory=false)
+        /* SUN ID value along with the current date */
+        ID -> UKDDMP_Import:UKDDMP_DDO_DIRECTORY PK required
+            @i18n:Label (en="Transaction Ref")
+            @i18n:Tooltip (en="Transaction Reference")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=0.0, core=true, businessType=A, t24Name="@ID", mandatory=true)
+        INPUTTER -> byValue UKDDMP_Import:UKDDMP_DDO_DIRECTORY__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        /* DDMMYY (this is the date when latest the directory was amended) */
+        LAST_AMENDED_DATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=2.0, core=true, t24Name=LAST.AMENDED.DATE, mandatory=false)
+        /* Market segment */
+        MARKET_SEGMENT : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=6, sysNumber=25.0, core=true, t24Name=MARKET.SEGMENT, mandatory=false)
+        /* Originator Status */
+        ORIGINATOR_STATUS : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=1, sysNumber=21.0, core=true, t24Name=ORIGINATOR.STATUS, mandatory=false)
+        /* User name */
+        ORIG_ADDRESSLINE1 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=33, sysNumber=14.0, core=true, t24Name=ORIG.ADDRESSLINE1, mandatory=false)
+        /* Postal name */
+        ORIG_ADDRESSLINE2 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=33, sysNumber=15.0, core=true, t24Name=ORIG.ADDRESSLINE2, mandatory=false)
+        /* Address of service user */
+        ORIG_ADDRESSLINE3 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=33, sysNumber=16.0, core=true, t24Name=ORIG.ADDRESSLINE3, mandatory=false)
+        /* Address of service user */
+        ORIG_ADDRESSLINE4 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=33, sysNumber=17.0, core=true, t24Name=ORIG.ADDRESSLINE4, mandatory=false)
+        /* Address of service user */
+        ORIG_ADDRESSLINE5 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=33, sysNumber=18.0, core=true, t24Name=ORIG.ADDRESSLINE5, mandatory=false)
+        /* Address of service user */
+        ORIG_ADDRESSLINE6 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=33, sysNumber=19.0, core=true, t24Name=ORIG.ADDRESSLINE6, mandatory=false)
+        /* Padder record */
+        PADDER_REC : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=28.0, core=true, t24Name=PADDER.REC, mandatory=false)
+        /* Prior notification period. Will be numeric, zero (0) filled to the left where required. */
+        PRIOR_NOT_PERIOD : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=2, sysNumber=23.0, core=true, t24Name=PRIOR.NOT.PERIOD, mandatory=false)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=42.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        /* Record type – will be O */
+        RECORD_TYPE : T24BusinessTypes:A
+            @i18n:Label (en="Record Type")
+            @t24:i (align=L, inputBehaviour=I, maxLength=1, sysNumber=1.0, core=true, t24Name=RECORD.TYPE, mandatory=false)
+        /* Reserved */
+        RESERVED : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=27.0, core=true, t24Name=RESERVED, mandatory=false)
+        RESERVED_1 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=37.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=38.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=39.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=40.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        RESERVED_5 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=41.0, core=true, t24Name=RESERVED.5, mandatory=false)
+        /* Service User name */
+        SERVICE_USER_NAME : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=33, sysNumber=4.0, core=true, t24Name=SERVICE.USER.NAME, mandatory=false)
+        /* Value of SUN (Service User number) */
+        SERVICE_USER_NO : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=6, sysNumber=3.0, core=true, t24Name=SERVICE.USER.NO, mandatory=false)
+        /* The bank code of the service user’s sponsor */
+        SPONSOR_BANK_CODE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=4, sysNumber=20.0, core=true, t24Name=SPONSOR.BANK.CODE, mandatory=false)
+        /* Contact address of the Scheme administrator */
+        SU_ADDRESSEE_NAME : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=33, sysNumber=5.0, core=true, t24Name=SU.ADDRESSEE.NAME, mandatory=false)
+        /* Address */
+        SU_ADDRESSLINE1 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=33, sysNumber=7.0, core=true, t24Name=SU.ADDRESSLINE1, mandatory=false)
+        /* Address */
+        SU_ADDRESSLINE2 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=33, sysNumber=8.0, core=true, t24Name=SU.ADDRESSLINE2, mandatory=false)
+        /* Address */
+        SU_ADDRESSLINE3 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=33, sysNumber=9.0, core=true, t24Name=SU.ADDRESSLINE3, mandatory=false)
+        /* Address */
+        SU_ADDRESSLINE4 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=25, sysNumber=10.0, core=true, t24Name=SU.ADDRESSLINE4, mandatory=false)
+        /* Postal name of the scheme administrator */
+        SU_POSTAL_NAME : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=33, sysNumber=6.0, core=true, t24Name=SU.POSTAL.NAME, mandatory=false)
+        /* Post Code */
+        SU_POST_CODE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=8, sysNumber=11.0, core=true, t24Name=SU.POST.CODE, mandatory=false)
+        /* Telephone no */
+        TELEPHONE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=20, sysNumber=12.0, core=true, t24Name=TELEPHONE, mandatory=false)
+    }
+    UKDDMP_DDO_DIRECTORY__ACC_RECORD_TYPE
+    {
+        /* Account name of the service user */
+        ACCOUNT_NAME : T24BusinessTypes:A
+            @i18n:Label (en="Portfolio Name")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=34.0, core=true, t24Name=ACCOUNT.NAME, mandatory=false)
+        /* Account type of the service user. Will be I (individual) or X (group) */
+        ACCOUNT_TYPE : T24BusinessTypes:A
+            @i18n:Label (en="Account Type")
+            @t24:i (align=L, inputBehaviour=I, maxLength=1, sysNumber=33.0, core=true, t24Name=ACCOUNT.TYPE, mandatory=false)
+        /* Date the record was last amended, in the format ddmmyy */
+        ACC_LAST_AMENDED_DATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=30.0, core=true, t24Name=ACC.LAST.AMENDED.DATE, mandatory=false)
+        /* Padder record */
+        ACC_PADDER_REC : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=1, sysNumber=35.0, core=true, t24Name=ACC.PADDER.REC, mandatory=false)
+        /* Record type */
+        ACC_RECORD_TYPE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=1, sysNumber=29.0, core=true, t24Name=ACC.RECORD.TYPE, mandatory=false)
+        /* Sort code of the service user */
+        ACC_SORT_CODE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=6, sysNumber=32.0, core=true, t24Name=ACC.SORT.CODE, mandatory=false)
+        /* Service user no */
+        ACC_SUN : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=6, sysNumber=31.0, core=true, t24Name=ACC.SUN, mandatory=false)
+    }
+    UKDDMP_DDO_DIRECTORY__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=45.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    UKDDMP_DDO_DIRECTORY__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=44.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+}

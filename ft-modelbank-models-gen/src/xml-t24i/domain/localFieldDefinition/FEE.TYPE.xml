@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<localref:LocalRef xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:localref="http://www.odcgroup.com/t24/application/localref/model/LocalRef"
+    xmlns:translationDsl="http://www.odcgroup.com/translation/TranslationDsl" localRefID="FEE.TYPE" maximumChars="50" minimumChars="0" mandatory="false"
+    charType="A" defaultPossible="false" virtualTable="MSO.FEE.TYPE" description="Fee type for AA.PRD.DES.CHARGE">
+  <shortName xsi:type="translationDsl:LocalTranslations">
+    <translations locale="en" text="FEE.TYPE"/>
+  </shortName>
+  <vettingTable vettingTable="APPLICATION">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Application"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="AVM">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Avm"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="BTLBUILDINGSURVEY">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="BTLBuilding Survey"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="BTLVALUATION">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="BTL Valuation"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="COMPLETION">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Completion"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="FINALREPAYMENT">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="FinalRepayment"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="INTERMEDIARY">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Intermediary"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="LANDREGISTER">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Land Registry"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="MORTGAGEVALUATION">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="MortgageValuation"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="POSTOFFERREINSPECTION">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="PostOfferReinspection"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="PREOFFERREINSPECTION">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="PreOfferReinspection"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="PROCURATION">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Procuration"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="PRODUCT">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Product"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="SOLICITOR">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Solicitor"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="TRANSCRIPTION">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Transcription"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="UPGRADETOBTLBUILDINGSURVEY">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="UpgradeToBTLBuildingSurvey"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="UPGRADETOBUILDINGSURVEY">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="UpgradeToBuilding Survey"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="WITHDRAWAL">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Withdrawal"/>
+    </remarks>
+  </vettingTable>
+</localref:LocalRef>

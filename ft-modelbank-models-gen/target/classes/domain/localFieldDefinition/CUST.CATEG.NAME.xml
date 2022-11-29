@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<localref:LocalRef xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:localref="http://www.odcgroup.com/t24/application/localref/model/LocalRef"
+    xmlns:translationDsl="http://www.odcgroup.com/translation/TranslationDsl" localRefID="CUST.CATEG.NAME" maximumChars="35" minimumChars="0"
+    mandatory="false" charType="ANY" defaultPossible="false" description="CUST.CATEG.NAME">
+  <shortName xsi:type="translationDsl:LocalTranslations">
+    <translations locale="en" text="CUST.CATEG.NAME"/>
+  </shortName>
+</localref:LocalRef>

@@ -1,0 +1,2237 @@
+# UTF-8
+/* Event Notification for Securities */
+Domain SC_SccEventNotification
+    @t24:i (module=SC)
+    @java:Package (value=com.temenos.t24.datamodel.sc.sc_scceventnotification)
+namespace "http://www.temenos.com/t24/SC_SccEventNotification"
+metamodelVersion 1.30.6
+Classes {
+    ENTITLEMENT_PRE_DIARY
+        @i18n:Description (en="")
+        @t24:i (t24Name=ENTITLEMENT.PRE.DIARY, level=F, type=L, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        ACTIVITY_CODE -> byValue SC_SccEventNotification:ENTITLEMENT_PRE_DIARY__ACTIVITY_CODE *
+            @t24:i (t24Name=ACTIVITY.CODE)
+        ADDL_NARRATIVE -> byValue SC_SccEventNotification:ENTITLEMENT_PRE_DIARY__ADDL_NARRATIVE *
+            @t24:i (t24Name=ADDL.NARRATIVE)
+/* Currency in which ENTITLEMENT.AMT is calculated.If CURRENCY in Diary is a non-restricted Currency, then the
+					currency will be defaulted
+					from the CURRENCY field on the original SC.PRE.DIARY record.
+Enriched by the short description from the CURRENCY file.
+Validation Rules:
+This is NOINPUT field */
+        CURRENCY -> ST_CurrencyConfig:CURRENCY
+            @i18n:Label (en=Ccy)
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=8.0, core=true, businessType=CCY, t24Name=CURRENCY, mandatory=false)
+/* Holds the date/time on which pre-advice/notification is generated for the first time
+Validation Rules:
+This is NOINPUT field. */
+        DATE_TIME : T24BusinessTypes:N
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=R, inputBehaviour=I, maxLength=15, sysNumber=19.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+/* The Depository number associated with the position.
+Enriched by short description from CUSTOMER.SECURITY file.
+Validation Rules:
+This is NOINPUT field. */
+        DEPOSITORY -> SC_Config:CUSTOMER_SECURITY
+            @i18n:Label (en=Depository)
+            @i18n:Tooltip (en="Depository the Security to be delivered from/to")
+            @t24:i (align=R, inputBehaviour=I, maxLength=6, sysNumber=3.0, core=true, businessType=CUS, t24Name=DEPOSITORY, mandatory=false)
+        ENT_PRE_DIARY_ID -> SC_SccEventNotification:ENTITLEMENT_PRE_DIARY PK required
+            @t24:i (align=L, inputBehaviour=I, maxLength=97, sysNumber=0.0, core=true, businessType=A, t24Name=ENT.PRE.DIARY.ID, mandatory=true)
+/* This is the total nominal involved in the event.
+Validation Rules:
+This is NOINPUT field */
+        EVENT_NOMINAL : T24BusinessTypes:NOMAMT
+            @i18n:Label (en="Event Nominal")
+            @i18n:Tooltip (en="Event Nominal")
+            @t24:i (align=R, inputBehaviour=I, maxLength=18, sysNumber=7.0, core=true, t24Name=EVENT.NOMINAL, typeModifiers=-, mandatory=false)
+/* Holds the Current Function of the message (MT564) defined in SC.PRE.DIARY record
+Validation Rules:
+This is NOINPUT field. */
+        MSG_FUNC : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=4, sysNumber=20.0, core=true, t24Name=MSG.FUNC, mandatory=false)
+/* Unique reference which identifies the Nominee Company record.
+Validation Rules:
+This is NOINPUT field */
+        NOMINEE -> SC_Config:NOMINEE_CODE
+            @i18n:Label (en=Nominee)
+            @t24:i (align=L, inputBehaviour=I, maxLength=5, sysNumber=4.0, core=true, businessType=S, t24Name=NOMINEE, mandatory=false)
+        OPTION_DESC -> byValue SC_SccEventNotification:ENTITLEMENT_PRE_DIARY__OPTION_DESC *
+            @t24:i (t24Name=OPTION.DESC)
+/* Portfolio number associated with the position for which the record is built.
+Enriched by the Account Name field from the SEC.ACC.MASTER file.
+Validation Rules:
+This is NOINPUT field. */
+        PORTFOLIO_NO -> SC_ScoPortfolioMaintenance:SEC_ACC_MASTER
+            @i18n:Label (en="Portfoio No")
+            @i18n:Tooltip (en="Indicates the Portfolio Account of the customer")
+            @t24:i (align=L, inputBehaviour=I, maxLength=20, sysNumber=1.0, core=true, businessType=SAM, t24Name=PORTFOLIO.NO, mandatory=false)
+/* Holds the date on which Pre-advice/notification is generated for the first time
+Validation Rules:
+This is NOINPUT field. */
+        PRE_ADV_DATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=18.0, core=true, t24Name=PRE.ADV.DATE, mandatory=false)
+/* Holds the Current processing Status (from MT564) defined in SC.PRE.DIARY record
+Validation Rules:
+This is NOINPUT field. */
+        PROC_STATUS : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=4, sysNumber=21.0, core=true, t24Name=PROC.STATUS, mandatory=false)
+/* Portfolio's holding in the original security eligible for the event.
+The calculation is similar to Entitlement
+Validation Rules:
+
+
+This is NOINPUT field */
+        QUALIFY_HOLDING : T24BusinessTypes:NOMAMT
+            @i18n:Label (en="Qual holding")
+            @t24:i (align=R, inputBehaviour=I, maxLength=25, sysNumber=6.0, core=true, t24Name=QUALIFY.HOLDING, typeModifiers=-, mandatory=false)
+/* Security Master ID of the event/original security. Updated from the originating SC.PRE.DIARY record.
+Enriched by the Short description of the Security from Security Master file.
+Validation Rules:
+This is NOINPUT field. */
+        SECURITY_NO -> SC_ScoSecurityMasterMaintenance:SECURITY_MASTER
+            @i18n:Label (en="Security No")
+            @i18n:Tooltip (en="Indicates the security code/number")
+            @t24:i (align=L, inputBehaviour=I, maxLength=12, sysNumber=2.0, core=true, businessType=SEC, t24Name=SECURITY.NO, mandatory=false)
+/* The Depository sub account of the position.
+It is defaulted from the ENTITLEMENT.PRE.DIARY key.
+Validation Rules:
+This is NOINPUT field */
+        SUB_ACCOUNT : T24BusinessTypes:A
+            @i18n:Label (en="Sub Account")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=5.0, core=true, t24Name=SUB.ACCOUNT, mandatory=false)
+    }
+    ENTITLEMENT_PRE_DIARY__ACTIVITY_CODE
+    {
+/* The activity code relating to the advice.
+Code SC-0100 is used for pre confirmation advice
+Validation Rules:
+
+
+This is NOINPUT field.
+Multi valued field associated with message type and delivery ref. */
+        ACTIVITY_CODE : T24BusinessTypes:N
+            @i18n:Label (en="Activity Code")
+            @i18n:Tooltip (en="Indicates activity code")
+            @t24:i (align=R, inputBehaviour=I, maxLength=10, sysNumber=22.0, core=true, t24Name=ACTIVITY.CODE, mandatory=false)
+        MESSAGE_TYPE -> byValue SC_SccEventNotification:ENTITLEMENT_PRE_DIARY__ACTIVITY_CODE__MESSAGE_TYPE *
+            @t24:i (t24Name=MESSAGE.TYPE)
+    }
+    ENTITLEMENT_PRE_DIARY__ACTIVITY_CODE__MESSAGE_TYPE
+    {
+/* The delivery reference of the advice generated by the delivery process for the associated message type.
+The information, which is handed off to delivery can be viewed via the enquiry DE.HANDOFF.DETS.
+Validation Rules:
+
+
+No Input field
+Multi valued associated with Activity Code and Delivery Ref. */
+        DELIVERY_REF : T24BusinessTypes:N
+            @i18n:Label (en="Delivery Ref")
+            @i18n:Tooltip (en="System generated Delivery ref key")
+            @t24:i (align=R, inputBehaviour=I, maxLength=20, sysNumber=24.0, core=true, t24Name=DELIVERY.REF, mandatory=false)
+/* The message type generated by the delivery process.
+Message types are defined on the relevant EB.ADVICES record.
+The key to EB.ADVICES is defined as follows ACTIVITY.CODE-DIARY.EVENT.TYPE
+Several message type may be defined for the same activity.
+Validation Rules:
+This is NOINPUT field.
+Multi valued associated with Activity Code and Delivery Ref. */
+        MESSAGE_TYPE : T24BusinessTypes:N
+            @i18n:Label (en="Message Type")
+            @i18n:Tooltip (en="Delivery message types generated for this record")
+            @t24:i (align=R, inputBehaviour=I, maxLength=10, sysNumber=23.0, core=true, t24Name=MESSAGE.TYPE, mandatory=false)
+    }
+    ENTITLEMENT_PRE_DIARY__ADDL_NARRATIVE
+    {
+/* Mapped from SC PRE DIARY – based on narrative in MT 564 and MT 568 – to be included in the notification
+Validation Rules:
+This is NOINPUT field. */
+        ADDL_NARRATIVE : T24BusinessTypes:A
+            @i18n:Label (en="Additional Narrative")
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=17.0, core=true, t24Name=ADDL.NARRATIVE, mandatory=false)
+    }
+    ENTITLEMENT_PRE_DIARY__OPTION_DESC
+    {
+/* The field stores the entitlement amount relating to the option.
+Validation Rules:
+This is a multivalued field.
+This is NOINPUT field
+This field is directly mapped in Pre Advice */
+        ENTITLEMENT_AMT : T24BusinessTypes:AMT
+            @i18n:Label (en="Cash Amount")
+            @t24:i (align=R, inputBehaviour=I, maxLength=18, sysNumber=13.0, core=true, t24Name=ENTITLEMENT.AMT, typeModifiers="-8D", mandatory=false)
+/* This field will indicate whether the Rate is quoted as net or gross
+Validation Rules:
+This is NOINPUT field
+This field is directly mapped in Pre Advice */
+        GROSS_OR_NET : T24BusinessTypes:A
+            @i18n:Label (en="Gross Or Net")
+            @t24:i (align=L, inputBehaviour=I, maxLength=5, sysNumber=12.0, core=true, t24Name=GROSS.OR.NET, mandatory=false)
+/* Gross rate of dividend/coupon.
+Validation Rules:
+This is NOINPUT field
+This field is directly mapped in Pre Advice */
+        GROSS_RATE : T24BusinessTypes:R
+            @i18n:Label (en="Gross Rate")
+            @t24:i (align=R, inputBehaviour=I, maxLength=15, sysNumber=10.0, core=true, t24Name=GROSS.RATE, mandatory=false)
+/* Displays the net rate
+Validation Rules:
+This is NOINPUT field
+This field is directly mapped in Pre Advice */
+        NET_RATE : T24BusinessTypes:R
+            @i18n:Label (en="Net Rate")
+            @t24:i (align=R, inputBehaviour=I, maxLength=15, sysNumber=11.0, core=true, t24Name=NET.RATE, mandatory=false)
+        NEW_SECURITY -> byValue SC_SccEventNotification:ENTITLEMENT_PRE_DIARY__OPTION_DESC__NEW_SECURITY *
+            @t24:i (t24Name=NEW.SECURITY)
+/* A brief description of the Option, updated by the system from the originating SC.PRE.DIARY record.
+Validation Rules:
+This is NOINPUT field */
+        OPTION_DESC : T24BusinessTypes:N
+            @i18n:Label (en=Options)
+            @t24:i (align=R, inputBehaviour=I, maxLength=35, sysNumber=9.0, core=true, t24Name=OPTION.DESC, mandatory=false)
+    }
+    ENTITLEMENT_PRE_DIARY__OPTION_DESC__NEW_SECURITY
+    {
+/* Security number of the securities to which the portfolio is entitled.
+Short description from SECURITY.MASTER file is enriched to this field.
+Validation Rules:
+This is NOINPUT field
+This field is directly mapped in Pre Advice */
+        NEW_SECURITY -> SC_ScoSecurityMasterMaintenance:SECURITY_MASTER
+            @t24:i (align=L, inputBehaviour=I, maxLength=12, sysNumber=14.0, core=true, businessType=A, t24Name=NEW.SECURITY, mandatory=false)
+/* The field indicates the number of securities to which the portfolio is entitled, updated by the system taking
+					into account the Old & New ratio defined in the originating SC.PRE.DIARY record.
+Validation Rules:
+This is NOINPUT field
+Multi-valued field linked to the OPTION set of fields.
+This field is directly mapped in Pre Advice */
+        NOMINAL : T24BusinessTypes:NOMAMT
+            @i18n:Label (en=Nominal)
+            @i18n:Tooltip (en="No of Units or Amount")
+            @t24:i (align=R, inputBehaviour=I, maxLength=25, sysNumber=15.0, core=true, t24Name=NOMINAL, typeModifiers=-, mandatory=false)
+/* Ratio between the Nominal of the NEW.SECURITY and the Nominal of the Original Security (EVENT.NOMINAL).
+Validation Rules:
+This is NOINPUT field
+This field is directly mapped in Pre Advice */
+        RATIO : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=16, sysNumber=16.0, core=true, t24Name=RATIO, mandatory=false)
+    }
+    SC_CA_DATE_TYPE
+        @i18n:Description (en="")
+        @t24:i (t24Name=SC.CA.DATE.TYPE, level=I, type=H, additionalInfo=NOH, allowedFunctions="A C D E I L P Q R S", localRefAllowed=false)
+    {
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=14.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=15.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=11.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=12.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=8.0, core=true, t24Name=CURR.NO, mandatory=false)
+        DATE_TIME -> byValue SC_SccEventNotification:SC_CA_DATE_TYPE__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DATE_TYPE -> SC_SccEventNotification:SC_CA_DATE_TYPE PK required
+            @i18n:Label (en="Date Type")
+            @t24:i (align=L, inputBehaviour=I, maxLength=5, sysNumber=0.0, core=true, businessType=A, t24Name=DATE.TYPE, mandatory=true)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=13.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        DESCRIPTION -> byValue SC_SccEventNotification:SC_CA_DATE_TYPE__DESCRIPTION *
+            @t24:i (t24Name=DESCRIPTION)
+        INPUTTER -> byValue SC_SccEventNotification:SC_CA_DATE_TYPE__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=7.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        RESERVED1 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=2.0, core=true, t24Name=RESERVED1, mandatory=false)
+        RESERVED2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=3.0, core=true, t24Name=RESERVED2, mandatory=false)
+        RESERVED3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=4.0, core=true, t24Name=RESERVED3, mandatory=false)
+        RESERVED4 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=5.0, core=true, t24Name=RESERVED4, mandatory=false)
+        RESERVED5 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=6.0, core=true, t24Name=RESERVED5, mandatory=false)
+    }
+    SC_CA_DATE_TYPE__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=10.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    SC_CA_DATE_TYPE__DESCRIPTION
+    {
+        DESCRIPTION : T24BusinessTypes:A required
+            @i18n:Label (en=Description)
+            @i18n:Tooltip (en=Description)
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, multiLanguage=true, sysNumber=1.0, core=true, t24Name=DESCRIPTION, mandatory=true)
+    }
+    SC_CA_DATE_TYPE__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=9.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    SC_CA_OPTION_DESC
+        @i18n:Description (en="")
+        @t24:i (t24Name=SC.CA.OPTION.DESC, level=I, type=H, additionalInfo=NOH, allowedFunctions="A C D E I L P Q R S", localRefAllowed=false)
+    {
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=14.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=15.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=11.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        CA_OPTION_DESCRIPTION -> SC_SccEventNotification:SC_CA_OPTION_DESC PK required
+            @t24:i (align=L, inputBehaviour=I, maxLength=4, sysNumber=0.0, core=true, businessType=A, t24Name=CA.OPTION.DESCRIPTION, mandatory=true)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=12.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=8.0, core=true, t24Name=CURR.NO, mandatory=false)
+        DATE_TIME -> byValue SC_SccEventNotification:SC_CA_OPTION_DESC__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=13.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        DESCRIPTION -> byValue SC_SccEventNotification:SC_CA_OPTION_DESC__DESCRIPTION *
+            @t24:i (t24Name=DESCRIPTION)
+        INPUTTER -> byValue SC_SccEventNotification:SC_CA_OPTION_DESC__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=7.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        RESERVED1 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=2.0, core=true, t24Name=RESERVED1, mandatory=false)
+        RESERVED2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=3.0, core=true, t24Name=RESERVED2, mandatory=false)
+        RESERVED3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=4.0, core=true, t24Name=RESERVED3, mandatory=false)
+        RESERVED4 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=5.0, core=true, t24Name=RESERVED4, mandatory=false)
+        RESERVED5 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=6.0, core=true, t24Name=RESERVED5, mandatory=false)
+    }
+    SC_CA_OPTION_DESC__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=10.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    SC_CA_OPTION_DESC__DESCRIPTION
+    {
+        DESCRIPTION : T24BusinessTypes:A required
+            @i18n:Label (en=Description)
+            @i18n:Tooltip (en=Description)
+            @t24:i (align=L, inputBehaviour=I, maxLength=25, multiLanguage=true, sysNumber=1.0, core=true, t24Name=DESCRIPTION, mandatory=true)
+    }
+    SC_CA_OPTION_DESC__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=9.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    SC_CA_PRE_ADVICE
+        @i18n:Description (en="")
+        @t24:i (t24Name=SC.CA.PRE.ADVICE, level=I, type=H, allowedFunctions="A C D E H I L P Q R S", localRefApplicationSysNo=20.0, localRefAllowed=true)
+    {
+        AMND_MSG_FUNC -> byValue SC_SccEventNotification:SC_CA_PRE_ADVICE__AMND_MSG_FUNC *
+            @t24:i (t24Name=AMND.MSG.FUNC)
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=29.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=30.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=26.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        CA_PRE_ADVICE_ID -> SC_SccEventNotification:SC_CA_PRE_ADVICE PK required
+            @t24:i (align=L, inputBehaviour=I, maxLength=28, sysNumber=0.0, core=true, businessType=A, t24Name=CA.PRE.ADVICE.ID, mandatory=true)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=27.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=23.0, core=true, t24Name=CURR.NO, mandatory=false)
+        DATE_TIME -> byValue SC_SccEventNotification:SC_CA_PRE_ADVICE__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=28.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+/* The function of the message (MT564 - Corporate Action Notification) based on which the first
+					pre-advice/notification has to be generated. The function must contain any of the codes like NEWM, REPL, etc.
+The valid functions will be defined by EB.LOOKUP table - MSG.FUNC*(ADDB,CANC,NEWM,REPE,REPL,RMDR,WITH)
+Validation Rules
+Mandatory Field */
+        INIT_MSG_FUNC : SC_SccEventNotification:SC_CA_PRE_ADVICE__INIT_MSG_FUNC required
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=1.0, core=true, t24Name=INIT.MSG.FUNC, mandatory=true)
+/* The processing status from the incoming MT564 - PREU, PREC, COMP, etc.
+If specified, the initial notification will be generated only if the processing status in the message/of the
+					event matches with the status defined here. If the field is left blank, notification will be generated on receipt
+					of MT 564 (provided there is a match with the INIT.MSG.FUNC)
+The valid statuses will be defined by EB.LOOKUP table - MSG.STATUS*(COMP,COMU,ENTL,PREU,PREC) */
+        INIT_MSG_STATUS : SC_SccEventNotification:SC_CA_PRE_ADVICE__INIT_MSG_STATUS
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=2.0, core=true, t24Name=INIT.MSG.STATUS, mandatory=false)
+        INPUTTER -> byValue SC_SccEventNotification:SC_CA_PRE_ADVICE__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        OVERRIDE -> byValue SC_SccEventNotification:SC_CA_PRE_ADVICE__OVERRIDE *
+            @t24:i (t24Name=OVERRIDE)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=22.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        RESERVED_01 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=19.0, core=true, t24Name=RESERVED.01, mandatory=false)
+        RESERVED_02 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=18.0, core=true, t24Name=RESERVED.02, mandatory=false)
+        RESERVED_03 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=17.0, core=true, t24Name=RESERVED.03, mandatory=false)
+        RESERVED_04 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=16.0, core=true, t24Name=RESERVED.04, mandatory=false)
+        RESERVED_05 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=15.0, core=true, t24Name=RESERVED.05, mandatory=false)
+        RESERVED_06 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=14.0, core=true, t24Name=RESERVED.06, mandatory=false)
+        RESERVED_07 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=13.0, core=true, t24Name=RESERVED.07, mandatory=false)
+        RESERVED_08 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=12.0, core=true, t24Name=RESERVED.08, mandatory=false)
+        RESERVED_09 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=11.0, core=true, t24Name=RESERVED.09, mandatory=false)
+        RESERVED_10 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=10.0, core=true, t24Name=RESERVED.10, mandatory=false)
+        RESERVED_11 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=9.0, core=true, t24Name=RESERVED.11, mandatory=false)
+        RESERVED_12 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=8.0, core=true, t24Name=RESERVED.12, mandatory=false)
+        RESERVED_13 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=7.0, core=true, t24Name=RESERVED.13, mandatory=false)
+        RESERVED_14 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=6.0, core=true, t24Name=RESERVED.14, mandatory=false)
+        RESERVED_15 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=5.0, core=true, t24Name=RESERVED.15, mandatory=false)
+    }
+    SC_CA_PRE_ADVICE__AMND_MSG_FUNC
+    {
+/* The function of the message based on which amendment notification is to be generated. If, for example, the
+					amendment notification needs to be generated only when a replacement message (function: REPL) is received and not
+					for Reminder (RMDR), only the REPL function will be specified in this field and not RMDR. Multi-Value Field
+The valid functions will be defined by EB.LOOKUP table from MSG.FUNC*(ADDB,CANC,NEWM,REPE,REPL,RMDR,WITH)
+Validation Rules
+Input mandatory if status is entered in AMND.MSG.STATUS field */
+        AMND_MSG_FUNC : SC_SccEventNotification:SC_CA_PRE_ADVICE__AMND_MSG_FUNC__AMND_MSG_FUNC
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=3.0, core=true, t24Name=AMND.MSG.FUNC, mandatory=false)
+        AMND_MSG_STATUS -> byValue SC_SccEventNotification:SC_CA_PRE_ADVICE__AMND_MSG_FUNC__AMND_MSG_STATUS *
+            @t24:i (t24Name=AMND.MSG.STATUS)
+    }
+    SC_CA_PRE_ADVICE__AMND_MSG_FUNC__AMND_MSG_STATUS
+    {
+/* Holds the status of the message based on which amendment notification is to be generated. Sub-Value field
+					associated with AMND.MSG.FUNC field.
+The statuses will be defined by EB.LOOKUP table from MSG.STATUS*(COMP,COMU,ENTL,PREU,PREC) */
+        AMND_MSG_STATUS : SC_SccEventNotification:SC_CA_PRE_ADVICE__AMND_MSG_FUNC__AMND_MSG_STATUS__AMND_MSG_STATUS
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=4.0, core=true, t24Name=AMND.MSG.STATUS, mandatory=false)
+    }
+    SC_CA_PRE_ADVICE__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=25.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    SC_CA_PRE_ADVICE__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=24.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    SC_CA_PRE_ADVICE__OVERRIDE
+    {
+        OVERRIDE : T24BusinessTypes:N
+            @i18n:Label (en=Override)
+            @i18n:Tooltip (en="Overrides generated by this transaction")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=21.0, core=true, t24Name=OVERRIDE, mandatory=false)
+    }
+    SC_CA_REASON_CODE
+        @i18n:Description (en="")
+        @t24:i (t24Name=SC.CA.REASON.CODE, level=I, type=H, allowedFunctions="A C D E I L P Q R S", localRefAllowed=false)
+    {
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=14.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=15.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=11.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=12.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=8.0, core=true, t24Name=CURR.NO, mandatory=false)
+        DATE_TIME -> byValue SC_SccEventNotification:SC_CA_REASON_CODE__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=13.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        DESCRIPTION -> byValue SC_SccEventNotification:SC_CA_REASON_CODE__DESCRIPTION *
+            @t24:i (t24Name=DESCRIPTION)
+        INPUTTER -> byValue SC_SccEventNotification:SC_CA_REASON_CODE__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        REASON_CODE -> SC_SccEventNotification:SC_CA_REASON_CODE PK required
+            @i18n:Label (en="Reason code")
+            @t24:i (align=L, inputBehaviour=I, maxLength=10, sysNumber=0.0, core=true, businessType=A, t24Name=REASON.CODE, mandatory=true)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=7.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        RESERVED1 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=2.0, core=true, t24Name=RESERVED1, mandatory=false)
+        RESERVED2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=3.0, core=true, t24Name=RESERVED2, mandatory=false)
+        RESERVED3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=4.0, core=true, t24Name=RESERVED3, mandatory=false)
+        RESERVED4 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=5.0, core=true, t24Name=RESERVED4, mandatory=false)
+        RESERVED5 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=6.0, core=true, t24Name=RESERVED5, mandatory=false)
+    }
+    SC_CA_REASON_CODE__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=10.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    SC_CA_REASON_CODE__DESCRIPTION
+    {
+/* Holds the description of the Reason code.
+This field is a multi-value field. */
+        DESCRIPTION : T24BusinessTypes:A required
+            @i18n:Label (en=Description)
+            @i18n:Tooltip (en=Description)
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, multiLanguage=true, sysNumber=1.0, core=true, t24Name=DESCRIPTION, mandatory=true)
+    }
+    SC_CA_REASON_CODE__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=9.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    SC_CA_STATUS_CODE
+        @i18n:Description (en="")
+        @t24:i (t24Name=SC.CA.STATUS.CODE, level=I, type=H, allowedFunctions="A C D E I L P Q R S", localRefAllowed=false)
+    {
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=14.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=15.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=11.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=12.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=8.0, core=true, t24Name=CURR.NO, mandatory=false)
+        DATE_TIME -> byValue SC_SccEventNotification:SC_CA_STATUS_CODE__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=13.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        DESCRIPTION -> byValue SC_SccEventNotification:SC_CA_STATUS_CODE__DESCRIPTION *
+            @t24:i (t24Name=DESCRIPTION)
+        INPUTTER -> byValue SC_SccEventNotification:SC_CA_STATUS_CODE__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=7.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        RESERVED1 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=2.0, core=true, t24Name=RESERVED1, mandatory=false)
+        RESERVED2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=3.0, core=true, t24Name=RESERVED2, mandatory=false)
+        RESERVED3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=4.0, core=true, t24Name=RESERVED3, mandatory=false)
+        RESERVED4 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=5.0, core=true, t24Name=RESERVED4, mandatory=false)
+        RESERVED5 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=6.0, core=true, t24Name=RESERVED5, mandatory=false)
+        STATUS_CODE -> SC_SccEventNotification:SC_CA_STATUS_CODE PK required
+            @t24:i (align=L, inputBehaviour=I, maxLength=10, sysNumber=0.0, core=true, businessType=A, t24Name=STATUS.CODE, mandatory=true)
+    }
+    SC_CA_STATUS_CODE__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=10.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    SC_CA_STATUS_CODE__DESCRIPTION
+    {
+/* Holds the description of the Status code.
+This field is a multi-value field. */
+        DESCRIPTION : T24BusinessTypes:A required
+            @i18n:Label (en=Description)
+            @i18n:Tooltip (en=Description)
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, multiLanguage=true, sysNumber=1.0, core=true, t24Name=DESCRIPTION, mandatory=true)
+    }
+    SC_CA_STATUS_CODE__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=9.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    SC_CTDY_CA_ADVICE
+        @i18n:Description (en="")
+        @t24:i (t24Name=SC.CTDY.CA.ADVICE, level=I, type=H, allowedFunctions="A C D E H I L P Q R S", localRefApplicationSysNo=39.0, localRefAllowed=true)
+    {
+        564_OUT_FUNC -> byValue SC_SccEventNotification:SC_CTDY_CA_ADVICE__564_OUT_FUNC *
+            @t24:i (t24Name=564.OUT.FUNC)
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=48.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=49.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=45.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=46.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CTDY_CA_ADVICE_ID -> SC_SccEventNotification:SC_CTDY_CA_ADVICE PK required
+            @t24:i (align=L, inputBehaviour=I, maxLength=36, sysNumber=0.0, core=true, businessType=A, t24Name=CTDY.CA.ADVICE.ID, mandatory=true)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=42.0, core=true, t24Name=CURR.NO, mandatory=false)
+        DATE_TIME -> byValue SC_SccEventNotification:SC_CTDY_CA_ADVICE__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=47.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        INPUTTER -> byValue SC_SccEventNotification:SC_CTDY_CA_ADVICE__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        IN_MT564_FUNC -> byValue SC_SccEventNotification:SC_CTDY_CA_ADVICE__IN_MT564_FUNC *
+            @t24:i (t24Name=IN.MT564.FUNC)
+        OVERRIDE -> byValue SC_SccEventNotification:SC_CTDY_CA_ADVICE__OVERRIDE *
+            @t24:i (t24Name=OVERRIDE)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=41.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        RESERVED01 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=38.0, core=true, t24Name=RESERVED01, mandatory=false)
+        RESERVED02 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=37.0, core=true, t24Name=RESERVED02, mandatory=false)
+        RESERVED03 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=36.0, core=true, t24Name=RESERVED03, mandatory=false)
+        RESERVED04 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=35.0, core=true, t24Name=RESERVED04, mandatory=false)
+        RESERVED05 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=34.0, core=true, t24Name=RESERVED05, mandatory=false)
+        RESERVED06 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=33.0, core=true, t24Name=RESERVED06, mandatory=false)
+        RESERVED07 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=32.0, core=true, t24Name=RESERVED07, mandatory=false)
+        RESERVED08 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=31.0, core=true, t24Name=RESERVED08, mandatory=false)
+        RESERVED09 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=30.0, core=true, t24Name=RESERVED09, mandatory=false)
+        RESERVED10 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=29.0, core=true, t24Name=RESERVED10, mandatory=false)
+        RESERVED11 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=28.0, core=true, t24Name=RESERVED11, mandatory=false)
+        RESERVED12 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=27.0, core=true, t24Name=RESERVED12, mandatory=false)
+        RESERVED13 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=26.0, core=true, t24Name=RESERVED13, mandatory=false)
+        RESERVED14 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=25.0, core=true, t24Name=RESERVED14, mandatory=false)
+        RESERVED15 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=24.0, core=true, t24Name=RESERVED15, mandatory=false)
+        RESERVED16 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=23.0, core=true, t24Name=RESERVED16, mandatory=false)
+        RESERVED17 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=22.0, core=true, t24Name=RESERVED17, mandatory=false)
+        RESERVED18 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=21.0, core=true, t24Name=RESERVED18, mandatory=false)
+        RESERVED19 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=20.0, core=true, t24Name=RESERVED19, mandatory=false)
+        RESERVED20 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=19.0, core=true, t24Name=RESERVED20, mandatory=false)
+        RESERVED21 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=18.0, core=true, t24Name=RESERVED21, mandatory=false)
+        RESERVED22 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=17.0, core=true, t24Name=RESERVED22, mandatory=false)
+        RESERVED23 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=16.0, core=true, t24Name=RESERVED23, mandatory=false)
+        RESERVED24 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=15.0, core=true, t24Name=RESERVED24, mandatory=false)
+        RESERVED25 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=14.0, core=true, t24Name=RESERVED25, mandatory=false)
+        RESERVED26 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=13.0, core=true, t24Name=RESERVED26, mandatory=false)
+        RESERVED27 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=12.0, core=true, t24Name=RESERVED27, mandatory=false)
+        RESERVED28 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=11.0, core=true, t24Name=RESERVED28, mandatory=false)
+        RESERVED29 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=10.0, core=true, t24Name=RESERVED29, mandatory=false)
+        RESERVED30 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=9.0, core=true, t24Name=RESERVED30, mandatory=false)
+/* This field indicates whether to generate MT564 message, when diary is reversed
+Validation Rules:
+Accepted Values : YES , BLANK */
+        SEND_MT564_CANC : SC_SccEventNotification:SC_CTDY_CA_ADVICE__SEND_MT564_CANC
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=4.0, core=true, t24Name=SEND.MT564.CANC, mandatory=false)
+    }
+    SC_CTDY_CA_ADVICE__564_OUT_FUNC
+    {
+        564_OUT_FUNC : SC_SccEventNotification:SC_CTDY_CA_ADVICE__564_OUT_FUNC__564_OUT_FUNC
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=5.0, core=true, t24Name=564.OUT.FUNC, mandatory=false)
+        564_OUT_NB_OF_DAYS : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=2, sysNumber=6.0, core=true, t24Name=564.OUT.NB.OF.DAYS, mandatory=false)
+        564_OUT_PRI_AFT : SC_SccEventNotification:SC_CTDY_CA_ADVICE__564_OUT_FUNC__564_OUT_PRI_AFT
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=7.0, core=true, t24Name=564.OUT.PRI.AFT, mandatory=false)
+        564_OUT_SEL_DATE : SC_SccEventNotification:SC_CTDY_CA_ADVICE__564_OUT_FUNC__564_OUT_SEL_DATE
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=8.0, core=true, t24Name=564.OUT.SEL.DATE, mandatory=false)
+    }
+    SC_CTDY_CA_ADVICE__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=44.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    SC_CTDY_CA_ADVICE__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=43.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    SC_CTDY_CA_ADVICE__IN_MT564_FUNC
+    {
+/* This field holds the function of the incoming MT564 or SC.PRE.DIARY for which Outward MT564 needs to be sent
+Validation Rules:
+NEWM or ALL is mandatory, when IN.MT564.FUNC is inputted */
+        IN_MT564_FUNC : SC_SccEventNotification:SC_CTDY_CA_ADVICE__IN_MT564_FUNC__IN_MT564_FUNC
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=1.0, core=true, t24Name=IN.MT564.FUNC, mandatory=false)
+        /* This fields holds the combination of Function and status separated by * */
+        IN_MT564_FUNC_STATUS : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=70, sysNumber=3.0, core=true, t24Name=IN.MT564.FUNC.STATUS, mandatory=false)
+        /* This field holds the status of the incoming MT564 or SC.PRE.DIARY for which Outward MT564 needs to be sent */
+        IN_MT564_STATUS : SC_SccEventNotification:SC_CTDY_CA_ADVICE__IN_MT564_FUNC__IN_MT564_STATUS
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=2.0, core=true, t24Name=IN.MT564.STATUS, mandatory=false)
+    }
+    SC_CTDY_CA_ADVICE__OVERRIDE
+    {
+        OVERRIDE : T24BusinessTypes:N
+            @i18n:Label (en=Override)
+            @i18n:Tooltip (en="Overrides generated by this transaction")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=40.0, core=true, t24Name=OVERRIDE, mandatory=false)
+    }
+    SC_CTDY_CORP_ACTION
+        @i18n:Description (en="")
+        @t24:i (t24Name=SC.CTDY.CORP.ACTION, level=F, type=H, allowedFunctions="A C D E H I L P Q R S", localRefApplicationSysNo=86.0, localRefAllowed=true)
+    {
+        /* This field holds the account number of the portfolio involved in the event */
+        ACCOUNT_NO : T24BusinessTypes:ANT
+            @i18n:Label (en=Account)
+            @i18n:Tooltip (en="Indicates Customer Account Number")
+            @t24:i (align=L, inputBehaviour=N, maxLength=16, sysNumber=16.0, core=true, t24Name=ACCOUNT.NO, typeModifiers="15D", mandatory=false)
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=95.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=96.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=92.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        /* This field is updated based on mandatory / voluntary flag in diary type */
+        CAMV : SC_SccEventNotification:SC_CTDY_CORP_ACTION__CAMV
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=9.0, core=true, t24Name=CAMV, mandatory=false)
+        /* This field holds the corp reference of the incoming message */
+        CORP_REF : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=8.0, core=true, t24Name=CORP.REF, mandatory=false)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=93.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CTDY_COA_ID -> SC_SccEventNotification:SC_CTDY_CORP_ACTION PK required
+            @t24:i (align=L, inputBehaviour=I, maxLength=91, sysNumber=0.0, core=true, businessType=A, t24Name=CTDY.COA.ID, mandatory=true)
+/* Currency in which ENTITLEMENT.AMT is calculated. If CURRENCY in Diary is a non-restricted Currency, then the
+					currency will be defaulted from the CURRENCY field on the original SC.PRE.DIARY record. */
+        CURRENCY -> ST_CurrencyConfig:CURRENCY
+            @i18n:Label (en=Ccy)
+            @t24:i (align=L, inputBehaviour=N, maxLength=3, sysNumber=15.0, core=true, businessType=CCY, t24Name=CURRENCY, mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=89.0, core=true, t24Name=CURR.NO, mandatory=false)
+        /* This field holds the segregated account id of the portfolio */
+        CUSTODY_PORT_NO : T24BusinessTypes:SW
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=4.0, core=true, t24Name=CUSTODY.PORT.NO, mandatory=false)
+        DATE_TIME -> byValue SC_SccEventNotification:SC_CTDY_CORP_ACTION__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        /* This field holds the depository number associated with the position */
+        DEPOSITORY -> SC_Config:CUSTOMER_SECURITY
+            @i18n:Label (en=Depository)
+            @i18n:Tooltip (en="Depository the Security to be delivered from/to")
+            @t24:i (align=R, inputBehaviour=N, maxLength=10, sysNumber=3.0, core=true, businessType=CUS, t24Name=DEPOSITORY, mandatory=false)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=94.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        /* This field holds the diary id */
+        DIARY_ID : T24BusinessTypes:S
+            @i18n:Label (en="Diary Id")
+            @i18n:Tooltip (en="Indicates the diary Id")
+            @t24:i (align=L, inputBehaviour=N, maxLength=16, sysNumber=6.0, core=true, t24Name=DIARY.ID, mandatory=false)
+        /* This field holds the entitlement id when diary is authorised */
+        ENTITLEMENT_ID : T24BusinessTypes:S
+            @i18n:Label (en="Entitlement Id")
+            @t24:i (align=L, inputBehaviour=N, maxLength=97, sysNumber=7.0, core=true, t24Name=ENTITLEMENT.ID, mandatory=false)
+/* This is the total nominal involved in the event. If the event is a RIGHTS issue then this is the total number of
+					rights otherwise this will be equal to the QUALIFY.HOLDING. */
+        EVENT_NOMINAL : T24BusinessTypes:NOMAMT
+            @i18n:Label (en="Event Nominal")
+            @i18n:Tooltip (en="Event Nominal")
+            @t24:i (align=R, inputBehaviour=N, maxLength=18, sysNumber=14.0, core=true, t24Name=EVENT.NOMINAL, typeModifiers=-, mandatory=false)
+        /* This field is updated with the ex-date from pre diary / diary record */
+        EX_DATE : T24BusinessTypes:D
+            @i18n:Label (en="Ex Date")
+            @i18n:Tooltip (en="Holds Ex Dividend date of the Diary.")
+            @t24:i (align=R, inputBehaviour=N, maxLength=11, sysNumber=10.0, core=true, t24Name=EX.DATE, mandatory=false)
+        INPUTTER -> byValue SC_SccEventNotification:SC_CTDY_CORP_ACTION__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        /* This field will allow the user to input the narrative that needs to be passed in outward 568 message */
+        LATEST_ADDTL_NARR : T24BusinessTypes:SW
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=55.0, core=true, t24Name=LATEST.ADDTL.NARR, isTextarea=true, mandatory=false)
+        /* Reserved for future use */
+        LATEST_ERR_NARRATIVE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=54.0, core=true, t24Name=LATEST.ERR.NARRATIVE, mandatory=false)
+        /* Reserved for future use */
+        LATEST_GROSS_CASH : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=18, sysNumber=48.0, core=true, t24Name=LATEST.GROSS.CASH, mandatory=false)
+        /* This field will allows the user to input the function for the message that needs to be generated */
+        LATEST_MSG_FUNCTION : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=4, sysNumber=46.0, core=true, t24Name=LATEST.MSG.FUNCTION, mandatory=false)
+        /* This field will allows the user to input the status for the message that needs to be generated */
+        LATEST_MSG_STATUS : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=4, sysNumber=47.0, core=true, t24Name=LATEST.MSG.STATUS, mandatory=false)
+        /* This field will allows the user to input the message that needs to be generated */
+        LATEST_MSG_TYPE : SC_SccEventNotification:SC_CTDY_CORP_ACTION__LATEST_MSG_TYPE
+            @t24:i (align=R, inputBehaviour=I, maxLength=35, sysNumber=45.0, core=true, t24Name=LATEST.MSG.TYPE, mandatory=false)
+        /* Reserved for future use */
+        LATEST_NET_CASH : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=18, sysNumber=51.0, core=true, t24Name=LATEST.NET.CASH, mandatory=false)
+        /* Reserved for future use */
+        LATEST_NEW_SECURITY -> SC_ScoSecurityMasterMaintenance:SECURITY_MASTER
+            @t24:i (align=L, inputBehaviour=I, maxLength=12, sysNumber=52.0, core=true, businessType=SEC, t24Name=LATEST.NEW.SECURITY, mandatory=false)
+        /* Reserved for future use */
+        LATEST_PROC_STATUS : SC_SccEventNotification:SC_CTDY_CORP_ACTION__LATEST_PROC_STATUS
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=53.0, core=true, t24Name=LATEST.PROC.STATUS, mandatory=false)
+        /* Reserved for future use */
+        LATEST_PSTA_CASH : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=18, sysNumber=49.0, core=true, t24Name=LATEST.PSTA.CASH, mandatory=false)
+        /* Reserved for future use */
+        LATEST_PSTA_QTY : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=18, sysNumber=50.0, core=true, t24Name=LATEST.PSTA.QTY, mandatory=false)
+        MSG_TYPE -> byValue SC_SccEventNotification:SC_CTDY_CORP_ACTION__MSG_TYPE *
+            @t24:i (t24Name=MSG.TYPE)
+        OPTION_DESCRIPTION -> byValue SC_SccEventNotification:SC_CTDY_CORP_ACTION__OPTION_DESCRIPTION *
+            @t24:i (t24Name=OPTION.DESCRIPTION)
+        OVERRIDE -> byValue SC_SccEventNotification:SC_CTDY_CORP_ACTION__OVERRIDE *
+            @t24:i (t24Name=OVERRIDE)
+        /* This field is updated with the pay-date from pre diary / diary record */
+        PAY_DATE : T24BusinessTypes:D
+            @i18n:Label (en="Pay Date")
+            @i18n:Tooltip (en="Holds the date the Event is Paid or Issued")
+            @t24:i (align=R, inputBehaviour=N, maxLength=11, sysNumber=11.0, core=true, t24Name=PAY.DATE, mandatory=false)
+        /* This field holds the portfolio number associated with the position for which the record is built */
+        PORTFOLIO -> SC_ScoPortfolioMaintenance:SEC_ACC_MASTER
+            @i18n:Label (en=Portfolio)
+            @t24:i (align=L, inputBehaviour=N, maxLength=20, sysNumber=1.0, core=true, businessType=SAM, t24Name=PORTFOLIO, mandatory=false)
+        /* Portfolio's holding in the original security as at EX.DATE */
+        QUALIFY_HOLDING : T24BusinessTypes:NOMAMT
+            @i18n:Label (en="Qual holding")
+            @t24:i (align=R, inputBehaviour=N, maxLength=25, sysNumber=13.0, core=true, t24Name=QUALIFY.HOLDING, typeModifiers=-, mandatory=false)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=88.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        RESERVED01 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=85.0, core=true, t24Name=RESERVED01, mandatory=false)
+        RESERVED02 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=84.0, core=true, t24Name=RESERVED02, mandatory=false)
+        RESERVED03 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=83.0, core=true, t24Name=RESERVED03, mandatory=false)
+        RESERVED04 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=82.0, core=true, t24Name=RESERVED04, mandatory=false)
+        RESERVED05 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=81.0, core=true, t24Name=RESERVED05, mandatory=false)
+        RESERVED06 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=80.0, core=true, t24Name=RESERVED06, mandatory=false)
+        RESERVED07 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=79.0, core=true, t24Name=RESERVED07, mandatory=false)
+        RESERVED08 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=78.0, core=true, t24Name=RESERVED08, mandatory=false)
+        RESERVED09 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=77.0, core=true, t24Name=RESERVED09, mandatory=false)
+        RESERVED10 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=76.0, core=true, t24Name=RESERVED10, mandatory=false)
+        RESERVED11 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=75.0, core=true, t24Name=RESERVED11, mandatory=false)
+        RESERVED12 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=74.0, core=true, t24Name=RESERVED12, mandatory=false)
+        RESERVED13 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=73.0, core=true, t24Name=RESERVED13, mandatory=false)
+        RESERVED14 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=72.0, core=true, t24Name=RESERVED14, mandatory=false)
+        RESERVED15 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=71.0, core=true, t24Name=RESERVED15, mandatory=false)
+        RESERVED16 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=70.0, core=true, t24Name=RESERVED16, mandatory=false)
+        RESERVED17 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=69.0, core=true, t24Name=RESERVED17, mandatory=false)
+        RESERVED18 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=68.0, core=true, t24Name=RESERVED18, mandatory=false)
+        RESERVED19 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=67.0, core=true, t24Name=RESERVED19, mandatory=false)
+        RESERVED20 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=66.0, core=true, t24Name=RESERVED20, mandatory=false)
+        RESERVED21 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=65.0, core=true, t24Name=RESERVED21, mandatory=false)
+        RESERVED22 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=64.0, core=true, t24Name=RESERVED22, mandatory=false)
+        RESERVED23 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=63.0, core=true, t24Name=RESERVED23, mandatory=false)
+        RESERVED24 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=62.0, core=true, t24Name=RESERVED24, mandatory=false)
+        RESERVED25 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=61.0, core=true, t24Name=RESERVED25, mandatory=false)
+        RESERVED26 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=60.0, core=true, t24Name=RESERVED26, mandatory=false)
+        RESERVED27 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=59.0, core=true, t24Name=RESERVED27, mandatory=false)
+        RESERVED28 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=58.0, core=true, t24Name=RESERVED28, mandatory=false)
+        RESERVED29 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=57.0, core=true, t24Name=RESERVED29, mandatory=false)
+        RESERVED30 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=56.0, core=true, t24Name=RESERVED30, mandatory=false)
+        RMDR_AUTO_DATE -> byValue SC_SccEventNotification:SC_CTDY_CORP_ACTION__RMDR_AUTO_DATE *
+            @t24:i (t24Name=RMDR.AUTO.DATE)
+        /* This field holds the pre diary id */
+        SC_PRE_DIARY_ID : T24BusinessTypes:S
+            @t24:i (align=L, inputBehaviour=N, maxLength=16, sysNumber=5.0, core=true, t24Name=SC.PRE.DIARY.ID, mandatory=false)
+/* This field holds the Security Master ID of the event/original security
+Updated from the originating SC.PRE.DIARY record */
+        SECURITY_NO -> SC_ScoSecurityMasterMaintenance:SECURITY_MASTER
+            @i18n:Label (en="Security No")
+            @i18n:Tooltip (en="Indicates the security code/number")
+            @t24:i (align=L, inputBehaviour=N, maxLength=12, sysNumber=2.0, core=true, businessType=SEC, t24Name=SECURITY.NO, mandatory=false)
+    }
+    SC_CTDY_CORP_ACTION__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=91.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    SC_CTDY_CORP_ACTION__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=90.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    SC_CTDY_CORP_ACTION__MSG_TYPE
+    {
+        566_NEW_SECURITY -> SC_ScoSecurityMasterMaintenance:SECURITY_MASTER
+            @t24:i (align=L, inputBehaviour=N, maxLength=12, sysNumber=36.0, core=true, businessType=SEC, t24Name=566.NEW.SECURITY, mandatory=false)
+        ADDTL_NARR -> byValue SC_SccEventNotification:SC_CTDY_CORP_ACTION__MSG_TYPE__ADDTL_NARR *
+            @t24:i (t24Name=ADDTL.NARR)
+        /* This field holds the delivery reference of the message generated */
+        DELIVERY_REF : T24BusinessTypes:A
+            @i18n:Label (en="Delivery Ref")
+            @i18n:Tooltip (en="System generated Delivery ref key")
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=41.0, core=true, t24Name=DELIVERY.REF, mandatory=false)
+        /* Reserved for future use */
+        ERR_NARRATIVE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=50, sysNumber=38.0, core=true, t24Name=ERR.NARRATIVE, mandatory=false)
+        /* Reserved for future use */
+        GEN_MT567 : SC_SccEventNotification:SC_CTDY_CORP_ACTION__MSG_TYPE__GEN_MT567
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=40.0, core=true, t24Name=GEN.MT567, mandatory=false)
+        /* Reserved for future use */
+        GROSS_CASH : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=18, sysNumber=32.0, core=true, t24Name=GROSS.CASH, mandatory=false)
+        /* Reserved for future use */
+        INW_DELIVERY_REF : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=39.0, core=true, t24Name=INW.DELIVERY.REF, mandatory=false)
+        /* Reserved for future use */
+        INW_SEME_REF : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=16, sysNumber=28.0, core=true, t24Name=INW.SEME.REF, mandatory=false)
+        /* This field is updated with the function from pre diary record */
+        MSG_FUNCTION : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=4, sysNumber=29.0, core=true, t24Name=MSG.FUNCTION, mandatory=false)
+        /* This field is updated with the status from pre diary record */
+        MSG_STATUS : T24BusinessTypes:A
+            @i18n:Label (en="Msg Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=4, sysNumber=30.0, core=true, t24Name=MSG.STATUS, mandatory=false)
+        /* This field holds the message type generated by the delivery process */
+        MSG_TYPE : SC_SccEventNotification:SC_CTDY_CORP_ACTION__MSG_TYPE__MSG_TYPE
+            @i18n:Label (en="Message Type")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=26.0, core=true, t24Name=MSG.TYPE, mandatory=false)
+        /* Reserved for future use */
+        NET_CASH : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=18, sysNumber=35.0, core=true, t24Name=NET.CASH, mandatory=false)
+        /* Reserved for future use */
+        PROC_STATUS : SC_SccEventNotification:SC_CTDY_CORP_ACTION__MSG_TYPE__PROC_STATUS
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=37.0, core=true, t24Name=PROC.STATUS, mandatory=false)
+        /* Reserved for future use */
+        PSTA_CASH : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=18, sysNumber=33.0, core=true, t24Name=PSTA.CASH, mandatory=false)
+        /* Reserved for future use */
+        PSTA_QTY : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=18, sysNumber=34.0, core=true, t24Name=PSTA.QTY, mandatory=false)
+        /* Reserved for future use */
+        RELA_REFERENCE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=16, sysNumber=31.0, core=true, t24Name=RELA.REFERENCE, mandatory=false)
+        /* This field holds the seme reference populated in the outgoing message */
+        SEME_REF : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=16, sysNumber=27.0, core=true, t24Name=SEME.REF, mandatory=false)
+        /* Reserved for future use */
+        SEND_MSG : SC_SccEventNotification:SC_CTDY_CORP_ACTION__MSG_TYPE__SEND_MSG
+            @i18n:Label (en="Send Msg")
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=44.0, core=true, t24Name=SEND.MSG, mandatory=false)
+/* This field will hold
+1. STP - when message is generated automatically by the system
+2. BULK.INSTRUCT - When message is generated from pre diary / diary record through manual process
+3. MANUAL - When message is generated from SC.CTDY.CORP.ACTION record
+Validation
+Accepted Values : STP, BULK.INSTRUCT, MANUAL */
+        SENT_BY : SC_SccEventNotification:SC_CTDY_CORP_ACTION__MSG_TYPE__SENT_BY
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=43.0, core=true, t24Name=SENT.BY, mandatory=false)
+    }
+    SC_CTDY_CORP_ACTION__MSG_TYPE__ADDTL_NARR
+    {
+        /* This field holds the additional narrative description from pre diary record */
+        ADDTL_NARR : T24BusinessTypes:SW
+            @t24:i (align=L, inputBehaviour=N, maxLength=65, sysNumber=42.0, core=true, t24Name=ADDTL.NARR, mandatory=false)
+    }
+    SC_CTDY_CORP_ACTION__OPTION_DESCRIPTION
+    {
+        /* The field stores the entitlement amount relating to the option. It will be updated based on qualifying holdings */
+        ENTITLEMENT_AMT : T24BusinessTypes:AMT
+            @i18n:Label (en="Cash Amount")
+            @t24:i (align=R, inputBehaviour=N, maxLength=18, sysNumber=18.0, core=true, t24Name=ENTITLEMENT.AMT, typeModifiers="-15D", mandatory=false)
+/* This field holds 'IN PROGRESS' when record is created
+Validation
+Accepted Values : IN PROGRESS , COMPLETED */
+        EVENT_STATUS : SC_SccEventNotification:SC_CTDY_CORP_ACTION__OPTION_DESCRIPTION__EVENT_STATUS
+            @i18n:Label (en="Event Status")
+            @i18n:Tooltip (en="Identifies the status of the event")
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=25.0, core=true, t24Name=EVENT.STATUS, mandatory=false)
+        /* This field holds the gross rate of dividend/coupon. */
+        GROSS_RATE : T24BusinessTypes:R
+            @i18n:Label (en="Gross Rate")
+            @t24:i (align=R, inputBehaviour=N, maxLength=15, sysNumber=20.0, core=true, t24Name=GROSS.RATE, mandatory=false)
+        /* This field holds the net rate */
+        NET_RATE : T24BusinessTypes:R
+            @i18n:Label (en="Net Rate")
+            @t24:i (align=R, inputBehaviour=N, maxLength=15, sysNumber=21.0, core=true, t24Name=NET.RATE, mandatory=false)
+        /* Reserved for future use. */
+        NEW_SECURITY -> SC_ScoSecurityMasterMaintenance:SECURITY_MASTER
+            @t24:i (align=L, inputBehaviour=N, maxLength=12, sysNumber=22.0, core=true, businessType=SEC, t24Name=NEW.SECURITY, mandatory=false)
+        /* Reserved for future use */
+        NOMINAL : T24BusinessTypes:NOMAMT
+            @i18n:Label (en=Nominal)
+            @i18n:Tooltip (en="No of Units or Amount")
+            @t24:i (align=R, inputBehaviour=N, maxLength=25, sysNumber=23.0, core=true, t24Name=NOMINAL, mandatory=false)
+        /* A brief description of the Option, updated by the system from the originating SC.PRE.DIARY record */
+        OPTION_DESCRIPTION : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=17.0, core=true, t24Name=OPTION.DESCRIPTION, mandatory=false)
+        /* Reserved for future use */
+        OPT_NOMINAL : T24BusinessTypes:NOMAMT
+            @t24:i (align=R, inputBehaviour=N, maxLength=25, sysNumber=24.0, core=true, t24Name=OPT.NOMINAL, mandatory=false)
+        /* This field holds the ratio between the Nominal of the NEW.SECURITY and the Nominal of the Original Security */
+        RATIO : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=16, sysNumber=19.0, core=true, t24Name=RATIO, mandatory=false)
+    }
+    SC_CTDY_CORP_ACTION__OVERRIDE
+    {
+        OVERRIDE : T24BusinessTypes:N
+            @i18n:Label (en=Override)
+            @i18n:Tooltip (en="Overrides generated by this transaction")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=87.0, core=true, t24Name=OVERRIDE, mandatory=false)
+    }
+    SC_CTDY_CORP_ACTION__RMDR_AUTO_DATE
+    {
+        /* This field holds the date on which the reminder message needs to be generated */
+        RMDR_AUTO_DATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=N, maxLength=11, sysNumber=12.0, core=true, t24Name=RMDR.AUTO.DATE, mandatory=false)
+    }
+    SC_DEPO_MSG_MONITOR
+        @i18n:Description (en="")
+        @t24:i (t24Name=SC.DEPO.MSG.MONITOR, level=F, type=L, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        DEPOSITORY -> byValue SC_SccEventNotification:SC_DEPO_MSG_MONITOR__DEPOSITORY *
+            @t24:i (t24Name=DEPOSITORY)
+        DEPO_MONITOR_ID -> SC_SccEventNotification:SC_DEPO_MSG_MONITOR PK required
+            @t24:i (align=L, inputBehaviour=I, maxLength=38, sysNumber=0.0, core=true, businessType=A, t24Name=DEPO.MONITOR.ID, mandatory=true)
+        EVENT_TYPE -> SC_SccEventCapture:DIARY_TYPE
+            @i18n:Label (en="Event type")
+            @i18n:Tooltip (en="Type of event - Dividend Payment/Bonus etc.")
+            @t24:i (align=L, inputBehaviour=I, maxLength=15, sysNumber=2.0, core=true, businessType=A, t24Name=EVENT.TYPE, mandatory=false)
+        EX_DATE : T24BusinessTypes:D
+            @i18n:Label (en="Ex Date")
+            @i18n:Tooltip (en="Holds Ex Dividend date of the Diary.")
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=3.0, core=true, t24Name=EX.DATE, mandatory=false)
+        MONITOR_DEPO -> byValue SC_SccEventNotification:SC_DEPO_MSG_MONITOR__MONITOR_DEPO *
+            @t24:i (t24Name=MONITOR.DEPO)
+        MSG_RECD_DATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=5.0, core=true, t24Name=MSG.RECD.DATE, mandatory=false)
+        MSG_TYPE : SC_SccEventNotification:SC_DEPO_MSG_MONITOR__MSG_TYPE
+            @i18n:Label (en="Message Type")
+            @t24:i (align=R, inputBehaviour=I, maxLength=35, sysNumber=4.0, core=true, t24Name=MSG.TYPE, mandatory=false)
+        SECURITY_NO -> SC_ScoSecurityMasterMaintenance:SECURITY_MASTER
+            @i18n:Label (en="Security No")
+            @i18n:Tooltip (en="Indicates the security code/number")
+            @t24:i (align=L, inputBehaviour=I, maxLength=12, sysNumber=1.0, core=true, businessType=SEC, t24Name=SECURITY.NO, mandatory=false)
+    }
+    SC_DEPO_MSG_MONITOR__DEPOSITORY
+    {
+        DEPOSITORY -> SC_Config:CUSTOMER_SECURITY
+            @i18n:Label (en=Depository)
+            @i18n:Tooltip (en="Depository the Security to be delivered from/to")
+            @t24:i (align=L, inputBehaviour=I, maxLength=10, sysNumber=6.0, core=true, businessType=A, t24Name=DEPOSITORY, mandatory=false)
+    }
+    SC_DEPO_MSG_MONITOR__MONITOR_DEPO
+    {
+        MONITOR_DEPO -> SC_Config:CUSTOMER_SECURITY
+            @t24:i (align=L, inputBehaviour=I, maxLength=10, sysNumber=7.0, core=true, businessType=A, t24Name=MONITOR.DEPO, mandatory=false)
+    }
+    SC_PRE_DIARY
+        @i18n:Description (en="")
+        @t24:i (t24Name=SC.PRE.DIARY, level=C, type=H, allowedFunctions="A C D E H I L P Q R S", localRefApplicationSysNo=119.0, localRefAllowed=true)
+    {
+        /* Extracted from the inward delivery message to indicate status, for SWIFT this can be NEWM or CANC etc. */
+        ACTION_STATUS : T24BusinessTypes:A
+            @i18n:Label (en="Action Status")
+            @i18n:Tooltip (en="Indicates the status of the SWIFT ")
+            @t24:i (align=L, inputBehaviour=I, maxLength=15, sysNumber=61.0, core=true, t24Name=ACTION.STATUS, mandatory=false)
+        ADDL_NARRATIVE -> byValue SC_SccEventNotification:SC_PRE_DIARY__ADDL_NARRATIVE *
+            @t24:i (t24Name=ADDL.NARRATIVE)
+/* Archive date of the SC.PRE.DIARY record.
+This date is defaulted to the date derived from the DIARY.REMAIN field
+of the SC.PARAMETER file that contains the number of days the
+diaries should remains before archiving.
+
+
+The date can be amended manually.
+Validation Rules:
+
+
+Mandatory input of Standard T24 Date format. */
+        ARCH_DATE : T24BusinessTypes:D
+            @i18n:Label (en="Archive Date")
+            @i18n:Tooltip (en="Identifies Archive date of SC.PRE.DIARY record")
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=49.0, core=true, t24Name=ARCH.DATE, mandatory=false)
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=129.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=130.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=126.0, core=true, t24Name=AUTHORISER, mandatory=false)
+/* Date on which the Start of Day process will automatically authorise the SC.PRE.DIARY record.
+This field is automatically populated from the parameters entered in the related DIARY.TYPE
+record (fields PRE.DIA.DAYS, PRE.DIA.PRI.AFT, PRE.DIA.SEL.DATE)
+This field can be amended.
+The user will be prompted to bypass the date when authorising the SC.PRE.DIARY record manually.
+Validation Rules:
+
+
+Standard T24 Date format
+The date must be at least the next working day */
+        AUTO_AUTH_DATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=12, sysNumber=67.0, core=true, t24Name=AUTO.AUTH.DATE, mandatory=false)
+/* Denotes the Corporate action Event Indicator in SWIFT terms.
+Validation Rules
+Valid Swift indicator */
+        CAEV_TYPE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=5, sysNumber=94.0, core=true, t24Name=CAEV.TYPE, mandatory=false)
+        CERTIFICATION_TYPE -> byValue SC_SccEventNotification:SC_PRE_DIARY__CERTIFICATION_TYPE *
+            @t24:i (t24Name=CERTIFICATION.TYPE)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=127.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+/* Indicates the Currency of the Event which is being defined.
+Validation Rules: */
+        CURRENCY -> ST_CurrencyConfig:CURRENCY
+            @i18n:Label (en=Ccy)
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=6.0, core=true, businessType=CCY, t24Name=CURRENCY, mandatory=false)
+/* The field to capture the function of the latest message (MT564 - Corporate Action Notification).
+Validation Rules
+The valid functions are defined in EB.LOOKUP table - MSG.FUNC*(ADDB,CANC,NEWM,REPE,REPL,RMDR,WITH) */
+        CURR_FUNC : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=4, sysNumber=89.0, core=true, t24Name=CURR.FUNC, mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=123.0, core=true, t24Name=CURR.NO, mandatory=false)
+/* The field to capture the processing status (Field 25D - Processing Status)from the latest MT 564
+Validation Rules
+The valid statuses are defined in EB.LOOKUP table - MSG.STATUS*(COMP,COMU,ENTL,PREU,PREC) */
+        CURR_STATUS_CODE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=4, sysNumber=90.0, core=true, t24Name=CURR.STATUS.CODE, mandatory=false)
+        DATE_TIME -> byValue SC_SccEventNotification:SC_PRE_DIARY__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DELIVERY_INREF -> byValue SC_SccEventNotification:SC_PRE_DIARY__DELIVERY_INREF *
+            @t24:i (t24Name=DELIVERY.INREF)
+        /* The depository from whom this notice originated. Extracted from the inward delivery message. */
+        DEPOSITORY : T24BusinessTypes:A
+            @i18n:Label (en=Depository)
+            @i18n:Tooltip (en="Depository the Security to be delivered from/to")
+            @t24:i (align=L, inputBehaviour=I, maxLength=10, sysNumber=54.0, core=true, t24Name=DEPOSITORY, mandatory=false)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=128.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+/* This field is a system maintained field that stores the reference to the DIARY record created when the
+					SC.PRE.DIARY record was authorised.
+Validation Rules:
+
+
+An EXTERNAL field.
+Maintained by the system. */
+        DIARY_ID : T24BusinessTypes:S
+            @i18n:Label (en="Security Pre Diary ID")
+            @i18n:Tooltip (en="Identifies the security pre diary ID")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=62.0, core=true, t24Name=DIARY.ID, mandatory=false)
+        /* This field will be updated from inward message MT564 and will hold the early deadline date of the event. */
+        EARLY_DEADLINE : T24BusinessTypes:D
+            @i18n:Label (en="Early Deadline")
+            @i18n:Tooltip (en="Early Deadline date")
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=66.0, core=true, t24Name=EARLY.DEADLINE, mandatory=false)
+/* Event type that the incoming swift message refers to.
+It must be a valid DIARY.TYPE record.
+
+
+If it doesn't exist in DIARAY.TYPE file, at authorisation stage :
+- a message is set to the HOLD.REASON field
+- the record stay in hld status.
+
+
+
+
+
+
+Validation Rules: */
+        EVENT_TYPE : T24BusinessTypes:A
+            @i18n:Label (en="Event type")
+            @i18n:Tooltip (en="Type of event - Dividend Payment/Bonus etc.")
+            @t24:i (align=L, inputBehaviour=I, maxLength=15, sysNumber=2.0, core=true, t24Name=EVENT.TYPE, mandatory=false)
+/* If CURRENCY is a restricted Curreny,then this field contains contains the Exchange Rate between CURRENCY and
+					SETT.CURRENCY. */
+        EXCH_RATE : T24BusinessTypes:R
+            @i18n:Label (en="Exchange Rate")
+            @t24:i (align=R, inputBehaviour=I, maxLength=15, sysNumber=73.0, core=true, t24Name=EXCH.RATE, mandatory=false)
+/* The Ex.Div date of the DIARY. All holders in the Security specified as of this date are entitled to the event.
+Validation Rules:
+
+
+Mandatory input of Standard T24 Date format. */
+        EX_DATE : T24BusinessTypes:D
+            @i18n:Label (en="Ex Date")
+            @i18n:Tooltip (en="Holds Ex Dividend date of the Diary.")
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=3.0, core=true, t24Name=EX.DATE, mandatory=false)
+        /* User defined field indicating the transaction source. */
+        FEED_SOURCE : T24BusinessTypes:A
+            @i18n:Label (en="Feed Source")
+            @i18n:Tooltip (en="Indicates the transaction source, user defined")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=59.0, core=true, t24Name=FEED.SOURCE, mandatory=false)
+/* This field will hold the Franking Credit rate that will be used for computing franking credits
+This will be a Rate or a Percentage of face value, based on whether field PERCENTAGE is set as No or Yes
+Validation Rules
+Field can be inputted only when
+1. CASH field for the record in DIARY.TYPE table is set to yes
+2. BOND.OR.SHARE set as 'S' in SECURITY.MASTER record
+3. FRANKING.CR.ALLOWED field should be set as YES at Parameter level
+Negative rates are not allowed.
+Sum of franked credit rate and unfranked rate should be equal to the rate field. */
+        FRANKED_CREDIT_RATE : T24BusinessTypes:R
+            @t24:i (align=R, inputBehaviour=I, maxLength=9, sysNumber=109.0, core=true, t24Name=FRANKED.CREDIT.RATE, mandatory=false)
+/* This field will be defaulted to STP or NO from GEN.MT564.METHOD in diary type.
+For manual generation of outward 564/568 message, this field needs to be set to yes */
+        GEN_MT564 : SC_SccEventNotification:SC_PRE_DIARY__GEN_MT564
+            @t24:i (align=L, inputBehaviour=I, maxLength=4, sysNumber=112.0, core=true, t24Name=GEN.MT564, mandatory=false)
+/* This field needs to be manually set to YES, to generate outward 568 message
+Validation Rules
+Field can be inputted only when ADDL.NARRATIVE is given */
+        GEN_MT568 : SC_SccEventNotification:SC_PRE_DIARY__GEN_MT568
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=113.0, core=true, t24Name=GEN.MT568, mandatory=false)
+/* The gross amount generated by the event populated from the GROSS.AMOUNT field
+of the incoming swift message.
+Validation Rules: */
+        GROSS_AMOUNT : T24BusinessTypes:AMT
+            @i18n:Label (en="Gross Amount")
+            @i18n:Tooltip (en="Indicates the gross amount generated by the event ")
+            @t24:i (align=R, inputBehaviour=I, maxLength=18, sysNumber=57.0, core=true, t24Name=GROSS.AMOUNT, mandatory=false)
+/* Reason of the HLD status of the record.
+
+
+If the DIARY cannot be generated, the reason is indicated here.
+
+
+Validation Rules:
+
+
+
+
+Automatic reason (at authorisation stage) :
+- SECURITY.NO UNKNOWN
+- SC.PRE.DIARY (OR $HIS OR $NAU) ALLREADY EXISTS
+- DIARY (OR $HIS OR $NAU) ALLREADY EXISTS
+- EVENT.TYPE MISSING
+- EX.DATE MISSING
+- NO POSITION
+- EVENT UNKNOWN IN DIARY.TYPE
+
+
+
+
+
+
+any manual entry */
+        HLD_REASON : T24BusinessTypes:A
+            @i18n:Label (en="Hold Reason")
+            @i18n:Tooltip (en="Indicates reason for not generating Diary record.")
+            @t24:i (align=L, inputBehaviour=I, maxLength=100, sysNumber=53.0, core=true, t24Name=HLD.REASON, mandatory=false)
+/* Flag to indicate whether initial advice is sent from pre diary
+Validation Rules
+Noinput Field */
+        INIT_ADVICE_SENT : SC_SccEventNotification:SC_PRE_DIARY__INIT_ADVICE_SENT
+            @t24:i (align=L, inputBehaviour=N, maxLength=1, sysNumber=93.0, core=true, t24Name=INIT.ADVICE.SENT, mandatory=false)
+        INPUTTER -> byValue SC_SccEventNotification:SC_PRE_DIARY__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+/* This field denotes whether the rights distribution event is for reinvestment, exchange or subscription of rights.
+Mapped from 564 identifier, 22F::RHDI from D sequence.
+Validation Rules:
+
+Allowed values: EXRI,EXOF,DRIP */
+        INT_DIST_TYPE : SC_SccEventNotification:SC_PRE_DIARY__INT_DIST_TYPE
+            @t24:i (align=L, inputBehaviour=I, maxLength=4, sysNumber=95.0, core=true, t24Name=INT.DIST.TYPE, mandatory=false)
+/* ISIN nr of the concerned security. Can be useful (if security number does not exist)
+to open a new SECURITY.MASTER record.
+Validation Rules: */
+        ISIN_NR : T24BusinessTypes:A
+            @i18n:Label (en="ISIN NR")
+            @i18n:Tooltip (en="ISIN NR")
+            @t24:i (align=L, inputBehaviour=I, maxLength=12, sysNumber=52.0, core=true, t24Name=ISIN.NR, mandatory=false)
+        K_PERCENTAGE -> byValue SC_SccEventNotification:SC_PRE_DIARY__K_PERCENTAGE *
+            @t24:i (t24Name=K.PERCENTAGE)
+        /* Extracted from the inward delivery message senders reference (prefix CORP) */
+        LINK_REF : T24BusinessTypes:A
+            @i18n:Label (en="Link Reference")
+            @i18n:Tooltip (en="Holds the sender\'s reference")
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=64.0, core=true, t24Name=LINK.REF, mandatory=false)
+/* Holds value YES - This field is only for informatory purpose and will determine whether Diary caters to lent
+					position of the security. */
+        LOAN : SC_SccEventNotification:SC_PRE_DIARY__LOAN
+            @i18n:Label (en=Loan)
+            @i18n:Tooltip (en="Is this Diary caters to lent position?")
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=70.0, core=true, t24Name=LOAN, mandatory=false)
+        LOCAL_TAX_PERC -> byValue SC_SccEventNotification:SC_PRE_DIARY__LOCAL_TAX_PERC *
+            @t24:i (t24Name=LOCAL.TAX.PERC)
+/* Mandatory or voluntary indicator for the Event. Mapped from 564 identifier, 22F::CAMV.
+Validation Rules:
+
+Allowed values: MAND,VOLU,CHOS */
+        MAND_VOLU_FLAG : SC_SccEventNotification:SC_PRE_DIARY__MAND_VOLU_FLAG
+            @i18n:Label (en="Mandatory Voluntary Flag")
+            @i18n:Tooltip (en="Indicates whether the event is mandatory or voluntary")
+            @t24:i (align=L, inputBehaviour=I, maxLength=4, sysNumber=76.0, core=true, t24Name=MAND.VOLU.FLAG, mandatory=false)
+/* This field specifies the date of meeting and so updated from 98A tag of CA option details of MT564 with qualifier MEET.
+Validation Rules
+Standard T24 Date field */
+        MEETING_DATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=80.0, core=true, t24Name=MEETING.DATE, mandatory=false)
+/* This field specifies the time of meeting and so updated from 98C tag of CA option details of MT564 with qualifier MEET.
+Validation Rules
+Standard T24 time field */
+        MEETING_TIME : T24BusinessTypes:TIME
+            @t24:i (align=L, inputBehaviour=I, maxLength=11, sysNumber=81.0, core=true, t24Name=MEETING.TIME, mandatory=false)
+/* This field specifies the venue of the first meeting , second meeting and third meeting.
+System will update this field from 94E tag of MT564 with the qualifiers MEET, MET2, MET3
+For e.g. if 94E tag contains the value, :94E::MEET//11 Eunos Rd 8,Lvl 1 Event Hall, system updates this field as "11 Eunos Rd 8,Lvl 1 Event Hall"
+The same process is carried out for qualifiers MET2 and MET3 as well
+Validation Rules
+Standard T24 Time field */
+        MEET_VENUE : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=82.0, core=true, t24Name=MEET.VENUE, isTextarea=true, mandatory=false)
+/* Message type of the incoming swift message (MTxxx)
+Validation Rules: */
+        MESSAGE_TYPE : T24BusinessTypes:A
+            @i18n:Label (en="Message Type")
+            @i18n:Tooltip (en="Delivery message types generated for this record")
+            @t24:i (align=L, inputBehaviour=I, maxLength=10, sysNumber=58.0, core=true, t24Name=MESSAGE.TYPE, mandatory=false)
+        NARRATIVE -> byValue SC_SccEventNotification:SC_PRE_DIARY__NARRATIVE *
+            @t24:i (t24Name=NARRATIVE)
+/* This field specifies the New Company's place of Incorporation.
+System will update this field from 94E tag of MT564 when the qualifier is NPLI
+For e.g. if 94E tag contains the value,:94E::NPLI//11 Eunos Rd 8,Lvl 1 Event Hall, system updates this field as "11 Eunos Rd 8,Lvl 1 Event Hall"
+Validation Rules
+Standard T24 Time field */
+        NEW_INCORP_PLACE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=83.0, core=true, t24Name=NEW.INCORP.PLACE, mandatory=false)
+        OPTION_DESC -> byValue SC_SccEventNotification:SC_PRE_DIARY__OPTION_DESC *
+            @t24:i (t24Name=OPTION.DESC)
+        OTH_DATE_TYPE -> byValue SC_SccEventNotification:SC_PRE_DIARY__OTH_DATE_TYPE *
+            @t24:i (t24Name=OTH.DATE.TYPE)
+        OVERRIDE -> byValue SC_SccEventNotification:SC_PRE_DIARY__OVERRIDE *
+            @t24:i (t24Name=OVERRIDE)
+/* Option indicator for oversubscription. Mapped from 564 identifier,22F::CAOP if option in CAOP tag contains OVER.
+					If manually input, this should be specified as OVER. */
+        OVER_OPTION_DESC : SC_SccEventNotification:SC_PRE_DIARY__OVER_OPTION_DESC
+            @i18n:Label (en="Over Subscription Description")
+            @i18n:Tooltip (en="Option Indicator for Over Subscription")
+            @t24:i (align=L, inputBehaviour=I, maxLength=4, sysNumber=77.0, core=true, t24Name=OVER.OPTION.DESC, mandatory=false)
+        /* Option number pertaining to Oversubscription.Mapped from 564 identifier, 13A::CAON. */
+        OVER_OPTION_NUM : T24BusinessTypes:N
+            @i18n:Label (en="Over Subscription Option NUmber")
+            @i18n:Tooltip (en="Option number pertaining to Oversubscription")
+            @t24:i (align=R, inputBehaviour=I, maxLength=3, sysNumber=78.0, core=true, t24Name=OVER.OPTION.NUM, mandatory=false)
+        /* This holds the price at which Over subscribed quantity is to be sold. Mapped from 564 identifier, 95a::PRPP. */
+        OVER_SUBS_PRICE : T24BusinessTypes:R
+            @i18n:Label (en="Oversubscription Price")
+            @i18n:Tooltip (en="Over Subscription Price")
+            @t24:i (align=R, inputBehaviour=I, maxLength=16, sysNumber=79.0, core=true, t24Name=OVER.SUBS.PRICE, mandatory=false)
+/* Date of the Event is paid/issued.
+Validation Rules:
+
+
+Mandatory input of Standard T24 Date format. */
+        PAY_DATE : T24BusinessTypes:D
+            @i18n:Label (en="Pay Date")
+            @i18n:Tooltip (en="Holds the date the Event is Paid or Issued")
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=4.0, core=true, t24Name=PAY.DATE, mandatory=false)
+/* This field is an information field to denote the percentage of shares sought.
+Mapped from 564 identifier, 92A::PTSC from D sequence. */
+        PERCENT_SOUGHT : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=15, sysNumber=96.0, core=true, t24Name=PERCENT.SOUGHT, mandatory=false)
+/* Determines whether pre confirmation advices are generated when SC.PRE.DIARY is created.
+The value will be defaulted from the relevant DIARY.TYPE record.
+The actual message types are determined via the relevant EB.ADVICES records, which will be either
+					SC-0100-EVENT.TYPE.
+
+Validation Rules
+Optional Input can be set to YES or NO */
+        PRE_ADVICE_REQ : SC_SccEventNotification:SC_PRE_DIARY__PRE_ADVICE_REQ
+            @i18n:Label (en="Pre Advice Reqd?")
+            @i18n:Tooltip (en="Whether pre-confirmation advices required?")
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=92.0, core=true, t24Name=PRE.ADVICE.REQ, mandatory=false)
+/* The quantity derived from the original security concerned by the event populated from the QTY.DERIVED field of
+					the incoming swift message.
+Validation Rules: */
+        QTY_DERIVED : T24BusinessTypes:A
+            @i18n:Label (en="Quantity Derived")
+            @i18n:Tooltip (en="Quantity derived from original event security ")
+            @t24:i (align=L, inputBehaviour=I, maxLength=15, sysNumber=56.0, core=true, t24Name=QTY.DERIVED, mandatory=false)
+/* The quantity of security concerned by the event populated from the QTY.SECURITY field
+of the incoming swift message.
+Validation Rules: */
+        QTY_SECURITY : T24BusinessTypes:A
+            @i18n:Label (en="Quantity Security")
+            @i18n:Tooltip (en="Quantity of security concerned by the event")
+            @t24:i (align=L, inputBehaviour=I, maxLength=18, sysNumber=55.0, core=true, t24Name=QTY.SECURITY, mandatory=false)
+/* This field will indicate whether the Rate is quoted as a net or gross figure - with respect to tax. The Corporate
+					Actions suite of programs allows rates to be entered before tax & or charges (Gross) or after tax & or
+					charges (Net).
+Validation Rules:
+
+
+Only input of 'GROSS' or 'NET' allowed. */
+        RATE_TYPE : SC_SccEventNotification:SC_PRE_DIARY__RATE_TYPE
+            @i18n:Label (en="Rate Type")
+            @i18n:Tooltip (en="Is the Rate quoted net of tax or gross of tax")
+            @t24:i (align=L, inputBehaviour=I, maxLength=5, sysNumber=7.0, core=true, t24Name=RATE.TYPE, mandatory=false)
+/* The RECORD.DATE of the DIARY.Optional date field that can be before, after or equal to EX.DATE. The Record Date
+					of a Corporate Event does not affect the beneficial entitlement to the event, but does affect the way the event is
+					processed with regard to who will receive the outcome of an event directly and where the outcome is due to/from.
+
+Validation Rules:
+Optional input of Standard T24 Date format. */
+        RECORD_DATE : T24BusinessTypes:D
+            @i18n:Label (en="Record Date")
+            @i18n:Tooltip (en="Indicates the record date of the diary")
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=63.0, core=true, t24Name=RECORD.DATE, mandatory=false)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=122.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+/* This field will hold the redemption percentage, up to which the nominal will be redeemed based on trading units.
+Validation Rules: */
+        REDEM_PERCENT : T24BusinessTypes:DEC
+            @i18n:Label (en="Redemption %")
+            @i18n:Tooltip (en="What percentage to be redeemed")
+            @t24:i (align=L, inputBehaviour=F, maxLength=10, sysNumber=71.0, core=true, t24Name=REDEM.PERCENT, typeModifiers="8", mandatory=false)
+/* Advises the date that instructions must be with the registrar or custodian.
+Validation Rules:
+
+
+Optional input of Standard T24 Date format. */
+        REPLY_BY_DATE : T24BusinessTypes:D
+            @i18n:Label (en="Reply By Date")
+            @i18n:Tooltip (en="Date reply should be sent back to Depository")
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=5.0, core=true, t24Name=REPLY.BY.DATE, mandatory=false)
+/* Field to trigger rerun of eligible holding calculation. It will be automatically set to Y on receipt of MT 564
+					for
+					which notification has to be generated.
+Validation Rules
+Cannot be set to Y once the DIARY is created. */
+        RERUN : SC_SccEventNotification:SC_PRE_DIARY__RERUN
+            @i18n:Label (en=Rerun)
+            @i18n:Tooltip (en="Whether to rerun the diary?")
+            @t24:i (align=L, inputBehaviour=N, maxLength=1, sysNumber=91.0, core=true, t24Name=RERUN, mandatory=false)
+        RESERVED_01 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=118.0, core=true, t24Name=RESERVED.01, mandatory=false)
+        RESERVED_02 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=117.0, core=true, t24Name=RESERVED.02, mandatory=false)
+        RESERVED_03 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=116.0, core=true, t24Name=RESERVED.03, mandatory=false)
+        RESERVED_04 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=115.0, core=true, t24Name=RESERVED.04, mandatory=false)
+        RESERVED_05 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=114.0, core=true, t24Name=RESERVED.05, mandatory=false)
+/* This field will specify the date on which rights will be credited to the account.
+Mapped from 98A/Post in Sequence C of MT564
+Validation Rules
+Must be valid T24 Date Format */
+        RIGHTS_CREDIT_DATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=8, sysNumber=105.0, core=true, t24Name=RIGHTS.CREDIT.DATE, mandatory=false)
+/* Denotes the expiry date of the rights.
+Mapped from 98A/EXPI in Sequence C of MT564.
+Validation Rules
+Must be valid T24 Date Format */
+        RIGHTS_EXP_DATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=8, sysNumber=106.0, core=true, t24Name=RIGHTS.EXP.DATE, mandatory=false)
+        /* Transaction id to uniquely identify this record. */
+        SC_PRE_DIARY_ID -> SC_SccEventNotification:SC_PRE_DIARY PK required
+            @t24:i (align=L, inputBehaviour=I, maxLength=16, sysNumber=0.0, core=true, businessType=S, t24Name=SC.PRE.DIARY.ID, mandatory=true)
+/* The Security number of the security that the Diary record relates to. Must exist on the SECURITY.MASTER record.
+If it doesn't exist in SECURITY.MASTER file, at authorisation stage :
+- the field is set to blank,
+- a message is set to the HOLD.REASON field
+- the record stay in hld status.
+
+
+
+
+Validation Rules: */
+        SECURITY_NO : T24BusinessTypes:SEC
+            @i18n:Label (en="Security No")
+            @i18n:Tooltip (en="Indicates the security code/number")
+            @t24:i (align=L, inputBehaviour=I, maxLength=12, sysNumber=1.0, core=true, t24Name=SECURITY.NO, mandatory=false)
+        SELL_BUY_OPT_DESC -> byValue SC_SccEventNotification:SC_PRE_DIARY__SELL_BUY_OPT_DESC *
+            @t24:i (t24Name=SELL.BUY.OPT.DESC)
+/* If CURRENCY is a restricted Curreny, then this field contains the Settlement Currency.
+Validation Rules:
+
+Must exist in CURRENCY file. */
+        SETT_CURRENCY -> ST_CurrencyConfig:CURRENCY
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=72.0, core=true, businessType=CCY, t24Name=SETT.CURRENCY, mandatory=false)
+/* Denotes the company in which SC.PRE.DIARY record is created
+The field will be defaulted with ID.COMPANY
+Validation Rules:
+Accepts a valid company code. */
+        SOURCE_COMPANY -> ST_CompanyCreation:COMPANY
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=68.0, core=true, businessType=A, t24Name=SOURCE.COMPANY, mask="R##-###-####", mandatory=false)
+        /* Extracted from the inward delivery message senders reference (prefix SEME) */
+        SOURCE_REF : T24BusinessTypes:A
+            @i18n:Label (en="Source Reference")
+            @i18n:Tooltip (en="Source Reference")
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=60.0, core=true, t24Name=SOURCE.REF, mandatory=false)
+/* Rate of Source Tax levied.
+This field will only be updated if the TAXABLE field on the DIARY.TYPE record that defines this corporate action is set to NO.
+Mapped from 564 identifier, 92A::TAXR from E2 sequence.
+This field will be mapped to DIARY to ENTITLEMENT record. */
+        SOURCE_TAX_PERC : T24BusinessTypes:R
+            @i18n:Label (en="Tax %")
+            @t24:i (align=R, inputBehaviour=I, maxLength=35, sysNumber=97.0, core=true, t24Name=SOURCE.TAX.PERC, mandatory=false)
+        STATEMENT_NOS -> byValue SC_SccEventNotification:SC_PRE_DIARY__STATEMENT_NOS *
+            @t24:i (t24Name=STATEMENT.NOS)
+        /* Holds value YES - This field is only for informatory purpose and will determine whether Diary caters to Full STP. */
+        STP : SC_SccEventNotification:SC_PRE_DIARY__STP
+            @i18n:Label (en=STP)
+            @i18n:Tooltip (en="Is this Diary caters to full STP?")
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=69.0, core=true, t24Name=STP, mandatory=false)
+/* Denotes the Taxable rate of Dividend or coupon
+This field is used to store the taxable rate of income(e.g PID component in UK)
+Only this portion of the dividend is taxable
+Validation Rules
+Input allowed only when Rate field has value
+Negative rates are not allowed */
+        TAXABLE_RATE : T24BusinessTypes:R
+            @t24:i (align=R, inputBehaviour=I, maxLength=15, sysNumber=107.0, core=true, t24Name=TAXABLE.RATE, mandatory=false)
+/* Denotes the tax-exempt rate of Dividend or coupon
+This field is used to store the tax exempt rate of income(e.g non PID component in UK)
+This portion of the Dividend is non-taxable
+Validation Rules
+Input allowed only when Rate field has value
+Negative rates are not allowed */
+        TAX_EXEMPT_RATE : T24BusinessTypes:R
+            @t24:i (align=R, inputBehaviour=I, maxLength=15, sysNumber=108.0, core=true, t24Name=TAX.EXEMPT.RATE, mandatory=false)
+        /* To record End Trading Period.Mapped from 564 identifier, 69B::TRDP. */
+        TRD_PERIOD_END : T24BusinessTypes:D
+            @i18n:Label (en="Trading Period End")
+            @i18n:Tooltip (en="Trading Period End")
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=75.0, core=true, t24Name=TRD.PERIOD.END, mandatory=false)
+        /* To record Start Trading Period.Mapped from 564 identifier, 69B::TRDP. */
+        TRD_PERIOD_START : T24BusinessTypes:D
+            @i18n:Label (en="Trading Period Start")
+            @i18n:Tooltip (en="Trading Period Start")
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=74.0, core=true, t24Name=TRD.PERIOD.START, mandatory=false)
+/* This field will hold Conduit Foreign Income rate and should not exceed the unfranked rate.
+This will be a Rate or a Percentage of face value, based on whether field PERCENTAGE is set as No or Yes
+Validation Rules
+Field can be inputted only when
+1. CASH field for the record in DIARY.TYPE table is set to yes
+2. BOND.OR.SHARE set as 'S' in SECURITY.MASTER record
+3. FRANKING.CR.ALLOWED field should be set as YES at Parameter level
+4. Only when Unfranked rate is inputted
+Negative rates are not allowed. */
+        UNFRANKED_CFI_RATE : T24BusinessTypes:R
+            @t24:i (align=R, inputBehaviour=I, maxLength=9, sysNumber=111.0, core=true, t24Name=UNFRANKED.CFI.RATE, mandatory=false)
+/* This field will hold the Unfranked rate
+This will be a Rate or a Percentage of face value, based on whether field PERCENTAGE is set as No or Yes
+If not available, this will default to the dividend rate minus FRANKED.CREDIT.RATE
+Validation Rules
+Field can be inputted only when
+1. CASH field for the record in DIARY.TYPE table is set to yes
+2. BOND.OR.SHARE set as 'S' in SECURITY.MASTER record
+3. FRANKING.CR.ALLOWED field should be set as YES at Parameter level
+Negative rates are not allowed.
+Sum of franked credit rate and unfranked rate should be equal to the rate field. */
+        UNFRANKED_RATE : T24BusinessTypes:R
+            @t24:i (align=R, inputBehaviour=I, maxLength=9, sysNumber=110.0, core=true, t24Name=UNFRANKED.RATE, mandatory=false)
+    }
+    SC_PRE_DIARY__ADDL_NARRATIVE
+    {
+        /* Additional narrative description extracted from inward delivery message. */
+        ADDL_NARRATIVE : T24BusinessTypes:SW
+            @i18n:Label (en="Additional Narrative")
+            @i18n:Tooltip (en="Additional Narrative")
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=65.0, core=true, t24Name=ADDL.NARRATIVE, isTextarea=true, mandatory=false)
+    }
+    SC_PRE_DIARY__CERTIFICATION_TYPE
+    {
+/* This field is mapped from 22F tag of CA option with Certification indicator 'CETI' which may have below indicators
+ACCI - Accredited Investor
+DOMI - Country of Domicile
+FRAC - Fraction Breakdown
+FULL - Full Beneficial Owner Breakdown
+NCOM - Non-Company Related Person
+NDOM - Country of Non-Domicile
+QIBB - QIB Certification
+System will update this field from 22F tag of CA option tag of MT564 for the above mentioned qualifiers
+For e.g. if 22F tag of CA option contains, :22F::CETI//NDOM, system updates this field as "NDOM"
+Validation Rules
+Alphanumeric field of length 4 */
+        CERTIFICATION_TYPE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=4, sysNumber=87.0, core=true, t24Name=CERTIFICATION.TYPE, mandatory=false)
+/* This field specifies the country code related to Non Domicile or Domicile, and mapped from 94C tag of CA option with Certification which may have below indicators.
+                 DOMI - Country of Domicile Validity
+                 NDOM - Country of Non-Domicile
+System will update this field from 94C tag of CA option tag of MT564 for the above mentioned qualifiers
+For e.g. if 94C tag of CA option contains the value,94C::NDOM//US, system updates this field as "US"
+This field is associated with CERTIFICATION.TYPE field.
+Validation Rules
+Alphanumeric field of length 2 */
+        CERT_PLACE : T24BusinessTypes:SSS
+            @t24:i (align=L, inputBehaviour=I, maxLength=2, sysNumber=88.0, core=true, t24Name=CERT.PLACE, mandatory=false)
+    }
+    SC_PRE_DIARY__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=125.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    SC_PRE_DIARY__DELIVERY_INREF
+    {
+/* Inward delivery reference.
+For information only.
+Validation Rules: */
+        DELIVERY_INREF : T24BusinessTypes:A
+            @i18n:Label (en="Inward Del Ref")
+            @i18n:Tooltip (en="Inward Delivery Reference")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=50.0, core=true, t24Name=DELIVERY.INREF, mandatory=false)
+    }
+    SC_PRE_DIARY__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=124.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    SC_PRE_DIARY__K_PERCENTAGE
+    {
+        /* Psuedonym for PERCENTAGE. */
+        K_PERCENTAGE : SC_SccEventNotification:SC_PRE_DIARY__K_PERCENTAGE__K_PERCENTAGE
+            @t24:i (align=L, inputBehaviour=N, maxLength=2, sysNumber=34.0, core=false, t24Name=K.PERCENTAGE, mandatory=false)
+    }
+    SC_PRE_DIARY__LOCAL_TAX_PERC
+    {
+/* Rate of Local Tax levied.
+This field will only be updated if the TAXABLE field on the DIARY.TYPE record that defines this corporate action is set to NO.
+Mapped from 564 identifier, 92A::WITL from E2 sequence.
+This field will be mapped to DIARY to ENTITLEMENT record. */
+        LOCAL_TAX_PERC : T24BusinessTypes:R
+            @i18n:Label (en="Local Tax Perc")
+            @i18n:Tooltip (en="Rate of tax levied by the \'Local\' government")
+            @t24:i (align=R, inputBehaviour=I, maxLength=35, sysNumber=98.0, core=true, t24Name=LOCAL.TAX.PERC, mandatory=false)
+    }
+    SC_PRE_DIARY__NARRATIVE
+    {
+/* Narrative contained in some incoming swift messages for corporate actions.
+Validation Rules: */
+        NARRATIVE : T24BusinessTypes:A
+            @i18n:Label (en=Narrative)
+            @i18n:Tooltip (en="Any narrative to be input for user information")
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=51.0, core=true, t24Name=NARRATIVE, mandatory=false)
+    }
+    SC_PRE_DIARY__OPTION_DESC
+    {
+/* Currency choices for each option can be updated in this field .Mapped from 564 identifier,11A .
+Validation Rules:
+
+Input is allowed only if the event is a dividend with multi currency option */
+        CASH_CCY : T24BusinessTypes:CCY
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=9.0, core=true, t24Name=CASH.CCY, mandatory=false)
+/* Indicates whether the option will be selected by default if no instruction is provided by the account
+					owner.Mapped from 564 identifier, 17B::DFLT.
+Validation Rules:
+
+Allowed Values:Y,N */
+        DEFAULT_OPTION : SC_SccEventNotification:SC_PRE_DIARY__OPTION_DESC__DEFAULT_OPTION
+            @i18n:Label (en="Default Option")
+            @i18n:Tooltip (en="Mapped from DFLT tag in MT564 to indicate whether option is default or not")
+            @t24:i (align=L, inputBehaviour=I, maxLength=2, sysNumber=12.0, core=true, t24Name=DEFAULT.OPTION, mandatory=false)
+/* This field represents the date on which the offer or privilege terminates for the event.
+                This is part of the OPTION.DESC multi value set.
+This field will be updated from 98A tag of MT564 with the qualifier EXPI
+Validation Rules
+Standard T24 Date field */
+        EXPIRY_DATE : T24BusinessTypes:D
+            @i18n:Label (en="Expiry Date")
+            @i18n:Tooltip (en="Indicates the Expiry Date of the Transaction")
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=18.0, core=true, t24Name=EXPIRY.DATE, mandatory=false)
+/* This field specify the Maximum exercisable quantities mapped from 36B/MAEX in Corporate Action Options sequence
+Validation Rules
+If the elected quantity is greater than Maxmimum exercisable quantities mentioned for the respective option,
+                    then system will raise an error. */
+        MAX_EXC_QTY : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=15, sysNumber=22.0, core=true, t24Name=MAX.EXC.QTY, mandatory=false)
+/* This field specify the Minimum exercisable quantities mapped from 36B/MIEX in Corporate Action Options sequence
+Validation Rules
+If the elected quantity is lesser than Minimum exercisable quantities mentioned for the respective option, then
+                    system will raise an error. */
+        MIN_EXC_QTY : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=15, sysNumber=21.0, core=true, t24Name=MIN.EXC.QTY, mandatory=false)
+/* This field will contain the new factor associated with the bond for which the corporate action has been initiated
+Validation Rules: */
+        NEW_FACTOR : T24BusinessTypes:R
+            @i18n:Label (en="New Factor")
+            @i18n:Tooltip (en="New factor of the bond used in the event ")
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=33.0, core=true, t24Name=NEW.FACTOR, mandatory=false)
+        NEW_SEC_NO -> byValue SC_SccEventNotification:SC_PRE_DIARY__OPTION_DESC__NEW_SEC_NO *
+            @t24:i (t24Name=NEW.SEC.NO)
+/* This field will contain the old factor associated with the bond for which the corporate action has been
+					initiated.
+Validation Rules: */
+        OLD_FACTOR : T24BusinessTypes:R
+            @i18n:Label (en="Old Factor")
+            @i18n:Tooltip (en="Old factor of the bond for which event is recorded")
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=32.0, core=true, t24Name=OLD.FACTOR, mandatory=false)
+        /* Help Text for this field is unavailable. Please refer to the T24 User Guides for further information. */
+        OPTION_DESC : T24BusinessTypes:S
+            @i18n:Label (en=Options)
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=8.0, core=true, t24Name=OPTION.DESC, mandatory=false)
+        /* Option indicator. Mapped from 564 identifier,22F::CAOP except for oversubscription option. */
+        OPTION_IND : T24BusinessTypes:S
+            @i18n:Label (en="Option Indicator")
+            @i18n:Tooltip (en="Option Indicator mapped from MT564 tag CAOP")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=10.0, core=true, t24Name=OPTION.IND, mandatory=false)
+        /* Option number. Mapped from 564 identifier, 13A::CAON except for oversubscription option. */
+        OPTION_NUM : T24BusinessTypes:N
+            @i18n:Label (en="Option Number")
+            @i18n:Tooltip (en="Option number mapped from MT564 tag CAON")
+            @t24:i (align=R, inputBehaviour=I, maxLength=3, sysNumber=11.0, core=true, t24Name=OPTION.NUM, mandatory=false)
+        /* This field holds the period of action start date for a particular option. Mapped from 564 identifier, 69A::PWAL. */
+        OPT_ACT_PRD_FROM : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=25.0, core=true, t24Name=OPT.ACT.PRD.FROM, mandatory=false)
+        /* This field holds the period of action end date for a particular option. Mapped from 564 identifier, 69A::PWAL. */
+        OPT_ACT_PRD_TO : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=26.0, core=true, t24Name=OPT.ACT.PRD.TO, mandatory=false)
+/* Rate defined for this option.Mapped from 564 identifier,92a.
+Validation Rules:
+
+Input is allowed only if the event is a dividend with multi currency option */
+        OPT_CCY_DIV_RATE : T24BusinessTypes:R
+            @i18n:Label (en="Opt Ccy Div rate")
+            @i18n:Tooltip (en="Option Ccy Dividend Rate")
+            @t24:i (align=R, inputBehaviour=I, maxLength=15, sysNumber=13.0, core=true, t24Name=OPT.CCY.DIV.RATE, mandatory=false)
+/* This holds exchange rate between option currency(CASH.CCY) and event currency(CURRENCY).Mapped from 564
+					identifier, 92a::EXCH. */
+        OPT_CCY_EXCH_RATE : T24BusinessTypes:R
+            @i18n:Label (en="Opt Ccy Exch Rate")
+            @i18n:Tooltip (en="Option Ccy Exchange Rate")
+            @t24:i (align=R, inputBehaviour=I, maxLength=15, sysNumber=14.0, core=true, t24Name=OPT.CCY.EXCH.RATE, mandatory=false)
+/* Holds the CA pay date for the particular option. It gets updated from 98A:PAYD tag of MT564 message or can be
+					updated manually.
+Validation Rules
+Standard T24 Date format */
+        OPT_PAY_DATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=17.0, core=true, t24Name=OPT.PAY.DATE, mandatory=false)
+/* Holds the CA cut-off date for the particular option. It gets updated from 98A:RDDT/98C:RDDT tag of MT564 message
+					or can be updated manually.
+Validation Rules
+Standard T24 Date format */
+        OPT_REPLY_BY_DATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=15.0, core=true, t24Name=OPT.REPLY.BY.DATE, mandatory=false)
+/* Holds the CA cut-off time for the particular option. It gets updated from 98C:RDDT tag of MT564 message
+Validation Rules
+Standard T24 Time format */
+        OPT_REPLY_BY_TIME : T24BusinessTypes:TIME
+            @t24:i (align=L, inputBehaviour=I, maxLength=11, sysNumber=16.0, core=true, t24Name=OPT.REPLY.BY.TIME, mandatory=false)
+        /* This field holds the revocability period start date for a particular option. Mapped from 564 identifier, 69A::REVO. */
+        OPT_REVOC_PRD_FROM : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=27.0, core=true, t24Name=OPT.REVOC.PRD.FROM, mandatory=false)
+        /* This field holds the revocability period end date for a particular option. Mapped from 564 identifier, 69A::REVO. */
+        OPT_REVOC_PRD_TO : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=28.0, core=true, t24Name=OPT.REVOC.PRD.TO, mandatory=false)
+        /* This field holds the trading period start date of the new security for a particular option. Mapped from 564 identifier, 69A::TRDP. */
+        OPT_TRAD_PRD_FROM : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=23.0, core=true, t24Name=OPT.TRAD.PRD.FROM, mandatory=false)
+        /* This field holds the trading period end date of the new security for a particular option. Mapped from 564 identifier, 69A::TRDP. */
+        OPT_TRAD_PRD_TO : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=24.0, core=true, t24Name=OPT.TRAD.PRD.TO, mandatory=false)
+        /* This field holds the value date for a particular option. Mapped from 564 identifier, 98A::VALU from E2 sequence. */
+        OPT_VALUE_DATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=29.0, core=true, t24Name=OPT.VALUE.DATE, mandatory=false)
+/* A flag to indicate whether the Rate entered is in Percentage or not.
+Validation Rules:
+
+
+Only input of 'Y' or 'NO' is allowed. */
+        PERCENTAGE : SC_SccEventNotification:SC_PRE_DIARY__OPTION_DESC__PERCENTAGE
+            @i18n:Label (en="% Change")
+            @t24:i (align=L, inputBehaviour=I, maxLength=2, sysNumber=34.0, core=true, t24Name=PERCENTAGE, mandatory=false)
+/* This field represents the period from when the options for the event remain valid.
+                This is part of the OPTION.DESC multi value set.
+It is the date1 from 69A tag of options tag
+Validation Rules
+Standard T24 Date field */
+        PERIOD_FROM : T24BusinessTypes:D
+            @i18n:Label (en="Period From")
+            @i18n:Tooltip (en="Indicates the Start of the Charge Period")
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=19.0, core=true, t24Name=PERIOD.FROM, mandatory=false)
+/* This field represents the period till when the options for the event remain valid.
+                This is part of the OPTION.DESC multi value set.
+It is the date2 from 69A tag of options tag
+Validation Rules
+Standard T24 Date field */
+        PERIOD_TO : T24BusinessTypes:D
+            @i18n:Label (en="Period To")
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=20.0, core=true, t24Name=PERIOD.TO, mandatory=false)
+/* Rate at which the dividend/coupon is paying.
+Validation Rules: */
+        RATE : T24BusinessTypes:R
+            @i18n:Label (en=Rate)
+            @i18n:Tooltip (en="Rate at which dividend/coupon is being paid")
+            @t24:i (align=R, inputBehaviour=I, maxLength=15, sysNumber=31.0, core=true, t24Name=RATE, mandatory=false)
+        RESERVED20 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=11, sysNumber=30.0, core=true, t24Name=RESERVED20, mandatory=false)
+    }
+    SC_PRE_DIARY__OPTION_DESC__NEW_SEC_NO
+    {
+        /* This field holds the date when the new security will be available for trading. Mapped from 564 identifier, 98A::AVAL from E1 sequence. */
+        AVAILABLE_DATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=12, sysNumber=45.0, core=true, t24Name=AVAILABLE.DATE, mandatory=false)
+/* Used for determining Cash payout for the Fractional shares
+Validation Rules
+If mentioned, then CASH.IN.LIEU.PRICE will be used for calculations instead of the rate */
+        CASH_IN_LIEU_PRICE : T24BusinessTypes:PRICE
+            @t24:i (align=L, inputBehaviour=I, maxLength=15, sysNumber=43.0, core=true, t24Name=CASH.IN.LIEU.PRICE, mandatory=false)
+/* This field specifies how fraction resulting from derived securities will be processed.There are different options
+                    as shown below:
+BUY - Fractional shares are updated to FRACTION.BUY.NOMINAL which in turn will create a BUY trade if any
+                    fractions
+PAY - Fractions are to be paid out as cash and cash paid is updated to ENTITLEMENT.AMT field
+SELL - Fractional shares are updated to FRACTION.NOMINAL which in turn will create a SELL trade if any fractions.
+DOWN - Round Down
+UP - Round Up
+STANDARD - Standard
+Validation Rules
+Allowed Values:BUY,PAY,SELL,DOWN,UP,STANDARD
+If Blank , then value will be defaulted from FRACTION.CASH in DIARY.TYPE */
+        FRACTION_DISP : SC_SccEventNotification:SC_PRE_DIARY__OPTION_DESC__NEW_SEC_NO__FRACTION_DISP
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=42.0, core=true, t24Name=FRACTION.DISP, mandatory=false)
+/* Price of the New Security entered.
+Validation Rules: */
+        NEW_PRICE : T24BusinessTypes:R
+            @i18n:Label (en="New Price")
+            @i18n:Tooltip (en="Holds the price of the New security being alloted")
+            @t24:i (align=R, inputBehaviour=I, maxLength=16, sysNumber=36.0, core=true, t24Name=NEW.PRICE, mandatory=false)
+/* Field showing the number of new shares for the number of old shares input in the previous field to build up an
+					new for old entitlement ratio.
+Validation Rules: */
+        NEW_RATIO : T24BusinessTypes:R
+            @i18n:Label (en="New Ratio")
+            @i18n:Tooltip (en="Number of New shares to decide new for old ratio")
+            @t24:i (align=R, inputBehaviour=I, maxLength=16, sysNumber=38.0, core=true, t24Name=NEW.RATIO, mandatory=false)
+/* Security Number of the New security to be allocated.
+Validation Rules: */
+        NEW_SEC_NO : T24BusinessTypes:SEC
+            @i18n:Label (en="New Security No")
+            @i18n:Tooltip (en="Security No of the New security being alloted")
+            @t24:i (align=L, inputBehaviour=I, maxLength=12, sysNumber=35.0, core=true, t24Name=NEW.SEC.NO, mandatory=false)
+/* Field showing the number of old shares for the number of new shares entered in the next field to build up an new
+					for old ratio.
+Validation Rules: */
+        OLD_RATIO : T24BusinessTypes:R
+            @i18n:Label (en="Old Ratio")
+            @i18n:Tooltip (en="Number of Old shares to decide new for old ratio")
+            @t24:i (align=R, inputBehaviour=I, maxLength=16, sysNumber=37.0, core=true, t24Name=OLD.RATIO, mandatory=false)
+/* This field is used in conjunction with the OLD.RATIO field to produce the ratio with which Rights will be issued
+					to a portfolio.
+Validation Rules: */
+        OLD_TO_RIGHT : T24BusinessTypes:R
+            @i18n:Label (en="Old To Right")
+            @i18n:Tooltip (en="Old shares in portfolio eligible for rights share")
+            @t24:i (align=R, inputBehaviour=I, maxLength=16, sysNumber=40.0, core=true, t24Name=OLD.TO.RIGHT, mandatory=false)
+/* Security Number of the Rights Security which is being issued as a result of the corporate action.
+Validation Rules: */
+        RIGHTS_NO : T24BusinessTypes:SEC
+            @i18n:Label (en="Rights Number")
+            @i18n:Tooltip (en="Rights Number")
+            @t24:i (align=L, inputBehaviour=I, maxLength=12, sysNumber=39.0, core=true, t24Name=RIGHTS.NO, mandatory=false)
+/* This field is used in conjunction with the NEW.RATIO field to produce the ratio with which securites will be
+					received by a portfolio as a result of taking up the right to the securities.
+Validation Rules: */
+        RIGHT_TO_NEW : T24BusinessTypes:R
+            @i18n:Label (en="Rights to New")
+            @i18n:Tooltip (en="Right to New")
+            @t24:i (align=R, inputBehaviour=I, maxLength=16, sysNumber=41.0, core=true, t24Name=RIGHT.TO.NEW, mandatory=false)
+/* Field to specify the multiple to which Entitlement nominals will be rounded to
+Validation Rules
+Takes higher precedence than the Trading units mentioned for the Security */
+        ROUND_NOMINAL : T24BusinessTypes:NOMAMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=18, sysNumber=44.0, core=true, t24Name=ROUND.NOMINAL, mandatory=false)
+        SEC_RESERVED_01 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=0, sysNumber=48.0, core=true, t24Name=SEC.RESERVED.01, mandatory=false)
+        SEC_RESERVED_02 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=0, sysNumber=47.0, core=true, t24Name=SEC.RESERVED.02, mandatory=false)
+        SEC_RESERVED_03 : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=N, maxLength=12, sysNumber=46.0, core=true, t24Name=SEC.RESERVED.03, mandatory=false)
+    }
+    SC_PRE_DIARY__OTH_DATE_TYPE
+    {
+        OTH_DATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=85.0, core=true, t24Name=OTH.DATE, mandatory=false)
+/* This field specifies the time related to the event which is mapped from 98X tag of CA option details of MT564.
+System will update this field with the time part from the above mentioned tag
+For e.g. if 98A tag contains the value, 98A::ANOU//20161025053000, system updates this field as 05:30
+Validation Rules
+Standard T24 Time field */
+        OTH_DATE_TIME : T24BusinessTypes:TIME
+            @t24:i (align=L, inputBehaviour=I, maxLength=11, sysNumber=86.0, core=true, t24Name=OTH.DATE.TIME, mandatory=false)
+/* This field specifies the dates related to the event which is mapped from 98A tag of CA option details of MT564 with below qualifiers
+ANOU - Announcement Date / Time
+AVAL - Available Date
+COAP - Court Approval Date
+CERT - Certfication Deadline Date
+ECDT - Early closing date/Time
+ECPD - Election to counterparty deadline
+EFFD - Effective Date/Time
+EQUL - Equalization Date/Time
+FDAT - Further detailed announcement date
+FILL - Filing Date
+GUPA - Guaranteed Participation Date/Time
+HEAR - Hearing Date
+IFIX - Fixing Date/Time
+LAPD - Lapsed Date/Time
+MATU - New Maturity Date/time
+MET2 - Meeting date - Second session
+MET3 - Meeting Date - Third Session
+OAPD - Official Announcement Date
+PLDT - Lead Plaintiff Deadline
+PROD - Proration Date/Time
+REGI - Deadline to Register
+SPLT - Deadline to Split
+SXDT - Special Ex-Date/Time
+TPDT - Third Party Deadline
+UNCO - Unconditional Date/Time
+System will update this field with the Description of SC.CA.DATE.TYPE record if there is a record with id as above qualifier.
+If the record for SC.CA.DATE.TYPE is not available, system will update the qualifier itself to this field.
+For e.g. if 98A tag contains the value, 98A::ANOU//20161025053000, system looks for a record in SC.CA.DATE.TYPE with the id ANOU which is the qualifier here
+if there is a record for ANOU, then system will update the Description of the record to this field.
+Validation Rules
+System updated Alpha numeric field of length 35 */
+        OTH_DATE_TYPE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=84.0, core=true, t24Name=OTH.DATE.TYPE, mandatory=false)
+    }
+    SC_PRE_DIARY__OVERRIDE
+    {
+        OVERRIDE : T24BusinessTypes:A
+            @i18n:Label (en=Override)
+            @i18n:Tooltip (en="Overrides generated by this transaction")
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=121.0, core=true, t24Name=OVERRIDE, mandatory=false)
+    }
+    SC_PRE_DIARY__SELL_BUY_OPT_DESC
+    {
+/* Field will hold either BUYA or SLLE to determine the type of transaction either as sale or buy more of rights/intermediate securities
+Validation Rules
+SELL.BUY.SEC is mandatory if SELL.BUY.OPTION.DESC is input
+Input allowed - BUYA or SLLE */
+        SELL_BUY_OPT_DESC : SC_SccEventNotification:SC_PRE_DIARY__SELL_BUY_OPT_DESC__SELL_BUY_OPT_DESC
+            @t24:i (align=L, inputBehaviour=I, maxLength=4, sysNumber=99.0, core=true, t24Name=SELL.BUY.OPT.DESC, mandatory=false)
+/* Option number is mapped from tag 13A in Option details sequence
+Validation Rules
+SELL.BUY.OPTION.DESC mandatory if SELL.BUY.OPT.NO is input */
+        SELL_BUY_OPT_NO : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=3, sysNumber=100.0, core=true, t24Name=SELL.BUY.OPT.NO, mandatory=false)
+/* Field to store the Reply by date for the option. Mapped from Tag 98A (RDDT) from the option details sequence
+Validation Rules
+SELL.BUY.OPTION.DESC mandatory if SELL.BUY.REPLY.DATE is input
+Must be valid T24 Date Format */
+        SELL_BUY_REPLY_DATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=8, sysNumber=102.0, core=true, t24Name=SELL.BUY.REPLY.DATE, mandatory=false)
+/* Field to denote the security for which there is an option to sell or buy rights based on the Sell Buy Opt Desc
+Validation Rules
+SELL.BUY.OPTION.DESC mandatory if SELL.BUY.SEC is input
+Must be valid Security Number */
+        SELL_BUY_SEC -> SC_ScoSecurityMasterMaintenance:SECURITY_MASTER
+            @t24:i (align=L, inputBehaviour=I, maxLength=12, sysNumber=101.0, core=true, businessType=SEC, t24Name=SELL.BUY.SEC, mandatory=false)
+/* Field to hold the Start date of action (Trading) period for the option
+Validation Rules
+SELL.BUY.OPTION.DESC mandatory if SELL.BUY.TRAD.FROM.DATE is input
+Must be valid T24 Date Format */
+        SELL_BUY_TRAD_FROM_DATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=8, sysNumber=103.0, core=true, t24Name=SELL.BUY.TRAD.FROM.DATE, mandatory=false)
+/* Field to hold the End date of action (trading) period for the option
+Validation Rules
+SELL.BUY.OPTION.DESC mandatory if SELL.BUY.TRAD.TO.DATE is input
+Must be valid T24 Date Format */
+        SELL_BUY_TRAD_TO_DATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=8, sysNumber=104.0, core=true, t24Name=SELL.BUY.TRAD.TO.DATE, mandatory=false)
+    }
+    SC_PRE_DIARY__STATEMENT_NOS
+    {
+        /* Help Text for this field is unavailable. Please refer to the T24 User Guides for further information. */
+        STATEMENT_NOS : T24BusinessTypes:A
+            @i18n:Label (en="Statement Numbers")
+            @i18n:Tooltip (en="Statement or category entry of a transaction")
+            @t24:i (align=L, inputBehaviour=N, maxLength=29, sysNumber=120.0, core=true, t24Name=STATEMENT.NOS, mandatory=false)
+    }
+}
+Enumerations {
+    SC_CA_PRE_ADVICE__AMND_MSG_FUNC__AMND_MSG_FUNC : mml:string
+        ADDB=ADDB
+        ALL=ALL
+        CANC=CANC
+        NEWM=NEWM
+        REPE=REPE
+        REPL=REPL
+        RMDR=RMDR
+        WITH=WITH
+    SC_CA_PRE_ADVICE__AMND_MSG_FUNC__AMND_MSG_STATUS__AMND_MSG_STATUS : mml:string
+        ALL=ALL
+        COMP=COMP
+        COMU=COMU
+        ENTL=ENTL
+        PREC=PREC
+        PREU=PREU
+    SC_CA_PRE_ADVICE__INIT_MSG_FUNC : mml:string
+        ADDB=ADDB
+        ALL=ALL
+        CANC=CANC
+        NEWM=NEWM
+        REPE=REPE
+        REPL=REPL
+        RMDR=RMDR
+        WITH=WITH
+    SC_CA_PRE_ADVICE__INIT_MSG_STATUS : mml:string
+        ALL=ALL
+        COMP=COMP
+        COMU=COMU
+        ENTL=ENTL
+        PREC=PREC
+        PREU=PREU
+    SC_CTDY_CA_ADVICE__564_OUT_FUNC__564_OUT_FUNC : mml:string
+        NULL=NULL
+        RMDR=RMDR
+    SC_CTDY_CA_ADVICE__564_OUT_FUNC__564_OUT_PRI_AFT : mml:string
+        AFTER=AFTER
+        PRIOR=PRIOR
+    SC_CTDY_CA_ADVICE__564_OUT_FUNC__564_OUT_SEL_DATE : mml:string
+        EX_DATE=EX.DATE
+        INT_REPLY_BY_DATE=INT.REPLY.BY.DATE
+        PAY_DATE=PAY.DATE
+        REPLY_BY_DATE=REPLY.BY.DATE
+        VALUE_DATE=VALUE.DATE
+    SC_CTDY_CA_ADVICE__IN_MT564_FUNC__IN_MT564_FUNC : mml:string
+        ADDB=ADDB
+        ALL=ALL
+        CANC=CANC
+        NEWM=NEWM
+        REPE=REPE
+        REPL=REPL
+        RMDR=RMDR
+        WITH=WITH
+    SC_CTDY_CA_ADVICE__IN_MT564_FUNC__IN_MT564_STATUS : mml:string
+        ALL=ALL
+        COMP=COMP
+        COMU=COMU
+        ENTL=ENTL
+        PREC=PREC
+        PREU=PREU
+    SC_CTDY_CA_ADVICE__SEND_MT564_CANC : mml:string
+        NULL=NULL
+        YES=YES
+    SC_CTDY_CORP_ACTION__CAMV : mml:string
+        CHOS=CHOS
+        MAND=MAND
+        VOLU=VOLU
+    SC_CTDY_CORP_ACTION__LATEST_MSG_TYPE : mml:string
+        564=564
+        565=565
+        566=566
+        567=567
+        568=568
+    SC_CTDY_CORP_ACTION__LATEST_PROC_STATUS : mml:string
+        ERROR=ERROR
+        OK=OK
+    SC_CTDY_CORP_ACTION__MSG_TYPE__GEN_MT567 : mml:string
+        NO=NO
+        STP=STP
+        YES=YES
+    SC_CTDY_CORP_ACTION__MSG_TYPE__MSG_TYPE : mml:string
+        564=564
+        565=565
+        566=566
+        567=567
+        568=568
+    SC_CTDY_CORP_ACTION__MSG_TYPE__PROC_STATUS : mml:string
+        ERROR=ERROR
+        OK=OK
+    SC_CTDY_CORP_ACTION__MSG_TYPE__SEND_MSG : mml:string
+        YES=YES
+    SC_CTDY_CORP_ACTION__MSG_TYPE__SENT_BY : mml:string
+        BULK_INSTRUCT=BULK.INSTRUCT
+        MANUAL=MANUAL
+        STP=STP
+    SC_CTDY_CORP_ACTION__OPTION_DESCRIPTION__EVENT_STATUS : mml:string
+        COMPLETED=COMPLETED
+        IN_PROGRESS="IN PROGRESS"
+    SC_DEPO_MSG_MONITOR__MSG_TYPE : mml:string
+        564=564
+    SC_PRE_DIARY__GEN_MT564 : mml:string
+        NO=NO
+        STP=STP
+        YES=YES
+    SC_PRE_DIARY__GEN_MT568 : mml:string
+        YES=YES
+    SC_PRE_DIARY__INIT_ADVICE_SENT : mml:string
+        Y=Y
+    SC_PRE_DIARY__INT_DIST_TYPE : mml:string
+        DRIP=DRIP
+        EXOF=EXOF
+        EXRI=EXRI
+    SC_PRE_DIARY__K_PERCENTAGE__K_PERCENTAGE : mml:string
+        NO=NO
+        Y=Y
+    SC_PRE_DIARY__LOAN : mml:string
+        YES=YES
+    SC_PRE_DIARY__MAND_VOLU_FLAG : mml:string
+        CHOS=CHOS
+        MAND=MAND
+        VOLU=VOLU
+    SC_PRE_DIARY__OPTION_DESC__DEFAULT_OPTION : mml:string
+        N=N
+        Y=Y
+    SC_PRE_DIARY__OPTION_DESC__NEW_SEC_NO__FRACTION_DISP : mml:string
+        BUY=BUY
+        DOWN=DOWN
+        PAY=PAY
+        SELL=SELL
+        STANDARD=STANDARD
+        UP=UP
+    SC_PRE_DIARY__OPTION_DESC__PERCENTAGE : mml:string
+        NO=NO
+        Y=Y
+    SC_PRE_DIARY__OVER_OPTION_DESC : mml:string
+        NULL=NULL
+        OVER=OVER
+    SC_PRE_DIARY__PRE_ADVICE_REQ : mml:string
+        NO=NO
+        YES=YES
+    SC_PRE_DIARY__RATE_TYPE : mml:string
+        GROSS=GROSS
+        NET=NET
+    SC_PRE_DIARY__RERUN : mml:string
+        Y=Y
+    SC_PRE_DIARY__SELL_BUY_OPT_DESC__SELL_BUY_OPT_DESC : mml:string
+        BUYA=BUYA
+        SLLE=SLLE
+    SC_PRE_DIARY__STP : mml:string
+        YES=YES
+}

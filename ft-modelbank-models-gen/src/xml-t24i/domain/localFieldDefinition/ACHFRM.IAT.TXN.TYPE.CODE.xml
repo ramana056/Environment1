@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<localref:LocalRef xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:localref="http://www.odcgroup.com/t24/application/localref/model/LocalRef"
+    xmlns:translationDsl="http://www.odcgroup.com/translation/TranslationDsl" localRefID="ACHFRM.IAT.TXN.TYPE.CODE" maximumChars="3" minimumChars="0"
+    mandatory="false" charType="N" defaultPossible="false" virtualTable="IAT.TXN.TYPE.CODE"
+    description="IAT.TXN.TYPE.CODE">
+  <shortName xsi:type="translationDsl:LocalTranslations">
+    <translations locale="en" text="IAT.TXN.TYPE"/>
+  </shortName>
+  <vettingTable vettingTable="ANN">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Annuity"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="ARC">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Accounts Receivable Entry"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="BOC">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Back Office Conversion Entry"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="BUS">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Business/Commercial"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="DEP">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Deposit"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="LOA">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Loan"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="MIS">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Miscellaneous"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="MOR">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Mortgage"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="MTE">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Machine Transfer Entry"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="PEN">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Pension"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="POP">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Point of Purchase Entry"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="POS">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Point of Sale Entry"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="RCK">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Re-presented Check Entry"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="REM">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Remittance"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="RLS">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Rent/Lease"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="SAL">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Salary/Payroll"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="SHR">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Share Network Transaction"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="TAX">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Tax"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="TEL">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Telephone-Initiated Entry"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="WEB">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Internet-Initiated Entry"/>
+    </remarks>
+  </vettingTable>
+</localref:LocalRef>

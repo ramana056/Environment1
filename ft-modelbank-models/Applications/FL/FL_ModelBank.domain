@@ -1,0 +1,156 @@
+# UTF-8
+/* Model component for Facility product */
+Domain FL_ModelBank
+    @t24:i (module=FL)
+    @java:Package (value=com.temenos.t24.datamodel.fl.fl_modelbank)
+namespace "http://www.temenos.com/t24/FL_ModelBank"
+metamodelVersion 1.30.6
+Classes {
+    NOFILE_FL_GET_DETAILED_FIN_SUMMARY
+        @i18n:Description (en="")
+        @t24:i (t24Name=NOFILE.FL.GET.DETAILED.FIN.SUMMARY, level=I, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        AA_ARR_ID : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=20, core=false, t24Name=AA.ARR.ID, mandatory=false)
+        ARRANGEMENT_ID : T24BusinessTypes:N
+            @i18n:Label (en="Arrangement Id")
+            @t24:i (align=L, inputBehaviour=N, maxLength=20, core=false, t24Name=ARRANGEMENT.ID, genOperation=E.FL.GET.DETAILED.FIN.SUMMARY, mandatory=false)
+        BALANCE_AMOUNT : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=19, sysNumber=2.0, core=true, t24Name=BALANCE.AMOUNT, mandatory=false)
+        BALANCE_TYPE : T24BusinessTypes:N
+            @i18n:Label (en="Balance Type")
+            @t24:i (align=R, inputBehaviour=N, maxLength=20, sysNumber=1.0, core=true, t24Name=BALANCE.TYPE, mandatory=true)
+        CHG_OFF : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, core=false, t24Name=CHG.OFF, mandatory=false)
+        DISPLAY_ZERO_BALS : T24BusinessTypes:N
+            @i18n:Label (en="Display Zero Bals")
+            @t24:i (align=R, inputBehaviour=N, maxLength=3, core=false, t24Name=DISPLAY.ZERO.BALS, mandatory=false)
+        DRILL_DOWN_ENQ : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=3, core=false, t24Name=DRILL.DOWN.ENQ, mandatory=false)
+        END_DATE : T24BusinessTypes:N
+            @i18n:Label (en="End Date")
+            @i18n:Tooltip (en="End Date")
+            @t24:i (align=R, inputBehaviour=N, maxLength=8, core=false, t24Name=END.DATE, mandatory=false)
+        FILE_VER : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=15, core=false, t24Name=FILE.VER, mandatory=false)
+        PROPERTY : T24BusinessTypes:N
+            @i18n:Label (en=Property)
+            @t24:i (align=R, inputBehaviour=N, maxLength=20, sysNumber=4.0, core=true, t24Name=PROPERTY, mandatory=false)
+        PROPERTY_CLASS : T24BusinessTypes:N
+            @i18n:Label (en="Property Class")
+            @t24:i (align=R, inputBehaviour=N, maxLength=20, sysNumber=5.0, core=true, t24Name=PROPERTY.CLASS, mandatory=false)
+        SIM_REF : T24BusinessTypes:N
+            @i18n:Label (en=Simulation)
+            @t24:i (align=R, inputBehaviour=N, maxLength=20, core=false, t24Name=SIM.REF, mandatory=false)
+        START_DATE : T24BusinessTypes:N
+            @i18n:Label (en="Start Date")
+            @i18n:Tooltip (en="Start Date")
+            @t24:i (align=R, inputBehaviour=N, maxLength=8, core=false, t24Name=START.DATE, mandatory=false)
+        VIRTUAL_BALANCES -> byValue FL_ModelBank:NOFILE_FL_GET_DETAILED_FIN_SUMMARY__VIRTUAL_BALANCES *
+            @t24:i (t24Name=VIRTUAL.BALANCES)
+    }
+    NOFILE_FL_GET_DETAILED_FIN_SUMMARY__VIRTUAL_BALANCES
+    {
+        VIRTUAL_BALANCES : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=20, sysNumber=3.0, core=true, t24Name=VIRTUAL.BALANCES, mandatory=false)
+    }
+    NOFILE_FL_GET_FIN_SUMMARY
+        @i18n:Description (en="")
+        @t24:i (t24Name=NOFILE.FL.GET.FIN.SUMMARY, level=I, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        ARRANGEMENT_ID : T24BusinessTypes:N
+            @i18n:Label (en="Arrangement Id")
+            @t24:i (align=L, inputBehaviour=N, maxLength=20, core=false, t24Name=ARRANGEMENT.ID, genOperation=E.FL.GET.FIN.SUMMARY, mandatory=false)
+        BALANCE_AMOUNT : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=19, sysNumber=2.0, core=true, t24Name=BALANCE.AMOUNT, mandatory=false)
+        BALANCE_TYPE : T24BusinessTypes:N
+            @i18n:Label (en="Balance Type")
+            @t24:i (align=R, inputBehaviour=N, maxLength=20, sysNumber=1.0, core=true, t24Name=BALANCE.TYPE, mandatory=true)
+        CHG_OFF : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, core=false, t24Name=CHG.OFF, mandatory=false)
+        DISPLAY_ZERO_BALS : T24BusinessTypes:N
+            @i18n:Label (en="Display Zero Bals")
+            @t24:i (align=R, inputBehaviour=N, maxLength=3, core=false, t24Name=DISPLAY.ZERO.BALS, mandatory=false)
+        DRILL_DOWN_ENQ : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=3, core=false, t24Name=DRILL.DOWN.ENQ, mandatory=false)
+        END_DATE : T24BusinessTypes:N
+            @i18n:Label (en="End Date")
+            @i18n:Tooltip (en="End Date")
+            @t24:i (align=R, inputBehaviour=N, maxLength=8, core=false, t24Name=END.DATE, mandatory=false)
+        FILE_VER : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=15, core=false, t24Name=FILE.VER, mandatory=false)
+        PROPERTY : T24BusinessTypes:N
+            @i18n:Label (en=Property)
+            @t24:i (align=R, inputBehaviour=N, maxLength=20, sysNumber=4.0, core=true, t24Name=PROPERTY, mandatory=false)
+        PROPERTY_CLASS : T24BusinessTypes:N
+            @i18n:Label (en="Property Class")
+            @t24:i (align=R, inputBehaviour=N, maxLength=20, sysNumber=5.0, core=true, t24Name=PROPERTY.CLASS, mandatory=false)
+        SIM_REF : T24BusinessTypes:N
+            @i18n:Label (en=Simulation)
+            @t24:i (align=R, inputBehaviour=N, maxLength=20, core=false, t24Name=SIM.REF, mandatory=false)
+        START_DATE : T24BusinessTypes:N
+            @i18n:Label (en="Start Date")
+            @i18n:Tooltip (en="Start Date")
+            @t24:i (align=R, inputBehaviour=N, maxLength=8, core=false, t24Name=START.DATE, mandatory=false)
+        VIRTUAL_BALANCES -> byValue FL_ModelBank:NOFILE_FL_GET_FIN_SUMMARY__VIRTUAL_BALANCES *
+            @t24:i (t24Name=VIRTUAL.BALANCES)
+    }
+    NOFILE_FL_GET_FIN_SUMMARY__VIRTUAL_BALANCES
+    {
+        VIRTUAL_BALANCES : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=20, sysNumber=3.0, core=true, t24Name=VIRTUAL.BALANCES, mandatory=false)
+    }
+    NOFILE_FL_GET_PAYOFF_DETAILS
+        @i18n:Description (en="")
+        @t24:i (t24Name=NOFILE.FL.GET.PAYOFF.DETAILS, level=I, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        AA_ARR_ID : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=20, core=false, t24Name=AA.ARR.ID, mandatory=false)
+        ARRANGEMENT_ID : T24BusinessTypes:N
+            @i18n:Label (en="Arrangement Id")
+            @t24:i (align=L, inputBehaviour=N, maxLength=20, core=false, t24Name=ARRANGEMENT.ID, genOperation=E.FL.GET.PAYOFF.DETAILS, mandatory=true)
+        FAC_PROPERTY : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=20, core=false, t24Name=FAC.PROPERTY, mandatory=false)
+        FAC_PROP_AMT : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=20, core=false, t24Name=FAC.PROP.AMT, mandatory=false)
+        FAC_TOT_AMT : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=20, core=false, t24Name=FAC.TOT.AMT, mandatory=false)
+        PRODUCT : T24BusinessTypes:N
+            @i18n:Label (en=Product)
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, core=false, t24Name=PRODUCT, mandatory=false)
+        PRODUCT_AMT : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=20, core=false, t24Name=PRODUCT.AMT, mandatory=false)
+    }
+    NOFILE_FL_GET_PAYOFF_PAYMENT_TYPE_DETS
+        @i18n:Description (en="")
+        @t24:i (t24Name=NOFILE.FL.GET.PAYOFF.PAYMENT.TYPE.DETS, level=I, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        AA_ARR_ID : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=20, core=false, t24Name=AA.ARR.ID, mandatory=false)
+        ARRANGEMENT_ID : T24BusinessTypes:N
+            @i18n:Label (en="Arrangement Id")
+            @t24:i (align=L, inputBehaviour=N, maxLength=20, core=false, t24Name=ARRANGEMENT.ID, genOperation=E.FL.GET.PAYOFF.PAYMENT.TYPE.DETS, mandatory=true)
+        PAYMENT_AMOUNT : T24BusinessTypes:N
+            @i18n:Label (en="Outstanding Amt")
+            @t24:i (align=R, inputBehaviour=N, maxLength=20, core=false, t24Name=PAYMENT.AMOUNT, mandatory=false)
+        PAYMENT_TYPE : T24BusinessTypes:N
+            @i18n:Label (en="Payment Type")
+            @i18n:Tooltip (en="Type of Payment (Annuity or Linear)")
+            @t24:i (align=R, inputBehaviour=N, maxLength=20, core=false, t24Name=PAYMENT.TYPE, mandatory=false)
+    }
+    NOFILE_FL_GET_PAYOFF_PROPERTY_DETS
+        @i18n:Description (en="")
+        @t24:i (t24Name=NOFILE.FL.GET.PAYOFF.PROPERTY.DETS, level=I, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        AA_ARR_ID : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=20, core=false, t24Name=AA.ARR.ID, mandatory=false)
+        ARRANGEMENT_ID : T24BusinessTypes:N
+            @i18n:Label (en="Arrangement Id")
+            @t24:i (align=L, inputBehaviour=N, maxLength=20, core=false, t24Name=ARRANGEMENT.ID, genOperation=E.FL.GET.PAYOFF.PROPERTY.DETS, mandatory=true)
+        PROPERTY : T24BusinessTypes:N
+            @i18n:Label (en=Property)
+            @t24:i (align=R, inputBehaviour=N, maxLength=20, core=false, t24Name=PROPERTY, mandatory=false)
+        PROP_AMOUNT : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=20, core=false, t24Name=PROP.AMOUNT, mandatory=false)
+    }
+}

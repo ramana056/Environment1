@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<localref:LocalRef xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:localref="http://www.odcgroup.com/t24/application/localref/model/LocalRef"
+    xmlns:translationDsl="http://www.odcgroup.com/translation/TranslationDsl" localRefID="NSF.REJECT.OFS" maximumChars="20" minimumChars="0"
+    mandatory="false" defaultPossible="false" applicationEnrich="DESCRIPTION" applicationVET="name://EB_Interface:OFS_SOURCE#"
+    description="OFS Source for NSF Returns process">
+  <shortName xsi:type="translationDsl:LocalTranslations">
+    <translations locale="en" text="NSF.REJECT.OFS"/>
+  </shortName>
+</localref:LocalRef>

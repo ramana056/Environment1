@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<localReferenceApplication:LocalReferenceApplication xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:localReferenceApplication="http://www.odcgroup.com/t24/application/localRefApplication/model/LocalReferenceApplication"
+    xmlns:translationDsl="http://www.odcgroup.com/translation/TranslationDsl" forApplication="name://AA_TermAmount:AA_PRD_DES_TERM_AMOUNT#">
+  <localField groupName="USLEND_INV_DEPOSIT" localRefID="USLEND.INV.DEPOSIT">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="INV.DEPOSIT"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+  <localField groupName="USLEND_INV_DEPOSIT" localRefID="USLEND.INV.PERCENTAGE">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="INV.PERCENTAGE"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+  <localField groupName="USLEND_INV_DEPOSIT" localRefID="USLEND.INV.PAYOUT.ACCT">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="INV.PAYOUT.ACCT"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+  <localField groupName="No" localRefID="USLEND.INV.LINKED.LOAN">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="INV.LINKED.LOAN"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+  <localField groupName="No" localRefID="USRETL.RENEWAL.COOLINGPERIOD">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="RENEWAL.COOLING"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+  <localField groupName="No" localRefID="LOAN.RIGHTS">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="LOAN.RIGHTS"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+</localReferenceApplication:LocalReferenceApplication>

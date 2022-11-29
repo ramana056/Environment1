@@ -1,0 +1,882 @@
+# UTF-8
+/* Mapping Class and its Validations */
+Domain AA_Mapping
+    @t24:i (module=AA)
+    @java:Package (value=com.temenos.t24.datamodel.aa.aa_mapping)
+namespace "http://www.temenos.com/t24/AA_Mapping"
+metamodelVersion 1.30.6
+Classes {
+    AA_FULFILMENT_TYPE
+        @i18n:Description (en="")
+        @t24:i (t24Name=AA.FULFILMENT.TYPE, level=I, type=L, allowedFunctions="L S", localRefAllowed=false)
+    {
+        AVAILABLE_DATE : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=8, sysNumber=7.0, core=true, t24Name=AVAILABLE.DATE, mandatory=false)
+        CLASS_NAME : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=5.0, core=true, t24Name=CLASS.NAME, mandatory=false)
+        DESCRIPTION -> byValue AA_Mapping:AA_FULFILMENT_TYPE__DESCRIPTION *
+            @t24:i (t24Name=DESCRIPTION)
+        EXPIRY_DATE : T24BusinessTypes:N
+            @i18n:Label (en="Expiry Date")
+            @i18n:Tooltip (en="Indicates the Expiry Date of the Transaction")
+            @t24:i (align=R, inputBehaviour=I, maxLength=8, sysNumber=8.0, core=true, t24Name=EXPIRY.DATE, mandatory=false)
+        FULFILMENT_TARGET -> EB_SystemTables:PGM_FILE
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=3.0, core=true, businessType=A, t24Name=FULFILMENT.TARGET, mandatory=false)
+        FULFILMENT_TYPE : AA_Mapping:AA_FULFILMENT_TYPE__FULFILMENT_TYPE
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=2.0, core=true, t24Name=FULFILMENT.TYPE, mandatory=false)
+        FULFILMENT_TYPE_ID -> AA_Mapping:AA_FULFILMENT_TYPE PK required
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=0.0, core=true, businessType=A, t24Name=FULFILMENT.TYPE.ID, mandatory=true)
+        INTERFACE_TYPE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=4.0, core=true, t24Name=INTERFACE.TYPE, mandatory=false)
+        LAST_PUBLISHED : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=8, sysNumber=9.0, core=true, t24Name=LAST.PUBLISHED, mandatory=false)
+        STATUS : T24BusinessTypes:A
+            @i18n:Label (en=Status)
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=6.0, core=true, t24Name=STATUS, mandatory=false)
+    }
+    AA_FULFILMENT_TYPE_CATALOG
+        @i18n:Description (en="")
+        @t24:i (t24Name=AA.FULFILMENT.TYPE.CATALOG, level=I, type=H, allowedFunctions="L Q S", localRefApplicationSysNo=39.0, localRefAllowed=true)
+    {
+        ACTION : AA_Mapping:AA_FULFILMENT_TYPE_CATALOG__ACTION
+            @i18n:Label (en=Action)
+            @t24:i (align=L, inputBehaviour=I, maxLength=7, sysNumber=34.0, core=true, t24Name=ACTION, mandatory=false)
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=52.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=53.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=49.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        CLASS -> byValue AA_Mapping:AA_FULFILMENT_TYPE_CATALOG__CLASS *
+            @t24:i (t24Name=CLASS)
+        CLASS_TYPE -> AA_Framework:AA_CLASS_TYPE
+            @i18n:Label (en="Class Type")
+            @t24:i (align=L, inputBehaviour=N, maxLength=25, sysNumber=40.0, core=true, businessType=ANY, t24Name=CLASS.TYPE, mandatory=true)
+        COMMON_CLASS_TYPE -> byValue AA_Mapping:AA_FULFILMENT_TYPE_CATALOG__COMMON_CLASS_TYPE *
+            @t24:i (t24Name=COMMON.CLASS.TYPE)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=50.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=46.0, core=true, t24Name=CURR.NO, mandatory=false)
+        DATE_TIME -> byValue AA_Mapping:AA_FULFILMENT_TYPE_CATALOG__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DEFAULT_ROLE -> byValue AA_Mapping:AA_FULFILMENT_TYPE_CATALOG__DEFAULT_ROLE *
+            @t24:i (t24Name=DEFAULT.ROLE)
+        DEFINITION_MANAGER -> AA_Mapping:AA_FULFILMENT_TYPE_CATALOG PK required
+            @t24:i (align=L, inputBehaviour=I, maxLength=60, sysNumber=0.0, core=true, businessType=A, t24Name=DEFINITION.MANAGER, mandatory=true)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=51.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        DESCRIPTION -> byValue AA_Mapping:AA_FULFILMENT_TYPE_CATALOG__DESCRIPTION *
+            @t24:i (t24Name=DESCRIPTION)
+        DOMAIN_TYPE -> OA_Framework:OA_DOMAIN_TYPE
+            @t24:i (align=L, inputBehaviour=I, maxLength=36, sysNumber=3.0, core=true, businessType=ANY, t24Name=DOMAIN.TYPE, mandatory=false)
+        EXPIRY_DATE : T24BusinessTypes:D
+            @i18n:Label (en="Expiry Date")
+            @i18n:Tooltip (en="Indicates the Expiry Date of the Transaction")
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=35.0, core=true, t24Name=EXPIRY.DATE, mandatory=false)
+        FORM_OWNER -> OA_Framework:OA_ROLE
+            @t24:i (align=L, inputBehaviour=I, maxLength=30, sysNumber=4.0, core=true, businessType=ANY, t24Name=FORM.OWNER, mandatory=false)
+        FULL_DESC -> byValue AA_Mapping:AA_FULFILMENT_TYPE_CATALOG__FULL_DESC *
+            @t24:i (t24Name=FULL.DESC)
+        INPUTTER -> byValue AA_Mapping:AA_FULFILMENT_TYPE_CATALOG__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        OVERRIDE -> byValue AA_Mapping:AA_FULFILMENT_TYPE_CATALOG__OVERRIDE *
+            @t24:i (t24Name=OVERRIDE)
+        PUBLISH_ERROR -> byValue AA_Mapping:AA_FULFILMENT_TYPE_CATALOG__PUBLISH_ERROR *
+            @t24:i (t24Name=PUBLISH.ERROR)
+        PUBLISH_STATUS : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=36.0, core=true, t24Name=PUBLISH.STATUS, mandatory=false)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=45.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        REFERENCE : T24BusinessTypes:ANY
+            @i18n:Label (en="Search by Referece")
+            @t24:i (align=L, inputBehaviour=N, maxLength=25, sysNumber=41.0, core=true, t24Name=REFERENCE, mandatory=true)
+        RESERVED_1 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=33.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=32.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=31.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=30.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        RESERVED_5 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=29.0, core=true, t24Name=RESERVED.5, mandatory=false)
+        RESERVED_6 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=28.0, core=true, t24Name=RESERVED.6, mandatory=false)
+        RESERVED_7 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=27.0, core=true, t24Name=RESERVED.7, mandatory=false)
+        RESERVED_8 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=26.0, core=true, t24Name=RESERVED.8, mandatory=false)
+        RESERVED_9 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=25.0, core=true, t24Name=RESERVED.9, mandatory=false)
+        SYNC_MAPPING -> AA_Mapping:AA_MAPPING_TYPE
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=24.0, core=true, businessType=ANY, t24Name=SYNC.MAPPING, mandatory=false)
+        VERSION : T24BusinessTypes:ANY
+            @i18n:Label (en=Version)
+            @t24:i (align=L, inputBehaviour=N, maxLength=5, sysNumber=42.0, core=true, t24Name=VERSION, mandatory=true)
+        VERSION_DATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=N, maxLength=11, sysNumber=43.0, core=true, t24Name=VERSION.DATE, mandatory=true)
+    }
+    AA_FULFILMENT_TYPE_CATALOG__CLASS
+    {
+        CLASS : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=7.0, core=true, t24Name=CLASS, mandatory=false)
+        CONDITION : T24BusinessTypes:ANY required
+            @i18n:Label (en=Condition)
+            @i18n:Tooltip (en="Value that the field name is to be compared with")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=14.0, core=true, t24Name=CONDITION, mandatory=true)
+        CONDITION_VERSION : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=5, sysNumber=15.0, core=true, t24Name=CONDITION.VERSION, mandatory=false)
+        INSTANCE : T24BusinessTypes:A
+            @i18n:Label (en=Instance)
+            @i18n:Tooltip (en=Instance)
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=8.0, core=true, t24Name=INSTANCE, mandatory=false)
+        OWNER -> OA_Framework:OA_ROLE
+            @i18n:Label (en=Owner)
+            @t24:i (align=L, inputBehaviour=I, maxLength=30, sysNumber=16.0, core=true, businessType=ANY, t24Name=OWNER, mandatory=false)
+        RESERVED_11 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=13.0, core=true, t24Name=RESERVED.11, mandatory=false)
+        RESERVED_12 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=12.0, core=true, t24Name=RESERVED.12, mandatory=false)
+        RESERVED_13 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=11.0, core=true, t24Name=RESERVED.13, mandatory=false)
+        RESERVED_14 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=10.0, core=true, t24Name=RESERVED.14, mandatory=false)
+        RESERVED_15 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=9.0, core=true, t24Name=RESERVED.15, mandatory=false)
+        ROLE -> byValue AA_Mapping:AA_FULFILMENT_TYPE_CATALOG__CLASS__ROLE *
+            @t24:i (t24Name=ROLE)
+    }
+    AA_FULFILMENT_TYPE_CATALOG__CLASS__ROLE
+    {
+        PRIVILEGE : AA_Mapping:AA_FULFILMENT_TYPE_CATALOG__CLASS__ROLE__PRIVILEGE
+            @t24:i (align=L, inputBehaviour=I, maxLength=7, sysNumber=18.0, core=true, t24Name=PRIVILEGE, mandatory=false)
+        ROLE -> OA_Framework:OA_ROLE
+            @i18n:Label (en=Role)
+            @i18n:Tooltip (en="Roles are user defined and specified in EB.LOOKUP")
+            @t24:i (align=L, inputBehaviour=I, maxLength=30, sysNumber=17.0, core=true, businessType=ANY, t24Name=ROLE, mandatory=false)
+    }
+    AA_FULFILMENT_TYPE_CATALOG__COMMON_CLASS_TYPE
+    {
+        COMMON_CLASS : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=20.0, core=true, t24Name=COMMON.CLASS, mandatory=false)
+        COMMON_CLASS_CONDITION : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=22.0, core=true, t24Name=COMMON.CLASS.CONDITION, mandatory=false)
+        COMMON_CLASS_TYPE -> AA_Framework:AA_CLASS_TYPE
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=19.0, core=true, businessType=ANY, t24Name=COMMON.CLASS.TYPE, mandatory=false)
+        COMMON_CONDITION_VERSION : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=5, sysNumber=23.0, core=true, t24Name=COMMON.CONDITION.VERSION, mandatory=false)
+        RESERVED_16 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=21.0, core=true, t24Name=RESERVED.16, mandatory=false)
+    }
+    AA_FULFILMENT_TYPE_CATALOG__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=48.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    AA_FULFILMENT_TYPE_CATALOG__DEFAULT_ROLE
+    {
+        DEFAULT_PRIVILEGE : AA_Mapping:AA_FULFILMENT_TYPE_CATALOG__DEFAULT_ROLE__DEFAULT_PRIVILEGE
+            @t24:i (align=L, inputBehaviour=I, maxLength=7, sysNumber=6.0, core=true, t24Name=DEFAULT.PRIVILEGE, mandatory=false)
+        DEFAULT_ROLE -> OA_Framework:OA_ROLE
+            @t24:i (align=L, inputBehaviour=I, maxLength=30, sysNumber=5.0, core=true, businessType=ANY, t24Name=DEFAULT.ROLE, mandatory=false)
+    }
+    AA_FULFILMENT_TYPE_CATALOG__DESCRIPTION
+    {
+        DESCRIPTION : T24BusinessTypes:ANY required
+            @i18n:Label (en=Description)
+            @i18n:Tooltip (en=Description)
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, multiLanguage=true, sysNumber=1.0, core=true, t24Name=DESCRIPTION, mandatory=true)
+    }
+    AA_FULFILMENT_TYPE_CATALOG__FULL_DESC
+    {
+        FULL_DESC : T24BusinessTypes:ANY required
+            @i18n:Label (en="Full Description")
+            @i18n:Tooltip (en="Detailed Description ")
+            @t24:i (align=L, inputBehaviour=I, maxLength=60, multiLanguage=true, sysNumber=2.0, core=true, t24Name=FULL.DESC, mandatory=true)
+    }
+    AA_FULFILMENT_TYPE_CATALOG__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=47.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    AA_FULFILMENT_TYPE_CATALOG__OVERRIDE
+    {
+        OVERRIDE : T24BusinessTypes:N
+            @i18n:Label (en=Override)
+            @i18n:Tooltip (en="Overrides generated by this transaction")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=44.0, core=true, t24Name=OVERRIDE, mandatory=false)
+    }
+    AA_FULFILMENT_TYPE_CATALOG__PUBLISH_ERROR
+    {
+        ERROR_SUGGESTION : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=38.0, core=true, t24Name=ERROR.SUGGESTION, mandatory=false)
+        PUBLISH_ERROR : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=37.0, core=true, t24Name=PUBLISH.ERROR, mandatory=false)
+    }
+    AA_FULFILMENT_TYPE__DESCRIPTION
+    {
+        DESCRIPTION : T24BusinessTypes:ANY
+            @i18n:Label (en=Description)
+            @i18n:Tooltip (en=Description)
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, multiLanguage=true, sysNumber=1.0, core=true, t24Name=DESCRIPTION, mandatory=false)
+    }
+    /* This table contains the high-level definition of a class of type MAPPING.CLASS. This is table is maintained by the system, and will be updated when a new definition is created and authorised in AA.CLASS.DEFINITION */
+    AA_MAPPING_CLASS
+        @i18n:Description (en="")
+        @t24:i (t24Name=AA.MAPPING.CLASS, level=I, type=H, allowedFunctions="A C D E H I L P Q S", localRefApplicationSysNo=14.0, localRefAllowed=true)
+    {
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=23.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=24.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=20.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=21.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=17.0, core=true, t24Name=CURR.NO, mandatory=false)
+        DATE_TIME -> byValue AA_Mapping:AA_MAPPING_CLASS__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=22.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        DESCRIPTION -> byValue AA_Mapping:AA_MAPPING_CLASS__DESCRIPTION *
+            @t24:i (t24Name=DESCRIPTION)
+        FULL_DESC -> byValue AA_Mapping:AA_MAPPING_CLASS__FULL_DESC *
+            @t24:i (t24Name=FULL.DESC)
+        INPUTTER -> byValue AA_Mapping:AA_MAPPING_CLASS__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        K_TYPE -> byValue AA_Mapping:AA_MAPPING_CLASS__K_TYPE *
+            @t24:i (t24Name=K.TYPE)
+        MAPPING_CLASS -> AA_Mapping:AA_MAPPING_CLASS PK required
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=0.0, core=true, businessType=A, t24Name=MAPPING.CLASS, mandatory=true)
+        OVERRIDE -> byValue AA_Mapping:AA_MAPPING_CLASS__OVERRIDE *
+            @t24:i (t24Name=OVERRIDE)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=16.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        RESERVED_1 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=13.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_10 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=4.0, core=true, t24Name=RESERVED.10, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=12.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=11.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=10.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        RESERVED_5 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=9.0, core=true, t24Name=RESERVED.5, mandatory=false)
+        RESERVED_6 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=8.0, core=true, t24Name=RESERVED.6, mandatory=false)
+        RESERVED_7 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=7.0, core=true, t24Name=RESERVED.7, mandatory=false)
+        RESERVED_8 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=6.0, core=true, t24Name=RESERVED.8, mandatory=false)
+        RESERVED_9 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=5.0, core=true, t24Name=RESERVED.9, mandatory=false)
+        TYPE -> byValue AA_Mapping:AA_MAPPING_CLASS__TYPE *
+            @t24:i (t24Name=TYPE)
+    }
+    AA_MAPPING_CLASS__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=19.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    AA_MAPPING_CLASS__DESCRIPTION
+    {
+        /* Short description of the class, updated from AA.CLASS.DEFINITION. Used for enrichment when this table is used as vetting table */
+        DESCRIPTION : T24BusinessTypes:A required
+            @i18n:Label (en=Description)
+            @i18n:Tooltip (en=Description)
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, multiLanguage=true, sysNumber=1.0, core=true, t24Name=DESCRIPTION, mandatory=true)
+    }
+    AA_MAPPING_CLASS__FULL_DESC
+    {
+        FULL_DESC : T24BusinessTypes:A required
+            @i18n:Label (en="Full Description")
+            @i18n:Tooltip (en="Detailed Description ")
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=2.0, core=true, t24Name=FULL.DESC, isTextarea=true, mandatory=true)
+    }
+    AA_MAPPING_CLASS__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=18.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    AA_MAPPING_CLASS__K_TYPE
+    {
+        K_TYPE : AA_Mapping:AA_MAPPING_CLASS__K_TYPE__K_TYPE
+            @i18n:Label (en=KType)
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=3.0, core=false, t24Name=K.TYPE, mandatory=false)
+    }
+    AA_MAPPING_CLASS__OVERRIDE
+    {
+        OVERRIDE : T24BusinessTypes:N
+            @i18n:Label (en=Override)
+            @i18n:Tooltip (en="Overrides generated by this transaction")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=15.0, core=true, t24Name=OVERRIDE, mandatory=false)
+    }
+    AA_MAPPING_CLASS__TYPE
+    {
+/* This multi-valued field controls attributes that a property of this class may or may not have.
+Valid options are,
+Version Type - Each amendment of the definition in the mapping class is identified by unique version */
+        TYPE : AA_Mapping:AA_MAPPING_CLASS__TYPE__TYPE
+            @i18n:Label (en=Type)
+            @i18n:Tooltip (en=Type)
+            @t24:i (align=L, inputBehaviour=I, maxLength=15, sysNumber=3.0, core=true, t24Name=TYPE, mandatory=false)
+    }
+    /* This application would be used to log the failure transaction error details as part of OA services. */
+    AA_MAPPING_LOG
+        @i18n:Description (en="")
+        @t24:i (t24Name=AA.MAPPING.LOG, level=I, type=H, allowedFunctions="A D E I L Q S", localRefAllowed=false)
+    {
+/* This field defines the activity to be processed against Mapping Log.
+1. Input in this field should be a valid record under AA.CLASS.TYPE.ACTIVITY.CLASS application.
+2. Input is mandatory in this field to create a new mapping log record.
+3. The system will default the RETRY.REQUEST activity when creating the new error log record under this application. */
+        ACTIVITY -> AA_ClassFramework:AA_CLASS_TYPE_ACTIVITY
+            @i18n:Label (en=Activity)
+            @t24:i (align=L, inputBehaviour=I, maxLength=60, sysNumber=1.0, core=true, businessType=A, t24Name=ACTIVITY, mandatory=false)
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=15.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=16.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=12.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=13.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=9.0, core=true, t24Name=CURR.NO, mandatory=false)
+        DATE_TIME -> byValue AA_Mapping:AA_MAPPING_LOG__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=14.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        ERROR_SOURCE -> byValue AA_Mapping:AA_MAPPING_LOG__ERROR_SOURCE *
+            @t24:i (t24Name=ERROR.SOURCE)
+        INPUTTER -> byValue AA_Mapping:AA_MAPPING_LOG__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        /* Record ID of this template - would be the same as the list file(AA.PUSH.MAPPING.SERVICE.LIST or AA.FULFILMENT.SERVICE.LIST) record ID. */
+        MAPPING_LOG_ID -> AA_Mapping:AA_MAPPING_LOG PK required
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=0.0, core=true, businessType=A, t24Name=MAPPING.LOG.ID, mandatory=true)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=8.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+/* This field denotes the Status of the Mapping log. It holds the two values ERROR and COMPLETED.
+1. When creating the new error log record this field updated as ERROR. So action is pending from user to correct the errors and then authorise the log record.
+2. Once the mapping log is authorised then Status will be changed to COMPLETED.  Means user has corrected the errors and actual push mapping or Fulfilment transaction would be created. */
+        STATUS : T24BusinessTypes:A
+            @i18n:Label (en=Status)
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=7.0, core=true, t24Name=STATUS, mandatory=false)
+    }
+    AA_MAPPING_LOG__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=11.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    AA_MAPPING_LOG__ERROR_SOURCE
+    {
+        /* It is the actual T24 account number. When creating the mapping request for arrangement fulfilment, system will generate account number and this account number will be used when creating new arrangement through FULFILMENT service. But if the fulfilment transaction is failed, then this account number should not lost. So, this system generated account number will be stored in this field. So, when re submitting the mapping log, this account number would be used when creating new arrangement. This field will get updated only for Arrangement type of fulfilment transactions. It will holds the null value for Push mapping type of failure logs. */
+        ACCOUNT_NO : T24BusinessTypes:ACC
+            @i18n:Label (en=Account)
+            @i18n:Tooltip (en="Indicates Customer Account Number")
+            @t24:i (align=R, inputBehaviour=I, maxLength=100, sysNumber=4.0, core=true, t24Name=ACCOUNT.NO, mandatory=false)
+        ERROR_PROPERTY -> byValue AA_Mapping:AA_MAPPING_LOG__ERROR_SOURCE__ERROR_PROPERTY *
+            @t24:i (t24Name=ERROR.PROPERTY)
+/* Error Source will be holding two type of values based on the type of log.
+1. If the log is created for any PUSH mapping failure then it will hold the name of the target application name. For example - OA.APP.PERSONAL.INFORMATION.
+2. If the log is created for any fulfilment transaction failure then it will hold the name of the FULFILMENT. */
+        ERROR_SOURCE : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=2.0, core=true, t24Name=ERROR.SOURCE, mandatory=false)
+/* The transaction reference will the record id of the Error Source.
+It will get updated for Push mapping transaction failure. It will have null value for fulfilment type of transactions. */
+        TRANSACTION_REFERENCE : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=100, sysNumber=3.0, core=true, t24Name=TRANSACTION.REFERENCE, mandatory=false)
+    }
+    AA_MAPPING_LOG__ERROR_SOURCE__ERROR_PROPERTY
+    {
+        /* This field denotes the actual errors happen while processing the OFS message as part of the service. Both ERROR.PROPERTY and ERROR.MESSAGE are associative sub value fields. */
+        ERROR_MESSAGE : T24BusinessTypes:ANY
+            @i18n:Label (en="Error Message")
+            @t24:i (align=L, inputBehaviour=I, maxLength=100, sysNumber=6.0, core=true, t24Name=ERROR.MESSAGE, mandatory=false)
+        /* It denotes the name of the error property. It will get updated only for Arrangement type of fulfilment failures. */
+        ERROR_PROPERTY : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=100, sysNumber=5.0, core=true, t24Name=ERROR.PROPERTY, mandatory=false)
+    }
+    AA_MAPPING_LOG__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=10.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    /* This is the request table to perform the Internal and External Fulfilment processing */
+    AA_MAPPING_REQUEST
+        @i18n:Description (en="")
+        @t24:i (t24Name=AA.MAPPING.REQUEST, nonStop=true, level=I, type=H, allowedFunctions="A D E I L Q R S", localRefApplicationSysNo=22.0, localRefAllowed=true)
+    {
+/* This field defines the activity to be processed against Mapping Request.
+1. Input in this field should be valid record under AA.CLASS.TYPE.ACTIVITY.CLASS application.
+2. Input is mandatory in this field to commit the new mapping request.
+3. System will defaults the RETRY.REQUEST activity when creating the new error log record under this application. */
+        ACTIVITY -> AA_ClassFramework:AA_CLASS_TYPE_ACTIVITY
+            @i18n:Label (en=Activity)
+            @t24:i (align=L, inputBehaviour=I, maxLength=60, sysNumber=1.0, core=true, businessType=A, t24Name=ACTIVITY, mandatory=false)
+/* Reference of the OA.APPLICATION.
+Mandatory field */
+        APPLICATION -> OA_Framework:OA_APPLICATION required
+            @i18n:Label (en=Application)
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=2.0, core=true, businessType=A, t24Name=APPLICATION, mandatory=true)
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=31.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=32.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=28.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=29.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=25.0, core=true, t24Name=CURR.NO, mandatory=false)
+        DATE_TIME -> byValue AA_Mapping:AA_MAPPING_REQUEST__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=30.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        FULFILMENT_TYPE -> byValue AA_Mapping:AA_MAPPING_REQUEST__FULFILMENT_TYPE *
+            @t24:i (t24Name=FULFILMENT.TYPE)
+        INPUTTER -> byValue AA_Mapping:AA_MAPPING_REQUEST__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        /* It is a running alpha numeric Key - AAMRnnnnXXXXX */
+        MAPPING_REQ_ID -> AA_Mapping:AA_MAPPING_REQUEST PK required
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=0.0, core=true, businessType=A, t24Name=MAPPING.REQ.ID, mandatory=true)
+        OVERRIDE -> byValue AA_Mapping:AA_MAPPING_REQUEST__OVERRIDE *
+            @t24:i (t24Name=OVERRIDE)
+        /* This field specifies the Purpose of the OA.APPLICATION. If the Application is running for multiple purposes, then this is mandatory. For single purpose,System would default the same. */
+        PURPOSE -> AA_ProductFramework:AA_PURPOSE
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=3.0, core=true, businessType=A, t24Name=PURPOSE, mandatory=false)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=24.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        RESERVED_1 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=21.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=20.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=19.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=18.0, core=true, t24Name=RESERVED.4, mandatory=false)
+    }
+    AA_MAPPING_REQUEST__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=27.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    AA_MAPPING_REQUEST__FULFILMENT_TYPE
+    {
+/* Fulfilment type required to be accomplished in this request.
+Should be a valid AA.FULFILMENT.TYPE and also should be a valid Fulfilment type for this purpose in OA.APPLICATION.CATALOG
+Could accept multiple fulfilment types. And all of them would be attempted for fulfilment. */
+        FULFILMENT_TYPE -> AA_Mapping:AA_FULFILMENT_TYPE required
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=4.0, core=true, businessType=ANY, t24Name=FULFILMENT.TYPE, mandatory=true)
+        RESERVED_10 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=7.0, core=true, t24Name=RESERVED.10, mandatory=false)
+        RESERVED_11 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=6.0, core=true, t24Name=RESERVED.11, mandatory=false)
+        RESERVED_12 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=5.0, core=true, t24Name=RESERVED.12, mandatory=false)
+        RESERVED_5 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=15.0, core=true, t24Name=RESERVED.5, mandatory=false)
+        RESERVED_6 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=14.0, core=true, t24Name=RESERVED.6, mandatory=false)
+        RESERVED_7 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=13.0, core=true, t24Name=RESERVED.7, mandatory=false)
+        RESERVED_8 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=12.0, core=true, t24Name=RESERVED.8, mandatory=false)
+        RESERVED_9 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=8.0, core=true, t24Name=RESERVED.9, mandatory=false)
+/* Application name of the target(like AA.ARRANGEMENT.ACTIVITY, LIMIT, COLLATERAL, AA.INTERFACE.REQUEST).
+It is a system populated field based on fulfilment type */
+        TARGET_APPLICATION -> EB_SystemTables:PGM_FILE
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=9.0, core=true, businessType=A, t24Name=TARGET.APPLICATION, mandatory=false)
+        TARGET_FAILURE -> byValue AA_Mapping:AA_MAPPING_REQUEST__FULFILMENT_TYPE__TARGET_FAILURE *
+            @t24:i (t24Name=TARGET.FAILURE)
+        /* Target reference used to create the message. It is a system populated field based on the fulfilment type. */
+        TARGET_REFERENCE : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=10.0, core=true, t24Name=TARGET.REFERENCE, mandatory=false)
+/* Indicates the OFS response status of the target message
+SUCCESS or FAILURE
+It is a system populated field. */
+        TARGET_RESPONSE_STATUS : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=11.0, core=true, t24Name=TARGET.RESPONSE.STATUS, mandatory=false)
+    }
+    AA_MAPPING_REQUEST__FULFILMENT_TYPE__TARGET_FAILURE
+    {
+        /* If the target response status is failure, this would indicate which application failed(for example if the Target application is AA.ARRANGEMENT.ACTIVITY, then this would indicate which property within that AAA request has failed) */
+        TARGET_FAILURE : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=16.0, core=true, t24Name=TARGET.FAILURE, mandatory=false)
+        /* This field will indicate the failure details. Parsed from the response and stored here - FIXED.RATE:1:1 = NOINPUT FIELD etc. */
+        TARGET_FAILURE_DETS : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=17.0, core=true, t24Name=TARGET.FAILURE.DETS, mandatory=false)
+    }
+    AA_MAPPING_REQUEST__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=26.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    AA_MAPPING_REQUEST__OVERRIDE
+    {
+        /* It will store the overrides raised while committing the transaction */
+        OVERRIDE : T24BusinessTypes:N
+            @i18n:Label (en=Override)
+            @i18n:Tooltip (en="Overrides generated by this transaction")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=23.0, core=true, t24Name=OVERRIDE, mandatory=false)
+    }
+    /* This table is system mainted and is updated when a new MappingType is defined in AA.DEFINITION.MANAGER */
+    AA_MAPPING_TYPE
+        @i18n:Description (en="")
+        @t24:i (t24Name=AA.MAPPING.TYPE, level=I, type=L, allowedFunctions="L S", localRefAllowed=false)
+    {
+        /* This field indicates the date from which this mapping type is valid. */
+        AVAILABLE_DATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=4.0, core=true, t24Name=AVAILABLE.DATE, mandatory=false)
+        /* This field denotes the successfully cataloged class name belonging to the mapping type. */
+        CLASS_NAME : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=2.0, core=true, t24Name=CLASS.NAME, mandatory=false)
+        DESCRIPTION -> byValue AA_Mapping:AA_MAPPING_TYPE__DESCRIPTION *
+            @t24:i (t24Name=DESCRIPTION)
+        /* This field denotes the expiry date when the mapping type was last cataloged. */
+        EXPIRY_DATE : T24BusinessTypes:D
+            @i18n:Label (en="Expiry Date")
+            @i18n:Tooltip (en="Indicates the Expiry Date of the Transaction")
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=5.0, core=true, t24Name=EXPIRY.DATE, mandatory=false)
+        /* This field denotes the date when the record was last published */
+        LAST_PUBLISHED : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=6.0, core=true, t24Name=LAST.PUBLISHED, mandatory=false)
+        MAPPING_TYPE -> AA_Mapping:AA_MAPPING_TYPE PK required
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=0.0, core=true, businessType=A, t24Name=MAPPING.TYPE, mandatory=true)
+        /* This field denotes the current status of the product. If the product was published lately it will hold the value PUBLISHED */
+        STATUS : T24BusinessTypes:A
+            @i18n:Label (en=Status)
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=3.0, core=true, t24Name=STATUS, mandatory=false)
+    }
+    AA_MAPPING_TYPE_CATALOG
+        @i18n:Description (en="")
+        @t24:i (t24Name=AA.MAPPING.TYPE.CATALOG, level=I, type=H, allowedFunctions="L Q S", localRefApplicationSysNo=39.0, localRefAllowed=true)
+    {
+        ACTION : AA_Mapping:AA_MAPPING_TYPE_CATALOG__ACTION
+            @i18n:Label (en=Action)
+            @t24:i (align=L, inputBehaviour=I, maxLength=7, sysNumber=34.0, core=true, t24Name=ACTION, mandatory=false)
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=52.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=53.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=49.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        CLASS -> byValue AA_Mapping:AA_MAPPING_TYPE_CATALOG__CLASS *
+            @t24:i (t24Name=CLASS)
+        CLASS_TYPE -> AA_Framework:AA_CLASS_TYPE
+            @i18n:Label (en="Class Type")
+            @t24:i (align=L, inputBehaviour=N, maxLength=25, sysNumber=40.0, core=true, businessType=ANY, t24Name=CLASS.TYPE, mandatory=true)
+        COMMON_CLASS_TYPE -> byValue AA_Mapping:AA_MAPPING_TYPE_CATALOG__COMMON_CLASS_TYPE *
+            @t24:i (t24Name=COMMON.CLASS.TYPE)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=50.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=46.0, core=true, t24Name=CURR.NO, mandatory=false)
+        DATE_TIME -> byValue AA_Mapping:AA_MAPPING_TYPE_CATALOG__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DEFAULT_ROLE -> byValue AA_Mapping:AA_MAPPING_TYPE_CATALOG__DEFAULT_ROLE *
+            @t24:i (t24Name=DEFAULT.ROLE)
+        DEFINITION_MANAGER -> AA_Mapping:AA_MAPPING_TYPE_CATALOG PK required
+            @t24:i (align=L, inputBehaviour=I, maxLength=60, sysNumber=0.0, core=true, businessType=A, t24Name=DEFINITION.MANAGER, mandatory=true)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=51.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        DESCRIPTION -> byValue AA_Mapping:AA_MAPPING_TYPE_CATALOG__DESCRIPTION *
+            @t24:i (t24Name=DESCRIPTION)
+        DOMAIN_TYPE -> OA_Framework:OA_DOMAIN_TYPE
+            @t24:i (align=L, inputBehaviour=I, maxLength=36, sysNumber=3.0, core=true, businessType=ANY, t24Name=DOMAIN.TYPE, mandatory=false)
+        EXPIRY_DATE : T24BusinessTypes:D
+            @i18n:Label (en="Expiry Date")
+            @i18n:Tooltip (en="Indicates the Expiry Date of the Transaction")
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=35.0, core=true, t24Name=EXPIRY.DATE, mandatory=false)
+        FORM_OWNER -> OA_Framework:OA_ROLE
+            @t24:i (align=L, inputBehaviour=I, maxLength=30, sysNumber=4.0, core=true, businessType=ANY, t24Name=FORM.OWNER, mandatory=false)
+        FULL_DESC -> byValue AA_Mapping:AA_MAPPING_TYPE_CATALOG__FULL_DESC *
+            @t24:i (t24Name=FULL.DESC)
+        INPUTTER -> byValue AA_Mapping:AA_MAPPING_TYPE_CATALOG__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        OVERRIDE -> byValue AA_Mapping:AA_MAPPING_TYPE_CATALOG__OVERRIDE *
+            @t24:i (t24Name=OVERRIDE)
+        PUBLISH_ERROR -> byValue AA_Mapping:AA_MAPPING_TYPE_CATALOG__PUBLISH_ERROR *
+            @t24:i (t24Name=PUBLISH.ERROR)
+        PUBLISH_STATUS : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=36.0, core=true, t24Name=PUBLISH.STATUS, mandatory=false)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=45.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        REFERENCE : T24BusinessTypes:ANY
+            @i18n:Label (en="Search by Referece")
+            @t24:i (align=L, inputBehaviour=N, maxLength=25, sysNumber=41.0, core=true, t24Name=REFERENCE, mandatory=true)
+        RESERVED_1 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=33.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=32.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=31.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=30.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        RESERVED_5 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=29.0, core=true, t24Name=RESERVED.5, mandatory=false)
+        RESERVED_6 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=28.0, core=true, t24Name=RESERVED.6, mandatory=false)
+        RESERVED_7 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=27.0, core=true, t24Name=RESERVED.7, mandatory=false)
+        RESERVED_8 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=26.0, core=true, t24Name=RESERVED.8, mandatory=false)
+        RESERVED_9 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=25.0, core=true, t24Name=RESERVED.9, mandatory=false)
+        SYNC_MAPPING -> AA_Mapping:AA_MAPPING_TYPE
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=24.0, core=true, businessType=ANY, t24Name=SYNC.MAPPING, mandatory=false)
+        VERSION : T24BusinessTypes:ANY
+            @i18n:Label (en=Version)
+            @t24:i (align=L, inputBehaviour=N, maxLength=5, sysNumber=42.0, core=true, t24Name=VERSION, mandatory=true)
+        VERSION_DATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=N, maxLength=11, sysNumber=43.0, core=true, t24Name=VERSION.DATE, mandatory=true)
+    }
+    AA_MAPPING_TYPE_CATALOG__CLASS
+    {
+        CLASS : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=7.0, core=true, t24Name=CLASS, mandatory=false)
+        CONDITION : T24BusinessTypes:ANY required
+            @i18n:Label (en=Condition)
+            @i18n:Tooltip (en="Value that the field name is to be compared with")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=14.0, core=true, t24Name=CONDITION, mandatory=true)
+        CONDITION_VERSION : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=5, sysNumber=15.0, core=true, t24Name=CONDITION.VERSION, mandatory=false)
+        INSTANCE : T24BusinessTypes:A
+            @i18n:Label (en=Instance)
+            @i18n:Tooltip (en=Instance)
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=8.0, core=true, t24Name=INSTANCE, mandatory=false)
+        OWNER -> OA_Framework:OA_ROLE
+            @i18n:Label (en=Owner)
+            @t24:i (align=L, inputBehaviour=I, maxLength=30, sysNumber=16.0, core=true, businessType=ANY, t24Name=OWNER, mandatory=false)
+        RESERVED_11 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=13.0, core=true, t24Name=RESERVED.11, mandatory=false)
+        RESERVED_12 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=12.0, core=true, t24Name=RESERVED.12, mandatory=false)
+        RESERVED_13 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=11.0, core=true, t24Name=RESERVED.13, mandatory=false)
+        RESERVED_14 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=10.0, core=true, t24Name=RESERVED.14, mandatory=false)
+        RESERVED_15 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=9.0, core=true, t24Name=RESERVED.15, mandatory=false)
+        ROLE -> byValue AA_Mapping:AA_MAPPING_TYPE_CATALOG__CLASS__ROLE *
+            @t24:i (t24Name=ROLE)
+    }
+    AA_MAPPING_TYPE_CATALOG__CLASS__ROLE
+    {
+        PRIVILEGE : AA_Mapping:AA_MAPPING_TYPE_CATALOG__CLASS__ROLE__PRIVILEGE
+            @t24:i (align=L, inputBehaviour=I, maxLength=7, sysNumber=18.0, core=true, t24Name=PRIVILEGE, mandatory=false)
+        ROLE -> OA_Framework:OA_ROLE
+            @i18n:Label (en=Role)
+            @i18n:Tooltip (en="Roles are user defined and specified in EB.LOOKUP")
+            @t24:i (align=L, inputBehaviour=I, maxLength=30, sysNumber=17.0, core=true, businessType=ANY, t24Name=ROLE, mandatory=false)
+    }
+    AA_MAPPING_TYPE_CATALOG__COMMON_CLASS_TYPE
+    {
+        COMMON_CLASS : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=20.0, core=true, t24Name=COMMON.CLASS, mandatory=false)
+        COMMON_CLASS_CONDITION : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=22.0, core=true, t24Name=COMMON.CLASS.CONDITION, mandatory=false)
+        COMMON_CLASS_TYPE -> AA_Framework:AA_CLASS_TYPE
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=19.0, core=true, businessType=ANY, t24Name=COMMON.CLASS.TYPE, mandatory=false)
+        COMMON_CONDITION_VERSION : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=5, sysNumber=23.0, core=true, t24Name=COMMON.CONDITION.VERSION, mandatory=false)
+        RESERVED_16 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=21.0, core=true, t24Name=RESERVED.16, mandatory=false)
+    }
+    AA_MAPPING_TYPE_CATALOG__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=48.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    AA_MAPPING_TYPE_CATALOG__DEFAULT_ROLE
+    {
+        DEFAULT_PRIVILEGE : AA_Mapping:AA_MAPPING_TYPE_CATALOG__DEFAULT_ROLE__DEFAULT_PRIVILEGE
+            @t24:i (align=L, inputBehaviour=I, maxLength=7, sysNumber=6.0, core=true, t24Name=DEFAULT.PRIVILEGE, mandatory=false)
+        DEFAULT_ROLE -> OA_Framework:OA_ROLE
+            @t24:i (align=L, inputBehaviour=I, maxLength=30, sysNumber=5.0, core=true, businessType=ANY, t24Name=DEFAULT.ROLE, mandatory=false)
+    }
+    AA_MAPPING_TYPE_CATALOG__DESCRIPTION
+    {
+        DESCRIPTION : T24BusinessTypes:ANY required
+            @i18n:Label (en=Description)
+            @i18n:Tooltip (en=Description)
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, multiLanguage=true, sysNumber=1.0, core=true, t24Name=DESCRIPTION, mandatory=true)
+    }
+    AA_MAPPING_TYPE_CATALOG__FULL_DESC
+    {
+        FULL_DESC : T24BusinessTypes:ANY required
+            @i18n:Label (en="Full Description")
+            @i18n:Tooltip (en="Detailed Description ")
+            @t24:i (align=L, inputBehaviour=I, maxLength=60, multiLanguage=true, sysNumber=2.0, core=true, t24Name=FULL.DESC, mandatory=true)
+    }
+    AA_MAPPING_TYPE_CATALOG__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=47.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    AA_MAPPING_TYPE_CATALOG__OVERRIDE
+    {
+        OVERRIDE : T24BusinessTypes:N
+            @i18n:Label (en=Override)
+            @i18n:Tooltip (en="Overrides generated by this transaction")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=44.0, core=true, t24Name=OVERRIDE, mandatory=false)
+    }
+    AA_MAPPING_TYPE_CATALOG__PUBLISH_ERROR
+    {
+        ERROR_SUGGESTION : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=38.0, core=true, t24Name=ERROR.SUGGESTION, mandatory=false)
+        PUBLISH_ERROR : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=37.0, core=true, t24Name=PUBLISH.ERROR, mandatory=false)
+    }
+    AA_MAPPING_TYPE__DESCRIPTION
+    {
+/* This field can be expanded to allow the user to enter the description of the AA.DEFINITION.MANAGER in various languages.
+Each expansion of the field will correspond to a new Language as defined in the LANGUAGE table (Ref: GENERAL TABLES), and will indicate to the User the Language in which the Description must be entered. */
+        DESCRIPTION : T24BusinessTypes:ANY
+            @i18n:Label (en=Description)
+            @i18n:Tooltip (en=Description)
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, multiLanguage=true, sysNumber=1.0, core=true, t24Name=DESCRIPTION, mandatory=false)
+    }
+}
+Enumerations {
+    AA_FULFILMENT_TYPE_CATALOG__ACTION : mml:string
+        PUBLISH=PUBLISH
+    AA_FULFILMENT_TYPE_CATALOG__CLASS__ROLE__PRIVILEGE : mml:string
+        INPUT=INPUT
+        NULL=NULL
+        SEE=SEE
+    AA_FULFILMENT_TYPE_CATALOG__DEFAULT_ROLE__DEFAULT_PRIVILEGE : mml:string
+        INPUT=INPUT
+        NULL=NULL
+        SEE=SEE
+    AA_FULFILMENT_TYPE__FULFILMENT_TYPE : mml:string
+        ARRANGEMENT=ARRANGEMENT
+        EXTERNAL=EXTERNAL
+        INTERNAL=INTERNAL
+        NULL=NULL
+    AA_MAPPING_CLASS__K_TYPE__K_TYPE : mml:string
+        CCY=CCY
+        COMMON=COMMON
+        DATED=DATED
+        DELAYED_TRACKING=DELAYED.TRACKING
+        EXTERNAL=EXTERNAL
+        EXTERNAL_FINANCIAL=EXTERNAL.FINANCIAL
+        FORWARD_DATED=FORWARD.DATED
+        INHERITANCE=INHERITANCE
+        MEMO_ENABLED=MEMO.ENABLED
+        MERGE=MERGE
+        MULTIPLE=MULTIPLE
+        NON_TRACKING=NON.TRACKING
+        OPT_CCY=OPT.CCY
+        TRACKING=TRACKING
+        TRACKING_ONLY=TRACKING.ONLY
+        TRANSACTION=TRANSACTION
+        TRIGGER=TRIGGER
+        VARIATION=VARIATION
+        VERSION=VERSION
+    AA_MAPPING_CLASS__TYPE__TYPE : mml:string
+        CCY=CCY
+        COMMON=COMMON
+        DATED=DATED
+        DELAYED_TRACKING=DELAYED.TRACKING
+        EXTERNAL=EXTERNAL
+        EXTERNAL_FINANCIAL=EXTERNAL.FINANCIAL
+        FORWARD_DATED=FORWARD.DATED
+        INHERITANCE=INHERITANCE
+        MEMO_ENABLED=MEMO.ENABLED
+        MERGE=MERGE
+        MULTIPLE=MULTIPLE
+        NON_TRACKING=NON.TRACKING
+        OPT_CCY=OPT.CCY
+        TRACKING=TRACKING
+        TRACKING_ONLY=TRACKING.ONLY
+        TRANSACTION=TRANSACTION
+        TRIGGER=TRIGGER
+        VARIATION=VARIATION
+        VERSION=VERSION
+    AA_MAPPING_TYPE_CATALOG__ACTION : mml:string
+        PUBLISH=PUBLISH
+    AA_MAPPING_TYPE_CATALOG__CLASS__ROLE__PRIVILEGE : mml:string
+        INPUT=INPUT
+        NULL=NULL
+        SEE=SEE
+    AA_MAPPING_TYPE_CATALOG__DEFAULT_ROLE__DEFAULT_PRIVILEGE : mml:string
+        INPUT=INPUT
+        NULL=NULL
+        SEE=SEE
+}

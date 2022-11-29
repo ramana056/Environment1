@@ -1,0 +1,427 @@
+# UTF-8
+/* Common & CEL artifacts */
+Domain FRPLCL_Foundation
+    @t24:i (module=FRPLCL)
+    @java:Package (value=com.temenos.t24.datamodel.frplcl.frplcl_foundation)
+namespace "http://www.temenos.com/t24/FRPLCL_Foundation"
+metamodelVersion 1.30.6
+Classes {
+    FRPLCL_PELCEL_DETAILS
+        @i18n:Description (en="")
+        @t24:i (t24Name=FRPLCL.PELCEL.DETAILS, level=F, type=H, allowedFunctions="A C D E H I L P Q R S", localRefAllowed=false)
+    {
+        ADDITIONAL_PEL_BONUS : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=50, sysNumber=18.0, core=true, t24Name=ADDITIONAL.PEL.BONUS, mandatory=false)
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=43.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=44.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=40.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        AVAILABLE_LOAN_RIGHTS : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=50, sysNumber=3.0, core=true, t24Name=AVAILABLE.LOAN.RIGHTS, mandatory=false)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=41.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=37.0, core=true, t24Name=CURR.NO, mandatory=false)
+        DATE_TIME -> byValue FRPLCL_Foundation:FRPLCL_PELCEL_DETAILS__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=42.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        ELIGIBLE_BONUS : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=50, sysNumber=5.0, core=true, t24Name=ELIGIBLE.BONUS, mandatory=false)
+        GROSS_CAP_INTEREST : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=20.0, core=true, t24Name=GROSS.CAP.INTEREST, mandatory=false)
+        ID -> FRPLCL_Foundation:FRPLCL_PELCEL_DETAILS PK required
+            @i18n:Label (en="Transaction Ref")
+            @i18n:Tooltip (en="Transaction Reference")
+            @t24:i (align=L, inputBehaviour=I, maxLength=20, sysNumber=0.0, core=true, businessType=ARR, t24Name="@ID", mandatory=true)
+        INPUTTER -> byValue FRPLCL_Foundation:FRPLCL_PELCEL_DETAILS__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        LOAN_ARRANGEMENT -> byValue FRPLCL_Foundation:FRPLCL_PELCEL_DETAILS__LOAN_ARRANGEMENT *
+            @t24:i (t24Name=LOAN.ARRANGEMENT)
+        NO_OF_DEPENDENTS : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=11.0, core=true, t24Name=NO.OF.DEPENDENTS, mandatory=false)
+        PEL_CEL : FRPLCL_Foundation:FRPLCL_PELCEL_DETAILS__PEL_CEL
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=1.0, core=true, t24Name=PEL.CEL, mandatory=false)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=36.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        REGULAR_DEPOSIT : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=21.0, core=true, t24Name=REGULAR.DEPOSIT, mandatory=false)
+        RESERVED_1 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=35.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_10 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=26.0, core=true, t24Name=RESERVED.10, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=34.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=33.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=32.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        RESERVED_5 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=31.0, core=true, t24Name=RESERVED.5, mandatory=false)
+        RESERVED_6 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=30.0, core=true, t24Name=RESERVED.6, mandatory=false)
+        RESERVED_7 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=29.0, core=true, t24Name=RESERVED.7, mandatory=false)
+        RESERVED_8 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=28.0, core=true, t24Name=RESERVED.8, mandatory=false)
+        RESERVED_9 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=27.0, core=true, t24Name=RESERVED.9, mandatory=false)
+        TOTAL_BONUS : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=50, sysNumber=4.0, core=true, t24Name=TOTAL.BONUS, mandatory=false)
+        TOTAL_LOAN_RIGHTS : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=50, sysNumber=2.0, core=true, t24Name=TOTAL.LOAN.RIGHTS, mandatory=false)
+        TOTAL_PAYMENT : T24BusinessTypes:A
+            @i18n:Label (en="Total Payment")
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=22.0, core=true, t24Name=TOTAL.PAYMENT, mandatory=false)
+        TRANSFERIN_ANNIVERSARY_RIGHTS : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=23.0, core=true, t24Name=TRANSFERIN.ANNIVERSARY.RIGHTS, mandatory=false)
+        TRANSFERIN_AVAILABLE_RIGHTS : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=15.0, core=true, t24Name=TRANSFERIN.AVAILABLE.RIGHTS, mandatory=false)
+        TRANSFERIN_DATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=50, sysNumber=24.0, core=true, t24Name=TRANSFERIN.DATE, mandatory=false)
+        TRANSFERIN_ELIGIBLE_BONUS : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=16.0, core=true, t24Name=TRANSFERIN.ELIGIBLE.BONUS, mandatory=false)
+        TRANSFERIN_MATURITY_DATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=50, sysNumber=25.0, core=true, t24Name=TRANSFERIN.MATURITY.DATE, mandatory=false)
+        TRANSFERIN_TOTAL_BONUS : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=14.0, core=true, t24Name=TRANSFERIN.TOTAL.BONUS, mandatory=false)
+        TRANSFERIN_TOTAL_LOAN_AMOUNT : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=17.0, core=true, t24Name=TRANSFERIN.TOTAL.LOAN.AMOUNT, mandatory=false)
+        TRANSFERIN_TOTAL_LOAN_RIGHTS : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=13.0, core=true, t24Name=TRANSFERIN.TOTAL.LOAN.RIGHTS, mandatory=false)
+        TRANSFER_STATUS : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=50, sysNumber=19.0, core=true, t24Name=TRANSFER.STATUS, mandatory=false)
+        TYPE_OF_RESIDENCE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=12.0, core=true, t24Name=TYPE.OF.RESIDENCE, mandatory=false)
+    }
+    FRPLCL_PELCEL_DETAILS__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=39.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    FRPLCL_PELCEL_DETAILS__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=38.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    FRPLCL_PELCEL_DETAILS__LOAN_ARRANGEMENT
+    {
+        BONUS_PAID : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=50, sysNumber=10.0, core=true, t24Name=BONUS.PAID, mandatory=false)
+        DATE_OF_LOAN : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=50, sysNumber=7.0, core=true, t24Name=DATE.OF.LOAN, mandatory=false)
+        ERROR_CODE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=50, sysNumber=9.0, core=true, t24Name=ERROR.CODE, mandatory=false)
+        LOAN_ARRANGEMENT : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=50, sysNumber=6.0, core=true, t24Name=LOAN.ARRANGEMENT, mandatory=false)
+        LOAN_RIGHTS_USED : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=50, sysNumber=8.0, core=true, t24Name=LOAN.RIGHTS.USED, mandatory=false)
+    }
+    FRPLCL_PELCEL_PARAMETER
+        @i18n:Description (en="")
+        @t24:i (t24Name=FRPLCL.PELCEL.PARAMETER, level=I, type=H, allowedFunctions="A C D E H I L P Q R S", localRefApplicationSysNo=31.0, localRefAllowed=true)
+    {
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=40.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=41.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=37.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        AUTO_RENEWAL_REPORT_DAYS : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=10, sysNumber=22.0, core=true, t24Name=AUTO.RENEWAL.REPORT.DAYS, mandatory=false)
+        CEL_BONUS_INDEX -> ST_RateParameters:BASIC_RATE_TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=10, sysNumber=3.0, core=true, businessType=A, t24Name=CEL.BONUS.INDEX, mandatory=false)
+        CEL_MAX_BALANCE : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=10, sysNumber=11.0, core=true, t24Name=CEL.MAX.BALANCE, typeModifiers="-USD", mandatory=false)
+        CEL_MAX_BONUS : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=10, sysNumber=9.0, core=true, t24Name=CEL.MAX.BONUS, typeModifiers="-USD", mandatory=false)
+        CEL_MIN_STO_AMT : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=10, sysNumber=2.0, core=true, t24Name=CEL.MIN.STO.AMT, typeModifiers="-USD", mandatory=false)
+        CEL_PRODUCT -> byValue FRPLCL_Foundation:FRPLCL_PELCEL_PARAMETER__CEL_PRODUCT *
+            @t24:i (t24Name=CEL.PRODUCT)
+        CEL_RATE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=4, sysNumber=5.0, core=true, t24Name=CEL.RATE, mandatory=false)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=38.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CREDIT_DEFICIT_REPORT_DAYS : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=10, sysNumber=24.0, core=true, t24Name=CREDIT.DEFICIT.REPORT.DAYS, mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=34.0, core=true, t24Name=CURR.NO, mandatory=false)
+        DATE_TIME -> byValue FRPLCL_Foundation:FRPLCL_PELCEL_PARAMETER__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=39.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        ID -> FRPLCL_Foundation:FRPLCL_PELCEL_PARAMETER PK required
+            @i18n:Label (en="Transaction Ref")
+            @i18n:Tooltip (en="Transaction Reference")
+            @t24:i (align=L, inputBehaviour=I, maxLength=11, sysNumber=0.0, core=true, businessType=A, t24Name="@ID", mandatory=true)
+        INPUTTER -> byValue FRPLCL_Foundation:FRPLCL_PELCEL_PARAMETER__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        LOAN_RIGHTS_REPORT_DAYS : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=10, sysNumber=23.0, core=true, t24Name=LOAN.RIGHTS.REPORT.DAYS, mandatory=false)
+        OVERRIDE -> byValue FRPLCL_Foundation:FRPLCL_PELCEL_PARAMETER__OVERRIDE *
+            @t24:i (t24Name=OVERRIDE)
+        PELCEL_TAX_PERIOD : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=10, sysNumber=17.0, core=true, t24Name=PELCEL.TAX.PERIOD, mandatory=false)
+        PEL_ACCOUNT_LIFETIME : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=10, sysNumber=6.0, core=true, t24Name=PEL.ACCOUNT.LIFETIME, mandatory=false)
+        PEL_BONUS_INDEX -> ST_RateParameters:BASIC_RATE_TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=10, sysNumber=4.0, core=true, businessType=A, t24Name=PEL.BONUS.INDEX, mandatory=false)
+        PEL_DATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=1.0, core=true, t24Name=PEL.DATE, mandatory=false)
+        PEL_MAX_BALANCE : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=10, sysNumber=12.0, core=true, t24Name=PEL.MAX.BALANCE, typeModifiers="-USD", mandatory=false)
+        PEL_MAX_BONUS : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=10, sysNumber=10.0, core=true, t24Name=PEL.MAX.BONUS, typeModifiers="-USD", mandatory=false)
+        PEL_NON_ENERGY_MAX_BONUS : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=10, sysNumber=18.0, core=true, t24Name=PEL.NON.ENERGY.MAX.BONUS, typeModifiers="-USD", mandatory=false)
+        PEL_PRODUCT -> byValue FRPLCL_Foundation:FRPLCL_PELCEL_PARAMETER__PEL_PRODUCT *
+            @t24:i (t24Name=PEL.PRODUCT)
+        PEL_REGULAR_TENURE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=10, sysNumber=20.0, core=true, t24Name=PEL.REGULAR.TENURE, mandatory=false)
+        PEL_TAX_POST_DATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=21.0, core=true, t24Name=PEL.TAX.POST.DATE, mandatory=false)
+        PEL_YEARLY_AMOUNT : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=10, sysNumber=19.0, core=true, t24Name=PEL.YEARLY.AMOUNT, typeModifiers="-USD", mandatory=false)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=33.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        RESERVED_1 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=30.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=29.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=28.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=27.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        RESERVED_5 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=26.0, core=true, t24Name=RESERVED.5, mandatory=false)
+        RESERVED_6 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=25.0, core=true, t24Name=RESERVED.6, mandatory=false)
+        TRANSFERIN_CHARGE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=17, sysNumber=8.0, core=true, t24Name=TRANSFERIN.CHARGE, mandatory=false)
+        TRANSFER_IN_DATES -> byValue FRPLCL_Foundation:FRPLCL_PELCEL_PARAMETER__TRANSFER_IN_DATES *
+            @t24:i (t24Name=TRANSFER.IN.DATES)
+    }
+    FRPLCL_PELCEL_PARAMETER__CEL_PRODUCT
+    {
+        CEL_LOAN_PRODUCT -> AA_ProductManagement:AA_PRODUCT
+            @t24:i (align=L, inputBehaviour=I, maxLength=20, sysNumber=14.0, core=true, businessType=A, t24Name=CEL.LOAN.PRODUCT, mandatory=false)
+        CEL_PRODUCT -> AA_ProductManagement:AA_PRODUCT
+            @t24:i (align=L, inputBehaviour=I, maxLength=20, sysNumber=13.0, core=true, businessType=A, t24Name=CEL.PRODUCT, mandatory=false)
+    }
+    FRPLCL_PELCEL_PARAMETER__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=36.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    FRPLCL_PELCEL_PARAMETER__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=35.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    FRPLCL_PELCEL_PARAMETER__OVERRIDE
+    {
+        OVERRIDE : T24BusinessTypes:N
+            @i18n:Label (en=Override)
+            @i18n:Tooltip (en="Overrides generated by this transaction")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=32.0, core=true, t24Name=OVERRIDE, mandatory=false)
+    }
+    FRPLCL_PELCEL_PARAMETER__PEL_PRODUCT
+    {
+        PEL_LOAN_PRODUCT -> AA_ProductManagement:AA_PRODUCT
+            @t24:i (align=L, inputBehaviour=I, maxLength=20, sysNumber=16.0, core=true, businessType=A, t24Name=PEL.LOAN.PRODUCT, mandatory=false)
+        PEL_PRODUCT -> AA_ProductManagement:AA_PRODUCT
+            @t24:i (align=L, inputBehaviour=I, maxLength=20, sysNumber=15.0, core=true, businessType=A, t24Name=PEL.PRODUCT, mandatory=false)
+    }
+    FRPLCL_PELCEL_PARAMETER__TRANSFER_IN_DATES
+    {
+        TRANSFER_IN_DATES : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=7.0, core=true, t24Name=TRANSFER.IN.DATES, mandatory=false)
+    }
+    FRPLCL_TAX_DETAILS
+        @i18n:Description (en="")
+        @t24:i (t24Name=FRPLCL.TAX.DETAILS, level=F, type=L, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        ID -> FRPLCL_Foundation:FRPLCL_TAX_DETAILS PK required
+            @i18n:Label (en="Transaction Ref")
+            @i18n:Tooltip (en="Transaction Reference")
+            @t24:i (align=L, inputBehaviour=I, maxLength=20, sysNumber=0.0, core=true, businessType=ARR, t24Name="@ID", mandatory=true)
+        RESERVED_1 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=12.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=11.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=10.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=9.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        RESERVED_5 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=8.0, core=true, t24Name=RESERVED.5, mandatory=false)
+        RESERVED_6 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=7.0, core=true, t24Name=RESERVED.6, mandatory=false)
+        RESERVED_7 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=6.0, core=true, t24Name=RESERVED.7, mandatory=false)
+        RESERVED_8 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=5.0, core=true, t24Name=RESERVED.8, mandatory=false)
+        RESERVED_9 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=4.0, core=true, t24Name=RESERVED.9, mandatory=false)
+        TAX_TYPE -> byValue FRPLCL_Foundation:FRPLCL_TAX_DETAILS__TAX_TYPE *
+            @t24:i (t24Name=TAX.TYPE)
+    }
+    FRPLCL_TAX_DETAILS__TAX_TYPE
+    {
+        TAX_PAYMENT_DATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=8, sysNumber=3.0, core=true, t24Name=TAX.PAYMENT.DATE, mandatory=false)
+        TAX_TYPE : T24BusinessTypes:A
+            @i18n:Label (en="Tax Type")
+            @i18n:Tooltip (en="Defines the tax type")
+            @t24:i (align=L, inputBehaviour=I, maxLength=10, sysNumber=1.0, core=true, t24Name=TAX.TYPE, mandatory=false)
+        TOTAL_TAX_AMOUNT : T24BusinessTypes:AMT
+            @i18n:Label (en="Total Tax Amount")
+            @t24:i (align=R, inputBehaviour=I, maxLength=20, sysNumber=2.0, core=true, t24Name=TOTAL.TAX.AMOUNT, mandatory=false)
+    }
+    FRPLCL_TRANSFER_DETAILS
+        @i18n:Description (en="")
+        @t24:i (t24Name=FRPLCL.TRANSFER.DETAILS, level=F, type=H, allowedFunctions="A C D E H I L P Q R S", localRefAllowed=false)
+    {
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=25.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=26.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=22.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=23.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=19.0, core=true, t24Name=CURR.NO, mandatory=false)
+        DATE_TIME -> byValue FRPLCL_Foundation:FRPLCL_TRANSFER_DETAILS__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=24.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        ID -> FRPLCL_Foundation:FRPLCL_TRANSFER_DETAILS PK required
+            @i18n:Label (en="Transaction Ref")
+            @i18n:Tooltip (en="Transaction Reference")
+            @t24:i (align=L, inputBehaviour=I, maxLength=17, sysNumber=0.0, core=true, businessType=ARR, t24Name="@ID", mandatory=true)
+        INPUTTER -> byValue FRPLCL_Foundation:FRPLCL_TRANSFER_DETAILS__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=18.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        RESERVED_1 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=17.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_10 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=8.0, core=true, t24Name=RESERVED.10, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=16.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=15.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=14.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        RESERVED_5 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=13.0, core=true, t24Name=RESERVED.5, mandatory=false)
+        RESERVED_6 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=12.0, core=true, t24Name=RESERVED.6, mandatory=false)
+        RESERVED_7 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=11.0, core=true, t24Name=RESERVED.7, mandatory=false)
+        RESERVED_8 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=10.0, core=true, t24Name=RESERVED.8, mandatory=false)
+        RESERVED_9 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=9.0, core=true, t24Name=RESERVED.9, mandatory=false)
+        START_DATE -> byValue FRPLCL_Foundation:FRPLCL_TRANSFER_DETAILS__START_DATE *
+            @t24:i (t24Name=START.DATE)
+    }
+    FRPLCL_TRANSFER_DETAILS__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=21.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    FRPLCL_TRANSFER_DETAILS__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=20.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    FRPLCL_TRANSFER_DETAILS__START_DATE
+    {
+        AVAILABLE_LOAN_RIGHTS : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=5.0, core=true, t24Name=AVAILABLE.LOAN.RIGHTS, mandatory=false)
+        END_DATE : T24BusinessTypes:D
+            @i18n:Label (en="End Date")
+            @i18n:Tooltip (en="End Date")
+            @t24:i (align=R, inputBehaviour=I, maxLength=8, sysNumber=2.0, core=true, t24Name=END.DATE, mandatory=false)
+        GROSS_INTEREST : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=4.0, core=true, t24Name=GROSS.INTEREST, mandatory=false)
+        LOAN_RIGHTS_USED : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=6.0, core=true, t24Name=LOAN.RIGHTS.USED, mandatory=false)
+        RATE : T24BusinessTypes:A
+            @i18n:Label (en=Rate)
+            @i18n:Tooltip (en="Rate at which dividend/coupon is being paid")
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=3.0, core=true, t24Name=RATE, mandatory=false)
+        START_DATE : T24BusinessTypes:D
+            @i18n:Label (en="Start Date")
+            @i18n:Tooltip (en="Start Date")
+            @t24:i (align=R, inputBehaviour=I, maxLength=8, sysNumber=1.0, core=true, t24Name=START.DATE, mandatory=false)
+        TAX_ON_INTEREST : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=7.0, core=true, t24Name=TAX.ON.INTEREST, mandatory=false)
+    }
+    NOFILE_FRPLCL_HOME_SAVINGS_STAT
+        @i18n:Description (en="")
+        @t24:i (t24Name=NOFILE.FRPLCL.HOME.SAVINGS.STAT, level=I, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        RESULT_DATA : T24BusinessTypes:N
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, core=false, t24Name=RESULT.DATA, genOperation=FRPLCL.HOME.SAVINGS.STATS, mandatory=true)
+    }
+    NOFILE_FRPLCL_TAXREG_LEVIES
+        @i18n:Description (en="")
+        @t24:i (t24Name=NOFILE.FRPLCL.TAXREG.LEVIES, level=I, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        RESULT_DATA : T24BusinessTypes:N
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, core=false, t24Name=RESULT.DATA, genOperation=FRPLCL.TAX.LEVIES.REPORT, mandatory=true)
+    }
+}
+Enumerations {
+    FRPLCL_PELCEL_DETAILS__PEL_CEL : mml:string
+        CEL=CEL
+        PEL=PEL
+}

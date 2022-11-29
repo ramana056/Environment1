@@ -1,0 +1,23 @@
+# UTF-8
+/* Channels Consent Information Customer Consent */
+Domain CK_Channels
+    @t24:i (module=CK)
+    @java:Package (value=com.temenos.t24.datamodel.ck.ck_channels)
+namespace "http://www.temenos.com/t24/CK_Channels"
+metamodelVersion 1.30.6
+Classes {
+    NOFILE_TC_AA_CONSENT_TYPE
+        @i18n:Description (en="")
+        @t24:i (t24Name=NOFILE.TC.AA.CONSENT.TYPE, level=I, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        CONSENT_DETAILS : T24BusinessTypes:N
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, core=false, t24Name=CONSENT.DETAILS, genOperation=E.NOFILE.TC.AA.CONSENT.TYPE, mandatory=true)
+        CUSTOMER_ID : T24BusinessTypes:N
+            @i18n:Label (en="Customer Id")
+            @i18n:Tooltip (en="Identifies the Customer for the transaction.")
+            @t24:i (align=R, inputBehaviour=N, maxLength=25, core=false, t24Name=CUSTOMER.ID, mandatory=false)
+        PROPERTY_CLASS : T24BusinessTypes:N
+            @i18n:Label (en="Property Class")
+            @t24:i (align=R, inputBehaviour=N, maxLength=25, core=false, t24Name=PROPERTY.CLASS, mandatory=false)
+    }
+}

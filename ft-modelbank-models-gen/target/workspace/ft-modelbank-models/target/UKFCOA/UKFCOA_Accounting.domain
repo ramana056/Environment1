@@ -1,0 +1,162 @@
+# UTF-8
+/* UK FSCS Continuity of Access */
+Domain UKFCOA_Accounting
+    @t24:i (module=UKFCOA)
+    @java:Package (value=com.temenos.t24.datamodel.ukfcoa.ukfcoa_accounting)
+namespace "http://www.temenos.com/t24/UKFCOA_Accounting"
+metamodelVersion 1.30.6
+Classes {
+    FSCS_LOCKED_EVENTS_CONCAT
+        @i18n:Description (en="")
+        @t24:i (t24Name=FSCS.LOCKED.EVENTS.CONCAT, level=F, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        AUDITOR_CODE -> byValue UKFCOA_Accounting:FSCS_LOCKED_EVENTS_CONCAT__AUDITOR_CODE *
+            @t24:i (t24Name=AUDITOR.CODE)
+        AUDIT_DATE_TIME -> byValue UKFCOA_Accounting:FSCS_LOCKED_EVENTS_CONCAT__AUDIT_DATE_TIME *
+            @t24:i (t24Name=AUDIT.DATE.TIME)
+        AUTHORISER -> byValue UKFCOA_Accounting:FSCS_LOCKED_EVENTS_CONCAT__AUTHORISER *
+            @t24:i (t24Name=AUTHORISER)
+        CO_CODE -> byValue UKFCOA_Accounting:FSCS_LOCKED_EVENTS_CONCAT__CO_CODE *
+            @t24:i (t24Name=CO.CODE)
+        CURR_NO -> byValue UKFCOA_Accounting:FSCS_LOCKED_EVENTS_CONCAT__CURR_NO *
+            @t24:i (t24Name=CURR.NO)
+        DATE_TIME -> byValue UKFCOA_Accounting:FSCS_LOCKED_EVENTS_CONCAT__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DEPT_CODE -> byValue UKFCOA_Accounting:FSCS_LOCKED_EVENTS_CONCAT__DEPT_CODE *
+            @t24:i (t24Name=DEPT.CODE)
+        ID -> UKFCOA_Accounting:FSCS_LOCKED_EVENTS_CONCAT PK required
+            @i18n:Label (en="Transaction Ref")
+            @i18n:Tooltip (en="Transaction Reference")
+            @t24:i (align=R, inputBehaviour=I, maxLength=0, sysNumber=0.0, core=true, businessType=ACC, t24Name="@ID", mandatory=true)
+        INPUTTER -> byValue UKFCOA_Accounting:FSCS_LOCKED_EVENTS_CONCAT__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        LOCKED_EVENT_ID -> byValue UKFCOA_Accounting:FSCS_LOCKED_EVENTS_CONCAT__LOCKED_EVENT_ID *
+            @t24:i (t24Name=LOCKED.EVENT.ID)
+        RECORD_STATUS -> byValue UKFCOA_Accounting:FSCS_LOCKED_EVENTS_CONCAT__RECORD_STATUS *
+            @t24:i (t24Name=RECORD.STATUS)
+    }
+    FSCS_LOCKED_EVENTS_CONCAT__AUDITOR_CODE
+    {
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=9.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+    }
+    FSCS_LOCKED_EVENTS_CONCAT__AUDIT_DATE_TIME
+    {
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=10.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    FSCS_LOCKED_EVENTS_CONCAT__AUTHORISER
+    {
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=6.0, core=true, t24Name=AUTHORISER, mandatory=false)
+    }
+    FSCS_LOCKED_EVENTS_CONCAT__CO_CODE
+    {
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=7.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+    }
+    FSCS_LOCKED_EVENTS_CONCAT__CURR_NO
+    {
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=3.0, core=true, t24Name=CURR.NO, mandatory=false)
+    }
+    FSCS_LOCKED_EVENTS_CONCAT__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=5.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    FSCS_LOCKED_EVENTS_CONCAT__DEPT_CODE
+    {
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=8.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+    }
+    FSCS_LOCKED_EVENTS_CONCAT__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=4.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    FSCS_LOCKED_EVENTS_CONCAT__LOCKED_EVENT_ID
+    {
+        LOCKED_EVENT_ID : T24BusinessTypes:T required
+            @t24:i (align=L, inputBehaviour=I, maxLength=30, sysNumber=1.0, core=true, t24Name=LOCKED.EVENT.ID, mandatory=true)
+    }
+    FSCS_LOCKED_EVENTS_CONCAT__RECORD_STATUS
+    {
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=2.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+    }
+    FSCS_UNFREEZE_DETAILS
+        @i18n:Description (en="")
+        @t24:i (t24Name=FSCS.UNFREEZE.DETAILS, level=C, type=L, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        DEPOSIT_ACCOUNT -> byValue UKFCOA_Accounting:FSCS_UNFREEZE_DETAILS__DEPOSIT_ACCOUNT *
+            @t24:i (t24Name=DEPOSIT.ACCOUNT)
+        ID -> UKFCOA_Accounting:FSCS_UNFREEZE_DETAILS PK required
+            @i18n:Label (en="Transaction Ref")
+            @i18n:Tooltip (en="Transaction Reference")
+            @t24:i (align=R, inputBehaviour=I, maxLength=20, sysNumber=0.0, core=true, businessType=CUS, t24Name="@ID", mandatory=true)
+        RESERVED_1 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=12.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_10 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=3.0, core=true, t24Name=RESERVED.10, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=11.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=10.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=9.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        RESERVED_5 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=8.0, core=true, t24Name=RESERVED.5, mandatory=false)
+        RESERVED_6 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=7.0, core=true, t24Name=RESERVED.6, mandatory=false)
+        RESERVED_7 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=6.0, core=true, t24Name=RESERVED.7, mandatory=false)
+        RESERVED_8 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=5.0, core=true, t24Name=RESERVED.8, mandatory=false)
+        RESERVED_9 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=4.0, core=true, t24Name=RESERVED.9, mandatory=false)
+    }
+    FSCS_UNFREEZE_DETAILS__DEPOSIT_ACCOUNT
+    {
+        DEPOSIT_ACCOUNT : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=1.0, core=true, t24Name=DEPOSIT.ACCOUNT, mandatory=false)
+        UNFREEZE_AMOUNT : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=2.0, core=true, t24Name=UNFREEZE.AMOUNT, mandatory=false)
+    }
+    NOFILE_FCOA_FREEZE_UNFREEZE_DETAILS
+        @i18n:Description (en="")
+        @t24:i (t24Name=NOFILE.FCOA.FREEZE.UNFREEZE.DETAILS, level=I, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        ACCOUNT_ID : T24BusinessTypes:N
+            @i18n:Label (en="Account No")
+            @i18n:Tooltip (en="Indicates the Account Number")
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, core=false, t24Name=ACCOUNT.ID, mandatory=false)
+        ACC_NUM : T24BusinessTypes:N
+            @t24:i (align=L, inputBehaviour=N, maxLength=30, core=false, t24Name=ACC.NUM, genOperation=NOFILE.FCOA.FREEZE.UNFREEZE.DETAILS, mandatory=true)
+        CURRENCY : T24BusinessTypes:N
+            @i18n:Label (en=Ccy)
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, core=false, t24Name=CURRENCY, mandatory=false)
+        CUSTOMER_ID : T24BusinessTypes:N
+            @i18n:Label (en="Customer Id")
+            @i18n:Tooltip (en="Identifies the Customer for the transaction.")
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, core=false, t24Name=CUSTOMER.ID, mandatory=false)
+        DEPOSIT_CATEGORY : T24BusinessTypes:N
+            @i18n:Label (en="Deposit Category")
+            @i18n:Tooltip (en="Identifies the category of the deposit")
+            @t24:i (align=R, inputBehaviour=N, maxLength=30, core=false, t24Name=DEPOSIT.CATEGORY, mandatory=false)
+    }
+}

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<localref:LocalRef xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:localref="http://www.odcgroup.com/t24/application/localref/model/LocalRef"
+    xmlns:translationDsl="http://www.odcgroup.com/translation/TranslationDsl" localRefID="USREGS.ACH.BEN" maximumChars="20" minimumChars="0"
+    mandatory="false" defaultPossible="false" applicationEnrich="CUSTOMER" applicationVET="name://USREGS_ACH:USREGS_ACH_BEN_DETAILS#"
+    description="ACH Benificiary Details">
+  <shortName xsi:type="translationDsl:LocalTranslations">
+    <translations locale="en" text="USREGS.ACH.BEN"/>
+  </shortName>
+</localref:LocalRef>

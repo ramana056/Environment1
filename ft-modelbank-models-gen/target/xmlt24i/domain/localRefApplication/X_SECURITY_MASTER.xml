@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<localReferenceApplication:LocalReferenceApplication xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:localReferenceApplication="http://www.odcgroup.com/t24/application/localRefApplication/model/LocalReferenceApplication"
+    xmlns:translationDsl="http://www.odcgroup.com/translation/TranslationDsl" forApplication="name://SC_ScoSecurityMasterMaintenance:SECURITY_MASTER#">
+  <localField groupName="No" localRefID="SEC.EFF.DATE">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="SEC.EFF.DATE"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+  <localField groupName="PRIIP_KID" localRefID="PRIIP.KID">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="PRIIP.KID"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+  <localField groupName="No" localRefID="TRASPASOS.ALLOWED">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="TRASPASOS.ALLOW"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+  <localField groupName="INGAAP_SUB_ASSET" localRefID="INGAAP.SUB.ASSET">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="SUB.ASSET"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+  <localField groupName="INGAAP_SUB_ASSET" localRefID="INGAAP.TIME.BAND">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="TIME.BAND"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+  <localField groupName="No" localRefID="INGAAP.LEVEL">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="LEVEL"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+  <localField groupName="No" localRefID="TDS.MESSAGE.ID">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="TDS.MESSAGE.ID"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+</localReferenceApplication:LocalReferenceApplication>

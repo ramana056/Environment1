@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<localReferenceApplication:LocalReferenceApplication xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:localReferenceApplication="http://www.odcgroup.com/t24/application/localRefApplication/model/LocalReferenceApplication"
+    xmlns:translationDsl="http://www.odcgroup.com/translation/TranslationDsl" forApplication="name://AC_NSF:NSF_PARAMETER#">
+  <localField groupName="No" localRefID="NSF.FLOAT.COMPONENT">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="NSF.FLOAT.COMP"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+  <localField groupName="No" localRefID="FLOAT.HOLD.TYPE">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="FLOAT.HOLD.TYPE"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+  <localField groupName="NSF_REJECT_TXN_VERSION" localRefID="NSF.REJECT.TXN.VERSION">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="NSF.REJ.VERSION"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+  <localField groupName="NSF_REJECT_TXN_VERSION" localRefID="NSF.REJECT.OFS">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="NSF.REJECT.OFS"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+  <localField groupName="No" localRefID="US.STOP.EXIST">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="STOP.EXIST"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+</localReferenceApplication:LocalReferenceApplication>

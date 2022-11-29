@@ -1,0 +1,430 @@
+# UTF-8
+/* All Funds Bank */
+Domain ALLFND_CustomerOnboarding
+    @t24:i (module=ALLFND)
+    @java:Package (value=com.temenos.t24.datamodel.allfnd.allfnd_customeronboarding)
+namespace "http://www.temenos.com/t24/ALLFND_CustomerOnboarding"
+metamodelVersion 1.30.6
+Classes {
+    /* A new application table to accept or reject traspaso requests raised by AFB will be created for the authorised user to accept or reject the request. This table will also be updated when AFB rejects the traspaso from its end. */
+    ALLFND_AFB_LOG
+        @i18n:Description (en="")
+        @t24:i (t24Name=ALLFND.AFB.LOG, level=C, type=H, allowedFunctions="A C D E H I L P Q R S", localRefApplicationSysNo=76.0, localRefAllowed=true)
+    {
+        /* This field will hold the actual charges calculated by the system */
+        ACT_CHARGES : T24BusinessTypes:A
+            @i18n:Tooltip (en="Actual charges calculated from the nominal")
+            @t24:i (align=L, inputBehaviour=I, maxLength=18, sysNumber=52.0, core=true, t24Name=ACT.CHARGES, mandatory=false)
+        /* Unique ID of portfolio owner which is provided by AFB at the time of registration. */
+        AFB_CLIENT_ID : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=8.0, core=true, t24Name=AFB.CLIENT.ID, mandatory=false)
+        /* Transaction ID provided by the AFB for every transaction that is registered with AFB. */
+        AFB_TRANSACTION_ID : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=17, sysNumber=1.0, core=true, t24Name=AFB.TRANSACTION.ID, mandatory=false)
+        /* Name of the Application which has triggered the API message to AFB */
+        APPLICATION : T24BusinessTypes:A
+            @i18n:Label (en=Application)
+            @t24:i (align=L, inputBehaviour=I, maxLength=20, sysNumber=19.0, core=true, t24Name=APPLICATION, mandatory=false)
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=95.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=96.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=92.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        /* This field specifies whether a broker advice is to be sent. The default is set in the ADVICE.DEFAULT field in the SC.PARAMETER file. */
+        BROKER_ADVICE_REQD : T24BusinessTypes:A
+            @i18n:Label (en="Broker Advice Reqd?")
+            @i18n:Tooltip (en="Specifies whether a broker advice is to be sent")
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=50.0, core=true, t24Name=BROKER.ADVICE.REQD, mandatory=false)
+/* Identifies the party to/from whom the transfer is to be made.
+You may input any of the following CUSTOMER.SECURITY types : 1) Broker 2) Counterparty 3) Client
+Whereas the Broker and Counterparty are self explanatory the Client may be a Customer of the Bank who is not traditionally known as either a Broker or Counterparty but as a Client (Without a Portfolio) who transacts business with the Bank. It is therefore permissible within the Sec.Trade appliaction to enter a transaction on the Broker side of the transaction who will Purchase securities from a Client who is selling those securities.
+The system is intelligent enough to know that the Client is effectively a Customer without a Portfolio and will ensure that the accounting procedures for this transaction are dealt with properly. */
+        BROKER_NO : T24BusinessTypes:N
+            @i18n:Label (en="Broker No")
+            @t24:i (align=R, inputBehaviour=I, maxLength=10, sysNumber=36.0, core=true, t24Name=BROKER.NO, mandatory=false)
+/* Specifies the Net.Amount due to/from the Broker (Field 23) for the transaction.
+Input is only required where the Security. Transfer is made against payment. */
+        BR_NET_AMT : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=18, sysNumber=37.0, core=true, t24Name=BR.NET.AMT, typeModifiers="-22", mandatory=false)
+        /* This field will signify the currency code in which the CGT base amount is denominatedThis field will signify the currency code in which the CGT base amount is denominated */
+        CGT_BAMT_CCY -> ST_CurrencyConfig:CURRENCY
+            @i18n:Label (en="CG Base Amount Ccy")
+            @i18n:Tooltip (en="Capital Gains base amount currency")
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=46.0, core=true, businessType=CCY, t24Name=CGT.BAMT.CCY, mandatory=false)
+        /* A multi-value NOINPUT field. The condition id allocated to this transaction relating to application CG.PARAM.CONDITION. This will determine the Capital Gains method and tax to be applied. */
+        CGT_PARAM_COND : T24BusinessTypes:A
+            @i18n:Label (en="CGT Parameter Condition")
+            @i18n:Tooltip (en="Capital Gains method and tax to be applied")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=47.0, core=true, t24Name=CGT.PARAM.COND, mandatory=false)
+        /* A NOINPUT multi-value associated field. This indicates whether the tax is to be deducted by the bank (LOCAL) or the depositor (SOURCE */
+        CGT_SRC_LCL_TAX : T24BusinessTypes:A
+            @i18n:Label (en="CGT Source Local Tax")
+            @i18n:Tooltip (en="Indicates whether CGT is source or local ")
+            @t24:i (align=L, inputBehaviour=I, maxLength=6, sysNumber=48.0, core=true, t24Name=CGT.SRC.LCL.TAX, mandatory=false)
+/* This field enables you to specify an alternative time for any SECURITY.TRANSFER undergoing Capital Gains tax processing should this particular process have been requested within the SC.PARAMETER file field, CG.BASE.UPDATE.
+Input without a time specified is acceptable to the System but you should be aware that this will cause the time of actual input to determine the location of the transaction in the Captal Gains tax transaction file, CG.TXN.BASE */
+        CG_TRADE_TIME : T24BusinessTypes:TIME
+            @i18n:Label (en="CG Trade Time")
+            @i18n:Tooltip (en="Specifies time for Capital Gains tax processing")
+            @t24:i (align=L, inputBehaviour=I, maxLength=11, sysNumber=45.0, core=true, t24Name=CG.TRADE.TIME, mandatory=false)
+        /* Records the charges levied against the Customer for the transaction. This is defaulted based on customer charge conditions set for SC.TRADING but could be manually amended */
+        CHARGES : T24BusinessTypes:A
+            @i18n:Label (en="Charge Amt")
+            @t24:i (align=L, inputBehaviour=I, maxLength=18, sysNumber=27.0, core=true, t24Name=CHARGES, mandatory=false)
+        /* Updated by ESB with yes/no. Yes is updated if the AFBClient ID has to be saved in CUSTOMER and No in case the AFBClient ID is already available in CUSTOMER. */
+        CLIENTID_UPDATE_REQUIRED : ALLFND_CustomerOnboarding:ALLFND_AFB_LOG__CLIENTID_UPDATE_REQUIRED
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=9.0, core=true, t24Name=CLIENTID.UPDATE.REQUIRED, mandatory=false)
+        /* This field accepts a valid FT.COMMISSION.TYPE ID ,Based on which the CHARGES will be calculated. */
+        COMMISSION_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Commission Code")
+            @i18n:Tooltip (en="Indicates the commission code")
+            @t24:i (align=L, inputBehaviour=I, maxLength=15, sysNumber=42.0, core=true, t24Name=COMMISSION.CODE, mandatory=false)
+        /* Commission percentage applied */
+        COMM_PERCENT : T24BusinessTypes:A
+            @i18n:Label (en="Commission (%)")
+            @t24:i (align=L, inputBehaviour=I, maxLength=15, sysNumber=43.0, core=true, t24Name=COMM.PERCENT, mandatory=false)
+        /* Updated by ESB with yes/no. Yes is updated if the AFBContract ID has to be saved in SEC.ACC.MASTER and No in case the AFB contract ID is already available in SEC.ACC.MASTER */
+        CONTRACTID_UPDATE_REQUIRED : ALLFND_CustomerOnboarding:ALLFND_AFB_LOG__CONTRACTID_UPDATE_REQUIRED
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=6.0, core=true, t24Name=CONTRACTID.UPDATE.REQUIRED, mandatory=false)
+/* This field may be used instead of the PRICE field to record the gross cost in the portfolios specified REFERENCE.CURRENCY of the security to be transferred into or out of the portfolio.
+If the PRICE field has been input then the COST field will already have been calculated and populated with the result. However, you may change the COST field contents but be aware that the PRICE field contents will be recalculated according to whatever value you may enter.
+Similarly, if the COST field is input and the PRICE field has been left blank then the system will calculate the PRICE given the COST.
+Should the REFERENCE.CURRENCY differ from the currency of the security then the appropriate foreign exchange rate is used to provide either the PRICE or the COST as required is created when this record is authorised in accepted status. */
+        COST : T24BusinessTypes:AMT
+            @i18n:Label (en="Cost Price")
+            @t24:i (align=R, inputBehaviour=I, maxLength=19, sysNumber=25.0, core=true, t24Name=COST, mandatory=false)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=93.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=89.0, core=true, t24Name=CURR.NO, mandatory=false)
+        /* Record ID of the Customer. */
+        CUSTOMER_ID -> ST_Customer:CUSTOMER
+            @i18n:Label (en="Customer Id")
+            @i18n:Tooltip (en="Identifies the Customer for the transaction.")
+            @t24:i (align=R, inputBehaviour=I, maxLength=10, sysNumber=7.0, core=true, businessType=CUS, t24Name=CUSTOMER.ID, mandatory=false)
+/* Specifies the Net.Amount due to/from the Customer for the transaction.
+Input is only required where the Security. Transfeust is made against payment. */
+        CUST_NET_AMT : T24BusinessTypes:AMT
+            @i18n:Label (en="Customer Net amount")
+            @t24:i (align=R, inputBehaviour=I, maxLength=18, sysNumber=39.0, core=true, t24Name=CUST.NET.AMT, typeModifiers="-22", mandatory=false)
+        /* Indicates the Currency of the Customer Account. */
+        CU_ACCOUNT_CCY -> ST_CurrencyConfig:CURRENCY
+            @i18n:Label (en="Customer Account Currency")
+            @i18n:Tooltip (en="Indicates the currency of customer account")
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=33.0, core=true, businessType=CCY, t24Name=CU.ACCOUNT.CCY, mandatory=false)
+        /* Specifies the (internal cash) Account for the Customer, over which cash entries relating to the transaction are to be passed */
+        CU_ACCOUNT_NO : T24BusinessTypes:ACC
+            @i18n:Label (en="Customer Acc No")
+            @i18n:Tooltip (en="Specifies the Account of the Customer")
+            @t24:i (align=R, inputBehaviour=I, maxLength=16, sysNumber=32.0, core=true, t24Name=CU.ACCOUNT.NO, mandatory=false)
+        /* Exchange rate to customer account currency */
+        CU_ACC_EX_RATE : T24BusinessTypes:R
+            @t24:i (align=R, inputBehaviour=I, maxLength=15, sysNumber=38.0, core=true, t24Name=CU.ACC.EX.RATE, mandatory=false)
+        /* Charge or Tax type as defined in SCDX.CHARGE.PARAMETER (value will be from CHARGE.TAX.TYPE field). These will be the charges/taxes defined for the customer side. */
+        CU_CHARGE_TAX_TYPE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=16, sysNumber=29.0, core=true, t24Name=CU.CHARGE.TAX.TYPE, mandatory=false)
+        DATE_TIME -> byValue ALLFND_CustomerOnboarding:ALLFND_AFB_LOG__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+/* Specifies the type of Delivery to be made for this transaction.
+This forms an important part of the transaction as it is linked to the delivery and clearing interfaces. For a fuller description of how the transaction processing within T24 works see the Securities Manual on Transaction Processing and Delivery Interfaces. */
+        DELIVERY_INSTR : T24BusinessTypes:A
+            @i18n:Label (en="Del Instrn")
+            @t24:i (align=L, inputBehaviour=I, maxLength=5, sysNumber=40.0, core=true, t24Name=DELIVERY.INSTR, mandatory=false)
+        /* Indicates the Depository that the Security is to be delivered from or to. */
+        DEPOSITORY : T24BusinessTypes:N
+            @i18n:Label (en=Depository)
+            @i18n:Tooltip (en="Depository the Security to be delivered from/to")
+            @t24:i (align=R, inputBehaviour=I, maxLength=10, sysNumber=23.0, core=true, t24Name=DEPOSITORY, mandatory=false)
+        /* Display the details of the individual transactions created by System in order to effect the Transfer as specified in Fields 1 to 6. */
+        DEPOSITORY_1 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=10, sysNumber=58.0, core=true, t24Name=DEPOSITORY.1, mandatory=false)
+        /* This field specifies whether a depository advice is to be produced. The default is set in the ADVICE.DEFAULT field in the SC.PARAMETER file */
+        DEPOT_ADVICE_REQD : T24BusinessTypes:A
+            @i18n:Label (en="Depo Advice Reqd?")
+            @i18n:Tooltip (en="Whether depository advice is required or not")
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=51.0, core=true, t24Name=DEPOT.ADVICE.REQD, mandatory=false)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=94.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        /* Error code returned by AFB during Client, Contract and Order registration */
+        ERROR_CODE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=10, sysNumber=17.0, core=true, t24Name=ERROR.CODE, mandatory=false)
+        ERROR_REASON -> byValue ALLFND_CustomerOnboarding:ALLFND_AFB_LOG__ERROR_REASON *
+            @t24:i (t24Name=ERROR.REASON)
+/* This field indicates the Exchange Rate to be Used during a Position Transfer.
+Valid Values are : EFFECTIVE - Exchange Rate on the trade date of the transaction will be used. TRADE - Exchange Rate as on the Trade Date of original transactions making up the position is used */
+        EXCHANGE_DATE : T24BusinessTypes:D
+            @i18n:Label (en="Exchange Date")
+            @t24:i (align=R, inputBehaviour=I, maxLength=9, sysNumber=67.0, core=true, t24Name=EXCHANGE.DATE, mandatory=false)
+        /* Calculates the Gross value of the Securities being transferred, ie. the Nominal.Amount (Field 11) valued at the Price (Field 12), displayed in the Security.Currency */
+        GROSS_AMT_SEC_CCY : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=19, sysNumber=26.0, core=true, t24Name=GROSS.AMT.SEC.CCY, typeModifiers="-22", mandatory=false)
+        HOLDER_CUSTOMERID -> byValue ALLFND_CustomerOnboarding:ALLFND_AFB_LOG__HOLDER_CUSTOMERID *
+            @t24:i (t24Name=HOLDER.CUSTOMERID)
+        /* Record ID of the transaction. */
+        ID -> ALLFND_CustomerOnboarding:ALLFND_AFB_LOG PK required
+            @i18n:Label (en="Transaction Ref")
+            @i18n:Tooltip (en="Transaction Reference")
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=0.0, core=true, businessType=A, t24Name=ID, mandatory=true)
+        INPUTTER -> byValue ALLFND_CustomerOnboarding:ALLFND_AFB_LOG__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+/* Input field allowing the user to record the amount of any local tax to be charged on the Security Transfer Transaction.
+If nothing is input will default to the local tax calculated from the local tax rate on the SC.STD.POS.TRANSF. */
+        LOCAL_TAX : T24BusinessTypes:A
+            @i18n:Label (en="Local Tax")
+            @t24:i (align=L, inputBehaviour=I, maxLength=18, sysNumber=28.0, core=true, t24Name=LOCAL.TAX, mandatory=false)
+/* Defaults to N (Normal Market).
+Not currently used. However it was envisaged that this field would determine the difference between Spot and Forward Transactions in the Securities Market. */
+        MARKET_TYPE : T24BusinessTypes:A
+            @i18n:Label (en="Martket Type")
+            @i18n:Tooltip (en="Indicates in which market the Trade has been dealt")
+            @t24:i (align=L, inputBehaviour=I, maxLength=2, sysNumber=41.0, core=true, t24Name=MARKET.TYPE, mandatory=false)
+        /* Calculates the current valuation of the Securities being transferred, ie.Gross.Amount +/- Charges + Accrued.Interest. */
+        NET_AMT_SEC_CCY : T24BusinessTypes:AMT
+            @i18n:Label (en="Net Amt Sec Ccy")
+            @t24:i (align=R, inputBehaviour=I, maxLength=18, sysNumber=30.0, core=true, t24Name=NET.AMT.SEC.CCY, typeModifiers="-22", mandatory=false)
+/* The multivalue fields 13 - 19 contain details of the individual transactions which have been created by the System when processing the transaction.
+For audit and control purposes the details relating to any particular Position Transfer are recorded at the transaction level itself. */
+        NO_NOMINAL : T24BusinessTypes:N
+            @i18n:Label (en=Nominal)
+            @t24:i (align=R, inputBehaviour=I, maxLength=18, sysNumber=59.0, core=true, t24Name=NO.NOMINAL, mandatory=false)
+        /* The field is used to specify the security transaction code (CREDIT) for the transactions. If not specified, the default is taken from SC.STD.POS.TRANSF */
+        NO_OF_POSITION : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=3, sysNumber=70.0, core=true, t24Name=NO.OF.POSITION, mandatory=false)
+        ORDER_DATE : T24BusinessTypes:D
+            @i18n:Label (en="Order Date")
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=2.0, core=true, t24Name=ORDER.DATE, mandatory=false)
+        OVERRIDE -> byValue ALLFND_CustomerOnboarding:ALLFND_AFB_LOG__OVERRIDE *
+            @t24:i (t24Name=OVERRIDE)
+        /* This field specifies whether a customer payment is to be made. The default is set in the ADVICE.DEFAULT field in the SC.PARAMETER file */
+        PAYMENT_REQD : T24BusinessTypes:A
+            @i18n:Label (en="Payment Reqd?")
+            @i18n:Tooltip (en="Specifies whether a customer payment is to be made")
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=49.0, core=true, t24Name=PAYMENT.REQD, mandatory=false)
+        /* This is the Reference Currency of the Portfolio from where positions are being transferred.BASE */
+        PF_OUT_REF_CCY -> ST_CurrencyConfig:CURRENCY
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=62.0, core=true, businessType=CCY, t24Name=PF.OUT.REF.CCY, mandatory=false)
+        /* This is the Reference Currency of the Portfolio to which the positions are being transferred to */
+        PF_REF_IN_CCY -> ST_CurrencyConfig:CURRENCY
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=63.0, core=true, businessType=CCY, t24Name=PF.REF.IN.CCY, mandatory=false)
+        /* The price at which the transferred position will be held by the new portfolio upon transfer. By default this will be the price at which the security is being held by the transferring party */
+        PRICE : T24BusinessTypes:PRICE
+            @i18n:Label (en=Price)
+            @t24:i (align=L, inputBehaviour=I, maxLength=18, sysNumber=60.0, core=true, t24Name=PRICE, mandatory=false)
+        /* Specifies the type of price calculation relevant to the Security */
+        PRICE_TYPE : T24BusinessTypes:A
+            @i18n:Label (en="Price Type")
+            @t24:i (align=L, inputBehaviour=I, maxLength=5, sysNumber=24.0, core=true, t24Name=PRICE.TYPE, mandatory=false)
+        /* Company code */
+        PT_CO_CODE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=15, sysNumber=74.0, core=true, t24Name=PT.CO.CODE, mandatory=false)
+        /* Department code */
+        PT_DEPT_CODE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=15, sysNumber=75.0, core=true, t24Name=PT.DEPT.CODE, mandatory=false)
+        /* Contains details of any overrides applicable to this Account */
+        PT_OVERRIDE_1 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=71.0, core=true, t24Name=PT.OVERRIDE.1, mandatory=false)
+        /* Contains details of any overrides applicable to this Account */
+        PT_OVERRIDE_2 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=72.0, core=true, t24Name=PT.OVERRIDE.2, mandatory=false)
+        /* Contains details of any overrides applicable to this Account */
+        PT_OVERRIDE_3 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=73.0, core=true, t24Name=PT.OVERRIDE.3, mandatory=false)
+        PT_SECURITY_CCY -> ST_CurrencyConfig:CURRENCY
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=61.0, core=true, businessType=CCY, t24Name=PT.SECURITY.CCY, mandatory=false)
+        PT_SECURITY_NO : T24BusinessTypes:SEC
+            @t24:i (align=L, inputBehaviour=I, maxLength=12, sysNumber=57.0, core=true, t24Name=PT.SECURITY.NO, mandatory=false)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=88.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        /* Records the Customers Reference.Ccy as specified in Field 2 of the Sec.Acc.Master record */
+        REFERENCE_CCY -> ST_CurrencyConfig:CURRENCY
+            @i18n:Label (en="Ref Ccy")
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=34.0, core=true, businessType=CCY, t24Name=REFERENCE.CCY, mandatory=false)
+        /* Indicates the exchange rate between the Customers Reference.Ccy and the Local Currency */
+        REF_EXCH_RATE : T24BusinessTypes:R
+            @t24:i (align=R, inputBehaviour=I, maxLength=15, sysNumber=35.0, core=true, t24Name=REF.EXCH.RATE, mandatory=false)
+        RESERVED_1 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=77.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_10 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=86.0, core=true, t24Name=RESERVED.10, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=78.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=79.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=80.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        RESERVED_5 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=81.0, core=true, t24Name=RESERVED.5, mandatory=false)
+        RESERVED_6 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=82.0, core=true, t24Name=RESERVED.6, mandatory=false)
+        RESERVED_7 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=83.0, core=true, t24Name=RESERVED.7, mandatory=false)
+        RESERVED_8 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=84.0, core=true, t24Name=RESERVED.8, mandatory=false)
+        RESERVED_9 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=85.0, core=true, t24Name=RESERVED.9, mandatory=false)
+/* The multivalue fields 13 - 19 contain details of the individual transactions which have been created by the System when processing the transaction.
+For audit and control purposes the details relating to any particular Position Transfer are recorded at the transaction level itselfent. */
+        SECURITY_ACCT : T24BusinessTypes:SAM
+            @i18n:Label (en=Portfolio)
+            @t24:i (align=L, inputBehaviour=I, maxLength=20, sysNumber=56.0, core=true, t24Name=SECURITY.ACCT, mandatory=false)
+/* Specifies the currency of the security.
+Defaults from SECURITY.CURRENCY field on the SECURITY.MASTER record */
+        SECURITY_CCY -> ST_CurrencyConfig:CURRENCY
+            @i18n:Label (en=Ccy)
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=22.0, core=true, businessType=CCY, t24Name=SECURITY.CCY, mandatory=false)
+/* The multivalue fields 13 - 19 contain details of the individual transactions which have been created by the System when processing the transaction.
+For audit and control purposes the details relating to any particular Position Transfer are recorded at the transaction level itself. */
+        SECURITY_NO : T24BusinessTypes:A
+            @i18n:Label (en="Security No")
+            @i18n:Tooltip (en="Indicates the security code/number")
+            @t24:i (align=L, inputBehaviour=I, maxLength=12, sysNumber=21.0, core=true, t24Name=SECURITY.NO, mandatory=false)
+/* Specifies the Security.Account from which the Transfer is to be made.
+Within the position transfer the system will allow the user to input a number of transfers */
+        SEC_ACCT_FROM : T24BusinessTypes:SAM
+            @i18n:Label (en="From Portfolio")
+            @t24:i (align=L, inputBehaviour=I, maxLength=20, sysNumber=54.0, core=true, t24Name=SEC.ACCT.FROM, mandatory=false)
+/* Specifies the Security.Account to which the Transfer is to be made.
+Within the position transfer the system will allow the user to input a number of transfers */
+        SEC_ACCT_TO : T24BusinessTypes:SAM
+            @i18n:Label (en="To Portfolio")
+            @t24:i (align=L, inputBehaviour=I, maxLength=20, sysNumber=55.0, core=true, t24Name=SEC.ACCT.TO, mandatory=false)
+        /* Indicates the exchange rate for the conversion to Local Currency (for valuation purposes) of the Net.Amt.Sec.Ccy. */
+        SEC_EXCH_RATE : T24BusinessTypes:R
+            @t24:i (align=R, inputBehaviour=I, maxLength=15, sysNumber=31.0, core=true, t24Name=SEC.EXCH.RATE, mandatory=false)
+        /* Unique ID of source portfolio which is provided by AFB at the time of registration. */
+        SOURCE_AFB_CONTRACT_ID : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=20, sysNumber=4.0, core=true, t24Name=SOURCE.AFB.CONTRACT.ID, mandatory=false)
+        /* Unique 20 digit number of source portfolio which is geenrated at the time portfolio creation. */
+        SOURCE_CCV : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=20, sysNumber=5.0, core=true, t24Name=SOURCE.CCV, mandatory=false)
+/* A number Generated automatically by the system after authorisation which identifies either a statement entry or a category entry in respect of a transaction. After validation but before authorisation, the value VAL will be inserted in this field to indicate that the transaction has been validated successfully but is still waiting authorisation.
+After authorisation of a Funds Transfer transaction, the system will automatically insert a number into this field and this number may refer to a statement entry or a category entry depending on the value contained in the corresponding multivalue fields. The following examples will illustrate the use of this field.
+Example 1:
+On the execution date of a transaction there will normally be an entry on a Customer account and the following type of number will be generated at this field:
+92.1 STMT.NO 673732684.48 92.2 STMT.NO 1
+The number automatically generated in field 92.1 is unique to the transaction in question and is built in the following way:
+1. The first four digits 6737 indicate the number of days since the 1st of January 1968. In our example, it corresponds to the 11th of June 1986.
+2. The next five digits 32684 indicate the number of seconds since midnight. In our example, it corresponds to an entry generated on line at 09:04:44 AM.
+3. The last two digits 48 indicate the number of hundreds of seconds.
+The value assigned (again automatically) to field 92.2 identifies the number in 92.1 as a statement entry number. If the User wishes to call this statement entry record on to the screen the User will invoke the STMT.ENTRY Application and the type the following at Awaiting ID :-673732684.480001 where the suffix 0001 identifies it as the first statement entry (there will normally be more than one as the next example will illustrate). */
+        STATEMENT_NOS : T24BusinessTypes:A
+            @i18n:Label (en="Statement Numbers")
+            @i18n:Tooltip (en="Statement or category entry of a transaction")
+            @t24:i (align=L, inputBehaviour=I, maxLength=29, sysNumber=53.0, core=true, t24Name=STATEMENT.NOS, mandatory=false)
+        /* Status of the request sent to AFB */
+        STATUS : T24BusinessTypes:AAA
+            @i18n:Label (en=Status)
+            @t24:i (align=L, inputBehaviour=I, maxLength=10, sysNumber=16.0, core=true, t24Name=STATUS, mandatory=false)
+        /* Indicates what kind of transaction is being processed */
+        TRANSACTION_TYPE : T24BusinessTypes:A
+            @i18n:Label (en="Transaction Type")
+            @i18n:Tooltip (en="Indicates the Transaction Type")
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=20.0, core=true, t24Name=TRANSACTION.TYPE, mandatory=false)
+        /* The field is used to specify the security transaction code (CREDIT) for the transactions. If not specified, the default is taken from SC.STD.POS.TRANSF */
+        TRANS_TYPE_CR : T24BusinessTypes:A
+            @i18n:Label (en="Trans Type Cr")
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=69.0, core=true, t24Name=TRANS.TYPE.CR, mandatory=false)
+        /* The field is used to specify the security transaction code (debit) for the transactions. If not specified, the default is taken from SC.STD.POS.TRANSF */
+        TRANS_TYPE_DR : T24BusinessTypes:A
+            @i18n:Label (en="Trans Type Dr")
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=68.0, core=true, t24Name=TRANS.TYPE.DR, mandatory=false)
+        VALUE_DATE : T24BusinessTypes:D
+            @i18n:Label (en="Value Date")
+            @i18n:Tooltip (en="Indicates the Value date of the Contract")
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=3.0, core=true, t24Name=VALUE.DATE, mandatory=false)
+/* VAULT CONTROL PARAMETER FLAG
+NB. VAULT.PARAMETER details supercedes this flag
+Validation Rules:
+NO - Vault control facilities not in use for the security transfer application
+YES - Vault control facilities switched on */
+        VAULT_UPDATE : T24BusinessTypes:A
+            @i18n:Label (en="Vault Update")
+            @i18n:Tooltip (en="Denotes whether to update vault or not?")
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=44.0, core=true, t24Name=VAULT.UPDATE, mandatory=false)
+        /* Specifies the exchange rate applicable between the Local Currency and the Portfolio Reference Currency of the portfolio that the position has been transferred in to. */
+        XRATE_BASE_PFIN : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=11, sysNumber=66.0, core=true, t24Name=XRATE.BASE.PFIN, mandatory=false)
+        /* Specifies the exchange rate applicable between the Local Currency and the Portfolio Reference Currency of the portfolio from where the position has been transferred out. */
+        XRATE_BASE_POUT : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=11, sysNumber=65.0, core=true, t24Name=XRATE.BASE.POUT, mandatory=false)
+        /* Specifies the exchange rate applicable between the Security currency and the Local Currency a number of transfers */
+        XRATE_SEC_BASE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=15, sysNumber=64.0, core=true, t24Name=XRATE.SEC.BASE, mandatory=false)
+    }
+    ALLFND_AFB_LOG__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=91.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    ALLFND_AFB_LOG__ERROR_REASON
+    {
+        /* Error reasowhich is returned by AFB after making an API call using errorcode returned */
+        ERROR_REASON : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=18.0, core=true, t24Name=ERROR.REASON, mandatory=false)
+    }
+    ALLFND_AFB_LOG__HOLDER_CUSTOMERID
+    {
+        HOLDER_AFBCLIENTID -> byValue ALLFND_CustomerOnboarding:ALLFND_AFB_LOG__HOLDER_CUSTOMERID__HOLDER_AFBCLIENTID *
+            @t24:i (t24Name=HOLDER.AFBCLIENTID)
+        HOLDER_CLIENTID_UPDT_REQ : ALLFND_CustomerOnboarding:ALLFND_AFB_LOG__HOLDER_CUSTOMERID__HOLDER_CLIENTID_UPDT_REQ
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=12.0, core=true, t24Name=HOLDER.CLIENTID.UPDT.REQ, mandatory=false)
+        /* Record ID of the Joint Holder Customer. */
+        HOLDER_CUSTOMERID -> ST_Customer:CUSTOMER
+            @t24:i (align=R, inputBehaviour=I, maxLength=10, sysNumber=10.0, core=true, businessType=CUS, t24Name=HOLDER.CUSTOMERID, mandatory=false)
+        /* Unique ID of target portfolio in an internal transfer, which is provided by AFB at the time of registration */
+        TARGET_AFB_CONTRACTID : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=20, sysNumber=13.0, core=true, t24Name=TARGET.AFB.CONTRACTID, mandatory=false)
+        /* Unique 20 digit number of target portfolio which is geenrated at the time portfolio creation */
+        TARGET_CCV : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=20, sysNumber=14.0, core=true, t24Name=TARGET.CCV, mandatory=false)
+        TARGET_CNTRCTID_UPDT_REQ : ALLFND_CustomerOnboarding:ALLFND_AFB_LOG__HOLDER_CUSTOMERID__TARGET_CNTRCTID_UPDT_REQ
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=15.0, core=true, t24Name=TARGET.CNTRCTID.UPDT.REQ, mandatory=false)
+    }
+    ALLFND_AFB_LOG__HOLDER_CUSTOMERID__HOLDER_AFBCLIENTID
+    {
+        /* Unique ID of portfolio joint owner which is provided by AFB at the time of registration. */
+        HOLDER_AFBCLIENTID : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=11.0, core=true, t24Name=HOLDER.AFBCLIENTID, mandatory=false)
+    }
+    ALLFND_AFB_LOG__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=90.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    ALLFND_AFB_LOG__OVERRIDE
+    {
+        OVERRIDE : T24BusinessTypes:N
+            @i18n:Label (en=Override)
+            @i18n:Tooltip (en="Overrides generated by this transaction")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=87.0, core=true, t24Name=OVERRIDE, mandatory=false)
+    }
+}
+Enumerations {
+    ALLFND_AFB_LOG__CLIENTID_UPDATE_REQUIRED : mml:string
+        No=No
+        Yes=Yes
+    ALLFND_AFB_LOG__CONTRACTID_UPDATE_REQUIRED : mml:string
+        No=No
+        Yes=Yes
+    ALLFND_AFB_LOG__HOLDER_CUSTOMERID__HOLDER_CLIENTID_UPDT_REQ : mml:string
+        No=No
+        Yes=Yes
+    ALLFND_AFB_LOG__HOLDER_CUSTOMERID__TARGET_CNTRCTID_UPDT_REQ : mml:string
+        No=No
+        Yes=Yes
+}

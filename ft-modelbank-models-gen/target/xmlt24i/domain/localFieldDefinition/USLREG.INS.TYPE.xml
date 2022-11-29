@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<localref:LocalRef xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:localref="http://www.odcgroup.com/t24/application/localref/model/LocalRef"
+    xmlns:translationDsl="http://www.odcgroup.com/translation/TranslationDsl" localRefID="USLREG.INS.TYPE" maximumChars="15" minimumChars="0"
+    mandatory="false" charType="A" defaultPossible="false" virtualTable="AA.INSURANCE.TYPE"
+    description="Insurance Type">
+  <shortName xsi:type="translationDsl:LocalTranslations">
+    <translations locale="en" text="INS.TYPE"/>
+  </shortName>
+  <vettingTable vettingTable="A&amp;H">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Accident &amp; Health Cover"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="DISABILITY">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Disability Cover"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="LIFE">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Life Cover"/>
+    </remarks>
+  </vettingTable>
+</localref:LocalRef>

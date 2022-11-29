@@ -1,0 +1,466 @@
+# UTF-8
+/* Automated Repair Tool */
+Domain PP_AutomatedRepairToolService
+    @t24:i (module=PP)
+    @java:Package (value=com.temenos.t24.datamodel.pp.pp_automatedrepairtoolservice)
+namespace "http://www.temenos.com/t24/PP_AutomatedRepairToolService"
+metamodelVersion 1.30.6
+Classes {
+    NOFILE_PP_AUTOREPAIR_AUDIT_LOG
+        @i18n:Description (en="")
+        @t24:i (t24Name=NOFILE.PP.AUTOREPAIR.AUDIT.LOG, level=I, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        CompanyID : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=20, core=false, t24Name=CompanyID, mandatory=false)
+        FTNumber : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=20, core=false, t24Name=FTNumber, mandatory=false)
+        OUT_VAL : T24BusinessTypes:N
+            @t24:i (align=L, inputBehaviour=N, maxLength=150, core=false, t24Name=OUT.VAL, genOperation=E.NOFILE.PP.AUTOREPAIR.AUDIT.LOG, mandatory=true)
+    }
+    NOFILE_PP_AUTO_REPAIR_LOG_LIST
+        @i18n:Description (en="")
+        @t24:i (t24Name=NOFILE.PP.AUTO.REPAIR.LOG.LIST, level=I, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        ARR -> byValue PP_AutomatedRepairToolService:NOFILE_PP_AUTO_REPAIR_LOG_LIST__ARR *
+            @t24:i (t24Name=ARR)
+        CompanyID : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=100, core=false, t24Name=CompanyID, mandatory=false)
+        EnrichedMsg -> byValue PP_AutomatedRepairToolService:NOFILE_PP_AUTO_REPAIR_LOG_LIST__EnrichedMsg *
+            @t24:i (t24Name=EnrichedMsg)
+        FTNumber : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=100, core=false, t24Name=FTNumber, mandatory=false)
+        ID : T24BusinessTypes:N
+            @i18n:Label (en="Transaction Ref")
+            @i18n:Tooltip (en="Transaction Reference")
+            @t24:i (align=R, inputBehaviour=N, maxLength=100, core=false, t24Name="@ID", mandatory=true)
+        NewID : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=100, core=false, t24Name=NewID, mandatory=false)
+        PrevPaymentMsg -> byValue PP_AutomatedRepairToolService:NOFILE_PP_AUTO_REPAIR_LOG_LIST__PrevPaymentMsg *
+            @t24:i (t24Name=PrevPaymentMsg)
+        ProcessDate : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=100, core=false, t24Name=ProcessDate, mandatory=false)
+        ReturnCode -> byValue PP_AutomatedRepairToolService:NOFILE_PP_AUTO_REPAIR_LOG_LIST__ReturnCode *
+            @t24:i (t24Name=ReturnCode)
+        ReturnCodeDesc -> byValue PP_AutomatedRepairToolService:NOFILE_PP_AUTO_REPAIR_LOG_LIST__ReturnCodeDesc *
+            @t24:i (t24Name=ReturnCodeDesc)
+    }
+    NOFILE_PP_AUTO_REPAIR_LOG_LIST__ARR
+    {
+        ARR : T24BusinessTypes:N
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, core=false, t24Name=ARR, genOperation=PP.AUTO.LOG.LIST, mandatory=false)
+    }
+    NOFILE_PP_AUTO_REPAIR_LOG_LIST__EnrichedMsg
+    {
+        EnrichedMsg : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=100, core=false, t24Name=EnrichedMsg, mandatory=false)
+    }
+    NOFILE_PP_AUTO_REPAIR_LOG_LIST__PrevPaymentMsg
+    {
+        PrevPaymentMsg : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=100, core=false, t24Name=PrevPaymentMsg, mandatory=false)
+    }
+    NOFILE_PP_AUTO_REPAIR_LOG_LIST__ReturnCode
+    {
+        ReturnCode : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=100, core=false, t24Name=ReturnCode, mandatory=false)
+    }
+    NOFILE_PP_AUTO_REPAIR_LOG_LIST__ReturnCodeDesc
+    {
+        ReturnCodeDesc : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=100, core=false, t24Name=ReturnCodeDesc, mandatory=false)
+    }
+    /* The OLD values of fields that have been enriched. */
+    POR_AUTOREPAIRPARTYENRICHMENT
+        @i18n:Description (en="")
+        @t24:i (t24Name=POR.AUTOREPAIRPARTYENRICHMENT, level=I, type=L, allowedFunctions="L P S", localRefAllowed=false)
+    {
+/* Indicates the company ID for which the record is created.
+Example: BNK,GB1
+Validation Rules:
+Mandatory field; 3 alphanumeric characters.
+The value links to the field 'CompanyID' in PPT.COMPANY. */
+        CompanyID : T24BusinessTypes:A required
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=1.0, core=true, t24Name=CompanyID, mandatory=true)
+/* This flag is set on the credit party and it is used to denote the receiver of the MT103 payment message when cover method is used.
+This flag is set only when a cover method of routing is used.
+The DirectPaymentFlag can also be used to determine if a cover method of routing is used for the payment or not.
+However, the DirectPaymentFlag is set at a credit party level and not at a transaction level.
+Validation Rules:
+1 alphanumeric character
+Possible values:
+Y - Credit Party is the receiver of the MT103 message when cover method is used.
+N or Blank - Credit party is not the receiver of the MT103 message. */
+        DirectPaymentFlag : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=1, sysNumber=13.0, core=true, t24Name=DirectPaymentFlag, mandatory=false)
+/* Denotes the unique ID generated by the payments hub upon generating a payment order.
+Validation Rules:
+Mandatory field; 16 alphanumeric characters. */
+        FTNumber : T24BusinessTypes:A required
+            @t24:i (align=L, inputBehaviour=I, maxLength=16, sysNumber=2.0, core=true, t24Name=FTNumber, mandatory=true)
+        /* Unique ID generated by the payments hub in order to identify each record in the application. */
+        ID -> PP_AutomatedRepairToolService:POR_AUTOREPAIRPARTYENRICHMENT PK required
+            @i18n:Label (en="Transaction Ref")
+            @i18n:Tooltip (en="Transaction Reference")
+            @t24:i (align=L, inputBehaviour=I, maxLength=255, sysNumber=0.0, core=true, businessType=A, t24Name=ID, mandatory=true)
+/* Party Account Line
+Validation Rules:
+37 alphanumeric characters */
+        PartyAccountLine : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=37, sysNumber=8.0, core=true, t24Name=PartyAccountLine, mandatory=false)
+/* Party Free Line1
+Validation Rules:
+35 alphanumeric characters */
+        PartyFreeLine1 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=75, sysNumber=9.0, core=true, t24Name=PartyFreeLine1, mandatory=false)
+/* Party Free Line2
+Validation Rules:
+35 alphanumeric characters */
+        PartyFreeLine2 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=75, sysNumber=10.0, core=true, t24Name=PartyFreeLine2, mandatory=false)
+/* Party Free Line3
+Validation Rules:
+35 alphanumeric characters */
+        PartyFreeLine3 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=75, sysNumber=11.0, core=true, t24Name=PartyFreeLine3, mandatory=false)
+/* Party Free Line4
+Validation Rules:
+35 alphanumeric characters */
+        PartyFreeLine4 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=75, sysNumber=12.0, core=true, t24Name=PartyFreeLine4, mandatory=false)
+/* Party Identifier Code
+Validation Rules:
+20 alphanumeric characters */
+        PartyIdentifierCode : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=20, sysNumber=7.0, core=true, t24Name=PartyIdentifierCode, mandatory=false)
+/* Party Information Tag
+Validation Rules:
+3 alphanumeric characters */
+        PartyInformationTag : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=5.0, core=true, t24Name=PartyInformationTag, mandatory=false)
+/* In case the Credit Party National Identification indicator is set to Y, the account field is populated with a National Identification number.
+This payment must be put to the repair queue for operator intervention.
+Validation Rules:
+1 alphanumeric character */
+        PartyNationalId : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=1, sysNumber=6.0, core=true, t24Name=PartyNationalId, mandatory=false)
+/* For Debit Parties: Party Role Role Description Tag
+Validation Rules:
+6 numeric characters.
+Possible values:
+INSPTY Instructing Party 50 C or L
+ORDPTY Ordering Party 50 A, F, G, H or K
+SNDINS Sending Institution 51A
+ASVINS Account Servicing Institution 52A or C
+ORDINS Ordering Institution 52A or D
+SNDCBK Sender's Correspondent Bank 53A, B or D
+RCVCBK Receiver's Correspondent Bank 54A, B or D
+TRMINS Third Reimbursement Institution 55A, B or D
+SENDER Sender
+IMPDBT Implied Debit Account
+For Credit Parties:
+BENFCY Beneficiary 59A or no letter option 50 C or L
+IMPCDT Implied Credit 50 A, F, G, H or K */
+        PartyRole : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=6, sysNumber=3.0, core=true, t24Name=PartyRole, mandatory=false)
+/* Party Role Indicator.
+Validation Rules:
+1 alphanumeric character */
+        PartyRoleIndicator : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=1, sysNumber=4.0, core=true, t24Name=PartyRoleIndicator, mandatory=false)
+    }
+    /* Stores the return codes returned by a repair instance defined in the payments hub. */
+    POR_AUTOREPAIRRETURNEDCD
+        @i18n:Description (en="")
+        @t24:i (t24Name=POR.AUTOREPAIRRETURNEDCD, level=I, type=L, allowedFunctions="L P S", localRefAllowed=false)
+    {
+/* Specifies a unique numeric code to be used a repair return code in the payments hub.
+Validation Rules:
+6 numeric characters. */
+        AutoRepairReturnCode : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=6, sysNumber=4.0, core=true, t24Name=AutoRepairReturnCode, mandatory=false)
+/* Indicates the company ID for which the record is created.
+Example: BNK,GB1
+Validation Rules:
+Mandatory field; 3 alphanumeric characters.
+The value links to the field 'CompanyID' in PPT.COMPANY. */
+        CompanyID : T24BusinessTypes:A required
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=1.0, core=true, t24Name=CompanyID, mandatory=true)
+/* Denotes the unique ID generated by the payments hub upon generating a payment order.
+Validation Rules:
+Mandatory field; 16 alphanumeric characters. */
+        FTNumber : T24BusinessTypes:A required
+            @t24:i (align=L, inputBehaviour=I, maxLength=16, sysNumber=2.0, core=true, t24Name=FTNumber, mandatory=true)
+        /* Unique ID generated by the payments hub in order to identify each record in the application. */
+        ID -> PP_AutomatedRepairToolService:POR_AUTOREPAIRRETURNEDCD PK required
+            @i18n:Label (en="Transaction Ref")
+            @i18n:Tooltip (en="Transaction Reference")
+            @t24:i (align=L, inputBehaviour=I, maxLength=255, sysNumber=0.0, core=true, businessType=A, t24Name=ID, mandatory=true)
+/* It is possible that more enrichments happens for one payment message in  Payfix.
+The sequence number makes the Payfix returned code unique.
+Validation Rules:
+Mandatory field; 7 characters. */
+        ReturnCodeSequence : T24BusinessTypes:N required
+            @t24:i (align=R, inputBehaviour=I, maxLength=7, sysNumber=3.0, core=true, t24Name=ReturnCodeSequence, mandatory=true)
+    }
+    /* Stores the return codes returned by a repair instance defined in the payments hub. */
+    POR_AUTOREPAIR_AUDIT_LOG
+        @i18n:Description (en="")
+        @t24:i (t24Name=POR.AUTOREPAIR.AUDIT.LOG, level=I, type=L, allowedFunctions="L P S", localRefAllowed=false)
+    {
+/* Indicates the company ID for which the record is created.
+Example: BNK,GB1
+Validation Rules:
+3 alphanumeric characters.
+The value links to the field 'CompanyID' in PPT.COMPANY. */
+        CompanyID : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=1.0, core=true, t24Name=CompanyID, mandatory=false)
+/* Denotes the unique ID generated by the payments hub upon generating a payment order.
+Validation Rules:
+Mandatory field; 16 alphanumeric characters. */
+        FTNumber : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=16, sysNumber=2.0, core=true, t24Name=FTNumber, mandatory=false)
+/* Denotes the unique ID generated by the payments hub upon receiving a message from an external system.
+Validation Rules:
+This field can hold upto 50 alphanumeric characters generated by the system */
+        FileReference : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=8.0, core=true, t24Name=FileReference, mandatory=false)
+        /* Unique ID generated by the payments hub in order to identify each record in the application. */
+        ID -> PP_AutomatedRepairToolService:POR_AUTOREPAIR_AUDIT_LOG PK required
+            @i18n:Label (en="Transaction Ref")
+            @i18n:Tooltip (en="Transaction Reference")
+            @t24:i (align=L, inputBehaviour=I, maxLength=255, sysNumber=0.0, core=true, businessType=A, t24Name=ID, mandatory=true)
+        TableName -> byValue PP_AutomatedRepairToolService:POR_AUTOREPAIR_AUDIT_LOG__TableName *
+            @t24:i (t24Name=TableName)
+    }
+    POR_AUTOREPAIR_AUDIT_LOG__TableName
+    {
+        FieldName -> byValue PP_AutomatedRepairToolService:POR_AUTOREPAIR_AUDIT_LOG__TableName__FieldName *
+            @t24:i (t24Name=FieldName)
+        RecordID : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=4.0, core=true, t24Name=RecordID, mandatory=false)
+        TableName : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=3.0, core=true, t24Name=TableName, mandatory=false)
+    }
+    POR_AUTOREPAIR_AUDIT_LOG__TableName__FieldName
+    {
+        FieldName : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=5.0, core=true, t24Name=FieldName, mandatory=false)
+        NewValue : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=100, sysNumber=7.0, core=true, t24Name=NewValue, mandatory=false)
+        OldValue : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=100, sysNumber=6.0, core=true, t24Name=OldValue, mandatory=false)
+    }
+    /* Holds the payment details before and after automatic repair/enrichment of payments. */
+    PPT_AUTOREPAIRLOG
+        @i18n:Description (en="")
+        @t24:i (t24Name=PPT.AUTOREPAIRLOG, nonStop=true, level=I, type=L, allowedFunctions="L P S", localRefAllowed=false)
+    {
+/* Indicates the company ID for which the record is created.
+Example : BNK,GB1
+The value links to the field ‘CompanyID’ in PPT.COMPANY */
+        CompanyID : T24BusinessTypes:A required
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=2.0, core=true, t24Name=CompanyID, mandatory=true)
+        /* Payment Data received after enrichment from Auto Repair tool */
+        EnrichedPaymentData : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=0, sysNumber=5.0, core=true, t24Name=EnrichedPaymentData, mandatory=false)
+        /* Unique payment reference generated for each payment by the payments hub. */
+        FTNumber : T24BusinessTypes:A required
+            @t24:i (align=L, inputBehaviour=I, maxLength=16, sysNumber=1.0, core=true, t24Name=FTNumber, mandatory=true)
+        /* Unique ID generated by the payments hub in order to identify each record in the application. */
+        ID -> PP_AutomatedRepairToolService:PPT_AUTOREPAIRLOG PK required
+            @i18n:Label (en="Transaction Ref")
+            @i18n:Tooltip (en="Transaction Reference")
+            @t24:i (align=L, inputBehaviour=I, maxLength=255, sysNumber=0.0, core=true, businessType=A, t24Name=ID, mandatory=true)
+        /* Original Payment Data received by the payments hub before enrichment by Auto Repair tool */
+        PreviousPaymentData : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=0, sysNumber=4.0, core=true, t24Name=PreviousPaymentData, mandatory=false)
+        /* Date on which payment is processed. */
+        ProcessingDate : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=3.0, core=true, t24Name=ProcessingDate, mandatory=false)
+    }
+/* This screen is used to setup repair instances used in the payments hub.
+External repair tools are primarily designed to enhance straight-through-processing(STP) rate of the bank.The output of the repair tool,is the input for the fee processing. */
+    PP_AUTO_REPAIR_INSTANCE
+        @i18n:Description (en="")
+        @t24:i (t24Name=PP.AUTO.REPAIR.INSTANCE, level=I, type=H, allowedFunctions="A C D E H I L P Q R S", localRefApplicationSysNo=4.0, localRefAllowed=true)
+    {
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=18.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=19.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=15.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        AutoRepairInstanceDesc -> byValue PP_AutomatedRepairToolService:PP_AUTO_REPAIR_INSTANCE__AutoRepairInstanceDesc *
+            @t24:i (t24Name=AutoRepairInstanceDesc)
+        AutoRepairInstanceName : PP_AutomatedRepairToolService:PP_AUTO_REPAIR_INSTANCE__AutoRepairInstanceName PK required
+            @i18n:Label (en=AutoRepairInstanceName)
+            @i18n:Tooltip (en=AutoRepairInstanceName)
+            @t24:i (align=L, inputBehaviour=I, maxLength=6, sysNumber=0.0, core=true, t24Name=AutoRepairInstanceName, mandatory=true)
+        AutoRepairRequestAPI : T24BusinessTypes:A required
+            @t24:i (align=L, inputBehaviour=I, maxLength=128, sysNumber=2.0, core=true, t24Name=AutoRepairRequestAPI, mandatory=true)
+        AutoRepairResponseAPI : T24BusinessTypes:A required
+            @t24:i (align=L, inputBehaviour=I, maxLength=128, sysNumber=3.0, core=true, t24Name=AutoRepairResponseAPI, mandatory=true)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=16.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=12.0, core=true, t24Name=CURR.NO, mandatory=false)
+        DATE_TIME -> byValue PP_AutomatedRepairToolService:PP_AUTO_REPAIR_INSTANCE__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=17.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        INPUTTER -> byValue PP_AutomatedRepairToolService:PP_AUTO_REPAIR_INSTANCE__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        OVERRIDE -> byValue PP_AutomatedRepairToolService:PP_AUTO_REPAIR_INSTANCE__OVERRIDE *
+            @t24:i (t24Name=OVERRIDE)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=11.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        RESERVED_1 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=9.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=8.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=7.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=6.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        RESERVED_5 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=5.0, core=true, t24Name=RESERVED.5, mandatory=false)
+    }
+    PP_AUTO_REPAIR_INSTANCE__AutoRepairInstanceDesc
+    {
+/* Describes the Instance in free text.
+Validation Rules:
+128 alphanumeric characters. */
+        AutoRepairInstanceDesc : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=128, multiLanguage=true, sysNumber=1.0, core=true, t24Name=AutoRepairInstanceDesc, mandatory=false)
+    }
+    PP_AUTO_REPAIR_INSTANCE__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=14.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    PP_AUTO_REPAIR_INSTANCE__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=13.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    PP_AUTO_REPAIR_INSTANCE__OVERRIDE
+    {
+        /* Contains all the override messages which the user agreed to during Input. During the validation of a transaction, the system may provide the user with a series of screen override messages to indicate an anomaly. */
+        OVERRIDE : T24BusinessTypes:N
+            @i18n:Label (en=Override)
+            @i18n:Tooltip (en="Overrides generated by this transaction")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=10.0, core=true, t24Name=OVERRIDE, mandatory=false)
+    }
+/* This screen is used to setup the description and meaning of the return codes returned by a repair instance defined in the payments hub.
+A record authorised in this screen will create or amend or delete a record in store table, PPT.AUTOREPAIRRETURNCODE */
+    PP_AUTO_REPAIR_RETURNCODE
+        @i18n:Description (en="")
+        @t24:i (t24Name=PP.AUTO.REPAIR.RETURNCODE, nonStop=true, level=I, type=H, allowedFunctions="A C D E H I L P Q R S", localRefApplicationSysNo=3.0, localRefAllowed=true)
+    {
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=17.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=18.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=14.0, core=true, t24Name=AUTHORISER, mandatory=false)
+/* Specifies a unique numeric code to be used a repair return code in the payments hub.
+Validation Rules:
+Mandatory field. 6 numeric characters. */
+        AutoRepairReturnCode -> PP_AutomatedRepairToolService:PP_AUTO_REPAIR_RETURNCODE PK required
+            @t24:i (align=L, inputBehaviour=I, maxLength=6, sysNumber=0.0, core=true, businessType=ANY, t24Name=AutoRepairReturnCode, mandatory=true)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=15.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=11.0, core=true, t24Name=CURR.NO, mandatory=false)
+        DATE_TIME -> byValue PP_AutomatedRepairToolService:PP_AUTO_REPAIR_RETURNCODE__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=16.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        INPUTTER -> byValue PP_AutomatedRepairToolService:PP_AUTO_REPAIR_RETURNCODE__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        OVERRIDE -> byValue PP_AutomatedRepairToolService:PP_AUTO_REPAIR_RETURNCODE__OVERRIDE *
+            @t24:i (t24Name=OVERRIDE)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=10.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        RESERVED_1 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=8.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=7.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=6.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=5.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        RESERVED_5 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=4.0, core=true, t24Name=RESERVED.5, mandatory=false)
+/* Describes the return code.
+Validation Rules:
+Mandatory field. 128 alphanumeric characters. */
+        ReturnCodeDescription : T24BusinessTypes:A
+            @i18n:Label (en="Return Code Description")
+            @i18n:Tooltip (en="Return Code Description")
+            @t24:i (align=L, inputBehaviour=I, maxLength=128, sysNumber=1.0, core=true, t24Name=ReturnCodeDescription, mandatory=false)
+/* As part of the Auto repair functionality which enriches payment information, banks can opt for events/ errors that can be chargeable.
+This provision is available by this field.
+Possible values:
+"Y" - Yes. Return code will be considered for processing in the payments hub.
+"N" - No. Return code will not considered for processing in the payments hub. */
+        SetBeneficiaryBICRepairedFlag : PP_AutomatedRepairToolService:PP_AUTO_REPAIR_RETURNCODE__SetBeneficiaryBICRepairedFlag required
+            @i18n:Label (en="Set Beneficiary BIC Repaired Flag")
+            @i18n:Tooltip (en="Set Beneficiary BIC Repaired Flag")
+            @t24:i (align=L, inputBehaviour=I, maxLength=1, sysNumber=2.0, core=true, t24Name=SetBeneficiaryBICRepairedFlag, mandatory=true)
+    }
+    PP_AUTO_REPAIR_RETURNCODE__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=13.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    PP_AUTO_REPAIR_RETURNCODE__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=12.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    PP_AUTO_REPAIR_RETURNCODE__OVERRIDE
+    {
+        /* Contains all the override messages which the user agreed to during Input. During the validation of a transaction, the system may provide the user with a series of screen override messages to indicate an anomaly. */
+        OVERRIDE : T24BusinessTypes:N
+            @i18n:Label (en=Override)
+            @i18n:Tooltip (en="Overrides generated by this transaction")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=9.0, core=true, t24Name=OVERRIDE, mandatory=false)
+    }
+}
+Enumerations {
+    PP_AUTO_REPAIR_INSTANCE__AutoRepairInstanceName : mml:string
+        SYSTEM=SYSTEM
+    PP_AUTO_REPAIR_RETURNCODE__SetBeneficiaryBICRepairedFlag : mml:string
+        N=N
+        NULL=NULL
+        Y=Y
+}

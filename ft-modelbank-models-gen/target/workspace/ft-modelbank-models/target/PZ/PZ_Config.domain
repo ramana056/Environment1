@@ -1,0 +1,203 @@
+# UTF-8
+/* Parameters for PSD2 */
+Domain PZ_Config
+    @t24:i (module=PZ)
+    @java:Package (value=com.temenos.t24.datamodel.pz.pz_config)
+namespace "http://www.temenos.com/t24/PZ_Config"
+metamodelVersion 1.30.6
+Classes {
+    NOFILE_AVAILABLE_ACCOUNTS
+        @i18n:Description (en="")
+        @t24:i (t24Name=NOFILE.AVAILABLE.ACCOUNTS, level=I, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        CUSTOMER_ID : T24BusinessTypes:N
+            @i18n:Label (en="Customer Id")
+            @i18n:Tooltip (en="Identifies the Customer for the transaction.")
+            @t24:i (align=L, inputBehaviour=N, maxLength=10, core=false, t24Name=CUSTOMER.ID, genOperation=E.GET.AVAILABLE.ACCOUNT.BALANCES, mandatory=true)
+        WITH_BALANCE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=4, core=false, t24Name=WITH.BALANCE, mandatory=false)
+    }
+    /* Table to configure the categories of the accounts that are considered as AVAILABLE for PSD2. */
+    PZ_PARAMETER
+        @i18n:Description (en="")
+        @t24:i (t24Name=PZ.PARAMETER, level=I, type=H, allowedFunctions="A C D E H I L P Q R S", localRefApplicationSysNo=24.0, localRefAllowed=true)
+    {
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=33.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=34.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=30.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        AVAIL_CATEG -> byValue PZ_Config:PZ_PARAMETER__AVAIL_CATEG *
+            @t24:i (t24Name=AVAIL.CATEG)
+        AVAIL_CATEG_START -> byValue PZ_Config:PZ_PARAMETER__AVAIL_CATEG_START *
+            @t24:i (t24Name=AVAIL.CATEG.START)
+        BLOCK_TPP -> byValue PZ_Config:PZ_PARAMETER__BLOCK_TPP *
+            @t24:i (t24Name=BLOCK.TPP)
+/* Field to specify whether the bank is operating a GLOBAL or COMPANY level consent
+GLOBAL means the consent arrangement can contain accounts from multiple companies that share the same customers
+COMPANY means the consent arrangement will hold only accounts from the lead company
+
+
+Validation Rule:
+
+It should either take two values GLOBAL or COMPANY */
+        CONSENT_LEVEL : PZ_Config:PZ_PARAMETER__CONSENT_LEVEL
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=18.0, core=true, t24Name=CONSENT.LEVEL, mandatory=false)
+/* Field to specify if the consent management id done via t24 or not.
+If specified as INTERNAL then consent managed via t24
+If specified as EXTERNAL then consent managed is outsourced
+
+
+Validation Rule:
+
+It should either take two values INTERNAL or EXTERNAL
+For INTERNAL consent managemement validations required for all AIS APIs */
+        CONSENT_MGMT : PZ_Config:PZ_PARAMETER__CONSENT_MGMT
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=15.0, core=true, t24Name=CONSENT.MGMT, mandatory=false)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=31.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=27.0, core=true, t24Name=CURR.NO, mandatory=false)
+        DATE_TIME -> byValue PZ_Config:PZ_PARAMETER__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+/* If this field is marked as YES, that means all the accounts are considered as Available irrespective of their Category.
+
+Yes/No Field
+Validation Rules:
+
+Either DEFAULT.AVAILABLE or AVAIL.CATEG.START is mandatory but not both. */
+        DEFAULT_AVAILABLE : PZ_Config:PZ_PARAMETER__DEFAULT_AVAILABLE
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=1.0, core=true, t24Name=DEFAULT.AVAILABLE, mandatory=false)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=32.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        INPUTTER -> byValue PZ_Config:PZ_PARAMETER__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+/* This field takes either a valid open banking dir provider name E.g. PRETA from ST.OPEN.BANKING.DIR.PARAMATER table or EXTERNAL value if openbanking is outsourced
+
+
+Validation Rule:
+
+If maintained by t24 all AIS APIs validations are required */
+        OBD_PROVIDER : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=16.0, core=true, t24Name=OBD.PROVIDER, mandatory=false)
+        OVERRIDE -> byValue PZ_Config:PZ_PARAMETER__OVERRIDE *
+            @t24:i (t24Name=OVERRIDE)
+        /* Any Valid Lead Company. */
+        PZ_PARAMETER_ID -> PZ_Config:PZ_PARAMETER PK required
+            @t24:i (align=L, inputBehaviour=I, maxLength=10, sysNumber=0.0, core=true, businessType=COM, t24Name=PZ.PARAMETER.ID, mandatory=true)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=26.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        RESERVED_01 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=23.0, core=true, t24Name=RESERVED.01, mandatory=false)
+        RESERVED_02 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=22.0, core=true, t24Name=RESERVED.02, mandatory=false)
+        RESERVED_03 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=21.0, core=true, t24Name=RESERVED.03, mandatory=false)
+        RESERVED_04 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=20.0, core=true, t24Name=RESERVED.04, mandatory=false)
+        RESERVED_05 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=19.0, core=true, t24Name=RESERVED.05, mandatory=false)
+    }
+    PZ_PARAMETER__AVAIL_CATEG
+    {
+/* Field to specify the category that doesn't comes between AVAIL.CATEG.START and AVAIL.CATEG.END
+
+
+Validation Rules:
+
+Accepts valid Category */
+        AVAIL_CATEG -> ST_Config:CATEGORY
+            @t24:i (align=R, inputBehaviour=I, maxLength=5, sysNumber=14.0, core=true, t24Name=AVAIL.CATEG, mandatory=false)
+    }
+    PZ_PARAMETER__AVAIL_CATEG_START
+    {
+/* Field to specify end of the category range i.e the Accounts that come under this category range are considered as the Available Accounts for a specific customer.
+
+
+Validation Rule:
+
+AVAIL.CATEG.END should always be greater than AVAIL.CATEG.START. */
+        AVAIL_CATEG_END -> ST_Config:CATEGORY
+            @t24:i (align=R, inputBehaviour=I, maxLength=5, sysNumber=3.0, core=true, t24Name=AVAIL.CATEG.END, mandatory=false)
+/* Field to specify start of the category range i.e the Accounts that come under this category range are considered as the Available Accounts for a specific customer.
+Also allows to specify a particular category instead of Range
+
+
+Validation Rules:
+
+Either DEFAULT.AVAILABLE or AVAIL.CATEG.START is mandatory but not both.
+Accepts valid Category
+If AVAIL.END.CATEG is specified, then AVAIL.START.CATEG should always be less than the AVAIL.END.CATEG. */
+        AVAIL_CATEG_START -> ST_Config:CATEGORY
+            @t24:i (align=R, inputBehaviour=I, maxLength=5, sysNumber=2.0, core=true, t24Name=AVAIL.CATEG.START, mandatory=false)
+        AVAIL_RESERVED_01 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=13.0, core=true, t24Name=AVAIL.RESERVED.01, mandatory=false)
+        AVAIL_RESERVED_02 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=12.0, core=true, t24Name=AVAIL.RESERVED.02, mandatory=false)
+        AVAIL_RESERVED_03 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=11.0, core=true, t24Name=AVAIL.RESERVED.03, mandatory=false)
+        AVAIL_RESERVED_04 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=10.0, core=true, t24Name=AVAIL.RESERVED.04, mandatory=false)
+        AVAIL_RESERVED_05 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=9.0, core=true, t24Name=AVAIL.RESERVED.05, mandatory=false)
+        AVAIL_RESERVED_06 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=8.0, core=true, t24Name=AVAIL.RESERVED.06, mandatory=false)
+        AVAIL_RESERVED_07 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=7.0, core=true, t24Name=AVAIL.RESERVED.07, mandatory=false)
+        AVAIL_RESERVED_08 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=6.0, core=true, t24Name=AVAIL.RESERVED.08, mandatory=false)
+        AVAIL_RESERVED_09 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=5.0, core=true, t24Name=AVAIL.RESERVED.09, mandatory=false)
+        AVAIL_RESERVED_10 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=4.0, core=true, t24Name=AVAIL.RESERVED.10, mandatory=false)
+    }
+    PZ_PARAMETER__BLOCK_TPP
+    {
+        /* If OBD.PROVIDER is set to EXTERNAL but the bank wants to block certain AIS type TPP’s, they can do so by giving the TPP reference here. */
+        BLOCK_TPP : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=125, sysNumber=17.0, core=true, t24Name=BLOCK.TPP, mandatory=false)
+    }
+    PZ_PARAMETER__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=29.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    PZ_PARAMETER__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=28.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    PZ_PARAMETER__OVERRIDE
+    {
+        OVERRIDE : T24BusinessTypes:N
+            @i18n:Label (en=Override)
+            @i18n:Tooltip (en="Overrides generated by this transaction")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=25.0, core=true, t24Name=OVERRIDE, mandatory=false)
+    }
+}
+Enumerations {
+    PZ_PARAMETER__CONSENT_LEVEL : mml:string
+        COMPANY=COMPANY
+        GLOBAL=GLOBAL
+    PZ_PARAMETER__CONSENT_MGMT : mml:string
+        EXTERNAL=EXTERNAL
+        INTERNAL=INTERNAL
+    PZ_PARAMETER__DEFAULT_AVAILABLE : mml:string
+        NULL=NULL
+        YES=YES
+}

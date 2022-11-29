@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<localReferenceApplication:LocalReferenceApplication xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:localReferenceApplication="http://www.odcgroup.com/t24/application/localRefApplication/model/LocalReferenceApplication"
+    xmlns:translationDsl="http://www.odcgroup.com/translation/TranslationDsl" forApplication="name://AA_Customer:AA_PRD_DES_CUSTOMER#">
+  <localField groupName="No" localRefID="USLREG.SER.MEMBER">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="SERVICE.MEMBER"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+  <localField groupName="No" localRefID="ACCT.TITLE.OPERAND">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="ACCT.TITLE.OPER"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+  <localField groupName="USRETL_ACCT_TITLE" localRefID="USRETL.ACCT.TITLE">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="ACCT.TITLE"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+  <localField groupName="No" localRefID="PELCEL.ACCOUNT">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="PELCEL.ACCOUNT"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+  <localField groupName="No" localRefID="NO.OF.DEPENDANT">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="NO.OF.DEPENDANT"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+  <localField groupName="No" localRefID="ENERGY.EFFICIENT">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="ENERGYEFFICIENT"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+</localReferenceApplication:LocalReferenceApplication>

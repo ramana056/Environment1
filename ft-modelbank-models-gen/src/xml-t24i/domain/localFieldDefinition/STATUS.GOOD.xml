@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<localref:LocalRef xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:localref="http://www.odcgroup.com/t24/application/localref/model/LocalRef"
+    xmlns:translationDsl="http://www.odcgroup.com/translation/TranslationDsl" localRefID="STATUS.GOOD" maximumChars="15" minimumChars="0" mandatory="false"
+    charType="A" defaultPossible="false" virtualTable="STATUS.GOOD" description="Goods Status">
+  <shortName xsi:type="translationDsl:LocalTranslations">
+    <translations locale="en" text="STATUS.GOOD"/>
+  </shortName>
+  <vettingTable vettingTable="CARVEHICLE">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Cars/Vehicle"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="FINALISED">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Finalised"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="FORECLOSEDASSET">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Foreclosed Asset"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="MORTAGELIABILITY">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Mortage Liability"/>
+    </remarks>
+  </vettingTable>
+</localref:LocalRef>

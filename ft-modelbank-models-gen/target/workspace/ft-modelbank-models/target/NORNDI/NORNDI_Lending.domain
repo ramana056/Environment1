@@ -1,0 +1,244 @@
+# UTF-8
+/* Nordic Prevent Night Disbursement */
+Domain NORNDI_Lending
+    @t24:i (module=NORNDI)
+    @java:Package (value=com.temenos.t24.datamodel.norndi.norndi_lending)
+namespace "http://www.temenos.com/t24/NORNDI_Lending"
+metamodelVersion 1.30.6
+Classes {
+    /* This table used to store NORNDI defer disbursement log related information */
+    NORNDI_DEFER_DISBURSEMENT_LOG
+        @i18n:Description (en="")
+        @t24:i (t24Name=NORNDI.DEFER.DISBURSEMENT.LOG, level=F, type=L, allowedFunctions="L P S", localRefApplicationSysNo=27.0, localRefAllowed=true)
+    {
+        DISABLE_PAYIN_SETTLEMENT -> byValue NORNDI_Lending:NORNDI_DEFER_DISBURSEMENT_LOG__DISABLE_PAYIN_SETTLEMENT *
+            @t24:i (t24Name=DISABLE.PAYIN.SETTLEMENT)
+        DISABLE_PAYOUT_SETTLEMENT -> byValue NORNDI_Lending:NORNDI_DEFER_DISBURSEMENT_LOG__DISABLE_PAYOUT_SETTLEMENT *
+            @t24:i (t24Name=DISABLE.PAYOUT.SETTLEMENT)
+        /* This field is to hold the YES value if the current ID financial transaction unable to automate the authorisation process. */
+        FAILED_TRANSACTION : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=6.0, core=true, t24Name=FAILED.TRANSACTION, mandatory=false)
+        /* ID can be prefixed with AA,FT,PI,TT. 1. AA id file will hold the defered disbursement arrangment details about the new loan (or) increase commitment details happened during the restricted cut-off time defined in NORNDI.PARAMETER to the respective company. */
+        ID -> NORNDI_Lending:NORNDI_DEFER_DISBURSEMENT_LOG PK required
+            @i18n:Label (en="Transaction Ref")
+            @i18n:Tooltip (en="Transaction Reference")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=0.0, core=true, businessType=A, t24Name="@ID", mandatory=true)
+        /* This field is to hold the total amount which are  increased on top of loan comitment during the cut-off time. */
+        INCREASED_TERM_AMOUNT : T24BusinessTypes:AMT
+            @t24:i (align=R, inputBehaviour=I, maxLength=19, sysNumber=5.0, core=true, t24Name=INCREASED.TERM.AMOUNT, typeModifiers="-USD", mandatory=false)
+        /* This field is to hold the YES value if the loan created during the restricted cut-off time. */
+        NEW_LOAN : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=1.0, core=true, t24Name=NEW.LOAN, mandatory=false)
+        /* Reserved for future use */
+        RESERVED_1 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=26.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        /* Reserved for future use */
+        RESERVED_10 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=17.0, core=true, t24Name=RESERVED.10, mandatory=false)
+        /* Reserved for future use */
+        RESERVED_11 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=16.0, core=true, t24Name=RESERVED.11, mandatory=false)
+        /* Reserved for future use */
+        RESERVED_12 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=15.0, core=true, t24Name=RESERVED.12, mandatory=false)
+        /* Reserved for future use */
+        RESERVED_13 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=14.0, core=true, t24Name=RESERVED.13, mandatory=false)
+        /* Reserved for future use */
+        RESERVED_14 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=13.0, core=true, t24Name=RESERVED.14, mandatory=false)
+        /* Reserved for future use */
+        RESERVED_15 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=12.0, core=true, t24Name=RESERVED.15, mandatory=false)
+        /* Reserved for future use */
+        RESERVED_16 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=11.0, core=true, t24Name=RESERVED.16, mandatory=false)
+        /* Reserved for future use */
+        RESERVED_17 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=10.0, core=true, t24Name=RESERVED.17, mandatory=false)
+        /* Reserved for future use */
+        RESERVED_18 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=9.0, core=true, t24Name=RESERVED.18, mandatory=false)
+        /* Reserved for future use */
+        RESERVED_19 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=8.0, core=true, t24Name=RESERVED.19, mandatory=false)
+        /* Reserved for future use */
+        RESERVED_2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=25.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        /* Reserved for future use */
+        RESERVED_20 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=7.0, core=true, t24Name=RESERVED.20, mandatory=false)
+        /* Reserved for future use */
+        RESERVED_3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=24.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        /* Reserved for future use */
+        RESERVED_4 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=23.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        /* Reserved for future use */
+        RESERVED_5 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=22.0, core=true, t24Name=RESERVED.5, mandatory=false)
+        /* Reserved for future use */
+        RESERVED_6 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=21.0, core=true, t24Name=RESERVED.6, mandatory=false)
+        /* Reserved for future use */
+        RESERVED_7 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=20.0, core=true, t24Name=RESERVED.7, mandatory=false)
+        /* Reserved for future use */
+        RESERVED_8 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=19.0, core=true, t24Name=RESERVED.8, mandatory=false)
+        /* Reserved for future use */
+        RESERVED_9 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=18.0, core=true, t24Name=RESERVED.9, mandatory=false)
+        /* This field is to hold YES value if the loan top up done during the cut-off time. */
+        TOPUP_LOAN : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=4.0, core=true, t24Name=TOPUP.LOAN, mandatory=false)
+    }
+    NORNDI_DEFER_DISBURSEMENT_LOG__DISABLE_PAYIN_SETTLEMENT
+    {
+        /* This field is to hold YES value if Payin settlement disabled for the new-loan. */
+        DISABLE_PAYIN_SETTLEMENT : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=2.0, core=true, t24Name=DISABLE.PAYIN.SETTLEMENT, mandatory=false)
+    }
+    NORNDI_DEFER_DISBURSEMENT_LOG__DISABLE_PAYOUT_SETTLEMENT
+    {
+        /* This field is to hold YES value if Payout settlement disabled for the new-loan. */
+        DISABLE_PAYOUT_SETTLEMENT : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=3.0, core=true, t24Name=DISABLE.PAYOUT.SETTLEMENT, mandatory=false)
+    }
+    /* This table used to store NORNDI Parameter related information */
+    NORNDI_PARAMETER
+        @i18n:Description (en="")
+        @t24:i (t24Name=NORNDI.PARAMETER, level=I, type=H, allowedFunctions="A C D E H I L P Q R S", localRefApplicationSysNo=24.0, localRefAllowed=true)
+    {
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=33.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=34.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=30.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        /* Field to hold the "Yes" flag to automate the manual disbursement after the PREVENT.DISBURSE.TIME */
+        AUTO_MANUAL_DISBURSE : NORNDI_Lending:NORNDI_PARAMETER__AUTO_MANUAL_DISBURSE
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=3.0, core=true, t24Name=AUTO.MANUAL.DISBURSE, mandatory=false)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=31.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=27.0, core=true, t24Name=CURR.NO, mandatory=false)
+        DATE_TIME -> byValue NORNDI_Lending:NORNDI_PARAMETER__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=32.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        /* This field is to hold the END time of disbursement activity should be restricted for a newly created loan until this cut-off time.This period will behave as restricted end cut off time of a new loan disbursement. */
+        END_CUT_OFF_TIME : T24BusinessTypes:TIME
+            @t24:i (align=L, inputBehaviour=I, maxLength=5, sysNumber=2.0, core=true, t24Name=END.CUT.OFF.TIME, mandatory=false)
+        /* Id of the record should be existing Company Id */
+        ID -> NORNDI_Lending:NORNDI_PARAMETER PK required
+            @i18n:Label (en="Transaction Ref")
+            @i18n:Tooltip (en="Transaction Reference")
+            @t24:i (align=L, inputBehaviour=I, maxLength=10, sysNumber=0.0, core=true, businessType=COM, t24Name=ID, mandatory=true)
+        INPUTTER -> byValue NORNDI_Lending:NORNDI_PARAMETER__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        OVERRIDE -> byValue NORNDI_Lending:NORNDI_PARAMETER__OVERRIDE *
+            @t24:i (t24Name=OVERRIDE)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=26.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        /* Reserved for future use */
+        RESERVED_1 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=23.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        /* Reserved for future use */
+        RESERVED_10 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=14.0, core=true, t24Name=RESERVED.10, mandatory=false)
+        /* Reserved for future use */
+        RESERVED_11 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=13.0, core=true, t24Name=RESERVED.11, mandatory=false)
+        /* Reserved for future use */
+        RESERVED_12 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=12.0, core=true, t24Name=RESERVED.12, mandatory=false)
+        /* Reserved for future use */
+        RESERVED_13 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=11.0, core=true, t24Name=RESERVED.13, mandatory=false)
+        /* Reserved for future use */
+        RESERVED_14 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=10.0, core=true, t24Name=RESERVED.14, mandatory=false)
+        /* Reserved for future use */
+        RESERVED_15 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=9.0, core=true, t24Name=RESERVED.15, mandatory=false)
+        /* Reserved for future use */
+        RESERVED_16 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=8.0, core=true, t24Name=RESERVED.16, mandatory=false)
+        /* Reserved for future use */
+        RESERVED_17 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=7.0, core=true, t24Name=RESERVED.17, mandatory=false)
+        /* Reserved for future use */
+        RESERVED_18 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=6.0, core=true, t24Name=RESERVED.18, mandatory=false)
+        /* Reserved for future use */
+        RESERVED_19 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=5.0, core=true, t24Name=RESERVED.19, mandatory=false)
+        /* Reserved for future use */
+        RESERVED_2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=22.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        /* Reserved for future use */
+        RESERVED_20 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=4.0, core=true, t24Name=RESERVED.20, mandatory=false)
+        /* Reserved for future use */
+        RESERVED_3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=21.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        /* Reserved for future use */
+        RESERVED_4 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=20.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        /* Reserved for future use */
+        RESERVED_5 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=19.0, core=true, t24Name=RESERVED.5, mandatory=false)
+        /* Reserved for future use */
+        RESERVED_6 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=18.0, core=true, t24Name=RESERVED.6, mandatory=false)
+        /* Reserved for future use */
+        RESERVED_7 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=17.0, core=true, t24Name=RESERVED.7, mandatory=false)
+        /* Reserved for future use */
+        RESERVED_8 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=16.0, core=true, t24Name=RESERVED.8, mandatory=false)
+        /* Reserved for future use */
+        RESERVED_9 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=15.0, core=true, t24Name=RESERVED.9, mandatory=false)
+        /* This field is to hold the START time of disbursement activity should be restricted for a newly created loan during this cut-off time.This period will behave as restricted cut off time of a new loan disbursement. */
+        START_CUT_OFF_TIME : T24BusinessTypes:TIME
+            @t24:i (align=L, inputBehaviour=I, maxLength=5, sysNumber=1.0, core=true, t24Name=START.CUT.OFF.TIME, mandatory=false)
+    }
+    NORNDI_PARAMETER__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=29.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    NORNDI_PARAMETER__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=28.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    NORNDI_PARAMETER__OVERRIDE
+    {
+        OVERRIDE : T24BusinessTypes:N
+            @i18n:Label (en=Override)
+            @i18n:Tooltip (en="Overrides generated by this transaction")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=25.0, core=true, t24Name=OVERRIDE, mandatory=false)
+    }
+}
+Enumerations {
+    NORNDI_PARAMETER__AUTO_MANUAL_DISBURSE : mml:string
+        NULL=NULL
+        YES=YES
+}

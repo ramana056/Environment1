@@ -1,0 +1,602 @@
+# UTF-8
+/* Advice Definition */
+Domain AA_Advice
+    @t24:i (module=AA)
+    @java:Package (value=com.temenos.t24.datamodel.aa.aa_advice)
+namespace "http://www.temenos.com/t24/AA_Advice"
+metamodelVersion 1.30.6
+Classes {
+    /* This is live file. The entry in this file will be created after publishing of AA.DEFINITION.MANAGER for ADVICE.CLASS. */
+    AA_ADVICE_TYPE
+        @i18n:Description (en="")
+        @t24:i (t24Name=AA.ADVICE.TYPE, level=I, type=L, allowedFunctions="L S", localRefAllowed=false)
+    {
+        ADVICE_APPLICATION_NAMES -> byValue AA_Advice:AA_ADVICE_TYPE__ADVICE_APPLICATION_NAMES *
+            @t24:i (t24Name=ADVICE.APPLICATION.NAMES)
+        ADVICE_TYPE -> AA_Advice:AA_ADVICE_TYPE PK required
+            @i18n:Label (en="Advice Type")
+            @i18n:Tooltip (en="Denotes the type of the advice")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=0.0, core=true, businessType=A, t24Name=ADVICE.TYPE, mandatory=true)
+/* The Date from which the Advice Type is Valid.
+1)Standard T24 Date , format is YYYYMMDD */
+        AVAILABLE_DATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=4.0, core=true, t24Name=AVAILABLE.DATE, mandatory=false)
+        CLASS_NAME : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=2.0, core=true, t24Name=CLASS.NAME, mandatory=false)
+        DESCRIPTION -> byValue AA_Advice:AA_ADVICE_TYPE__DESCRIPTION *
+            @t24:i (t24Name=DESCRIPTION)
+/* The Date beyond which the Advice Type is no longer Valid and can not be used as an Advice
+1)Standard T24 Date , format is YYYYMMDD */
+        EXPIRY_DATE : T24BusinessTypes:D
+            @i18n:Label (en="Expiry Date")
+            @i18n:Tooltip (en="Indicates the Expiry Date of the Transaction")
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=5.0, core=true, t24Name=EXPIRY.DATE, mandatory=false)
+/* The Date at which the Advice Type is published. It will be TODAY's date.
+1)Standard T24 Date , format is YYYYMMDD */
+        LAST_PUBLISHED : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=6.0, core=true, t24Name=LAST.PUBLISHED, mandatory=false)
+        /* It specifies the current status of the advice definition. The STATUS will update as PUBLISHED while publishing the AA.DEFINITION.MANAGER of ADVICE.CLASS definition. */
+        STATUS : T24BusinessTypes:A
+            @i18n:Label (en=Status)
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=3.0, core=true, t24Name=STATUS, mandatory=false)
+    }
+/* This is live file. The entry in this file will be created after publishing of AA.DEFINITION.MANAGER for ADVICE.CLASS type of definitions.  It is similar table of AA.PRODUCT.CATALOG. The key format will be CLASS.TYPE-REFERENCE-VERSION-VERSION.DATE.
+Id will be of the format AF-1-20091223
+where First Part of the ID from the appropriate condition table.
+Second part is a version
+Third part is an effective date */
+    AA_ADVICE_TYPE_CATALOG
+        @i18n:Description (en="")
+        @t24:i (t24Name=AA.ADVICE.TYPE.CATALOG, level=I, type=H, allowedFunctions="L Q S", localRefApplicationSysNo=39.0, localRefAllowed=true)
+    {
+/* Allowed options are :Null or PUBLISH
+If null, the record is simply being updated.
+PUBLISH will cause proofing and publishing to be initiated on commit. */
+        ACTION : AA_Advice:AA_ADVICE_TYPE_CATALOG__ACTION
+            @i18n:Label (en=Action)
+            @t24:i (align=L, inputBehaviour=I, maxLength=7, sysNumber=34.0, core=true, t24Name=ACTION, mandatory=false)
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=52.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=53.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=49.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        CLASS -> byValue AA_Advice:AA_ADVICE_TYPE_CATALOG__CLASS *
+            @t24:i (t24Name=CLASS)
+        /* Valid entry in AA.CLASS.TYPE. */
+        CLASS_TYPE -> AA_Framework:AA_CLASS_TYPE
+            @i18n:Label (en="Class Type")
+            @t24:i (align=L, inputBehaviour=N, maxLength=25, sysNumber=40.0, core=true, businessType=ANY, t24Name=CLASS.TYPE, mandatory=true)
+        COMMON_CLASS_TYPE -> byValue AA_Advice:AA_ADVICE_TYPE_CATALOG__COMMON_CLASS_TYPE *
+            @t24:i (t24Name=COMMON.CLASS.TYPE)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=50.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=46.0, core=true, t24Name=CURR.NO, mandatory=false)
+        DATE_TIME -> byValue AA_Advice:AA_ADVICE_TYPE_CATALOG__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DEFAULT_ROLE -> byValue AA_Advice:AA_ADVICE_TYPE_CATALOG__DEFAULT_ROLE *
+            @t24:i (t24Name=DEFAULT.ROLE)
+        DEFINITION_MANAGER -> AA_Advice:AA_ADVICE_TYPE_CATALOG PK required
+            @t24:i (align=L, inputBehaviour=I, maxLength=60, sysNumber=0.0, core=true, businessType=A, t24Name=DEFINITION.MANAGER, mandatory=true)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=51.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        DESCRIPTION -> byValue AA_Advice:AA_ADVICE_TYPE_CATALOG__DESCRIPTION *
+            @t24:i (t24Name=DESCRIPTION)
+        /* Used for Form Definition to specify which domain type the form is used in and therefore will default the Instances (i.e. the formlets) in the domain type into the mv set. */
+        DOMAIN_TYPE -> OA_Framework:OA_DOMAIN_TYPE
+            @t24:i (align=L, inputBehaviour=I, maxLength=36, sysNumber=3.0, core=true, businessType=ANY, t24Name=DOMAIN.TYPE, mandatory=false)
+        /* Date from which the resultant Advice will no longer be available for use. */
+        EXPIRY_DATE : T24BusinessTypes:D
+            @i18n:Label (en="Expiry Date")
+            @i18n:Tooltip (en="Indicates the Expiry Date of the Transaction")
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=35.0, core=true, t24Name=EXPIRY.DATE, mandatory=false)
+        FORM_OWNER -> OA_Framework:OA_ROLE
+            @t24:i (align=L, inputBehaviour=I, maxLength=30, sysNumber=4.0, core=true, businessType=ANY, t24Name=FORM.OWNER, mandatory=false)
+        FULL_DESC -> byValue AA_Advice:AA_ADVICE_TYPE_CATALOG__FULL_DESC *
+            @t24:i (t24Name=FULL.DESC)
+        INPUTTER -> byValue AA_Advice:AA_ADVICE_TYPE_CATALOG__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        OVERRIDE -> byValue AA_Advice:AA_ADVICE_TYPE_CATALOG__OVERRIDE *
+            @t24:i (t24Name=OVERRIDE)
+        PUBLISH_ERROR -> byValue AA_Advice:AA_ADVICE_TYPE_CATALOG__PUBLISH_ERROR *
+            @t24:i (t24Name=PUBLISH.ERROR)
+        /* Status of publishing effort. */
+        PUBLISH_STATUS : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=36.0, core=true, t24Name=PUBLISH.STATUS, mandatory=false)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=45.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        /* ID Component 2. Is the main "ID" of the item being designed.  For evidence this is the name of the Advice type */
+        REFERENCE : T24BusinessTypes:ANY
+            @i18n:Label (en="Search by Referece")
+            @t24:i (align=L, inputBehaviour=N, maxLength=25, sysNumber=41.0, core=true, t24Name=REFERENCE, mandatory=true)
+        RESERVED_1 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=33.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=32.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=31.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=30.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        RESERVED_5 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=29.0, core=true, t24Name=RESERVED.5, mandatory=false)
+        RESERVED_6 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=28.0, core=true, t24Name=RESERVED.6, mandatory=false)
+        RESERVED_7 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=27.0, core=true, t24Name=RESERVED.7, mandatory=false)
+        RESERVED_8 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=26.0, core=true, t24Name=RESERVED.8, mandatory=false)
+        RESERVED_9 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=25.0, core=true, t24Name=RESERVED.9, mandatory=false)
+        SYNC_MAPPING -> AA_Mapping:AA_MAPPING_TYPE
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=24.0, core=true, businessType=ANY, t24Name=SYNC.MAPPING, mandatory=false)
+        /* ID Component 3: Version number identifier. */
+        VERSION : T24BusinessTypes:ANY
+            @i18n:Label (en=Version)
+            @t24:i (align=L, inputBehaviour=N, maxLength=5, sysNumber=42.0, core=true, t24Name=VERSION, mandatory=true)
+        /* ID Component 4: Date of the version becomes effective. */
+        VERSION_DATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=N, maxLength=11, sysNumber=43.0, core=true, t24Name=VERSION.DATE, mandatory=true)
+    }
+    AA_ADVICE_TYPE_CATALOG__CLASS
+    {
+        /* ID from corresponding *.CLASS table. (e.g. AA.ADVICE.CLASS) */
+        CLASS : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=7.0, core=true, t24Name=CLASS, mandatory=false)
+        /* Part 1 of the ID from the appropriate condition table. */
+        CONDITION : T24BusinessTypes:ANY required
+            @i18n:Label (en=Condition)
+            @i18n:Tooltip (en="Value that the field name is to be compared with")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=14.0, core=true, t24Name=CONDITION, mandatory=true)
+        /* Can only be used to specify Advice condition versions for AA.ADVICE.CLASS. */
+        CONDITION_VERSION : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=5, sysNumber=15.0, core=true, t24Name=CONDITION.VERSION, mandatory=false)
+        /* Used when designing Forms to indicated the instance of a Formlet class.(e.g. Home Address vs. Work Address) */
+        INSTANCE : T24BusinessTypes:A
+            @i18n:Label (en=Instance)
+            @i18n:Tooltip (en=Instance)
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=8.0, core=true, t24Name=INSTANCE, mandatory=false)
+        OWNER -> OA_Framework:OA_ROLE
+            @i18n:Label (en=Owner)
+            @t24:i (align=L, inputBehaviour=I, maxLength=30, sysNumber=16.0, core=true, businessType=ANY, t24Name=OWNER, mandatory=false)
+        RESERVED_11 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=13.0, core=true, t24Name=RESERVED.11, mandatory=false)
+        RESERVED_12 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=12.0, core=true, t24Name=RESERVED.12, mandatory=false)
+        RESERVED_13 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=11.0, core=true, t24Name=RESERVED.13, mandatory=false)
+        RESERVED_14 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=10.0, core=true, t24Name=RESERVED.14, mandatory=false)
+        RESERVED_15 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=9.0, core=true, t24Name=RESERVED.15, mandatory=false)
+        ROLE -> byValue AA_Advice:AA_ADVICE_TYPE_CATALOG__CLASS__ROLE *
+            @t24:i (t24Name=ROLE)
+    }
+    AA_ADVICE_TYPE_CATALOG__CLASS__ROLE
+    {
+        PRIVILEGE : AA_Advice:AA_ADVICE_TYPE_CATALOG__CLASS__ROLE__PRIVILEGE
+            @t24:i (align=L, inputBehaviour=I, maxLength=7, sysNumber=18.0, core=true, t24Name=PRIVILEGE, mandatory=false)
+        ROLE -> OA_Framework:OA_ROLE
+            @i18n:Label (en=Role)
+            @i18n:Tooltip (en="Roles are user defined and specified in EB.LOOKUP")
+            @t24:i (align=L, inputBehaviour=I, maxLength=30, sysNumber=17.0, core=true, businessType=ANY, t24Name=ROLE, mandatory=false)
+    }
+    AA_ADVICE_TYPE_CATALOG__COMMON_CLASS_TYPE
+    {
+        COMMON_CLASS : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=20.0, core=true, t24Name=COMMON.CLASS, mandatory=false)
+        COMMON_CLASS_CONDITION : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=22.0, core=true, t24Name=COMMON.CLASS.CONDITION, mandatory=false)
+        COMMON_CLASS_TYPE -> AA_Framework:AA_CLASS_TYPE
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=19.0, core=true, businessType=ANY, t24Name=COMMON.CLASS.TYPE, mandatory=false)
+        COMMON_CONDITION_VERSION : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=5, sysNumber=23.0, core=true, t24Name=COMMON.CONDITION.VERSION, mandatory=false)
+        RESERVED_16 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=21.0, core=true, t24Name=RESERVED.16, mandatory=false)
+    }
+    AA_ADVICE_TYPE_CATALOG__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=48.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    AA_ADVICE_TYPE_CATALOG__DEFAULT_ROLE
+    {
+        DEFAULT_PRIVILEGE : AA_Advice:AA_ADVICE_TYPE_CATALOG__DEFAULT_ROLE__DEFAULT_PRIVILEGE
+            @t24:i (align=L, inputBehaviour=I, maxLength=7, sysNumber=6.0, core=true, t24Name=DEFAULT.PRIVILEGE, mandatory=false)
+        DEFAULT_ROLE -> OA_Framework:OA_ROLE
+            @t24:i (align=L, inputBehaviour=I, maxLength=30, sysNumber=5.0, core=true, businessType=ANY, t24Name=DEFAULT.ROLE, mandatory=false)
+    }
+    AA_ADVICE_TYPE_CATALOG__DESCRIPTION
+    {
+        /* The Description of the Advice as defined in AA.DEFINITION.MANAGER */
+        DESCRIPTION : T24BusinessTypes:ANY required
+            @i18n:Label (en=Description)
+            @i18n:Tooltip (en=Description)
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, multiLanguage=true, sysNumber=1.0, core=true, t24Name=DESCRIPTION, mandatory=true)
+    }
+    AA_ADVICE_TYPE_CATALOG__FULL_DESC
+    {
+        /* This field provides a more detailed description of the Advice being designed. */
+        FULL_DESC : T24BusinessTypes:ANY required
+            @i18n:Label (en="Full Description")
+            @i18n:Tooltip (en="Detailed Description ")
+            @t24:i (align=L, inputBehaviour=I, maxLength=60, multiLanguage=true, sysNumber=2.0, core=true, t24Name=FULL.DESC, mandatory=true)
+    }
+    AA_ADVICE_TYPE_CATALOG__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=47.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    AA_ADVICE_TYPE_CATALOG__OVERRIDE
+    {
+        OVERRIDE : T24BusinessTypes:N
+            @i18n:Label (en=Override)
+            @i18n:Tooltip (en="Overrides generated by this transaction")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=44.0, core=true, t24Name=OVERRIDE, mandatory=false)
+    }
+    AA_ADVICE_TYPE_CATALOG__PUBLISH_ERROR
+    {
+        /* Suggestion on how to correct the associated error. */
+        ERROR_SUGGESTION : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=38.0, core=true, t24Name=ERROR.SUGGESTION, mandatory=false)
+        /* Error Message if any on publishing */
+        PUBLISH_ERROR : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=37.0, core=true, t24Name=PUBLISH.ERROR, mandatory=false)
+    }
+    AA_ADVICE_TYPE__ADVICE_APPLICATION_NAMES
+    {
+        /* It holds the record ids of the Advice artefact application which will be created on publishing the AA.DEFINITION.MANAGER for ADVICE.CLASS definition. */
+        ADVICE_APPLICATION_IDS : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=8.0, core=true, t24Name=ADVICE.APPLICATION.IDS, mandatory=false)
+        /* It holds the Advice artefact application names which are created on publishing the AA.DEFINITION.MANAGER of ADVICE.CLASS definition. It is associated multivalued field along with ADVICE.APPLICATION.ID. The following artefacts will be created while publishing the ADVICE product definition. (DE.MESSAGE, DE.MAPPING, EB.ACTIVITY, EB.ADVICES, EB.EVENT.TYPE, TEC.ITEMS */
+        ADVICE_APPLICATION_NAMES : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=7.0, core=true, t24Name=ADVICE.APPLICATION.NAMES, mandatory=false)
+    }
+    AA_ADVICE_TYPE__DESCRIPTION
+    {
+        /* The Description of the Advice as defined in AA.DEFINITION.MANAGER */
+        DESCRIPTION : T24BusinessTypes:ANY
+            @i18n:Label (en=Description)
+            @i18n:Tooltip (en=Description)
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, multiLanguage=true, sysNumber=1.0, core=true, t24Name=DESCRIPTION, mandatory=false)
+    }
+    /* It is a specific table from which the data will be extracted and also the specific runtime instance (i.e the specific artefact), which can result in the system determining the specific record to read. */
+    AA_DATA_OBJECT
+        @i18n:Description (en="")
+        @t24:i (t24Name=AA.DATA.OBJECT, level=I, type=H, allowedFunctions="A C D E I L Q R S", localRefApplicationSysNo=17.0, localRefAllowed=true)
+    {
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=26.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=27.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=23.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=24.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=20.0, core=true, t24Name=CURR.NO, mandatory=false)
+/* A Data Model can be comprised of multiple tables.  For example a Form can have multiple formlets.  This specifies the exact "input" Data table from the model.
+
+1. It should be a valid OA.FORMLET if the DATA.MODEL is Form.
+2. It should be a valid EV.EVIDENCE.CLASS if the DATA.MODEL is Evidence Type.
+3. It should be a valid NA.NEEDS.CLASS if the DATA.MODEL is Questionnaire Type.
+4. It should be a valid APPLICATION from TARGET field of PW.ACTIVITY, If the DATA.MODEL is Pw Activity.
+5. It should be a valid AA.QUOTATION.CLASS if the DATA.MODEL is Quotation Type.
+
+Validation Rules: Input mandatory either in DATA.INPUT or DATA.RESULT fields. Input not allowed in both fields. */
+        DATA_INPUT : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=9.0, core=true, t24Name=DATA.INPUT, mandatory=false)
+/* It is specific model belonging to the Category defined in DATA.MODEL.CATAGORY field. The input should follow below restrictions.
+A data model will typically have input data (e.g. captured data). For a form or questionnaire this is the information a customer provides.
+Two of the models, Quotation and Needs Analysis have result data. The user must either specify whether they want input data or output data.
+
+1. It should be valid record from OA.FROM if the data model category is APPLICATION.FROM.
+2. It should be valid record from EV.EVIDENCE.TYPE if the data model category is EVIDENCE.
+3. It should be valid record from NA.QUESTIONNAIRE.TYPE  if the data model category is NEEDS.ANALYSIS.
+4. It should be valid record from PW.ACTIVITY if the data model category is PROCESS.
+5. It should be valid record from AA.QUOTATION.TYPE if the data model category is QUOTATION.
+
+Validation Rules : It is a mandatory field. */
+        DATA_MODEL : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=4.0, core=true, t24Name=DATA.MODEL, mandatory=false)
+/* A data object can be defined for one of the following five data Model Categories
+APPLICATION.FORM
+EVIDENCE
+NEEDS.ANALYSIS
+PROCESS
+QUOTATION
+
+Validation Rules : It is a mandatory field. */
+        DATA_MODEL_CATEGORY : AA_Advice:AA_DATA_OBJECT__DATA_MODEL_CATEGORY
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=3.0, core=true, t24Name=DATA.MODEL.CATEGORY, mandatory=false)
+        DATA_OBJECT -> AA_Advice:AA_DATA_OBJECT PK required
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=0.0, core=true, businessType=A, t24Name=DATA.OBJECT, mandatory=true)
+/* This field will be used to specify whether data has to be captured from output result file. The Options available for this field are NEEDS.RECOMMENDATION, QUOTATION.OUTPUT, REFERENCE and SCHEDULE.DETAILS.
+
+1. The output result will be extracted from NA.PRODUCT.RECOMMENDATION if the DATA.MODEL.CATEGORY is NEEDS.ANALYSIS.
+2. The output result will be extracted from AA.QUOTATION.OUTPUT if the DATA.MODEL.CATEGORY is QUOTATION.
+
+Validation Rules: Input mandatory either in DATA.INPUT or DATA.RESULT fields.
+a. If Data Model Category is "Needs Analysis" then Data Result should be "NEEDS.RECOMMENDATION"
+b. If Data Model Category is "Quotation" then Data Result should be "QUOTATION.OUTPUT"
+c. If Data Model Category is "Temenos Core" then Data Result should be "REFERENCE" */
+        DATA_RESULT : AA_Advice:AA_DATA_OBJECT__DATA_RESULT
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=10.0, core=true, t24Name=DATA.RESULT, mandatory=false)
+        DATE_TIME -> byValue AA_Advice:AA_DATA_OBJECT__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=25.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        DESCRIPTION -> byValue AA_Advice:AA_DATA_OBJECT__DESCRIPTION *
+            @t24:i (t24Name=DESCRIPTION)
+        /* The Full description of the Data Object */
+        FULL_DESCRIPTION : T24BusinessTypes:TEXT required
+            @t24:i (align=L, inputBehaviour=I, maxLength=100, sysNumber=2.0, core=true, t24Name=FULL.DESCRIPTION, mandatory=true)
+        INPUTTER -> byValue AA_Advice:AA_DATA_OBJECT__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        OVERRIDE -> byValue AA_Advice:AA_DATA_OBJECT__OVERRIDE *
+            @t24:i (t24Name=OVERRIDE)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=19.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        SYS_RESERVED_1 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=16.0, core=true, t24Name=SYS.RESERVED.1, mandatory=false)
+        SYS_RESERVED_10 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=5.0, core=true, t24Name=SYS.RESERVED.10, mandatory=false)
+        SYS_RESERVED_2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=15.0, core=true, t24Name=SYS.RESERVED.2, mandatory=false)
+        SYS_RESERVED_3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=14.0, core=true, t24Name=SYS.RESERVED.3, mandatory=false)
+        SYS_RESERVED_4 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=13.0, core=true, t24Name=SYS.RESERVED.4, mandatory=false)
+        SYS_RESERVED_5 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=12.0, core=true, t24Name=SYS.RESERVED.5, mandatory=false)
+        SYS_RESERVED_6 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=11.0, core=true, t24Name=SYS.RESERVED.6, mandatory=false)
+        SYS_RESERVED_7 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=8.0, core=true, t24Name=SYS.RESERVED.7, mandatory=false)
+        SYS_RESERVED_8 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=7.0, core=true, t24Name=SYS.RESERVED.8, mandatory=false)
+        SYS_RESERVED_9 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=6.0, core=true, t24Name=SYS.RESERVED.9, mandatory=false)
+    }
+    AA_DATA_OBJECT__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=22.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    AA_DATA_OBJECT__DESCRIPTION
+    {
+        /* The Description of the Data Object */
+        DESCRIPTION : T24BusinessTypes:A required
+            @i18n:Label (en=Description)
+            @i18n:Tooltip (en=Description)
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, multiLanguage=true, sysNumber=1.0, core=true, t24Name=DESCRIPTION, mandatory=true)
+    }
+    AA_DATA_OBJECT__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=21.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    AA_DATA_OBJECT__OVERRIDE
+    {
+        OVERRIDE : T24BusinessTypes:N
+            @i18n:Label (en=Override)
+            @i18n:Tooltip (en="Overrides generated by this transaction")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=18.0, core=true, t24Name=OVERRIDE, mandatory=false)
+    }
+    /* This is a central advice generation place within OA whether advices are triggered manually (by a user or a process like PW) or automatically by a status code change or an activity extension. */
+    AA_GENERATE_ADVICE
+        @i18n:Description (en="")
+        @t24:i (t24Name=AA.GENERATE.ADVICE, nonStop=true, level=F, type=H, allowedFunctions="A C D E H I L P Q S", localRefApplicationSysNo=20.0, localRefAllowed=true)
+    {
+/* This field defines the activity to be processed against Mapping Request.
+1. Input in this field should be valid record under AA.CLASS.TYPE.ACTIVITY.CLASS application.
+2. Input is mandatory in this field to create the new generate advice transaction.
+3. Only allowed activity is GENERATE-ADVICE and System will default this activity when creating the new generate advice transaction. */
+        ACTIVITY -> AA_ClassFramework:AA_CLASS_TYPE_ACTIVITY
+            @i18n:Label (en=Activity)
+            @t24:i (align=L, inputBehaviour=I, maxLength=60, sysNumber=1.0, core=true, businessType=A, t24Name=ACTIVITY, mandatory=false)
+        /* It is a delivery related field, value in this field will be a valid record in EB.ADVICES table. It is a no-input field. */
+        ADVICE_NO -> EB_Delivery:EB_ADVICES
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=21.0, core=true, businessType=A, t24Name=ADVICE.NO, mandatory=false)
+        /* The type of the advice to be generated. Must be a valid ID from AA.ADVICE.TYPE. If Purpose Code is populated then the advice type will be validated against the types specified for the purpose. */
+        ADVICE_TYPE -> AA_Advice:AA_ADVICE_TYPE required
+            @i18n:Label (en="Advice Type")
+            @i18n:Tooltip (en="Denotes the type of the advice")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=2.0, core=true, businessType=A, t24Name=ADVICE.TYPE, mandatory=true)
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=32.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=33.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=29.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=30.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=26.0, core=true, t24Name=CURR.NO, mandatory=false)
+        CUSTOMER -> byValue AA_Advice:AA_GENERATE_ADVICE__CUSTOMER *
+            @t24:i (t24Name=CUSTOMER)
+        DATE_TIME -> byValue AA_Advice:AA_GENERATE_ADVICE__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DELIVERY_REFERENCE -> byValue AA_Advice:AA_GENERATE_ADVICE__DELIVERY_REFERENCE *
+            @t24:i (t24Name=DELIVERY.REFERENCE)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=31.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        /* id of the Generate Advice */
+        GENERATE_ADVICE_ID -> AA_Advice:AA_GENERATE_ADVICE PK required
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=0.0, core=true, businessType=A, t24Name=GENERATE.ADVICE.ID, mandatory=true)
+        INITIATION_TYPE -> byValue AA_Advice:AA_GENERATE_ADVICE__INITIATION_TYPE *
+            @t24:i (t24Name=INITIATION.TYPE)
+        INPUTTER -> byValue AA_Advice:AA_GENERATE_ADVICE__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        /* DE.MAPPING id. the value in this field will be valid record from DE.MAPPING application */
+        MAPPING_KEY -> DE_Config:DE_MAPPING
+            @i18n:Label (en="Mapping Key")
+            @t24:i (align=L, inputBehaviour=N, maxLength=20, sysNumber=22.0, core=true, businessType=A, t24Name=MAPPING.KEY, mandatory=false)
+        OVERRIDE -> byValue AA_Advice:AA_GENERATE_ADVICE__OVERRIDE *
+            @t24:i (t24Name=OVERRIDE)
+        /* The purpose for which an advice is being generated. Conditionally available and mandatory if Source is "Application" */
+        PURPOSE_CODE -> AA_ProductFramework:AA_PURPOSE
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=6.0, core=true, businessType=A, t24Name=PURPOSE.CODE, mandatory=false)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=25.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        RESERVED_1 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=19.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_10 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=7.0, core=true, t24Name=RESERVED.10, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=18.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=17.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=16.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        RESERVED_5 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=15.0, core=true, t24Name=RESERVED.5, mandatory=false)
+        RESERVED_6 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=11.0, core=true, t24Name=RESERVED.6, mandatory=false)
+        RESERVED_7 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=10.0, core=true, t24Name=RESERVED.7, mandatory=false)
+        RESERVED_8 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=9.0, core=true, t24Name=RESERVED.8, mandatory=false)
+        RESERVED_9 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=8.0, core=true, t24Name=RESERVED.9, mandatory=false)
+/* Each advice will have one "primary" source. It is either a specific application or a stand-alone Needs analysis or Quotation.
+Application
+Needs Analysis
+Quotation */
+        SOURCE : AA_Advice:AA_GENERATE_ADVICE__SOURCE
+            @i18n:Label (en=Source)
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=4.0, core=true, t24Name=SOURCE, mandatory=false)
+/* The reference id of the source.
+OA.APPLICATION id for Application
+NA.QUESTIONNAIRE id for Needs Analysis
+AA.QUOTATION.REQUEST id for Quotation
+It is a mandatory field. */
+        SOURCE_REFERENCE : T24BusinessTypes:A required
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=5.0, core=true, t24Name=SOURCE.REFERENCE, mandatory=true)
+    }
+    AA_GENERATE_ADVICE__CUSTOMER
+    {
+        /* Customer number of the recipient. */
+        CUSTOMER -> ST_Customer:CUSTOMER
+            @i18n:Label (en=Customer)
+            @i18n:Tooltip (en="Customer Liability")
+            @t24:i (align=R, inputBehaviour=I, maxLength=10, sysNumber=12.0, core=true, t24Name=CUSTOMER, mandatory=false)
+        /* The role of the customer if the advice is for an application. System maintained for information purposes. */
+        CUSTOMER_ROLE -> OA_Framework:OA_ROLE
+            @t24:i (align=L, inputBehaviour=N, maxLength=30, sysNumber=13.0, core=true, businessType=ANY, t24Name=CUSTOMER.ROLE, mandatory=false)
+        /* The sequence of the customer if the advice is for an application. System maintained field for information purposes. */
+        CUSTOMER_ROLE_SEQ : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=3, sysNumber=14.0, core=true, t24Name=CUSTOMER.ROLE.SEQ, mandatory=false)
+    }
+    AA_GENERATE_ADVICE__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=28.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    AA_GENERATE_ADVICE__DELIVERY_REFERENCE
+    {
+        /* Id of the DE.O.HEADER application, which gets updated when the delivery message is created. Delivery message will be created in backend file DE.O.HANDOFF. It can be verified with enquiry ENQ DE.HANDOFF.DETS by giving the DELIVERY.REFERENCE. */
+        DELIVERY_REFERENCE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=16, sysNumber=23.0, core=true, t24Name=DELIVERY.REFERENCE, mandatory=false)
+    }
+    AA_GENERATE_ADVICE__INITIATION_TYPE
+    {
+        /* Indicates the mode with which the record was initiated. If the Advice is triggered as a result of a trigger rule getting satisfied, then the mode would be populated as SYSTEM. */
+        INITIATION_TYPE : AA_Advice:AA_GENERATE_ADVICE__INITIATION_TYPE__INITIATION_TYPE
+            @i18n:Label (en=Initiation)
+            @i18n:Tooltip (en="Valid options are AUTO or MANUAL")
+            @t24:i (align=L, inputBehaviour=I, maxLength=10, sysNumber=3.0, core=true, t24Name=INITIATION.TYPE, mandatory=false)
+    }
+    AA_GENERATE_ADVICE__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=27.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    AA_GENERATE_ADVICE__OVERRIDE
+    {
+        /* Override messages if generated will be stored in this field. */
+        OVERRIDE : T24BusinessTypes:N
+            @i18n:Label (en=Override)
+            @i18n:Tooltip (en="Overrides generated by this transaction")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=24.0, core=true, t24Name=OVERRIDE, mandatory=false)
+    }
+}
+Enumerations {
+    AA_ADVICE_TYPE_CATALOG__ACTION : mml:string
+        PUBLISH=PUBLISH
+    AA_ADVICE_TYPE_CATALOG__CLASS__ROLE__PRIVILEGE : mml:string
+        INPUT=INPUT
+        NULL=NULL
+        SEE=SEE
+    AA_ADVICE_TYPE_CATALOG__DEFAULT_ROLE__DEFAULT_PRIVILEGE : mml:string
+        INPUT=INPUT
+        NULL=NULL
+        SEE=SEE
+    AA_DATA_OBJECT__DATA_MODEL_CATEGORY : mml:string
+        APPLICATION_FORM=APPLICATION.FORM
+        DECISION=DECISION
+        EVIDENCE=EVIDENCE
+        INTERFACE=INTERFACE
+        NEEDS_ANALYSIS=NEEDS.ANALYSIS
+        NULL=NULL
+        PROCESS=PROCESS
+        QUOTATION=QUOTATION
+        TEMENOS_CORE=TEMENOS.CORE
+    AA_DATA_OBJECT__DATA_RESULT : mml:string
+        NEEDS_RECOMMENDATION=NEEDS.RECOMMENDATION
+        NULL=NULL
+        QUOTATION_OUTPUT=QUOTATION.OUTPUT
+        REFERENCE=REFERENCE
+        SCHEDULE_DETAILS=SCHEDULE.DETAILS
+    AA_GENERATE_ADVICE__INITIATION_TYPE__INITIATION_TYPE : mml:string
+        MANUAL=MANUAL
+        NULL=NULL
+        SYSTEM=SYSTEM
+    AA_GENERATE_ADVICE__SOURCE : mml:string
+        APPLICATION=APPLICATION
+        NEEDS_ANALYSIS=NEEDS.ANALYSIS
+        NULL=NULL
+        QUOTATION=QUOTATION
+}

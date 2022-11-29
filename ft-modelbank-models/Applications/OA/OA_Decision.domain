@@ -1,0 +1,1407 @@
+# UTF-8
+/* Decision Processing for Origination Architecture */
+Domain OA_Decision
+    @t24:i (module=OA)
+    @java:Package (value=com.temenos.t24.datamodel.oa.oa_decision)
+namespace "http://www.temenos.com/t24/OA_Decision"
+metamodelVersion 1.30.6
+Classes {
+    /* This is the Master table for Decision.OA.DECISION is similar to AA.ARRANGEMENT.ACTIVITY, and is used to capture the Decision. */
+    OA_DECISION
+        @i18n:Description (en="")
+        @t24:i (t24Name=OA.DECISION, nonStop=true, level=I, type=H, additionalInfo="TABS OA.DECISION.,-OA.DEC.DES.,-OA.DEC.CAT.", allowedFunctions="A C D E I L Q R S", localRefApplicationSysNo=31.0, localRefAllowed=true)
+    {
+/* This field defines the Activity to be processed against the decision. The activity may be a user activity or a system generated activity. The business functionality of the activity would be defined in the action routines which are defined in ACTIVITY.ACTION or ACTION fields.
+
+Validation Rules
+1.      Input is mandatory in this field.
+
+2.      It must be a valid record in AA.CLASS.TYPE.ACTIVITY and valid decision activity.
+
+3.      The very first activity to make a decision would be NEW-DECISION.  Activity UPDATE-DECISION would be used to vote on the decision. Activity UPDATE.NOTES-DECISION would be used to update the comments and conditions. */
+        ACTIVITY -> AA_ClassFramework:AA_CLASS_TYPE_ACTIVITY
+            @i18n:Label (en=Activity)
+            @t24:i (align=L, inputBehaviour=I, maxLength=60, sysNumber=3.0, core=true, businessType=A, t24Name=ACTIVITY, mandatory=false)
+        /* A Valid OA.APPLICATION record */
+        APPLICATION -> OA_Framework:OA_APPLICATION required
+            @i18n:Label (en=Application)
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=21.0, core=true, businessType=A, t24Name=APPLICATION, mandatory=true)
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=40.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=41.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=37.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        AUTO_DECISION : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=30.0, core=true, t24Name=AUTO.DECISION, mandatory=false)
+        CLASS_INSTANCE -> byValue OA_Decision:OA_DECISION__CLASS_INSTANCE *
+            @t24:i (t24Name=CLASS.INSTANCE)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=38.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=34.0, core=true, t24Name=CURR.NO, mandatory=false)
+        CUSTOMER -> byValue OA_Decision:OA_DECISION__CUSTOMER *
+            @t24:i (t24Name=CUSTOMER)
+        /* Context specified in the decision type. */
+        DATA_CONTEXT -> EB_RulesEngine:EB_CONTEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=23.0, core=true, businessType=A, t24Name=DATA.CONTEXT, mandatory=false)
+/* Reference of the record for which decision needs to be made.
+Should be a valid record in the given DATA.CONTEXT */
+        DATA_REFERENCE : T24BusinessTypes:A required
+            @t24:i (align=L, inputBehaviour=I, maxLength=60, sysNumber=24.0, core=true, t24Name=DATA.REFERENCE, mandatory=true)
+        DATE_TIME -> byValue OA_Decision:OA_DECISION__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        /* Auto generated ID for OA.DECISION */
+        DECISION_ID -> OA_Decision:OA_DECISION PK required
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=0.0, core=true, businessType=A, t24Name=DECISION.ID, mandatory=true)
+/* This field defines that type of the decision being recorded.
+Validation Rules
+1. It should be valid record from OA.DECISION.TYPE
+2. It should be a published definition */
+        DEFINITION -> OA_Decision:OA_DECISION_TYPE required
+            @i18n:Label (en="Process Name")
+            @t24:i (align=L, inputBehaviour=I, maxLength=30, sysNumber=1.0, core=true, businessType=A, t24Name=DEFINITION, mandatory=true)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=39.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+/* Effective date of the decision being inputted. It will default to system date when the user does not input any date.
+
+Validation rules are
+
+1. The effective date should be greater than or equals to AVAILABLE.DATE of decision definition, which will be taken from OA.DECISION record of definition.
+2. The effective date should be less than to EXPIRY.DATE of decision definition, which will be taken from OA.DECISION.TYPE record of definition. */
+        EFFECTIVE_DATE : T24BusinessTypes:D
+            @i18n:Label (en="Effective Date")
+            @i18n:Tooltip (en="Effective date of the transaction")
+            @t24:i (align=R, inputBehaviour=I, maxLength=8, sysNumber=4.0, core=true, t24Name=EFFECTIVE.DATE, mandatory=false)
+/* The decision body selected to make the decision.
+Noinput field */
+        EVALUATED_DECISION_BODY -> OA_Decision:OA_DECISION_BODY
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=29.0, core=true, businessType=A, t24Name=EVALUATED.DECISION.BODY, mandatory=false)
+/* Populated with the matrix which either made the decision or which selected the Decision Body.
+Noinput field */
+        EVALUATED_DECISION_MATRIX -> OA_Decision:OA_DECISION_MATRIX
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=28.0, core=true, businessType=A, t24Name=EVALUATED.DECISION.MATRIX, mandatory=false)
+        INPUTTER -> byValue OA_Decision:OA_DECISION__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        /* Last activity performed for a given record. */
+        LAST_ACTIVITY : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=50, sysNumber=16.0, core=true, t24Name=LAST.ACTIVITY, mandatory=false)
+/* Specifies whether the decision was made by a body or was made automatically.
+Noinput field */
+        METHOD : T24BusinessTypes:A
+            @i18n:Label (en=Method)
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=27.0, core=true, t24Name=METHOD, mandatory=false)
+        /* This is a no input field, which will hold the subsequent decision reference. */
+        NEXT_DECISION -> OA_Decision:OA_DECISION
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=26.0, core=true, businessType=A, t24Name=NEXT.DECISION, mandatory=false)
+        OVERRIDE -> byValue OA_Decision:OA_DECISION__OVERRIDE *
+            @t24:i (t24Name=OVERRIDE)
+        /* This is a no input field, which will hold the reference of then previous decision record associated with the current decision. */
+        PREV_DECISION -> OA_Decision:OA_DECISION
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=25.0, core=true, businessType=A, t24Name=PREV.DECISION, mandatory=false)
+        /* Purpose of the Application input. */
+        PURPOSE -> AA_ProductFramework:AA_PURPOSE
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=22.0, core=true, businessType=A, t24Name=PURPOSE, mandatory=false)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=33.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        /* Reserved Field included for future purpose. */
+        STD_RESERVE1 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=20.0, core=true, t24Name=STD.RESERVE1, mandatory=false)
+        /* Reserved Field included for future purpose. */
+        STD_RESERVE2 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=19.0, core=true, t24Name=STD.RESERVE2, mandatory=false)
+        /* Reserved Field included for future purpose. */
+        STD_RESERVE3 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=18.0, core=true, t24Name=STD.RESERVE3, mandatory=false)
+        /* Reserved Field included for future purpose. */
+        STD_RESERVE4 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=17.0, core=true, t24Name=STD.RESERVE4, mandatory=false)
+        /* Reserved Field included for future purpose. */
+        STD_RESERVE6 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=10.0, core=true, t24Name=STD.RESERVE6, mandatory=false)
+        /* Reserved Field included for future purpose. */
+        STD_RESERVE7 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=9.0, core=true, t24Name=STD.RESERVE7, mandatory=false)
+        /* Reserved Field included for future purpose. */
+        STD_RESERVE8 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=8.0, core=true, t24Name=STD.RESERVE8, mandatory=false)
+        TO_CLASS_INSTANCE -> byValue OA_Decision:OA_DECISION__TO_CLASS_INSTANCE *
+            @t24:i (t24Name=TO.CLASS.INSTANCE)
+        /* The version of the Decision being utilized for this application.  If the user doesn't input any version, then the system will default the latest version number of current decision (DEFINITION).   If user inputs, then version would be validated against all available versions of decision. */
+        VERSION : T24BusinessTypes:A
+            @i18n:Label (en=Version)
+            @t24:i (align=L, inputBehaviour=I, maxLength=10, sysNumber=2.0, core=true, t24Name=VERSION, mandatory=false)
+    }
+    /* This is to define all the members and their roles as well as the rules of the body’s operation. */
+    OA_DECISION_BODY
+        @i18n:Description (en="")
+        @t24:i (t24Name=OA.DECISION.BODY, level=I, type=H, allowedFunctions="A C D E H I L Q R S", localRefApplicationSysNo=19.0, localRefAllowed=true)
+    {
+/* This field indicates which action will be performed after the record is authorised. Optional Input
+Allowed values are Null or PUBLISH */
+        ACTION : OA_Decision:OA_DECISION_BODY__ACTION
+            @i18n:Label (en=Action)
+            @t24:i (align=L, inputBehaviour=I, maxLength=7, sysNumber=14.0, core=true, t24Name=ACTION, mandatory=false)
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=27.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=28.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=24.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=25.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=21.0, core=true, t24Name=CURR.NO, mandatory=false)
+        DATE_TIME -> byValue OA_Decision:OA_DECISION_BODY__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DECISION -> byValue OA_Decision:OA_DECISION_BODY__DECISION *
+            @t24:i (t24Name=DECISION)
+        /* ID of the Decision Body */
+        DECISION_BODY_ID -> OA_Decision:OA_DECISION_BODY PK required
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=0.0, core=true, businessType=A, t24Name=DECISION.BODY.ID, mandatory=true)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=26.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        DESCRIPTION -> byValue OA_Decision:OA_DECISION_BODY__DESCRIPTION *
+            @t24:i (t24Name=DESCRIPTION)
+/* This is the date beyond which the DECISION.BODY represented by the ID of this record can no longer be used.
+T24 Date Input */
+        EXPIRY_DATE : T24BusinessTypes:D
+            @i18n:Label (en="Expiry Date")
+            @i18n:Tooltip (en="Indicates the Expiry Date of the Transaction")
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=15.0, core=true, t24Name=EXPIRY.DATE, mandatory=false)
+        FULL_DESCRIPTION -> byValue OA_Decision:OA_DECISION_BODY__FULL_DESCRIPTION *
+            @t24:i (t24Name=FULL.DESCRIPTION)
+        INPUTTER -> byValue OA_Decision:OA_DECISION_BODY__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        PUBLISH_ERROR -> byValue OA_Decision:OA_DECISION_BODY__PUBLISH_ERROR *
+            @t24:i (t24Name=PUBLISH.ERROR)
+        /* System maintained Noinput field which will contain the result of the publishing effort. */
+        PUBLISH_STATUS : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=16.0, core=true, t24Name=PUBLISH.STATUS, mandatory=false)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=20.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        /* This field will indicate whether referral would be allowed for this body. */
+        REFER_ALLOWED : OA_Decision:OA_DECISION_BODY__REFER_ALLOWED
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=6.0, core=true, t24Name=REFER.ALLOWED, mandatory=false)
+        RESERVED_1 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=13.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=12.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=11.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=8.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        RESERVED_5 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=7.0, core=true, t24Name=RESERVED.5, mandatory=false)
+        ROLE -> byValue OA_Decision:OA_DECISION_BODY__ROLE *
+            @t24:i (t24Name=ROLE)
+    }
+    /* This is to contain the catalogued record of OA.DECISION.BODY after it is published. */
+    OA_DECISION_BODY_CATALOG
+        @i18n:Description (en="")
+        @t24:i (t24Name=OA.DECISION.BODY.CATALOG, level=I, type=H, allowedFunctions="L Q S", localRefApplicationSysNo=19.0, localRefAllowed=true)
+    {
+/* This field indicates which action will be performed after the record is authorised. Optional Input
+Allowed values are Null or PUBLISH */
+        ACTION : OA_Decision:OA_DECISION_BODY_CATALOG__ACTION
+            @i18n:Label (en=Action)
+            @t24:i (align=L, inputBehaviour=I, maxLength=7, sysNumber=14.0, core=true, t24Name=ACTION, mandatory=false)
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=27.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=28.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=24.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=25.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=21.0, core=true, t24Name=CURR.NO, mandatory=false)
+        DATE_TIME -> byValue OA_Decision:OA_DECISION_BODY_CATALOG__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DECISION -> byValue OA_Decision:OA_DECISION_BODY_CATALOG__DECISION *
+            @t24:i (t24Name=DECISION)
+        /* ID of the Decision Body */
+        DECISION_BODY_ID -> OA_Decision:OA_DECISION_BODY_CATALOG PK required
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=0.0, core=true, businessType=A, t24Name=DECISION.BODY.ID, mandatory=true)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=26.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        DESCRIPTION -> byValue OA_Decision:OA_DECISION_BODY_CATALOG__DESCRIPTION *
+            @t24:i (t24Name=DESCRIPTION)
+/* This is the date beyond which the DECISION.BODY represented by the ID of this record can no longer be used.
+T24 Date Input */
+        EXPIRY_DATE : T24BusinessTypes:D
+            @i18n:Label (en="Expiry Date")
+            @i18n:Tooltip (en="Indicates the Expiry Date of the Transaction")
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=15.0, core=true, t24Name=EXPIRY.DATE, mandatory=false)
+        FULL_DESCRIPTION -> byValue OA_Decision:OA_DECISION_BODY_CATALOG__FULL_DESCRIPTION *
+            @t24:i (t24Name=FULL.DESCRIPTION)
+        INPUTTER -> byValue OA_Decision:OA_DECISION_BODY_CATALOG__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        PUBLISH_ERROR -> byValue OA_Decision:OA_DECISION_BODY_CATALOG__PUBLISH_ERROR *
+            @t24:i (t24Name=PUBLISH.ERROR)
+        /* System maintained Noinput field which will contain the result of the publishing effort. */
+        PUBLISH_STATUS : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=16.0, core=true, t24Name=PUBLISH.STATUS, mandatory=false)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=20.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        REFER_ALLOWED : OA_Decision:OA_DECISION_BODY_CATALOG__REFER_ALLOWED
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=6.0, core=true, t24Name=REFER.ALLOWED, mandatory=false)
+        RESERVED_1 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=13.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=12.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=11.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=8.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        RESERVED_5 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=7.0, core=true, t24Name=RESERVED.5, mandatory=false)
+        ROLE -> byValue OA_Decision:OA_DECISION_BODY_CATALOG__ROLE *
+            @t24:i (t24Name=ROLE)
+    }
+    OA_DECISION_BODY_CATALOG__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=23.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    OA_DECISION_BODY_CATALOG__DECISION
+    {
+/* Specify the decisions this decision body can make.
+Valid options are Approve and Reject */
+        DECISION : OA_Decision:OA_DECISION_BODY_CATALOG__DECISION__DECISION required
+            @i18n:Label (en=Decision)
+            @i18n:Tooltip (en="Indicates the type of function to perform")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=9.0, core=true, t24Name=DECISION, mandatory=true)
+        DECISION_RULE -> byValue OA_Decision:OA_DECISION_BODY_CATALOG__DECISION__DECISION_RULE *
+            @t24:i (t24Name=DECISION.RULE)
+    }
+    OA_DECISION_BODY_CATALOG__DECISION__DECISION_RULE
+    {
+        /* Specifies the rule which leads to a decision. */
+        DECISION_RULE : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=100, sysNumber=10.0, core=true, t24Name=DECISION.RULE, mandatory=false)
+    }
+    OA_DECISION_BODY_CATALOG__DESCRIPTION
+    {
+        /* Standard multi-language description type field to update description for the record. */
+        DESCRIPTION : T24BusinessTypes:A required
+            @i18n:Label (en=Description)
+            @i18n:Tooltip (en=Description)
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, multiLanguage=true, sysNumber=1.0, core=true, t24Name=DESCRIPTION, mandatory=true)
+    }
+    OA_DECISION_BODY_CATALOG__FULL_DESCRIPTION
+    {
+        /* Standard full description field where a detailed notes on the purpose of the record could be updated. */
+        FULL_DESCRIPTION : T24BusinessTypes:A required
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=2.0, core=true, t24Name=FULL.DESCRIPTION, isTextarea=true, mandatory=true)
+    }
+    OA_DECISION_BODY_CATALOG__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=22.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    OA_DECISION_BODY_CATALOG__PUBLISH_ERROR
+    {
+        /* In the event of the publishing effort resulting in the PUBLISH.ERROR field being set to "Completed with Error", this field will contain suggestions provided in order to correct the errors listed in the associated PUBLISH.ERROR. */
+        ERROR_SUGGESTION : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=18.0, core=true, t24Name=ERROR.SUGGESTION, mandatory=false)
+/* In the event of the publishing effort resulting in the PUBLISH.ERROR field being set to "Completed with Error", this field will contain error messages encountered 1) Associated Multi-value : Beginning with PUBLISH.ERROR and ending with ERROR.SUGGESTION
+2) Validation Rules a. Non Input. b. System Maintained */
+        PUBLISH_ERROR : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=17.0, core=true, t24Name=PUBLISH.ERROR, mandatory=false)
+    }
+    OA_DECISION_BODY_CATALOG__ROLE
+    {
+        DEPARTMENT -> byValue OA_Decision:OA_DECISION_BODY_CATALOG__ROLE__DEPARTMENT *
+            @t24:i (t24Name=DEPARTMENT)
+/* The role of the associated member or members have.
+Should be a valid EB.LOOKUP value (Virtual Table : OA.DECISION.BODY.ROLE). */
+        ROLE : T24BusinessTypes:A
+            @i18n:Label (en=Role)
+            @i18n:Tooltip (en="Roles are user defined and specified in EB.LOOKUP")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=3.0, core=true, t24Name=ROLE, mandatory=false)
+        USER -> byValue OA_Decision:OA_DECISION_BODY_CATALOG__ROLE__USER *
+            @t24:i (t24Name=USER)
+    }
+    OA_DECISION_BODY_CATALOG__ROLE__DEPARTMENT
+    {
+/* A bank department whose members can fulfill this role.
+Must be a valid record in DEPT.ACCT.OFFICER. */
+        DEPARTMENT -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en=Department)
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=5.0, core=true, businessType=A, t24Name=DEPARTMENT, mandatory=false)
+    }
+    OA_DECISION_BODY_CATALOG__ROLE__USER
+    {
+/* A specific T24 user who has the capacity to fulfill this role.
+Must be a valid record in USER */
+        USER -> EB_Security:USER
+            @i18n:Label (en=User)
+            @i18n:Tooltip (en="Indicates teller id")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=4.0, core=true, businessType=A, t24Name=USER, mandatory=false)
+    }
+    OA_DECISION_BODY__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=23.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    OA_DECISION_BODY__DECISION
+    {
+/* Specify the decisions this decision body can make.
+Valid options are Approve and Reject */
+        DECISION : OA_Decision:OA_DECISION_BODY__DECISION__DECISION required
+            @i18n:Label (en=Decision)
+            @i18n:Tooltip (en="Indicates the type of function to perform")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=9.0, core=true, t24Name=DECISION, mandatory=true)
+        DECISION_RULE -> byValue OA_Decision:OA_DECISION_BODY__DECISION__DECISION_RULE *
+            @t24:i (t24Name=DECISION.RULE)
+    }
+    OA_DECISION_BODY__DECISION__DECISION_RULE
+    {
+        /* Specifies the rule which leads to a decision. */
+        DECISION_RULE : T24BusinessTypes:TEXT
+            @t24:i (align=L, inputBehaviour=I, maxLength=100, sysNumber=10.0, core=true, t24Name=DECISION.RULE, mandatory=false)
+    }
+    OA_DECISION_BODY__DESCRIPTION
+    {
+        /* Standard multi-language description type field to update description for the record. */
+        DESCRIPTION : T24BusinessTypes:A required
+            @i18n:Label (en=Description)
+            @i18n:Tooltip (en=Description)
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, multiLanguage=true, sysNumber=1.0, core=true, t24Name=DESCRIPTION, mandatory=true)
+    }
+    OA_DECISION_BODY__FULL_DESCRIPTION
+    {
+        /* Standard full description field where a detailed notes on the purpose of the record could be updated. */
+        FULL_DESCRIPTION : T24BusinessTypes:A required
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=2.0, core=true, t24Name=FULL.DESCRIPTION, isTextarea=true, mandatory=true)
+    }
+    OA_DECISION_BODY__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=22.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    OA_DECISION_BODY__PUBLISH_ERROR
+    {
+        /* In the event of the publishing effort resulting in the PUBLISH.ERROR field being set to "Completed with Error", this field will contain suggestions provided in order to correct the errors listed in the associated PUBLISH.ERROR. */
+        ERROR_SUGGESTION : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=18.0, core=true, t24Name=ERROR.SUGGESTION, mandatory=false)
+/* In the event of the publishing effort resulting in the PUBLISH.ERROR field being set to "Completed with Error", this field will contain error messages encountered 1) Associated Multi-value : Beginning with PUBLISH.ERROR and ending with ERROR.SUGGESTION
+2) Validation Rules a. Non Input. b. System Maintained */
+        PUBLISH_ERROR : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=17.0, core=true, t24Name=PUBLISH.ERROR, mandatory=false)
+    }
+    OA_DECISION_BODY__ROLE
+    {
+        DEPARTMENT -> byValue OA_Decision:OA_DECISION_BODY__ROLE__DEPARTMENT *
+            @t24:i (t24Name=DEPARTMENT)
+/* The role of the associated member or members have.
+Should be a valid EB.LOOKUP value (Virtual Table : OA.DECISION.BODY.ROLE). */
+        ROLE : T24BusinessTypes:A
+            @i18n:Label (en=Role)
+            @i18n:Tooltip (en="Roles are user defined and specified in EB.LOOKUP")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=3.0, core=true, t24Name=ROLE, mandatory=false)
+        USER -> byValue OA_Decision:OA_DECISION_BODY__ROLE__USER *
+            @t24:i (t24Name=USER)
+    }
+    OA_DECISION_BODY__ROLE__DEPARTMENT
+    {
+/* A bank department whose members can fulfill this role.
+Must be a valid record in DEPT.ACCT.OFFICER. */
+        DEPARTMENT -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en=Department)
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=5.0, core=true, businessType=A, t24Name=DEPARTMENT, mandatory=false)
+    }
+    OA_DECISION_BODY__ROLE__USER
+    {
+/* A specific T24 user who has the capacity to fulfill this role.
+Must be a valid record in USER */
+        USER -> EB_Security:USER
+            @i18n:Label (en=User)
+            @i18n:Tooltip (en="Indicates teller id")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=4.0, core=true, businessType=A, t24Name=USER, mandatory=false)
+    }
+/* Basic layout of the Decision Processing.
+This table contains the high-level definition of a class of type DECISION.CLASS.
+Maintained by the system, and will be updated when a new definition is created and authorised in AA.CLASS.DEFINITION. */
+    OA_DECISION_CLASS
+        @i18n:Description (en="")
+        @t24:i (t24Name=OA.DECISION.CLASS, level=I, type=H, allowedFunctions="A C D E H I L P Q S", localRefApplicationSysNo=14.0, localRefAllowed=true)
+    {
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=23.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=24.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=20.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=21.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=17.0, core=true, t24Name=CURR.NO, mandatory=false)
+        DATE_TIME -> byValue OA_Decision:OA_DECISION_CLASS__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        /* Class name of type DECISION.CLASS, updated by the system based on the definition in AA.CLASS.DEFINITION */
+        DECISION_CLASS -> OA_Decision:OA_DECISION_CLASS PK required
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=0.0, core=true, businessType=A, t24Name=DECISION.CLASS, mandatory=true)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=22.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        DESCRIPTION -> byValue OA_Decision:OA_DECISION_CLASS__DESCRIPTION *
+            @t24:i (t24Name=DESCRIPTION)
+        FULL_DESC -> byValue OA_Decision:OA_DECISION_CLASS__FULL_DESC *
+            @t24:i (t24Name=FULL.DESC)
+        INPUTTER -> byValue OA_Decision:OA_DECISION_CLASS__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        K_TYPE -> byValue OA_Decision:OA_DECISION_CLASS__K_TYPE *
+            @t24:i (t24Name=K.TYPE)
+        OVERRIDE -> byValue OA_Decision:OA_DECISION_CLASS__OVERRIDE *
+            @t24:i (t24Name=OVERRIDE)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=16.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        RESERVED_1 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=13.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_10 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=4.0, core=true, t24Name=RESERVED.10, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=12.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=11.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=10.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        RESERVED_5 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=9.0, core=true, t24Name=RESERVED.5, mandatory=false)
+        RESERVED_6 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=8.0, core=true, t24Name=RESERVED.6, mandatory=false)
+        RESERVED_7 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=7.0, core=true, t24Name=RESERVED.7, mandatory=false)
+        RESERVED_8 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=6.0, core=true, t24Name=RESERVED.8, mandatory=false)
+        RESERVED_9 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=5.0, core=true, t24Name=RESERVED.9, mandatory=false)
+        TYPE -> byValue OA_Decision:OA_DECISION_CLASS__TYPE *
+            @t24:i (t24Name=TYPE)
+    }
+    OA_DECISION_CLASS__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=19.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    OA_DECISION_CLASS__DESCRIPTION
+    {
+        /* Short description of the class, updated from AA.CLASS.DEFINITION. Used for enrichment when this table is used as vetting table */
+        DESCRIPTION : T24BusinessTypes:A required
+            @i18n:Label (en=Description)
+            @i18n:Tooltip (en=Description)
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, multiLanguage=true, sysNumber=1.0, core=true, t24Name=DESCRIPTION, mandatory=true)
+    }
+    OA_DECISION_CLASS__FULL_DESC
+    {
+        /* Full description of the class, updated from AA.CLASS.DEFINITION */
+        FULL_DESC : T24BusinessTypes:A required
+            @i18n:Label (en="Full Description")
+            @i18n:Tooltip (en="Detailed Description ")
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=2.0, core=true, t24Name=FULL.DESC, isTextarea=true, mandatory=true)
+    }
+    OA_DECISION_CLASS__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=18.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    OA_DECISION_CLASS__K_TYPE
+    {
+        K_TYPE : OA_Decision:OA_DECISION_CLASS__K_TYPE__K_TYPE
+            @i18n:Label (en=KType)
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=3.0, core=false, t24Name=K.TYPE, mandatory=false)
+    }
+    OA_DECISION_CLASS__OVERRIDE
+    {
+        OVERRIDE : T24BusinessTypes:N
+            @i18n:Label (en=Override)
+            @i18n:Tooltip (en="Overrides generated by this transaction")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=15.0, core=true, t24Name=OVERRIDE, mandatory=false)
+    }
+    OA_DECISION_CLASS__TYPE
+    {
+/* This multi-valued field controls attributes that a property of this class may or may not have.
+
+Valid options are:
+
+Version Type - Each amendment of the definition in the decision class is identified by unique version. */
+        TYPE : OA_Decision:OA_DECISION_CLASS__TYPE__TYPE
+            @i18n:Label (en=Type)
+            @i18n:Tooltip (en=Type)
+            @t24:i (align=L, inputBehaviour=I, maxLength=15, sysNumber=3.0, core=true, t24Name=TYPE, mandatory=false)
+    }
+    /* This is to define the set of rules which enables the system to identify which decision body should make the decision. */
+    OA_DECISION_MATRIX
+        @i18n:Description (en="")
+        @t24:i (t24Name=OA.DECISION.MATRIX, level=I, type=H, allowedFunctions="A C D E H I L Q R S", localRefApplicationSysNo=29.0, localRefAllowed=true)
+    {
+/* This field indicates which action will be performed after the record is authorised. Optional Input
+
+Allowed values are Null or PUBLISH */
+        ACTION : OA_Decision:OA_DECISION_MATRIX__ACTION
+            @i18n:Label (en=Action)
+            @t24:i (align=L, inputBehaviour=I, maxLength=7, sysNumber=24.0, core=true, t24Name=ACTION, mandatory=false)
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=37.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=38.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=34.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=35.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=31.0, core=true, t24Name=CURR.NO, mandatory=false)
+        DATE_TIME -> byValue OA_Decision:OA_DECISION_MATRIX__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        /* ID of the decision matrix. */
+        DECISION_MATRIX_ID -> OA_Decision:OA_DECISION_MATRIX PK required
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=0.0, core=true, businessType=A, t24Name=DECISION.MATRIX.ID, mandatory=true)
+/* DEFAULT.BODY, DEFAULT.MATRIX and DEFAULT.DECISION fields are mutually exclusive, Any one of the fields must be specified.
+Default decision body. */
+        DEFAULT_BODY -> OA_Decision:OA_DECISION_BODY_CATALOG
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=19.0, core=true, businessType=A, t24Name=DEFAULT.BODY, mandatory=false)
+/* DEFAULT.BODY, DEFAULT.MATRIX and DEFAULT.DECISION fields are mutually exclusive, Any one of the fields must be specified.
+Default decision. */
+        DEFAULT_DECISION : OA_Decision:OA_DECISION_MATRIX__DEFAULT_DECISION
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=21.0, core=true, t24Name=DEFAULT.DECISION, mandatory=false)
+/* DEFAULT.BODY, DEFAULT.MATRIX and DEFAULT.DECISION fields are mutually exclusive, Any one of the fields must be specified.
+Default decision matrix. */
+        DEFAULT_MATRIX -> OA_Decision:OA_DECISION_MATRIX_CATALOG
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=20.0, core=true, businessType=A, t24Name=DEFAULT.MATRIX, mandatory=false)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=36.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        DESCRIPTION -> byValue OA_Decision:OA_DECISION_MATRIX__DESCRIPTION *
+            @t24:i (t24Name=DESCRIPTION)
+        /* This is the date beyond which the DECISION.MATRIX represented by the ID of this record can no longer be used. */
+        EXPIRY_DATE : T24BusinessTypes:D
+            @i18n:Label (en="Expiry Date")
+            @i18n:Tooltip (en="Indicates the Expiry Date of the Transaction")
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=25.0, core=true, t24Name=EXPIRY.DATE, mandatory=false)
+        FULL_DESCRIPTION -> byValue OA_Decision:OA_DECISION_MATRIX__FULL_DESCRIPTION *
+            @t24:i (t24Name=FULL.DESCRIPTION)
+        INPUTTER -> byValue OA_Decision:OA_DECISION_MATRIX__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        PUBLISH_ERROR -> byValue OA_Decision:OA_DECISION_MATRIX__PUBLISH_ERROR *
+            @t24:i (t24Name=PUBLISH.ERROR)
+        /* System maintained Noinput field which will contain the result of the publishing effort. */
+        PUBLISH_STATUS : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=26.0, core=true, t24Name=PUBLISH.STATUS, mandatory=false)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=30.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        RESERVED_1 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=23.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_10 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=3.0, core=true, t24Name=RESERVED.10, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=22.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=18.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=17.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        RESERVED_5 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=16.0, core=true, t24Name=RESERVED.5, mandatory=false)
+        RULE_DESCRIPTION -> byValue OA_Decision:OA_DECISION_MATRIX__RULE_DESCRIPTION *
+            @t24:i (t24Name=RULE.DESCRIPTION)
+    }
+    /* This is to contain the catalogued record of OA.DECISION.MATRIX after it is published. */
+    OA_DECISION_MATRIX_CATALOG
+        @i18n:Description (en="")
+        @t24:i (t24Name=OA.DECISION.MATRIX.CATALOG, level=I, type=H, allowedFunctions="L Q S", localRefApplicationSysNo=29.0, localRefAllowed=true)
+    {
+/* This field indicates which action will be performed after the record is authorised. Optional Input
+
+Allowed values are Null or PUBLISH */
+        ACTION : OA_Decision:OA_DECISION_MATRIX_CATALOG__ACTION
+            @i18n:Label (en=Action)
+            @t24:i (align=L, inputBehaviour=I, maxLength=7, sysNumber=24.0, core=true, t24Name=ACTION, mandatory=false)
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=37.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=38.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=34.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=35.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=31.0, core=true, t24Name=CURR.NO, mandatory=false)
+        DATE_TIME -> byValue OA_Decision:OA_DECISION_MATRIX_CATALOG__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        /* ID of the decision matrix. */
+        DECISION_MATRIX_ID -> OA_Decision:OA_DECISION_MATRIX_CATALOG PK required
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=0.0, core=true, businessType=A, t24Name=DECISION.MATRIX.ID, mandatory=true)
+/* DEFAULT.BODY, DEFAULT.MATRIX and DEFAULT.DECISION fields are mutually exclusive, Any one of the fields must be specified.
+Default decision body. */
+        DEFAULT_BODY -> OA_Decision:OA_DECISION_BODY_CATALOG
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=19.0, core=true, businessType=A, t24Name=DEFAULT.BODY, mandatory=false)
+/* DEFAULT.BODY, DEFAULT.MATRIX and DEFAULT.DECISION fields are mutually exclusive, Any one of the fields must be specified.
+Default decision. */
+        DEFAULT_DECISION : OA_Decision:OA_DECISION_MATRIX_CATALOG__DEFAULT_DECISION
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=21.0, core=true, t24Name=DEFAULT.DECISION, mandatory=false)
+/* DEFAULT.BODY, DEFAULT.MATRIX and DEFAULT.DECISION fields are mutually exclusive, Any one of the fields must be specified.
+Default decision matrix. */
+        DEFAULT_MATRIX -> OA_Decision:OA_DECISION_MATRIX_CATALOG
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=20.0, core=true, businessType=A, t24Name=DEFAULT.MATRIX, mandatory=false)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=36.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        DESCRIPTION -> byValue OA_Decision:OA_DECISION_MATRIX_CATALOG__DESCRIPTION *
+            @t24:i (t24Name=DESCRIPTION)
+        /* This is the date beyond which the DECISION.MATRIX represented by the ID of this record can no longer be used. */
+        EXPIRY_DATE : T24BusinessTypes:D
+            @i18n:Label (en="Expiry Date")
+            @i18n:Tooltip (en="Indicates the Expiry Date of the Transaction")
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=25.0, core=true, t24Name=EXPIRY.DATE, mandatory=false)
+        FULL_DESCRIPTION -> byValue OA_Decision:OA_DECISION_MATRIX_CATALOG__FULL_DESCRIPTION *
+            @t24:i (t24Name=FULL.DESCRIPTION)
+        INPUTTER -> byValue OA_Decision:OA_DECISION_MATRIX_CATALOG__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        PUBLISH_ERROR -> byValue OA_Decision:OA_DECISION_MATRIX_CATALOG__PUBLISH_ERROR *
+            @t24:i (t24Name=PUBLISH.ERROR)
+        /* System maintained Noinput field which will contain the result of the publishing effort. */
+        PUBLISH_STATUS : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=26.0, core=true, t24Name=PUBLISH.STATUS, mandatory=false)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=30.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        RESERVED_1 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=23.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_10 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=3.0, core=true, t24Name=RESERVED.10, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=22.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=18.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=17.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        RESERVED_5 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=16.0, core=true, t24Name=RESERVED.5, mandatory=false)
+        RULE_DESCRIPTION -> byValue OA_Decision:OA_DECISION_MATRIX_CATALOG__RULE_DESCRIPTION *
+            @t24:i (t24Name=RULE.DESCRIPTION)
+    }
+    OA_DECISION_MATRIX_CATALOG__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=33.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    OA_DECISION_MATRIX_CATALOG__DESCRIPTION
+    {
+        /* Standard multi-language description type field to update description for the record */
+        DESCRIPTION : T24BusinessTypes:A required
+            @i18n:Label (en=Description)
+            @i18n:Tooltip (en=Description)
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, multiLanguage=true, sysNumber=1.0, core=true, t24Name=DESCRIPTION, mandatory=true)
+    }
+    OA_DECISION_MATRIX_CATALOG__FULL_DESCRIPTION
+    {
+        /* Standard full description field where a detailed notes on the purpose of the record could be updated */
+        FULL_DESCRIPTION : T24BusinessTypes:A required
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=2.0, core=true, t24Name=FULL.DESCRIPTION, isTextarea=true, mandatory=true)
+    }
+    OA_DECISION_MATRIX_CATALOG__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=32.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    OA_DECISION_MATRIX_CATALOG__PUBLISH_ERROR
+    {
+        /* In the event of the publishing effort resulting in the PUBLISH.ERROR field being set to "Completed with Error", this field will contain suggestions provided in order to correct the errors listed in the associated PUBLISH.ERROR. */
+        ERROR_SUGGESTION : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=28.0, core=true, t24Name=ERROR.SUGGESTION, mandatory=false)
+/* In the event of the publishing effort resulting in the PUBLISH.ERROR field being set to "Completed with Error", this field will contain error messages encountered 1) Associated Multi-value : Beginning with PUBLISH.ERROR and ending with ERROR.SUGGESTION
+
+2) Validation Rules a. Non Input. b. System Maintained */
+        PUBLISH_ERROR : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=27.0, core=true, t24Name=PUBLISH.ERROR, mandatory=false)
+    }
+    OA_DECISION_MATRIX_CATALOG__RULE_DESCRIPTION
+    {
+/* If the rule is true, this decision will automatically be made.
+Must be one of the available options as specified at the Decision Type. */
+        DECISION : OA_Decision:OA_DECISION_MATRIX_CATALOG__RULE_DESCRIPTION__DECISION
+            @i18n:Label (en=Decision)
+            @i18n:Tooltip (en="Indicates the type of function to perform")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=11.0, core=true, t24Name=DECISION, mandatory=false)
+/* Specifies which committee should make the decision
+Valid OA.DECISION.BODY id */
+        DECISION_BODY -> OA_Decision:OA_DECISION_BODY_CATALOG
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=9.0, core=true, businessType=A, t24Name=DECISION.BODY, mandatory=false)
+/* Allows another linked Matrix to decide thus forming a Decision Matrix “Tree”.
+Caution required while configuring this field to avoid deadlock situation.
+Valid OA.DECISION.MATRIX id */
+        DECISION_MATRIX -> OA_Decision:OA_DECISION_MATRIX_CATALOG
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=10.0, core=true, businessType=A, t24Name=DECISION.MATRIX, mandatory=false)
+/* Next body to approve request.
+Valid OA.DECISION.BODY id */
+        NEXT_BODY -> OA_Decision:OA_DECISION_BODY_CATALOG
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=14.0, core=true, businessType=A, t24Name=NEXT.BODY, mandatory=false)
+/* Matrix to determine next body to approve request.
+Valid OA.DECISION.MATRIX id */
+        NEXT_MATRIX -> OA_Decision:OA_DECISION_MATRIX_CATALOG
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=15.0, core=true, businessType=A, t24Name=NEXT.MATRIX, mandatory=false)
+        RESERVED_6 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=13.0, core=true, t24Name=RESERVED.6, mandatory=false)
+        RESERVED_7 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=12.0, core=true, t24Name=RESERVED.7, mandatory=false)
+        RESERVED_8 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=8.0, core=true, t24Name=RESERVED.8, mandatory=false)
+        RESERVED_9 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=7.0, core=true, t24Name=RESERVED.9, mandatory=false)
+        /* Boolean rule comparing field values to literals. If the rule returns true then the specified path will be taken. */
+        RULE -> OA_Status:OA_RULE_DEFINITION
+            @i18n:Label (en=Rule)
+            @i18n:Tooltip (en="Rule to evaluate if client fits into profile")
+            @t24:i (align=L, inputBehaviour=I, maxLength=70, sysNumber=5.0, core=true, businessType=A, t24Name=RULE, mandatory=false)
+        RULE_DESCRIPTION -> byValue OA_Decision:OA_DECISION_MATRIX_CATALOG__RULE_DESCRIPTION__RULE_DESCRIPTION *
+            @t24:i (t24Name=RULE.DESCRIPTION)
+/* For very complex rules where the Boolean rules are insufficient, a rule defined in the Rules Engine can be specified.
+Mutually exclusive with RULE.  ID from EB.RULES. */
+        RULE_ID -> EB_RulesEngine:EB_RULES
+            @i18n:Label (en="Rule Id")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=6.0, core=true, businessType=A, t24Name=RULE.ID, mandatory=false)
+    }
+    OA_DECISION_MATRIX_CATALOG__RULE_DESCRIPTION__RULE_DESCRIPTION
+    {
+        /* Explanation of the purpose of this multi-value set, as system may scan through multiple sets until a matching rule is found. */
+        RULE_DESCRIPTION : T24BusinessTypes:A required
+            @t24:i (align=L, inputBehaviour=I, maxLength=100, sysNumber=4.0, core=true, t24Name=RULE.DESCRIPTION, isTextarea=true, mandatory=true)
+    }
+    OA_DECISION_MATRIX__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=33.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    OA_DECISION_MATRIX__DESCRIPTION
+    {
+        /* Standard multi-language description type field to update description for the record */
+        DESCRIPTION : T24BusinessTypes:A required
+            @i18n:Label (en=Description)
+            @i18n:Tooltip (en=Description)
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, multiLanguage=true, sysNumber=1.0, core=true, t24Name=DESCRIPTION, mandatory=true)
+    }
+    OA_DECISION_MATRIX__FULL_DESCRIPTION
+    {
+        /* Standard full description field where a detailed notes on the purpose of the record could be updated */
+        FULL_DESCRIPTION : T24BusinessTypes:A required
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=2.0, core=true, t24Name=FULL.DESCRIPTION, isTextarea=true, mandatory=true)
+    }
+    OA_DECISION_MATRIX__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=32.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    OA_DECISION_MATRIX__PUBLISH_ERROR
+    {
+        /* In the event of the publishing effort resulting in the PUBLISH.ERROR field being set to "Completed with Error", this field will contain suggestions provided in order to correct the errors listed in the associated PUBLISH.ERROR. */
+        ERROR_SUGGESTION : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=28.0, core=true, t24Name=ERROR.SUGGESTION, mandatory=false)
+/* In the event of the publishing effort resulting in the PUBLISH.ERROR field being set to "Completed with Error", this field will contain error messages encountered 1) Associated Multi-value : Beginning with PUBLISH.ERROR and ending with ERROR.SUGGESTION
+
+2) Validation Rules a. Non Input. b. System Maintained */
+        PUBLISH_ERROR : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=27.0, core=true, t24Name=PUBLISH.ERROR, mandatory=false)
+    }
+    OA_DECISION_MATRIX__RULE_DESCRIPTION
+    {
+/* If the rule is true, this decision will automatically be made.
+Must be one of the available options as specified at the Decision Type. */
+        DECISION : OA_Decision:OA_DECISION_MATRIX__RULE_DESCRIPTION__DECISION
+            @i18n:Label (en=Decision)
+            @i18n:Tooltip (en="Indicates the type of function to perform")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=11.0, core=true, t24Name=DECISION, mandatory=false)
+/* Specifies which committee should make the decision
+Valid OA.DECISION.BODY id */
+        DECISION_BODY -> OA_Decision:OA_DECISION_BODY_CATALOG
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=9.0, core=true, businessType=A, t24Name=DECISION.BODY, mandatory=false)
+/* Allows another linked Matrix to decide thus forming a Decision Matrix “Tree”.
+Caution required while configuring this field to avoid deadlock situation.
+Valid OA.DECISION.MATRIX id */
+        DECISION_MATRIX -> OA_Decision:OA_DECISION_MATRIX_CATALOG
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=10.0, core=true, businessType=A, t24Name=DECISION.MATRIX, mandatory=false)
+/* Next body to approve request.
+Valid OA.DECISION.BODY id */
+        NEXT_BODY -> OA_Decision:OA_DECISION_BODY_CATALOG
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=14.0, core=true, businessType=A, t24Name=NEXT.BODY, mandatory=false)
+/* Matrix to determine next body to approve request.
+Valid OA.DECISION.MATRIX id */
+        NEXT_MATRIX -> OA_Decision:OA_DECISION_MATRIX_CATALOG
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=15.0, core=true, businessType=A, t24Name=NEXT.MATRIX, mandatory=false)
+        RESERVED_6 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=13.0, core=true, t24Name=RESERVED.6, mandatory=false)
+        RESERVED_7 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=12.0, core=true, t24Name=RESERVED.7, mandatory=false)
+        RESERVED_8 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=8.0, core=true, t24Name=RESERVED.8, mandatory=false)
+        RESERVED_9 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=7.0, core=true, t24Name=RESERVED.9, mandatory=false)
+/* Entry in this field should be a valid record from OA.RULE.DEFINITION, wherein a Boolean rule can be specified. Which would compare the field values to literals. If the rule returns true then the specified path will be taken.
+In the rule definition, the first word (Field Name) should always be a valid field name from the context. Second word should be an operand and the third word should be a literal with quotes.
+eg1 : (FOREIGNAPPLICATION == 'YES')
+Here, "FOREIGNAPPLICATION" is a field name from the context.
+"==" is an operand
+"'YES'" is a literal
+eg2 : (HIGHESTDEGREE == 'PG' AND AGESTATUS == 'ADULT')
+Here, "HIGHESTDEGREE" and "AGESTATUS" are the valid field names in the context.
+"==" is an operand
+'PG' and 'ADULT' are Literals.
+The list of comparison operands are here.
+Comparison List = "<", "<=", "==", "!=", ">=", ">"
+Join List = "||", "&&", "OR", "AND"
+Here is the explanation for Comparison List operators
+Equals Operator ==
+Not Equals operator !=
+Less than operator "<"
+Greater than operator ">"
+Less than or Equals to operator "<="
+Greater than or Equals to operator ">="
+Some of the Rule Examples :
+1. COUNTRY != "US"
+2. CURRENCY == "USD"
+3. (GENDER == "MALE") AND (AGE >= 35) */
+        RULE -> OA_Status:OA_RULE_DEFINITION
+            @i18n:Label (en=Rule)
+            @i18n:Tooltip (en="Rule to evaluate if client fits into profile")
+            @t24:i (align=L, inputBehaviour=I, maxLength=70, sysNumber=5.0, core=true, businessType=A, t24Name=RULE, mandatory=false)
+        RULE_DESCRIPTION -> byValue OA_Decision:OA_DECISION_MATRIX__RULE_DESCRIPTION__RULE_DESCRIPTION *
+            @t24:i (t24Name=RULE.DESCRIPTION)
+/* For very complex rules where the Boolean rules are insufficient, a rule defined in the Rules Engine can be specified.
+Mutually exclusive with RULE.  ID from EB.RULES. */
+        RULE_ID -> EB_RulesEngine:EB_RULES
+            @i18n:Label (en="Rule Id")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=6.0, core=true, businessType=A, t24Name=RULE.ID, mandatory=false)
+    }
+    OA_DECISION_MATRIX__RULE_DESCRIPTION__RULE_DESCRIPTION
+    {
+        /* Explanation of the purpose of this multi-value set, as system may scan through multiple sets until a matching rule is found. */
+        RULE_DESCRIPTION : T24BusinessTypes:A required
+            @t24:i (align=L, inputBehaviour=I, maxLength=100, sysNumber=4.0, core=true, t24Name=RULE.DESCRIPTION, isTextarea=true, mandatory=true)
+    }
+    /* This table is system maintained and is updated when a new decision type definition is published through AA.DEFINITION.MANAGER application. */
+    OA_DECISION_TYPE
+        @i18n:Description (en="")
+        @t24:i (t24Name=OA.DECISION.TYPE, level=I, type=L, allowedFunctions="L S", localRefAllowed=false)
+    {
+        /* The Date from which the Decision Type is Valid. Standard T24 Date, format is YYYYMMDD. */
+        AVAILABLE_DATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=4.0, core=true, t24Name=AVAILABLE.DATE, mandatory=false)
+        /* Name of the class as given in AA.DEFINITION.MANAGER. Should belong to OA.DECISION.CLASS */
+        CLASS_NAME : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=2.0, core=true, t24Name=CLASS.NAME, mandatory=false)
+        DECISION_TYPE_ID -> OA_Decision:OA_DECISION_TYPE PK required
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=0.0, core=true, businessType=A, t24Name=DECISION.TYPE.ID, mandatory=true)
+        DESCRIPTION -> byValue OA_Decision:OA_DECISION_TYPE__DESCRIPTION *
+            @t24:i (t24Name=DESCRIPTION)
+        /* The Date beyond which the Decision Type is no longer Valid.Standard T24 Date, format is YYYYMMDD. */
+        EXPIRY_DATE : T24BusinessTypes:D
+            @i18n:Label (en="Expiry Date")
+            @i18n:Tooltip (en="Indicates the Expiry Date of the Transaction")
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=5.0, core=true, t24Name=EXPIRY.DATE, mandatory=false)
+        /* The Date at which the Decision Type is published. It will be TODAY's date.Standard T24 Date, format is YYYYMMDD. */
+        LAST_PUBLISHED : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=6.0, core=true, t24Name=LAST.PUBLISHED, mandatory=false)
+        /* It specifies the STATUS of the current decision type. The only allowed value is PUBLISHED. */
+        STATUS : T24BusinessTypes:A
+            @i18n:Label (en=Status)
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=3.0, core=true, t24Name=STATUS, mandatory=false)
+    }
+    /* This table is system maintained and is updated when a new Decision type is defined in AA.DEFINITION.MANAGER is published, this is used by the system for processing Decision and serves to separate the design-time definition in AA.DEFINITION.MANAGER. */
+    OA_DECISION_TYPE_CATALOG
+        @i18n:Description (en="")
+        @t24:i (t24Name=OA.DECISION.TYPE.CATALOG, level=I, type=H, allowedFunctions="L Q S", localRefApplicationSysNo=39.0, localRefAllowed=true)
+    {
+/* Allowed options are
+1. "Null"- the record is simply being updated.
+2. PUBLISH - record is proofed and published. */
+        ACTION : OA_Decision:OA_DECISION_TYPE_CATALOG__ACTION
+            @i18n:Label (en=Action)
+            @t24:i (align=L, inputBehaviour=I, maxLength=7, sysNumber=34.0, core=true, t24Name=ACTION, mandatory=false)
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=52.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=53.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=49.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        CLASS -> byValue OA_Decision:OA_DECISION_TYPE_CATALOG__CLASS *
+            @t24:i (t24Name=CLASS)
+        /* Valid entry in AA.CLASS.TYPE. */
+        CLASS_TYPE -> AA_Framework:AA_CLASS_TYPE
+            @i18n:Label (en="Class Type")
+            @t24:i (align=L, inputBehaviour=N, maxLength=25, sysNumber=40.0, core=true, businessType=ANY, t24Name=CLASS.TYPE, mandatory=true)
+        COMMON_CLASS_TYPE -> byValue OA_Decision:OA_DECISION_TYPE_CATALOG__COMMON_CLASS_TYPE *
+            @t24:i (t24Name=COMMON.CLASS.TYPE)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=50.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=46.0, core=true, t24Name=CURR.NO, mandatory=false)
+        DATE_TIME -> byValue OA_Decision:OA_DECISION_TYPE_CATALOG__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DEFAULT_ROLE -> byValue OA_Decision:OA_DECISION_TYPE_CATALOG__DEFAULT_ROLE *
+            @t24:i (t24Name=DEFAULT.ROLE)
+        /* The record ID of OA.DECISION.TYPE.CATALOG */
+        DEFINITION_MANAGER -> OA_Decision:OA_DECISION_TYPE_CATALOG PK required
+            @t24:i (align=L, inputBehaviour=I, maxLength=60, sysNumber=0.0, core=true, businessType=A, t24Name=DEFINITION.MANAGER, mandatory=true)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=51.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        DESCRIPTION -> byValue OA_Decision:OA_DECISION_TYPE_CATALOG__DESCRIPTION *
+            @t24:i (t24Name=DESCRIPTION)
+        /* Used for Form Definition to specify which domain type the form is used in and therefore will default the Instances (i.e. the formlets) in the domain type into the mv set. */
+        DOMAIN_TYPE -> OA_Framework:OA_DOMAIN_TYPE
+            @t24:i (align=L, inputBehaviour=I, maxLength=36, sysNumber=3.0, core=true, businessType=ANY, t24Name=DOMAIN.TYPE, mandatory=false)
+        /* Date from which the Decision type will no longer be available for use. */
+        EXPIRY_DATE : T24BusinessTypes:D
+            @i18n:Label (en="Expiry Date")
+            @i18n:Tooltip (en="Indicates the Expiry Date of the Transaction")
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=35.0, core=true, t24Name=EXPIRY.DATE, mandatory=false)
+        FORM_OWNER -> OA_Framework:OA_ROLE
+            @t24:i (align=L, inputBehaviour=I, maxLength=30, sysNumber=4.0, core=true, businessType=ANY, t24Name=FORM.OWNER, mandatory=false)
+        FULL_DESC -> byValue OA_Decision:OA_DECISION_TYPE_CATALOG__FULL_DESC *
+            @t24:i (t24Name=FULL.DESC)
+        INPUTTER -> byValue OA_Decision:OA_DECISION_TYPE_CATALOG__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        OVERRIDE -> byValue OA_Decision:OA_DECISION_TYPE_CATALOG__OVERRIDE *
+            @t24:i (t24Name=OVERRIDE)
+        PUBLISH_ERROR -> byValue OA_Decision:OA_DECISION_TYPE_CATALOG__PUBLISH_ERROR *
+            @t24:i (t24Name=PUBLISH.ERROR)
+        /* This field will contain the result of the publishing effort. Validation Rules - Non Inputtable, System Maintained, Allowed values are : Completed Successfully or Completed with Errors. */
+        PUBLISH_STATUS : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=36.0, core=true, t24Name=PUBLISH.STATUS, mandatory=false)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=45.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        /* ID Component 2: Is the main "ID" of the item being designed. For decision this is the name of the decision type. */
+        REFERENCE : T24BusinessTypes:ANY
+            @i18n:Label (en="Search by Referece")
+            @t24:i (align=L, inputBehaviour=N, maxLength=25, sysNumber=41.0, core=true, t24Name=REFERENCE, mandatory=true)
+        RESERVED_1 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=33.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=32.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=31.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=30.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        RESERVED_5 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=29.0, core=true, t24Name=RESERVED.5, mandatory=false)
+        RESERVED_6 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=28.0, core=true, t24Name=RESERVED.6, mandatory=false)
+        RESERVED_7 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=27.0, core=true, t24Name=RESERVED.7, mandatory=false)
+        RESERVED_8 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=26.0, core=true, t24Name=RESERVED.8, mandatory=false)
+        RESERVED_9 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=25.0, core=true, t24Name=RESERVED.9, mandatory=false)
+        /* This field will allow a user to specify which mapping definition to use when syncing data for the form. */
+        SYNC_MAPPING -> AA_Mapping:AA_MAPPING_TYPE
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=24.0, core=true, businessType=ANY, t24Name=SYNC.MAPPING, mandatory=false)
+        /* ID Component 3: Version number identifier. */
+        VERSION : T24BusinessTypes:ANY
+            @i18n:Label (en=Version)
+            @t24:i (align=L, inputBehaviour=N, maxLength=5, sysNumber=42.0, core=true, t24Name=VERSION, mandatory=true)
+        /* ID Component 4: Date when the version becomes effective. */
+        VERSION_DATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=N, maxLength=11, sysNumber=43.0, core=true, t24Name=VERSION.DATE, mandatory=true)
+    }
+    OA_DECISION_TYPE_CATALOG__CLASS
+    {
+        /* ID from corresponding *.CLASS table. (e.g. OA.DECISION.CLASS) */
+        CLASS : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=7.0, core=true, t24Name=CLASS, mandatory=false)
+/* Name of an the CONDITION being included on the definition line.
+
+1. Associated Multivalue Field beginning with CLASS, including INSTANCE , CONDITION and ending with CONDITION.VERSION.
+
+2. Mandatory Input
+
+3. Validation Rules:
+
+I. Must be a valid condition previously defined in the condition class file indicated in the CLASS field or implied from the INSTANCE field. The condition file name is formed by concatenating values of the PRODUCT.CODE, PREFIX.DESIGN fields from AA.CLASS.TYPE and the value of the CLASS field.
+
+Examples CLASS : BASIC.INFO CLASS.TYPE : FORMLET.CLASS PRODUCT.CODE in AA.CLASS.TYPE for FORMLET.CLASS : OA PREFIX.DESIGN in AA.CLASS.TYPE for FORMLET.CLASS : DES CONDITION FILE NAME : OA.DES.BASIC.INFO
+
+II. T24 String of 35 Characters Maximum */
+        CONDITION : T24BusinessTypes:ANY required
+            @i18n:Label (en=Condition)
+            @i18n:Tooltip (en="Value that the field name is to be compared with")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=14.0, core=true, t24Name=CONDITION, mandatory=true)
+/* Indicate which version of the condition the definition uses. A class may have one or more CONDITIONS, and CONDITIONs may have one or more VERSIONs
+
+1. Associated Multivalue Field beginning with CLASS, including INSTANCE , CONDITION and ending with CONDITION.VERSION
+
+2. Optional Input
+
+3. Validation Rules:
+
+I. Must be a valid condition-version previously defined in the condition class file indicated in the CLASS field or implied from the INSTANCE field. If not provided the system will default the current applicable version of the condition on file
+
+II. T24 Numeric Input */
+        CONDITION_VERSION : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=5, sysNumber=15.0, core=true, t24Name=CONDITION.VERSION, mandatory=false)
+        /* Used when designing Forms to indicated the instance of a formlet class.(e.g. Home Address vs. Work Address) */
+        INSTANCE : T24BusinessTypes:A
+            @i18n:Label (en=Instance)
+            @i18n:Tooltip (en=Instance)
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=8.0, core=true, t24Name=INSTANCE, mandatory=false)
+        OWNER -> OA_Framework:OA_ROLE
+            @i18n:Label (en=Owner)
+            @t24:i (align=L, inputBehaviour=I, maxLength=30, sysNumber=16.0, core=true, businessType=ANY, t24Name=OWNER, mandatory=false)
+        RESERVED_11 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=13.0, core=true, t24Name=RESERVED.11, mandatory=false)
+        RESERVED_12 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=12.0, core=true, t24Name=RESERVED.12, mandatory=false)
+        RESERVED_13 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=11.0, core=true, t24Name=RESERVED.13, mandatory=false)
+        RESERVED_14 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=10.0, core=true, t24Name=RESERVED.14, mandatory=false)
+        RESERVED_15 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=9.0, core=true, t24Name=RESERVED.15, mandatory=false)
+        ROLE -> byValue OA_Decision:OA_DECISION_TYPE_CATALOG__CLASS__ROLE *
+            @t24:i (t24Name=ROLE)
+    }
+    OA_DECISION_TYPE_CATALOG__CLASS__ROLE
+    {
+        PRIVILEGE : OA_Decision:OA_DECISION_TYPE_CATALOG__CLASS__ROLE__PRIVILEGE
+            @t24:i (align=L, inputBehaviour=I, maxLength=7, sysNumber=18.0, core=true, t24Name=PRIVILEGE, mandatory=false)
+        ROLE -> OA_Framework:OA_ROLE
+            @i18n:Label (en=Role)
+            @i18n:Tooltip (en="Roles are user defined and specified in EB.LOOKUP")
+            @t24:i (align=L, inputBehaviour=I, maxLength=30, sysNumber=17.0, core=true, businessType=ANY, t24Name=ROLE, mandatory=false)
+    }
+    OA_DECISION_TYPE_CATALOG__COMMON_CLASS_TYPE
+    {
+        /* It should be the valid CLASS record belongs to the class type defined in above COMMON.CLASS.TYPE field.   It is an associative multi-value set beginning with COMMON.CLASS.TYPE, Including COMMON.CLASS, COMMON.CLASS.CONDITION, COMMON.CONDITION.VERSION. */
+        COMMON_CLASS : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=20.0, core=true, t24Name=COMMON.CLASS, mandatory=false)
+/* Name of the CONDITION being included on the definition line
+1) It is an associative multi-value set beginning with COMMON.CLASS.TYPE, Including COMMON.CLASS, COMMON.CLASS.CONDITION and ending with COMMON.CONDITION.VERSION.
+2) Mandatory Input
+3) Validation Rules
+a. Must be a valid condition previously defined in the condition class file indicated in the COMMON.CLASS field.  The condition file name is formed by concatenating values of the PRODUCT.CODE and PREFIX.DESIGN fields from AA.CLASS.TYPE and the value of the CLASS field Examples COMMON.CLASS : MORTGAGE
+CLASS.TYPE : ACTIVITY.PROCESSING
+PRODUCT.CODE in AA.CLASS.TYPE for ACTIVITY.PROCESSING : AA
+PREFIX.DESIGN in AA.CLASS.TYPE for ACTIVITY.PROCESSING : ACT.DES
+CONDITION FILE NAME : AA.ACT.DES.MORTGAGE
+b. T24 String of 35 Characters Maximum */
+        COMMON_CLASS_CONDITION : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=22.0, core=true, t24Name=COMMON.CLASS.CONDITION, mandatory=false)
+/* This field specifies the name of the common class which is going to link to the current product definition.  Currently, three common class types exist in the system.
+Those are
+1. ACTIVITY.PROCESSING.CLASS
+2. API.CLASS
+3. DYNAMIC.DESCRIPTION.CLASS
+It is an associative multi-value set beginning with COMMON.CLASS.TYPE, Including COMMON.CLASS, COMMON.CLASS.CONDITION and ending with COMMON.CONDITION.VERSION.
+Validation Rule –
+1. It should be a valid class type record from AA.CLASS.TYPE application.
+2. The class types which are having the FUTURE attribute Value as COMMON only allowed as Common class types. */
+        COMMON_CLASS_TYPE -> AA_Framework:AA_CLASS_TYPE
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=19.0, core=true, businessType=ANY, t24Name=COMMON.CLASS.TYPE, mandatory=false)
+/* Indicate which version of the condition the definition  uses. A class may have one or more CONDITIONS, and CONDITIONs may have one or more VERSIONs
+1) It is an associative multi-value set beginning with COMMON.CLASS.TYPE, Including COMMON.CLASS, COMMON.CLASS.CONDITION and ending with COMMON.CONDITION.VERSION.
+2)Optional Input
+3) Validation Rules
+a. Must be a valid condition-version previously defined in the condition class file indicated in the COMMON.CLASS field. If not provided then system will default the latest version of the given CONDITION for the COMMON.CLASS.
+b.T24 Numeric Input */
+        COMMON_CONDITION_VERSION : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=5, sysNumber=23.0, core=true, t24Name=COMMON.CONDITION.VERSION, mandatory=false)
+        RESERVED_16 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=21.0, core=true, t24Name=RESERVED.16, mandatory=false)
+    }
+    OA_DECISION_TYPE_CATALOG__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=48.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    OA_DECISION_TYPE_CATALOG__DEFAULT_ROLE
+    {
+        DEFAULT_PRIVILEGE : OA_Decision:OA_DECISION_TYPE_CATALOG__DEFAULT_ROLE__DEFAULT_PRIVILEGE
+            @t24:i (align=L, inputBehaviour=I, maxLength=7, sysNumber=6.0, core=true, t24Name=DEFAULT.PRIVILEGE, mandatory=false)
+        DEFAULT_ROLE -> OA_Framework:OA_ROLE
+            @t24:i (align=L, inputBehaviour=I, maxLength=30, sysNumber=5.0, core=true, businessType=ANY, t24Name=DEFAULT.ROLE, mandatory=false)
+    }
+    OA_DECISION_TYPE_CATALOG__DESCRIPTION
+    {
+        /* The Description of the Decision as defined in AA.DEFINITION.MANAGER. */
+        DESCRIPTION : T24BusinessTypes:ANY required
+            @i18n:Label (en=Description)
+            @i18n:Tooltip (en=Description)
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, multiLanguage=true, sysNumber=1.0, core=true, t24Name=DESCRIPTION, mandatory=true)
+    }
+    OA_DECISION_TYPE_CATALOG__FULL_DESC
+    {
+        /* Detailed description defined in AA.DEFINITION.MANAGER */
+        FULL_DESC : T24BusinessTypes:ANY required
+            @i18n:Label (en="Full Description")
+            @i18n:Tooltip (en="Detailed Description ")
+            @t24:i (align=L, inputBehaviour=I, maxLength=60, multiLanguage=true, sysNumber=2.0, core=true, t24Name=FULL.DESC, mandatory=true)
+    }
+    OA_DECISION_TYPE_CATALOG__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=47.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    OA_DECISION_TYPE_CATALOG__OVERRIDE
+    {
+        /* Standard override field */
+        OVERRIDE : T24BusinessTypes:N
+            @i18n:Label (en=Override)
+            @i18n:Tooltip (en="Overrides generated by this transaction")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=44.0, core=true, t24Name=OVERRIDE, mandatory=false)
+    }
+    OA_DECISION_TYPE_CATALOG__PUBLISH_ERROR
+    {
+        /* Suggestion on how to correct the associated error. */
+        ERROR_SUGGESTION : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=38.0, core=true, t24Name=ERROR.SUGGESTION, mandatory=false)
+        /* In the event of the publishing effort resulting in a error,the PUBLISH.ERROR field being set to "Completed with Error". This field will contain error messages encountered. Validation Rules - Non Inputtable, System Maintained. */
+        PUBLISH_ERROR : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=37.0, core=true, t24Name=PUBLISH.ERROR, mandatory=false)
+    }
+    OA_DECISION_TYPE__DESCRIPTION
+    {
+        /* The Description of the Decision as defined in AA.DEFINITION.MANAGER. */
+        DESCRIPTION : T24BusinessTypes:ANY
+            @i18n:Label (en=Description)
+            @i18n:Tooltip (en=Description)
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, multiLanguage=true, sysNumber=1.0, core=true, t24Name=DESCRIPTION, mandatory=false)
+    }
+    OA_DECISION__CLASS_INSTANCE
+    {
+        /* This field will hold the list of INSTANCES or CLASSES processed as part of current decision record. It should be a valid record from OA.DECISION.CLASS. */
+        CLASS_INSTANCE -> OA_Decision:OA_DECISION_CLASS
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=5.0, core=true, businessType=A, t24Name=CLASS.INSTANCE, mandatory=false)
+        /* This field would hold the list of all applications and those record keys that were processed as part of current transactions. The format for storing is - Application: Space : Function : Space : Record Id. */
+        INSTANCE_KEY : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=60, sysNumber=6.0, core=true, t24Name=INSTANCE.KEY, mandatory=false)
+        INSTANCE_STATUS : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=30, sysNumber=7.0, core=true, t24Name=INSTANCE.STATUS, mandatory=false)
+    }
+    OA_DECISION__CUSTOMER
+    {
+        /* Reserved Field included for future purpose. */
+        CUSTOMER -> ST_Customer:CUSTOMER
+            @i18n:Label (en=Customer)
+            @i18n:Tooltip (en="Customer Liability")
+            @t24:i (align=R, inputBehaviour=I, maxLength=10, sysNumber=11.0, core=true, businessType=CUS, t24Name=CUSTOMER, mandatory=false)
+        /* Reserved Field included for future purpose. */
+        CUSTOMER_ROLE : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=30, sysNumber=12.0, core=true, t24Name=CUSTOMER.ROLE, mandatory=false)
+    }
+    OA_DECISION__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=36.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    OA_DECISION__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=35.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    OA_DECISION__OVERRIDE
+    {
+        /* Standard Override field */
+        OVERRIDE : T24BusinessTypes:N
+            @i18n:Label (en=Override)
+            @i18n:Tooltip (en="Overrides generated by this transaction")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=32.0, core=true, t24Name=OVERRIDE, mandatory=false)
+    }
+    OA_DECISION__TO_CLASS_INSTANCE
+    {
+        /* The fields from TO.CLASS.INSTANCE, TO.FIELD & TO.VALUE are used for scripting test scenarios. The field TO.CLASS.INSTANCE will accept the valid record id from OA.DECISION.CLASS. The value in the TO.FIELD should be a valid field name from decision table, and value to this field can be defined in TO.VALUE field. An OFS message would be formed for the given OA.DECISION.CLASS application with the fields and values defined. */
+        TO_CLASS_INSTANCE -> OA_Decision:OA_DECISION_CLASS
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=13.0, core=true, businessType=A, t24Name=TO.CLASS.INSTANCE, mandatory=false)
+        TO_FIELD -> byValue OA_Decision:OA_DECISION__TO_CLASS_INSTANCE__TO_FIELD *
+            @t24:i (t24Name=TO.FIELD)
+    }
+    OA_DECISION__TO_CLASS_INSTANCE__TO_FIELD
+    {
+        /* The fields from TO.CLASS.INSTANCE, TO.FIELD & TO.VALUE are used for scripting test scenarios. The field TO.CLASS.INSTANCE will accept the valid record id from OA.DECISION.CLASS. The value in the TO.FIELD should be a valid field name from decision table, and value to this field can be defined in TO.VALUE field. An OFS message would be formed for the given OA.DECISION.CLASS application with the fields and values defined. */
+        TO_FIELD : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=14.0, core=true, t24Name=TO.FIELD, mandatory=false)
+        /* The fields from TO.CLASS.INSTANCE, TO.FIELD & TO.VALUE are used for scripting test scenarios. The field TO.CLASS.INSTANCE will accept the valid record id from OA.DECISION.CLASS. The value in the TO.FIELD should be a valid field name from decision table, and value to this field can be defined in TO.VALUE field. An OFS message would be formed for the given OA.DECISION.CLASS application with the fields and values defined. */
+        TO_VALUE : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=100, sysNumber=15.0, core=true, t24Name=TO.VALUE, mandatory=false)
+    }
+}
+Enumerations {
+    OA_DECISION_BODY_CATALOG__ACTION : mml:string
+        PUBLISH=PUBLISH
+    OA_DECISION_BODY_CATALOG__DECISION__DECISION : mml:string
+        APPROVE=APPROVE
+        NULL=NULL
+        REJECT=REJECT
+    OA_DECISION_BODY_CATALOG__REFER_ALLOWED : mml:string
+        NULL=NULL
+        YES=YES
+    OA_DECISION_BODY__ACTION : mml:string
+        PUBLISH=PUBLISH
+    OA_DECISION_BODY__DECISION__DECISION : mml:string
+        APPROVE=APPROVE
+        NULL=NULL
+        REJECT=REJECT
+    OA_DECISION_BODY__REFER_ALLOWED : mml:string
+        NULL=NULL
+        YES=YES
+    OA_DECISION_CLASS__K_TYPE__K_TYPE : mml:string
+        CCY=CCY
+        COMMON=COMMON
+        DATED=DATED
+        DELAYED_TRACKING=DELAYED.TRACKING
+        EXTERNAL=EXTERNAL
+        EXTERNAL_FINANCIAL=EXTERNAL.FINANCIAL
+        FORWARD_DATED=FORWARD.DATED
+        INHERITANCE=INHERITANCE
+        MERGE=MERGE
+        MULTIPLE=MULTIPLE
+        NON_TRACKING=NON.TRACKING
+        OPT_CCY=OPT.CCY
+        TRACKING=TRACKING
+        TRACKING_ONLY=TRACKING.ONLY
+        TRANSACTION=TRANSACTION
+        TRIGGER=TRIGGER
+        VARIATION=VARIATION
+        VERSION=VERSION
+    OA_DECISION_CLASS__TYPE__TYPE : mml:string
+        CCY=CCY
+        COMMON=COMMON
+        DATED=DATED
+        DELAYED_TRACKING=DELAYED.TRACKING
+        EXTERNAL=EXTERNAL
+        EXTERNAL_FINANCIAL=EXTERNAL.FINANCIAL
+        FORWARD_DATED=FORWARD.DATED
+        INHERITANCE=INHERITANCE
+        MEMO_ENABLED=MEMO.ENABLED
+        MERGE=MERGE
+        MULTIPLE=MULTIPLE
+        NON_TRACKING=NON.TRACKING
+        OPT_CCY=OPT.CCY
+        TRACKING=TRACKING
+        TRACKING_ONLY=TRACKING.ONLY
+        TRANSACTION=TRANSACTION
+        TRIGGER=TRIGGER
+        VARIATION=VARIATION
+        VERSION=VERSION
+    OA_DECISION_MATRIX_CATALOG__ACTION : mml:string
+        PUBLISH=PUBLISH
+    OA_DECISION_MATRIX_CATALOG__DEFAULT_DECISION : mml:string
+        APPROVE=APPROVE
+        NULL=NULL
+        REJECT=REJECT
+    OA_DECISION_MATRIX_CATALOG__RULE_DESCRIPTION__DECISION : mml:string
+        APPROVE=APPROVE
+        NULL=NULL
+        REJECT=REJECT
+    OA_DECISION_MATRIX__ACTION : mml:string
+        PUBLISH=PUBLISH
+    OA_DECISION_MATRIX__DEFAULT_DECISION : mml:string
+        APPROVE=APPROVE
+        NULL=NULL
+        REJECT=REJECT
+    OA_DECISION_MATRIX__RULE_DESCRIPTION__DECISION : mml:string
+        APPROVE=APPROVE
+        NULL=NULL
+        REJECT=REJECT
+    OA_DECISION_TYPE_CATALOG__ACTION : mml:string
+        PUBLISH=PUBLISH
+    OA_DECISION_TYPE_CATALOG__CLASS__ROLE__PRIVILEGE : mml:string
+        INPUT=INPUT
+        NULL=NULL
+        SEE=SEE
+    OA_DECISION_TYPE_CATALOG__DEFAULT_ROLE__DEFAULT_PRIVILEGE : mml:string
+        INPUT=INPUT
+        NULL=NULL
+        SEE=SEE
+}

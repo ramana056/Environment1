@@ -1,0 +1,85 @@
+# UTF-8
+/* Safety Deposit Box */
+Domain USRETL_SDB
+    @t24:i (module=USRETL)
+    @java:Package (value=com.temenos.t24.datamodel.usretl.usretl_sdb)
+namespace "http://www.temenos.com/t24/USRETL_SDB"
+metamodelVersion 1.30.6
+Classes {
+    NOFILE_USRETL_FIND_SDB_BOX
+        @i18n:Description (en="")
+        @t24:i (t24Name=NOFILE.USRETL.FIND.SDB.BOX, level=I, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        BOX_NUMBER : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=33, core=false, t24Name=BOX.NUMBER, mandatory=false)
+        BOX_TYPE : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=15, core=false, t24Name=BOX.TYPE, mandatory=false)
+        BRANCH : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=16, core=false, t24Name=BRANCH, mandatory=false)
+        CUSTOMER_ID : T24BusinessTypes:N
+            @i18n:Label (en="Customer Id")
+            @i18n:Tooltip (en="Identifies the Customer for the transaction.")
+            @t24:i (align=R, inputBehaviour=N, maxLength=10, core=false, t24Name=CUSTOMER.ID, mandatory=false)
+        ID : T24BusinessTypes:N
+            @i18n:Label (en="Transaction Ref")
+            @i18n:Tooltip (en="Transaction Reference")
+            @t24:i (align=R, inputBehaviour=N, maxLength=33, core=false, t24Name="@ID", mandatory=false)
+        PAYMENT_STATUS : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=15, core=false, t24Name=PAYMENT.STATUS, mandatory=false)
+        RECORD : T24BusinessTypes:N
+            @t24:i (align=L, inputBehaviour=N, maxLength=200, core=false, t24Name=RECORD, genOperation=NOFILE.USRETL.FIND.SDB.BOX, mandatory=true)
+        STATUS : T24BusinessTypes:N
+            @i18n:Label (en=Status)
+            @t24:i (align=R, inputBehaviour=N, maxLength=15, core=false, t24Name=STATUS, mandatory=false)
+    }
+    NOFILE_USRETL_SDB_AA_OVERVIEW
+        @i18n:Description (en="")
+        @t24:i (t24Name=NOFILE.USRETL.SDB.AA.OVERVIEW, level=I, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        ARRANGEMENT_ID : T24BusinessTypes:N
+            @i18n:Label (en="Arrangement Id")
+            @t24:i (align=R, inputBehaviour=N, maxLength=40, core=false, t24Name=ARRANGEMENT.ID, mandatory=false)
+        RECORD : T24BusinessTypes:N
+            @t24:i (align=L, inputBehaviour=N, maxLength=25, core=false, t24Name=RECORD, genOperation=E.USRETL.SDB.OVERVIEW, mandatory=true)
+    }
+    NOFILE_USRETL_SDB_ACTIVITY
+        @i18n:Description (en="")
+        @t24:i (t24Name=NOFILE.USRETL.SDB.ACTIVITY, level=I, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        ACTIVITY_DATE : T24BusinessTypes:N
+            @i18n:Label (en="Activity Date")
+            @i18n:Tooltip (en="indicates the date on which activity is generated")
+            @t24:i (align=R, inputBehaviour=N, maxLength=10, core=false, t24Name=ACTIVITY.DATE, mandatory=false)
+        BOX_NUMBER : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=10, core=false, t24Name=BOX.NUMBER, mandatory=false)
+        BRANCH : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=16, core=false, t24Name=BRANCH, mandatory=false)
+        RECORD : T24BusinessTypes:N
+            @t24:i (align=L, inputBehaviour=N, maxLength=200, core=false, t24Name=RECORD, genOperation=NOFILE.USRETL.GET.SDB.HISTORY, mandatory=true)
+    }
+    NOFILE_USRETL_SDB_DUE_AMOUNT
+        @i18n:Description (en="")
+        @t24:i (t24Name=NOFILE.USRETL.SDB.DUE.AMOUNT, level=I, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        BOX_ID : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=33, core=false, t24Name=BOX.ID, mandatory=false)
+        BOX_TYPE : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=15, core=false, t24Name=BOX.TYPE, mandatory=false)
+        BRANCH : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=16, core=false, t24Name=BRANCH, mandatory=false)
+        CUSTOMER_ID : T24BusinessTypes:N
+            @i18n:Label (en="Customer Id")
+            @i18n:Tooltip (en="Identifies the Customer for the transaction.")
+            @t24:i (align=R, inputBehaviour=N, maxLength=10, core=false, t24Name=CUSTOMER.ID, mandatory=false)
+        PAYMENT_STATUS : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=15, core=false, t24Name=PAYMENT.STATUS, mandatory=false)
+        RECORD : T24BusinessTypes:N
+            @t24:i (align=L, inputBehaviour=N, maxLength=200, core=false, t24Name=RECORD, genOperation=NOFILE.USRETL.SDB.DUE.AMOUNT, mandatory=true)
+        RECORD_KEY : T24BusinessTypes:N
+            @i18n:Label (en="Record Key")
+            @t24:i (align=R, inputBehaviour=N, maxLength=33, core=false, t24Name=RECORD.KEY, mandatory=false)
+        STATUS : T24BusinessTypes:N
+            @i18n:Label (en=Status)
+            @t24:i (align=R, inputBehaviour=N, maxLength=15, core=false, t24Name=STATUS, mandatory=false)
+    }
+}

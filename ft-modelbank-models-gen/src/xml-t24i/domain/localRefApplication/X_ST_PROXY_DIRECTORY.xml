@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<localReferenceApplication:LocalReferenceApplication xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:localReferenceApplication="http://www.odcgroup.com/t24/application/localRefApplication/model/LocalReferenceApplication"
+    xmlns:translationDsl="http://www.odcgroup.com/translation/TranslationDsl" forApplication="name://ST_AliasManagement:ST_PROXY_DIRECTORY#">
+  <localField groupName="No" localRefID="BUSINESS.ID">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="BUSINESS.ID"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+  <localField groupName="No" localRefID="REGISTRATION.DATE.TIME">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="REG.DATE.TIME"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+  <localField groupName="No" localRefID="PROCESS.IDENTIFIER">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="PROCESS.ID"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+  <localField groupName="No" localRefID="SERVER.NODE">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="SERVER.NODE"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+</localReferenceApplication:LocalReferenceApplication>

@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<localref:LocalRef xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:localref="http://www.odcgroup.com/t24/application/localref/model/LocalRef"
+    xmlns:translationDsl="http://www.odcgroup.com/translation/TranslationDsl" localRefID="TXN.RETURN.CODE" maximumChars="10" minimumChars="0"
+    mandatory="false" charType="A" defaultPossible="false" virtualTable="TXN.RETURN.CODE"
+    description="TXN.RETURN.CODE">
+  <shortName xsi:type="translationDsl:LocalTranslations">
+    <translations locale="en" text="TXN.RETURN.CODE"/>
+  </shortName>
+  <vettingTable vettingTable="A">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Non-Sufficient Funds"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="B">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Uncollect funds"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="C">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Stop Payment"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="D">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Closed Account"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="E">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="UTLA- Unable to Locate Account"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="F">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Frozen/Blocked Account"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="G">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Stale Dated"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="H">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Post Dated"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="I">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Endorsement Missing"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="J">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Endorsement Irregular"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="K">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Signature(s) Missing"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="L">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Signature(s) Irregular, Suspected"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="N">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Altered/Fictitious Item"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="R01">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Non-Sufficient Funds"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="R02">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Account Closed"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="R03">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Unable to locate Account"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="R06">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Returned per ODFI's Request"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="R07">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Authorization Revoked by Cus"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="R08">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Payment Stopped"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="R09">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Uncollect funds"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="R10">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Customer advises not authorized"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="R14">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Payee deceased or changed capacity"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="R15">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Beneficiary deceased"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="R16">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Account frozen"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="R20">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Non-Transaction Account"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="R24">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Duplicate Entry"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="R29">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Corp Customer Advises Not Auth"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="R31">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Permissible Return Entry"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="R35">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Return of Improper Dr Entry"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="R41">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Invalid Transaction Code"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="R45">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Invalid Individual Name/Co. Name"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="S">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Refer to Maker"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="T">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Stop Payment Suspect"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="U">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Unusable Image"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="W">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Cannot Determine Account"/>
+    </remarks>
+  </vettingTable>
+</localref:LocalRef>

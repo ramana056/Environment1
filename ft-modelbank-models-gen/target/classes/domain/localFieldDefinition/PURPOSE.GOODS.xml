@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<localref:LocalRef xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:localref="http://www.odcgroup.com/t24/application/localref/model/LocalRef"
+    xmlns:translationDsl="http://www.odcgroup.com/translation/TranslationDsl" localRefID="PURPOSE.GOODS" maximumChars="40" minimumChars="0" mandatory="false"
+    charType="A" defaultPossible="false" virtualTable="PURPOSE.GOODS" description="Purpose of Goods">
+  <shortName xsi:type="translationDsl:LocalTranslations">
+    <translations locale="en" text="PURPOSE.GOODS"/>
+  </shortName>
+  <vettingTable vettingTable="INVESTMENT">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Investment"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="MH">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Main Home"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="OTHER.HOME">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Other Home"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="OWNERSHIP">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Ownership"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="RENTAL">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Rental"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="SH">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Second Home"/>
+    </remarks>
+  </vettingTable>
+</localref:LocalRef>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<localReferenceApplication:LocalReferenceApplication xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:localReferenceApplication="http://www.odcgroup.com/t24/application/localRefApplication/model/LocalReferenceApplication"
+    xmlns:translationDsl="http://www.odcgroup.com/translation/TranslationDsl" forApplication="name://ST_Config:INDUSTRY#">
+  <localField groupName="No" localRefID="BOE.SECTOR">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="BOE.SECTOR"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+  <localField groupName="No" localRefID="BOE.INDUSTRY">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="BOE.INDUSTRY"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+  <localField groupName="No" localRefID="BOE.SIC">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="BOE.SIC"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+</localReferenceApplication:LocalReferenceApplication>

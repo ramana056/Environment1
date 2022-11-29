@@ -1,0 +1,198 @@
+# UTF-8
+/* Model Configuration for RR */
+Domain RR_ModelBank
+    @t24:i (module=RR)
+    @java:Package (value=com.temenos.t24.datamodel.rr.rr_modelbank)
+namespace "http://www.temenos.com/t24/RR_ModelBank"
+metamodelVersion 1.30.6
+Classes {
+    NOFILE_RR_COMPARE
+        @i18n:Description (en="")
+        @t24:i (t24Name=NOFILE.RR.COMPARE, level=I, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        ID : T24BusinessTypes:N
+            @i18n:Label (en="Transaction Ref")
+            @i18n:Tooltip (en="Transaction Reference")
+            @t24:i (align=L, inputBehaviour=N, maxLength=18, core=false, t24Name="@ID", genOperation=E.RR.DETAIL.COMPARE.BUILD, mandatory=true)
+    }
+    NOFILE_RR_CURR_MONITORING
+        @i18n:Description (en="")
+        @t24:i (t24Name=NOFILE.RR.CURR.MONITORING, level=I, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        EVENT_STATUS : T24BusinessTypes:ANY
+            @i18n:Label (en="Event Status")
+            @i18n:Tooltip (en="Identifies the status of the event")
+            @t24:i (align=L, inputBehaviour=N, maxLength=70, core=false, t24Name=EVENT.STATUS, genOperation=E.RR.CURR.MONITOR, mandatory=true)
+    }
+    NOFILE_RR_DETAIL
+        @i18n:Description (en="")
+        @t24:i (t24Name=NOFILE.RR.DETAIL, level=I, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        ID : T24BusinessTypes:N
+            @i18n:Label (en="Transaction Ref")
+            @i18n:Tooltip (en="Transaction Reference")
+            @t24:i (align=L, inputBehaviour=N, maxLength=30, core=false, t24Name="@ID", genOperation=E.RR.APPL.MONITOR.CNT, mandatory=true)
+    }
+    NOFILE_RR_RECORDS_PROC
+        @i18n:Description (en="")
+        @t24:i (t24Name=NOFILE.RR.RECORDS.PROC, level=I, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        RTN_FIELD -> byValue RR_ModelBank:NOFILE_RR_RECORDS_PROC__RTN_FIELD *
+            @t24:i (t24Name=RTN.FIELD)
+    }
+    NOFILE_RR_RECORDS_PROC__RTN_FIELD
+    {
+        RTN_FIELD : T24BusinessTypes:N
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, core=false, t24Name=RTN.FIELD, genOperation=E.RR.RECORDS.PROC, mandatory=true)
+    }
+    RR_ERROR_TRACKER
+        @i18n:Description (en="")
+        @t24:i (t24Name=RR.ERROR.TRACKER, level=I, type=D, allowedFunctions="A C D E H I L P Q R S", localApplication=true, localRefAllowed=false)
+    {
+        APPLICATION_NAME -> byValue RR_ModelBank:RR_ERROR_TRACKER__APPLICATION_NAME *
+            @t24:i (t24Name=APPLICATION.NAME)
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=15.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=16.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=12.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=13.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=9.0, core=true, t24Name=CURR.NO, mandatory=false)
+        DATE_TIME -> byValue RR_ModelBank:RR_ERROR_TRACKER__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=14.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        DESCRIPTION : T24BusinessTypes:A
+            @i18n:Label (en=Description)
+            @i18n:Tooltip (en=Description)
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=4.0, core=true, t24Name=DESCRIPTION, isTextarea=true, mandatory=false)
+        ERROR_MSG : T24BusinessTypes:ANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=5.0, core=true, t24Name=ERROR.MSG, mandatory=false)
+        ERROR_TYPE_ID : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=14, sysNumber=3.0, core=true, t24Name=ERROR.TYPE.ID, mandatory=false)
+        EVENT_ID -> RR_ModelBank:RR_ERROR_TRACKER PK required
+            @i18n:Label (en="Event Id")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=0.0, core=true, businessType=A, t24Name=EVENT.ID, mandatory=true)
+        INPUTTER -> byValue RR_ModelBank:RR_ERROR_TRACKER__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        OVERRIDE -> byValue RR_ModelBank:RR_ERROR_TRACKER__OVERRIDE *
+            @t24:i (t24Name=OVERRIDE)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=8.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        REFERENCE_NO -> byValue RR_ModelBank:RR_ERROR_TRACKER__REFERENCE_NO *
+            @t24:i (t24Name=REFERENCE.NO)
+        TIME_ERROR : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=6.0, core=true, t24Name=TIME.ERROR, mandatory=false)
+    }
+    RR_ERROR_TRACKER__APPLICATION_NAME
+    {
+        APPLICATION_NAME : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=1.0, core=true, t24Name=APPLICATION.NAME, isTextarea=true, mandatory=false)
+    }
+    RR_ERROR_TRACKER__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=11.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    RR_ERROR_TRACKER__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=10.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    RR_ERROR_TRACKER__OVERRIDE
+    {
+        OVERRIDE : T24BusinessTypes:A
+            @i18n:Label (en=Override)
+            @i18n:Tooltip (en="Overrides generated by this transaction")
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=7.0, core=true, t24Name=OVERRIDE, mandatory=false)
+    }
+    RR_ERROR_TRACKER__REFERENCE_NO
+    {
+        REFERENCE_NO : T24BusinessTypes:N
+            @i18n:Label (en="Reference No")
+            @i18n:Tooltip (en="Unique reference which identifies the transaction")
+            @t24:i (align=R, inputBehaviour=I, maxLength=14, sysNumber=2.0, core=true, t24Name=REFERENCE.NO, mandatory=false)
+    }
+    RR_REPAIR_DATA
+        @i18n:Description (en="")
+        @t24:i (t24Name=RR.REPAIR.DATA, level=I, type=D, allowedFunctions="A C D E H I L P Q R S", localApplication=true, localRefAllowed=false)
+    {
+        ACTION_FLAG : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=3.0, core=true, t24Name=ACTION.FLAG, isTextarea=true, mandatory=false)
+        APPLICATION_NAME : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=1.0, core=true, t24Name=APPLICATION.NAME, isTextarea=true, mandatory=false)
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=12.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=13.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=9.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=10.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=6.0, core=true, t24Name=CURR.NO, mandatory=false)
+        DATE_TIME -> byValue RR_ModelBank:RR_REPAIR_DATA__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=11.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        INPUTTER -> byValue RR_ModelBank:RR_REPAIR_DATA__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        OVERRIDE -> byValue RR_ModelBank:RR_REPAIR_DATA__OVERRIDE *
+            @t24:i (t24Name=OVERRIDE)
+        RECORD_ID : T24BusinessTypes:A
+            @i18n:Label (en="Record Id")
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=2.0, core=true, t24Name=RECORD.ID, isTextarea=true, mandatory=false)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=5.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        REPAIR_ID -> RR_ModelBank:RR_REPAIR_DATA PK required
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=0.0, core=true, businessType=A, t24Name=REPAIR.ID, mandatory=true)
+    }
+    RR_REPAIR_DATA__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=8.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    RR_REPAIR_DATA__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=7.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    RR_REPAIR_DATA__OVERRIDE
+    {
+        OVERRIDE : T24BusinessTypes:A
+            @i18n:Label (en=Override)
+            @i18n:Tooltip (en="Overrides generated by this transaction")
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=4.0, core=true, t24Name=OVERRIDE, mandatory=false)
+    }
+}

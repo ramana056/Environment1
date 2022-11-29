@@ -1,0 +1,180 @@
+# UTF-8
+/* ISANOTE File Extract(Multiline) */
+Domain LUCUPI_MultilineExtract
+    @t24:i (module=LUCUPI)
+    @java:Package (value=com.temenos.t24.datamodel.lucupi.lucupi_multilineextract)
+namespace "http://www.temenos.com/t24/LUCUPI_MultilineExtract"
+metamodelVersion 1.30.6
+Classes {
+    /* Table used to store the ISANOTE generation detail */
+    LUCUPI_ISANOTE_GENERATION
+        @i18n:Description (en="")
+        @t24:i (t24Name=LUCUPI.ISANOTE.GENERATION, level=I, type=L, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        /* File Reference ID for Inward Pain file */
+        ID -> LUCUPI_MultilineExtract:LUCUPI_ISANOTE_GENERATION PK required
+            @i18n:Label (en="Transaction Ref")
+            @i18n:Tooltip (en="Transaction Reference")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=0.0, core=true, businessType=A, t24Name="@ID", mandatory=true)
+/* This fieLd has values Yes or No.
+If the first ISANOTE is generated for the file or transaction, the value should be updated as Yes otherwise No.
+This is system-generated field. */
+        ISANOTE1_GENERATED : LUCUPI_MultilineExtract:LUCUPI_ISANOTE_GENERATION__ISANOTE1_GENERATED
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=1.0, core=true, t24Name=ISANOTE1.GENERATED, mandatory=false)
+/* This fieLd has values Yes, No or Part.
+The second ISANOTE will be generated if the value in this field is 'Part' and once the second ISANOTE is generated for the file or transaction, the value should be updated as Yes.
+This is system-generated field. */
+        ISANOTE2_GENERATED : LUCUPI_MultilineExtract:LUCUPI_ISANOTE_GENERATION__ISANOTE2_GENERATED
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=6.0, core=true, t24Name=ISANOTE2.GENERATED, mandatory=false)
+        OVERRIDE -> byValue LUCUPI_MultilineExtract:LUCUPI_ISANOTE_GENERATION__OVERRIDE *
+            @t24:i (t24Name=OVERRIDE)
+/* Reflects the pending transactions to be processed for this file reference
+Usually takes value as TOTAL.TRANSACTIONS - TRANSACTION.PROCESSED */
+        PENDING_TRANSACTIONS : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=35, sysNumber=4.0, core=true, t24Name=PENDING.TRANSACTIONS, mandatory=false)
+        PP_REFERENCE -> byValue LUCUPI_MultilineExtract:LUCUPI_ISANOTE_GENERATION__PP_REFERENCE *
+            @t24:i (t24Name=PP.REFERENCE)
+        RESERVED_1 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=8.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_10 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=17.0, core=true, t24Name=RESERVED.10, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=9.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=10.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=11.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        RESERVED_5 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=12.0, core=true, t24Name=RESERVED.5, mandatory=false)
+        RESERVED_6 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=13.0, core=true, t24Name=RESERVED.6, mandatory=false)
+        RESERVED_7 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=14.0, core=true, t24Name=RESERVED.7, mandatory=false)
+        RESERVED_8 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=15.0, core=true, t24Name=RESERVED.8, mandatory=false)
+        RESERVED_9 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=16.0, core=true, t24Name=RESERVED.9, mandatory=false)
+        /* Holds the status code in output ISANOTE file */
+        STATUS_CODE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=7.0, core=true, t24Name=STATUS.CODE, mandatory=false)
+        /* Total number of transactions in the pain file */
+        TOTAL_TRANSACTIONS : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=35, sysNumber=2.0, core=true, t24Name=TOTAL.TRANSACTIONS, mandatory=false)
+        /* Reflects the number of transactions processed for the ISANOTE1 */
+        TRANSACTION_PROCESSED : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=35, sysNumber=3.0, core=true, t24Name=TRANSACTION.PROCESSED, mandatory=false)
+    }
+    LUCUPI_ISANOTE_GENERATION__OVERRIDE
+    {
+        OVERRIDE : T24BusinessTypes:N
+            @i18n:Label (en=Override)
+            @i18n:Tooltip (en="Overrides generated by this transaction")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=18.0, core=true, t24Name=OVERRIDE, mandatory=false)
+    }
+    LUCUPI_ISANOTE_GENERATION__PP_REFERENCE
+    {
+/* FT Number for each transaction in pain file
+Equals number of TOTAL.TRANSACTIONS */
+        PP_REFERENCE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=5.0, core=true, t24Name=PP.REFERENCE, mandatory=false)
+    }
+    /* Table used to store the default values of Bank Protocol Number and eBanking user ID required in outward ISANOTE file */
+    LUCUPI_ISANOTE_PARAMETER
+        @i18n:Description (en="")
+        @t24:i (t24Name=LUCUPI.ISANOTE.PARAMETER, level=I, type=H, allowedFunctions="A C D E H I L P Q R S", localRefAllowed=false)
+    {
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=21.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=22.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=18.0, core=true, t24Name=AUTHORISER, mandatory=false)
+/* Bank Protocol Number which reflected in the ISANOTE message.
+Defaulted to 123 */
+        BANK_PROTOCOL_NUMBER : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=1.0, core=true, t24Name=BANK.PROTOCOL.NUMBER, mandatory=false)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=19.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=15.0, core=true, t24Name=CURR.NO, mandatory=false)
+        DATE_TIME -> byValue LUCUPI_MultilineExtract:LUCUPI_ISANOTE_PARAMETER__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=20.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+/* e-Banking user ID which reflected in the ISANOTE message.
+Defaulted to  5001000800177 */
+        E_BANKING_USER_ID : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=13, sysNumber=2.0, core=true, t24Name=E.BANKING.USER.ID, mandatory=false)
+        /* Company ID of the user */
+        ID -> LUCUPI_MultilineExtract:LUCUPI_ISANOTE_PARAMETER PK required
+            @i18n:Label (en="Transaction Ref")
+            @i18n:Tooltip (en="Transaction Reference")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=0.0, core=true, businessType=A, t24Name="@ID", mandatory=true)
+        INPUTTER -> byValue LUCUPI_MultilineExtract:LUCUPI_ISANOTE_PARAMETER__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        OVERRIDE -> byValue LUCUPI_MultilineExtract:LUCUPI_ISANOTE_PARAMETER__OVERRIDE *
+            @t24:i (t24Name=OVERRIDE)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=14.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        RESERVED_1 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=3.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_10 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=12.0, core=true, t24Name=RESERVED.10, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=4.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=5.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=6.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        RESERVED_5 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=7.0, core=true, t24Name=RESERVED.5, mandatory=false)
+        RESERVED_6 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=8.0, core=true, t24Name=RESERVED.6, mandatory=false)
+        RESERVED_7 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=9.0, core=true, t24Name=RESERVED.7, mandatory=false)
+        RESERVED_8 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=10.0, core=true, t24Name=RESERVED.8, mandatory=false)
+        RESERVED_9 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=11.0, core=true, t24Name=RESERVED.9, mandatory=false)
+    }
+    LUCUPI_ISANOTE_PARAMETER__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=17.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    LUCUPI_ISANOTE_PARAMETER__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=16.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    LUCUPI_ISANOTE_PARAMETER__OVERRIDE
+    {
+        OVERRIDE : T24BusinessTypes:N
+            @i18n:Label (en=Override)
+            @i18n:Tooltip (en="Overrides generated by this transaction")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=13.0, core=true, t24Name=OVERRIDE, mandatory=false)
+    }
+}
+Enumerations {
+    LUCUPI_ISANOTE_GENERATION__ISANOTE1_GENERATED : mml:string
+        No=No
+        Yes=Yes
+    LUCUPI_ISANOTE_GENERATION__ISANOTE2_GENERATED : mml:string
+        No=No
+        Part=Part
+        Yes=Yes
+}

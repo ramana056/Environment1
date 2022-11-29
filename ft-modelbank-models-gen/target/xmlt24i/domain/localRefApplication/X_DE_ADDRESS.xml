@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<localReferenceApplication:LocalReferenceApplication xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:localReferenceApplication="http://www.odcgroup.com/t24/application/localRefApplication/model/LocalReferenceApplication"
+    xmlns:translationDsl="http://www.odcgroup.com/translation/TranslationDsl" forApplication="name://PY_Config:DE_ADDRESS#">
+  <localField groupName="No" localRefID="NPAI.FLAG">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="NPAI.FLAG"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+  <localField groupName="No" localRefID="USCORE.CITY">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="CITY"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+  <localField groupName="No" localRefID="USCORE.ZIP4">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="ZIP4"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+  <localField groupName="No" localRefID="USCORE.COUNTY">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="COUNTY"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+  <localField groupName="No" localRefID="USREGS.US.STATE">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="US.STATE"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+  <localField groupName="No" localRefID="USREGS.ADDRESS.TYPE">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="ADDRESS.TYPE"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+  <localField groupName="No" localRefID="NACUST.CUS.CONTACT">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="CUS.CONTACT"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+  <localField groupName="No" localRefID="CUSTOMER.MAIL.INDICATOR">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="CUS.MAIL.IND"/>
+    </label>
+    <toolTip xsi:type="translationDsl:LocalTranslations"/>
+  </localField>
+</localReferenceApplication:LocalReferenceApplication>

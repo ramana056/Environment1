@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<localref:LocalRef xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:localref="http://www.odcgroup.com/t24/application/localref/model/LocalRef"
+    xmlns:translationDsl="http://www.odcgroup.com/translation/TranslationDsl" localRefID="TAX.BENEFICIARY.NUMBER" maximumChars="2" minimumChars="0"
+    mandatory="false" charType="A" defaultPossible="false" virtualTable="AA.TX.BENEFIT.NUMBER"
+    description="Benefit Number of the account">
+  <shortName xsi:type="translationDsl:LocalTranslations">
+    <translations locale="en" text="TX.BEN.NUM"/>
+  </shortName>
+  <vettingTable vettingTable="1">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="1"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="10">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="10"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="11">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="11"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="12">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="12"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="13">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="13"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="14">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="14"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="15">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="15"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="16">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="16"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="17">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="17"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="18">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="18"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="19">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="19"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="2">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="2"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="20">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="20"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="21">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="21"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="22">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="22"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="23">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="23"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="24">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="24"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="25">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="25"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="26">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="26"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="27">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="27"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="28">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="28"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="29">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="29"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="3">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="3"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="30">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="30"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="31">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="31"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="32">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="32"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="33">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="33"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="34">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="34"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="35">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="35"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="36">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="36"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="37">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="37"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="38">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="38"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="39">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="39"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="4">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="4"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="40">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="40"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="41">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="41"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="42">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="42"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="43">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="43"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="44">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="44"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="45">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="45"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="46">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="46"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="47">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="47"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="48">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="48"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="49">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="49"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="5">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="5"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="50">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="50"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="51">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="51"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="52">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="52"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="53">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="53"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="6">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="6"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="7">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="7"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="8">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="8"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="9">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="9"/>
+    </remarks>
+  </vettingTable>
+</localref:LocalRef>

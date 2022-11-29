@@ -1,0 +1,163 @@
+# UTF-8
+/* Treasury Payment Integration */
+Domain TM_PaymentOrder
+    @t24:i (module=TM)
+    @java:Package (value=com.temenos.t24.datamodel.tm.tm_paymentorder)
+namespace "http://www.temenos.com/t24/TM_PaymentOrder"
+metamodelVersion 1.30.6
+Classes {
+    TM_PO_INTEGRATION
+        @i18n:Description (en="")
+        @t24:i (t24Name=TM.PO.INTEGRATION, level=I, type=H, allowedFunctions="A C D E I L P Q S", localRefAllowed=false)
+    {
+        ACC_TRANS_THRU_PO : TM_PaymentOrder:TM_PO_INTEGRATION__ACC_TRANS_THRU_PO
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=3.0, core=true, t24Name=ACC.TRANS.THRU.PO, mandatory=false)
+        APPLIC_PO_POSN_REF : T24BusinessTypes:A required
+            @t24:i (align=L, inputBehaviour=I, maxLength=1, sysNumber=8.0, core=true, t24Name=APPLIC.PO.POSN.REF, mandatory=true)
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=30.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=31.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=27.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        COMPANY -> TM_PaymentOrder:TM_PO_INTEGRATION PK required
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=0.0, core=true, businessType=COM, t24Name=COMPANY, mandatory=true)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=28.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=24.0, core=true, t24Name=CURR.NO, mandatory=false)
+        DATE_TIME -> byValue TM_PaymentOrder:TM_PO_INTEGRATION__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=29.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        DESCRIPTION -> byValue TM_PaymentOrder:TM_PO_INTEGRATION__DESCRIPTION *
+            @t24:i (t24Name=DESCRIPTION)
+        INPUTTER -> byValue TM_PaymentOrder:TM_PO_INTEGRATION__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        ORDER_INITIATION_TYPE : TM_PaymentOrder:TM_PO_INTEGRATION__ORDER_INITIATION_TYPE
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=9.0, core=true, t24Name=ORDER.INITIATION.TYPE, mandatory=false)
+        PAYMENT_CATEGORY -> AC_StandingOrders:PAYMENT_CATEG_PURPOSE
+            @t24:i (align=L, inputBehaviour=I, maxLength=4, sysNumber=10.0, core=true, businessType=A, t24Name=PAYMENT.CATEGORY, mandatory=false)
+        PAYMENT_METHOD : TM_PaymentOrder:TM_PO_INTEGRATION__PAYMENT_METHOD
+            @i18n:Label (en="Payment Method")
+            @i18n:Tooltip (en="Specify if the amount will be Due or Capitalised")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=11.0, core=true, t24Name=PAYMENT.METHOD, mandatory=false)
+        PAYMENT_PURPOSE -> AC_StandingOrders:PAYMENT_PURPOSE_CODE
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=12.0, core=true, businessType=SW, t24Name=PAYMENT.PURPOSE, mandatory=false)
+        PO_APPLICATION -> byValue TM_PaymentOrder:TM_PO_INTEGRATION__PO_APPLICATION *
+            @t24:i (t24Name=PO.APPLICATION)
+        PO_REF_PRODUCT -> PI_Config:PAYMENT_ORDER_PRODUCT required
+            @t24:i (align=L, inputBehaviour=F, maxLength=35, sysNumber=2.0, core=true, businessType=A, t24Name=PO.REF.PRODUCT, mandatory=true)
+        PO_SUSP_CATEG -> ST_Config:CATEGORY required
+            @t24:i (align=L, inputBehaviour=I, maxLength=5, sysNumber=4.0, core=true, businessType=CAT, t24Name=PO.SUSP.CATEG, mandatory=true)
+        PO_SUSP_TXN_CODE -> ST_Config:TRANSACTION required
+            @t24:i (align=L, inputBehaviour=I, maxLength=4, sysNumber=5.0, core=true, businessType=TXN, t24Name=PO.SUSP.TXN.CODE, mandatory=true)
+        PO_VERSION -> EB_Versions:VERSION
+            @t24:i (align=L, inputBehaviour=I, maxLength=60, sysNumber=13.0, core=true, businessType=A, t24Name=PO.VERSION, mandatory=false)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=23.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        RESERVED_13 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=22.0, core=true, t24Name=RESERVED.13, mandatory=false)
+        RESERVED_14 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=21.0, core=true, t24Name=RESERVED.14, mandatory=false)
+        RESERVED_15 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=20.0, core=true, t24Name=RESERVED.15, mandatory=false)
+        RESERVED_16 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=19.0, core=true, t24Name=RESERVED.16, mandatory=false)
+        RESERVED_17 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=18.0, core=true, t24Name=RESERVED.17, mandatory=false)
+        RESERVED_18 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=17.0, core=true, t24Name=RESERVED.18, mandatory=false)
+        RESERVED_19 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=16.0, core=true, t24Name=RESERVED.19, mandatory=false)
+        RESERVED_20 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=15.0, core=true, t24Name=RESERVED.20, mandatory=false)
+        RESERVED_21 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=14.0, core=true, t24Name=RESERVED.21, mandatory=false)
+    }
+    TM_PO_INTEGRATION__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=26.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    TM_PO_INTEGRATION__DESCRIPTION
+    {
+        DESCRIPTION : T24BusinessTypes:A required
+            @i18n:Label (en=Description)
+            @i18n:Tooltip (en=Description)
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, multiLanguage=true, sysNumber=1.0, core=true, t24Name=DESCRIPTION, mandatory=true)
+    }
+    TM_PO_INTEGRATION__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=25.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    TM_PO_INTEGRATION__PO_APPLICATION
+    {
+        DAYS_SEND_PO : TM_PaymentOrder:TM_PO_INTEGRATION__PO_APPLICATION__DAYS_SEND_PO
+            @t24:i (align=R, inputBehaviour=I, maxLength=2, sysNumber=7.0, core=true, t24Name=DAYS.SEND.PO, mandatory=false)
+        PO_APPLICATION : TM_PaymentOrder:TM_PO_INTEGRATION__PO_APPLICATION__PO_APPLICATION
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=6.0, core=true, t24Name=PO.APPLICATION, mandatory=false)
+    }
+}
+Enumerations {
+    TM_PO_INTEGRATION__ACC_TRANS_THRU_PO : mml:string
+        NO=NO
+        YES=YES
+    TM_PO_INTEGRATION__ORDER_INITIATION_TYPE : mml:string
+        ACCLM=ACCLM
+        ACCLOSE=ACCLOSE
+        AD=AD
+        AG=AG
+        AL=AL
+        AR=AR
+        BX=BX
+        CERTCQ=CERTCQ
+        DEBORDER=DEBORDER
+        ESTXPY=ESTXPY
+        FL=FL
+        INSPAY=INSPAY
+        ISAINT=ISAINT
+        MISCPY=MISCPY
+        POA=POA
+        RW=RW
+        STO=STO
+        USACH=USACH
+    TM_PO_INTEGRATION__PAYMENT_METHOD : mml:string
+        CreditTransfer=CreditTransfer
+        TRF=TRF
+    TM_PO_INTEGRATION__PO_APPLICATION__DAYS_SEND_PO : mml:string
+        0=0
+        1=1
+        10=10
+        2=2
+        3=3
+        4=4
+        5=5
+        6=6
+        7=7
+        8=8
+        9=9
+    TM_PO_INTEGRATION__PO_APPLICATION__PO_APPLICATION : mml:string
+        ALL=ALL
+        FOREX=FOREX
+        FRA_DEAL=FRA.DEAL
+        MM_MONEY_MARKET=MM.MONEY.MARKET
+        ND_DEAL=ND.DEAL
+        SWAP=SWAP
+}

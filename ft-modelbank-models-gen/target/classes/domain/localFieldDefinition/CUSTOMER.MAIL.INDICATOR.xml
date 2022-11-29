@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<localref:LocalRef xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:localref="http://www.odcgroup.com/t24/application/localref/model/LocalRef"
+    xmlns:translationDsl="http://www.odcgroup.com/translation/TranslationDsl" localRefID="CUSTOMER.MAIL.INDICATOR" maximumChars="1" minimumChars="0"
+    mandatory="false" charType="A" defaultPossible="false" virtualTable="CUSTOMER.MAIL.INDICATOR"
+    description="Customer Mail Indicator">
+  <shortName xsi:type="translationDsl:LocalTranslations">
+    <translations locale="en" text="CUS.MAIL.IND"/>
+  </shortName>
+  <vettingTable vettingTable="B">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Bad Address"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="F">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Foreign Address"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="H">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Hold Mail"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="M">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Mail"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="O">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="No Mailings"/>
+    </remarks>
+  </vettingTable>
+</localref:LocalRef>

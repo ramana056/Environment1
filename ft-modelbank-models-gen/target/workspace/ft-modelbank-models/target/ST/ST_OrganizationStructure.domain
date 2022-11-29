@@ -1,0 +1,458 @@
+# UTF-8
+/* Organization Structure Definitions */
+Domain ST_OrganizationStructure
+    @t24:i (module=ST)
+    @java:Package (value=com.temenos.t24.datamodel.st.st_organizationstructure)
+namespace "http://www.temenos.com/t24/ST_OrganizationStructure"
+metamodelVersion 1.30.6
+Classes {
+/* This is an internal file providing a relationship between parent and child nodes in ST.ORGANIZATION.CODE
+Only the S(ee) and L(ist) functions may be used in this application. */
+    ORG_NODE_LINK
+        @i18n:Description (en="")
+        @t24:i (t24Name=ORG.NODE.LINK, level=I, type=T, allowedFunctions="L S", localRefAllowed=false)
+    {
+        CHILD -> byValue ST_OrganizationStructure:ORG_NODE_LINK__CHILD *
+            @t24:i (t24Name=CHILD)
+/* Specifies an Organization level, whose immediate Child Nodes are listed in other fields
+Validation Rules:
+Valid ST.ORGANIZATION.CODE.LEVEL Record
+Internal field.  This is a NOINPUT field. */
+        PARENT_ID -> ST_OrganizationStructure:ORG_NODE_LINK PK required
+            @i18n:Label (en="Parent Id")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=0.0, core=true, businessType=A, t24Name=PARENT.ID, mandatory=true)
+    }
+    ORG_NODE_LINK__CHILD
+    {
+/* Specifies an Organization level, which is a child node of the Parent specified in PARENT.ID field.
+The Child Nodes belonging to the Parent Id are held starting from field 1 onwards, with one child node per field.
+Validation Rules:
+Valid ST.ORGANIZATION.CODE Record
+Internal field.  This is a NOINPUT field. */
+        CHILD -> ST_OrganizationStructure:ST_ORGANIZATION_CODE
+            @t24:i (align=R, inputBehaviour=I, maxLength=0, sysNumber=1.0, core=true, t24Name=CHILD, mandatory=false)
+    }
+    /* BRANCH level is considered as the last level in Organization Hierarchy. The Branch records get auto populated in ST.BRANCH table, on authorization of ST.ORGANIZATION.CODE record, defined for Branch Level. */
+    ST_BRANCH
+        @i18n:Description (en="")
+        @t24:i (t24Name=ST.BRANCH, level=I, type=H, allowedFunctions="A D E I L Q S", localRefApplicationSysNo=12.0, localRefAllowed=true)
+    {
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=21.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=22.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=18.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        BRANCH_NAME -> byValue ST_OrganizationStructure:ST_BRANCH__BRANCH_NAME *
+            @t24:i (t24Name=BRANCH.NAME)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=19.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=15.0, core=true, t24Name=CURR.NO, mandatory=false)
+        DATE_TIME -> byValue ST_OrganizationStructure:ST_BRANCH__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=20.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        INPUTTER -> byValue ST_OrganizationStructure:ST_BRANCH__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        OVERRIDE -> byValue ST_OrganizationStructure:ST_BRANCH__OVERRIDE *
+            @t24:i (t24Name=OVERRIDE)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=14.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        RESERVED_1 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=11.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_10 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=2.0, core=true, t24Name=RESERVED.10, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=10.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=9.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=8.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        RESERVED_5 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=7.0, core=true, t24Name=RESERVED.5, mandatory=false)
+        RESERVED_6 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=6.0, core=true, t24Name=RESERVED.6, mandatory=false)
+        RESERVED_7 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=5.0, core=true, t24Name=RESERVED.7, mandatory=false)
+        RESERVED_8 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=4.0, core=true, t24Name=RESERVED.8, mandatory=false)
+        RESERVED_9 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=3.0, core=true, t24Name=RESERVED.9, mandatory=false)
+/* Branch ID corresponds to Organization Code, barring the Level Prefix, defined for Branch level in ST.ORGANIZATION.CODE
+Validation Rule: Numeric Field with Max upto 9 characters */
+        ST_BRANCH_ID -> ST_OrganizationStructure:ST_BRANCH PK required
+            @t24:i (align=L, inputBehaviour=I, maxLength=16, sysNumber=0.0, core=true, businessType=A, t24Name=ST.BRANCH.ID, mandatory=true)
+    }
+    ST_BRANCH__BRANCH_NAME
+    {
+/* BRANCH NAME is a multi-lingual field that provides description for the Organization Code defined at Branch Level.
+Validation Rule: Free Text Field, that can support upto 50 characters. */
+        BRANCH_NAME : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, multiLanguage=true, sysNumber=1.0, core=true, t24Name=BRANCH.NAME, mandatory=false)
+    }
+    ST_BRANCH__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=17.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    ST_BRANCH__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=16.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    ST_BRANCH__OVERRIDE
+    {
+        OVERRIDE : T24BusinessTypes:N
+            @i18n:Label (en=Override)
+            @i18n:Tooltip (en="Overrides generated by this transaction")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=13.0, core=true, t24Name=OVERRIDE, mandatory=false)
+    }
+    /* In Addition to creating Branches, at Branch Level, in Organization Hierarchy, Line Of Business is defined to distinctly define different Cost Centres for bank, and align them later to a particular branch depending on its construct and requirement. */
+    ST_LINE_OF_BUSINESS
+        @i18n:Description (en="")
+        @t24:i (t24Name=ST.LINE.OF.BUSINESS, level=I, type=H, allowedFunctions="A D E I L Q S", localRefApplicationSysNo=12.0, localRefAllowed=true)
+    {
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=21.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=22.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=18.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=19.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=15.0, core=true, t24Name=CURR.NO, mandatory=false)
+        DATE_TIME -> byValue ST_OrganizationStructure:ST_LINE_OF_BUSINESS__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=20.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        INPUTTER -> byValue ST_OrganizationStructure:ST_LINE_OF_BUSINESS__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        NAME -> byValue ST_OrganizationStructure:ST_LINE_OF_BUSINESS__NAME *
+            @t24:i (t24Name=NAME)
+        OVERRIDE -> byValue ST_OrganizationStructure:ST_LINE_OF_BUSINESS__OVERRIDE *
+            @t24:i (t24Name=OVERRIDE)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=14.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        RESERVED_1 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=11.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_10 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=2.0, core=true, t24Name=RESERVED.10, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=10.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=9.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=8.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        RESERVED_5 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=7.0, core=true, t24Name=RESERVED.5, mandatory=false)
+        RESERVED_6 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=6.0, core=true, t24Name=RESERVED.6, mandatory=false)
+        RESERVED_7 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=5.0, core=true, t24Name=RESERVED.7, mandatory=false)
+        RESERVED_8 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=4.0, core=true, t24Name=RESERVED.8, mandatory=false)
+        RESERVED_9 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=3.0, core=true, t24Name=RESERVED.9, mandatory=false)
+/* Line Of Business Id is a distinct code that defines a cost centre for the bank.
+Validation Rule: Mandatory Field with Max upto 4 Numeric characters */
+        ST_LINE_OF_BUSINESS_ID -> ST_OrganizationStructure:ST_LINE_OF_BUSINESS PK required
+            @t24:i (align=R, inputBehaviour=I, maxLength=4, sysNumber=0.0, core=true, t24Name=ST.LINE.OF.BUSINESS.ID, mandatory=true)
+    }
+    ST_LINE_OF_BUSINESS__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=17.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    ST_LINE_OF_BUSINESS__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=16.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    ST_LINE_OF_BUSINESS__NAME
+    {
+/* NAME is a multi-lingual field that provides description for the Line Of Business or distinct Cost Centre defined for a bank.
+Validation Rule: Free Text Field, that can support upto 50 characters. */
+        NAME : T24BusinessTypes:A required
+            @i18n:Label (en=Name)
+            @i18n:Tooltip (en="Indicates the Name ")
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, multiLanguage=true, sysNumber=1.0, core=true, t24Name=NAME, mandatory=true)
+    }
+    ST_LINE_OF_BUSINESS__OVERRIDE
+    {
+        OVERRIDE : T24BusinessTypes:N
+            @i18n:Label (en=Override)
+            @i18n:Tooltip (en="Overrides generated by this transaction")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=13.0, core=true, t24Name=OVERRIDE, mandatory=false)
+    }
+    /* ST.ORGANIZATION.CODE table is introduced to create Organization Codes, at each Level defined in ST.ORGANIZATION.STRUCTURE. This table contains the definition of each element in the organization along with its hierarchy details, Viz. Parent detail, Level Detail etc. */
+    ST_ORGANIZATION_CODE
+        @i18n:Description (en="")
+        @t24:i (t24Name=ST.ORGANIZATION.CODE, level=I, type=H, allowedFunctions="A D E I L Q S", localRefApplicationSysNo=14.0, localRefAllowed=true)
+    {
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=23.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=24.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=20.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=21.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=17.0, core=true, t24Name=CURR.NO, mandatory=false)
+        DATE_TIME -> byValue ST_OrganizationStructure:ST_ORGANIZATION_CODE__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=22.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        INPUTTER -> byValue ST_OrganizationStructure:ST_ORGANIZATION_CODE__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+/* Defines the Organization Level of the code, that is default populated based on the Organization Level in Hierarchy.
+Is a Numeric Field ranging from 1-99. */
+        LEVEL : T24BusinessTypes:N
+            @i18n:Label (en=Level)
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=3.0, core=true, t24Name=LEVEL, mandatory=false)
+        NAME -> byValue ST_OrganizationStructure:ST_ORGANIZATION_CODE__NAME *
+            @t24:i (t24Name=NAME)
+        OVERRIDE -> byValue ST_OrganizationStructure:ST_ORGANIZATION_CODE__OVERRIDE *
+            @t24:i (t24Name=OVERRIDE)
+/* PARENT field specifies the parent Organization Code. This is a drop-down field chosen from ST.ORGANIZATION.CODE. The Parent Level in the Parent ID must be one level above the current Organization Code
+Note that PARENT is a Mandatory Input except for the top most Level */
+        PARENT : ST_OrganizationStructure:ST_ORGANIZATION_CODE__PARENT
+            @i18n:Label (en=Parent)
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=1.0, core=true, t24Name=PARENT, mandatory=false)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=16.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        RESERVED_1 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=13.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_10 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=4.0, core=true, t24Name=RESERVED.10, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=12.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=11.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=10.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        RESERVED_5 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=9.0, core=true, t24Name=RESERVED.5, mandatory=false)
+        RESERVED_6 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=8.0, core=true, t24Name=RESERVED.6, mandatory=false)
+        RESERVED_7 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=7.0, core=true, t24Name=RESERVED.7, mandatory=false)
+        RESERVED_8 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=6.0, core=true, t24Name=RESERVED.8, mandatory=false)
+        RESERVED_9 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=5.0, core=true, t24Name=RESERVED.9, mandatory=false)
+/* This ID field specifies the Organization Code for elements defined in the hierarchy.
+The ID must be in the format LEVEL*Code, where the first Part must be a valid Level defined in ST.ORGANIZATION.STRUCTURE. The second part is  Organization Element Code, that is validated against Organization Code Attributes, defined for that Level in ST.ORGANIZATION.STRUCTURE.
+Validation Rule: Max upto 99 characters */
+        ST_ORGANIZATION_CODE_ID -> ST_OrganizationStructure:ST_ORGANIZATION_CODE PK required
+            @t24:i (align=L, inputBehaviour=I, maxLength=99, sysNumber=0.0, core=true, businessType=A, t24Name=ST.ORGANIZATION.CODE.ID, mandatory=true)
+    }
+    ST_ORGANIZATION_CODE__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=19.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    ST_ORGANIZATION_CODE__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=18.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    ST_ORGANIZATION_CODE__NAME
+    {
+/* NAME is a multi-lingual field that provides the description for Organization Code. This is a Mandatory Field
+Validation Rule: Free Text Field, that can support upto 50 characters. */
+        NAME : T24BusinessTypes:A required
+            @i18n:Label (en=Name)
+            @i18n:Tooltip (en="Indicates the Name ")
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, multiLanguage=true, sysNumber=2.0, core=true, t24Name=NAME, mandatory=true)
+    }
+    ST_ORGANIZATION_CODE__OVERRIDE
+    {
+        OVERRIDE : T24BusinessTypes:N
+            @i18n:Label (en=Override)
+            @i18n:Tooltip (en="Overrides generated by this transaction")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=15.0, core=true, t24Name=OVERRIDE, mandatory=false)
+    }
+/* ST.ORGANIZATION.STRUCTURE table is used to hold the Organization Hierarchy of the Bank. For Eg.
+Bank > Region > Market > Area> Branch
+This table will help the User create hierarchy order of Organization Levels that they wish to use for operational benefit and profit business. */
+    ST_ORGANIZATION_STRUCTURE
+        @i18n:Description (en="")
+        @t24:i (t24Name=ST.ORGANIZATION.STRUCTURE, level=I, type=H, allowedFunctions="A D E I L Q S", localRefApplicationSysNo=15.0, localRefAllowed=true)
+    {
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=24.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=25.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=21.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=22.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=18.0, core=true, t24Name=CURR.NO, mandatory=false)
+        DATE_TIME -> byValue ST_OrganizationStructure:ST_ORGANIZATION_STRUCTURE__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=6, sysNumber=23.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        INPUTTER -> byValue ST_OrganizationStructure:ST_ORGANIZATION_STRUCTURE__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        K_TYPE -> byValue ST_OrganizationStructure:ST_ORGANIZATION_STRUCTURE__K_TYPE *
+            @t24:i (t24Name=K.TYPE)
+        LEVEL -> byValue ST_OrganizationStructure:ST_ORGANIZATION_STRUCTURE__LEVEL *
+            @t24:i (t24Name=LEVEL)
+        OVERRIDE -> byValue ST_OrganizationStructure:ST_ORGANIZATION_STRUCTURE__OVERRIDE *
+            @t24:i (t24Name=OVERRIDE)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=6, sysNumber=17.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        RESERVED_1 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=14.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_10 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=5.0, core=true, t24Name=RESERVED.10, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=13.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=12.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=11.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        RESERVED_5 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=10.0, core=true, t24Name=RESERVED.5, mandatory=false)
+        RESERVED_6 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=9.0, core=true, t24Name=RESERVED.6, mandatory=false)
+        RESERVED_7 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=8.0, core=true, t24Name=RESERVED.7, mandatory=false)
+        RESERVED_8 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=7.0, core=true, t24Name=RESERVED.8, mandatory=false)
+        RESERVED_9 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=6.0, core=true, t24Name=RESERVED.9, mandatory=false)
+        /* The Default ID for the ST.ORGANIZATION.STRUCTURE is SYSTEM. */
+        ST_ORGANIZATION_STRUCTURE_ID : ST_OrganizationStructure:ST_ORGANIZATION_STRUCTURE__ST_ORGANIZATION_STRUCTURE_ID PK required
+            @t24:i (align=L, inputBehaviour=I, maxLength=7, sysNumber=0.0, core=true, t24Name=ST.ORGANIZATION.STRUCTURE.ID, mandatory=true)
+    }
+    ST_ORGANIZATION_STRUCTURE__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=20.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    ST_ORGANIZATION_STRUCTURE__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, sysNumber=19.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    ST_ORGANIZATION_STRUCTURE__K_TYPE
+    {
+        K_TYPE : ST_OrganizationStructure:ST_ORGANIZATION_STRUCTURE__K_TYPE__K_TYPE
+            @i18n:Label (en=KType)
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=2.0, core=false, t24Name=K.TYPE, mandatory=false)
+    }
+    ST_ORGANIZATION_STRUCTURE__LEVEL
+    {
+/* This field contains a valid Application to be used as the checkfile for the Organization code ID, defined at each Level, in ST.ORGANIZATION.CODE
+Note that CHECKFILE would remain a NOINPUT field unless and until the TYPE is defined as CHECKFILE for a particular Level in Hierarchy */
+        CHECKFILE -> EB_SystemTables:FILE_CONTROL
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=4.0, core=true, businessType=A, t24Name=CHECKFILE, mandatory=false)
+/* This is a multi-valued field that specifies the length of the Organization Code ID, that would be created, in ST.ORGANIZATION.CODE, for each Level defined in LEVEL field.This field can take numeric values from 1-9.
+Note that LENGTH field would be a NOINPUT field, in case the TYPE is defined as CHECKFILE. */
+        LENGTH : T24BusinessTypes:N
+            @i18n:Label (en=Length)
+            @i18n:Tooltip (en=Length)
+            @t24:i (align=R, inputBehaviour=I, maxLength=1, sysNumber=3.0, core=true, t24Name=LENGTH, mandatory=false)
+        /* This is a multi-valued field used to specify the Organization Levels in their hierarchy Order. The levels being defined must be a valid one in EB.LOOKUP list, with virtual table being ST.ORGANIZATION.STRUCTURE.LEVEL */
+        LEVEL : ST_OrganizationStructure:ST_ORGANIZATION_STRUCTURE__LEVEL__LEVEL required
+            @i18n:Label (en=Level)
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=1.0, core=true, t24Name=LEVEL, mandatory=true)
+/* This is a multi-valued field to define the type of characters that can be used to define Organization Code ID, at a particular Level, in ST.ORGANIZATION.CODE. The supported types are ALPHANUMERIC, NUMERIC, ALPHA and CHECKFILE.
+Note that LENGTH field would be a NOINPUT field, in case the type is defined as CHECKFILE. Also that the field would be validated against 
+checkfile defined in the CHECKFILE field. */
+        TYPE : ST_OrganizationStructure:ST_ORGANIZATION_STRUCTURE__LEVEL__TYPE
+            @i18n:Label (en=Type)
+            @i18n:Tooltip (en=Type)
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=2.0, core=true, t24Name=TYPE, mandatory=false)
+    }
+    ST_ORGANIZATION_STRUCTURE__OVERRIDE
+    {
+        OVERRIDE : T24BusinessTypes:N
+            @i18n:Label (en=Override)
+            @i18n:Tooltip (en="Overrides generated by this transaction")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=16.0, core=true, t24Name=OVERRIDE, mandatory=false)
+    }
+}
+Enumerations {
+    ST_ORGANIZATION_CODE__PARENT : mml:string
+        A=A
+    ST_ORGANIZATION_STRUCTURE__K_TYPE__K_TYPE : mml:string
+        ALPHA=ALPHA
+        ALPHANUMERIC=ALPHANUMERIC
+        CHECKFILE=CHECKFILE
+        NUMERIC=NUMERIC
+    ST_ORGANIZATION_STRUCTURE__LEVEL__LEVEL : mml:string
+        AREA=AREA
+        BRANCH=BRANCH
+        DIVISION=DIVISION
+        REGION=REGION
+        STATE=STATE
+    ST_ORGANIZATION_STRUCTURE__LEVEL__TYPE : mml:string
+        ALPHA=ALPHA
+        ALPHANUMERIC=ALPHANUMERIC
+        CHECKFILE=CHECKFILE
+        NUMERIC=NUMERIC
+    ST_ORGANIZATION_STRUCTURE__ST_ORGANIZATION_STRUCTURE_ID : mml:string
+        SYSTEM=SYSTEM
+}

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<localref:LocalRef xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:localref="http://www.odcgroup.com/t24/application/localref/model/LocalRef"
+    xmlns:translationDsl="http://www.odcgroup.com/translation/TranslationDsl" localRefID="PAY.WHEN" maximumChars="20" minimumChars="0" mandatory="false"
+    charType="A" defaultPossible="false" virtualTable="MSO.PAY.WHEN" description="When the fee will be paid">
+  <shortName xsi:type="translationDsl:LocalTranslations">
+    <translations locale="en" text="PAY.WHEN"/>
+  </shortName>
+  <vettingTable vettingTable="ATINTERVIEW">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="At Interview"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="BEFORELOANSTARTS">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Before Loan Starts"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="CANCELLATIONPOSTOFFER">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Cancellation Post offer"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="COMPLETION">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Completion"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="ONAPPLICATION">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="On Application"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="ONCANCELLATIONORDECLINE">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="On Cancellation or Decline"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="POSTOFFER">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Post Offer"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="PRIORTOOFFER">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Prior to Offer"/>
+    </remarks>
+  </vettingTable>
+  <vettingTable vettingTable="REDEMPTION">
+    <remarks xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Redemption"/>
+    </remarks>
+  </vettingTable>
+</localref:LocalRef>
